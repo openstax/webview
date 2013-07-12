@@ -1,0 +1,53 @@
+@import "variables.less";
+
+#header {
+    height: 157px;
+
+    .logo, .links {
+        display: inline-block;
+    }
+
+    .logo {
+        vertical-align: top;
+    }
+
+    .links .login {
+        margin-top: 25px;
+        text-align: right;
+        font-size: 0.9em;
+        font-weight: 300;
+
+        a:after {
+            content: "|";
+            padding: 0 5px 0 8px;
+            color: lighten(@link-active-color, 33%);
+        }
+
+        a:last-child:after {
+            content: "";
+            padding: 0;
+        }
+
+        .donate {
+            padding: 5px 8px;
+            background-color: rgb(120, 176, 74);
+            color: white;
+            border-radius: 4px;
+        }
+    }
+
+    .links nav {
+        margin-top: 60px;
+
+        a {
+            padding: 5px 10px;
+            color: @link-color;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .active {
+            color: @link-active-color;
+        }
+    }
+}
