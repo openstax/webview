@@ -1,18 +1,33 @@
 @import "variables.less";
 
+@logo-width: 319px;
+@logo-height: 157px;
+
 #header {
-    height: 157px;
+    position: relative;
+    height: @logo-height;
+    overflow: hidden;
 
     .logo, .links {
         display: inline-block;
     }
 
     .logo {
+        width: @logo-width;
         vertical-align: top;
     }
 
+    .links {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: @logo-width;
+        
+    }
+
     .links .login {
-        margin-top: 25px;
+        margin: 25px 25px 0 0;
         text-align: right;
         font-size: 0.9em;
         font-weight: 300;
@@ -37,11 +52,15 @@
     }
 
     .links nav {
+        display: table;
+        width: 100%;
         margin-top: 60px;
 
         a {
+            display: table-cell;
             padding: 5px 10px;
             color: @link-color;
+            text-align: center;
             font-size: 1.1em;
             font-weight: 500;
         }
