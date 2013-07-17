@@ -69,8 +69,10 @@
     }
 
     .connect {
-        border-left: 1px solid @link-active-color;
-        border-right: 1px solid @link-active-color;
+        @media (min-width: @screen-small) {
+            border-left: 1px solid @link-active-color;
+            border-right: 1px solid @link-active-color;
+        }
     }
 
     .share {
