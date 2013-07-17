@@ -24,6 +24,8 @@ define [
 
         @$el.html(template)
 
+        $('.carousel').carousel()
+
         #@regions.splash.show(new SplashView())
         #@regions.find.show(new FindView())
         #@regions.featured.show(new FeaturedView())
