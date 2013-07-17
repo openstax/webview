@@ -1,6 +1,30 @@
 @import "variables.less";
 
 #footer {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    flex-flow: column nowrap;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
     background-color: rgb(51, 51, 51);
     color: rgb(194, 194, 194);
+    font-size: 0.85em;
+    
+    .box {
+        max-width: 50%;
+    }
+    
+    ul {
+         list-style-type: none;
+         padding: 0;
+    }
+    
+    .horizontal {
+        
+        li {
+            display: inline-block;
+            border-right: 1px solid lighten(@link-active-color, 33%);
+        }
+    }
 }
