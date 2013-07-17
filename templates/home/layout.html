@@ -1,6 +1,32 @@
 <div id="home">
-  <div class="banner">
-    <img src="http://placehold.it/2000x350&text=Banner" />
+  <div id="banner" class="carousel slide">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#banner" data-slide-to="0" class="active"></li>
+      <li data-target="#banner" data-slide-to="1"></li>
+      <li data-target="#banner" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="http://placehold.it/2000x350&text=Banner-1" />
+      </div>
+      <div class="item">
+        <img src="http://placehold.it/2000x350&text=Banner-2" />
+      </div>
+      <div class="item">
+        <img src="http://placehold.it/2000x350&text=Banner-3" />
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#banner" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#banner" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
   </div>
 
   <div class="sub-banner">

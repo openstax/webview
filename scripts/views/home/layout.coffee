@@ -7,6 +7,7 @@ define [
   'cs!views/footer'
   'hbs!templates/home/layout'
   'less!styles/home/home'
+  'bootstrapCarousel'
 ], ($, _, Backbone, BaseView, HeaderView, FooterView, template) ->
 
     return class HomeView extends BaseView
@@ -22,6 +23,8 @@ define [
         @parent?.regions.footer.show(new FooterView())
 
         @$el.html(template)
+
+        $('.carousel').carousel()
 
         #@regions.splash.show(new SplashView())
         #@regions.find.show(new FindView())
