@@ -24,7 +24,7 @@ define [
 
         @$el.html(template)
 
-        $('.carousel').carousel()
+        $('.carousel').carousel().carousel('next')
 
         #@regions.splash.show(new SplashView())
         #@regions.find.show(new FindView())
