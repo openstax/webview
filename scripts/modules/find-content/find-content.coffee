@@ -9,8 +9,3 @@ define [
 
     return class FindContentView extends BaseView
       template: template()
-
-      render: () ->
-        @$el.html(@template)
-
-        return @

@@ -12,7 +12,7 @@ define [
       template: template()
 
       render: () ->
-        @$el.html(@template)
+        super()
 
         # Initialize the Bootstrap Carousel
         $('.carousel').carousel().carousel('next')

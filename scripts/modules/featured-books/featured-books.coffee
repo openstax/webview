@@ -9,8 +9,3 @@ define [
 
     return class FeaturedBooksView extends BaseView
       template: template()
-
-      render: () ->
-        @$el.html(@template)
-
-        return @

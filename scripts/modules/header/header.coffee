@@ -9,7 +9,3 @@ define [
 
   return class HeaderView extends BaseView
     template: template()
-
-    render: () ->
-      @$el.html(@template)
-      return @
