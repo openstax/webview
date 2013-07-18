@@ -5,30 +5,30 @@ define [
   'cs!views/inherits/base'
   'cs!views/header'
   'cs!views/footer'
+  'cs!views/home/splash'
+  'cs!views/shared/featured-books'
   'hbs!templates/home/layout'
   'less!styles/home/home'
-  'bootstrapCarousel'
-], ($, _, Backbone, BaseView, HeaderView, FooterView, template) ->
+], ($, _, Backbone, BaseView, HeaderView, FooterView, SplashView, FeaturedBooksView, template) ->
 
     return class HomeView extends BaseView
+      template: template()
       regions:
         splash: '#splash'
-        find: '#find'
-        featured: '#featured'
-        news: '#news'
-        spotlight: '#spotlight'
+        #find: '#find'
+        featured: '#featured-books'
+        #news: '#news'
+        #spotlight: '#spotlight'
 
       render: () ->
         @parent?.regions.header.show(new HeaderView())
         @parent?.regions.footer.show(new FooterView())
 
-        @$el.html(template)
+        @$el.html(@template)
 
-        $('.carousel').carousel().carousel('next')
-
-        #@regions.splash.show(new SplashView())
+        @regions.splash.show(new SplashView())
+        @regions.featured.show(new FeaturedBooksView())
         #@regions.find.show(new FindView())
-        #@regions.featured.show(new FeaturedView())
         #@regions.news.show(new NewsView())
         #@regions.spotlight.show(new SpotlightView())
 

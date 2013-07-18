@@ -7,9 +7,10 @@ define [
   class Region
     constructor: (el, parent) ->
       @parent = parent
-      @$el = @parent.$el.find(el)
+      @el = el
 
     show: (view) ->
+      @$el = @$el or @parent.$el.find(@el)
       view.parent = @parent
       @view = view
       @view.setElement(@$el).render()
