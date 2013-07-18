@@ -1,9 +1,8 @@
 require.config
   # # Configure Library Locations
   paths:
-    # ## Template and Style paths
-    templates: '../templates'
-    styles: '../styles'
+    # HACK: Handlebars requirejs plugin does not like relative paths
+    templates: './'
 
     # ## Requirejs plugins
     text: 'libs/require/plugins/text'
@@ -74,7 +73,7 @@ require.config
   hbs:
     disableI18n: true
     helperPathCallback: (name) ->
-      return "cs!../templates/helpers/#{name}"
+      return "cs!helpers/handlebars/#{name}"
     templateExtension: 'html'
 
 # # Load and run the application

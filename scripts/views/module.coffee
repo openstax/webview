@@ -2,7 +2,7 @@ define [
   'jquery'
   'underscore'
   'backbone'
-  'cs!views/inherits/base'
+  'cs!./base'
 ], ($, _, Backbone, BaseView) ->
 
   return class ModuleView extends BaseView

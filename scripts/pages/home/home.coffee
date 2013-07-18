@@ -2,17 +2,18 @@ define [
   'jquery'
   'underscore'
   'backbone'
-  'cs!views/inherits/base'
-  'cs!views/header'
-  'cs!views/footer'
-  'cs!views/home/splash'
-  'cs!views/shared/featured-books'
-  'hbs!templates/home/layout'
-  'less!styles/home/home'
+  'cs!views/base'
+  'cs!modules/header/header'
+  'cs!modules/footer/footer'
+  'cs!modules/splash/splash'
+  'cs!modules/featured-books/featured-books'
+  'hbs!templates/pages/home/home'
+  'less!./home'
 ], ($, _, Backbone, BaseView, HeaderView, FooterView, SplashView, FeaturedBooksView, template) ->
 
     return class HomeView extends BaseView
       template: template()
+
       regions:
         splash: '#splash'
         #find: '#find'

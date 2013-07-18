@@ -1,7 +1,7 @@
 define [
   'underscore'
-  'backbone',
-  'cs!views/app'
+  'backbone'
+  'cs!pages/app/app'
 ], (_, Backbone, appView) ->
 
   return new class Router extends Backbone.Router

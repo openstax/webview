@@ -2,21 +2,27 @@ define [
   'jquery'
   'underscore'
   'backbone'
-  'cs!views/inherits/base'
-  'less!styles/main'
-], ($, _, Backbone, BaseView) ->
+  'cs!views/base'
+  'hbs!templates/pages/app/app'
+  'less!./app'
+], ($, _, Backbone, BaseView, template) ->
 
   return new class AppView extends BaseView
     el: 'body'
+    template: template()
 
     regions:
       main: '#main'
       header: '#header'
       footer: '#footer'
 
+    initialize: () ->
+      super()
+      @$el.html(@template)
+
     render: (page, options) ->
       # Lazy-load the page
-      require ["cs!views/#{page}/layout"], (View) =>
+      require ["cs!pages/#{page}/#{page}"], (View) =>
         @regions.main.show(new View(options))
 
       return @

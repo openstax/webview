@@ -2,15 +2,14 @@ define [
   'jquery'
   'underscore'
   'backbone'
-  'cs!views/inherits/base'
-  'hbs!templates/header'
-  'less!styles/header'
+  'cs!views/base'
+  'hbs!templates/modules/header/header'
+  'less!./header'
 ], ($, _, Backbone, BaseView, template) ->
 
   return class HeaderView extends BaseView
-    # el is set by views/app.coffee
-    # el: '#header'
+    template: template()
 
     render: () ->
-      @$el.html(template)
+      @$el.html(@template)
       return @
