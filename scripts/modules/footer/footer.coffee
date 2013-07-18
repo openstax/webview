@@ -3,7 +3,7 @@ define [
   'underscore'
   'backbone'
   'cs!views/base'
-  'hbs!templates/modules/footer/footer'
+  'hbs!.footer-template'
   'less!./footer'
 ], ($, _, Backbone, BaseView, template) ->
 

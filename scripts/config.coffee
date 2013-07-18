@@ -1,9 +1,6 @@
 require.config
   # # Configure Library Locations
   paths:
-    # HACK: Handlebars requirejs plugin does not like relative paths
-    templates: './'
-
     # ## Requirejs plugins
     text: 'libs/require/plugins/text'
     hbs: 'libs/require/plugins/require-handlebars/hbs'

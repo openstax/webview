@@ -3,7 +3,7 @@ define [
   'underscore'
   'backbone'
   'cs!views/base'
-  'hbs!templates/pages/app/app'
+  'hbs!./app-template'
   'less!./app'
 ], ($, _, Backbone, BaseView, template) ->
 

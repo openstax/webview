@@ -7,7 +7,7 @@ define [
   'cs!modules/footer/footer'
   'cs!modules/splash/splash'
   'cs!modules/featured-books/featured-books'
-  'hbs!templates/pages/home/home'
+  'hbs!./home-template'
   'less!./home'
 ], ($, _, Backbone, BaseView, HeaderView, FooterView, SplashView, FeaturedBooksView, template) ->
 

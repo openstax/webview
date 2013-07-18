@@ -3,7 +3,7 @@ define [
   'underscore'
   'backbone'
   'cs!views/base'
-  'hbs!templates/modules/splash/splash'
+  'hbs!./splash-template'
   'less!./splash'
   'bootstrapCarousel'
 ], ($, _, Backbone, BaseView, template) ->

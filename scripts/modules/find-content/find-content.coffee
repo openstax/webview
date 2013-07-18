@@ -3,7 +3,7 @@ define [
   'underscore'
   'backbone'
   'cs!views/base'
-  'hbs!templates/modules/find-content/find-content'
+  'hbs!./find-content-template'
   'less!./find-content'
 ], ($, _, Backbone, BaseView, template) ->
 
