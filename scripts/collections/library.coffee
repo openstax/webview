@@ -10,4 +10,4 @@ define [
     model: Book
 
     initialize: () ->
-      @fetch()
+      @fetch({reset: true})

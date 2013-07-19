@@ -3,9 +3,15 @@ define [
   'underscore'
   'backbone'
   'cs!views/base'
+  'cs!collections/library'
   'hbs!./featured-books-template'
   'less!./featured-books'
-], ($, _, Backbone, BaseView, template) ->
+], ($, _, Backbone, BaseView, library, template) ->
 
     return class FeaturedBooksView extends BaseView
-      template: template()
+      initialize: () ->
+        @listenTo(library, 'reset', @render)
+
+      render: () ->
+        @template = template({books: library.toJSON()})
+        super()

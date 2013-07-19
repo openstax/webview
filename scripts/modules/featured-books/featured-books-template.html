@@ -1,15 +1,11 @@
 <div class="featured-books">
-  <div class="book">
-    <a href="#"><img src="http://placehold.it/122x161/222f63/76b248&text=Physics" width="122" height="161" alt="College Physics" /></a>
-    <h4><a href="#">OpenStax College Physics</a></h4>
-    <p>A two-semester introductory physics book that's algebra-based, grounded with real-world examples, illustrations and explanations to help students grasp key, fundamental physics concepts.</p>
-  </div>
-
-  <div class="book">
-    <a href="#"><img src="http://placehold.it/122x161/f3d235/223066&text=Sociology" width="122" height="161" alt="College Introduction to Sociology" /></a>
-    <h4><a href="#">OpenStax College Introduction to Sociology</a></h4>
-    <p>A one-semester, introductory sociology course including sociology theory and research, real-world applications, simplify and debate features, and learning objectives.</p>
-  </div>
+  {{#each books}}
+    <div class="book">
+      <a href="#"><img src="{{cover}}" width="122" height="161" alt="{{title}}" /></a>
+      <h4><a href="#">{{title}}</a></h4>
+      <p>{{description}}</p>
+    </div>
+  {{/each}}
 </div>
 
 {{!
