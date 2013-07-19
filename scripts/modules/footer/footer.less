@@ -1,12 +1,13 @@
 @import "../../../styles/variables.less";
 
-#footer {
+.page-footer {
     .make-row();
-    background-color: rgb(51, 51, 51);
-    color: rgb(194, 194, 194);
-    font-size: 0.85em;
     padding: 20px;
+    margin: 0 !important; // where is margin: 0 -15px; coming from?
     text-align: center;
+    background-color: @gray-dark;
+    color: @link-color-light;
+    font-size: 0.85em;
 
     a {
         color: @link-color-light;
@@ -87,6 +88,7 @@
 
             li {
                 -webkit-flex: 1 0 auto;
+                flex: 1 0 auto;
                 margin: 3px 0;
             }
         }

@@ -23,10 +23,10 @@ define [
         #spotlight: '#spotlight'
 
       render: () ->
+        super()
+
         @parent?.regions.header.show(new HeaderView())
         @parent?.regions.footer.show(new FooterView())
-
-        @$el.html(@template)
 
         @regions.splash.show(new SplashView())
         @regions.featured.show(new FeaturedBooksView())

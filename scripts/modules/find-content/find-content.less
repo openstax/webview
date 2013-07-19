@@ -1,1 +1,84 @@
 @import "../../../styles/variables.less";
+
+.find-content {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -webkit-justify-content: center;
+    justify-content: center;
+
+    padding: 10px;
+    background-color: @gray-dark;
+    color: @gray-lighter;
+
+    a {
+        color: @gray-lighter;
+    }
+
+    h3, span {
+        line-height: 30px;
+        text-align: center;
+    }
+
+    h3 {
+        -webkit-flex: 2 0 auto;
+        margin: 0;
+        font-size: 1.5em;
+        font-weight: 400;
+    }
+
+    span {
+        -webkit-flex: 1 1 auto;
+        margin: 0 15px;
+        font-size: 1.4em;
+        font-weight: 200;
+    }
+
+    input {
+        -webkit-flex: 4 4 33%;
+        height: 30px;
+        min-height: 30px;
+        font-size: 1.2em;
+        background-color: @gray-medium;
+        border: none;
+        color: @link-color-light;
+    }
+
+    input:focus {
+        border: 1px solid lighten(@gray-medium, 15%);
+        box-shadow: inset 0 1px 1px rgba(96, 97, 99,.075), 0 0 8px rgba(153,153,153,.6);
+    }
+
+    .dropdown {
+        -webkit-flex: 4 0 33%;
+        position: relative;
+        margin-right: 15px;
+        height: 30px;
+        font-size: 1.2em;
+        border-radius: 4px;
+        background-color: @gray-medium;
+        color: @link-color-light;
+        
+        a {
+            display: block;
+            line-height: 30px;
+            padding: 0 12px;
+            font-weight: 300;
+        }
+    }
+
+    /* Placeholder */
+    ::-webkit-input-placeholder { /* WebKit browsers */
+        color: @gray-light;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: @link-color-light;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: @link-color-light;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10+ */
+        color: @link-color-light;
+    }
+}
