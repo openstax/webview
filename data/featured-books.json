@@ -1,0 +1,12 @@
+[
+    {
+        "title": "OpenStax College Physics",
+        "cover": "/images/physics.png",
+        "description": "A two-semester introductory physics book that's algebra-based, grounded with real-world examples, illustrations and explanations to help students grasp key, fundamental physics concepts."
+    },
+    {
+        "title": "OpenStax College Introduction to Sociology",
+        "cover": "/images/sociology-intro.png",
+        "description": "A one-semester, introductory sociology course including sociology theory and research, real-world applications, simplify and debate features, and learning objectives."
+    }
+]

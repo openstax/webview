@@ -1,5 +1,7 @@
 @import "../../../styles/variables.less";
 
+@bar-height: 30px;
+
 .find-content {
     display: -webkit-flex;
     display: flex;
@@ -17,7 +19,7 @@
     }
 
     h3, span {
-        line-height: 30px;
+        line-height: @bar-height;
         text-align: center;
     }
 
@@ -37,12 +39,12 @@
 
     input {
         -webkit-flex: 4 4 33%;
-        height: 30px;
-        min-height: 30px;
+        height: @bar-height;
+        min-height: @bar-height;
         font-size: 1.2em;
         background-color: @gray-medium;
         border: 1px solid transparent;
-        color: @link-color-light;
+        color: @gray-lighter;
     }
 
     input:focus {
@@ -54,15 +56,15 @@
         -webkit-flex: 4 0 33%;
         position: relative;
         margin-right: 15px;
-        height: 30px;
+        height: @bar-height;
         font-size: 1.2em;
         border-radius: 4px;
         background-color: @gray-medium;
-        color: @link-color-light;
+        color: @gray-lighter;
         
         a {
             display: block;
-            line-height: 30px;
+            line-height: @bar-height;
             padding: 0 12px;
             font-weight: 300;
         }
@@ -73,12 +75,12 @@
         color: @gray-light;
     }
     :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        color: @link-color-light;
+        color: @gray-lighter;
     }
     ::-moz-placeholder { /* Mozilla Firefox 19+ */
-        color: @link-color-light;
+        color: @gray-lighter;
     }
     :-ms-input-placeholder { /* Internet Explorer 10+ */
-        color: @link-color-light;
+        color: @gray-lighter;
     }
 }
