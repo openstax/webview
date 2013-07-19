@@ -1,5 +1,33 @@
 @import "../../../styles/variables.less";
 
 .featured-books {
-    
+    .make-row();
+    padding: 40px;
+
+    .book {
+        .make-column(6);
+
+        img {
+            float: left;
+            margin-right: 20px;
+        }
+
+        h4 {
+            color: @link-color;
+            font-weight: 300;
+        }
+        
+        p {
+            color: @gray-dark;
+            font-weight: 300;
+        }
+    }
+
+    .book:first-child {
+        padding-right: 15px;
+    }
+
+    .book:last-child {
+        padding-left: 15px;
+    }
 }
