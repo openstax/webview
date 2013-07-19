@@ -1,12 +1,27 @@
 [
     {
-        "title": "OpenStax College Physics",
-        "cover": "/images/physics.png",
+        "title": "College Physics",
+        "cover": "/images/books/college_physics.png",
         "description": "A two-semester introductory physics book that's algebra-based, grounded with real-world examples, illustrations and explanations to help students grasp key, fundamental physics concepts."
     },
     {
-        "title": "OpenStax College Introduction to Sociology",
-        "cover": "/images/sociology-intro.png",
+        "title": "College Introduction to Sociology",
+        "cover": "/images/books/college_introduction_to_sociology.png",
         "description": "A one-semester, introductory sociology course including sociology theory and research, real-world applications, simplify and debate features, and learning objectives."
+    },
+    {
+        "title": "Biology",
+        "cover": "/images/books/biology.png",
+        "description": "Biology is grounded in an evolutionary basis and includes exciting features that highlight careers in the biological sciences and everyday applications of the concepts at hand."
+    },
+    {
+        "title": "Concepts of Biology",
+        "cover": "/images/books/concepts_of_biology.png",
+        "description": "Concepts of Biology is designed for the introductory biology course for nonmajors taught at most two- and four-year colleges. The scope, sequence, and level of the program are designed to match typical course syllabi in the market."
+    },
+    {
+        "title": "Anatomy and Physiology",
+        "cover": "/images/books/concepts_of_biology.png",
+        "description": "Anatomy and Physiology is a dynamic textbook for the yearlong Human Anatomy and Physiology course taught at most two- and four-year colleges and universities to students majoring in nursing and allied health."
     }
 ]
