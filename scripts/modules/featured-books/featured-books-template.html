@@ -1,9 +1,11 @@
 <div class="featured-books">
-  {{#each books}}
-    <div class="book">
-      <a href="#"><img src="{{cover}}" width="122" height="161" alt="{{title}}" /></a>
-      <h4><a href="#">{{title}}</a></h4>
-      <p>{{description}}</p>
-    </div>
-  {{/each}}
+  <div class="books">
+    {{#each books}}
+      <div class="book">
+        <a href="{{link}}"><img src="{{cover}}" width="125" height="162" alt="{{title}}" /></a>
+        <h4><a href="{{link}}">{{title}}</a></h4>
+        <p>{{description}}</p>
+      </div>
+    {{/each}}
+  </div>
 </div>
