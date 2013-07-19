@@ -7,7 +7,7 @@ define [
   'less!./app'
 ], ($, _, Backbone, BaseView, template) ->
 
-  return new class AppView extends BaseView
+  return class AppView extends BaseView
     el: 'body'
     template: template()
 
