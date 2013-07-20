@@ -5,9 +5,11 @@
     padding: 40px;
     // Override bootstrap css
     margin: 0 !important;
+    overflow: hidden;
 
     .book {
         .make-column(6);
+        display: none;
 
         img {
             float: left;
@@ -29,10 +31,12 @@
     }
 
     .book:first-child {
+        display: block;
         padding-right: 15px;
     }
 
-    .book:last-child {
+    .book:nth-child(2) {
+        display: block;
         padding-left: 15px;
     }
 }
