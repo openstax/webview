@@ -1,6 +1,8 @@
 <div class="info-block">
   <h3>{{title}}</h3>
-  <a href="{{link}}" class="more">{{linkTitle}}</a>
+  {{#if linkTitle}}
+    <a href="{{link}}" class="more">{{linkTitle}}</a>
+  {{/if}}
 
   <div class="content">
     {{include content}}

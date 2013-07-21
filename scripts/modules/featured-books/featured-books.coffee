@@ -15,12 +15,14 @@ define [
         super()
         @listenTo(library, 'reset', @render)
 
-      render: () ->
-        @template = template({books: library.toJSON()})
-        super()
-        @startCarousel()
+      # @template must be evaluated prior to rendering
+      beforeRender: () -> @template = template({books: library.toJSON()})
+      afterRender: () -> @startCarousel()
 
-        return @
+      # Called when the 'More' link is clicked
+      more: (e) ->
+        e.preventDefault()
+        console.log 'FIXME: Show more books'
 
       startCarousel: () ->
         # Animate the carousel to show the next featured book
