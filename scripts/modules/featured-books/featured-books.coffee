@@ -2,14 +2,15 @@ define [
   'jquery'
   'underscore'
   'backbone'
-  'cs!views/base'
+  'cs!modules/info-block/info-block'
   'cs!collections/library'
   'hbs!./featured-books-template'
   'less!./featured-books'
-], ($, _, Backbone, BaseView, library, template) ->
+], ($, _, Backbone, InfoBlockView, library, template) ->
 
-    return class FeaturedBooksView extends BaseView
+    return class FeaturedBooksView extends InfoBlockView
       initialize: () ->
+        super()
         @listenTo(library, 'reset', @render)
 
       render: () ->
