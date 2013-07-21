@@ -4,6 +4,7 @@ define [
   'backbone'
   'cs!views/base'
   'hbs!./info-block-template'
+  'less!./info-block'
 ], ($, _, Backbone, BaseView, template) ->
 
   return class InfoBlockView extends BaseView
