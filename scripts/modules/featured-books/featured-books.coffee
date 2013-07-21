@@ -9,13 +9,15 @@ define [
 ], ($, _, Backbone, InfoBlockView, library, template) ->
 
     return class FeaturedBooksView extends InfoBlockView
+      title: 'Featured Books'
+
       initialize: () ->
         super()
         @listenTo(library, 'reset', @render)
 
       render: () ->
         @template = template({books: library.toJSON()})
-        @$el.html(@template)
+        super()
         @startCarousel()
 
         return @
@@ -31,6 +33,7 @@ define [
           hoffset = $first.offset().left - $second.offset().left
           voffset = $first.offset().top - $second.offset().top
 
+          # Position the next book to scroll in
           $third.css({display: 'block', position: 'absolute', marginLeft: hoffset*-2 + 'px'})
 
           $first.animate {marginLeft: hoffset, marginTop: voffset, opacity: 0}, 1000, () ->
