@@ -38,8 +38,11 @@ define [
           # Position the next book to scroll in
           $third.css({display: 'block', position: 'absolute', marginLeft: hoffset*-2 + 'px'})
 
-          $first.animate {marginLeft: hoffset, marginTop: voffset, opacity: 0}, 1000, () ->
+          $first.animate {marginLeft: hoffset+'px', marginTop: voffset+'px'}, 1000, () ->
             $first.insertAfter($books.last()).removeAttr('style')
+
+          $second.animate {paddingLeft: 0}, 1000, () ->
+            $second.removeAttr('style')
 
           $third.animate {marginLeft: hoffset*-1+'px'}, 1000, () ->
             $third.removeAttr('style')
