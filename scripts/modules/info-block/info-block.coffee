@@ -20,3 +20,4 @@ define [
       # add a content region to add views to and automatically insert them
 
     more: () -> #noop
+      console.log 'more'
