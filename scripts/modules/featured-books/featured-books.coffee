@@ -14,6 +14,11 @@ define [
       initialize: () ->
         super()
         @listenTo(library, 'reset', @render)
+        
+        # Don't run any animations while the window is being resized
+        $(window).resize () ->
+          @stopCarousel()
+          @startCarousel()
 
       # @template must be evaluated prior to rendering
       beforeRender: () -> @template = template({books: library.toJSON()})
@@ -64,4 +69,4 @@ define [
 
         # Start the carousel
         if @_carousel then clearInterval(@_carousel)
-        @_carousel = setInterval(nextFeatured, 2000)
+        @_carousel = setInterval(nextFeatured, 3000)
