@@ -11,12 +11,13 @@ define [
     title: 'Untitled'
     link: '#'
     linkTitle: 'More'
+    linkExpandedTitle: 'Less'
 
     initialize: () ->
       super()
 
       @_events =
-        'click .more': 'more'
+        'click .more': 'clickMore'
 
       # Re-delegate events with added 'more' event
       @events = @events or {}
@@ -36,4 +37,14 @@ define [
 
       return @
 
-    more: (e) -> #noop
+    clickMore: (e) ->
+      e.preventDefault()
+
+      if @_expanded
+        @_expanded = false
+        @$el.find('.link-title').text(@linkTitle)
+        @less?()
+      else
+        @_expanded = true
+        @$el.find('.link-title').text(@linkExpandedTitle)
+        @more?()

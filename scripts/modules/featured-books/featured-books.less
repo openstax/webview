@@ -5,7 +5,7 @@
     // Override bootstrap css
     margin: 0 !important;
     overflow: hidden;
-    
+
     .books {
         position: relative;
         width: 100%;
@@ -15,6 +15,7 @@
     .book {
         .make-column(6);
         display: none;
+        margin-bottom: 15px;
 
         img {
             float: left;
@@ -34,7 +35,7 @@
             font-weight: 300;
         }
     }
-    
+
     .book:after {
         visibility: hidden;
     	display: block;
@@ -44,14 +45,16 @@
     	clear: both;
     }
 
-    .book:first-child {
+    .book:first-child, .book:nth-child(2) {
         display: block;
+    }
+
+    .book:nth-child(2n+1) {
         padding-left: 0;
         padding-right: 15px;
     }
 
-    .book:nth-child(2) {
-        display: block;
+    .book:nth-child(2n) {
         padding-left: 15px;
     }
 }

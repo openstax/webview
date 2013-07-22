@@ -10,7 +10,6 @@ define [
 
     return class FeaturedBooksView extends InfoBlockView
       title: 'Featured Books'
-      linkTitle: null # Don't show the 'More' link
 
       initialize: () ->
         super()
@@ -21,9 +20,17 @@ define [
       afterRender: () -> @startCarousel()
 
       # Called when the 'More' link is clicked
-      more: (e) ->
-        e.preventDefault()
-        console.log 'FIXME: Show more books'
+      more: () ->
+        @stopCarousel()
+        @$el.find('.book').show()
+
+      less: () ->
+        @startCarousel()
+        @$el.find('.book').removeAttr('style')
+
+      stopCarousel: () ->
+        clearInterval(@_carousel)
+        @_carousel = null
 
       startCarousel: () ->
         # Animate the carousel to show the next featured book
@@ -37,7 +44,7 @@ define [
           voffset = $first.offset().top - $second.offset().top
 
           # Position the next book to scroll in
-          $third.css({display: 'block', position: 'absolute', marginLeft: hoffset*-2 + 'px'})
+          $third.css({display: 'block', position: 'absolute', marginLeft: hoffset*-2 + 'px', paddingLeft: '15px'})
 
           $first.animate {marginLeft: hoffset+'px', marginTop: voffset+'px'}, 1000, () ->
             $first.insertAfter($books.last()).removeAttr('style')
@@ -50,4 +57,4 @@ define [
 
         # Start the carousel
         if @_carousel then clearInterval(@_carousel)
-        @_carousel = setInterval(nextFeatured, 15000)
+        @_carousel = setInterval(nextFeatured, 3000)
