@@ -29,6 +29,7 @@ define [
         @$el.find('.book').removeAttr('style')
 
       stopCarousel: () ->
+        @$el.find('.book').finish() # Immediately finish the animation
         clearInterval(@_carousel)
         @_carousel = null
 
