@@ -10,6 +10,7 @@ define [
 
     return class FeaturedBooksView extends InfoBlockView
       title: 'Featured Books'
+      linkTitle: null # Don't show the 'More' link
 
       initialize: () ->
         super()
@@ -49,4 +50,4 @@ define [
 
         # Start the carousel
         if @_carousel then clearInterval(@_carousel)
-        @_carousel = setInterval(nextFeatured, 3000)
+        @_carousel = setInterval(nextFeatured, 15000)
