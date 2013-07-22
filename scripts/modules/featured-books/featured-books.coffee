@@ -29,6 +29,7 @@ define [
         @stopCarousel()
         @$el.find('.book').show()
 
+      # Called when the 'Less' link is clicked
       less: () ->
         @startCarousel()
         @$el.find('.book').removeAttr('style')
