@@ -43,8 +43,10 @@ define [
       if @_expanded
         @_expanded = false
         @$el.find('.link-title').text(@linkTitle)
+        @$el.find('.arrow').text('▶')
         @less?()
       else
         @_expanded = true
         @$el.find('.link-title').text(@linkExpandedTitle)
+        @$el.find('.arrow').text('▼')
         @more?()
