@@ -13,16 +13,20 @@
     padding: 10px;
     background-color: @gray-dark;
     color: @gray-lighter;
+    
+    @media screen and (max-width: @screen-tiny-max) {
+        display: block;
+    }
 
     a {
         color: @gray-lighter;
         text-decoration: none;
     }
-    
+
     .dropdown-toggle {
         outline: none;
     }
-    
+
     .dropdown-menu {
         max-height: 300px;
         overflow-y: auto;
@@ -39,6 +43,11 @@
         margin: 0;
         font-size: 1.5em;
         font-weight: 400;
+        
+        @media screen and (max-width: @screen-tiny-max) {
+            display: block;
+            margin-bottom: 15px;
+        }
     }
 
     span {
@@ -47,6 +56,11 @@
         margin: 0 15px;
         font-size: 1.4em;
         font-weight: 200;
+
+        // Don't display on screens smaller than a tablet
+        @media screen and (max-width: @screen-tiny-max) {
+            display: none;
+        }
     }
 
     input {
@@ -57,6 +71,11 @@
         background-color: @gray-medium;
         border: 1px solid transparent;
         color: @gray-lighter;
+        
+        @media screen and (max-width: @screen-tiny-max) {
+            display: block;
+            margin-bottom: 15px;
+        }
     }
 
     input:focus {
@@ -74,12 +93,17 @@
         border-radius: 4px;
         background-color: @gray-medium;
         color: @gray-lighter;
-        
+
         a {
             display: block;
             line-height: @bar-height;
             padding: 0 12px;
             font-weight: 300;
+        }
+        
+        @media screen and (max-width: @screen-tiny-max) {
+            display: block;
+            margin-right: 0;
         }
     }
 
