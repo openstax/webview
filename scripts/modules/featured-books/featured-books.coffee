@@ -69,4 +69,4 @@ define [
 
         # Start the carousel
         if @_carousel then clearInterval(@_carousel)
-        @_carousel = setInterval(nextFeatured, 3000)
+        @_carousel = setInterval(nextFeatured, 15000)
