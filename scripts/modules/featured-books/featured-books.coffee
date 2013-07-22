@@ -36,7 +36,8 @@ define [
       startCarousel: () ->
         # Animate the carousel to show the next featured book
         nextFeatured = () =>
-          $books = @$el.find('.book')
+          $container = @$el.find('.books')
+          $books = $container.find('.book')
           $first = $books.first()
           $second = $books.eq(1)
           $third = $books.eq(2)
@@ -44,13 +45,18 @@ define [
           hoffset = $first.offset().left - $second.offset().left
           voffset = $first.offset().top - $second.offset().top
 
+          $container.css({'height': $container.height()+'px'})
+
           # Position the next book to scroll in
-          $third.css({display: 'block', position: 'absolute', marginLeft: hoffset*-2 + 'px', paddingLeft: '15px'})
+          $third.css({display: 'block'})
+          if not voffset
+            $third.css({position: 'absolute', marginLeft: hoffset*-2 + 'px', paddingLeft: '15px'})
 
           $first.animate {marginLeft: hoffset+'px', marginTop: voffset+'px'}, 1000, () ->
             $first.insertAfter($books.last()).removeAttr('style')
+            $container.removeAttr('style')
 
-          $second.animate {paddingLeft: 0}, 1000, () ->
+          $second.animate {paddingLeft: 0, paddingRight: '15px'}, 1000, () ->
             $second.removeAttr('style')
 
           $third.animate {marginLeft: hoffset*-1+'px'}, 1000, () ->
@@ -58,4 +64,4 @@ define [
 
         # Start the carousel
         if @_carousel then clearInterval(@_carousel)
-        @_carousel = setInterval(nextFeatured, 15000)
+        @_carousel = setInterval(nextFeatured, 2000)
