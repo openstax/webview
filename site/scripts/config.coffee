@@ -30,11 +30,19 @@ require.config
     i18nprecompile: 'libs/require/plugins/require-handlebars/hbs/i18nprecompile'
     json2: 'libs/require/plugins/require-handlebars/hbs/json2'
 
-  # # Map prefixes
-  map:
-    '*':
-      css: 'libs/require/plugins/require-css/css'
-      less: 'libs/require/plugins/require-less/less'
+  # # Packages
+  packages: [
+      {
+          name: 'css',
+          location: 'libs/require/plugins/require-css',
+          main: 'css'
+      },
+      {
+          name: 'less',
+          location: 'libs/require/plugins/require-less',
+          main: 'less'
+      }
+  ]
 
   # # Shims
   # Used to support libraries that were not written for AMD

@@ -21,11 +21,11 @@
  * Chome 3 - 26
  * Firefox 3.5 - 19
  * Opera 10 - 12
- * 
+ *
  * browserling.com used for virtual testing environment
  *
  * Credit to B Cavalier & J Hann for the elegant IE 6 - 9 hack.
- * 
+ *
  * Sources that helped along the way:
  * - https://developer.mozilla.org/en-US/docs/Browser_detection_using_the_user_agent
  * - http://www.phpied.com/when-is-a-stylesheet-really-loaded/
@@ -41,7 +41,7 @@ define(['./normalize'], function(normalize) {
 
   // set to true to enable test prompts for device testing
   var testing = false;
-  
+
   var head = document.getElementsByTagName('head')[0];
 
   var engine = window.navigator.userAgent.match(/Trident\/([^ ;]*)|AppleWebKit\/([^ ;]*)|Opera\/([^ ;]*)|rv\:([^ ;]*)(.*?)Gecko\/([^ ;]*)|MSIE\s([^ ;]*)/);
@@ -66,16 +66,16 @@ define(['./normalize'], function(normalize) {
   }
   else if (testing)
     alert('Engine detection failed');
-  
+
   //main api object
   var cssAPI = {};
 
   var absUrlRegEx = /^\/|([^\:\/]*:)/;
-  
+
   cssAPI.pluginBuilder = './css-builder';
 
   // used by layer builds to register their css buffers
-  
+
   // the current layer buffer items (from addBuffer)
   var curBuffer = [];
 
@@ -206,7 +206,7 @@ define(['./normalize'], function(normalize) {
       if (!curImport) {
         style.onload = noop;
         ieStyles.push(style);
-        return;  
+        return;
       }
       style.onload = function() {
         curImport.cb(curImport.ss);
@@ -282,15 +282,15 @@ define(['./normalize'], function(normalize) {
           xhr = new ActiveXObject(progId);
         }
         catch (e) {}
-  
+
         if (xhr) {
           progIds = [progId];  // so faster next time
           break;
         }
       }
-    
+
     xhr.open('GET', url, requirejs.inlineRequire ? false : true);
-  
+
     xhr.onreadystatechange = function (evt) {
       var status, err;
       //Do not explicitly handle errors, those should be
@@ -309,7 +309,7 @@ define(['./normalize'], function(normalize) {
         }
       }
     };
-    
+
     xhr.send(null);
   }
   //uses the <style> load method
@@ -327,7 +327,7 @@ define(['./normalize'], function(normalize) {
     else
       curStyle.appendChild(document.createTextNode(css));
   }
-  
+
   // NB add @media query support for media imports
   var importRegEx = /@import\s*(url)?\s*(('([^']*)'|"([^"]*)")|\(('([^']*)'|"([^"]*)"|([^\)]*))\))\s*;?/g;
 
@@ -380,18 +380,18 @@ define(['./normalize'], function(normalize) {
     }, errback);
   }
 
-  
+
   cssAPI.normalize = function(name, normalize) {
     if (name.substr(name.length - 4, 4) == '.css')
       name = name.substr(0, name.length - 4);
-    
+
     return normalize(name);
   }
-  
+
   var waitSeconds;
   var alerted = false;
   cssAPI.load = function(cssId, req, load, config, parse) {
-    
+
     waitSeconds = waitSeconds || config.waitSeconds || 7;
 
     var resourceId = cssId + (!parse ? '.css' : '.less');
@@ -402,7 +402,7 @@ define(['./normalize'], function(normalize) {
       return;
 
     fileUrl = req.toUrl(resourceId);
-    
+
     if (!alerted && testing) {
       alert(hackLinks ? 'hacking links' : 'not hacking');
       alerted = true;
@@ -430,6 +430,6 @@ define(['./normalize'], function(normalize) {
       else if (stylesheet.innerHTML)
         return stylesheet.innerHTML;
     }
-  
+
   return cssAPI;
 });
