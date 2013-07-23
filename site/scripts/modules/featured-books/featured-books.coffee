@@ -2,7 +2,7 @@ define [
   'jquery'
   'underscore'
   'backbone'
-  'cs!modules/info-block/info-block'
+  'cs!modules/inherits/info-block/info-block'
   'cs!collections/library'
   'hbs!./featured-books-template'
   'less!./featured-books'
