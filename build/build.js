@@ -10,7 +10,7 @@
     preserveLicenseComments: false,
     optimize: 'uglify2',
 
-    //stubModules: ['cs'],
+    stubModules: ['cs'],
 
     modules: [
         {
@@ -20,8 +20,8 @@
                 'less/lessc-server',
                 'less/lessc'
             ],
-            include: [/*'css', */'cs!pages/home/home'],
-            //exclude: ['coffee-script']
+            include: [/*'css', */'cs!config', 'cs!pages/home/home'],
+            exclude: ['coffee-script']
         }
     ],
 
