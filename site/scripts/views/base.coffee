@@ -27,7 +27,7 @@ define [
   return class BaseView extends Backbone.View
     initialize: () ->
       @regions = new Regions(@regions, @)
-    
+
     render: () ->
       @$el.html(@template)
 

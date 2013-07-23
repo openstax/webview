@@ -2,15 +2,12 @@
     appDir: '../site',
     baseUrl: 'scripts',
     dir: '../dist',
-    mainConfigFile: '../site/scripts/main.js',
+    mainConfigFile: '../site/scripts/config.js',
     findNestedDependencies: true,
     removeCombined: true,
-    useStrict: true,
     keepBuildDir: false,
     preserveLicenseComments: false,
     optimize: 'uglify2',
-
-    stubModules: ['cs'],
 
     modules: [
         {
@@ -20,12 +17,11 @@
                 'less/lessc-server',
                 'less/lessc'
             ],
-            include: [/*'css', */'cs!config', 'cs!pages/home/home'],
-            exclude: ['coffee-script']
+            include: [
+                'cs!pages/home/home'
+            ]/*,
+            exclude: ['coffee-script'],
+            stubModules: ['cs']*/
         }
-    ],
-
-    uglify2: {
-        mangle: true
-    }
+    ]
 })

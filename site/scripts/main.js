@@ -2,12 +2,7 @@
     "use strict";
 
     // Load the config
-    require({
-        paths: {
-            cs: 'libs/require/plugins/require-cs/cs',
-            'coffee-script': 'libs/require/plugins/require-cs/coffee-script'
-        }
-    }, ['cs!config'], function () {
+    require(['config'], function () {
         // Load the application after the config
         require(['cs!loader'], function(loader) {
             loader.init();
