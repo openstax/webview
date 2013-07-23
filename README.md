@@ -8,7 +8,7 @@ Below are instructions for optimizing the site and a layout of how the code is o
 
 1. Download and extract (if necessary)
 2. Configure your server to point at `site/index.html` (development) or `dist/index.html` (production)
-3. (optional) Build your own production code by running `r.js -o build/build.js` (requires [Node.js](http://nodejs.org) and [r.js](http://requirejs.org/docs/optimization.html)
+3. (optional) Build your own production code by running `r.js -o build/build.js` (requires [Node.js](http://nodejs.org) and [r.js](http://requirejs.org/docs/optimization.html))
 
 
 ### Directory Layout
