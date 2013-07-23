@@ -72,7 +72,3 @@ require.config
     helperPathCallback: (name) ->
       return "cs!helpers/handlebars/#{name}"
     templateExtension: 'html'
-
-# # Load and run the application
-define ['cs!loader'], (loader) ->
-  loader.init()
