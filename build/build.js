@@ -19,9 +19,9 @@
             ],
             include: [
                 'cs!pages/home/home'
-            ]/*,
+            ],
             exclude: ['coffee-script'],
-            stubModules: ['cs']*/
+            stubModules: ['cs']
         }
     ]
 })
