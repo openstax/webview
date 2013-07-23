@@ -6,7 +6,7 @@ define [
 ], ($, _, Backbone, Book) ->
 
   return new class Library extends Backbone.Collection
-    url: '/data/library.json'
+    url: 'data/library.json'
     model: Book
 
     initialize: () ->
