@@ -8,7 +8,6 @@
             text: 'libs/require/plugins/text',
             hbs: 'libs/require/plugins/require-handlebars/hbs',
             cs: 'libs/require/plugins/require-cs/cs',
-            'coffee-script': 'libs/require/plugins/require-cs/coffee-script',
 
             // ## Core Libraries
             jquery: 'libs/jquery',
@@ -33,7 +32,10 @@
             // ## Handlebars Dependencies
             Handlebars: 'libs/require/plugins/require-handlebars/Handlebars',
             i18nprecompile: 'libs/require/plugins/require-handlebars/hbs/i18nprecompile',
-            json2: 'libs/require/plugins/require-handlebars/hbs/json2'
+            json2: 'libs/require/plugins/require-handlebars/hbs/json2',
+
+            // ## Coffeescript Compiler
+            'coffee-script': 'libs/require/plugins/require-cs/coffee-script'
         },
 
         // # Packages
