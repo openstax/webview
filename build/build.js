@@ -12,13 +12,16 @@
     modules: [
         {
             name: 'main',
+            create: true,
+            include: [
+                'css',
+                'main',
+                'cs!pages/home/home'
+            ],
             excludeShallow: [
                 'css/css-builder',
                 'less/lessc-server',
                 'less/lessc'
-            ],
-            include: [
-                'cs!pages/home/home'
             ],
             exclude: ['coffee-script'],
             stubModules: ['cs']
