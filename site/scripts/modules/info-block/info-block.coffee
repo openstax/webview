@@ -2,7 +2,7 @@ define [
   'jquery'
   'underscore'
   'backbone'
-  'cs!views/base'
+  'cs!helpers/backbone/views/base'
   'hbs!./info-block-template'
   'less!./info-block'
 ], ($, _, Backbone, BaseView, template) ->

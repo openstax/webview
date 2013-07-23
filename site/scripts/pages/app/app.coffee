@@ -2,7 +2,7 @@ define [
   'jquery'
   'underscore'
   'backbone'
-  'cs!views/base'
+  'cs!helpers/backbone/views/base'
   'hbs!./app-template'
   'less!./app'
 ], ($, _, Backbone, BaseView, template) ->

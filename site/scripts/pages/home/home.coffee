@@ -2,7 +2,7 @@ define [
   'jquery'
   'underscore'
   'backbone'
-  'cs!views/base'
+  'cs!helpers/backbone/views/base'
   'cs!modules/header/header'
   'cs!modules/footer/footer'
   'cs!modules/splash/splash'

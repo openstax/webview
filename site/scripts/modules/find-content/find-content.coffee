@@ -2,7 +2,7 @@ define [
   'jquery'
   'underscore'
   'backbone'
-  'cs!views/base'
+  'cs!helpers/backbone/views/base'
   'hbs!./find-content-template'
   'less!./find-content'
   'bootstrapDropdown'
