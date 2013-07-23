@@ -23,7 +23,7 @@ Below are instructions for optimizing the site and a layout of how the code is o
 * `site/scripts/helpers`        Helpers for Handlebars, Backbone, and generic code
 * `site/scripts/libs`           3rd Party Libraries
 * `site/scripts/models`         Backbone Models
-* `site/scripts/modules`        Reusable Modules used to construct pages (includes LESS and Handlebars templates)
+* `site/scripts/modules`        Self-contained, Reusable Modules used to construct pages
 * `site/scripts/pages`          Backbone Views representing an entire page (or the entire viewport)
 * `site/scripts/config.js`      Require.js configuration
 * `site/scripts/loader.coffee`  App loader, responsible for setting up global listeners
