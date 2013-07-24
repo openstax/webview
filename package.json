@@ -25,12 +25,10 @@
         "grunt-jsbeautifier": "~0.1.10"
     },
 
-    "license": [
-        {
-            "type" : "AGPL",
-            "url" : "https://github.com/Connexions/webview/blob/master/LICENSE.txt"
-        }
-    ],
+    "license": [{
+        "type": "AGPL",
+        "url": "https://github.com/Connexions/webview/blob/master/LICENSE.txt"
+    }],
 
     "engines": {
         "node": ">=0.10"
