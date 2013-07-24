@@ -66,6 +66,15 @@ module.exports = (grunt) ->
         'site/scripts/**/*.js'
       ]
 
+    # JS Beautifier
+    jsbeautifier:
+      files: ['site/scripts/**/*.js', '!site/scripts/libs/**']
+      options:
+        mode: "VERIFY_ONLY"
+        keep_array_indentation: true
+        space_after_anon_function: true
+        wrap_line_length: 120
+
     # CoffeeLint
     coffeelint:
       options:
@@ -103,6 +112,7 @@ module.exports = (grunt) ->
   # -----
   grunt.registerTask 'test', [
     'jshint'
+    'jsbeautifier'
     'coffeelint'
     'recess'
   ]

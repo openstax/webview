@@ -16,7 +16,8 @@
         "grunt": "~0.4.1",
         "grunt-contrib-jshint": "~0.6",
         "grunt-coffeelint": "0.0.x",
-        "grunt-recess": "~0.3.3"
+        "grunt-recess": "~0.3.3",
+        "grunt-jsbeautifier": "~0.1.10"
     },
 
     "license": [
