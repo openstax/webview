@@ -1,5 +1,6 @@
 module.exports = (grunt) ->
 
+  fs = require('fs')
   pkg = require('./package.json')
 
   # Project configuration.
@@ -71,7 +72,6 @@ module.exports = (grunt) ->
       files: ['site/scripts/**/*.js', '!site/scripts/libs/**']
       options:
         mode: "VERIFY_ONLY"
-        keep_array_indentation: true
         space_after_anon_function: true
         wrap_line_length: 120
 
@@ -100,6 +100,80 @@ module.exports = (grunt) ->
           'site/scripts/modules/**/*.less'
         ]
 
+    # Build
+    # ----
+
+    # Requirejs Optimizer
+    requirejs:
+      compile:
+        options:
+          appDir: 'site'
+          baseUrl: 'scripts'
+          dir: 'dist'
+          mainConfigFile: 'site/scripts/config.js'
+          findNestedDependencies: true
+          removeCombined: true
+          keepBuildDir: false
+          preserveLicenseComments: false
+          optimize: 'uglify2'
+          modules: [{
+              name: 'main'
+              create: true
+              include: [
+                  'css'
+                  'main'
+                  'cs!pages/home/home'
+              ]
+              excludeShallow: [
+                  'css/css-builder'
+                  'less/lessc-server'
+                  'less/lessc'
+              ]
+              exclude: ['coffee-script']
+              stubModules: ['cs']
+          }]
+
+          done: (done, output) ->
+            duplicates = require('rjs-build-analysis').duplicates(output)
+
+            if (duplicates.length > 0)
+              grunt.log.subhead('Duplicates found in requirejs build:')
+              grunt.log.warn(duplicates)
+              done(new Error('r.js built duplicate modules, please check the excludes option.'))
+
+            done()
+
+    # Clean
+    clean:
+      files:
+        src: [
+          'dist/build.txt'
+          'dist/styles/**/*'
+          'dist/scripts/**/*'
+          '!dist/scripts/main.js'
+          '!dist/scripts/libs/require/require.js'
+        ]
+        filter: 'isFile'
+      directories:
+        src: [
+          'dist/**/*'
+        ]
+        filter: (filepath) ->
+          # Ignore files
+          if not grunt.file.isDir(filepath) then return false
+
+          # Remove all directories inside /dist/scripts
+          if filepath.match(/^dist\/scripts\//)
+            # Don't remove the matching directories
+            if filepath is 'dist/scripts/libs' or
+                filepath is 'dist/scripts/libs/require'
+              return false
+            else
+              return true
+
+          # Remove empty directories
+          return fs.readdirSync(filepath).length is 0
+
   # Dependencies
   # ============
   for name of pkg.devDependencies when name.substring(0, 6) is 'grunt-'
@@ -115,4 +189,11 @@ module.exports = (grunt) ->
     'jsbeautifier'
     'coffeelint'
     'recess'
+  ]
+
+  # Build
+  # -----
+  grunt.registerTask 'build', [
+    'requirejs'
+    'clean'
   ]

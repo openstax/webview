@@ -3,7 +3,8 @@
     "version": "0.0.3",
     "description": "Connexions (cnx.org) web site",
     "scripts": {
-        "test": "grunt test --verbose"
+        "test": "grunt test --verbose",
+        "build": "grunt build --verbose"
     },
 
     "repository": {
@@ -14,8 +15,12 @@
     "dependencies": {},
     "devDependencies": {
         "grunt": "~0.4.1",
+        "grunt-cli": "~0.1.9",
+        "grunt-contrib-requirejs": "~0.4.1",
+        "rjs-build-analysis": "~0.0.3",
+        "grunt-contrib-clean": "~0.5",
         "grunt-contrib-jshint": "~0.6",
-        "grunt-coffeelint": "0.0.x",
+        "grunt-coffeelint": "~0.0.7",
         "grunt-recess": "~0.3.3",
         "grunt-jsbeautifier": "~0.1.10"
     },
