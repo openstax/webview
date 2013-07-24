@@ -10,8 +10,7 @@ define [
   'cs!modules/featured-books/featured-books'
   'hbs!./home-template'
   'less!./home'
-], ($, _, Backbone, BaseView, HeaderView, FooterView, SplashView,
-  FindContentView, FeaturedBooksView, template) ->
+], ($, _, Backbone, BaseView, HeaderView, FooterView, SplashView, FindContentView, FeaturedBooksView, template) ->
 
   return class HomeView extends BaseView
     template: template()

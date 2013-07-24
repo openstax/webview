@@ -35,7 +35,7 @@ module.exports = (grunt) ->
         strict: true
         trailing: true
         maxparams: 3
-        maxlen: 100
+        maxlen: 120
         # Relaxing options
         asi: false
         boss: false
@@ -76,7 +76,7 @@ module.exports = (grunt) ->
           value: 'unix'
         max_line_length:
           level: 'error'
-          value: 100
+          value: 120
 
       source: 'site/scripts/**/*.coffee'
       grunt: 'Gruntfile.coffee'
