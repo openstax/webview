@@ -4,20 +4,18 @@
 
 Below are instructions for optimizing the site and a layout of how the code is organized.
 
-### Building Yourself
+### Hosting Yourself
 
 1. Download and extract (if necessary)
 2. Install [Node.js](http://nodejs.org) (and npm) if necessary
 3. Run `npm install` to install test and build dependencies
 4. (optional) Run tests with `npm test`
-5. (optional) Build the production code with `npm run build`
+5. Build the production code with `npm run build`
 6. Configure your server to point at `dist/index.html`
-  * You can also host the development code at `site/index.html` (no build required)
+  * Note: You can also host the development version at `site/index.html` (no build required)
 
 ### Directory Layout
 
-* `build/`                      Build tools and scripts
-* `dist/`                       Production version of the site
 * `site/`                       Development version of the site
 * `site/data/`                  Hardcoded data
 * `site/images/`                Images used throughout the site
