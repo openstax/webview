@@ -1,6 +1,6 @@
 {
     "name": "connexions-webview",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Connexions (cnx.org) web site",
     "scripts": {
         "test": "grunt test --verbose",
