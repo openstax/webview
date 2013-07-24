@@ -16,9 +16,13 @@ define [
       @listenTo(library, 'reset', @render)
 
       # Don't run any animations while the window is being resized
-      $(window).resize () ->
-        @stopCarousel()
+      $(window).resize () =>
+        @stopCarousel({finish: true})
         @startCarousel()
+
+    events:
+      'mouseenter .books': 'stopCarousel'
+      'mouseleave .books': 'startCarousel'
 
     # @template must be evaluated prior to rendering
     beforeRender: () -> @template = template({books: library.toJSON()})
@@ -26,20 +30,25 @@ define [
 
     # Called when the 'More' link is clicked
     more: () ->
-      @stopCarousel()
+      @stopCarousel({finish: true})
       @$el.find('.book').show()
+      @_expanded = true
 
     # Called when the 'Less' link is clicked
     less: () ->
       @startCarousel()
       @$el.find('.book').removeAttr('style')
+      @_expanded = false
 
-    stopCarousel: () ->
-      @$el.find('.book').finish() # Immediately finish the animation
+    stopCarousel: (options) ->
+      if options.finish then @$el.find('.book').finish() # Immediately finish the animation
       clearInterval(@_carousel)
       @_carousel = null
 
     startCarousel: () ->
+      # Don't run the carousel while it's expanded
+      if @_expanded then return
+
       # Animate the carousel to show the next featured book
       nextFeatured = () =>
         $container = @$el.find('.books')
@@ -76,4 +85,4 @@ define [
 
       # Start the carousel
       if @_carousel then clearInterval(@_carousel)
-      @_carousel = setInterval(nextFeatured, 15000)
+      @_carousel = setInterval(nextFeatured, 7000)
