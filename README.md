@@ -1,3 +1,5 @@
+[![build status](https://secure.travis-ci.org/Connexions/webview.png)](http://travis-ci.org/Connexions/webview)
+
 # Connexions
 
 ## Development and Building
