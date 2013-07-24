@@ -1,6 +1,8 @@
 (function () {
     'use strict';
 
+    var handlebarsPath = 'libs/require/plugins/require-handlebars/';
+
     require.config({
         // # Paths
         paths: {
@@ -30,9 +32,9 @@
             bootstrapTransition: 'libs/bootstrap/js/transition',
 
             // ## Handlebars Dependencies
-            Handlebars: 'libs/require/plugins/require-handlebars/Handlebars',
-            i18nprecompile: 'libs/require/plugins/require-handlebars/hbs/i18nprecompile',
-            json2: 'libs/require/plugins/require-handlebars/hbs/json2',
+            Handlebars: handlebarsPath + 'Handlebars',
+            i18nprecompile: handlebarsPath + 'hbs/i18nprecompile',
+            json2: handlebarsPath + 'hbs/json2',
 
             // ## Coffeescript Compiler
             'coffee-script': 'libs/require/plugins/require-cs/coffee-script'

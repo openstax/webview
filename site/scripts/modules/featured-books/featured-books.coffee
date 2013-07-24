@@ -58,10 +58,16 @@ define [
         # Position the next book to scroll in
         $third.css({display: 'block'})
         if not voffset
-          $third.css({position: 'absolute', marginLeft: hoffset*-2 + 'px', paddingLeft: '15px'})
+          $third.css
+            position: 'absolute'
+            marginLeft: hoffset*-2 + 'px'
+            paddingLeft: '15px'
 
         # Slide the carousel
-        $first.animate {marginLeft: hoffset+'px', marginTop: voffset+'px'}, 1000, () ->
+        $first.animate {
+          marginLeft: hoffset+'px'
+          marginTop: voffset+'px'
+        }, 1000, () ->
           $first.insertAfter($books.last()).removeAttr('style')
           $container.removeAttr('style')
 
