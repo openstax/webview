@@ -1,4 +1,4 @@
-[![build status](https://secure.travis-ci.org/Connexions/webview.png)](http://travis-ci.org/Connexions/webview)
+[![Build Status](https://travis-ci.org/Connexions/webview.png)](https://travis-ci.org/Connexions/webview)
 
 # Connexions
 
