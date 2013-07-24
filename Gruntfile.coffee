@@ -22,6 +22,15 @@ module.exports = (grunt) ->
       source: 'site/scripts/**/*.coffee'
       grunt: 'Gruntfile.coffee'
 
+    recess:
+      dist:
+        options:
+          strictPropertyOrder: false
+        src: [
+          'site/styles/**/*.less'
+          'site/scripts/modules/**/*.less'
+        ]
+
   # Dependencies
   # ============
   for name of pkg.devDependencies when name.substring(0, 6) is 'grunt-'
@@ -33,5 +42,6 @@ module.exports = (grunt) ->
   # Travis CI
   # -----
   grunt.registerTask 'test', [
+    'recess'
     'coffeelint'
   ]
