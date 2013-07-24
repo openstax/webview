@@ -7,11 +7,12 @@ Below are instructions for optimizing the site and a layout of how the code is o
 ### Building Yourself
 
 1. Download and extract (if necessary)
-2. Configure your server to point at `site/index.html` (development) or `dist/index.html` (production)
-3. (optional) Build your own production code by running `r.js -o build/build.js` (requires [Node.js](http://nodejs.org) and [r.js](http://requirejs.org/docs/optimization.html))
-4. (optional) Install test dependencies with `npm install` (requires [Node.js](http://nodejs.org) and npm)
-5. (optional) Run tests with `npm test` or `grunt test` (requires test dependencies, [Node.js](http://nodejs.org) and [grunt-cli](https://github.com/gruntjs/grunt-cli))
-
+2. Install [Node.js](http://nodejs.org) (and npm) if necessary
+3. Run `npm install` to install test and build dependencies
+4. (optional) Run tests with `npm test`
+5. (optional) Build the production code with `npm run build`
+6. Configure your server to point at `dist/index.html`
+  * You can also host the development code at `site/index.html` (no build required)
 
 ### Directory Layout
 
