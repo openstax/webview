@@ -6,10 +6,9 @@
 .page-header {
     position: relative;
     height: @logo-height;
-    overflow: hidden;
-    // Override bootstrap css
     padding-bottom: 0;
     margin: 0;
+    overflow: hidden;
     border-bottom: none;
 
     .logo, .links {
@@ -27,30 +26,30 @@
         right: 0;
         bottom: 0;
         left: @logo-width;
-        
+
     }
 
     .links .login {
         margin: 25px 25px 0 0;
-        text-align: right;
         font-size: 0.9em;
         font-weight: 300;
+        text-align: right;
 
         a:after {
-            content: "|";
             padding: 0 5px 0 8px;
             color: @gray-lighter;
+            content: "|";
         }
 
         a:last-child:after {
-            content: "";
             padding: 0;
+            content: "";
         }
 
         .donate {
             padding: 5px 8px;
-            background-color: rgb(120, 176, 74);
             color: white;
+            background-color: rgb(120, 176, 74);
             border-radius: 4px;
         }
     }
@@ -63,16 +62,16 @@
         a {
             display: table-cell;
             padding: 5px 10px;
-            color: @link-color;
-            text-align: center;
             font-size: 1.1em;
             font-weight: 500;
+            color: @link-color;
+            text-align: center;
         }
 
         .active {
             color: @link-active-color;
         }
-        
+
         .rice {
             margin-bottom: 5px;
         }

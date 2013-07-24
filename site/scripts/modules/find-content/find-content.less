@@ -5,15 +5,14 @@
 .find-content {
     display: -webkit-flex;
     display: flex;
+    padding: 10px;
+    color: @gray-lighter;
+    background-color: @gray-dark;
     -webkit-flex-flow: row nowrap;
     flex-flow: row nowrap;
     -webkit-justify-content: center;
     justify-content: center;
 
-    padding: 10px;
-    background-color: @gray-dark;
-    color: @gray-lighter;
-    
     @media screen and (max-width: @screen-tiny-max) {
         display: block;
     }
@@ -38,12 +37,12 @@
     }
 
     h3 {
-        -webkit-flex: 2 0 auto;
-        flex: 2 0 auto;
         margin: 0;
         font-size: 1.5em;
         font-weight: 400;
-        
+        -webkit-flex: 2 0 auto;
+        flex: 2 0 auto;
+
         @media screen and (max-width: @screen-tiny-max) {
             display: block;
             margin-bottom: 15px;
@@ -64,14 +63,14 @@
     }
 
     input {
-        -webkit-flex: 4 4 33%;
-        flex: 4 4 33%;
         height: @bar-height;
         font-size: 1.2em;
+        color: @gray-lighter;
         background-color: @gray-medium;
         border: 1px solid transparent;
-        color: @gray-lighter;
-        
+        -webkit-flex: 4 4 33%;
+        flex: 4 4 33%;
+
         @media screen and (max-width: @screen-tiny-max) {
             display: block;
             margin-bottom: 15px;
@@ -84,27 +83,27 @@
     }
 
     .dropdown {
+        position: relative;
+        height: @bar-height;
+        margin-right: 15px;
+        font-size: 1.2em;
+        color: @gray-lighter;
+        background-color: @gray-medium;
+        border-radius: 4px;
         -webkit-flex: 4 0 33%;
         flex: 4 0 33%;
-        position: relative;
-        margin-right: 15px;
-        height: @bar-height;
-        font-size: 1.2em;
-        border-radius: 4px;
-        background-color: @gray-medium;
-        color: @gray-lighter;
 
         a {
             display: block;
-            line-height: @bar-height;
             padding: 0 12px;
             font-weight: 300;
+            line-height: @bar-height;
         }
-        
+
         .dropdown-menu {
             width: 100%;
         }
-        
+
         @media screen and (max-width: @screen-tiny-max) {
             display: block;
             margin-right: 0;

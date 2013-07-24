@@ -4,10 +4,10 @@
     .make-row();
     padding: 20px;
     margin: 0 !important; // override bootstrap css
+    font-size: 0.85em;
+    color: @gray-lighter;
     text-align: center;
     background-color: @gray-dark;
-    color: @gray-lighter;
-    font-size: 0.85em;
 
     a {
         color: @gray-lighter;
@@ -55,17 +55,17 @@
 
         h5 {
             margin-bottom: 7px;
-            font-weight: 400;
             font-size: 1.7rem;
+            font-weight: 400;
         }
 
         ul {
-             list-style-type: none;
-             padding: 0;
+            padding: 0;
+            list-style-type: none;
 
-             li {
-                 margin-bottom: 2px;
-             }
+            li {
+                margin-bottom: 2px;
+            }
         }
     }
 
@@ -80,17 +80,17 @@
         ul {
             display: -webkit-flex;
             display: flex;
+            max-width: 75px;
+            margin: 0 auto;
             -webkit-flex-flow: row wrap;
             flex-flow: row wrap;
             -webkit-justify-content: center;
             justify-content: center;
-            max-width: 75px;
-            margin: 0 auto;
 
             li {
+                margin: 3px 0;
                 -webkit-flex: 1 0 auto;
                 flex: 1 0 auto;
-                margin: 3px 0;
             }
         }
     }

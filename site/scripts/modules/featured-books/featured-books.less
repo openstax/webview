@@ -29,24 +29,24 @@
 
         h4 {
             a {
-                color: @link-color;
                 font-weight: 300;
+                color: @link-color;
             }
         }
 
         p {
-            color: @gray-dark;
             font-weight: 300;
+            color: @gray-dark;
         }
     }
 
     .book:after {
-        visibility: hidden;
     	display: block;
         height: 0;
+        clear: both;
     	font-size: 0;
     	content: " ";
-    	clear: both;
+        visibility: hidden;
     }
 
     .book:first-child, .book:nth-child(2) {
@@ -54,8 +54,8 @@
     }
 
     .book:nth-child(2n+1) {
-        padding-left: 0;
         padding-right: 15px;
+        padding-left: 0;
     }
 
     .book:nth-child(2n) {
