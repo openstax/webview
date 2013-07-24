@@ -81,7 +81,7 @@
         hbs: {
             disableI18n: true,
             helperPathCallback: function (name) {
-                return "cs!helpers/handlebars/" + name;
+                return 'cs!helpers/handlebars/' + name;
             },
             templateExtension: 'html'
         }

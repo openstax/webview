@@ -1,5 +1,5 @@
 (function () {
-    "use strict";
+    'use strict';
 
     // Load the config
     require(['config'], function () {
