@@ -14,7 +14,7 @@ define [
     initialize: () ->
       super()
       @listenTo(library, 'reset', @render)
-      
+
       # Don't run any animations while the window is being resized
       $(window).resize () ->
         @stopCarousel()
@@ -64,10 +64,7 @@ define [
             paddingLeft: '15px'
 
         # Slide the carousel
-        $first.animate {
-          marginLeft: hoffset+'px'
-          marginTop: voffset+'px'
-        }, 1000, () ->
+        $first.animate {marginLeft: hoffset+'px', marginTop: voffset+'px'}, 1000, () ->
           $first.insertAfter($books.last()).removeAttr('style')
           $container.removeAttr('style')
 
