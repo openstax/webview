@@ -32,6 +32,6 @@ module.exports = (grunt) ->
 
   # Travis CI
   # -----
-  grunt.registerTask 'travis', [
+  grunt.registerTask 'test', [
     'coffeelint'
   ]
