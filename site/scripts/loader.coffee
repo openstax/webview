@@ -14,7 +14,7 @@ define [
       # Don't handle navigation if the default handling was already prevented
       if e.isDefaultPrevented() then return
 
-      e.preventDefault();
+      e.preventDefault()
 
       if external.test(href)
         window.open(href, '_blank')

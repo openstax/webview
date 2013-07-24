@@ -1,0 +1,30 @@
+{
+    "name": "connexions-webview",
+    "version": "0.0.1",
+    "description": "Connexions (cnx.org) web site.",
+    "scripts": {
+        "test": "grunt travis --verbose"
+    },
+
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Connexions/webview.git"
+    },
+
+    "dependencies": {},
+    "devDependencies": {
+        "grunt": "0.4.x",
+        "grunt-coffeelint": "0.0.x"
+    },
+
+    "license": [
+        {
+            "type" : "AGPL",
+            "url" : "https://github.com/Connexions/webview/blob/master/LICENSE.txt"
+        }
+    ],
+
+    "engines": {
+        "node": ">=0.10"
+    }
+}

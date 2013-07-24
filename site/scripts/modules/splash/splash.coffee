@@ -8,13 +8,13 @@ define [
   'bootstrapCarousel'
 ], ($, _, Backbone, BaseView, template) ->
 
-    return class SplashView extends BaseView
-      template: template()
+  return class SplashView extends BaseView
+    template: template()
 
-      render: () ->
-        super()
+    render: () ->
+      super()
 
-        # Initialize the Bootstrap Carousel
-        $('.carousel').carousel().carousel('next')
+      # Initialize the Bootstrap Carousel
+      $('.carousel').carousel().carousel('next')
 
-        return @
+      return @

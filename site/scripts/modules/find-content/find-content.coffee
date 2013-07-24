@@ -8,5 +8,5 @@ define [
   'bootstrapDropdown'
 ], ($, _, Backbone, BaseView, template) ->
 
-    return class FindContentView extends BaseView
-      template: template()
+  return class FindContentView extends BaseView
+    template: template()

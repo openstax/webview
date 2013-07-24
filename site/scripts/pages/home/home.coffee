@@ -12,26 +12,26 @@ define [
   'less!./home'
 ], ($, _, Backbone, BaseView, HeaderView, FooterView, SplashView, FindContentView, FeaturedBooksView, template) ->
 
-    return class HomeView extends BaseView
-      template: template()
+  return class HomeView extends BaseView
+    template: template()
 
-      regions:
-        splash: '#splash'
-        find: '#find-content'
-        featured: '#featured-books'
-        #news: '#news'
-        #spotlight: '#spotlight'
+    regions:
+      splash: '#splash'
+      find: '#find-content'
+      featured: '#featured-books'
+      #news: '#news'
+      #spotlight: '#spotlight'
 
-      render: () ->
-        super()
+    render: () ->
+      super()
 
-        @parent?.regions.header.show(new HeaderView())
-        @parent?.regions.footer.show(new FooterView())
+      @parent?.regions.header.show(new HeaderView())
+      @parent?.regions.footer.show(new FooterView())
 
-        @regions.splash.show(new SplashView())
-        @regions.featured.show(new FeaturedBooksView())
-        @regions.find.show(new FindContentView())
-        #@regions.news.show(new NewsView())
-        #@regions.spotlight.show(new SpotlightView())
+      @regions.splash.show(new SplashView())
+      @regions.featured.show(new FeaturedBooksView())
+      @regions.find.show(new FindContentView())
+      #@regions.news.show(new NewsView())
+      #@regions.spotlight.show(new SpotlightView())
 
-        return @
+      return @
