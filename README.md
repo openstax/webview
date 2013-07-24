@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/Connexions/webview.png)](https://travis-ci.org/Connexions/webview)
-
-# Connexions
+# Connexions [![Build Status](https://travis-ci.org/Connexions/webview.png)](https://travis-ci.org/Connexions/webview)
 
 ## Development and Building
 
