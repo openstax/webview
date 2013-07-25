@@ -177,6 +177,12 @@ module.exports = (grunt) ->
           # Remove empty directories
           return fs.readdirSync(filepath).length is 0
 
+    # Uglify
+    uglify:
+      dist:
+        files:
+          'dist/scripts/libs/requirejs/require.js': ['dist/scripts/libs/requirejs/require.js']
+
     # Install
     # ----
 
@@ -210,6 +216,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'dist', [
     'requirejs'
     'clean'
+    'uglify:dist'
   ]
 
   # Install
