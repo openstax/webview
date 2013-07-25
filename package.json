@@ -3,6 +3,7 @@
     "version": "0.0.4",
     "description": "Connexions (cnx.org) web site",
     "scripts": {
+        "prepublish": "grunt install",
         "test": "grunt test --verbose",
         "build": "grunt build --verbose"
     },
@@ -12,10 +13,13 @@
         "url": "https://github.com/Connexions/webview.git"
     },
 
-    "dependencies": {},
-    "devDependencies": {
+    "dependencies": {
         "grunt": "~0.4.1",
-        "grunt-cli": "~0.1.9",
+        "grunt-shell": "~0.3.1",
+        "bower": "~1.0"
+    },
+
+    "devDependencies": {
         "grunt-contrib-requirejs": "~0.4.1",
         "rjs-build-analysis": "~0.0.3",
         "grunt-contrib-clean": "~0.5",

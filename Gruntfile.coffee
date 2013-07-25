@@ -174,10 +174,18 @@ module.exports = (grunt) ->
           # Remove empty directories
           return fs.readdirSync(filepath).length is 0
 
+    # Shell
+    shell:
+      bower:
+        command: 'bower install'
+
   # Dependencies
   # ============
+  for name of pkg.dependencies when name.substring(0, 6) is 'grunt-'
+    grunt.loadNpmTasks(name)
   for name of pkg.devDependencies when name.substring(0, 6) is 'grunt-'
-    if name isnt 'grunt-cli' then grunt.loadNpmTasks(name)
+    if grunt.file.exists("./node_modules/#{name}")
+      grunt.loadNpmTasks(name)
 
   # Tasks
   # =====
@@ -196,4 +204,11 @@ module.exports = (grunt) ->
   grunt.registerTask 'build', [
     'requirejs'
     'clean'
+  ]
+
+  # Install
+  # -----
+  grunt.registerTask 'install', [
+    'shell'
+    #'bower'
   ]

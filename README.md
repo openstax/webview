@@ -6,13 +6,15 @@ Below are instructions for optimizing the site and a layout of how the code is o
 
 ### Hosting Yourself
 
-1. Download and extract (if necessary)
-2. Install [Node.js](http://nodejs.org) (and npm) if necessary
-3. Run `npm install` to install test and build dependencies
-4. (optional) Run tests with `npm test`
-5. Build the production code with `npm run build`
-6. Configure your server to point at `dist/index.html`
+1. Download and extract
+2. Install [Node.js](http://nodejs.org) (and npm)
+3. Run `npm install -g grunt-cli` to install [grunt-cli](https://github.com/gruntjs/grunt-cli)
+4. Run `npm install` to install test and build dependencies
+5. (optional) Run tests with `npm test`
+6. Build the production code with `npm run-script dist` or `grunt dist`
+7. Configure your server to point at `dist/index.html`
   * Note: You can also host the development version at `site/index.html` (no build required)
+  * Note: Unresolveable URIs should also load `dist/index.html` or `site/index.html`
 
 ### Directory Layout
 

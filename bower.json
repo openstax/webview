@@ -1,0 +1,27 @@
+{
+    "name": "connexions-webview",
+    "version": "0.0.4",
+
+    "ignore": [
+        "**/.*",
+        "dist",
+        "node_modules"
+    ],
+
+    "dependencies": {
+        "jquery": "~2.0.3",
+        "lodash": "~v1.3.1",
+        "backbone": "~1.0.0",
+        "bootstrap": "930c75e5dd0f2ae861a505bda740f289570c9b8a",
+        "requirejs": "~2.1.8",
+        "requirejs-text": "~2.0.7",
+        "require-cs": "~0.4.4",
+        "require-css": "~0.0.6",
+        "require-less": "~0.0.6",
+        "require-handlebars-plugin": "f35a00080cce34ab8b5181247524972aef33e1d0"
+    },
+
+    "devDependencies": {
+        "jquery-mockjax": "~v1.5.2"
+    }
+}

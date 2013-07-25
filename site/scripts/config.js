@@ -5,13 +5,12 @@
         // # Paths
         paths: {
             // ## Requirejs plugins
-            text: 'libs/require/plugins/text',
-            hbs: 'libs/require/plugins/require-handlebars/hbs',
-            cs: 'libs/require/plugins/require-cs/cs',
+            text: 'libs/requirejs-text/text',
+            hbs: 'libs/require-handlebars-plugin/hbs',
 
             // ## Core Libraries
-            jquery: 'libs/jquery',
-            underscore: 'libs/lodash',
+            jquery: 'libs/jquery/jquery',
+            underscore: 'libs/lodash/lodash',
             backbone: 'libs/backbone/backbone',
 
             // ## UI Libraries
@@ -30,23 +29,28 @@
             bootstrapTransition: 'libs/bootstrap/js/transition',
 
             // ## Handlebars Dependencies
-            Handlebars: 'libs/require/plugins/require-handlebars/Handlebars',
-            i18nprecompile: 'libs/require/plugins/require-handlebars/hbs/i18nprecompile',
-            json2: 'libs/require/plugins/require-handlebars/hbs/json2',
-
-            // ## Coffeescript Compiler
-            'coffee-script': 'libs/require/plugins/require-cs/coffee-script'
+            Handlebars: 'libs/require-handlebars-plugin/Handlebars',
+            i18nprecompile: 'libs/require-handlebars-plugin/hbs/i18nprecompile',
+            json2: 'libs/require-handlebars-plugin/hbs/json2',
         },
 
         // # Packages
         packages: [{
             name: 'css',
-            location: 'libs/require/plugins/require-css',
+            location: 'libs/require-css/',
             main: 'css'
         }, {
             name: 'less',
-            location: 'libs/require/plugins/require-less',
+            location: 'libs/require-less',
             main: 'less'
+        }, {
+            name: 'cs',
+            location: 'libs/require-cs',
+            main: 'cs'
+        }, {
+            name: 'coffee-script',
+            location: 'libs/coffee-script',
+            main: 'index'
         }],
 
         // # Shims
