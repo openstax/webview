@@ -37,6 +37,7 @@ module.exports = (grunt) ->
         trailing: true
         maxparams: 3
         maxlen: 120
+        maxcomplexity: 10
         # Relaxing options
         asi: false
         boss: false
@@ -86,6 +87,9 @@ module.exports = (grunt) ->
         max_line_length:
           level: 'error'
           value: 120
+        cyclomatic_complexity:
+          level: 'error'
+          value: 10
 
       source: 'site/scripts/**/*.coffee'
       grunt: 'Gruntfile.coffee'
