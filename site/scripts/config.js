@@ -7,6 +7,7 @@
             // ## Requirejs plugins
             text: 'libs/requirejs-text/text',
             hbs: 'libs/require-handlebars-plugin/hbs',
+            cs: 'libs/require-cs/cs',
 
             // ## Core Libraries
             jquery: 'libs/jquery/jquery',
@@ -32,6 +33,9 @@
             Handlebars: 'libs/require-handlebars-plugin/Handlebars',
             i18nprecompile: 'libs/require-handlebars-plugin/hbs/i18nprecompile',
             json2: 'libs/require-handlebars-plugin/hbs/json2',
+
+            // ## CoffeeScript Compiler
+            'coffee-script': 'libs/coffee-script/index'
         },
 
         // # Packages
@@ -43,14 +47,6 @@
             name: 'less',
             location: 'libs/require-less',
             main: 'less'
-        }, {
-            name: 'cs',
-            location: 'libs/require-cs',
-            main: 'cs'
-        }, {
-            name: 'coffee-script',
-            location: 'libs/coffee-script',
-            main: 'index'
         }],
 
         // # Shims

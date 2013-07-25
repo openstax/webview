@@ -117,10 +117,11 @@ module.exports = (grunt) ->
           preserveLicenseComments: false
           skipDirOptimize: true
           optimize: 'uglify2'
+
+          stubModules: ['cs']
           modules: [{
               name: 'main'
               create: true
-              #insertRequire: ["scripts/main"]
               include: [
                   'css'
                   'main'
@@ -132,7 +133,6 @@ module.exports = (grunt) ->
                   'less/lessc'
               ]
               exclude: ['coffee-script']
-              stubModules: ['cs']
           }]
 
           done: (done, output) ->
