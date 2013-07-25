@@ -2,7 +2,7 @@
 
 ## Development and Building
 
-Below are instructions for optimizing the site and a layout of how the code is organized.
+Below are instructions for hosting and building the site and a layout of how the code is organized.
 
 ### Hosting Yourself
 
