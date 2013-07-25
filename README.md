@@ -11,7 +11,7 @@ Below are instructions for optimizing the site and a layout of how the code is o
 3. Run `npm install -g grunt-cli` to install [grunt-cli](https://github.com/gruntjs/grunt-cli)
 4. Run `npm install` to install test and build dependencies
 5. (optional) Run tests with `npm test`
-6. Build the production code with `npm run-script dist` or `grunt dist`
+6. Build the production code with `grunt dist` or `npm run-script dist`
 7. Configure your server to point at `dist/index.html`
   * Note: You can also host the development version at `site/index.html` (no build required)
   * Note: Unresolveable URIs should also load `dist/index.html` or `site/index.html`
