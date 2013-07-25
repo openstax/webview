@@ -6,6 +6,8 @@ Below are instructions for optimizing the site and a layout of how the code is o
 
 ### Hosting Yourself
 
+#### Download and build development version
+
 1. Download and extract
 2. Install [Node.js](http://nodejs.org) (and npm)
 3. Run `npm install -g grunt-cli` to install [grunt-cli](https://github.com/gruntjs/grunt-cli)
