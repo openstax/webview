@@ -187,6 +187,19 @@ module.exports = (grunt) ->
         files:
           'dist/scripts/libs/requirejs/require.js': ['dist/scripts/libs/requirejs/require.js']
 
+    # Imagemin
+    imagemin:
+      png:
+        options:
+          optimizationLevel: 7
+        files: [{
+          expand: true
+          cwd: 'dist/images/'
+          src: ['**/*.png']
+          dest: 'dist/images/'
+          ext: '.png'
+        }]
+
     # Install
     # ----
 
@@ -221,6 +234,7 @@ module.exports = (grunt) ->
     'requirejs'
     'clean'
     'uglify:dist'
+    'imagemin'
   ]
 
   # Install
