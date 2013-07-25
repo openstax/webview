@@ -201,14 +201,14 @@ module.exports = (grunt) ->
 
   # Build
   # -----
-  grunt.registerTask 'build', [
+  grunt.registerTask 'dist', [
     'requirejs'
     'clean'
+    # bower
   ]
 
   # Install
   # -----
   grunt.registerTask 'install', [
-    'shell'
-    #'bower'
+    'shell:bower'
   ]

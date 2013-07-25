@@ -3,7 +3,7 @@
     "version": "0.0.4",
     "description": "Connexions (cnx.org) web site",
     "scripts": {
-        "prepublish": "grunt install",
+        "prepublish": "grunt install --verbose",
         "test": "grunt test --verbose",
         "build": "grunt build --verbose"
     },
