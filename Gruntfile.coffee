@@ -100,7 +100,7 @@ module.exports = (grunt) ->
           'site/scripts/modules/**/*.less'
         ]
 
-    # Build
+    # Dist
     # ----
 
     # Requirejs Optimizer
@@ -115,10 +115,12 @@ module.exports = (grunt) ->
           removeCombined: true
           keepBuildDir: false
           preserveLicenseComments: false
+          skipDirOptimize: true
           optimize: 'uglify2'
           modules: [{
               name: 'main'
               create: true
+              #insertRequire: ["scripts/main"]
               include: [
                   'css'
                   'main'
@@ -147,11 +149,12 @@ module.exports = (grunt) ->
     clean:
       files:
         src: [
+          'dist/**/.*'
           'dist/build.txt'
           'dist/styles/**/*'
           'dist/scripts/**/*'
           '!dist/scripts/main.js'
-          '!dist/scripts/libs/require/require.js'
+          '!dist/scripts/libs/requirejs/require.js'
         ]
         filter: 'isFile'
       directories:
@@ -166,13 +169,16 @@ module.exports = (grunt) ->
           if filepath.match(/^dist\/scripts\//)
             # Don't remove the matching directories
             if filepath is 'dist/scripts/libs' or
-                filepath is 'dist/scripts/libs/require'
+                filepath is 'dist/scripts/libs/requirejs'
               return false
             else
               return true
 
           # Remove empty directories
           return fs.readdirSync(filepath).length is 0
+
+    # Install
+    # ----
 
     # Shell
     shell:
@@ -199,12 +205,11 @@ module.exports = (grunt) ->
     'recess'
   ]
 
-  # Build
+  # Dist
   # -----
   grunt.registerTask 'dist', [
     'requirejs'
     'clean'
-    # bower
   ]
 
   # Install

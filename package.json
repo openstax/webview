@@ -5,7 +5,7 @@
     "scripts": {
         "prepublish": "grunt install --verbose",
         "test": "grunt test --verbose",
-        "build": "grunt build --verbose"
+        "dist": "grunt dist --verbose"
     },
 
     "repository": {
