@@ -16,6 +16,12 @@ Below are instructions for optimizing the site and a layout of how the code is o
   * Note: You can also host the development version at `site/index.html` (no build required)
   * Note: Unresolveable URIs should also load `dist/index.html` or `site/index.html`
 
+#### Download production version
+
+An optimized version of the site not requiring any build tools is
+maintained in the `gh-pages` [branch](https://github.com/Connexions/webview/tree/gh-pages).
+It can also be previewed at http://connexions.github.io/webview/.
+
 ### Directory Layout
 
 * `site/`                       Development version of the site
