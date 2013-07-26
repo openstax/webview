@@ -37,6 +37,7 @@ module.exports = (grunt) ->
         trailing: true
         maxparams: 3
         maxlen: 120
+        maxcomplexity: 10
         # Relaxing options
         asi: false
         boss: false
@@ -86,6 +87,9 @@ module.exports = (grunt) ->
         max_line_length:
           level: 'error'
           value: 120
+        cyclomatic_complexity:
+          level: 'error'
+          value: 10
 
       source: 'site/scripts/**/*.coffee'
       grunt: 'Gruntfile.coffee'
@@ -183,6 +187,19 @@ module.exports = (grunt) ->
         files:
           'dist/scripts/libs/requirejs/require.js': ['dist/scripts/libs/requirejs/require.js']
 
+    # Imagemin
+    imagemin:
+      png:
+        options:
+          optimizationLevel: 7
+        files: [{
+          expand: true
+          cwd: 'dist/images/'
+          src: ['**/*.png']
+          dest: 'dist/images/'
+          ext: '.png'
+        }]
+
     # Install
     # ----
 
@@ -217,6 +234,7 @@ module.exports = (grunt) ->
     'requirejs'
     'clean'
     'uglify:dist'
+    'imagemin'
   ]
 
   # Install
