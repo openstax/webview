@@ -41,7 +41,7 @@
         // # Packages
         packages: [{
             name: 'css',
-            location: 'libs/require-css/',
+            location: 'libs/require-css',
             main: 'css'
         }, {
             name: 'less',
