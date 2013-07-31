@@ -91,7 +91,7 @@ module.exports = (grunt) ->
           level: 'error'
           value: 10
 
-      source: 'site/scripts/**/*.coffee'
+      source: ['site/scripts/**/*.coffee', '!site/scripts/libs/**']
       grunt: 'Gruntfile.coffee'
 
     # Recess
