@@ -15,8 +15,8 @@ Below are instructions for hosting and building the site and a layout of how the
 5. (optional) Run tests with `npm test`
 6. Build the production code with `grunt dist` or `npm run-script dist`
 7. Configure your server to point at `dist/index.html`
-  * Note: You can also host the development version at `site/index.html` (no build required)
-  * Note: Unresolveable URIs should also load `dist/index.html` or `site/index.html`
+  * Note: You can also host the development version at `src/index.html` (no build required)
+  * Note: Unresolveable URIs should also load `dist/index.html` or `src/index.html`
 
 #### Download production version
 
@@ -26,22 +26,22 @@ It can also be previewed at http://connexions.github.io/webview/.
 
 ### Directory Layout
 
-* `site/`                       Development version of the site
-* `site/data/`                  Hardcoded data
-* `site/images/`                Images used throughout the site
-* `site/scripts/`               Site scripts and 3rd party libraries
-* `site/scripts/collections`    Backbone Collections
-* `site/scripts/helpers`        Helpers for Handlebars, Backbone, and generic code
-* `site/scripts/libs`           3rd Party Libraries
-* `site/scripts/models`         Backbone Models
-* `site/scripts/modules`        Self-contained, Reusable Modules used to construct pages
-* `site/scripts/pages`          Backbone Views representing an entire page (or the entire viewport)
-* `site/scripts/config.js`      Require.js configuration
-* `site/scripts/loader.coffee`  App loader, responsible for setting up global listeners
-* `site/scripts/main.js`        Initial script called by Requirejs
-* `site/scripts/router.coffee`  Backbone Router
-* `site/scripts/session.coffee` Session state singleton (Backbone Model)
-* `site/styles/`                App-specific LESS variables and mixins
+* `src/`                       Development version of the site
+* `src/data/`                  Hardcoded data
+* `src/images/`                Images used throughout the site
+* `src/scripts/`               Site scripts and 3rd party libraries
+* `src/scripts/collections`    Backbone Collections
+* `src/scripts/helpers`        Helpers for Handlebars, Backbone, and generic code
+* `src/scripts/libs`           3rd Party Libraries
+* `src/scripts/models`         Backbone Models
+* `src/scripts/modules`        Self-contained, Reusable Modules used to construct pages
+* `src/scripts/pages`          Backbone Views representing an entire page (or the entire viewport)
+* `src/scripts/config.js`      Require.js configuration
+* `src/scripts/loader.coffee`  App loader, responsible for setting up global listeners
+* `src/scripts/main.js`        Initial script called by Requirejs
+* `src/scripts/router.coffee`  Backbone Router
+* `src/scripts/session.coffee` Session state singleton (Backbone Model)
+* `src/styles/`                App-specific LESS variables and mixins
 * `index.html`                  App's HTML Page
 
 License
