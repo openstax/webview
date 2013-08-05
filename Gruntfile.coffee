@@ -228,3 +228,12 @@ module.exports = (grunt) ->
     'uglify:dist'
     'imagemin'
   ]
+
+  # Default
+  # -----
+  grunt.registerTask 'default', [
+    'requirejs'
+    'clean'
+    'uglify:dist'
+    'imagemin'
+  ]
