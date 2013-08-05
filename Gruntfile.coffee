@@ -111,7 +111,7 @@ module.exports = (grunt) ->
     requirejs:
       compile:
         options:
-          appDir: 'site'
+          appDir: 'src'
           baseUrl: 'scripts'
           dir: 'dist'
           mainConfigFile: 'src/scripts/config.js'
