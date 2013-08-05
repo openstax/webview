@@ -11,6 +11,9 @@ define [
       @route '', 'home', () ->
         @appView.render('home')
 
+      @route 'content/:uuid', 'content', (uuid) ->
+        @appView.render('content', {uuid: uuid})
+
       # Default Route
       @route '*actions', 'default', () ->
         @appView.render('home')
