@@ -42,7 +42,7 @@ It can also be previewed at http://connexions.github.io/webview/.
 * `src/scripts/router.coffee`  Backbone Router
 * `src/scripts/session.coffee` Session state singleton (Backbone Model)
 * `src/styles/`                App-specific LESS variables and mixins
-* `index.html`                  App's HTML Page
+* `src/index.html`             App's HTML Page
 
 License
 -------
