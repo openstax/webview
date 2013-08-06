@@ -5,12 +5,10 @@ define [
   'cs!helpers/backbone/views/base'
   'cs!modules/header/header'
   'cs!modules/footer/footer'
-  'cs!modules/splash/splash'
-  'cs!modules/find-content/find-content'
-  'cs!modules/featured-books/featured-books'
-  'hbs!./home-template'
-  'less!./home'
-], ($, _, Backbone, BaseView, HeaderView, FooterView, SplashView, FindContentView, FeaturedBooksView, template) ->
+  #'cs!modules/splash/splash'
+  'hbs!./content-template'
+  'less!./content'
+], ($, _, Backbone, BaseView, HeaderView, FooterView, template) ->
 
   return class HomeView extends BaseView
     initialize: (options) ->
@@ -22,22 +20,24 @@ define [
     template: template()
 
     regions:
-      splash: '#splash'
-      find: '#find-content'
-      featured: '#featured-books'
-      #news: '#news'
-      #spotlight: '#spotlight'
+      title: '#content-title'
+      navTop: '#content-nav-top'
+      header: '#content-header'
+      body: '#content-body'
+      footer: '#content-footer'
+      navBottom: '#content-nav-bottom'
 
     render: () ->
       super()
 
-      @parent?.regions.header.show(new HeaderView())
-      @parent?.regions.footer.show(new FooterView())
+      @parent?.regions.header.show(new HeaderView({page: 'content'}))
+      @parent?.regions.footer.show(new FooterView({page: 'content'}))
 
-      @regions.splash.show(new SplashView())
-      @regions.featured.show(new FeaturedBooksView())
-      @regions.find.show(new FindContentView())
-      #@regions.news.show(new NewsView())
-      #@regions.spotlight.show(new SpotlightView())
+      #@regions.title.show(new ContentTitleView({uuid: @uuid}))
+      #@regions.navTop.show(new ContentNavView({uuid: @uuid}))
+      #@regions.header.show(new ContentHeaderView({uuid: @uuid}))
+      #@regions.body.show(new ContentBodyView({uuid: @uuid}))
+      #@regions.footer.show(new ContentFooterView({uuid: @uuid}))
+      #@regions.navBottom.show(new ContentNavView({uuid: @uuid}))
 
       return @

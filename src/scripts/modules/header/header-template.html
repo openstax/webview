@@ -10,8 +10,8 @@
       <a href="/donate" class="donate">Donate</a>
     </div>
     <nav>
-      <a href="/" class="active">Home</a>
-      <a href="/content">Content</a>
+      <a href="/" {{#is page 'home'}}class="active"{{/is}}>Home</a>
+      <a href="/content" {{#is page 'content'}}class="active"{{/is}}>Content</a>
       <a href="http://cnx.org/lenses">Reading Lists</a>
       <a href="http://cnx.org/aboutus/">About Us</a>
       <a href="http://cnx.org/mycnx">My CNX</a>

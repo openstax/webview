@@ -13,10 +13,33 @@ Below are instructions for hosting and building the site and a layout of how the
 3. Run `npm install -g grunt-cli` to install [grunt-cli](https://github.com/gruntjs/grunt-cli)
 4. Run `npm install` to install test and build dependencies
 5. (optional) Run tests with `npm test`
-6. Build the production code with `grunt dist` or `npm run-script dist`
-7. Configure your server to point at `dist/index.html`
-  * Note: You can also host the development version at `src/index.html` (no build required)
-  * Note: Unresolveable URIs should also load `dist/index.html` or `src/index.html`
+6. Build the production code with `grunt dist`
+7. Configure your server to point at `dist/index.html` (or `src/index.html` for development)
+  * Unresolveable URIs should load `dist/index.html` or `src/index.html`
+  * If not hosting the site from the domain root, update `root` in `src/scripts/loader.coffee` (line 8)
+  * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
+  * Example nginx config:
+  ```
+          server {
+              listen 80;
+              server_name $hostname;
+              root /path/to/webview/src/;
+              index index.html;
+              try_files $uri $uri/ /index.html;
+
+              location ~ ^.*/scripts/ {
+                  rewrite /scripts/(.*) /scripts/$1 break;
+              }
+
+              location ~ ^.*/styles/ {
+                  rewrite /styles/(.*) /styles/$1 break;
+              }
+
+              location ~ ^.*/images/ {
+                  rewrite /images/(.*) /images/$1 break;
+              }
+          }
+  ```
 
 #### Download production version
 
