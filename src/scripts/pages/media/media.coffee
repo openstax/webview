@@ -10,7 +10,13 @@ define [
   'less!./content'
 ], ($, _, Backbone, BaseView, HeaderView, FooterView, template) ->
 
-  return class ContentView extends BaseView
+  return class MediaView extends BaseView
+    initialize: (options) ->
+      if not options or not options.uuid
+        throw new Error('A media view must be instantiated with the uuid of the content to display')
+
+      @uuid = options.uuid
+
     template: template()
 
     regions:
