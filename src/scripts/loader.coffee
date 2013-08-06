@@ -5,6 +5,7 @@ define [
   'cs!router'
 ], ($, _, Backbone, router) ->
 
+  # The root URI prefixed on all non-external AJAX and Backbone URIs
   root = '/'
 
   init = () ->
@@ -28,6 +29,7 @@ define [
       pushState: true
       root: root
 
+    # Prefix all non-external AJAX requests with the root URI
     $.ajaxPrefilter ( options, originalOptions, jqXHR ) ->
       if not external.test(options.url)
         options.url = root + options.url
