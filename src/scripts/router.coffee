@@ -7,6 +7,11 @@ define [
   return new class Router extends Backbone.Router
     initialize: () ->
       @appView = new AppView()
+      
+      # Default Route
+      @route '*actions', 'default', () ->
+        console.log 'default'
+        @appView.render('home')
 
       @route 'content', 'content', () ->
         console.log 'content'
@@ -15,8 +20,3 @@ define [
       @route 'content/:uuid', 'content', (uuid) ->
         console.log 'content uuid'
         @appView.render('content', {uuid: uuid})
-
-      # Default Route
-      @route '*actions', 'default', () ->
-        console.log 'default'
-        @appView.render('home')
