@@ -1,7 +1,7 @@
 [{
     "title": "College Physics",
     "cover": "images/books/college_physics.png",
-    "link": "books/college_physics",
+    "link": "content/college_physics",
     "description": "A two-semester introductory physics book that's algebra-based, grounded with real-world examples, illustrations and explanations to help students grasp key, fundamental physics concepts."
 }, {
     "title": "College Introduction to Sociology",
