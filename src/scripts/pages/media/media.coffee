@@ -6,8 +6,8 @@ define [
   'cs!modules/header/header'
   'cs!modules/footer/footer'
   #'cs!modules/splash/splash'
-  'hbs!./content-template'
-  'less!./content'
+  'hbs!./media-template'
+  'less!./media'
 ], ($, _, Backbone, BaseView, HeaderView, FooterView, template) ->
 
   return class MediaView extends BaseView
