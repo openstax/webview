@@ -5,10 +5,11 @@ define [
   'cs!helpers/backbone/views/base'
   'cs!modules/header/header'
   'cs!modules/footer/footer'
+  'cs!modules/find-content/find-content'
   'cs!modules/media/media'
   'hbs!./content-template'
   'less!./content'
-], ($, _, Backbone, BaseView, HeaderView, FooterView, MediaView, template) ->
+], ($, _, Backbone, BaseView, HeaderView, FooterView, FindContentView, MediaView, template) ->
 
   return class ContentView extends BaseView
     template: template()
@@ -29,6 +30,7 @@ define [
       @parent?.regions.footer.show(new FooterView({page: 'content'}))
 
       if @uuid
-        @regions.content.show(new MediaView({uuid: @uuid}))
+        @regions.content.append(new FindContentView())
+        @regions.content.append(new MediaView({uuid: @uuid}))
 
       return @
