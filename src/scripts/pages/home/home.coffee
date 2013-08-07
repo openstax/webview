@@ -25,8 +25,8 @@ define [
     render: () ->
       super()
 
-      @parent?.regions.header.show(new HeaderView())
-      @parent?.regions.footer.show(new FooterView())
+      @parent?.regions.header.show(new HeaderView({page: 'home'}))
+      @parent?.regions.footer.show(new FooterView({page: 'home'}))
 
       @regions.splash.show(new SplashView())
       @regions.featured.show(new FeaturedBooksView())

@@ -8,9 +8,12 @@ define [
     initialize: () ->
       @appView = new AppView()
 
-      @route '', 'home', () ->
-        @appView.render('home')
-
       # Default Route
       @route '*actions', 'default', () ->
         @appView.render('home')
+
+      @route 'content', 'content', () ->
+        @appView.render('content')
+
+      @route 'content/:uuid', 'media', (uuid) ->
+        @appView.render('media', {uuid: uuid})
