@@ -34,16 +34,24 @@
         font-size: 0.9em;
         font-weight: 300;
         text-align: right;
-
-        a:after {
-            padding: 0 5px 0 8px;
-            color: @gray-lighter;
-            content: "|";
-        }
-
-        a:last-child:after {
-            padding: 0;
-            content: "";
+        
+        ul {
+            list-style-type: none;
+            
+            li {
+                display: inline-block;
+                
+                &:after {
+                    padding: 0 5px 0 8px;
+                    color: @gray-lighter;
+                    content: "|";
+                }
+                
+                &:last-child:after {
+                    padding: 0;
+                    content: "";
+                }
+            }
         }
 
         .donate {
