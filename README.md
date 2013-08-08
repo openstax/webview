@@ -6,15 +6,20 @@ Below are instructions for hosting and building the site and a layout of how the
 
 ### Hosting Yourself
 
-#### Download and build development version
+#### Building
 
-1. Download and extract
-2. Install [Node.js](http://nodejs.org) (and npm)
-3. Run `npm install -g grunt-cli` to install [grunt-cli](https://github.com/gruntjs/grunt-cli)
-4. Run `npm install` to install test and build dependencies
-5. (optional) Run tests with `npm test`
-6. Build the production code with `grunt dist`
-7. Configure your server to point at `dist/index.html` (or `src/index.html` for development)
+##### Requirements
+1. Install [Node.js](http://nodejs.org) (and npm)
+2. Run `npm install -g grunt-cli` to install [grunt-cli](https://github.com/gruntjs/grunt-cli)
+3. Run `npm install` to install test and build dependencies
+
+##### Testing and Building
+1. (optional) Run tests with `npm test`
+2. Build the production code with `grunt dist`
+
+#### Hosting
+
+Configure your server to point at `dist/index.html` (or `src/index.html` for development)
   * Unresolveable URIs should load `dist/index.html` or `src/index.html`
   * If not hosting the site from the domain root, update `root` in `src/scripts/loader.coffee` (line 8)
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
@@ -40,12 +45,6 @@ Below are instructions for hosting and building the site and a layout of how the
               }
           }
   ```
-
-#### Download production version
-
-An optimized version of the site not requiring any build tools is
-maintained in the `gh-pages` [branch](https://github.com/Connexions/webview/tree/gh-pages).
-It can also be previewed at http://connexions.github.io/webview/.
 
 ### Directory Layout
 
