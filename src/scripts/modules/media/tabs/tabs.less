@@ -1,11 +1,30 @@
 @import "../../../../styles/variables.less";
 
 .media-tabs {
-    background-color: @gray-lighter;
-    
+    background-color: @gray-lightest;
+
     ul {
         margin: 0;
-        padding: 0;
+        padding: 0 0 0 30px;
         list-style-type: none;
+        color: @link-color;
+        border-bottom: 2px solid white;
+
+        li {
+            display: inline-block;
+            padding: 7px 10px;
+            font-size: 1.5rem;
+            background-color: white;
+            cursor: pointer;
+
+            .title {
+                margin-left: 2px;
+                vertical-align: middle;
+            }
+
+            .expand {
+                font-weight: bold;
+            }
+        }
     }
 }

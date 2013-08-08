@@ -1,9 +1,20 @@
 @import "../../../../styles/variables.less";
 
 .media-title {
-    background-color: @gray-lighter;
+    padding: 30px 30px 40px 30px;
+    background-color: @gray-lightest;
     
     h1 {
-        margin: 0;
+        display: inline-block;
+    }
+    
+    .info {
+        display: inline-block;
+        float: right;
+        text-align: right;
+        
+        .collection-author {
+            display: block;
+        }
     }
 }
