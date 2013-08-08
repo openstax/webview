@@ -21,7 +21,7 @@ Below are instructions for hosting and building the site and a layout of how the
 
 Configure your server to point at `dist/index.html` (or `src/index.html` for development)
   * Unresolveable URIs should load `dist/index.html` or `src/index.html`
-  * If not hosting the site from the domain root, update `root` in `src/scripts/loader.coffee` (line 8)
+  * If not hosting the site from the domain root, update `root` in `src/scripts/config.js` (line 8)
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
   * Example nginx config:
   ```
