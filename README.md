@@ -25,25 +25,25 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
   * Example nginx config:
   ```
-          server {
-              listen 80;
-              server_name $hostname;
-              root /path/to/webview/src/;
-              index index.html;
-              try_files $uri $uri/ /index.html;
+  server {
+      listen 80;
+      server_name $hostname;
+      root /path/to/webview/src/;
+      index index.html;
+      try_files $uri $uri/ /index.html;
 
-              location ~ ^.*/scripts/ {
-                  rewrite /scripts/(.*) /scripts/$1 break;
-              }
+      location ~ ^.*/scripts/ {
+          rewrite /scripts/(.*) /scripts/$1 break;
+      }
 
-              location ~ ^.*/styles/ {
-                  rewrite /styles/(.*) /styles/$1 break;
-              }
+      location ~ ^.*/styles/ {
+          rewrite /styles/(.*) /styles/$1 break;
+      }
 
-              location ~ ^.*/images/ {
-                  rewrite /images/(.*) /images/$1 break;
-              }
-          }
+      location ~ ^.*/images/ {
+          rewrite /images/(.*) /images/$1 break;
+      }
+  }
   ```
 
 ### Directory Layout
