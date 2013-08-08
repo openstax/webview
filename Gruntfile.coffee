@@ -13,7 +13,7 @@ module.exports = (grunt) ->
     # JSHint
     jshint:
       options:
-        ignores: ['site/scripts/libs/**']
+        ignores: ['src/scripts/libs/**']
         globals:
           require: true
 
@@ -65,12 +65,12 @@ module.exports = (grunt) ->
         devel: false
 
       source: [
-        'site/scripts/**/*.js'
+        'src/scripts/**/*.js'
       ]
 
     # JS Beautifier
     jsbeautifier:
-      files: ['site/scripts/**/*.js', '!site/scripts/libs/**']
+      files: ['src/scripts/**/*.js', '!src/scripts/libs/**']
       options:
         mode: "VERIFY_ONLY"
         space_after_anon_function: true
@@ -91,7 +91,7 @@ module.exports = (grunt) ->
           level: 'error'
           value: 10
 
-      source: ['site/scripts/**/*.coffee', '!site/scripts/libs/**']
+      source: ['src/scripts/**/*.coffee', '!src/scripts/libs/**']
       grunt: 'Gruntfile.coffee'
 
     # Recess
@@ -100,8 +100,8 @@ module.exports = (grunt) ->
         options:
           strictPropertyOrder: false
         src: [
-          'site/styles/**/*.less'
-          'site/scripts/modules/**/*.less'
+          'src/styles/**/*.less'
+          'src/scripts/modules/**/*.less'
         ]
 
     # Dist
@@ -111,10 +111,10 @@ module.exports = (grunt) ->
     requirejs:
       compile:
         options:
-          appDir: 'site'
+          appDir: 'src'
           baseUrl: 'scripts'
           dir: 'dist'
-          mainConfigFile: 'site/scripts/config.js'
+          mainConfigFile: 'src/scripts/config.js'
           findNestedDependencies: true
           removeCombined: true
           keepBuildDir: false
@@ -130,6 +130,8 @@ module.exports = (grunt) ->
                   'css'
                   'main'
                   'cs!pages/home/home'
+                  'cs!pages/content/content'
+                  'cs!pages/media/media'
               ]
               excludeShallow: [
                   'css/css-builder'
@@ -200,14 +202,6 @@ module.exports = (grunt) ->
           ext: '.png'
         }]
 
-    # Install
-    # ----
-
-    # Shell
-    shell:
-      bower:
-        command: 'bower install'
-
   # Dependencies
   # ============
   for name of pkg.dependencies when name.substring(0, 6) is 'grunt-'
@@ -237,8 +231,11 @@ module.exports = (grunt) ->
     'imagemin'
   ]
 
-  # Install
+  # Default
   # -----
-  grunt.registerTask 'install', [
-    'shell:bower'
+  grunt.registerTask 'default', [
+    'requirejs'
+    'clean'
+    'uglify:dist'
+    'imagemin'
   ]

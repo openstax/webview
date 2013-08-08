@@ -3,9 +3,9 @@ define [
   'underscore'
   'backbone'
   'cs!helpers/backbone/views/base'
-  'hbs!./header-template'
-  'less!./header'
+  'hbs!./endorsed-template'
+  'less!./endorsed'
 ], ($, _, Backbone, BaseView, template) ->
 
-  return class HeaderView extends BaseView
+  return class EndorsedView extends BaseView
     template: template()

@@ -13,10 +13,33 @@ Below are instructions for hosting and building the site and a layout of how the
 3. Run `npm install -g grunt-cli` to install [grunt-cli](https://github.com/gruntjs/grunt-cli)
 4. Run `npm install` to install test and build dependencies
 5. (optional) Run tests with `npm test`
-6. Build the production code with `grunt dist` or `npm run-script dist`
-7. Configure your server to point at `dist/index.html`
-  * Note: You can also host the development version at `site/index.html` (no build required)
-  * Note: Unresolveable URIs should also load `dist/index.html` or `site/index.html`
+6. Build the production code with `grunt dist`
+7. Configure your server to point at `dist/index.html` (or `src/index.html` for development)
+  * Unresolveable URIs should load `dist/index.html` or `src/index.html`
+  * If not hosting the site from the domain root, update `root` in `src/scripts/loader.coffee` (line 8)
+  * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
+  * Example nginx config:
+  ```
+          server {
+              listen 80;
+              server_name $hostname;
+              root /path/to/webview/src/;
+              index index.html;
+              try_files $uri $uri/ /index.html;
+
+              location ~ ^.*/scripts/ {
+                  rewrite /scripts/(.*) /scripts/$1 break;
+              }
+
+              location ~ ^.*/styles/ {
+                  rewrite /styles/(.*) /styles/$1 break;
+              }
+
+              location ~ ^.*/images/ {
+                  rewrite /images/(.*) /images/$1 break;
+              }
+          }
+  ```
 
 #### Download production version
 
@@ -26,23 +49,23 @@ It can also be previewed at http://connexions.github.io/webview/.
 
 ### Directory Layout
 
-* `site/`                       Development version of the site
-* `site/data/`                  Hardcoded data
-* `site/images/`                Images used throughout the site
-* `site/scripts/`               Site scripts and 3rd party libraries
-* `site/scripts/collections`    Backbone Collections
-* `site/scripts/helpers`        Helpers for Handlebars, Backbone, and generic code
-* `site/scripts/libs`           3rd Party Libraries
-* `site/scripts/models`         Backbone Models
-* `site/scripts/modules`        Self-contained, Reusable Modules used to construct pages
-* `site/scripts/pages`          Backbone Views representing an entire page (or the entire viewport)
-* `site/scripts/config.js`      Require.js configuration
-* `site/scripts/loader.coffee`  App loader, responsible for setting up global listeners
-* `site/scripts/main.js`        Initial script called by Requirejs
-* `site/scripts/router.coffee`  Backbone Router
-* `site/scripts/session.coffee` Session state singleton (Backbone Model)
-* `site/styles/`                App-specific LESS variables and mixins
-* `index.html`                  App's HTML Page
+* `src/`                       Development version of the site
+* `src/data/`                  Hardcoded data
+* `src/images/`                Images used throughout the site
+* `src/scripts/`               Site scripts and 3rd party libraries
+* `src/scripts/collections`    Backbone Collections
+* `src/scripts/helpers`        Helpers for Handlebars, Backbone, and generic code
+* `src/scripts/libs`           3rd Party Libraries
+* `src/scripts/models`         Backbone Models
+* `src/scripts/modules`        Self-contained, Reusable Modules used to construct pages
+* `src/scripts/pages`          Backbone Views representing an entire page (or the entire viewport)
+* `src/scripts/config.js`      Require.js configuration
+* `src/scripts/loader.coffee`  App loader, responsible for setting up global listeners
+* `src/scripts/main.js`        Initial script called by Requirejs
+* `src/scripts/router.coffee`  Backbone Router
+* `src/scripts/session.coffee` Session state singleton (Backbone Model)
+* `src/styles/`                App-specific LESS variables and mixins
+* `src/index.html`             App's HTML Page
 
 License
 -------
