@@ -11,6 +11,8 @@
   margin: 0;
   overflow: hidden;
   border-bottom: none;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.9);
 
   .logo, .links {
     display: inline-block;
@@ -18,7 +20,8 @@
 
   .logo {
     width: @logo-width;
-    vertical-align: top;
+    height: @logo-height;
+    background: url(/images/logo.png) center center no-repeat;
   }
 
   .links {
