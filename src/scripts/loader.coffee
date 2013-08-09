@@ -5,9 +5,6 @@ define [
   'backbone'
   'cs!router'
 ], (module, $, _, Backbone, router) ->
-  
-  console.log module
-  console.log module.config()
 
   init = () ->
     external = new RegExp('^((f|ht)tps?:)?//')
