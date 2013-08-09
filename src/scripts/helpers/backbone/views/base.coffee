@@ -16,7 +16,7 @@ define [
     append: (view) ->
       @$el = @$el or @parent.$el.find(@el).eq(0)
       view.parent = @parent
-      @views = @views or []
+      @views ?= []
       @views.push(view)
       view.setElement($('<div>').appendTo(@$el)).render()
 
