@@ -23,7 +23,7 @@ module.exports = (grunt) ->
         eqeqeq: true
         forin: true
         immed: true
-        indent: 4
+        indent: 2
         latedef: true
         newcap: true
         noarg: true
@@ -75,6 +75,7 @@ module.exports = (grunt) ->
         mode: "VERIFY_ONLY"
         space_after_anon_function: true
         wrap_line_length: 120
+        indent_size: 2
 
     # CoffeeLint
     coffeelint:

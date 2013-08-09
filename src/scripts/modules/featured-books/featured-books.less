@@ -1,64 +1,64 @@
 @import "../../../styles/variables.less";
 
 .featured-books {
-    .make-row();
-    // Override bootstrap css
-    margin: 0 !important;
+  .make-row();
+  // Override bootstrap css
+  margin: 0 !important;
+  overflow: hidden;
+
+  .books {
+    position: relative;
+    width: 100%;
     overflow: hidden;
+  }
 
-    .books {
-        position: relative;
-        width: 100%;
-        overflow: hidden;
+  .book {
+    .make-column(6);
+    display: none;
+    margin-bottom: 15px;
+
+    @media screen and (max-width: @screen-tiny-max) {
+      padding-left: 0 !important;
     }
 
-    .book {
-        .make-column(6);
-        display: none;
-        margin-bottom: 15px;
-
-        @media screen and (max-width: @screen-tiny-max) {
-            padding-left: 0 !important;
-        }
-
-        img {
-            float: left;
-            margin-right: 20px;
-            border: 0;
-        }
-
-        h4 {
-            a {
-                font-weight: 300;
-                color: @link-color;
-            }
-        }
-
-        p {
-            font-weight: 300;
-            color: @gray-dark;
-        }
+    img {
+      float: left;
+      margin-right: 20px;
+      border: 0;
     }
 
-    .book:after {
-    	display: block;
-        height: 0;
-        clear: both;
-    	font-size: 0;
-    	content: " ";
-        visibility: hidden;
+    h4 {
+      a {
+        font-weight: 300;
+        color: @link-color;
+      }
     }
 
-    .book:first-child, .book:nth-child(2) {
-        display: block;
+    p {
+      font-weight: 300;
+      color: @gray-dark;
     }
+  }
 
-    .book:nth-child(2n+1) {
-        padding-right: 15px;
-        padding-left: 0;
-    }
+  .book:after {
+  	display: block;
+    height: 0;
+    clear: both;
+  	font-size: 0;
+  	content: " ";
+    visibility: hidden;
+  }
 
-    .book:nth-child(2n) {
-        padding-left: 15px;
-    }
+  .book:first-child, .book:nth-child(2) {
+    display: block;
+  }
+
+  .book:nth-child(2n+1) {
+    padding-right: 15px;
+    padding-left: 0;
+  }
+
+  .book:nth-child(2n) {
+    padding-left: 15px;
+  }
 }
