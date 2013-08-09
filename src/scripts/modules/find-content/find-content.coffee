@@ -10,3 +10,9 @@ define [
 
   return class FindContentView extends BaseView
     template: template()
+
+    events:
+      'click .dropdown-toggle': 'clickToggle'
+
+    clickToggle: (e) ->
+      e.preventDefault()
