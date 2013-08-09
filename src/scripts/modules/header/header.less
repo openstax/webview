@@ -1,4 +1,5 @@
 @import "../../../styles/variables.less";
+@import "../../../styles/mixins.less";
 
 @logo-width: 300px;
 @logo-height: 140px;
@@ -55,10 +56,7 @@
     }
 
     .donate {
-      padding: 5px 8px;
-      color: white;
-      background-color: rgb(120, 176, 74);
-      border-radius: 4px;
+      .button-extra();
     }
   }
 

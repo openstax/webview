@@ -1,7 +1,30 @@
 @import "../../../../styles/variables.less";
+@import "../../../../styles/mixins.less";
 
 .media-header {
   margin: 0 60px;
   padding-bottom: 30px;
   border-bottom: 1px solid @gray-lighter;
+  
+  h2 {
+    display: inline-block;
+    margin-top: 35px;
+  }
+  
+  .info {
+    display: inline-block;
+    margin-top: 35px;
+    float: right;
+    text-align: right;
+    
+    button {
+      .button-extra();
+      display: block;
+      margin: 0 0 20px auto;
+    }
+  }
+  
+  .summary {
+    margin-top: 15px;
+  }
 }
