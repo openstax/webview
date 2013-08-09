@@ -1,7 +1,7 @@
 @import "../../../styles/variables.less";
 
-@logo-width: 319px;
-@logo-height: 157px;
+@logo-width: 300px;
+@logo-height: 140px;
 
 .page-header {
     position: relative;
@@ -34,16 +34,24 @@
         font-size: 0.9em;
         font-weight: 300;
         text-align: right;
-
-        a:after {
-            padding: 0 5px 0 8px;
-            color: @gray-lighter;
-            content: "|";
-        }
-
-        a:last-child:after {
-            padding: 0;
-            content: "";
+        
+        ul {
+            list-style-type: none;
+            
+            li {
+                display: inline-block;
+                
+                &:after {
+                    padding: 0 5px 0 8px;
+                    color: @gray-lighter;
+                    content: "|";
+                }
+                
+                &:last-child:after {
+                    padding: 0;
+                    content: "";
+                }
+            }
         }
 
         .donate {
@@ -57,7 +65,7 @@
     .links nav {
         display: table;
         width: 100%;
-        margin-top: 60px;
+        margin-top: 20px;
 
         a {
             display: table-cell;

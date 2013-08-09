@@ -24,5 +24,6 @@ define [
       # Lazy-load the page
       require ["cs!pages/#{page}/#{page}"], (View) =>
         @regions.main.show(new View(options))
+        window.scrollTo(0, 0)
 
       return @
