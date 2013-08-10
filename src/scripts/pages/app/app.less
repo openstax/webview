@@ -23,3 +23,56 @@ h5 {
   font-weight: bold;
   color: @title-color;
 }
+
+.circle {
+  display: inline-block;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.primary {
+  background-color: @brand-primary;
+}
+
+.secondary {
+  background-color: @brand-secondary;
+}
+
+.highlight {
+  background-color: @brand-highlight;
+}
+
+.social-button (@url: "images/social/mail.png") {
+  font-size: 0;
+  line-height: 2.4rem;
+  background-image: url("/@{url}");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.mail {
+  .social-button();
+}
+
+.facebook {
+  .social-button("images/social/facebook.png");
+}
+
+.twitter {
+  .social-button("images/social/twitter.png");
+}
+
+.google {
+  .social-button("images/social/google.png");
+  background-position: bottom left;
+}
+
+.linkedin {
+  .social-button("images/social/linkedin.png");
+}
+
+.pinterest {
+  .social-button("images/social/pinterest.png");
+}
