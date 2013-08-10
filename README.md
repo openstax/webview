@@ -18,6 +18,7 @@ Below are instructions for hosting and building the site and a layout of how the
 
 ##### Building
 `grunt dist` inside the `webview` directory
+Adds the `dist` directory to `webview` with the built site.
 
 #### Hosting
 Configure your server to point at `dist/index.html` (or `src/index.html` for development)
