@@ -1,5 +1,47 @@
 @import "../../../../styles/variables.less";
 
 .media-nav {
+  display: table;
+  width: 100%;
+  text-align: center;
   background-color: @gray-lightest;
+
+  .book-nav {
+    display: table-cell;
+    vertical-align: middle;
+
+    .progress {
+      display: inline-block;
+      margin-bottom: 0;
+      height: 9px;
+      width: 75%;
+      vertical-align: middle;
+      border-radius: 8px;
+      background-color: darken(@gray-lighter, 5%);
+      -webkit-box-shadow: none;
+      box-shadow: none;
+
+      .progress-bar {
+        border-right: 1px solid white;
+      }
+    }
+
+    .next, .back {
+      cursor: pointer;
+
+      span {
+        vertical-align: middle;
+      }
+
+      img {
+        padding: 0 3px;
+      }
+
+      display: inline-block;
+      width: 12%;
+      vertical-align: middle;
+      font-size: 1.6rem;
+      color: @brand-primary;
+    }
+  }
 }
