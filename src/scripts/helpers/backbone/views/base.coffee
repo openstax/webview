@@ -10,14 +10,21 @@ define [
       @el = el
 
     show: (view) ->
-      @$el = @$el or @parent.$el.find(@el)
+      @close()
+      @append(view)
+
+    append: (view) ->
+      @$el = @$el or @parent.$el.find(@el).eq(0)
       view.parent = @parent
-      @view = view
-      @view.setElement(@$el).render()
+      @views ?= []
+      @views.push(view)
+      view.setElement($('<div>').appendTo(@$el)).render()
 
     close: () ->
-      @view?.close()
-      @$el.empty()
+      _.each @views, (view) ->
+        view.close()
+
+      @$el?.empty()
 
   class Regions
     constructor: (regions, $context) ->
@@ -35,7 +42,7 @@ define [
 
     close: () ->
       _.each @regions, (region) ->
-        region.view.close()
+        region.close()
 
       @stopListening()
       @remove()

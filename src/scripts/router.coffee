@@ -16,4 +16,4 @@ define [
         @appView.render('content')
 
       @route 'content/:uuid', 'media', (uuid) ->
-        @appView.render('media', {uuid: uuid})
+        @appView.render('content', {uuid: uuid})
