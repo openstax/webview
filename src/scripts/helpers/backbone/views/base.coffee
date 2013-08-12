@@ -11,12 +11,13 @@ define [
 
     show: (view) ->
       @close()
+      @views = null
       @append(view)
 
     append: (view) ->
       @$el = @$el or @parent.$el.find(@el).eq(0)
       view.parent = @parent
-      @views = @views or []
+      @views ?= []
       @views.push(view)
       view.setElement($('<div>').appendTo(@$el)).render()
 
@@ -44,6 +45,7 @@ define [
       _.each @regions, (region) ->
         region.close()
 
+      @parent = null
       @stopListening()
       @remove()
       @unbind()

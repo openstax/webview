@@ -16,9 +16,10 @@ define [
       @listenTo(library, 'reset', @render)
 
       # Don't run any animations while the window is being resized
-      $(window).resize () =>
+      @_resizer = () ->
         @stopCarousel({finish: true})
         @startCarousel()
+      $(window).resize(@_resizer)
 
     events:
       'mouseenter .books': 'stopCarousel'
@@ -41,7 +42,7 @@ define [
       @_expanded = false
 
     stopCarousel: (options) ->
-      if options.finish then @$el.find('.book').finish() # Immediately finish the animation
+      if options?.finish then @$el.find('.book').finish() # Immediately finish the animation
       clearInterval(@_carousel)
       @_carousel = null
 
@@ -86,3 +87,8 @@ define [
       # Start the carousel
       if @_carousel then clearInterval(@_carousel)
       @_carousel = setInterval(nextFeatured, 7000)
+
+    close: () ->
+      $(window).off("resize", @_resizer)
+      @stopCarousel({finish: true})
+      super()
