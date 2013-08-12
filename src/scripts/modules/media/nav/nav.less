@@ -14,7 +14,7 @@
     flex-flow: row nowrap;
     -webkit-justify-content: center;
     justify-content: center;
-    
+
     .progress, .back-to-top {
       -webkit-flex: 1 1 75%;
       flex: 1 1 75%;
@@ -30,18 +30,20 @@
 
       .progress-bar {
         border-right: 1px solid white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
       }
     }
-    
+
     .back-to-top {
       text-align: center;
       line-height: @nav-height;
-      
+
       a {
         display: inline-block;
         padding: 0 5px;
       }
-      
+
       &:before, &:after {
         font-size: 1.4em;
         content: "▴"
