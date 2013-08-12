@@ -16,7 +16,7 @@ define [
       @listenTo(library, 'reset', @render)
 
       # Don't run any animations while the window is being resized
-      @_resizer = () ->
+      @_resizer = () =>
         @stopCarousel({finish: true})
         @startCarousel()
       $(window).resize(@_resizer)
@@ -90,5 +90,5 @@ define [
 
     close: () ->
       $(window).off("resize", @_resizer)
-      @stopCarousel({finish: true})
+      clearInterval(@_carousel)
       super()
