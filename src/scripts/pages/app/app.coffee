@@ -1,11 +1,9 @@
 define [
   'jquery'
-  'underscore'
-  'backbone'
   'cs!helpers/backbone/views/base'
   'hbs!./app-template'
   'less!./app'
-], ($, _, Backbone, BaseView, template) ->
+], ($, BaseView, template) ->
 
   return class AppView extends BaseView
     el: 'body'

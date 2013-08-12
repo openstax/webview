@@ -1,7 +1,4 @@
 define [
-  'jquery'
-  'underscore'
-  'backbone'
   'cs!helpers/backbone/views/base'
   'cs!modules/header/header'
   'cs!modules/footer/footer'
@@ -9,7 +6,7 @@ define [
   'cs!modules/media/media'
   'hbs!./content-template'
   'less!./content'
-], ($, _, Backbone, BaseView, HeaderView, FooterView, FindContentView, MediaView, template) ->
+], (BaseView, HeaderView, FooterView, FindContentView, MediaView, template) ->
 
   return class ContentView extends BaseView
     template: template()
