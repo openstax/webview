@@ -13,7 +13,7 @@ define [
       href = $(this).attr('href')
 
       # Don't handle navigation if the default handling was already prevented
-      if e.isDefaultPrevented() then return
+      if e.isDefaultPrevented() or href.charAt(0) is '#' then return
 
       e.preventDefault()
 

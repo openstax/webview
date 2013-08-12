@@ -38,6 +38,6 @@ define [
       @regions.media.append(new MediaHeaderView({uuid: @uuid}))
       @regions.media.append(new MediaBodyView({uuid: @uuid}))
       @regions.media.append(new MediaFooterView({uuid: @uuid}))
-      @regions.media.append(new MediaNavView({uuid: @uuid}))
+      @regions.media.append(new MediaNavView({uuid: @uuid, bottom: true}))
 
       return @

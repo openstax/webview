@@ -5,4 +5,14 @@ define [
 ], (BaseView, template) ->
 
   return class MediaNavView extends BaseView
-    template: template()
+    template: template
+
+    initialize: (options) ->
+      super()
+      @bottom = options?.bottom
+
+    render: () ->
+      @$el.html @template
+        bottom: @bottom
+
+      return @

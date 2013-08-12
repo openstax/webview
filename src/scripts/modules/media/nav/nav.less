@@ -14,6 +14,11 @@
     flex-flow: row nowrap;
     -webkit-justify-content: center;
     justify-content: center;
+    
+    .progress, .back-to-top {
+      -webkit-flex: 1 1 75%;
+      flex: 1 1 75%;
+    }
 
     .progress {
       margin-top: (@nav-height - @progress-height)/2;
@@ -22,11 +27,20 @@
       background-color: darken(@gray-lighter, 5%);
       -webkit-box-shadow: none;
       box-shadow: none;
-      -webkit-flex: 1 1 75%;
-      flex: 1 1 75%;
 
       .progress-bar {
         border-right: 1px solid white;
+      }
+    }
+    
+    .back-to-top {
+      text-align: center;
+      line-height: @nav-height;
+      
+      &:before, &:after {
+        margin: 0 5px;
+        font-size: 1.4em;
+        content: "▴"
       }
     }
 
