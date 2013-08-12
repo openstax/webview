@@ -31,32 +31,43 @@
     }
 
     .next, .back {
+      display: inline-block;
+      font-size: 1.6rem;
       line-height: @nav-height;
+      color: @brand-primary;
       cursor: pointer;
       -webkit-flex: 1 0 75px;
       flex: 1 0 100px;
-
-      span {
-        vertical-align: middle;
-      }
-
-      img {
-        padding: 0 3px;
-      }
-
-      display: inline-block;
-      font-size: 1.6rem;
-      color: @brand-primary;
     }
 
     .back {
       padding-right: 20px;
       text-align: right;
+
+      &:before {
+        // Flip the background-image horizontally
+        -ms-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+      }
     }
 
     .next {
       padding-left: 20px;
       text-align: left;
+    }
+
+    .back:before, .next:after {
+      display: inline-block;
+      margin: 0 10px;
+      height: 1.6rem;
+      width: 1.6rem;
+      vertical-align: text-bottom;
+      border-radius: 50%;
+      color: white;
+      background: @brand-primary url(/images/icons/arrow-white.png) no-repeat 0.6rem center;
+      background-size: 40%;
+      content: ""
     }
   }
 }
