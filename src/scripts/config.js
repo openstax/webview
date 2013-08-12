@@ -2,13 +2,6 @@
   'use strict';
 
   require.config({
-    // # Application Configs
-    config: {
-      loader: {
-        root: '/' // The root URI prefixed on all non-external AJAX and Backbone URIs
-      }
-    },
-
     // # Paths
     paths: {
       // ## Requirejs plugins

@@ -1,9 +1,11 @@
 define [
-  'module'
   'jquery'
   'backbone'
   'cs!router'
-], (module, $, Backbone, router) ->
+], ($, Backbone, router) ->
+
+  # The root URI prefixed on all non-external AJAX and Backbone URIs
+  root = '/'
 
   init = () ->
     external = new RegExp('^((f|ht)tps?:)?//')
@@ -24,12 +26,12 @@ define [
 
     Backbone.history.start
       pushState: true
-      root: module.config().root
+      root: root
 
     # Prefix all non-external AJAX requests with the root URI
     $.ajaxPrefilter ( options, originalOptions, jqXHR ) ->
       if not external.test(options.url)
-        options.url = module.config().root + options.url
+        options.url = root + options.url
 
       return
 
