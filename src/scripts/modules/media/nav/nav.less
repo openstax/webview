@@ -1,5 +1,6 @@
 @import "../../../../styles/variables.less";
 
+@nav-height: 75px;
 @progress-height: 9px;
 
 .media-nav {
@@ -8,14 +9,14 @@
   .book-nav {
     display: -webkit-flex;
     display: flex;
-    height: 75px;
+    height: @nav-height;
     -webkit-flex-flow: row nowrap;
     flex-flow: row nowrap;
     -webkit-justify-content: center;
     justify-content: center;
 
     .progress {
-      margin-top: (75-@progress-height)/2px;
+      margin-top: (@nav-height - @progress-height)/2;
       height: @progress-height;
       border-radius: 8px;
       background-color: darken(@gray-lighter, 5%);
@@ -30,7 +31,7 @@
     }
 
     .next, .back {
-      line-height: 75px;
+      line-height: @nav-height;
       cursor: pointer;
       -webkit-flex: 1 0 75px;
       flex: 1 0 100px;
