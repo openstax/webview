@@ -1,7 +1,6 @@
 define [
-  'underscore'
   'backbone'
-], (_, Backbone) ->
+], (Backbone) ->
 
   _authenticated = false
 

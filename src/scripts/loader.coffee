@@ -1,10 +1,9 @@
 define [
   'module'
   'jquery'
-  'underscore'
   'backbone'
   'cs!router'
-], (module, $, _, Backbone, router) ->
+], (module, $, Backbone, router) ->
 
   init = () ->
     external = new RegExp('^((f|ht)tps?:)?//')

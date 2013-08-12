@@ -1,11 +1,10 @@
 define [
   'jquery'
   'underscore'
-  'backbone'
   'cs!helpers/backbone/views/base'
   'hbs!./info-block-template'
   'less!./info-block'
-], ($, _, Backbone, BaseView, template) ->
+], ($, _, BaseView, template) ->
 
   return class InfoBlockView extends BaseView
     title: 'Untitled'

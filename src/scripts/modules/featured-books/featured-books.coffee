@@ -1,12 +1,10 @@
 define [
   'jquery'
-  'underscore'
-  'backbone'
   'cs!modules/inherits/info-block/info-block'
   'cs!collections/library'
   'hbs!./featured-books-template'
   'less!./featured-books'
-], ($, _, Backbone, InfoBlockView, library, template) ->
+], ($, InfoBlockView, library, template) ->
 
   return class FeaturedBooksView extends InfoBlockView
     title: 'Featured Books'
