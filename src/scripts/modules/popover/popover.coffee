@@ -19,10 +19,12 @@ define [
       @$parent = params.owner.popover(@options)
       @constructor.popovers.push(@$parent)
 
-      @_showPopoverEvent = (e) =>
+      # Attach event handler to close open popovers on show
+      @$parent.on 'show.bs.popover', (e) =>
         @constructor.hidePopovers() # Close open popovers
 
-      @_shownPopoverEvent = (e) =>
+      # Attach event handler to correctly position the popover after it's added to the DOM
+      @$parent.on 'shown.bs.popover', (e) =>
         $popover = @$parent.siblings('.popover')
 
         # Adjust popover positioning
@@ -32,10 +34,6 @@ define [
           # HACK: Position popover at far left to prevent whitespace wrapping from affecting popover width
           $popover.css('left', 0)
           $popover.css('left', @$parent.offset().left + @$parent.width() - $popover.width() + 'px')
-
-      # Attach event handlers to popover for popover positioning
-      @$parent.on('show.bs.popover', @_showPopoverEvent)
-      @$parent.on('shown.bs.popover', @_shownPopoverEvent)
 
       # Attach custom event handlers to popover
       if typeof @events is 'object'
