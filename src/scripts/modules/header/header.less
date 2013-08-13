@@ -1,5 +1,4 @@
 @import "../../../styles/variables.less";
-@import "../../../styles/mixins.less";
 
 @logo-width: 300px;
 @logo-height: 140px;
@@ -30,7 +29,6 @@
     right: 0;
     bottom: 0;
     left: @logo-width;
-
   }
 
   .links .login {
@@ -38,19 +36,19 @@
     font-size: 0.9em;
     font-weight: 300;
     text-align: right;
-    
+
     ul {
       list-style-type: none;
-      
+
       li {
         display: inline-block;
-        
+
         &::after {
           padding: 0 5px 0 8px;
           color: @gray-lighter;
           content: "|";
         }
-        
+
         &:last-child::after {
           padding: 0;
           content: "";
@@ -58,8 +56,8 @@
       }
     }
 
-    .donate {
-      .button-extra();
+    .btn {
+      padding: 3px 10px;
     }
   }
 

@@ -1,5 +1,4 @@
 @import "../../../styles/variables.less";
-@import "../../../styles/mixins.less";
 
 @banner-height: 480px;
 
@@ -28,7 +27,11 @@
       color: white;
 
       h1, p, a {
-        margin: 50px 0 0 50px;
+        margin-left: 50px;
+      }
+      
+      h1, p {
+        margin-top: 50px;
       }
 
       h1 {
@@ -41,10 +44,6 @@
         margin: 0 0 25px 50px;
         font-size: 1.6rem;
         font-weight: 300;
-      }
-
-      a {
-        .button-extra();
       }
     }
   }
