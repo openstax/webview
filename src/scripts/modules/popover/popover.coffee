@@ -1,0 +1,91 @@
+define [
+  'jquery'
+  'underscore'
+  'backbone'
+  'less!./popover'
+  'bootstrapPopover'
+], ($, _, Backbone) ->
+
+  return class PopoverView extends Backbone.View
+    @popovers: []
+
+    initialize: (params) ->
+      if typeof params isnt 'object' or not params.owner
+        throw new Error('Tried to initialize PopoverView, but no \'owner\' was defined.')
+
+      @options = params.options
+      @events = params.events
+
+      @$parent = params.owner.popover(@options)
+      @constructor.popovers.push(@$parent)
+
+      @_showPopoverEvent = (e) =>
+        @constructor.hidePopovers() # Close open popovers
+
+      @_shownPopoverEvent = (e) =>
+        $popover = @$parent.siblings('.popover')
+
+        # Adjust popover positioning
+        if @options?.placement is 'bottom'
+          $popover.find('.arrow').css({top: '-7px', left: '100%'})
+          $popover.css('top', $popover.offset().top + 7 + 'px')
+          # HACK: Position popover at far left to prevent whitespace wrapping from affecting popover width
+          $popover.css('left', 0)
+          $popover.css('left', @$parent.offset().left + @$parent.width() - $popover.width() + 'px')
+
+      # Attach event handlers to popover for popover positioning
+      @$parent.on('show.bs.popover', @_showPopoverEvent)
+      @$parent.on('shown.bs.popover', @_shownPopoverEvent)
+
+      # Attach custom event handlers to popover
+      if typeof @events is 'object'
+        if @events.show then @$parent.on('show.bs.popover', @events.show)
+        if @events.shown then @$parent.on('shown.bs.popover', @events.shown)
+        if @events.hide then @$parent.on('hide.bs.popover', @events.hide)
+        if @events.hidden then @$parent.on('hidden.bs.popover', @events.hidden)
+
+      # Show the popover immediately if option 'show' is true
+      if params.show then @show()
+
+    render: () ->
+      return @show()
+
+    show: () ->
+      @$parent.popover('show')
+      return @
+
+    hide: () ->
+      @$parent.popover('hide')
+      return @
+
+    toggle: () ->
+      @$parent.popover('toggle')
+      return @
+
+    destroy: () ->
+      @close()
+      return @
+
+    @hidePopovers: () ->
+      _.each @popovers, ($popover) ->
+        $popover.popover('hide')
+
+    @removePopover: ($parent) ->
+      @popovers = _.reject @popovers, ($popover) ->
+        return _.isEqual($parent, $popover)
+
+    close: () ->
+      @constructor.removePopover(@$parent)
+
+      # Remove event handlers from popover
+      @$parent.off('show.bs.popover', @_showPopoverEvent)
+      @$parent.off('shown.bs.popover', @_shownPopoverEvent)
+
+      if typeof @events is 'object'
+        if @events.show then @$parent.off('show.bs.popover', @events.show)
+        if @events.shown then @$parent.off('shown.bs.popover', @events.shown)
+        if @events.hide then @$parent.off('hide.bs.popover', @events.hide)
+        if @events.hidden then @$parent.off('hidden.bs.popover', @events.hidden)
+
+      @$parent.popover('destroy')
+      @$parent = null

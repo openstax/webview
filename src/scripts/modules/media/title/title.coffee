@@ -1,8 +1,39 @@
 define [
+  'jquery'
+  'underscore'
   'cs!helpers/backbone/views/base'
+  'cs!modules/popover/popover'
   'hbs!./title-template'
   'less!./title'
-], (BaseView, template) ->
+], ($, _, BaseView, PopoverView, template) ->
 
   return class MediaTitleView extends BaseView
+    popovers: []
     template: template()
+
+    render: () ->
+      super()
+
+      view = this
+
+      $('.share li').each () ->
+        popover = new PopoverView
+          owner: $(this)
+          options:
+            html: true
+            placement: 'bottom'
+            content: '<h1>test content2</h1>'
+
+        view.popovers.push(popover)
+
+    events:
+      'click .share a': 'clickShareButton'
+
+    clickShareButton: (e) ->
+      e.preventDefault()
+
+    close: () ->
+      _.each popovers, (popover) ->
+        popover.destroy()
+
+      super()
