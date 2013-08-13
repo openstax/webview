@@ -76,16 +76,6 @@ define [
 
     close: () ->
       @constructor.removePopover(@$parent)
-
-      # Remove event handlers from popover
-      @$parent.off('show.bs.popover', @_showPopoverEvent)
-      @$parent.off('shown.bs.popover', @_shownPopoverEvent)
-
-      if typeof @events is 'object'
-        if @events.show then @$parent.off('show.bs.popover', @events.show)
-        if @events.shown then @$parent.off('shown.bs.popover', @events.shown)
-        if @events.hide then @$parent.off('hide.bs.popover', @events.hide)
-        if @events.hidden then @$parent.off('hidden.bs.popover', @events.hidden)
-
+      @$parent.off() # Remove event handlers from popover
       @$parent.popover('destroy')
       @$parent = null
