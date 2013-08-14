@@ -16,14 +16,12 @@ define [
       view = this
 
       @$el.find('.info .btn').each () ->
-        popover = new PopoverView
+        view.popovers.push new PopoverView
           owner: $(this)
           options:
             html: true
             placement: 'bottom'
             content: '<h1>test content3</h1>'
-
-        view.popovers.push(popover)
 
     close: () ->
       @popovers.pop().destroy() while @popovers.length
