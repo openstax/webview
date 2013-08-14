@@ -91,7 +91,7 @@ module.exports = (grunt) ->
           value: 120
         cyclomatic_complexity:
           level: 'error'
-          value: 15
+          value: 10
 
       source: ['src/scripts/**/*.coffee', '!src/scripts/libs/**']
       grunt: 'Gruntfile.coffee'
@@ -100,6 +100,7 @@ module.exports = (grunt) ->
     recess:
       dist:
         options:
+          noOverqualifying: false
           strictPropertyOrder: false
         src: [
           'src/styles/**/*.less'

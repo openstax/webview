@@ -37,11 +37,10 @@ define [
           $popover.css('left', @$parent.offset().left + @$parent.width() - $popover.width() + 'px')
 
       # Attach custom event handlers to popover
-      if typeof @events is 'object'
-        if @events.show then @$parent.on('show.bs.popover', @events.show)
-        if @events.shown then @$parent.on('shown.bs.popover', @events.shown)
-        if @events.hide then @$parent.on('hide.bs.popover', @events.hide)
-        if @events.hidden then @$parent.on('hidden.bs.popover', @events.hidden)
+      @$parent.on('show.bs.popover', @events?.show)
+      @$parent.on('shown.bs.popover', @events?.shown)
+      @$parent.on('hide.bs.popover', @events?.hide)
+      @$parent.on('hidden.bs.popover', @events?.hidden)
 
       # Show the popover immediately if option 'show' is true
       if params.show then @show()
