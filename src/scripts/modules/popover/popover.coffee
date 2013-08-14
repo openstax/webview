@@ -6,7 +6,7 @@ define [
   'bootstrapPopover'
 ], ($, _, Backbone) ->
 
-  return class PopoverView extends Backbone.View
+  class PopoverView extends Backbone.View
     @popovers: []
 
     initialize: (params) ->
@@ -18,6 +18,9 @@ define [
 
       @$parent = params.owner.popover(@options)
       @constructor.popovers.push(@$parent)
+
+      # Stop propogation of 'click' events so popover doesn't get auto-closed
+      @$parent.on 'click', (e) -> e.stopPropagation()
 
       # Attach event handler to close open popovers on show
       @$parent.on 'show.bs.popover', (e) =>
@@ -77,3 +80,13 @@ define [
       @$parent.off() # Remove event handlers from popover
       @$parent.popover('destroy')
       @$parent = null
+
+  # Close popovers when clicking on the document
+  $(document).click (e) ->
+    $el = $(document.elementFromPoint(e.pageX, e.pageY))
+
+    # Don't clear the popover if clicking in it
+    if not $el.parents().hasClass('popover')
+      PopoverView.hidePopovers()
+
+  return PopoverView
