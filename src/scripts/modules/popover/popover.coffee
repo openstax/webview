@@ -1,12 +1,20 @@
 define [
   'jquery'
   'underscore'
-  'backbone'
+  'cs!helpers/backbone/views/base'
   'less!./popover'
   'bootstrapPopover'
-], ($, _, Backbone) ->
+], ($, _, BaseView) ->
 
-  class PopoverView extends Backbone.View
+  # Close popovers when clicking on the document
+  $(document).click (e) ->
+    $el = $(document.elementFromPoint(e.clientX, e.clientY))
+
+    # Don't clear the popover if clicking in it
+    if not $el.parents().hasClass('popover')
+      PopoverView.hidePopovers()
+
+  return class PopoverView extends BaseView
     @popovers: []
 
     initialize: (params) ->
@@ -15,32 +23,33 @@ define [
 
       @options = params.options
       @events = params.events
+      @setElement(params.owner)
 
-      @$parent = params.owner.popover(@options)
-      @constructor.popovers.push(@$parent)
+      @$el.popover(@options)
+      @constructor.popovers.push(@$el)
 
       # Stop propogation of 'click' events so popover doesn't get auto-closed
-      @$parent.on 'click', (e) -> e.stopPropagation()
+      @$el.on 'click', (e) -> e.stopPropagation()
 
       # Attach event handler to close open popovers on show
-      @$parent.on 'show.bs.popover', (e) =>
+      @$el.on 'show.bs.popover', (e) =>
         @constructor.hidePopovers() # Close open popovers
 
       # Attach event handler to correctly position the popover after it's added to the DOM
-      @$parent.on 'shown.bs.popover', (e) =>
-        $popover = @$parent.siblings('.popover')
+      @$el.on 'shown.bs.popover', (e) =>
+        $popover = @$el.siblings('.popover')
 
         # Adjust popover positioning
         if @options?.placement is 'bottom'
           # HACK: Position popover at far left to prevent whitespace wrapping from affecting popover width
           $popover.css('left', 0)
-          $popover.css('left', @$parent.offset().left + @$parent.width() - $popover.width() + 'px')
+          $popover.css('left', @$el.offset().left + @$el.width() - $popover.width() + 'px')
 
       # Attach custom event handlers to popover
-      @$parent.on('show.bs.popover', @events?.show)
-      @$parent.on('shown.bs.popover', @events?.shown)
-      @$parent.on('hide.bs.popover', @events?.hide)
-      @$parent.on('hidden.bs.popover', @events?.hidden)
+      @$el.on('show.bs.popover', @events?.show)
+      @$el.on('shown.bs.popover', @events?.shown)
+      @$el.on('hide.bs.popover', @events?.hide)
+      @$el.on('hidden.bs.popover', @events?.hidden)
 
       # Show the popover immediately if option 'show' is true
       if params.show then @show()
@@ -49,15 +58,15 @@ define [
       return @show()
 
     show: () ->
-      @$parent.popover('show')
+      @$el.popover('show')
       return @
 
     hide: () ->
-      @$parent.popover('hide')
+      @$el.popover('hide')
       return @
 
     toggle: () ->
-      @$parent.popover('toggle')
+      @$el.popover('toggle')
       return @
 
     destroy: () ->
@@ -68,22 +77,11 @@ define [
       _.each @popovers, ($popover) ->
         $popover.popover('hide')
 
-    @removePopover: ($parent) ->
+    @removePopover: ($el) ->
       @popovers = _.reject @popovers, ($popover) ->
-        return _.isEqual($parent, $popover)
+        return _.isEqual($el, $popover)
 
     close: () ->
-      @constructor.removePopover(@$parent)
-      @$parent.off() # Remove event handlers from popover
-      @$parent.popover('destroy')
-      @$parent = null
-
-  # Close popovers when clicking on the document
-  $(document).click (e) ->
-    $el = $(document.elementFromPoint(e.clientX, e.clientY))
-
-    # Don't clear the popover if clicking in it
-    if not $el.parents().hasClass('popover')
-      PopoverView.hidePopovers()
-
-  return PopoverView
+      @constructor.removePopover(@$el)
+      @$el.popover('destroy')
+      super()

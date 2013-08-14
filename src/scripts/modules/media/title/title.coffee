@@ -1,11 +1,10 @@
 define [
   'jquery'
-  'underscore'
   'cs!helpers/backbone/views/base'
   'cs!modules/popover/popover'
   'hbs!./title-template'
   'less!./title'
-], ($, _, BaseView, PopoverView, template) ->
+], ($, BaseView, PopoverView, template) ->
 
   return class MediaTitleView extends BaseView
     popovers: []
@@ -27,7 +26,5 @@ define [
         view.popovers.push(popover)
 
     close: () ->
-      _.each popovers, (popover) ->
-        popover.destroy()
-
+      @popovers.pop().destroy() while @popovers.length
       super()
