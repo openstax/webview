@@ -26,12 +26,6 @@ define [
 
         view.popovers.push(popover)
 
-    events:
-      'click .share a': 'clickShareButton'
-
-    clickShareButton: (e) ->
-      e.preventDefault()
-
     close: () ->
       _.each popovers, (popover) ->
         popover.destroy()
