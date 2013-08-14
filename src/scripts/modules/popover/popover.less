@@ -2,7 +2,6 @@
 
 // Re-style Bootstrap Popovers
 .popover {
-  margin: 0 !important;
   border: none;
   border-radius: 0;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
@@ -13,5 +12,10 @@
     &::after {
       border-width: 6px;
     }
+  }
+  
+  &.bottom .arrow {
+    top: -7px;
+    left: 100%;
   }
 }
