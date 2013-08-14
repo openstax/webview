@@ -83,7 +83,7 @@ define [
 
   # Close popovers when clicking on the document
   $(document).click (e) ->
-    $el = $(document.elementFromPoint(e.pageX, e.pageY))
+    $el = $(document.elementFromPoint(e.clientX, e.clientY))
 
     # Don't clear the popover if clicking in it
     if not $el.parents().hasClass('popover')
