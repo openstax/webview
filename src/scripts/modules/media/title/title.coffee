@@ -15,7 +15,7 @@ define [
 
       view = this
 
-      $('.share li').each () ->
+      @$el.find('.share li').each () ->
         popover = new PopoverView
           owner: $(this)
           options:

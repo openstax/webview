@@ -15,7 +15,7 @@ define [
 
       view = this
 
-      $('.info .btn').each () ->
+      @$el.find('.info .btn').each () ->
         popover = new PopoverView
           owner: $(this)
           options:
