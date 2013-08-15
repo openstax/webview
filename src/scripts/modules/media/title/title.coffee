@@ -21,7 +21,7 @@ define [
           options:
             html: true
             placement: 'bottom'
-            content: '<h1>test content2</h1>'
+            content: '<p>test content2</p>'
 
     close: () ->
       @popovers.pop().destroy() while @popovers.length

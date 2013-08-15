@@ -42,6 +42,7 @@ define [
         # Adjust popover positioning
         if @options?.placement is 'bottom'
           # HACK: Position popover at far left to prevent whitespace wrapping from affecting popover width
+          $popover.find('.arrow').css({top: '-7px', left: '100%'})
           $popover.css('left', 0)
           $popover.css('left', @$el.offset().left + @$el.width() - $popover.width() + 'px')
 

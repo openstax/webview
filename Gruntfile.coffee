@@ -100,7 +100,6 @@ module.exports = (grunt) ->
     recess:
       dist:
         options:
-          noOverqualifying: false
           strictPropertyOrder: false
         src: [
           'src/styles/**/*.less'
