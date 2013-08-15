@@ -34,6 +34,7 @@ define [
 
   return class BaseView extends Backbone.View
     initialize: () ->
+      @_popovers = []
       @regions = new Regions(@regions, @)
 
     render: () ->
@@ -45,7 +46,14 @@ define [
       _.each @regions, (region) ->
         region.close()
 
-      @parent = null
+      @detachPopovers()
       @stopListening()
       @remove()
       @unbind()
+      @parent = null
+
+    detachPopovers: () ->
+      @_popovers.pop().close() while @_popovers?.length
+
+    attachPopover: (popover) ->
+      @_popovers.push popover

@@ -7,16 +7,10 @@ define [
 ], ($, BaseView, MailPopoverView, template) ->
 
   return class MediaTitleView extends BaseView
-    popovers: []
     template: template()
 
     render: () ->
       super()
-      
+
       $share = @$el.find('.share')
-
-      @popovers.push new MailPopoverView({owner: $share.find('.mail')})
-
-    close: () ->
-      @popovers.pop().close() while @popovers.length
-      super()
+      @attachPopover new MailPopoverView({owner: $share.find('.mail')})
