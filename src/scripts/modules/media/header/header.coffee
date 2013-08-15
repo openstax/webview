@@ -24,5 +24,5 @@ define [
             content: '<h1>test content3</h1>'
 
     close: () ->
-      @popovers.pop().destroy() while @popovers.length
+      @popovers.pop().close() while @popovers.length
       super()

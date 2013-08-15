@@ -15,7 +15,7 @@ define [
       @append(view)
 
     append: (view) ->
-      @$el = @$el or @parent.$el.find(@el).eq(0)
+      @$el = @$el or @parent.$el.find(@el)
       view.parent = @parent
       @views ?= []
       @views.push(view)

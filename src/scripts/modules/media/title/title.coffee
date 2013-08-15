@@ -1,10 +1,10 @@
 define [
   'jquery'
   'cs!helpers/backbone/views/base'
-  'cs!modules/popover/popover'
+  'cs!./popovers/mail/mail'
   'hbs!./title-template'
   'less!./title'
-], ($, BaseView, PopoverView, template) ->
+], ($, BaseView, MailPopoverView, template) ->
 
   return class MediaTitleView extends BaseView
     popovers: []
@@ -12,17 +12,11 @@ define [
 
     render: () ->
       super()
+      
+      $share = @$el.find('.share')
 
-      view = this
-
-      @$el.find('.share li').each () ->
-        view.popovers.push new PopoverView
-          owner: $(this)
-          options:
-            html: true
-            placement: 'bottom'
-            content: '<p>test content2</p>'
+      @popovers.push new MailPopoverView({owner: $share.find('.mail')})
 
     close: () ->
-      @popovers.pop().destroy() while @popovers.length
+      @popovers.pop().close() while @popovers.length
       super()
