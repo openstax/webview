@@ -2,7 +2,6 @@ define [
   'jquery'
   'underscore'
   'cs!helpers/backbone/views/base'
-  'less!./popover'
   'bootstrapPopover'
 ], ($, _, BaseView) ->
 
@@ -12,14 +11,14 @@ define [
 
     # Don't clear the popover if clicking in it
     if not $el.parents().hasClass('popover')
-      PopoverView.hidePopovers()
+      Popover.hidePopovers()
 
-  return class PopoverView extends BaseView
+  class Popover extends BaseView
     @popovers: []
 
     initialize: (params) ->
       if typeof params isnt 'object' or not params.owner
-        throw new Error('Tried to initialize PopoverView, but no \'owner\' was defined.')
+        throw new Error('Tried to initialize Popover, but no \'owner\' was defined.')
 
       @events = params.events
 
@@ -28,7 +27,7 @@ define [
       @constructor.popovers.push(@$owner)
 
       # Stop propogation of 'click' events so popover doesn't get auto-closed
-      @$owner.on 'click', (e) -> e.stopPropagation()
+      @$owner.on 'click', (e) => e.stopPropagation()
 
       # Attach event handler to close open popovers on show
       @$owner.on 'show.bs.popover', (e) =>
@@ -68,3 +67,7 @@ define [
       @constructor.removePopover(@$owner)
       @$owner.popover('destroy')
       super()
+
+  return new class PopoverHandler
+    createPopover: (@popover) ->
+      return new Popover(@popover)
