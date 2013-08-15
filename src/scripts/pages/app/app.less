@@ -1,7 +1,10 @@
-/* Bootstrap */
-@import "../../libs/bootstrap/less/bootstrap.less";
-
+@import "../../libs/bootstrap/less/bootstrap.less"; // Bootstrap
 @import "../../../styles/variables.less";
+@import "../../../styles/mixins.less";
+
+//
+// Headers
+//
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
@@ -28,21 +31,9 @@ h5 {
   font-weight: bold;
 }
 
-.btn {
-  .button-variant(white; @brand-secondary; @brand-secondary);
-  padding: 5px 10px;
-  font-weight: 300;
-  border: none;
-  vertical-align: baseline;
-}
-
-.circle {
-  display: inline-block;
-  height: 28px;
-  width: 28px;
-  border-radius: 50%;
-  overflow: hidden;
-}
+//
+// Background colors
+//
 
 .primary {
   background-color: @brand-primary;
@@ -56,14 +47,29 @@ h5 {
   background-color: @brand-highlight;
 }
 
-.social-button (@url: "images/social/mail.png") {
-  font-size: 0;
-  line-height: 2.4rem;
-  background-image: url("/@{url}");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 67%;
+//
+// Buttons
+//
+
+.btn {
+  .button-variant(white; @brand-secondary);
 }
+
+.btn-primary {
+  .button-variant(white; @brand-primary);
+}
+
+.circle {
+  display: inline-block;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+//
+// Social buttons
+//
 
 .mail {
   .social-button();
