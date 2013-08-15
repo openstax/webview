@@ -15,10 +15,19 @@ define [
           html: true
           placement: 'bottom'
           content: @template
+        events:
+          'submit form': (e) ->
+            e.preventDefault()
+            console.log('submitted')
 
     render: () -> return @
 
+    submitForm: (e) ->
+      e.preventDefault()
+
+      alert('submitted!')
+
     close: () ->
-      @popover.destroy()
+      @popover.close()
       @popover = null
       super()

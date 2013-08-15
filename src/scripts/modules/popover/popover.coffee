@@ -21,58 +21,40 @@ define [
       if typeof params isnt 'object' or not params.owner
         throw new Error('Tried to initialize PopoverView, but no \'owner\' was defined.')
 
-      @options = params.options
       @events = params.events
-      @setElement(params.owner)
 
-      @$el.popover(@options)
-      @constructor.popovers.push(@$el)
+      @$owner = params.owner
+      @$owner.popover(params.options)
+      @constructor.popovers.push(@$owner)
 
       # Stop propogation of 'click' events so popover doesn't get auto-closed
-      @$el.on 'click', (e) -> e.stopPropagation()
+      @$owner.on 'click', (e) -> e.stopPropagation()
 
       # Attach event handler to close open popovers on show
-      @$el.on 'show.bs.popover', (e) =>
+      @$owner.on 'show.bs.popover', (e) =>
         @constructor.hidePopovers() # Close open popovers
 
-      # Attach event handler to correctly position the popover after it's added to the DOM
-      @$el.on 'shown.bs.popover', (e) =>
-        $popover = @$el.siblings('.popover')
+      @$owner.on 'shown.bs.popover', (e) =>
+        @setElement @$owner.siblings('.popover')
 
         # Adjust popover positioning
-        if @options?.placement is 'bottom'
-          $popover.find('.arrow').css({top: '-7px', left: '100%'})
-          $popover.css
+        if params.options?.placement is 'bottom'
+          @$el.find('.arrow').css({top: '-7px', left: '100%'})
+          @$el.css
             'left': 'auto'
-            'right': document.body.clientWidth - (@$el.offset().left + @$el.outerWidth())
+            'right': document.body.clientWidth - (@$owner.offset().left + @$owner.outerWidth())
 
-      # Attach custom event handlers to popover
-      @$el.on('show.bs.popover', @events?.show)
-      @$el.on('shown.bs.popover', @events?.shown)
-      @$el.on('hide.bs.popover', @events?.hide)
-      @$el.on('hidden.bs.popover', @events?.hidden)
+        # Attach custom event handlers to popover
+        @delegateEvents(@events)
+
+      # Detach event handlers from popover on hide
+      @$owner.on 'hide.bs.popover', (e) =>
+        @undelegateEvents()
 
       # Show the popover immediately if option 'show' is true
       if params.show then @show()
 
-    render: () ->
-      return @show()
-
-    show: () ->
-      @$el.popover('show')
-      return @
-
-    hide: () ->
-      @$el.popover('hide')
-      return @
-
-    toggle: () ->
-      @$el.popover('toggle')
-      return @
-
-    destroy: () ->
-      @close()
-      return @
+    render: () -> return @ # noop
 
     @hidePopovers: () ->
       _.each @popovers, ($popover) ->
@@ -83,6 +65,6 @@ define [
         return _.isEqual($el, $popover)
 
     close: () ->
-      @constructor.removePopover(@$el)
-      @$el.popover('destroy')
+      @constructor.removePopover(@$owner)
+      @$owner.popover('destroy')
       super()
