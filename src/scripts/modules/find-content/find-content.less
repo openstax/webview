@@ -1,5 +1,4 @@
 @import "../../../styles/variables.less";
-@import "../../../styles/mixins.less";
 
 @bar-height: 30px;
 
@@ -74,9 +73,14 @@
     -webkit-flex: 4 4 33%;
     flex: 4 4 33%;
 
+    &::-webkit-input-placeholder { color: darken(@gray-lighter, 15%); }
+    &::-moz-placeholder { color: darken(@gray-lighter, 15%); }
+    &:-ms-input-placeholder { color: darken(@gray-lighter, 15%); }
+
     &:focus {
-      border: 1px solid lighten(@gray-medium, 15%);
-      .box-shadow(~"inset 0 1px 1px rgba(96,97,99,.075), 0 0 8px rgba(153,153,153,.6)");
+      border: 1px solid transparent;
+      -webkit-box-shadow: none;
+      box-shadow: none;
     }
 
     @media screen and (max-width: @screen-tiny-max) {
