@@ -6,6 +6,8 @@ define [
   'less!./featured-books'
 ], ($, InfoBlockView, library, template) ->
 
+  CAROUSEL_SPEED = 7000 # The rate at which a new book will be shown (in ms).
+
   return class FeaturedBooksView extends InfoBlockView
     title: 'Featured Books'
 
@@ -84,7 +86,7 @@ define [
 
       # Start the carousel
       if @_carousel then clearInterval(@_carousel)
-      @_carousel = setInterval(nextFeatured, 7000)
+      @_carousel = setInterval(nextFeatured, CAROUSEL_SPEED)
 
     close: () ->
       $(window).off('resize', @_resizer)
