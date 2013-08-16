@@ -55,15 +55,15 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
 
 ### Directory Layout
 
-* `dist/`                      Production version of the site (added after install)
-* `node_modules/`              Node Modules (added after install)
+* `dist/`                      Production version of the site *(added after install)*
+* `node_modules/`              Node Modules *(added after install)*
 * `src/`                       Development version of the site
 * `src/data/`                  Hardcoded data
 * `src/images/`                Images used throughout the site
 * `src/scripts/`               Site scripts and 3rd party libraries
 * `src/scripts/collections`    Backbone Collections
 * `src/scripts/helpers`        Helpers for Handlebars, Backbone, and generic code
-* `src/scripts/libs`           3rd Party Libraries (added after install)
+* `src/scripts/libs`           3rd Party Libraries *(added after install)*
 * `src/scripts/models`         Backbone Models
 * `src/scripts/modules`        Self-contained, Reusable Modules used to construct pages
 * `src/scripts/pages`          Backbone Views representing an entire page (or the entire viewport)
