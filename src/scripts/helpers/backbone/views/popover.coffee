@@ -16,7 +16,6 @@ define [
         throw new Error('\'popover.owner\' not defined on object inheriting PopoverView nor passed to constructor')
 
       @_popover = popoverHandler.createPopover(@_popover)
-      console.log @
 
     render: () -> return @
 
