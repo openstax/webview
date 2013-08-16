@@ -40,27 +40,27 @@
       font-weight: 300;
       color: @gray-dark;
     }
-  }
 
-  .book::after {
-  	display: block;
-    height: 0;
-    clear: both;
-  	font-size: 0;
-  	content: " ";
-    visibility: hidden;
-  }
+    &::after {
+    	display: block;
+      height: 0;
+      clear: both;
+    	font-size: 0;
+    	content: " ";
+      visibility: hidden;
+    }
 
-  .book:first-child, .book:nth-child(2) {
-    display: block;
-  }
+    &:first-child, &:nth-child(2) {
+      display: block;
+    }
 
-  .book:nth-child(2n+1) {
-    padding-right: 15px;
-    padding-left: 0;
-  }
+    &:nth-child(2n+1) {
+      padding-right: 15px;
+      padding-left: 0;
+    }
 
-  .book:nth-child(2n) {
-    padding-left: 15px;
+    &:nth-child(2n) {
+      padding-left: 15px;
+    }
   }
 }
