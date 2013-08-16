@@ -69,5 +69,5 @@ define [
       super()
 
   return new class PopoverHandler
-    createPopover: (@popover) ->
-      return new Popover(@popover)
+    createPopover: (popover) ->
+      return new Popover(popover)

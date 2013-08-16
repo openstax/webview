@@ -50,7 +50,8 @@ define [
       @stopListening()
       @remove()
       @unbind()
-      @parent = null
+      delete @[key] for key of @
+      return @
 
     detachPopovers: () ->
       @_popovers.pop().close() while @_popovers?.length
