@@ -21,8 +21,8 @@ define [
         throw new Error('Tried to initialize Popover, but no \'owner\' was defined.')
 
       @events = params.events
-
       @$owner = params.owner
+
       @$owner.popover(params.options)
       @constructor.popovers.push(@$owner)
 

@@ -1,24 +1,26 @@
 define [
+  'underscore'
   'cs!helpers/backbone/views/base'
   'cs!helpers/handlers/popover-handler'
-], (BaseView, popoverHandler) ->
+], (_, BaseView, popoverHandler) ->
 
   return class PopoverView extends BaseView
     initialize: (options) ->
-      @popover ?= {}
-      _.extend(@popover, options)
+      @_popover = _.extend({}, @popover or {}, options)
+      delete @popover
 
-      if not @popover
+      if not @_popover
         throw new Error('\'popover\' not defined on object inheriting PopoverView nor passed to constructor')
 
-      if not @popover.owner
+      if not @_popover.owner
         throw new Error('\'popover.owner\' not defined on object inheriting PopoverView nor passed to constructor')
 
-      @popover = popoverHandler.createPopover(@popover)
+      @_popover = popoverHandler.createPopover(@_popover)
+      console.log @
 
     render: () -> return @
 
     close: () ->
-      @popover.close()
-      @popover = null
+      @_popover.close()
+      @_popover = null
       super()
