@@ -6,9 +6,7 @@ Below are instructions for hosting and building the site and a layout of how the
 
 ### Installing & Hosting
 
-#### Testing & Building
-
-##### Requirements
+#### Installing
 
 1. Install [Node.js](http://nodejs.org) (and npm).
 2. Run `npm install -g grunt-cli` in the command line to install [grunt-cli](https://github.com/gruntjs/grunt-cli).
