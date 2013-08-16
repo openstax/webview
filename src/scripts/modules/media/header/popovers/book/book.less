@@ -1,0 +1,55 @@
+@import "../../../../../../styles/variables.less";
+
+.book-popover {
+  max-width: 200px;
+
+  .header {
+    h4, img {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    h4 {
+      margin-left: 5px;
+    }
+
+    p {
+      margin: 10px 0;
+      color: @gray;
+    }
+  }
+
+  h5 {
+    color: @gray;
+  }
+
+  ul {
+    padding: 0;
+    list-style-type: none;
+
+    li {
+      display: inline-block;
+      padding: 10px 0;
+
+      &::after {
+        padding: 0 5px 0 8px;
+        color: @gray-lighter;
+        content: "|";
+      }
+
+      &:last-child::after {
+        padding: 0;
+        content: "";
+      }
+    }
+  }
+
+  .download-collection ul {
+    border-bottom: 1px solid @gray-lightest;
+  }
+
+  .btn {
+    margin-bottom: 5px;
+    width: 100%;
+  }
+}
