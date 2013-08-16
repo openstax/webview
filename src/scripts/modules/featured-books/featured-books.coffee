@@ -39,8 +39,8 @@ define [
       @$el.find('.book').removeAttr('style')
       @_expanded = false
 
-    stopCarousel: (options) ->
-      if options?.finish then @$el.find('.book').finish() # Immediately finish the animation
+    stopCarousel: (options = {}) ->
+      if options.finish then @$el.find('.book').finish() # Immediately finish the animation
       clearInterval(@_carousel)
       @_carousel = null
 
@@ -87,6 +87,6 @@ define [
       @_carousel = setInterval(nextFeatured, 7000)
 
     close: () ->
-      $(window).off("resize", @_resizer)
-      clearInterval(@_carousel)
+      $(window).off('resize', @_resizer)
+      @stopCarousel()
       super()
