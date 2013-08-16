@@ -4,7 +4,7 @@
 
 Below are instructions for hosting and building the site and a layout of how the code is organized.
 
-### Hosting Yourself
+### Installing & Hosting
 
 #### Testing & Building
 
