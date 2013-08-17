@@ -87,19 +87,15 @@
 
   .share {
     ul {
-      display: -webkit-flex;
-      display: flex;
+      .flexbox();
+      .flex-flow(row; wrap);
+      .justify-content(center);
       max-width: 75px;
       margin: 0 auto;
-      -webkit-flex-flow: row wrap;
-      flex-flow: row wrap;
-      -webkit-justify-content: center;
-      justify-content: center;
 
       li {
+        .flex(1; 0; auto);
         margin: 5px 0;
-        -webkit-flex: 1 0 auto;
-        flex: 1 0 auto;
       }
     }
   }

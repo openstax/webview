@@ -34,6 +34,8 @@ define [
         @constructor.hidePopovers() # Close open popovers
 
       @$owner.on 'shown.bs.popover', (e) =>
+        # HACK: Bootstrap does not provide a hook to get the `popover` element
+        #       that it adds, so we have to look for it.
         @setElement @$owner.siblings('.popover')
 
         # Adjust popover positioning

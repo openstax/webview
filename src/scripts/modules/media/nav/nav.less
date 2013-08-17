@@ -1,4 +1,5 @@
 @import "../../../../styles/variables.less";
+@import "../../../../styles/mixins.less";
 
 @nav-height: 75px;
 @progress-height: 9px;
@@ -7,17 +8,13 @@
   background-color: @gray-lightest;
 
   .book-nav {
-    display: -webkit-flex;
-    display: flex;
+    .flexbox();
+    .flex-flow(row; nowrap);
+    .justify-content(center);
     height: @nav-height;
-    -webkit-flex-flow: row nowrap;
-    flex-flow: row nowrap;
-    -webkit-justify-content: center;
-    justify-content: center;
 
     .progress, .back-to-top {
-      -webkit-flex: 1 1 75%;
-      flex: 1 1 75%;
+      .flex(1; 1; 75%);
     }
 
     .progress {
@@ -47,7 +44,7 @@
       &::before, &::after {
         font-size: 1.4em;
         color: @link-color;
-        content: "▴"
+        content: "\25b4"; // ▴
       }
     }
 
@@ -57,8 +54,7 @@
       line-height: @nav-height;
       color: @brand-primary;
       cursor: pointer;
-      -webkit-flex: 1 0 75px;
-      flex: 1 0 100px;
+      .flex(1; 0; 75px);
     }
 
     .back {

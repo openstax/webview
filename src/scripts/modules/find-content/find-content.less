@@ -3,15 +3,12 @@
 @bar-height: 30px;
 
 .find-content {
-  display: -webkit-flex;
-  display: flex;
+  .flexbox();
+  .flex-flow(row; nowrap);
+  .justify-content(center);
   padding: 10px;
   color: @gray-lighter;
   background-color: @gray-dark;
-  -webkit-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-  -webkit-justify-content: center;
-  justify-content: center;
 
   @media screen and (max-width: @screen-tiny-max) {
     display: block;
@@ -39,9 +36,8 @@
   }
 
   h3 {
+    .flex(2; 0; auto);
     color: @gray-lighter;
-    -webkit-flex: 2 0 auto;
-    flex: 2 0 auto;
 
     @media screen and (max-width: @screen-tiny-max) {
       display: block;
@@ -50,11 +46,10 @@
   }
 
   span {
+    .flex(1; 1; auto);
     margin: 0 15px;
     font-size: 1.4em;
     font-weight: 200;
-    -webkit-flex: 1 1 auto;
-    flex: 1 1 auto;
 
     // Don't display on screens smaller than a tablet
     @media screen and (max-width: @screen-tiny-max) {
@@ -63,6 +58,7 @@
   }
 
   input {
+    .flex(4; 4; 33%);
     height: @bar-height;
     padding-right: 37px;
     font-size: 1.2em;
@@ -71,8 +67,10 @@
     border: 1px solid transparent;
     -webkit-box-shadow: none;
     box-shadow: none;
-    -webkit-flex: 4 4 33%;
-    flex: 4 4 33%;
+
+    &::-webkit-input-placeholder { color: darken(@gray-lighter, 15%); }
+    &::-moz-placeholder { color: darken(@gray-lighter, 15%); }
+    &:-ms-input-placeholder { color: darken(@gray-lighter, 15%); }
 
     &::-webkit-input-placeholder { color: darken(@gray-lighter, 15%); }
     &::-moz-placeholder { color: darken(@gray-lighter, 15%); }
@@ -91,6 +89,7 @@
   }
 
   .dropdown {
+    .flex(4; 0; 33%);
     position: relative;
     height: @bar-height;
     margin-right: 15px;
@@ -98,8 +97,6 @@
     color: @gray-lighter;
     background-color: @gray-medium;
     border-radius: 4px;
-    -webkit-flex: 4 0 33%;
-    flex: 4 0 33%;
 
     a {
       display: block;

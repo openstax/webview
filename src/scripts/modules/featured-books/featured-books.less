@@ -16,9 +16,31 @@
     .make-sm-column(6);
     display: none;
     margin-bottom: 15px;
+    
+    &::after {
+    	display: block;
+      height: 0;
+      clear: both;
+    	font-size: 0;
+    	content: " ";
+      visibility: hidden;
+    }
+
+    &:first-child, &:nth-child(2) {
+      display: block;
+    }
+
+    &:nth-child(2n+1) {
+      padding-right: 15px;
+      padding-left: 0;
+    }
+
+    &:nth-child(2n) {
+      padding-left: 15px;
+    }
 
     @media screen and (max-width: @screen-tiny-max) {
-      padding-left: 0 !important;
+      padding-left: 0 !important; // Override bootstrap css
     }
 
     img {
@@ -40,27 +62,5 @@
       font-weight: 300;
       color: @gray-dark;
     }
-  }
-
-  .book::after {
-  	display: block;
-    height: 0;
-    clear: both;
-  	font-size: 0;
-  	content: " ";
-    visibility: hidden;
-  }
-
-  .book:first-child, .book:nth-child(2) {
-    display: block;
-  }
-
-  .book:nth-child(2n+1) {
-    padding-right: 15px;
-    padding-left: 0;
-  }
-
-  .book:nth-child(2n) {
-    padding-left: 15px;
   }
 }

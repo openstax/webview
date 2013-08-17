@@ -1,3 +1,11 @@
+# The PopoverView can be inherited or used directly to add a popover to another view.
+#
+# This class is a wrapper for `helpers/handlers/popover-handler` that adds boilerplate
+# code necessary to prevent memory leaks related to popovers.
+#
+# When creating a popover, use or inherit from this class, rather than creating a
+# popover directly with `helpers/handlers/popover-handler`.
+
 define [
   'underscore'
   'cs!helpers/backbone/views/base'
