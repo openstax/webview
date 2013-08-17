@@ -1,8 +1,7 @@
 define [
-  'underscore'
   'backbone'
   'cs!pages/app/app'
-], (_, Backbone, AppView) ->
+], (Backbone, AppView) ->
 
   return new class Router extends Backbone.Router
     initialize: () ->

@@ -4,84 +4,84 @@
 @logo-height: 140px;
 
 .page-header {
-    position: relative;
+  position: relative;
+  height: @logo-height;
+  padding-bottom: 0;
+  margin: 0;
+  overflow: hidden;
+  border-bottom: none;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.9);
+
+  .logo, .links {
+    display: inline-block;
+  }
+
+  .logo {
+    width: @logo-width;
     height: @logo-height;
-    padding-bottom: 0;
-    margin: 0;
-    overflow: hidden;
-    border-bottom: none;
+    background: url(/images/logo.png) center center no-repeat;
+  }
 
-    .logo, .links {
+  .links {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: @logo-width;
+  }
+
+  .links .login {
+    margin: 25px 25px 0 0;
+    font-size: 0.9em;
+    font-weight: 300;
+    text-align: right;
+
+    ul {
+      padding: 0;
+      list-style-type: none;
+
+      li {
         display: inline-block;
-    }
 
-    .logo {
-        width: @logo-width;
-        vertical-align: top;
-    }
-
-    .links {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: @logo-width;
-
-    }
-
-    .links .login {
-        margin: 25px 25px 0 0;
-        font-size: 0.9em;
-        font-weight: 300;
-        text-align: right;
-        
-        ul {
-            list-style-type: none;
-            
-            li {
-                display: inline-block;
-                
-                &:after {
-                    padding: 0 5px 0 8px;
-                    color: @gray-lighter;
-                    content: "|";
-                }
-                
-                &:last-child:after {
-                    padding: 0;
-                    content: "";
-                }
-            }
+        &::after {
+          padding: 0 5px 0 8px;
+          color: @gray-lighter;
+          content: "|";
         }
 
-        .donate {
-            padding: 5px 8px;
-            color: white;
-            background-color: rgb(120, 176, 74);
-            border-radius: 4px;
+        &:last-child::after {
+          padding: 0;
+          content: "";
         }
+      }
     }
 
-    .links nav {
-        display: table;
-        width: 100%;
-        margin-top: 20px;
-
-        a {
-            display: table-cell;
-            padding: 5px 10px;
-            font-size: 1.1em;
-            font-weight: 500;
-            color: @link-color;
-            text-align: center;
-        }
-
-        .active {
-            color: @link-active-color;
-        }
-
-        .rice {
-            margin-bottom: 5px;
-        }
+    .btn {
+      padding: 3px 10px;
     }
+  }
+
+  .links nav {
+    display: table;
+    width: 100%;
+    margin-top: 20px;
+
+    a {
+      display: table-cell;
+      padding: 5px 10px;
+      font-size: 1.1em;
+      font-weight: 500;
+      color: @link-color;
+      text-align: center;
+    }
+
+    .active {
+      color: @link-active-color;
+    }
+
+    .rice {
+      margin-bottom: 5px;
+    }
+  }
 }

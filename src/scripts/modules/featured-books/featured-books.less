@@ -1,64 +1,66 @@
 @import "../../../styles/variables.less";
+@import "../../../styles/mixins.less";
 
 .featured-books {
-    .make-row();
-    // Override bootstrap css
-    margin: 0 !important;
+  .make-row();
+  margin: 0 !important; // Override bootstrap css
+  overflow: hidden;
+
+  .books {
+    position: relative;
+    width: 100%;
     overflow: hidden;
+  }
 
-    .books {
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-    }
-
-    .book {
-        .make-column(6);
-        display: none;
-        margin-bottom: 15px;
-
-        @media screen and (max-width: @screen-tiny-max) {
-            padding-left: 0 !important;
-        }
-
-        img {
-            float: left;
-            margin-right: 20px;
-            border: 0;
-        }
-
-        h4 {
-            a {
-                font-weight: 300;
-                color: @link-color;
-            }
-        }
-
-        p {
-            font-weight: 300;
-            color: @gray-dark;
-        }
-    }
-
-    .book:after {
+  .book {
+    .make-sm-column(6);
+    display: none;
+    margin-bottom: 15px;
+    
+    &::after {
     	display: block;
-        height: 0;
-        clear: both;
+      height: 0;
+      clear: both;
     	font-size: 0;
     	content: " ";
-        visibility: hidden;
+      visibility: hidden;
     }
 
-    .book:first-child, .book:nth-child(2) {
-        display: block;
+    &:first-child, &:nth-child(2) {
+      display: block;
     }
 
-    .book:nth-child(2n+1) {
-        padding-right: 15px;
-        padding-left: 0;
+    &:nth-child(2n+1) {
+      padding-right: 15px;
+      padding-left: 0;
     }
 
-    .book:nth-child(2n) {
-        padding-left: 15px;
+    &:nth-child(2n) {
+      padding-left: 15px;
     }
+
+    @media screen and (max-width: @screen-tiny-max) {
+      padding-left: 0 !important; // Override bootstrap css
+    }
+
+    img {
+      float: left;
+      margin-right: 20px;
+      border: 0;
+    }
+
+    h4 {
+      margin-bottom: 10px;
+
+      a {
+        font-weight: 300;
+        color: @link-color;
+      }
+    }
+
+    p {
+      font-weight: 300;
+      color: @gray-dark;
+    }
+  }
 }

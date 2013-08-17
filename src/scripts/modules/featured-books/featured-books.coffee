@@ -1,12 +1,12 @@
 define [
   'jquery'
-  'underscore'
-  'backbone'
   'cs!modules/inherits/info-block/info-block'
   'cs!collections/library'
   'hbs!./featured-books-template'
   'less!./featured-books'
-], ($, _, Backbone, InfoBlockView, library, template) ->
+], ($, InfoBlockView, library, template) ->
+
+  CAROUSEL_SPEED = 7000 # The rate at which a new book will be shown (in ms).
 
   return class FeaturedBooksView extends InfoBlockView
     title: 'Featured Books'
@@ -16,9 +16,10 @@ define [
       @listenTo(library, 'reset', @render)
 
       # Don't run any animations while the window is being resized
-      $(window).resize () =>
+      @_resizer = () =>
         @stopCarousel({finish: true})
         @startCarousel()
+      $(window).resize(@_resizer)
 
     events:
       'mouseenter .books': 'stopCarousel'
@@ -40,7 +41,7 @@ define [
       @$el.find('.book').removeAttr('style')
       @_expanded = false
 
-    stopCarousel: (options) ->
+    stopCarousel: (options = {}) ->
       if options.finish then @$el.find('.book').finish() # Immediately finish the animation
       clearInterval(@_carousel)
       @_carousel = null
@@ -85,4 +86,9 @@ define [
 
       # Start the carousel
       if @_carousel then clearInterval(@_carousel)
-      @_carousel = setInterval(nextFeatured, 7000)
+      @_carousel = setInterval(nextFeatured, CAROUSEL_SPEED)
+
+    close: () ->
+      $(window).off('resize', @_resizer)
+      @stopCarousel()
+      super()

@@ -1,5 +1,90 @@
 @import "../../../../styles/variables.less";
+@import "../../../../styles/mixins.less";
+
+@nav-height: 75px;
+@progress-height: 9px;
 
 .media-nav {
-    background-color: @gray-lighter;
+  background-color: @gray-lightest;
+
+  .book-nav {
+    .flexbox();
+    .flex-flow(row; nowrap);
+    .justify-content(center);
+    height: @nav-height;
+
+    .progress, .back-to-top {
+      .flex(1; 1; 75%);
+    }
+
+    .progress {
+      margin-top: (@nav-height - @progress-height)/2;
+      height: @progress-height;
+      border-radius: 8px;
+      background-color: darken(@gray-lighter, 5%);
+      -webkit-box-shadow: none;
+      box-shadow: none;
+
+      .progress-bar {
+        border-right: 1px solid white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+
+    .back-to-top {
+      text-align: center;
+      line-height: @nav-height;
+
+      a {
+        display: inline-block;
+        padding: 0 5px;
+      }
+
+      &::before, &::after {
+        font-size: 1.4em;
+        color: @link-color;
+        content: "\25b4"; // ▴
+      }
+    }
+
+    .next, .back {
+      display: inline-block;
+      font-size: 1.6rem;
+      line-height: @nav-height;
+      color: @brand-primary;
+      cursor: pointer;
+      .flex(1; 0; 75px);
+    }
+
+    .back {
+      padding-right: 20px;
+      text-align: right;
+
+      &:before {
+        // Flip the background-image horizontally
+        -ms-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+      }
+    }
+
+    .next {
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    .back::before, .next::after {
+      display: inline-block;
+      margin: 0 10px;
+      height: 1.6rem;
+      width: 1.6rem;
+      vertical-align: text-bottom;
+      border-radius: 50%;
+      color: white;
+      background: @brand-primary url(/images/icons/arrow-white.png) no-repeat 0.6rem center;
+      background-size: 40%;
+      content: ""
+    }
+  }
 }

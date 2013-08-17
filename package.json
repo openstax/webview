@@ -1,6 +1,6 @@
 {
     "name": "connexions-webview",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Connexions (cnx.org) web site",
     "scripts": {
         "prepublish": "bower install",
@@ -15,7 +15,7 @@
 
     "dependencies": {
         "grunt": "~0.4.1",
-        "bower": "~1.0"
+        "bower": "~1.1.2"
     },
 
     "devDependencies": {
@@ -25,7 +25,7 @@
         "grunt-contrib-jshint": "~0.6",
         "grunt-coffeelint": "~0.0.7",
         "grunt-recess": "~0.3.3",
-        "grunt-jsbeautifier": "~0.1.10",
+        "grunt-jsbeautifier": "~0.2",
         "grunt-contrib-uglify": "~0.2.2",
         "grunt-contrib-imagemin": "~0.1.4"
     },

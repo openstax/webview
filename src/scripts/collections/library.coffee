@@ -1,9 +1,7 @@
 define [
-  'jquery'
-  'underscore'
   'backbone'
   'cs!models/book'
-], ($, _, Backbone, Book) ->
+], (Backbone, Book) ->
 
   return new class Library extends Backbone.Collection
     url: 'data/library.json'

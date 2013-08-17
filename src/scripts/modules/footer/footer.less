@@ -1,103 +1,102 @@
 @import "../../../styles/variables.less";
+@import "../../../styles/mixins.less";
 
 .page-footer {
-    .make-row();
-    padding: 20px;
-    margin: 0 !important; // override bootstrap css
-    font-size: 0.85em;
+  .make-row();
+  padding: 20px;
+  margin: 0 !important; // override bootstrap css
+  font-size: 0.85em;
+  color: @gray-lighter;
+  text-align: center;
+  background-color: @gray-dark;
+
+  a {
     color: @gray-lighter;
-    text-align: center;
-    background-color: @gray-dark;
+  }
 
-    a {
-        color: @gray-lighter;
+  .copyright {
+    .make-sm-column(8);
+    padding-right: 30px;
+    text-align: left;
+
+    > div {
+      padding: 8px 0;
+      margin: 0;
     }
 
-    .copyright {
-        .make-column(8);
-        padding-right: 30px;
-        text-align: left;
-
-        > div {
-            padding: 8px 0;
-            margin: 0;
-        }
-
-        img {
-            float: left;
-            margin-right: 15px;
-        }
-
-        .horizontal {
-            display: inline-block;
-            margin: 0;
-            padding: 0;
-
-            li {
-                display: inline-block;
-                padding-right: 7px;
-                padding-left: 3px;
-                border-right: 1px solid @link-active-color;
-                
-                &:first-child {
-                    padding-left: 0;
-                }
-                
-                &:last-child {
-                    border-right: none;
-                }
-            }
-        }
-
-        /* Make the OER logo look like a button */
-        .oer {
-            background-color: white;
-            border-radius: 4px;
-        }
+    img {
+      float: left;
+      margin-right: 15px;
     }
 
-    .connect, .share {
-        .make-column(2);
+    .horizontal {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
 
-        h5 {
-            margin-bottom: 7px;
-            font-size: 1.7rem;
-            font-weight: 400;
+      li {
+        display: inline-block;
+        padding-right: 7px;
+        padding-left: 3px;
+        border-right: 1px solid @link-active-color;
+
+        &:first-child {
+          padding-left: 0;
         }
 
-        ul {
-            padding: 0;
-            list-style-type: none;
-
-            li {
-                margin-bottom: 2px;
-            }
+        &:last-child {
+          border-right: none;
         }
+      }
     }
 
-    .connect {
-        @media (min-width: @screen-small) {
-            border-left: 1px solid @link-active-color;
-            border-right: 1px solid @link-active-color;
-        }
+    /* Make the OER logo look like a button */
+    .oer {
+      background-color: white;
+      border-radius: 4px;
+    }
+  }
+
+  .connect, .share {
+    .make-sm-column(2);
+
+    h4 {
+      margin-top: 15px;
+      margin-bottom: 7px;
+      font-size: 1.7rem;
+      font-weight: 400;
+      color: @gray-lighter;
     }
 
-    .share {
-        ul {
-            display: -webkit-flex;
-            display: flex;
-            max-width: 75px;
-            margin: 0 auto;
-            -webkit-flex-flow: row wrap;
-            flex-flow: row wrap;
-            -webkit-justify-content: center;
-            justify-content: center;
+    ul {
+      padding: 0;
+      list-style-type: none;
 
-            li {
-                margin: 3px 0;
-                -webkit-flex: 1 0 auto;
-                flex: 1 0 auto;
-            }
-        }
+      li {
+        margin-bottom: 2px;
+      }
     }
+  }
+
+  .connect {
+    @media (min-width: @screen-small) {
+      border-left: 1px solid @link-active-color;
+      border-right: 1px solid @link-active-color;
+    }
+  }
+
+  .share {
+    ul {
+      .flexbox();
+      .flex-flow(row; wrap);
+      .justify-content(center);
+      max-width: 75px;
+      margin: 0 auto;
+
+      li {
+        .flex(1; 0; auto);
+        margin: 5px 0;
+      }
+    }
+  }
 }

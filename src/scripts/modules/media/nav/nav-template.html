@@ -1,3 +1,17 @@
 <div class="media-nav" style="height: 75px;">
+  <div class="book-nav">
+    <div class="back">Back</div>
 
+    {{#if bottom}}
+      <div class="back-to-top">
+        <a href="#">Back to Top</a>
+      </div>
+    {{else}}
+      <div class="progress">
+        <div class="secondary progress-bar" style="width: 20%;"></div>
+      </div>
+    {{/if}}
+
+    <div class="next">Next</div>
+  </div>
 </div>
