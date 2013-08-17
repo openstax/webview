@@ -42,84 +42,13 @@
 
 // flex //
 
-// applies to flex-items
-
-// specifying how items flex, in shorthand (like background property is shorthand)
-
-// 2009 spec is box-flex, and only accepts numbers with decimals
-// tweener -ms- spec and 2013 spec both use flex and contain 3 values instead of just one
-// tweener spec has different names for their values but the values do the same thing
-
-// 2009 spec only accepts a number (not just integer) as an input
-
-// tweener -ms- spec works as follows
-// -ms-flex: <positive-flex> <negative-flex> <preferred-size>
-// positive-flex is integer indicating whether item should grow
-// negative-flex is integer indicating whether item should shrink
-// preferred-size uses any valid value for width or height (i.e. px, em, rem, %)
-
 // 2013 spec works as follows
 // flex: <flex-grow> <flex-shrink> <flex-basis>
 // flex-grow is integer indicating whether item should grow
 // flex-shrink is integer indicating whether item should shrink
 // flex-basis  uses any valid value for width (i.e. px, em, rem, %)
 
-// handling when 2013 or tweener spec is 'none' instead of shorthand values
-.flex(@spec; @flex) when (@flex = none) and (@spec = 2013), (@spec = tweener) {
-// tweener -ms- spec is same as 2013
-// 2013 spec
-  -webkit-flex: 0 0 auto;
-  -moz-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  -o-flex: 0 0 auto;
-  flex: 0 0 auto;
-}
-
-
-// handling when 2013 or tweener spec is 'auto' instead of shorthand values
-.flex(@spec; @flex) when (@flex = auto) and (@spec = 2013), (@spec = tweener) {
-// tweener -ms- spec is same as 2013
-// 2013 spec
-  -webkit-flex: 1 1 auto;
-  -moz-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
-  -o-flex: 1 1 auto;
-  flex: 1 1 auto;
-}
-
-// handling when 2013 or tweener spec is 'initial' instead of shorthand values
-.flex(@spec; @flex) when (@flex = initial) and (@spec = 2013), (@spec = tweener) {
-// tweener -ms- spec is same as 2013
-// 2013 spec
-  -webkit-flex: 0 1 auto;
-  -moz-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  -o-flex: 0 1 auto;
-  flex: 0 1 auto;
-}
-
-// handling 2009 'none' value
-.flex(@spec; @grow) when (@grow = none) and (@spec = 2009) {
-// 2009 spec
-  -webkit-box-flex: 0.0;
-  -moz-box-flex: 0.0;
-  -ms-box-flex: 0.0;
-  -o-box-flex: 0.0;
-  box-flex: 0.0;
-}
-
-// handling remaining 2009 scenarios where it is not 'none'
-.flex(@spec; @grow) when (isnumber(@grow)) and (@spec = 2009) {
-  // 2009 spec (accepts only 1 integer value)
-    -webkit-box-flex: @grow;
-    -moz-box-flex: @grow;
-    -ms-box-flex: @grow;
-    -o-box-flex: @grow;
-    box-flex: @grow;
-}
-
-// this should cover all other scenarios that are not 2009 and/or not 'none'
-.flex(@spec; @grow; @shrink; @basis) when not (@spec = 2009) {
+.flex(@grow; @shrink; @basis) {
   // tweener -ms- spec is same as 2013
   // 2013 spec
     -webkit-flex: @grow @shrink @basis;
