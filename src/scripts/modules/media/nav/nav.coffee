@@ -5,14 +5,8 @@ define [
 ], (BaseView, template) ->
 
   return class MediaNavView extends BaseView
-    template: template
-
     initialize: (options) ->
       super()
-      @bottom = options?.bottom
-
-    render: () ->
-      @$el.html @template
-        bottom: @bottom
-
-      return @
+      tmplOptions = options.content.toJSON()
+      tmplOptions._hideProgress = options.hideProgress
+      @template = template tmplOptions

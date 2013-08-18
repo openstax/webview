@@ -7,7 +7,9 @@ define [
 ], ($, BaseView, MailPopoverView, template) ->
 
   return class MediaTitleView extends BaseView
-    template: template()
+    initialize: (options) ->
+      super()
+      @template = template options.content.toJSON()
 
     render: () ->
       super()
