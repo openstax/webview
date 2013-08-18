@@ -1,8 +1,6 @@
 define [
-  'jquery'
-  'underscore'
   'backbone'
-], ($, _, Backbone) ->
+], (Backbone) ->
 
   return class Book extends Backbone.Model
     defaults:
