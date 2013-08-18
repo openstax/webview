@@ -10,11 +10,10 @@ define [
       @content = options.content
       @hideProgress = options.hideProgress
 
-      @listenTo(@content, 'change:currentPage', @render)
+      if not @hideProgress
+        @listenTo(@content, 'change:currentPage', @render)
 
     render: () ->
-      console.log 'render'
-      console.log @content.toJSON()
       tmplOptions = @content.toJSON()
       tmplOptions._hideProgress = @hideProgress
       @template = template tmplOptions
