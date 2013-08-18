@@ -1,4 +1,5 @@
 @import "../../../../styles/variables.less";
+@import "../../../../styles/mixins.less";
 
 .media-title {
   padding: 30px 30px 40px 30px;
@@ -12,10 +13,7 @@
     display: inline-block;
     float: right;
     text-align: right;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    .user-select(none);
 
     .share {
       margin-top: 30px;

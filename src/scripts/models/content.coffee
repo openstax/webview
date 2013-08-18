@@ -20,7 +20,7 @@ define [
     defaults:
       title: 'Untitled Book'
       type: 'book'
-      pages: 315
+      pages: 10
       author:
         name: 'Uknown'
         email: '#'
@@ -31,3 +31,21 @@ define [
       json = super()
       json.currentPage = currentPage
       return json
+
+    nextPage: () ->
+      currentPage = @get('currentPage')
+      pageNumber = currentPage.get('pageNumber')
+
+      # Show the next page if there is one
+      if pageNumber < @get('pages')
+        currentPage.set('pageNumber', pageNumber+1)
+        @trigger('change:currentPage')
+
+    previousPage: () ->
+      currentPage = @get('currentPage')
+      pageNumber = currentPage.get('pageNumber')
+
+      # Show the previous page if there is one
+      if pageNumber isnt 1
+        currentPage.set('pageNumber', pageNumber-1)
+        @trigger('change:currentPage')
