@@ -20,7 +20,7 @@ define [
     defaults:
       title: 'Untitled Book'
       type: 'book'
-      pages: 10
+      pages: 300
       author:
         name: 'Uknown'
         email: '#'
