@@ -8,6 +8,8 @@ define [
   root = '/'
 
   init = (options = {}) ->
+    root = options.root or root
+
     external = new RegExp('^((f|ht)tps?:)?//')
 
     # Catch internal application links and let Backbone handle the routing
@@ -34,9 +36,5 @@ define [
         options.url = root + options.url
 
       return
-
-    # Append 'TEST: ' to the page title if in a test environment
-    if options.test
-      document.title = 'TEST: ' + document.title
 
   return {init: init}

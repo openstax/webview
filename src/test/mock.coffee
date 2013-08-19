@@ -10,4 +10,4 @@ define [
     service = settings.url.match(/\/content\/(.*)$/)
 
     if service
-      return {proxy: 'test/data/' + service[1] + '.json'}
+      return {proxy: '/test/data/' + service[1] + '.json'}

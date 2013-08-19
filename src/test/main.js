@@ -3,11 +3,10 @@
 
   // Load the config
   require({
-    baseUrl: '../../src/scripts/',
+    baseUrl: '../scripts/',
 
     paths: {
-      tests: '../../tests',
-      mock: '../../tests/data',
+      test: '../test',
       jquery: 'libs/jquery/jquery',
       mockjax: 'libs/jquery-mockjax/jquery.mockjax'
     },
@@ -17,10 +16,10 @@
     }
   }, ['config'], function () {
     // Load the mock data
-    require(['cs!tests/mock'], function () {
+    require(['cs!test/mock'], function () {
       // Load the application after the config
       require(['cs!loader'], function (loader) {
-        loader.init({test: true});
+        loader.init({root: '/test/'});
       });
     });
   });

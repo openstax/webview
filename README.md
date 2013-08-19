@@ -31,28 +31,22 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
   * Example nginx development config:
   ```
     server {
-        listen 80;
+        listen       8080;
         server_name $hostname;
         root /path/to/webview/src/;
         index index.html;
         try_files $uri $uri/ /index.html;
 
-        location ~ ^.*/scripts/ {
-            rewrite /scripts/(.*) /scripts/$1 break;
+        location ~ ^.*/(data|scripts|styles|images)/(.*) {
+            try_files $uri $uri/ /$1/$2 /test/$1/$2;
         }
 
-        location ~ ^.*/styles/ {
-            rewrite /styles/(.*) /styles/$1 break;
+        location ~ ^.*/test/(.*)/(.*) {
+            try_files $uri $uri/ /test/$1 /test/$2 /test/index.html;
         }
 
-        location ~ ^.*/images/ {
-            rewrite /images/(.*) /images/$1 break;
-        }
-
-        # For development server only
-        location ~ ^/test[s]?[/]?(.*) {
-            alias /path/to/webview/tests/;
-            try_files $1 $1/ /index.html;
+        location ~ ^.*/test/(.*) {
+            try_files $uri $uri/ /test/$1 /test/index.html;
         }
     }
   ```
@@ -77,8 +71,9 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
 * `src/scripts/router.coffee`  Backbone Router
 * `src/scripts/session.coffee` Session state singleton (Backbone Model)
 * `src/styles/`                App-specific LESS variables and mixins
+* `src/test/`                  Test site
 * `src/index.html`             App's HTML Page
-* `tests/`                     Unit tests and test site with mock data
+* `tests/`                     Unit tests
 
 License
 -------
