@@ -28,7 +28,7 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
   * Unresolveable URIs should load `dist/index.html` or `src/index.html`
   * If not hosting the site from the domain root, update `root` in `src/scripts/config.js` (line 8)
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
-  * Example nginx config:
+  * Example nginx development config:
   ```
     server {
         listen 80;
