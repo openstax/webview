@@ -78,7 +78,7 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
 * `src/scripts/session.coffee` Session state singleton (Backbone Model)
 * `src/styles/`                App-specific LESS variables and mixins
 * `src/index.html`             App's HTML Page
-* `tests/`                     Test site with mock data and units tests
+* `tests/`                     Unit tests and test site with mock data
 
 License
 -------
