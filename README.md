@@ -48,6 +48,12 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
         location ~ ^.*/images/ {
             rewrite /images/(.*) /images/$1 break;
         }
+        
+        # For development server only
+        location ~ ^/test[s]?[/]?(.*) {
+            alias /path/to/webview/tests/;
+            try_files $1 $1/ /index.html;
+        }
     }
   ```
 
