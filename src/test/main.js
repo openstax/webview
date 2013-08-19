@@ -19,7 +19,7 @@
     require(['cs!test/mock'], function () {
       // Load the application after the config
       require(['cs!loader'], function (loader) {
-        loader.init({root: '/test/'});
+        loader.init({test: true});
       });
     });
   });

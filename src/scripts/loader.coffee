@@ -8,7 +8,9 @@ define [
   root = '/'
 
   init = (options = {}) ->
-    root = options.root or root
+    # Append /test to the root if the app is in test mode
+    if options.test
+      root += 'test/'
 
     external = new RegExp('^((f|ht)tps?:)?//')
 
