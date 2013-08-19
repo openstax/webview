@@ -5,5 +5,8 @@
   "author": {
     "name": "OpenStax College",
     "email": "cnx@cnx.org"
-  }
+  },
+  "contents": [
+    { "id": "the_nature_of_science_and_physics" }
+  ]
 }

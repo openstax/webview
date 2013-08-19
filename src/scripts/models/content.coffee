@@ -9,13 +9,10 @@ define [
       pageNumber: 1
       title: 'Untitled'
       author:
-        name: 'Uknown'
+        name: 'Unknown'
         email: '#'
       summary: 'No summary'
       body: 'No content'
-
-    initialize: () ->
-      #@fetch()
 
   return class Content extends Backbone.Model
     url: () -> return "/content/#{@id}"
@@ -25,7 +22,7 @@ define [
       type: 'book'
       pages: 300
       author:
-        name: 'Uknown'
+        name: 'Unknown'
         email: '#'
       currentPage: new CurrentPage()
 
@@ -36,7 +33,11 @@ define [
       return json
 
     initialize: () ->
-      @fetch()
+      @fetch
+        success: (model, response, options) =>
+          currentPage = @get('currentPage')
+          currentPage.id = response.contents[0].id
+          currentPage.fetch()
 
     nextPage: () ->
       currentPage = @get('currentPage')

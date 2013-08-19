@@ -7,10 +7,13 @@ define [
 ], ($, BaseView, BookPopoverView, template) ->
 
   return class MediaHeaderView extends BaseView
+    template: () -> template @content.toJSON()
+
     initialize: (options) ->
       super()
       @content = options.content
-      @template = template @content.toJSON()
+      
+      @listenTo(@content.get('currentPage'), 'all', @render)
 
     render: () ->
       super()
