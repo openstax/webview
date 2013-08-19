@@ -48,7 +48,7 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
         location ~ ^.*/images/ {
             rewrite /images/(.*) /images/$1 break;
         }
-        
+
         # For development server only
         location ~ ^/test[s]?[/]?(.*) {
             alias /path/to/webview/tests/;
@@ -78,6 +78,7 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
 * `src/scripts/session.coffee` Session state singleton (Backbone Model)
 * `src/styles/`                App-specific LESS variables and mixins
 * `src/index.html`             App's HTML Page
+* `tests/`                     Test site with mock data and units tests
 
 License
 -------
