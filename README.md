@@ -31,7 +31,7 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
   * Example nginx development config:
   ```
     server {
-        listen       8080;
+        listen 8080;
         server_name $hostname;
         root /path/to/webview/src/;
         index index.html;
