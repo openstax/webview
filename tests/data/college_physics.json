@@ -1,0 +1,9 @@
+{
+  "title": "College Physics",
+  "type": "book",
+  "pages": 300,
+  "author": {
+    "name": "OpenStax College",
+    "email": "cnx@cnx.org"
+  }
+}

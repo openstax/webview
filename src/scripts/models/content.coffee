@@ -14,6 +14,9 @@ define [
       summary: 'No summary'
       body: 'No content'
 
+    initialize: () ->
+      #@fetch()
+
   return class Content extends Backbone.Model
     url: () -> return "/content/#{@id}"
 
@@ -31,6 +34,9 @@ define [
       json = super()
       json.currentPage = currentPage
       return json
+
+    initialize: () ->
+      @fetch()
 
     nextPage: () ->
       currentPage = @get('currentPage')
