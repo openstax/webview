@@ -27,7 +27,8 @@ define [
       @constructor.popovers.push(@$owner)
 
       # Stop propogation of 'click' events so popover doesn't get auto-closed
-      @$owner.click (e) => e.stopPropagation()
+      @_stopPropagation = (e) -> e.stopPropagation()
+      @$owner.click(@_stopPropagation)
 
       # Attach event handler to close open popovers on show
       @$owner.on 'show.bs.popover', (e) =>
@@ -61,4 +62,5 @@ define [
     close: () ->
       @constructor.removePopover(@$owner)
       @$owner.popover('destroy')
+      @$owner.off('click', @_stopPropagation)
       super()
