@@ -14,7 +14,7 @@
         "backbone": "~1.0.0",
         "bootstrap": "~3.0.0",
         "requirejs": "~2.1.8",
-        "requirejs-text": "~2.0.7",
+        "requirejs-text": "~2.0.10",
         "require-cs": "~0.4.4",
         "require-css": "~0.0.7",
         "require-less": "~0.0.7",
