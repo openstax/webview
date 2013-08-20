@@ -60,7 +60,7 @@ define [
         popover = $owner.data('bs.popover')
         if popover.hoverState is 'in'
           $owner.popover('hide')
-          popover.$tip.hide() # HACK: Bootstrap is not properly hiding the popover dom element
+          popover.$tip.detach() # HACK: Bootstrap is not properly detaching the popover dom element
 
     @removePopover: ($el) ->
       @popovers = _.reject @popovers, ($popover) ->
