@@ -3,7 +3,7 @@ define [
 ], (Backbone) ->
 
   class CurrentPage extends Backbone.Model
-    url: () -> return "/content/#{@id}"
+    url: () -> "/content/#{@id}"
 
     defaults:
       pageNumber: 1
@@ -15,7 +15,7 @@ define [
       body: 'No content'
 
   return class Content extends Backbone.Model
-    url: () -> return "/content/#{@id}"
+    url: () -> "/content/#{@id}"
 
     defaults:
       title: 'Untitled Book'
