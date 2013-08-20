@@ -27,31 +27,23 @@ define [
       @constructor.popovers.push(@$owner)
 
       # Stop propogation of 'click' events so popover doesn't get auto-closed
-      @$owner.on 'click', (e) => e.stopPropagation()
+      @$owner.click (e) => e.stopPropagation()
 
       # Attach event handler to close open popovers on show
       @$owner.on 'show.bs.popover', (e) =>
         @constructor.hidePopovers() # Close open popovers
 
-      @$owner.on 'shown.bs.popover', (e) =>
+      @$owner.one 'shown.bs.popover', (e) =>
         @setElement @$owner.data('bs.popover').$tip
+        @delegateEvents(@events) # Attach custom event handlers to popover
 
+      @$owner.on 'shown.bs.popover', (e) =>
         # Adjust popover positioning
         if params.options?.placement is 'bottom'
           @$el.find('.arrow').css({top: '-7px', left: '100%'})
           @$el.css
             'left': 'auto'
             'right': document.body.clientWidth - (@$owner.offset().left + @$owner.outerWidth())
-
-        # Attach custom event handlers to popover
-        @delegateEvents(@events)
-
-      # Detach event handlers from popover on hide
-      @$owner.on 'hide.bs.popover', (e) =>
-        @undelegateEvents()
-
-      # Show the popover immediately if option 'show' is true
-      if params.show then @show()
 
     render: () -> return @ # noop
 
