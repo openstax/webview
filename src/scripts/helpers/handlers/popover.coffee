@@ -13,7 +13,7 @@ define [
     if not $el.parents().hasClass('popover')
       Popover.hidePopovers()
 
-  class Popover extends BaseView
+  return class Popover extends BaseView
     @popovers: []
 
     initialize: (params) ->
@@ -70,7 +70,3 @@ define [
       @constructor.removePopover(@$owner)
       @$owner.popover('destroy')
       super()
-
-  return new class PopoverHandler
-    createPopover: (popover) ->
-      return new Popover(popover)
