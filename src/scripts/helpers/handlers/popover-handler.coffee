@@ -56,8 +56,11 @@ define [
     render: () -> return @ # noop
 
     @hidePopovers: () ->
-      _.each @popovers, ($popover) ->
-        $popover.popover('hide')
+      _.each @popovers, ($owner) ->
+        popover = $owner.data('bs.popover')
+        if popover.hoverState is 'in'
+          $owner.popover('hide')
+          popover.$tip.hide() # HACK: Bootstrap is not properly hiding the popover dom element
 
     @removePopover: ($el) ->
       @popovers = _.reject @popovers, ($popover) ->
