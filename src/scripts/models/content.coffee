@@ -57,6 +57,7 @@ define [
       @set('page', num)
 
       currentPage = @get('currentPage')
+      currentPage.clear({silent: true}).set(currentPage.defaults) # Reset the current page
       contents = @get('contents')
       currentPage.id = contents[num-1].id
       currentPage.fetch
