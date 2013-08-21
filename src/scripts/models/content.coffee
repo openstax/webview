@@ -38,9 +38,16 @@ define [
       success: (model, response, options) => @setup()
 
     setup: () ->
-      @set('type', MEDIA_TYPES[@get('mediaType')])
-      @set('pages', @get('contents').length)
-      @setPage(1)
+      type = MEDIA_TYPES[@get('mediaType')]
+      @set('type', type)
+
+      if type is 'book'
+        @set('pages', @get('contents').length)
+        @setPage(1)
+      else
+        currentPage = @get('currentPage')
+        currentPage.id = @id
+        currentPage.fetch()
 
     setPage: (num) ->
       if num < 1 then num = 1
