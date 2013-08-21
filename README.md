@@ -50,6 +50,20 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
         }
     }
   ```
+  * Example nginx production config:
+  ```
+    server {
+        listen 80;
+        server_name $hostname;
+        root /path/to/webview/dist/;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+
+        location ~ ^.*/(data|scripts|styles|images)/(.*) {
+            try_files $uri $uri/ /$1/$2;
+        }
+    }
+  ```
 
 ### Directory Layout
 
