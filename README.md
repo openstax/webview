@@ -63,7 +63,7 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
 * `src/scripts/helpers`        Helpers for Handlebars, Backbone, and generic code
 * `src/scripts/libs`           3rd Party Libraries *(added after install)*
 * `src/scripts/models`         Backbone Models
-* `src/scripts/modules`        Self-contained, Reusable Modules used to construct pages
+* `src/scripts/modules`        Self-contained, reusable Modules used to construct pages
 * `src/scripts/pages`          Backbone Views representing an entire page (or the entire viewport)
 * `src/scripts/config.js`      Require.js configuration
 * `src/scripts/loader.coffee`  App loader, responsible for setting up global listeners
