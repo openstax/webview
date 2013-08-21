@@ -6,12 +6,10 @@ define [
     url: () -> "/content/#{@id}"
 
     defaults:
-      pageNumber: 1
       title: 'Untitled'
       author:
         name: 'Unknown'
         email: '#'
-      summary: 'No summary'
       body: 'No content'
 
   return class Content extends Backbone.Model
@@ -20,7 +18,8 @@ define [
     defaults:
       title: 'Untitled Book'
       type: 'book'
-      pages: 300
+      pages: 1
+      page: 1
       author:
         name: 'Unknown'
         email: '#'
@@ -32,27 +31,39 @@ define [
       json.currentPage = currentPage
       return json
 
-    initialize: () ->
-      @fetch
-        success: (model, response, options) =>
-          currentPage = @get('currentPage')
-          currentPage.id = response.contents[0].id
-          currentPage.fetch()
+    initialize: () -> @fetch
+      success: (model, response, options) => @setup()
+
+    setup: () ->
+      @set('pages', @get('contents').length)
+      @setPage(1)
+
+    setPage: (num) ->
+      if num < 1 then num = 1
+      if num > @pages then num = @pages
+      if not num then return
+
+      @set('page', num)
+
+      currentPage = @get('currentPage')
+      contents = @get('contents')
+      currentPage.id = contents[num-1].id
+      currentPage.fetch
+        success: (model, response, options) ->
+          currentPage.set('title', contents[num-1].title) if contents[num-1].title
 
     nextPage: () ->
       currentPage = @get('currentPage')
-      pageNumber = currentPage.get('pageNumber')
+      page = @get('page')
 
       # Show the next page if there is one
-      if pageNumber < @get('pages')
-        currentPage.set('pageNumber', pageNumber+1)
-        @trigger('change:currentPage')
+      if page < @get('pages')
+        @setPage(page+1)
 
     previousPage: () ->
       currentPage = @get('currentPage')
-      pageNumber = currentPage.get('pageNumber')
+      page = @get('page')
 
       # Show the previous page if there is one
-      if pageNumber isnt 1
-        currentPage.set('pageNumber', pageNumber-1)
-        @trigger('change:currentPage')
+      if page isnt 1
+        @setPage(page-1)

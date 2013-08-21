@@ -11,7 +11,7 @@ define [
       @hideProgress = options.hideProgress
 
       if not @hideProgress
-        @listenTo(@content, 'change:currentPage', @render)
+        @listenTo(@content, 'change:page change:pages', @render)
 
     render: () ->
       tmplOptions = @content.toJSON()

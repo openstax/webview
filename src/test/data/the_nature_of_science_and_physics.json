@@ -1,6 +1,7 @@
 {
+  "id": "the_nature_of_science_and_physics",
   "title": "Introduction: The Nature of Science and Physics",
-  "type": "module",
+  "mediaType": "application/vnd.org.cnx.module",
   "author": {
     "name": "OpenStax College",
     "email": "cnx@cnx.org"
