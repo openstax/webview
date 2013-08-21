@@ -2,6 +2,10 @@ define [
   'backbone'
 ], (Backbone) ->
 
+  MEDIA_TYPES =
+    'application/vnd.org.cnx.collection' : 'book'
+    'application/vnd.org.cnx.module': 'module'
+
   class CurrentPage extends Backbone.Model
     url: () -> "/content/#{@id}"
 
@@ -17,7 +21,6 @@ define [
 
     defaults:
       title: 'Untitled Book'
-      type: 'book'
       pages: 1
       page: 1
       author:
@@ -35,6 +38,7 @@ define [
       success: (model, response, options) => @setup()
 
     setup: () ->
+      @set('type', MEDIA_TYPES[@get('mediaType')])
       @set('pages', @get('contents').length)
       @setPage(1)
 
