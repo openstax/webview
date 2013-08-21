@@ -13,7 +13,6 @@ module.exports = (grunt) ->
     # JSHint
     jshint:
       options:
-        ignores: ['src/scripts/libs/**']
         globals:
           require: true
 
@@ -66,6 +65,7 @@ module.exports = (grunt) ->
 
       source: [
         'src/scripts/**/*.js'
+        '!src/scripts/libs/**'
       ]
 
     # JS Beautifier
