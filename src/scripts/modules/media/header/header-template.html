@@ -16,12 +16,14 @@
     </span>
   </div>
 
-  <div class="summary">
-    <h5>
-      <a href="#">
-        <span class="expand">▸</span>
-        Summary
-      </a>
-    <h5>
-  </div>
+  {{#if currentPage.summary}}
+    <div class="summary">
+      <h5>
+        <a href="#">
+          <span class="expand">▸</span>
+          Summary
+        </a>
+      <h5>
+    </div>
+  {{/if}}
 </div>

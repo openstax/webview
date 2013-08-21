@@ -19,4 +19,4 @@ define [
       super()
       @attachPopover new BookPopoverView
         owner: @$el.find('.info .btn')
-        content: @content
+        content: @content.toJSON()
