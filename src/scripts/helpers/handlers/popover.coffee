@@ -41,7 +41,7 @@ define [
       @$owner.on 'shown.bs.popover', (e) =>
         # Adjust popover positioning
         if params.options?.placement is 'bottom'
-          #@$el.find('.arrow').css({top: '-7px', left: '100%'})
+          @$el.find('.arrow').css({top: '-7px', left: '100%'})
           @$el.css
             'left': 'auto'
             'right': document.body.clientWidth - (@$owner.offset().left + @$owner.outerWidth())
