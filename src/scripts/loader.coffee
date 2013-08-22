@@ -2,7 +2,7 @@ define [
   'jquery'
   'backbone'
   'cs!router'
-  'helpers/analytics'
+  'cs!helpers/handlers/analytics'
 ], ($, Backbone, router, analytics) ->
 
   # The root URI prefixed on all non-external AJAX and Backbone URIs
@@ -35,12 +35,12 @@ define [
       matched = loadUrl.apply(@, arguments)
       gaFragment = @fragment
       if not /^\//.test(gaFragment) then gaFragment = '/' + gaFragment
-      if window._gaq then window._gaq.push(['_trackPageview', gaFragment])
+      analytics.gaq(['_trackPageview', gaFragment])
       return matched
 
     # Add tracking with analytics.js
     router.on 'route', () ->
-      if window.GoogleAnalyticsObject then ga('send', 'pageview')
+      analytics.ga('send', 'pageview')
 
     Backbone.history.start
       pushState: true
