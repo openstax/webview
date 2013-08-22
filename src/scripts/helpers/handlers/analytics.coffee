@@ -1,6 +1,4 @@
-define [], () ->
-
-  ID = 'UA-7903479-1'
+define (require, exports, module) ->
 
   # Class to handle loading analytics scripts and wrapping
   # handlers around them so that modules don't have to
@@ -17,7 +15,7 @@ define [], () ->
       window.ga.l = 1 * new Date()
 
       # Initialize analytics.js account
-      window.ga('create', ID)
+      window.ga('create', module.config().analyticsID)
 
       # Asynchronously load analytics.js.
       require(['https://www.google-analytics.com/analytics.js'])
@@ -28,7 +26,7 @@ define [], () ->
 
       # ## Setup ga.js
       window._gaq ?= []
-      window._gaq.push(['_setAccount', ID])
+      window._gaq.push(['_setAccount', module.config().analyticsID])
 
       # Asynchronously load ga.js
       require(['https://www.google-analytics.com/ga.js'])
