@@ -1,6 +1,6 @@
 {
     "name": "connexions-webview",
-    "version": "0.1.1",
+    "version": "0.2.0",
 
     "ignore": [
         "**/.*",
@@ -12,12 +12,12 @@
         "jquery": "~2.0.3",
         "lodash": "~1.3.1",
         "backbone": "~1.0.0",
-        "bootstrap": "3.0.0-rc.2",
+        "bootstrap": "~3.0.0",
         "requirejs": "~2.1.8",
-        "requirejs-text": "~2.0.7",
+        "requirejs-text": "~2.0.10",
         "require-cs": "~0.4.4",
-        "require-css": "~0.0.6",
-        "require-less": "~0.0.6",
+        "require-css": "~0.0.7",
+        "require-less": "~0.0.7",
         "require-handlebars-plugin": "f35a00080cce34ab8b5181247524972aef33e1d0"
     },
 

@@ -5,14 +5,26 @@ define [
 ], (BaseView, template) ->
 
   return class MediaNavView extends BaseView
-    template: template
-
     initialize: (options) ->
       super()
-      @bottom = options?.bottom
+      @content = options.content
+      @hideProgress = options.hideProgress
+
+      if not @hideProgress
+        @listenTo(@content, 'change:page change:pages', @render)
 
     render: () ->
-      @$el.html @template
-        bottom: @bottom
+      tmplOptions = @content.toJSON()
+      tmplOptions._hideProgress = @hideProgress
+      @template = template tmplOptions
+      super()
 
-      return @
+    events:
+      'click .next': 'nextPage'
+      'click .back': 'previousPage'
+
+    nextPage: (e) ->
+      @content.nextPage()
+
+    previousPage: (e) ->
+      @content.previousPage()

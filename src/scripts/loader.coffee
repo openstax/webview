@@ -7,7 +7,11 @@ define [
   # The root URI prefixed on all non-external AJAX and Backbone URIs
   root = '/'
 
-  init = () ->
+  init = (options = {}) ->
+    # Append /test to the root if the app is in test mode
+    if options.test
+      root += 'test/'
+
     external = new RegExp('^((f|ht)tps?:)?//')
 
     # Catch internal application links and let Backbone handle the routing

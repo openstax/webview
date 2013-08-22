@@ -5,4 +5,13 @@ define [
 ], (BaseView, template) ->
 
   return class MediaBodyView extends BaseView
-    template: template()
+    template: () -> template @content.get('currentPage').toJSON()
+
+    initialize: (options) ->
+      super()
+      @content = options.content
+
+      @listenTo(@content.get('currentPage'), 'all', @render)
+
+    render: () ->
+      super()
