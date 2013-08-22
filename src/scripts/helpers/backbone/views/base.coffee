@@ -11,10 +11,11 @@ define [
 
     show: (view) ->
       @close()
+      @views = null
       @append(view)
 
     append: (view) ->
-      @$el = @$el or @parent.$el.find(@el).eq(0)
+      @$el = @$el or @parent.$el.find(@el)
       view.parent = @parent
       @views ?= []
       @views.push(view)
@@ -33,6 +34,7 @@ define [
 
   return class BaseView extends Backbone.View
     initialize: () ->
+      @_popovers = []
       @regions = new Regions(@regions, @)
 
     render: () ->
@@ -44,6 +46,15 @@ define [
       _.each @regions, (region) ->
         region.close()
 
+      @detachPopovers()
       @stopListening()
       @remove()
       @unbind()
+      delete @[key] for key of @
+      return @
+
+    detachPopovers: () ->
+      @_popovers.pop().close() while @_popovers?.length
+
+    attachPopover: (popover) ->
+      @_popovers.push popover

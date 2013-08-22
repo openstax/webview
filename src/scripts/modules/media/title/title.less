@@ -1,9 +1,42 @@
 @import "../../../../styles/variables.less";
 
 .media-title {
-    background-color: @gray-lighter;
-    
-    h1 {
-        margin: 0;
+  padding: 30px 30px 40px 30px;
+  background-color: @gray-lightest;
+
+  h1 {
+    display: inline-block;
+  }
+
+  .info {
+    display: inline-block;
+    float: right;
+    text-align: right;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    .share {
+      margin-top: 30px;
+
+      .title {
+        margin-right: 5px;
+        font-size: 1.6rem;
+        vertical-align: middle;
+      }
+
+      ul {
+        display: inline-block;
+        padding: 0;
+        list-style-type: none;
+
+        li {
+          display: inline-block;
+          vertical-align: middle;
+          cursor: pointer;
+        }
+      }
     }
+  }
 }

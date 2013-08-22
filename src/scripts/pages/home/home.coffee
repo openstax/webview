@@ -1,7 +1,4 @@
 define [
-  'jquery'
-  'underscore'
-  'backbone'
   'cs!helpers/backbone/views/base'
   'cs!modules/header/header'
   'cs!modules/footer/footer'
@@ -10,7 +7,7 @@ define [
   'cs!modules/featured-books/featured-books'
   'hbs!./home-template'
   'less!./home'
-], ($, _, Backbone, BaseView, HeaderView, FooterView, SplashView, FindContentView, FeaturedBooksView, template) ->
+], (BaseView, HeaderView, FooterView, SplashView, FindContentView, FeaturedBooksView, template) ->
 
   return class HomeView extends BaseView
     template: template()

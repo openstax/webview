@@ -1,10 +1,11 @@
 define [
-  'module'
   'jquery'
-  'underscore'
   'backbone'
   'cs!router'
-], (module, $, _, Backbone, router) ->
+], ($, Backbone, router) ->
+
+  # The root URI prefixed on all non-external AJAX and Backbone URIs
+  root = '/'
 
   init = () ->
     external = new RegExp('^((f|ht)tps?:)?//')
@@ -14,7 +15,7 @@ define [
       href = $(this).attr('href')
 
       # Don't handle navigation if the default handling was already prevented
-      if e.isDefaultPrevented() then return
+      if e.isDefaultPrevented() or href.charAt(0) is '#' then return
 
       e.preventDefault()
 
@@ -25,12 +26,12 @@ define [
 
     Backbone.history.start
       pushState: true
-      root: module.config().root
+      root: root
 
     # Prefix all non-external AJAX requests with the root URI
     $.ajaxPrefilter ( options, originalOptions, jqXHR ) ->
       if not external.test(options.url)
-        options.url = module.config().root + options.url
+        options.url = root + options.url
 
       return
 

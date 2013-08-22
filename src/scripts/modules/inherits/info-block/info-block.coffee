@@ -1,11 +1,10 @@
 define [
   'jquery'
   'underscore'
-  'backbone'
   'cs!helpers/backbone/views/base'
   'hbs!./info-block-template'
   'less!./info-block'
-], ($, _, Backbone, BaseView, template) ->
+], ($, _, BaseView, template) ->
 
   return class InfoBlockView extends BaseView
     title: 'Untitled'
@@ -43,10 +42,10 @@ define [
       if @_expanded
         @_expanded = false
         @$el.find('.link-title').text(@linkTitle)
-        @$el.find('.arrow').text('▶')
+        @$el.find('.arrow').text('▸')
         @less?()
       else
         @_expanded = true
         @$el.find('.link-title').text(@linkExpandedTitle)
-        @$el.find('.arrow').text('▼')
+        @$el.find('.arrow').text('▾')
         @more?()

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-    <ShortName>Connexions</ShortName>
-    <Description>Connexions</Description>
-    <Tags>educational open content</Tags>
-    <Contact>cnx@cnx.org</Contact>
-    <Url type="text/html" method="get" template="http://cnx.org/content/search?words={searchTerms}" />
-    <Image height="64" width="64" type="image/png">/images/cnx-64x64.png</Image>
-    <Query role="example" searchTerms="DSP" />
-    <Attribution>Creative Commons Attribution License</Attribution>
-    <SyndicationRight>open</SyndicationRight>
-    <AdultContent>false</AdultContent>
-    <Language>en-us</Language>
-    <OutputEncoding>UTF-8</OutputEncoding>
-    <InputEncoding>UTF-8</InputEncoding>
+  <ShortName>Connexions</ShortName>
+  <Description>Connexions</Description>
+  <Tags>educational open content</Tags>
+  <Contact>cnx@cnx.org</Contact>
+  <Url type="text/html" method="get" template="http://cnx.org/search?q={searchTerms}" />
+  <Image height="64" width="64" type="image/png">/images/cnx-64x64.png</Image>
+  <Query role="example" searchTerms="DSP" />
+  <Attribution>Creative Commons Attribution License</Attribution>
+  <SyndicationRight>open</SyndicationRight>
+  <AdultContent>false</AdultContent>
+  <Language>en-us</Language>
+  <OutputEncoding>UTF-8</OutputEncoding>
+  <InputEncoding>UTF-8</InputEncoding>
 </OpenSearchDescription>

@@ -1,0 +1,42 @@
+@import "../../../../../../styles/variables.less";
+
+.mail-popover {
+  text-align: right;
+
+  .header {
+    text-align: left;
+
+    h4, img {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    h4 {
+      margin-left: 5px;
+    }
+
+    small {
+      display: block;
+      margin: 10px 0;
+      color: @gray;
+    }
+  }
+
+  input[type="email"], textarea {
+    margin-bottom: 10px;
+    max-width: 100%;
+    border: none;
+    border-radius: 0;
+    background-color: @gray-lightest;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .form-control {
+    &:focus {
+      border: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+}

@@ -1,29 +1,39 @@
 @import "../../../../styles/variables.less";
 
 .media-body {
-    margin: 0 60px;
-    padding: 40px 0;
-    
-    p {
-        color: @gray;
+  margin: 0 60px;
+  padding: 40px 0;
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 15px;
+  }
+
+  p {
+    color: @gray;
+  }
+
+  .figure {
+    float: right;
+    padding: 0 0 30px 30px;
+
+    caption {
+      padding: 10px;
+      font-size: 1.2rem;
+      background-color: @gray-lightest;
     }
-    
-    .figure {
-        float: right;
-        padding: 0 0 30px 30px;
+  }
+
+  .section {
+    .title {
+      font-size: 2.1rem;
+      font-weight: 300;
+      color: @link-color;
     }
-    
-    .section {
-        .title {
-            font-size: 2.1rem;
-            font-weight: 300;
-            color: @link-color;
-        }
-    }
-    
-    .note {
-        padding: 10px;
-        margin: 10px;
-        background-color: #fbf2e2;
-    }
+  }
+
+  .note {
+    padding: 10px;
+    margin: 10px;
+    background-color: #fbf2e2;
+  }
 }

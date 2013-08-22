@@ -1,7 +1,4 @@
 define [
-  'jquery'
-  'underscore'
-  'backbone'
   'cs!helpers/backbone/views/base'
   'cs!modules/header/header'
   'cs!modules/footer/footer'
@@ -14,8 +11,8 @@ define [
   'cs!./footer/footer'
   'hbs!./media-template'
   'less!./media'
-], ($, _, Backbone, BaseView, HeaderView, FooterView, MediaEndorsedView, MediaTitleView,
-    MediaTabsView, MediaNavView, MediaHeaderView, MediaBodyView, MediaFooterView, template) ->
+], (BaseView, HeaderView, FooterView, MediaEndorsedView, MediaTitleView, MediaTabsView,
+    MediaNavView, MediaHeaderView, MediaBodyView, MediaFooterView, template) ->
 
   return class MediaView extends BaseView
     template: template()
@@ -41,6 +38,6 @@ define [
       @regions.media.append(new MediaHeaderView({uuid: @uuid}))
       @regions.media.append(new MediaBodyView({uuid: @uuid}))
       @regions.media.append(new MediaFooterView({uuid: @uuid}))
-      @regions.media.append(new MediaNavView({uuid: @uuid}))
+      @regions.media.append(new MediaNavView({uuid: @uuid, bottom: true}))
 
       return @

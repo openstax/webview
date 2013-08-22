@@ -1,12 +1,10 @@
 define [
   'jquery'
-  'underscore'
-  'backbone'
   'cs!helpers/backbone/views/base'
   'hbs!./splash-template'
   'less!./splash'
   'bootstrapCarousel'
-], ($, _, Backbone, BaseView, template) ->
+], ($, BaseView, template) ->
 
   return class SplashView extends BaseView
     template: template()

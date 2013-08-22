@@ -1,11 +1,18 @@
 define [
-  'jquery'
-  'underscore'
-  'backbone'
   'cs!helpers/backbone/views/base'
   'hbs!./nav-template'
   'less!./nav'
-], ($, _, Backbone, BaseView, template) ->
+], (BaseView, template) ->
 
   return class MediaNavView extends BaseView
-    template: template()
+    template: template
+
+    initialize: (options) ->
+      super()
+      @bottom = options?.bottom
+
+    render: () ->
+      @$el.html @template
+        bottom: @bottom
+
+      return @

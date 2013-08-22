@@ -6,44 +6,47 @@ Below are instructions for hosting and building the site and a layout of how the
 
 ### Hosting Yourself
 
-#### Building
+#### Testing & Building
 
 ##### Requirements
 1. Install [Node.js](http://nodejs.org) (and npm)
-2. Run `npm install -g grunt-cli` to install [grunt-cli](https://github.com/gruntjs/grunt-cli)
-3. Run `npm install` to install test and build dependencies
+2. `npm install -g grunt-cli` to install [grunt-cli](https://github.com/gruntjs/grunt-cli)
+3. `npm install` inside the `webview` directory to install test and build dependencies
 
-##### Testing and Building
-1. (optional) Run tests with `npm test`
-2. Build the production code with `grunt dist`
+##### Testing
+`npm test` inside the `webview` directory
+
+##### Building
+`grunt dist` inside the `webview` directory
+
+Adds the `dist` directory to `webview` with the built site.
 
 #### Hosting
-
 Configure your server to point at `dist/index.html` (or `src/index.html` for development)
   * Unresolveable URIs should load `dist/index.html` or `src/index.html`
   * If not hosting the site from the domain root, update `root` in `src/scripts/config.js` (line 8)
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
   * Example nginx config:
   ```
-  server {
-      listen 80;
-      server_name $hostname;
-      root /path/to/webview/src/;
-      index index.html;
-      try_files $uri $uri/ /index.html;
+    server {
+        listen 80;
+        server_name $hostname;
+        root /path/to/webview/src/;
+        index index.html;
+        try_files $uri $uri/ /index.html;
 
-      location ~ ^.*/scripts/ {
-          rewrite /scripts/(.*) /scripts/$1 break;
-      }
+        location ~ ^.*/scripts/ {
+            rewrite /scripts/(.*) /scripts/$1 break;
+        }
 
-      location ~ ^.*/styles/ {
-          rewrite /styles/(.*) /styles/$1 break;
-      }
+        location ~ ^.*/styles/ {
+            rewrite /styles/(.*) /styles/$1 break;
+        }
 
-      location ~ ^.*/images/ {
-          rewrite /images/(.*) /images/$1 break;
-      }
-  }
+        location ~ ^.*/images/ {
+            rewrite /images/(.*) /images/$1 break;
+        }
+    }
   ```
 
 ### Directory Layout
