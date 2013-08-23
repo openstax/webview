@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Connexions" />
 
-    <script data-main="scripts/main" src="scripts/libs/requirejs/require.js" async></script>
+    <!--(if target dev)><!-->
+      <script data-main="scripts/main" src="../bower_components/requirejs/require.js" async></script>
+    <!--<!(endif)-->
+
+    <!--(if target dist)>
+      <script data-main="scripts/main" src="scripts/require.js" async></script>
+    <!(endif)-->
   </head>
   <body>
     Loading...

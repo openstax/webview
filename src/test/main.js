@@ -7,8 +7,8 @@
 
     paths: {
       test: '../test',
-      jquery: 'libs/jquery/jquery',
-      mockjax: 'libs/jquery-mockjax/jquery.mockjax'
+      jquery: '../../bower_components/jquery/jquery',
+      mockjax: '../../bower_components/jquery-mockjax/jquery.mockjax'
     },
 
     shim: {
@@ -19,7 +19,9 @@
     require(['cs!test/mock'], function () {
       // Load the application after the config
       require(['cs!loader'], function (loader) {
-        loader.init({test: true});
+        loader.init({
+          test: true
+        });
       });
     });
   });
