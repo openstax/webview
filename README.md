@@ -69,7 +69,7 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
 
 * `bower_components/`          3rd Party Libraries *(added after install)*
 * `node_modules/`              Node Modules *(added after install)*
-* `dist/`                      Production version of the site *(added after build)*
+* `dist/`                      Production version of the site
 * `src/`                       Development version of the site
 * `src/data/`                  Hardcoded data
 * `src/images/`                Images used throughout the site
