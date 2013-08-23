@@ -20,13 +20,12 @@ From the root `webview` directory, run `npm test`.
 
 From the root `webview` directory, run `grunt dist`.
 
-The `dist` directory containing the built site will be added to the root `webview` directory.
+The newly built site will replace the old contents of the `dist` directory.
 
 #### Hosting
 
 Configure your server to point at `dist/index.html` (or `src/index.html` for development)
   * Unresolveable URIs should load `dist/index.html` or `src/index.html`
-  * If not hosting the site from the domain root, update `root` in `src/scripts/config.js` (line 8)
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
   * Example nginx development config:
   ```
