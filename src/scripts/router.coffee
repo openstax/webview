@@ -15,3 +15,6 @@ define (require) ->
 
       @route 'content/:uuid', 'media', (uuid) ->
         @appView.render('content', {uuid: uuid})
+
+      @route 'content/:uuid/:page', 'media', (uuid, page) ->
+        @appView.render('content', {uuid: uuid, page: page})

@@ -37,6 +37,10 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
         index index.html;
         try_files $uri $uri/ /index.html;
 
+        location ~ ^.*/bower_components/(.*)$ {
+            alias /path/to/webview/bower_components/$1;
+        }
+
         location ~ ^.*/(data|scripts|styles|images)/(.*) {
             try_files $uri $uri/ /$1/$2 /test/$1/$2;
         }

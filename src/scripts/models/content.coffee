@@ -21,7 +21,6 @@ define (require) ->
     defaults:
       title: 'Untitled Book'
       pages: 1
-      page: 1
       author:
         name: 'Unknown'
         email: '#'
@@ -33,16 +32,17 @@ define (require) ->
       json.currentPage = currentPage
       return json
 
-    initialize: () -> @fetch
-      success: (model, response, options) => @setup()
+    initialize: (options = {}) ->
+      @fetch
+        success: () => @setup(options.page)
 
-    setup: () ->
+    setup: (page) ->
       type = MEDIA_TYPES[@get('mediaType')]
       @set('type', type)
 
       if type is 'book'
         @set('pages', @get('contents').length)
-        @setPage(1)
+        @setPage(page or 1) # Default to page 1
       else
         currentPage = @get('currentPage')
         currentPage.id = @id
