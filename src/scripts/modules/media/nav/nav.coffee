@@ -32,7 +32,4 @@ define (require) ->
     navigate: (page) ->
       route = "/content/#{router.current().params[0]}/#{page}" # Deterimine the new route
       router.navigate(route) # Update browser URL to reflect the new route
-
-      # Send the analytics information for the new route, since it isn't being triggered
-      analytics.ga('send', 'pageview')
-      analytics.gaq(['_trackPageview', route])
+      analytics.send() # Send the analytics information for the new route
