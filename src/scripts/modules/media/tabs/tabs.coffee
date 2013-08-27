@@ -4,6 +4,6 @@ define (require) ->
   require('less!./tabs')
 
   return class MediaTabsView extends BaseView
-    initialize: (options) ->
+    initialize: () ->
       super()
-      @template = template options.content.toJSON()
+      @template = template @model.toJSON()

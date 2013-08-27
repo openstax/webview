@@ -8,7 +8,7 @@ define (require) ->
 
   return class MediaTitleView extends BaseView
     template: () ->
-      content = @content.toJSON()
+      content = @model.toJSON()
       content.share =
         url: window.location.href.split('#')[0] # Get the current URL without a hash string
         source: content.source or content.currentPage.source or 'OpenStax College'
@@ -22,11 +22,10 @@ define (require) ->
 
       return template content
 
-    initialize: (options) ->
+    initialize: () ->
       super()
-      @content = options.content
 
-      @listenTo(@content, 'all', @render)
+      @listenTo(@model, 'all', @render)
 
     render: () ->
       super()
