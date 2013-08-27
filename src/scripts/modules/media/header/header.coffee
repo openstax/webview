@@ -1,10 +1,9 @@
-define [
-  'jquery'
-  'cs!helpers/backbone/views/base'
-  'cs!./popovers/book/book'
-  'hbs!./header-template'
-  'less!./header'
-], ($, BaseView, BookPopoverView, template) ->
+define (require) ->
+  $ = require('jquery')
+  BaseView = require('cs!helpers/backbone/views/base')
+  BookPopoverView = require('cs!./popovers/book/book')
+  template = require('hbs!./header-template')
+  require('less!./header')
 
   return class MediaHeaderView extends BaseView
     template: () -> template @content.toJSON()

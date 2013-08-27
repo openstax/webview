@@ -1,10 +1,9 @@
-define [
-  'jquery'
-  'cs!modules/inherits/info-block/info-block'
-  'cs!collections/featured-books'
-  'hbs!./featured-books-template'
-  'less!./featured-books'
-], ($, InfoBlockView, featuredBooks, template) ->
+define (require) ->
+  $ = require('jquery')
+  InfoBlockView = require('cs!modules/inherits/info-block/info-block')
+  featuredBooks = require('cs!collections/featured-books')
+  template = require('hbs!./featured-books-template')
+  require('less!./featured-books')
 
   CAROUSEL_SPEED = 7000 # The rate at which a new book will be shown (in ms).
 

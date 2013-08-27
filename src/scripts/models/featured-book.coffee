@@ -1,6 +1,5 @@
-define [
-  'backbone'
-], (Backbone) ->
+define (require) ->
+  Backbone = require('backbone')
 
   return class Book extends Backbone.Model
     defaults:

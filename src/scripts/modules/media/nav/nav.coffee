@@ -1,8 +1,7 @@
-define [
-  'cs!helpers/backbone/views/base'
-  'hbs!./nav-template'
-  'less!./nav'
-], (BaseView, template) ->
+define (require) ->
+  BaseView = require('cs!helpers/backbone/views/base')
+  template = require('hbs!./nav-template')
+  require('less!./nav')
 
   return class MediaNavView extends BaseView
     initialize: (options) ->

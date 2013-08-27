@@ -1,6 +1,5 @@
-define [
-  'backbone'
-], (Backbone) ->
+define (require) ->
+  Backbone = require('backbone')
 
   MEDIA_TYPES =
     'application/vnd.org.cnx.collection' : 'book'

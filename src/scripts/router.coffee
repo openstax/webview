@@ -1,7 +1,6 @@
-define [
-  'backbone'
-  'cs!pages/app/app'
-], (Backbone, AppView) ->
+define (require) ->
+  Backbone = require('backbone')
+  AppView = require('cs!pages/app/app')
 
   return new class Router extends Backbone.Router
     initialize: () ->

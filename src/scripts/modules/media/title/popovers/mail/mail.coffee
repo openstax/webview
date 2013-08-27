@@ -1,8 +1,7 @@
-define [
-  'cs!helpers/backbone/views/popover'
-  'hbs!./mail-template'
-  'less!./mail'
-], (PopoverView, template) ->
+define (require) ->
+  PopoverView = require('cs!helpers/backbone/views/popover')
+  template = require('hbs!./mail-template')
+  require('less!./mail')
 
   return class MailPopoverView extends PopoverView
     popover:
