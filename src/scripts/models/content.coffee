@@ -69,7 +69,9 @@ define (require) ->
 
       # Show the next page if there is one
       if page < @get('pages')
-        @setPage(page+1)
+        @setPage(++page)
+
+      return page
 
     previousPage: () ->
       currentPage = @get('currentPage')
@@ -77,4 +79,6 @@ define (require) ->
 
       # Show the previous page if there is one
       if page isnt 1
-        @setPage(page-1)
+        @setPage(--page)
+
+      return page
