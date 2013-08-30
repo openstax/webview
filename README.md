@@ -9,7 +9,7 @@ Below are instructions for hosting and building the site and a layout of how the
 #### Installing
 
 1. If necessary, install [Node.js](http://nodejs.org) and npm (included with Node.js).
-2. Run `npm install -g grunt-cli` in the command line to install [grunt-cli](https://github.com/gruntjs/grunt-cli).
+2. Run `npm install -g grunt-cli bower` in the command line to install [grunt-cli](https://github.com/gruntjs/grunt-cli) and [bower](http://bower.io/).
 3. From the root `webview` directory, run `npm install` in the command line to install test and build dependencies.
 
 ##### Testing
