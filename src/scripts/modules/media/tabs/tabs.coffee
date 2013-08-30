@@ -5,4 +5,6 @@ define [
 ], (BaseView, template) ->
 
   return class MediaTabsView extends BaseView
-    template: template()
+    initialize: (options) ->
+      super()
+      @template = template options.content.toJSON()

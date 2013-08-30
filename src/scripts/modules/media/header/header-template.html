@@ -1,3 +1,29 @@
 <div class="media-header">
+  <h2>{{currentPage.title}}</h2>
 
+  <div class="info">
+    <div>
+      {{#is type 'book'}}
+        <button class="btn">Get This Book!</button>
+      {{else}}
+        <button class="btn">Get This Module!</button>
+      {{/is}}
+    </div>
+    <span>Module by:</span>
+    <span class="module-author">
+      <a href="{{currentPage.author.email}}">{{currentPage.author.name}}</a>
+      <img src="images/icons/mail.png" width="18" height="12" alt="Mail" />
+    </span>
+  </div>
+
+  {{#if currentPage.summary}}
+    <div class="summary">
+      <h5>
+        <a href="#">
+          <span class="expand">▸</span>
+          Summary
+        </a>
+      <h5>
+    </div>
+  {{/if}}
 </div>

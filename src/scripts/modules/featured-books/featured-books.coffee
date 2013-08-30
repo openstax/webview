@@ -1,10 +1,10 @@
 define [
   'jquery'
   'cs!modules/inherits/info-block/info-block'
-  'cs!collections/library'
+  'cs!collections/featured-books'
   'hbs!./featured-books-template'
   'less!./featured-books'
-], ($, InfoBlockView, library, template) ->
+], ($, InfoBlockView, featuredBooks, template) ->
 
   CAROUSEL_SPEED = 7000 # The rate at which a new book will be shown (in ms).
 
@@ -13,7 +13,7 @@ define [
 
     initialize: () ->
       super()
-      @listenTo(library, 'reset', @render)
+      @listenTo(featuredBooks, 'reset', @render)
 
       # Don't run any animations while the window is being resized
       @_resizer = () =>
@@ -26,7 +26,7 @@ define [
       'mouseleave .books': 'startCarousel'
 
     # @template must be evaluated prior to rendering
-    beforeRender: () -> @template = template({books: library.toJSON()})
+    beforeRender: () -> @template = template({books: featuredBooks.toJSON()})
     afterRender: () -> @startCarousel()
 
     # Called when the 'More' link is clicked

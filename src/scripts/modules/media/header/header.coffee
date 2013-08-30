@@ -7,9 +7,16 @@ define [
 ], ($, BaseView, BookPopoverView, template) ->
 
   return class MediaHeaderView extends BaseView
-    template: template()
+    template: () -> template @content.toJSON()
+
+    initialize: (options) ->
+      super()
+      @content = options.content
+      
+      @listenTo(@content.get('currentPage'), 'all', @render)
 
     render: () ->
       super()
-
-      @attachPopover new BookPopoverView({owner: @$el.find('.info .btn')})
+      @attachPopover new BookPopoverView
+        owner: @$el.find('.info .btn')
+        content: @content.toJSON()

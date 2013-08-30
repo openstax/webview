@@ -10,4 +10,3 @@ define [
         html: true
         placement: 'bottom'
         content: template()
-

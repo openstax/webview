@@ -13,7 +13,7 @@ define [
     if not $el.parents().hasClass('popover')
       Popover.hidePopovers()
 
-  class Popover extends BaseView
+  return class Popover extends BaseView
     @popovers: []
 
     initialize: (params) ->
@@ -27,17 +27,18 @@ define [
       @constructor.popovers.push(@$owner)
 
       # Stop propogation of 'click' events so popover doesn't get auto-closed
-      @$owner.on 'click', (e) => e.stopPropagation()
+      @_stopPropagation = (e) -> e.stopPropagation()
+      @$owner.click(@_stopPropagation)
 
       # Attach event handler to close open popovers on show
       @$owner.on 'show.bs.popover', (e) =>
         @constructor.hidePopovers() # Close open popovers
 
-      @$owner.on 'shown.bs.popover', (e) =>
-        # HACK: Bootstrap does not provide a hook to get the `popover` element
-        #       that it adds, so we have to look for it.
-        @setElement @$owner.siblings('.popover')
+      @$owner.one 'shown.bs.popover', (e) =>
+        @setElement @$owner.data('bs.popover').$tip
+        @delegateEvents(@events) # Attach custom event handlers to popover
 
+      @$owner.on 'shown.bs.popover', (e) =>
         # Adjust popover positioning
         if params.options?.placement is 'bottom'
           @$el.find('.arrow').css({top: '-7px', left: '100%'})
@@ -45,21 +46,14 @@ define [
             'left': 'auto'
             'right': document.body.clientWidth - (@$owner.offset().left + @$owner.outerWidth())
 
-        # Attach custom event handlers to popover
-        @delegateEvents(@events)
-
-      # Detach event handlers from popover on hide
-      @$owner.on 'hide.bs.popover', (e) =>
-        @undelegateEvents()
-
-      # Show the popover immediately if option 'show' is true
-      if params.show then @show()
-
     render: () -> return @ # noop
 
     @hidePopovers: () ->
-      _.each @popovers, ($popover) ->
-        $popover.popover('hide')
+      _.each @popovers, ($owner) ->
+        popover = $owner.data('bs.popover')
+        if popover.hoverState is 'in'
+          $owner.popover('hide')
+          popover.$tip.detach() # HACK: Bootstrap is not properly detaching the popover dom element
 
     @removePopover: ($el) ->
       @popovers = _.reject @popovers, ($popover) ->
@@ -68,8 +62,5 @@ define [
     close: () ->
       @constructor.removePopover(@$owner)
       @$owner.popover('destroy')
+      @$owner.off('click', @_stopPropagation)
       super()
-
-  return new class PopoverHandler
-    createPopover: (popover) ->
-      return new Popover(popover)

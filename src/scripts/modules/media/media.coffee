@@ -1,4 +1,5 @@
 define [
+  'cs!models/content'
   'cs!helpers/backbone/views/base'
   'cs!modules/header/header'
   'cs!modules/footer/footer'
@@ -11,7 +12,7 @@ define [
   'cs!./footer/footer'
   'hbs!./media-template'
   'less!./media'
-], (BaseView, HeaderView, FooterView, MediaEndorsedView, MediaTitleView, MediaTabsView,
+], (Content, BaseView, HeaderView, FooterView, MediaEndorsedView, MediaTitleView, MediaTabsView,
     MediaNavView, MediaHeaderView, MediaBodyView, MediaFooterView, template) ->
 
   return class MediaView extends BaseView
@@ -24,6 +25,7 @@ define [
         throw new Error('A media view must be instantiated with the uuid of the media to display')
 
       @uuid = options.uuid
+      @content = new Content({id: @uuid})
 
     regions:
       media: '.media'
@@ -31,13 +33,13 @@ define [
     render: () ->
       super()
 
-      @regions.media.append(new MediaEndorsedView({uuid: @uuid}))
-      @regions.media.append(new MediaTitleView({uuid: @uuid}))
-      @regions.media.append(new MediaTabsView({uuid: @uuid}))
-      @regions.media.append(new MediaNavView({uuid: @uuid}))
-      @regions.media.append(new MediaHeaderView({uuid: @uuid}))
-      @regions.media.append(new MediaBodyView({uuid: @uuid}))
-      @regions.media.append(new MediaFooterView({uuid: @uuid}))
-      @regions.media.append(new MediaNavView({uuid: @uuid, bottom: true}))
+      @regions.media.append(new MediaEndorsedView({content: @content}))
+      @regions.media.append(new MediaTitleView({content: @content}))
+      @regions.media.append(new MediaTabsView({content: @content}))
+      @regions.media.append(new MediaNavView({content: @content}))
+      @regions.media.append(new MediaHeaderView({content: @content}))
+      @regions.media.append(new MediaBodyView({content: @content}))
+      @regions.media.append(new MediaFooterView({content: @content}))
+      @regions.media.append(new MediaNavView({content: @content, hideProgress: true}))
 
       return @

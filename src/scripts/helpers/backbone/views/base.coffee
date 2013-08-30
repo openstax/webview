@@ -38,7 +38,8 @@ define [
       @regions = new Regions(@regions, @)
 
     render: () ->
-      @$el.html(@template)
+      @detachPopovers()
+      @$el.html(@template?() or @template)
 
       return @
 

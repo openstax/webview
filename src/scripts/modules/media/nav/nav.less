@@ -12,6 +12,7 @@
     .flex-flow(row; nowrap);
     .justify-content(center);
     height: @nav-height;
+    .user-select(none);
 
     .progress, .back-to-top {
       .flex(1; 1; 75%);
@@ -22,12 +23,11 @@
       height: @progress-height;
       border-radius: 8px;
       background-color: darken(@gray-lighter, 5%);
-      -webkit-box-shadow: none;
       box-shadow: none;
 
       .progress-bar {
+        .box-sizing(content-box); // Prevent the white border from being visible at 100% progress
         border-right: 1px solid white;
-        -webkit-box-shadow: none;
         box-shadow: none;
       }
     }

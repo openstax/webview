@@ -1,0 +1,16 @@
+{
+  "id_": "college_physics",
+  "title": "College Physics",
+  "mediaType": "application/vnd.org.cnx.collection",
+  "published": "2013-05-16T15:35:40.059942",
+  "author": {
+    "name": "OpenStax College",
+    "email": "cnx@cnx.org"
+  },
+  "contents": [{
+    "id": "the_nature_of_science_and_physics"
+  }, {
+    "id": "physics_an_introduction",
+    "title": "Test Override (Physics: An Introduction)"
+  }]
+}
