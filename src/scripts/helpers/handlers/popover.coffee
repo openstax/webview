@@ -1,9 +1,8 @@
-define [
-  'jquery'
-  'underscore'
-  'cs!helpers/backbone/views/base'
-  'bootstrapPopover'
-], ($, _, BaseView) ->
+define (require) ->
+  $ = require('jquery')
+  _ = require('underscore')
+  BaseView = require('cs!helpers/backbone/views/base')
+  require('bootstrapPopover')
 
   # Close popovers when clicking on the document
   $(document).click (e) ->

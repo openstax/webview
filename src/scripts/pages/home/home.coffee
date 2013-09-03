@@ -1,13 +1,12 @@
-define [
-  'cs!helpers/backbone/views/base'
-  'cs!modules/header/header'
-  'cs!modules/footer/footer'
-  'cs!modules/splash/splash'
-  'cs!modules/find-content/find-content'
-  'cs!modules/featured-books/featured-books'
-  'hbs!./home-template'
-  'less!./home'
-], (BaseView, HeaderView, FooterView, SplashView, FindContentView, FeaturedBooksView, template) ->
+define (require) ->
+  BaseView = require('cs!helpers/backbone/views/base')
+  HeaderView = require('cs!modules/header/header')
+  FooterView = require('cs!modules/footer/footer')
+  SplashView = require('cs!modules/splash/splash')
+  FindContentView = require('cs!modules/find-content/find-content')
+  FeaturedBooksView = require('cs!modules/featured-books/featured-books')
+  template = require('hbs!./home-template')
+  require('less!./home')
 
   return class HomeView extends BaseView
     template: template()

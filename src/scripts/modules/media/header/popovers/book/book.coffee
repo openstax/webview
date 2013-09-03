@@ -1,8 +1,7 @@
-define [
-  'cs!helpers/backbone/views/popover'
-  'hbs!./book-template'
-  'less!./book'
-], (PopoverView, template) ->
+define (require) ->
+  PopoverView = require('cs!helpers/backbone/views/popover')
+  template = require('hbs!./book-template')
+  require('less!./book')
 
   return class BookPopoverView extends PopoverView
     popover:

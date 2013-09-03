@@ -1,7 +1,6 @@
-define [
-  'jquery'
-  'mockjax'
-], ($) ->
+define (require) ->
+  $ = require('jquery')
+  require('mockjax')
 
   # GET
 

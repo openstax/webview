@@ -1,12 +1,11 @@
-define [
-  'cs!helpers/backbone/views/base'
-  'cs!modules/header/header'
-  'cs!modules/footer/footer'
-  'cs!modules/find-content/find-content'
-  'cs!modules/media/media'
-  'hbs!./content-template'
-  'less!./content'
-], (BaseView, HeaderView, FooterView, FindContentView, MediaView, template) ->
+define (require) ->
+  BaseView = require('cs!helpers/backbone/views/base')
+  HeaderView = require('cs!modules/header/header')
+  FooterView = require('cs!modules/footer/footer')
+  FindContentView = require('cs!modules/find-content/find-content')
+  MediaView = require('cs!modules/media/media')
+  template = require('hbs!./content-template')
+  require('less!./content')
 
   return class ContentView extends BaseView
     template: template()

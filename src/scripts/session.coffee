@@ -1,6 +1,5 @@
-define [
-  'backbone'
-], (Backbone) ->
+define (require) ->
+  Backbone = require('backbone')
 
   _authenticated = false
 
