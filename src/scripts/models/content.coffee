@@ -21,7 +21,6 @@ define (require) ->
     defaults:
       title: 'Untitled Book'
       pages: 1
-      page: 1
       author:
         name: 'Unknown'
         email: '#'
@@ -33,16 +32,17 @@ define (require) ->
       json.currentPage = currentPage
       return json
 
-    initialize: () -> @fetch
-      success: (model, response, options) => @setup()
+    initialize: (options = {}) ->
+      @fetch
+        success: () => @setup(options.page)
 
-    setup: () ->
+    setup: (page) ->
       type = MEDIA_TYPES[@get('mediaType')]
       @set('type', type)
 
       if type is 'book'
         @set('pages', @get('contents').length)
-        @setPage(1)
+        @setPage(page or 1) # Default to page 1
       else
         currentPage = @get('currentPage')
         currentPage.id = @id
@@ -69,7 +69,9 @@ define (require) ->
 
       # Show the next page if there is one
       if page < @get('pages')
-        @setPage(page+1)
+        @setPage(++page)
+
+      return page
 
     previousPage: () ->
       currentPage = @get('currentPage')
@@ -77,4 +79,6 @@ define (require) ->
 
       # Show the previous page if there is one
       if page isnt 1
-        @setPage(page-1)
+        @setPage(--page)
+
+      return page

@@ -23,7 +23,7 @@ define (require) ->
         throw new Error('A media view must be instantiated with the uuid of the media to display')
 
       @uuid = options.uuid
-      @content = new Content({id: @uuid})
+      @content = new Content({id: @uuid, page: options.page})
 
     regions:
       media: '.media'

@@ -11,6 +11,3 @@ define (require) ->
       @model = @model.get('currentPage')
 
       @listenTo(@model, 'all', @render) # FIXME: Only listen to relevant events
-
-    render: () ->
-      super()

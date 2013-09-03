@@ -4,6 +4,8 @@ define (require) ->
   require('less!./endorsed')
 
   return class EndorsedView extends BaseView
+    template: () -> template @model.toJSON()
+
     initialize: () ->
       super()
-      @template = template @model.toJSON()
+      @listenTo(@model, 'all', @render) # FIXME: Only listen to relevant events

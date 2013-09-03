@@ -13,8 +13,8 @@ define (require) ->
     initialize: (options) ->
       super()
 
-      if options?.uuid
-        @uuid = options.uuid
+      @uuid = options?.uuid
+      @page = options?.page
 
     regions:
       content: '#content'
@@ -27,6 +27,6 @@ define (require) ->
 
       if @uuid
         @regions.content.append(new FindContentView())
-        @regions.content.append(new MediaView({uuid: @uuid}))
+        @regions.content.append(new MediaView({uuid: @uuid, page: @page}))
 
       return @

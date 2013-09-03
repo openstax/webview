@@ -1,4 +1,5 @@
 define (require, exports, module) ->
+  Backbone = require('backbone')
 
   # Class to handle loading analytics scripts and wrapping
   # handlers around them so that modules don't have to
@@ -34,3 +35,11 @@ define (require, exports, module) ->
     # Wrapper function to add analytics events
     ga: () -> if window.ga then window.ga.apply(@, arguments) # analytics.js
     gaq: () -> if window._gaq then window._gaq.push(arguments) # ga.js
+
+    # Send the current page to every analytics service
+    send: () ->
+      fragment = Backbone.history.fragment
+      if not /^\//.test(fragment) then fragment = '/' + fragment
+
+      @ga('send', 'pageview')
+      @gaq(['_trackPageview', fragment])

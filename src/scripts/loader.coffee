@@ -30,11 +30,11 @@ define (require) ->
 
     # Add tracking with ga.js
     loadUrl = Backbone.History.prototype.loadUrl
-    Backbone.History::loadUrl = (fragmentOverride) ->
+    Backbone.History::loadUrl = () ->
       matched = loadUrl.apply(@, arguments)
-      gaFragment = @fragment
-      if not /^\//.test(gaFragment) then gaFragment = '/' + gaFragment
-      analytics.gaq(['_trackPageview', gaFragment])
+      fragment = @fragment
+      if not /^\//.test(fragment) then fragment = '/' + fragment
+      analytics.gaq(['_trackPageview', fragment])
       return matched
 
     # Add tracking with analytics.js
