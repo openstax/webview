@@ -28,7 +28,7 @@ define [
       @$el?.empty()
 
   class Regions
-    constructor: (regions, $context) ->
+    constructor: (regions = {}, $context) ->
       _.each _.keys(regions), (region) =>
         @[region] = new Region(regions[region], $context)
 

@@ -17,7 +17,7 @@
 
       // ## Core Libraries
       jquery: '../../bower_components/jquery/jquery',
-      underscore: '../../bower_components/lodash/lodash',
+      underscore: '../../bower_components/lodash/dist/lodash.underscore',
       backbone: '../../bower_components/backbone/backbone',
 
       // ## UI Libraries
