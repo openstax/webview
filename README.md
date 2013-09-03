@@ -20,13 +20,12 @@ From the root `webview` directory, run `npm test`.
 
 From the root `webview` directory, run `grunt dist`.
 
-The `dist` directory containing the built site will be added to the root `webview` directory.
+The newly built site will replace the old contents of the `dist` directory.
 
 #### Hosting
 
 Configure your server to point at `dist/index.html` (or `src/index.html` for development)
   * Unresolveable URIs should load `dist/index.html` or `src/index.html`
-  * If not hosting the site from the domain root, update `root` in `src/scripts/config.js` (line 8)
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
   * Example nginx development config:
   ```
@@ -67,15 +66,15 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
 
 ### Directory Layout
 
-* `dist/`                      Production version of the site *(added after install)*
+* `bower_components/`          3rd Party Libraries *(added after install)*
 * `node_modules/`              Node Modules *(added after install)*
+* `dist/`                      Production version of the site
 * `src/`                       Development version of the site
 * `src/data/`                  Hardcoded data
 * `src/images/`                Images used throughout the site
 * `src/scripts/`               Site scripts and 3rd party libraries
 * `src/scripts/collections`    Backbone Collections
 * `src/scripts/helpers`        Helpers for Handlebars, Backbone, and generic code
-* `src/scripts/libs`           3rd Party Libraries *(added after install)*
 * `src/scripts/models`         Backbone Models
 * `src/scripts/modules`        Self-contained, reusable Modules used to construct pages
 * `src/scripts/pages`          Backbone Views representing an entire page (or the entire viewport)

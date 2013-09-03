@@ -13,7 +13,6 @@ module.exports = (grunt) ->
     # JSHint
     jshint:
       options:
-        ignores: ['src/scripts/libs/**']
         globals:
           require: true
 
@@ -64,13 +63,11 @@ module.exports = (grunt) ->
         browser: true
         devel: false
 
-      source: [
-        'src/scripts/**/*.js'
-      ]
+      source: ['src/**/*.js']
 
     # JS Beautifier
     jsbeautifier:
-      files: ['src/scripts/**/*.js', '!src/scripts/libs/**']
+      files: ['src/**/*.js']
       options:
         js:
           mode: "VERIFY_ONLY"
@@ -93,7 +90,7 @@ module.exports = (grunt) ->
           level: 'error'
           value: 10
 
-      source: ['src/scripts/**/*.coffee', '!src/scripts/libs/**']
+      source: ['src/**/*.coffee']
       grunt: 'Gruntfile.coffee'
 
     # Recess
@@ -101,10 +98,7 @@ module.exports = (grunt) ->
       dist:
         options:
           strictPropertyOrder: false
-        src: [
-          'src/styles/**/*.less'
-          'src/scripts/modules/**/*.less'
-        ]
+        src: ['src/**/*.less', '!src/scripts/pages/app/app.less'] # Don't lint bootstrap
 
     # Dist
     # ----
@@ -118,28 +112,30 @@ module.exports = (grunt) ->
           dir: 'dist'
           mainConfigFile: 'src/scripts/config.js'
           findNestedDependencies: true
-          removeCombined: true
+          removeCombined: false
           keepBuildDir: false
           preserveLicenseComments: false
           skipDirOptimize: true
           optimize: 'uglify2'
+          # CSS Base points to project root for bower_components (https://github.com/jrburke/r.js/issues/412)
+          cssBase: '../../'
 
           stubModules: ['cs']
           modules: [{
-              name: 'main'
-              create: true
-              include: [
-                  'css'
-                  'main'
-                  'cs!pages/home/home'
-                  'cs!pages/content/content'
-              ]
-              excludeShallow: [
-                  'css/css-builder'
-                  'less/lessc-server'
-                  'less/lessc'
-              ]
-              exclude: ['coffee-script']
+            name: 'main'
+            create: true
+            include: [
+              'css'
+              'main'
+              'cs!pages/home/home'
+              'cs!pages/content/content'
+            ]
+            excludeShallow: [
+              'css/css-builder'
+              'less/lessc-server'
+              'less/lessc'
+            ]
+            exclude: ['coffee-script']
           }]
 
           done: (done, output) ->
@@ -152,34 +148,41 @@ module.exports = (grunt) ->
 
             done()
 
+    # Target HTML
+    targethtml:
+      dist:
+        files:
+          'dist/index.html': 'dist/index.html'
+
+    # Copy
+    copy:
+      dist:
+        src: 'bower_components/requirejs/require.js'
+        dest: 'dist/scripts/require.js'
+
     # Clean
     clean:
       files:
         src: [
           'dist/**/.*'
           'dist/build.txt'
-          'dist/styles/**/*'
           'dist/scripts/**/*'
           '!dist/scripts/main.js'
-          '!dist/scripts/libs/requirejs/require.js'
+          '!dist/scripts/require.js'
         ]
         filter: 'isFile'
       directories:
         src: [
+          'dist/styles'
+          'dist/test'
           'dist/**/*'
         ]
         filter: (filepath) ->
           # Ignore files
           if not grunt.file.isDir(filepath) then return false
 
-          # Remove all directories inside /dist/scripts
-          if filepath.match(/^dist\/scripts\//)
-            # Don't remove the matching directories
-            if filepath is 'dist/scripts/libs' or
-                filepath is 'dist/scripts/libs/requirejs'
-              return false
-            else
-              return true
+          # Remove /dist/styles, /dist/test, and all directories inside /dist/scripts
+          if filepath.match(/^dist\/(scripts\/|styles|test)/) then return true
 
           # Remove empty directories
           return fs.readdirSync(filepath).length is 0
@@ -188,7 +191,16 @@ module.exports = (grunt) ->
     uglify:
       dist:
         files:
-          'dist/scripts/libs/requirejs/require.js': ['dist/scripts/libs/requirejs/require.js']
+          'dist/scripts/require.js': ['dist/scripts/require.js']
+
+    # HTML min
+    htmlmin:
+      dist:
+        options:
+          removeComments: true
+          collapseWhitespace: true
+        files:
+          'dist/index.html': 'dist/index.html'
 
     # Imagemin
     imagemin:
@@ -227,8 +239,11 @@ module.exports = (grunt) ->
   # -----
   grunt.registerTask 'dist', [
     'requirejs'
+    'copy:dist'
+    'targethtml:dist'
     'clean'
     'uglify:dist'
+    'htmlmin:dist'
     'imagemin'
   ]
 
@@ -236,7 +251,10 @@ module.exports = (grunt) ->
   # -----
   grunt.registerTask 'default', [
     'requirejs'
+    'copy:dist'
+    'targethtml:dist'
     'clean'
     'uglify:dist'
+    'htmlmin:dist'
     'imagemin'
   ]

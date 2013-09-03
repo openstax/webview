@@ -2,50 +2,56 @@
   'use strict';
 
   require.config({
+    config: {
+      'cs!helpers/handlers/analytics': {
+        analyticsID: 'UA-7903479-1'
+      }
+    },
+
     // # Paths
     paths: {
       // ## Requirejs plugins
-      text: 'libs/requirejs-text/text',
-      hbs: 'libs/require-handlebars-plugin/hbs',
-      cs: 'libs/require-cs/cs',
+      text: '../../bower_components/requirejs-text/text',
+      hbs: '../../bower_components/require-handlebars-plugin/hbs',
+      cs: '../../bower_components/require-cs/cs',
 
       // ## Core Libraries
-      jquery: 'libs/jquery/jquery',
-      underscore: 'libs/lodash/lodash',
-      backbone: 'libs/backbone/backbone',
+      jquery: '../../bower_components/jquery/jquery',
+      underscore: '../../bower_components/lodash/lodash',
+      backbone: '../../bower_components/backbone/backbone',
 
       // ## UI Libraries
       // Boostrap Plugins
-      bootstrapAffix: 'libs/bootstrap/js/affix',
-      bootstrapAlert: 'libs/bootstrap/js/alert',
-      bootstrapButton: 'libs/bootstrap/js/button',
-      bootstrapCarousel: 'libs/bootstrap/js/carousel',
-      bootstrapCollapse: 'libs/bootstrap/js/collapse',
-      bootstrapDropdown: 'libs/bootstrap/js/dropdown',
-      bootstrapModal: 'libs/bootstrap/js/modal',
-      bootstrapPopover: 'libs/bootstrap/js/popover',
-      bootstrapScrollspy: 'libs/bootstrap/js/scrollspy',
-      bootstrapTab: 'libs/bootstrap/js/tab',
-      bootstrapTooltip: 'libs/bootstrap/js/tooltip',
-      bootstrapTransition: 'libs/bootstrap/js/transition',
+      bootstrapAffix: '../../bower_components/bootstrap/js/affix',
+      bootstrapAlert: '../../bower_components/bootstrap/js/alert',
+      bootstrapButton: '../../bower_components/bootstrap/js/button',
+      bootstrapCarousel: '../../bower_components/bootstrap/js/carousel',
+      bootstrapCollapse: '../../bower_components/bootstrap/js/collapse',
+      bootstrapDropdown: '../../bower_components/bootstrap/js/dropdown',
+      bootstrapModal: '../../bower_components/bootstrap/js/modal',
+      bootstrapPopover: '../../bower_components/bootstrap/js/popover',
+      bootstrapScrollspy: '../../bower_components/bootstrap/js/scrollspy',
+      bootstrapTab: '../../bower_components/bootstrap/js/tab',
+      bootstrapTooltip: '../../bower_components/bootstrap/js/tooltip',
+      bootstrapTransition: '../../bower_components/bootstrap/js/transition',
 
       // ## Handlebars Dependencies
-      Handlebars: 'libs/require-handlebars-plugin/Handlebars',
-      i18nprecompile: 'libs/require-handlebars-plugin/hbs/i18nprecompile',
-      json2: 'libs/require-handlebars-plugin/hbs/json2',
+      Handlebars: '../../bower_components/require-handlebars-plugin/Handlebars',
+      i18nprecompile: '../../bower_components/require-handlebars-plugin/hbs/i18nprecompile',
+      json2: '../../bower_components/require-handlebars-plugin/hbs/json2',
 
       // ## CoffeeScript Compiler
-      'coffee-script': 'libs/coffee-script/index'
+      'coffee-script': '../../bower_components/coffee-script/index'
     },
 
     // # Packages
     packages: [{
       name: 'css',
-      location: 'libs/require-css',
+      location: '../../bower_components/require-css',
       main: 'css'
     }, {
       name: 'less',
-      location: 'libs/require-less',
+      location: '../../bower_components/require-less',
       main: 'less'
     }],
 
