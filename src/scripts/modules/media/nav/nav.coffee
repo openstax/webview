@@ -6,14 +6,13 @@ define (require) ->
   return class MediaNavView extends BaseView
     initialize: (options) ->
       super()
-      @content = options.content
       @hideProgress = options.hideProgress
 
       if not @hideProgress
-        @listenTo(@content, 'change:page change:pages', @render)
+        @listenTo(@model, 'change:page change:pages', @render)
 
     render: () ->
-      tmplOptions = @content.toJSON()
+      tmplOptions = @model.toJSON()
       tmplOptions._hideProgress = @hideProgress
       @template = template tmplOptions
       super()
@@ -23,7 +22,7 @@ define (require) ->
       'click .back': 'previousPage'
 
     nextPage: (e) ->
-      @content.nextPage()
+      @model.nextPage()
 
     previousPage: (e) ->
-      @content.previousPage()
+      @model.previousPage()

@@ -6,16 +6,15 @@ define (require) ->
   require('less!./header')
 
   return class MediaHeaderView extends BaseView
-    template: () -> template @content.toJSON()
+    template: () -> template @model.toJSON()
 
-    initialize: (options) ->
+    initialize: () ->
       super()
-      @content = options.content
       
-      @listenTo(@content.get('currentPage'), 'all', @render)
+      @listenTo(@model.get('currentPage'), 'all', @render)
 
     render: () ->
       super()
       @attachPopover new BookPopoverView
         owner: @$el.find('.info .btn')
-        content: @content.toJSON()
+        content: @model.toJSON()

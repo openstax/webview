@@ -4,13 +4,13 @@ define (require) ->
   require('less!./body')
 
   return class MediaBodyView extends BaseView
-    template: () -> template @content.get('currentPage').toJSON()
+    template: () -> template @model.toJSON()
 
-    initialize: (options) ->
+    initialize: () ->
       super()
-      @content = options.content
+      @model = @model.get('currentPage')
 
-      @listenTo(@content.get('currentPage'), 'all', @render)
+      @listenTo(@model, 'all', @render) # FIXME: Only listen to relevant events
 
     render: () ->
       super()

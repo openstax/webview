@@ -31,13 +31,13 @@ define (require) ->
     render: () ->
       super()
 
-      @regions.media.append(new MediaEndorsedView({content: @content}))
-      @regions.media.append(new MediaTitleView({content: @content}))
-      @regions.media.append(new MediaTabsView({content: @content}))
-      @regions.media.append(new MediaNavView({content: @content}))
-      @regions.media.append(new MediaHeaderView({content: @content}))
-      @regions.media.append(new MediaBodyView({content: @content}))
-      @regions.media.append(new MediaFooterView({content: @content}))
-      @regions.media.append(new MediaNavView({content: @content, hideProgress: true}))
+      @regions.media.append(new MediaEndorsedView({model: @content}))
+      @regions.media.append(new MediaTitleView({model: @content}))
+      @regions.media.append(new MediaTabsView({model: @content}))
+      @regions.media.append(new MediaNavView({model: @content}))
+      @regions.media.append(new MediaHeaderView({model: @content}))
+      @regions.media.append(new MediaBodyView({model: @content}))
+      @regions.media.append(new MediaFooterView({model: @content}))
+      @regions.media.append(new MediaNavView({model: @content, hideProgress: true}))
 
       return @
