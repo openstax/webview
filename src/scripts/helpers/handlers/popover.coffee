@@ -1,3 +1,6 @@
+# This handler is used internally by `helpers/backbone/views/popover.coffee`.
+# It should not be inherited directly.
+
 define (require) ->
   $ = require('jquery')
   _ = require('underscore')
