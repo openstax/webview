@@ -38,7 +38,7 @@ define (require) ->
 
     render: () ->
       @detachPopovers()
-      @$el.html(@template?() or @template)
+      @$el.html(@template?(@model?.toJSON()) or @template)
 
       return @
 
