@@ -13,7 +13,6 @@ module.exports = (grunt) ->
     # JSHint
     jshint:
       options:
-        ignores: ['src/scripts/libs/**']
         globals:
           require: true
 
@@ -66,6 +65,7 @@ module.exports = (grunt) ->
 
       source: [
         'src/scripts/**/*.js'
+        '!src/scripts/libs/**'
       ]
 
     # JS Beautifier
@@ -126,20 +126,20 @@ module.exports = (grunt) ->
 
           stubModules: ['cs']
           modules: [{
-              name: 'main'
-              create: true
-              include: [
-                  'css'
-                  'main'
-                  'cs!pages/home/home'
-                  'cs!pages/content/content'
-              ]
-              excludeShallow: [
-                  'css/css-builder'
-                  'less/lessc-server'
-                  'less/lessc'
-              ]
-              exclude: ['coffee-script']
+            name: 'main'
+            create: true
+            include: [
+              'css'
+              'main'
+              'cs!pages/home/home'
+              'cs!pages/content/content'
+            ]
+            excludeShallow: [
+              'css/css-builder'
+              'less/lessc-server'
+              'less/lessc'
+            ]
+            exclude: ['coffee-script']
           }]
 
           done: (done, output) ->
@@ -158,7 +158,6 @@ module.exports = (grunt) ->
         src: [
           'dist/**/.*'
           'dist/build.txt'
-          'dist/styles/**/*'
           'dist/scripts/**/*'
           '!dist/scripts/main.js'
           '!dist/scripts/libs/requirejs/require.js'
@@ -166,6 +165,8 @@ module.exports = (grunt) ->
         filter: 'isFile'
       directories:
         src: [
+          'dist/styles'
+          'dist/test'
           'dist/**/*'
         ]
         filter: (filepath) ->
@@ -173,7 +174,7 @@ module.exports = (grunt) ->
           if not grunt.file.isDir(filepath) then return false
 
           # Remove all directories inside /dist/scripts
-          if filepath.match(/^dist\/scripts\//)
+          if filepath.match(/^dist\/(scripts\/|styles|test)/)
             # Don't remove the matching directories
             if filepath is 'dist/scripts/libs' or
                 filepath is 'dist/scripts/libs/requirejs'
