@@ -1,10 +1,9 @@
-define [
-  'jquery'
-  'cs!helpers/backbone/views/base'
-  'hbs!./splash-template'
-  'less!./splash'
-  'bootstrapCarousel'
-], ($, BaseView, template) ->
+define (require) ->
+  $ = require('jquery')
+  BaseView = require('cs!helpers/backbone/views/base')
+  template = require('hbs!./splash-template')
+  require('less!./splash')
+  require('bootstrapCarousel')
 
   return class SplashView extends BaseView
     template: template()

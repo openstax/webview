@@ -1,19 +1,17 @@
-define [
-  'cs!models/content'
-  'cs!helpers/backbone/views/base'
-  'cs!modules/header/header'
-  'cs!modules/footer/footer'
-  'cs!./endorsed/endorsed'
-  'cs!./title/title'
-  'cs!./tabs/tabs'
-  'cs!./nav/nav'
-  'cs!./header/header'
-  'cs!./body/body'
-  'cs!./footer/footer'
-  'hbs!./media-template'
-  'less!./media'
-], (Content, BaseView, HeaderView, FooterView, MediaEndorsedView, MediaTitleView, MediaTabsView,
-    MediaNavView, MediaHeaderView, MediaBodyView, MediaFooterView, template) ->
+define (require) ->
+  Content = require('cs!models/content')
+  BaseView = require('cs!helpers/backbone/views/base')
+  HeaderView = require('cs!modules/header/header')
+  FooterView = require('cs!modules/footer/footer')
+  MediaEndorsedView = require('cs!./endorsed/endorsed')
+  MediaTitleView = require('cs!./title/title')
+  MediaTabsView = require('cs!./tabs/tabs')
+  MediaNavView = require('cs!./nav/nav')
+  MediaHeaderView = require('cs!./header/header')
+  MediaBodyView = require('cs!./body/body')
+  MediaFooterView = require('cs!./footer/footer')
+  template = require('hbs!./media-template')
+  require('less!./media')
 
   return class MediaView extends BaseView
     template: template()

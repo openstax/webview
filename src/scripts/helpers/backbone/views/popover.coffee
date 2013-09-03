@@ -6,11 +6,10 @@
 # When creating a popover, use or inherit from this class, rather than creating a
 # popover directly with `helpers/handlers/popover`.
 
-define [
-  'underscore'
-  'cs!helpers/backbone/views/base'
-  'cs!helpers/handlers/popover'
-], (_, BaseView, Popover) ->
+define (require) ->
+  _ = require('underscore')
+  BaseView = require('cs!helpers/backbone/views/base')
+  Popover = require('cs!helpers/handlers/popover')
 
   return class PopoverView extends BaseView
     initialize: (options) ->

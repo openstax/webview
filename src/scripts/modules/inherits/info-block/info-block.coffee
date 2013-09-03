@@ -1,10 +1,9 @@
-define [
-  'jquery'
-  'underscore'
-  'cs!helpers/backbone/views/base'
-  'hbs!./info-block-template'
-  'less!./info-block'
-], ($, _, BaseView, template) ->
+define (require) ->
+  $ = require('jquery')
+  _ = require('underscore')
+  BaseView = require('cs!helpers/backbone/views/base')
+  template = require('hbs!./info-block-template')
+  require('less!./info-block')
 
   return class InfoBlockView extends BaseView
     title: 'Untitled'

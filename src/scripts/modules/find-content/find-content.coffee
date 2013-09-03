@@ -1,9 +1,8 @@
-define [
-  'cs!helpers/backbone/views/base'
-  'hbs!./find-content-template'
-  'less!./find-content'
-  'bootstrapDropdown'
-], (BaseView, template) ->
+define (require) ->
+  BaseView = require('cs!helpers/backbone/views/base')
+  template = require('hbs!./find-content-template')
+  require('less!./find-content')
+  require('bootstrapDropdown')
 
   return class FindContentView extends BaseView
     template: template()

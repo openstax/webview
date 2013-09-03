@@ -1,11 +1,10 @@
-define [
-  'underscore'
-  'jquery'
-  'cs!helpers/backbone/views/base'
-  'cs!./popovers/mail/mail'
-  'hbs!./title-template'
-  'less!./title'
-], (_, $, BaseView, MailPopoverView, template) ->
+define (require) ->
+  $ = require('jquery')
+  _ = require('underscore')
+  BaseView = require('cs!helpers/backbone/views/base')
+  MailPopoverView = require('cs!./popovers/mail/mail')
+  template = require('hbs!./title-template')
+  require('less!./title')
 
   return class MediaTitleView extends BaseView
     template: () ->

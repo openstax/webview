@@ -1,9 +1,8 @@
-define [
-  'jquery'
-  'backbone'
-  'cs!router'
-  'cs!helpers/handlers/analytics'
-], ($, Backbone, router, analytics) ->
+define (require) ->
+  $ = require('jquery')
+  Backbone = require('backbone')
+  router = require('cs!router')
+  analytics = require('cs!helpers/handlers/analytics')
 
   # The root URI prefixed on all non-external AJAX and Backbone URIs
   root = '/'

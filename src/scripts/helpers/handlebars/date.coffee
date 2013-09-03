@@ -1,6 +1,5 @@
-define [
-  'Handlebars'
-], (Handlebars) ->
+define (require) ->
+  Handlebars = require('Handlebars')
 
   Handlebars.registerHelper 'date', (period) ->
     date = new Date()
