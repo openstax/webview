@@ -2,6 +2,12 @@
   'use strict';
 
   require.config({
+    config: {
+      'cs!helpers/handlers/analytics': {
+        analyticsID: 'UA-7903479-1'
+      }
+    },
+
     // # Paths
     paths: {
       // ## Requirejs plugins
