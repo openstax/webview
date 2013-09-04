@@ -62,6 +62,8 @@ define (require) ->
       return @
 
     close: () ->
+      @onBeforeClose?()
+
       _.each @regions, (region) ->
         region.close()
 
