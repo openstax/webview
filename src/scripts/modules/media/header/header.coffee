@@ -6,7 +6,7 @@ define (require) ->
   require('less!./header')
 
   return class MediaHeaderView extends BaseView
-    template: () -> template @model.toJSON()
+    template: template
 
     initialize: () ->
       super()

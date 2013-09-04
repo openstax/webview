@@ -8,7 +8,7 @@ define (require) ->
   require('less!./content')
 
   return class ContentView extends BaseView
-    template: template()
+    template: template
 
     initialize: (options) ->
       super()

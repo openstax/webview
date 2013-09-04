@@ -6,7 +6,7 @@ define (require) ->
   require('bootstrapCarousel')
 
   return class SplashView extends BaseView
-    template: template()
+    template: template
 
     render: () ->
       super()

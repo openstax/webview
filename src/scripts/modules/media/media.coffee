@@ -14,7 +14,7 @@ define (require) ->
   require('less!./media')
 
   return class MediaView extends BaseView
-    template: template()
+    template: template
 
     initialize: (options) ->
       super()

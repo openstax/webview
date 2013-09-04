@@ -9,7 +9,7 @@ define (require) ->
   require('less!./home')
 
   return class HomeView extends BaseView
-    template: template()
+    template: template
 
     regions:
       splash: '#splash'

@@ -4,6 +4,4 @@ define (require) ->
   require('less!./footer')
 
   return class MediaFooterView extends BaseView
-    initialize: () ->
-      super()
-      @template = template @model.toJSON()
+    template: template

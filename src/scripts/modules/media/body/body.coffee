@@ -4,7 +4,7 @@ define (require) ->
   require('less!./body')
 
   return class MediaBodyView extends BaseView
-    template: () -> template @model.toJSON()
+    template: template
 
     initialize: () ->
       super()
