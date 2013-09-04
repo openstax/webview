@@ -9,9 +9,7 @@ define (require) ->
     initialize: (options) ->
       super()
       @hideProgress = options.hideProgress
-
-      if not @hideProgress
-        @listenTo(@model, 'change:page change:pages', @render)
+      @listenTo(@model, 'change', @render)
 
     render: () ->
       tmplOptions = @model.toJSON()
