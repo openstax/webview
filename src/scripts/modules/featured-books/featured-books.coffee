@@ -86,7 +86,6 @@ define (require) ->
       if @_carousel then clearInterval(@_carousel)
       @_carousel = setInterval(nextFeatured, CAROUSEL_SPEED)
 
-    close: () ->
+    onBeforeClose: () ->
       $(window).off('resize', @_resizer)
       @stopCarousel()
-      super()
