@@ -12,21 +12,16 @@ define (require) ->
 
     initialize: (options) ->
       super()
-
       @uuid = options?.uuid
       @page = options?.page
 
     regions:
       content: '#content'
 
-    render: () ->
-      super()
-
+    onRender: () ->
       @parent?.regions.header.show(new HeaderView({page: 'content'}))
       @parent?.regions.footer.show(new FooterView({page: 'content'}))
 
       if @uuid
         @regions.content.append(new FindContentView())
         @regions.content.append(new MediaView({uuid: @uuid, page: @page}))
-
-      return @

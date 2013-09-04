@@ -8,6 +8,7 @@ define (require) ->
   CAROUSEL_SPEED = 7000 # The rate at which a new book will be shown (in ms).
 
   return class FeaturedBooksView extends InfoBlockView
+    template: () -> template({books: featuredBooks.toJSON()})
     title: 'Featured Books'
 
     initialize: () ->
@@ -24,9 +25,7 @@ define (require) ->
       'mouseenter .books': 'stopCarousel'
       'mouseleave .books': 'startCarousel'
 
-    # @template must be evaluated prior to rendering
-    beforeRender: () -> @template = template({books: featuredBooks.toJSON()})
-    afterRender: () -> @startCarousel()
+    onRender: () -> @startCarousel()
 
     # Called when the 'More' link is clicked
     more: () ->

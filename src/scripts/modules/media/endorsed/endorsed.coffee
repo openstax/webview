@@ -5,7 +5,3 @@ define (require) ->
 
   return class EndorsedView extends BaseView
     template: template
-
-    initialize: () ->
-      super()
-      @listenTo(@model, 'all', @render) # FIXME: Only listen to relevant events

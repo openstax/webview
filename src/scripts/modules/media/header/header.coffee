@@ -10,11 +10,9 @@ define (require) ->
 
     initialize: () ->
       super()
-      
-      @listenTo(@model.get('currentPage'), 'all', @render)
+      @listenTo(@model.get('currentPage'), 'change', @render)
 
-    render: () ->
-      super()
+    onRender: () ->
       @attachPopover new BookPopoverView
         owner: @$el.find('.info .btn')
         content: @model.toJSON()

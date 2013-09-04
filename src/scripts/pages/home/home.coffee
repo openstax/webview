@@ -18,9 +18,7 @@ define (require) ->
       #news: '#news'
       #spotlight: '#spotlight'
 
-    render: () ->
-      super()
-
+    onRender: () ->
       @parent?.regions.header.show(new HeaderView({page: 'home'}))
       @parent?.regions.footer.show(new FooterView({page: 'home'}))
 
@@ -29,5 +27,3 @@ define (require) ->
       @regions.find.show(new FindContentView())
       #@regions.news.show(new NewsView())
       #@regions.spotlight.show(new SpotlightView())
-
-      return @

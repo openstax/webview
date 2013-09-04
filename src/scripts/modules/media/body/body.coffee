@@ -7,7 +7,5 @@ define (require) ->
     template: template
 
     initialize: () ->
-      super()
       @model = @model.get('currentPage')
-
-      @listenTo(@model, 'all', @render) # FIXME: Only listen to relevant events
+      super()
