@@ -11,6 +11,12 @@ define (require) ->
     linkTitle: 'More'
     linkExpandedTitle: 'Less'
 
+    templateHelpers:
+      title: () -> @title
+      link: () -> @link
+      linkTitle: () -> @linkTitle
+      content: () -> @template?() or @template
+
     initialize: () ->
       super()
 
@@ -21,19 +27,9 @@ define (require) ->
       @events = @events or {}
       _.extend(@_events, @events)
 
-    render: () ->
-      @beforeRender?()
-
-      @$el.html template
-        title: @title
-        link: @link
-        linkTitle: @linkTitle
-        content: @template?() or @template
+    _renderDom: (data) ->
+      @$el.html(template(data))
       @delegateEvents(@_events)
-
-      @afterRender?()
-
-      return @
 
     clickMore: (e) ->
       e.preventDefault()

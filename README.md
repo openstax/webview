@@ -72,7 +72,7 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
 #### Test Site
 
 When running the development version of the site with its corresponding config, you can
-access a test version of the site that simulates AJAX requests by appending `/test` to the URI
+access a test version of the site that simulates AJAX requests by appending `/test` to the root URI
 (for example: `http://localhost/test`).
 
 ### Directory Layout

@@ -6,7 +6,7 @@ define (require) ->
 
   return class AppView extends BaseView
     el: 'body'
-    template: template()
+    template: template
 
     regions:
       main: '#main'

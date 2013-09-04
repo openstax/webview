@@ -24,9 +24,8 @@ define (require) ->
 
       @_popover = new Popover(@_popover)
 
-    render: () -> return @
+    render: () -> return @ # noop
 
-    close: () ->
+    onBeforeClose: () ->
       @_popover.close()
       @_popover = null
-      super()

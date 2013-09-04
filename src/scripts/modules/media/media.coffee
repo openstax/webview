@@ -14,7 +14,7 @@ define (require) ->
   require('less!./media')
 
   return class MediaView extends BaseView
-    template: template()
+    template: template
 
     initialize: (options) ->
       super()
@@ -23,21 +23,17 @@ define (require) ->
         throw new Error('A media view must be instantiated with the uuid of the media to display')
 
       @uuid = options.uuid
-      @content = new Content({id: @uuid, page: options.page})
+      @model = new Content({id: @uuid, page: options.page})
 
     regions:
       media: '.media'
 
-    render: () ->
-      super()
-
-      @regions.media.append(new MediaEndorsedView({model: @content}))
-      @regions.media.append(new MediaTitleView({model: @content}))
-      @regions.media.append(new MediaTabsView({model: @content}))
-      @regions.media.append(new MediaNavView({model: @content}))
-      @regions.media.append(new MediaHeaderView({model: @content}))
-      @regions.media.append(new MediaBodyView({model: @content}))
-      @regions.media.append(new MediaFooterView({model: @content}))
-      @regions.media.append(new MediaNavView({model: @content, hideProgress: true}))
-
-      return @
+    onRender: () ->
+      @regions.media.append(new MediaEndorsedView({model: @model}))
+      @regions.media.append(new MediaTitleView({model: @model}))
+      @regions.media.append(new MediaTabsView({model: @model}))
+      @regions.media.append(new MediaNavView({model: @model}))
+      @regions.media.append(new MediaHeaderView({model: @model}))
+      @regions.media.append(new MediaBodyView({model: @model}))
+      @regions.media.append(new MediaFooterView({model: @model}))
+      @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
