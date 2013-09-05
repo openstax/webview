@@ -5,7 +5,7 @@ define (require) ->
   require('bootstrapDropdown')
 
   return class FindContentView extends BaseView
-    template: template()
+    template: template
 
     events:
       'click .dropdown-toggle': 'clickToggle'

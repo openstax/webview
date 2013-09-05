@@ -5,11 +5,9 @@ define (require) ->
   require('less!./footer')
 
   return class FooterView extends BaseView
-    template: template()
+    template: template
 
-    render: () ->
-      super()
-
+    onRender: () ->
       height = @$el.find('.copyright').height()
       @$el.find('.connect').height(height)
       @$el.find('.share').height(height)

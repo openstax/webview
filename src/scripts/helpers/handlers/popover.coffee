@@ -61,8 +61,7 @@ define (require) ->
       @popovers = _.reject @popovers, ($popover) ->
         return _.isEqual($el, $popover)
 
-    close: () ->
+    onBeforeClose: () ->
       @constructor.removePopover(@$owner)
       @$owner.popover('destroy')
       @$owner.off('click', @_stopPropagation)
-      super()

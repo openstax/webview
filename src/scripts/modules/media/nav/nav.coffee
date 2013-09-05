@@ -6,18 +6,13 @@ define (require) ->
   require('less!./nav')
 
   return class MediaNavView extends BaseView
+    template: template
+    templateHelpers:
+      _hideProgress: () -> @hideProgress
+    
     initialize: (options) ->
       super()
       @hideProgress = options.hideProgress
-
-      if not @hideProgress
-        @listenTo(@model, 'change:page change:pages', @render)
-
-    render: () ->
-      tmplOptions = @model.toJSON()
-      tmplOptions._hideProgress = @hideProgress
-      @template = template tmplOptions
-      super()
 
     events:
       'click .next': 'nextPage'

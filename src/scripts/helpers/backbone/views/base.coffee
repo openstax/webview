@@ -35,14 +35,35 @@ define (require) ->
     initialize: () ->
       @_popovers = []
       @regions = new Regions(@regions, @)
+      @listenTo(@model, 'change', @render) if @model
+
+    _renderDom: (data) ->
+      @$el.html(@template?(data) or @template)
+
+    _render: () ->
+      data = @model?.toJSON() or {}
+
+      # Add data from template helpers to the model's data
+      _.each @templateHelpers, (value, key) =>
+        if typeof value is 'function'
+          data[key] = value.apply(@)
+        else
+          data[key] = value
+
+      @_renderDom(data)
 
     render: () ->
+      @onBeforeRender?()
       @detachPopovers()
-      @$el.html(@template?() or @template)
+      @_render()
+      @onRender?()
+      if @_rendered then @onDomRefresh?() else @_rendered = true
 
       return @
 
     close: () ->
+      @onBeforeClose?()
+
       _.each @regions, (region) ->
         region.close()
 
