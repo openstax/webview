@@ -37,7 +37,7 @@ define (require, exports, module) ->
       window._gaq.push(['_setAccount', module.config().analyticsID])
 
       # ## Add tracking with ga.js
-      loadUrl = Backbone.History.prototype.loadUrl
+      loadUrl = Backbone.History::loadUrl
       Backbone.History::loadUrl = () ->
         matched = loadUrl.apply(@, arguments)
         fragment = @fragment
