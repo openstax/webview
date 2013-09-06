@@ -44,7 +44,7 @@ define (require) ->
       data = @model?.toJSON() or {}
 
       if typeof @templateHelpers is 'function'
-        _.extend(data, @templateHelpers())
+        _.extend(data, @templateHelpers(data))
       else
         # Add data from template helpers to the model's data
         _.each @templateHelpers, (value, key) =>
