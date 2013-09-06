@@ -7,36 +7,36 @@
 .media-nav {
   background-color: @gray-lightest;
 
-  .book-nav {
+  > .book-nav {
     .flexbox();
     .flex-flow(row; nowrap);
     .justify-content(center);
     height: @nav-height;
     .user-select(none);
 
-    .progress, .back-to-top {
+    > .progress, > .back-to-top {
       .flex(1; 1; 75%);
     }
 
-    .progress {
+    > .progress {
       margin-top: (@nav-height - @progress-height)/2;
       height: @progress-height;
       border-radius: 8px;
       background-color: darken(@gray-lighter, 5%);
       box-shadow: none;
 
-      .progress-bar {
+      > .progress-bar {
         .box-sizing(content-box); // Prevent the white border from being visible at 100% progress
         border-right: 1px solid white;
         box-shadow: none;
       }
     }
 
-    .back-to-top {
+    > .back-to-top {
       text-align: center;
       line-height: @nav-height;
 
-      a {
+      > a {
         display: inline-block;
         padding: 0 5px;
       }
@@ -48,7 +48,7 @@
       }
     }
 
-    .next, .back {
+    > .next, > .back {
       display: inline-block;
       font-size: 1.6rem;
       line-height: @nav-height;
@@ -57,7 +57,7 @@
       .flex(1; 0; 75px);
     }
 
-    .back {
+    > .back {
       padding-right: 20px;
       text-align: right;
 
@@ -69,12 +69,12 @@
       }
     }
 
-    .next {
+    > .next {
       padding-left: 20px;
       text-align: left;
     }
 
-    .back::before, .next::after {
+    > .back::before, > .next::after {
       display: inline-block;
       margin: 0 10px;
       height: 1.6rem;

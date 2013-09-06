@@ -21,22 +21,12 @@
     text-decoration: none;
   }
 
-  .dropdown-toggle {
-    outline: none;
-    background: transparent url(images/icons/arrows-white.png) no-repeat 98% center;
-  }
-
-  .dropdown-menu {
-    max-height: 300px;
-    overflow-y: auto;
-  }
-
-  h3, span {
+  > h3, > span {
     line-height: @bar-height;
     text-align: center;
   }
 
-  h3 {
+  > h3 {
     .flex(2; 0; auto);
     color: @gray-lighter;
 
@@ -46,7 +36,7 @@
     }
   }
 
-  span {
+  > span {
     .flex(1; 1; auto);
     margin: 0 15px;
     font-size: 1.4em;
@@ -58,7 +48,7 @@
     }
   }
 
-  input {
+  > input {
     .flex(4; 4; 33%);
     height: @bar-height;
     padding-right: 37px;
@@ -100,8 +90,15 @@
       line-height: @bar-height;
     }
 
-    .dropdown-menu {
+    > .dropdown-toggle {
+      outline: none;
+      background: transparent url(images/icons/arrows-white.png) no-repeat 98% center;
+    }
+
+    > .dropdown-menu {
       width: 100%;
+      max-height: 300px;
+      overflow-y: auto;
     }
 
     @media screen and (max-width: @screen-xs-max) {

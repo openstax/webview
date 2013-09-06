@@ -13,17 +13,17 @@
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.9);
 
-  .logo, .links {
+  > .logo, > .links {
     display: inline-block;
   }
 
-  .logo {
+  > .logo {
     width: @logo-width;
     height: @logo-height;
     background: url(images/logo.png) center center no-repeat;
   }
 
-  .links {
+  > .links {
     position: absolute;
     top: 0;
     right: 0;
@@ -31,17 +31,17 @@
     left: @logo-width;
   }
 
-  .links .login {
+  > .links > .login {
     margin: 25px 25px 0 0;
     font-size: 0.9em;
     font-weight: 300;
     text-align: right;
 
-    ul {
+    > ul {
       padding: 0;
       list-style-type: none;
 
-      li {
+      > li {
         display: inline-block;
 
         &::after {
@@ -62,12 +62,12 @@
     }
   }
 
-  .links nav {
+  > .links > nav {
     display: table;
     width: 100%;
     margin-top: 20px;
 
-    a {
+    > a {
       display: table-cell;
       padding: 5px 10px;
       font-size: 1.1em;
@@ -76,7 +76,7 @@
       text-align: center;
     }
 
-    .active {
+    > .active {
       color: @link-active-color;
     }
 

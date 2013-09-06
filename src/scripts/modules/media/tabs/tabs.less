@@ -3,7 +3,7 @@
 .media-tabs {
   background-color: @gray-lightest;
 
-  ul {
+  > ul {
     margin: 0;
     padding: 0 0 0 30px;
     font-size: 0;
@@ -11,7 +11,7 @@
     color: @link-color;
     border-bottom: 2px solid white;
 
-    li {
+    > li {
       display: inline-block;
       padding: 7px 10px;
       margin-right: 3px;
@@ -19,12 +19,12 @@
       background-color: white;
       cursor: pointer;
 
-      .title {
+      > .title {
         margin-left: 2px;
         vertical-align: middle;
       }
 
-      .expand {
+      > .expand {
         font-weight: bold;
       }
     }
