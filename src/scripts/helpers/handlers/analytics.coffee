@@ -7,6 +7,8 @@ define (require, exports, module) ->
   # interact with global variables directly
   return new class AnalyticsHandler
     constructor: () ->
+      view = @
+
       #
       # # analytics.js
       #
@@ -21,7 +23,7 @@ define (require, exports, module) ->
 
       # Add tracking with analytics.js
       router.on 'route', () ->
-        AnalyticsHandler.ga('send', 'pageview')
+        view.ga('send', 'pageview')
 
       # Asynchronously load analytics.js.
       require(['https://www.google-analytics.com/analytics.js'])
@@ -40,20 +42,20 @@ define (require, exports, module) ->
         matched = loadUrl.apply(@, arguments)
         fragment = @fragment
         if not /^\//.test(fragment) then fragment = '/' + fragment
-        AnalyticsHandler.gaq(['_trackPageview', fragment])
+        view.gaq(['_trackPageview', fragment])
         return matched
 
       # Asynchronously load ga.js
       require(['https://www.google-analytics.com/ga.js'])
 
     # Wrapper functions to add analytics events
-    @ga: () -> window.ga?.apply(@, arguments) # analytics.js
-    @gaq: () -> window._gaq?.push(arguments) # ga.js
+    ga: () -> window.ga?.apply(@, arguments) # analytics.js
+    gaq: () -> window._gaq?.push(arguments) # ga.js
 
     # Send the current page to every analytics service
     send: () ->
       fragment = Backbone.history.fragment
       if not /^\//.test(fragment) then fragment = '/' + fragment
 
-      AnalyticsHandler.ga('send', 'pageview')
-      AnalyticsHandler.gaq(['_trackPageview', fragment])
+      @ga('send', 'pageview')
+      @gaq(['_trackPageview', fragment])
