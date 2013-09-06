@@ -11,11 +11,12 @@ define (require) ->
     linkTitle: 'More'
     linkExpandedTitle: 'Less'
 
-    templateHelpers:
-      title: () -> @title
-      link: () -> @link
-      linkTitle: () -> @linkTitle
-      content: () -> @template?() or @template
+    templateHelpers: () -> {
+      title: @title
+      link: @link
+      linkTitle: @linkTitle
+      content: @template?() or @template
+    }
 
     initialize: () ->
       super()
