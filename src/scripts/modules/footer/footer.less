@@ -14,7 +14,7 @@
     color: @gray-lighter;
   }
 
-  .copyright {
+  > .copyright {
     .make-sm-column(8);
     padding-right: 30px;
     text-align: left;
@@ -57,7 +57,7 @@
     }
   }
 
-  .connect, .share {
+  > .connect, > .share {
     .make-sm-column(2);
 
     h4 {
@@ -68,32 +68,32 @@
       color: @gray-lighter;
     }
 
-    ul {
+    > ul {
       padding: 0;
       list-style-type: none;
 
-      li {
+      > li {
         margin-bottom: 2px;
       }
     }
   }
 
-  .connect {
+  > .connect {
     @media (min-width: @screen-sm) {
       border-left: 1px solid @link-active-color;
       border-right: 1px solid @link-active-color;
     }
   }
 
-  .share {
-    ul {
+  > .share {
+    > ul {
       .flexbox();
       .flex-flow(row; wrap);
       .justify-content(center);
       max-width: 75px;
       margin: 0 auto;
 
-      li {
+      > li {
         .flex(1; 0; auto);
         margin: 5px 0;
       }
