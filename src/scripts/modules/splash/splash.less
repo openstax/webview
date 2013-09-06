@@ -5,18 +5,17 @@
 .splash {
   margin-top: -140px;
 
-  .banner {
+  > .banner {
     position: relative;
     width: 100%;
     height: @banner-height;
-
     background: url(images/banners/splash.jpg) no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 
-    .text-overlay {
+    > .text-overlay {
       position: absolute;
       top: 140px;
       right: 50%;
@@ -26,27 +25,27 @@
       background: linear-gradient(90deg, rgba(0,0,0,0.33) 0,rgba(0,0,0,0) 100%,rgba(0,0,0,0) 100%);
       color: white;
 
-      h1, p, a {
+      > h1, > p, > a {
         margin-left: 50px;
       }
 
-      h1, p {
+      > h1, > p {
         margin-top: 50px;
       }
 
-      h1 {
+      > h1 {
         margin-bottom: 30px;
         font-weight: 300;
         color: white;
       }
 
-      p {
+      > p {
         margin: 0 0 25px 50px;
         font-size: 1.6rem;
         font-weight: 300;
       }
-      
-      a {
+
+      > a {
         font-size: 1.6rem;
       }
     }
