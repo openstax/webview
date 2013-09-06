@@ -7,8 +7,6 @@ define (require, exports, module) ->
   # interact with global variables directly
   return new class AnalyticsHandler
     constructor: () ->
-      view = @
-
       # Setup temporary analytics.js objects
       window.GoogleAnalyticsObject = 'ga'
       window.ga = () -> (window.ga.q ?= []).push(arguments)
@@ -22,8 +20,8 @@ define (require, exports, module) ->
       window._gaq.push(['_setAccount', module.config().analyticsID])
 
       # Add tracking
-      router.on 'route', () ->
-        view.send()
+      router.on 'route', () =>
+        @send()
 
       # Asynchronously load analytics.js.
       require(['https://www.google-analytics.com/analytics.js'])
