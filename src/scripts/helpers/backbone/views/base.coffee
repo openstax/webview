@@ -43,12 +43,15 @@ define (require) ->
     _render: () ->
       data = @model?.toJSON() or {}
 
-      # Add data from template helpers to the model's data
-      _.each @templateHelpers, (value, key) =>
-        if typeof value is 'function'
-          data[key] = value.apply(@)
-        else
-          data[key] = value
+      if typeof @templateHelpers is 'function'
+        _.extend(data, @templateHelpers(data))
+      else
+        # Add data from template helpers to the model's data
+        _.each @templateHelpers, (value, key) =>
+          if typeof value is 'function'
+            data[key] = value.apply(@)
+          else
+            data[key] = value
 
       @_renderDom(data)
 

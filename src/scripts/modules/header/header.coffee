@@ -6,8 +6,9 @@ define (require) ->
 
   return class HeaderView extends BaseView
     template: template
-    templateHelpers:
-      page: () -> @page
+    templateHelpers: () -> {
+      page: @page
+    }
 
     initialize: (options) ->
       super()
