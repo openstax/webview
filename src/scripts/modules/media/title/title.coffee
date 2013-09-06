@@ -7,7 +7,9 @@ define (require) ->
   require('less!./title')
 
   return class MediaTitleView extends BaseView
-    template: (data) ->
+    template: template
+
+    templateHelpers: (data) ->
       data.share =
         url: window.location.href.split('#')[0] # Get the current URL without a hash string
         source: data.source or data.currentPage.source or 'OpenStax College'
@@ -19,7 +21,7 @@ define (require) ->
       _.each data.share, (value, key, list) ->
         list[key] = encodeURI(value)
 
-      return template(data)
+      return {share: data.share}
 
     onRender: () ->
       $share = @$el.find('.share')
