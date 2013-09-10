@@ -18,8 +18,8 @@ define (require) ->
     $(document).on 'click', 'a:not([data-bypass])', (e) ->
       href = $(this).attr('href')
 
-      # Don't handle navigation if the default handling was already prevented
-      if e.isDefaultPrevented() or href.charAt(0) is '#' then return
+      # Only handle links intended to be processed by Backbone
+      if e.isDefaultPrevented() or href.charAt(0) is '#' or /^mailto:.+/.test(link) then return
 
       e.preventDefault()
 
@@ -33,7 +33,7 @@ define (require) ->
       root: root
 
     # Prefix all non-external AJAX requests with the root URI
-    $.ajaxPrefilter ( options, originalOptions, jqXHR ) ->
+    $.ajaxPrefilter (options, originalOptions, jqXHR) ->
       if not external.test(options.url)
         options.url = root + options.url
 

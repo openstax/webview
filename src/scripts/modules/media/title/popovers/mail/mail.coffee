@@ -13,4 +13,11 @@ define (require) ->
       events:
         'submit form': (e) ->
           e.preventDefault()
-          console.log('submitted')
+
+          $form = $(e.currentTarget)
+          subject = @model.get('title')
+          # from = $form.find('.js-email')
+          to = $form.find('.js-target-email').val()
+          message = $form.find('.js-message').val()
+
+          document.location.href = "mailto:#{to}?subject=#{subject}&body=#{message}"
