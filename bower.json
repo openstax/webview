@@ -1,6 +1,6 @@
 {
     "name": "connexions-webview",
-    "version": "0.3.0",
+    "version": "0.3.1",
 
     "ignore": [
         "**/.*",
@@ -16,8 +16,8 @@
         "requirejs": "~2.1.8",
         "requirejs-text": "~2.0.10",
         "require-cs": "~0.4.4",
-        "require-css": "~0.0.7",
-        "require-less": "~0.0.7",
+        "require-css": "~0.0.8",
+        "require-less": "~0.0.8",
         "require-handlebars-plugin": "a9819e78f54dd5655b18dea976a2507baf660e1c"
     },
 
