@@ -24,4 +24,4 @@ define (require) ->
 
     onRender: () ->
       $share = @$el.find('.share')
-      @attachPopover new MailPopoverView({owner: $share.find('.mail')})
+      @attachPopover new MailPopoverView({owner: $share.find('.mail'), model: @model})
