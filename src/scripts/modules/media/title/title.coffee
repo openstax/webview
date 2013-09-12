@@ -9,6 +9,7 @@ define (require) ->
   return class MediaTitleView extends BaseView
     template: template
     templateHelpers: (data) ->
+      encodedTitle = encodeURI(data.title)
       data.share =
         url: Backbone.history.fragment
         source: data.source or data.currentPage.source or 'OpenStax College'
@@ -20,7 +21,7 @@ define (require) ->
       _.each data.share, (value, key, list) ->
         list[key] = encodeURI(value)
 
-      return {share: data.share}
+      return {share: data.share, encodedTitle: encodedTitle}
 
     onRender: () ->
       $share = @$el.find('.share')
