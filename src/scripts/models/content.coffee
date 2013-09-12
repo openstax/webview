@@ -80,14 +80,13 @@ define (require) ->
 
       @set('page', num)
 
-      num-- # Page numbers begin at 1, but arrays begin at 0
       currentPage = @get('currentPage')
       currentPage.clear({silent: true}).set(currentPage.defaults) # Reset the current page
-      contents = @get('toc').at(num).toJSON()
+      contents = @get('toc').at(num-1).toJSON()
       currentPage.id = contents.id
-      currentPage.fetch()
-        #success: (model, response, options) ->
-          #currentPage.set('title', contents[num].title) if contents[num].title
+      currentPage.fetch
+        success: (model, response, options) ->
+          currentPage.set('title', contents.title) if contents.title
 
     nextPage: () ->
       currentPage = @get('currentPage')
