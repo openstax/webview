@@ -3,6 +3,7 @@
 ## Development and Building
 
 Below are instructions for hosting and building the site and a layout of how the code is organized.
+CNX webview is designed to be run as a frontend for [cnx-archive](https://github.com/Connexions/cnx-archive).
 
 ### Installing & Hosting
 
