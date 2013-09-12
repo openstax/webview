@@ -7,8 +7,10 @@ define (require) ->
     'application/vnd.org.cnx.collection' : 'book'
     'application/vnd.org.cnx.module': 'module'
 
+  CONTENT_URI = "#{location.protocol}//#{location.hostname}:6543/contents"
+
   class CurrentPage extends Backbone.Model
-    url: () -> "/content/#{@id}"
+    url: () -> "#{CONTENT_URI}/#{@id}"
 
     defaults:
       title: 'Untitled'
@@ -25,7 +27,7 @@ define (require) ->
       return response
 
   return class Content extends Backbone.Model
-    url: () -> "/content/#{@id}"
+    url: () -> "#{CONTENT_URI}/#{@id}"
 
     defaults:
       title: 'Untitled Book'
@@ -84,8 +86,8 @@ define (require) ->
       currentPage.clear({silent: true}).set(currentPage.defaults) # Reset the current page
       contents = @get('toc').at(num).toJSON()
       currentPage.id = contents.id
-      currentPage.fetch
-        success: (model, response, options) ->
+      currentPage.fetch()
+        #success: (model, response, options) ->
           #currentPage.set('title', contents[num].title) if contents[num].title
 
     nextPage: () ->
