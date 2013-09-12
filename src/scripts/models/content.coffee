@@ -1,4 +1,5 @@
 define (require) ->
+  _ = require('underscore')
   Backbone = require('backbone')
 
   MEDIA_TYPES =
@@ -10,10 +11,7 @@ define (require) ->
 
     defaults:
       title: 'Untitled'
-      author:
-        name: 'Unknown'
-        email: '#'
-      body: 'No content'
+      content: 'No content'
 
   return class Content extends Backbone.Model
     url: () -> "/content/#{@id}"
@@ -41,12 +39,27 @@ define (require) ->
       @set('type', type)
 
       if type is 'book'
-        @set('pages', @get('contents').length)
+        @setupToc()
         @setPage(page or 1) # Default to page 1
       else
         currentPage = @get('currentPage')
         currentPage.id = @id
         currentPage.fetch()
+
+    # Create a flat collection to store all the pages
+    setupToc: () ->
+      toc = new Backbone.Collection()
+
+      _.each @get('tree').contents, (item, index, contents) ->
+        if item.contents
+          _.each item.contents, (module, ind, subcol) ->
+            module.parent = index # Module parents are numbered by their position in the tree
+            toc.add(module)
+        else
+          toc.add(item)
+
+      @set('toc', toc)
+      @set('pages', toc.models.length)
 
     setPage: (num) ->
       if num < 1 then num = 1
@@ -55,13 +68,14 @@ define (require) ->
 
       @set('page', num)
 
+      num-- # Page numbers begin at 1, but arrays begin at 0
       currentPage = @get('currentPage')
       currentPage.clear({silent: true}).set(currentPage.defaults) # Reset the current page
-      contents = @get('contents')
-      currentPage.id = contents[num-1].id
+      contents = @get('toc').at(num).toJSON()
+      currentPage.id = contents.id
       currentPage.fetch
         success: (model, response, options) ->
-          currentPage.set('title', contents[num-1].title) if contents[num-1].title
+          #currentPage.set('title', contents[num].title) if contents[num].title
 
     nextPage: () ->
       currentPage = @get('currentPage')
