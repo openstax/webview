@@ -13,7 +13,7 @@
       <span>Module by:</span>
       <span class="module-author">
         {{#each currentPage.authors}}
-          <a href="mailto:{{email}}?subject={{../currentPage.title}}">{{fullname}}</a>
+          <a href="mailto:{{email}}?subject={{../currentPage.encodedTitle}}">{{fullname}}</a>
         {{/each}}
         <img src="images/icons/mail.png" width="18" height="12" alt="Mail" />
       </span>
