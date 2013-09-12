@@ -1,4 +1,5 @@
 define (require) ->
+  $ = require('jquery')
   _ = require('underscore')
   Backbone = require('backbone')
 
@@ -12,6 +13,16 @@ define (require) ->
     defaults:
       title: 'Untitled'
       content: 'No content'
+
+    parse: (response, options) ->
+      # jQuery can not build a jQuery object with <head> or <body> tags,
+      # and will instead move all elements in them up one level.
+      # Use a regex to extract everything in the body and put it into a div instead.
+      $body = $('<div>' + response.content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>')
+      $body.find('.title').eq(0).remove()
+      response.content = $body.html()
+
+      return response
 
   return class Content extends Backbone.Model
     url: () -> "/content/#{@id}"
