@@ -1,0 +1,91 @@
+{
+  "googleAnalytics": "UA-XXXXX-Y",
+  "submitlog": "",
+  "abstract": "This introductory, algebra-based, two-semester college physics book is grounded with real-world examples, illustrations, and explanations to help students grasp key, fundamental physics concepts. This online, fully editable and customizable title includes learning objectives, concept questions, links to labs and simulations, and ample practice opportunities to solve traditional physics application problems.",
+  "revised": "2013-07-31 15:07:20.342798-04",
+  "roles": null,
+  "id": "e79ffde3-7fb4-4af3-9ec8-df648b391597",
+  "subject": "",
+  "title": "College Physics",
+  "mediaType": "application/vnd.org.cnx.collection",
+  "version": "1.7",
+  "parentId": null,
+  "stateid": null,
+  "maintainers": [],
+  "authors": [],
+  "parentVersion": null,
+  "licensors": [],
+  "license": "http://creativecommons.org/licenses/by/3.0/",
+  "language": "en",
+  "created": "2013-07-31 15:07:20.342798-04",
+  "tree": {
+    "id": "e79ffde3-7fb4-4af3-9ec8-df648b391597@1.7",
+    "contents": [{
+      "id": "209deb1f-1a46-4369-9e0d-18674cf58a3e@1.7",
+      "title": "80"
+    }, {
+      "id": "subcol",
+      "contents": [{
+        "id": "f3c9ab70-a916-4d8c-9256-42953287b4e9@1.3",
+        "title": "73"
+      }, {
+        "id": "d395b566-5fe3-4428-bcb2-19016e3aa3ce@1.4",
+        "title": "80"
+      }, {
+        "id": "c8bdbabc-62b1-4a5f-b291-982ab25756d7@1.6",
+        "title": "80"
+      }, {
+        "id": "5152cea8-829a-4aaf-bcc5-c58a416ecb66@1.7",
+        "title": "65"
+      }, {
+        "id": "5838b105-41cd-4c3d-a957-3ac004a48af3@1.5",
+        "title": "65"
+      }],
+      "title": "73"
+    }, {
+      "id": "subcol",
+      "contents": [{
+        "id": "24a2ed13-22a6-47d6-97a3-c8aa8d54ac6d@1.2",
+        "title": "73"
+      }, {
+        "id": "ea271306-f7f2-46ac-b2ec-1d80ff186a59@1.5",
+        "title": "70"
+      }, {
+        "id": "26346a42-84b9-48ad-9f6a-62303c16ad41@1.6",
+        "title": "68"
+      }, {
+        "id": "56f1c5c1-4014-450d-a477-2121e276beca@1.8",
+        "title": "69"
+      }],
+      "title": "70"
+    }, {
+      "id": "f6024d8a-1868-44c7-ab65-45419ef54881@1.3",
+      "title": "65"
+    }, {
+      "id": "7250386b-14a7-41a2-b8bf-9e9ab872f0dc@1.2",
+      "title": "83"
+    }, {
+      "id": "c0a76659-c311-405f-9a99-15c71af39325@1.5",
+      "title": "85"
+    }, {
+      "id": "ae3e18de-638d-4738-b804-dc69cd4db3a3@1.4",
+      "title": "71"
+    }],
+    "title": "67"
+  },
+  "doctype": "",
+  "submitter": "",
+  "parentAuthors": [],
+  "authors": [{
+    "website": null,
+    "surname": null,
+    "suffix": null,
+    "firstname": null,
+    "title": null,
+    "_legacy_id": null,
+    "othername": null,
+    "email": "cnx@cnx.org",
+    "fullname": "OpenStax College",
+    "id": "e09581bb-87ab-45bd-a05b-72762a3829a2"
+  }]
+}
