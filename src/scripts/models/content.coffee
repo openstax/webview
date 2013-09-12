@@ -15,6 +15,7 @@ define (require) ->
     defaults:
       title: 'Untitled'
       content: 'No content'
+      authors: []
 
     parse: (response, options) ->
       # jQuery can not build a jQuery object with <head> or <body> tags,
@@ -32,9 +33,7 @@ define (require) ->
     defaults:
       title: 'Untitled Book'
       pages: 1
-      author:
-        name: 'Unknown'
-        email: '#'
+      authors: []
       currentPage: new CurrentPage()
 
     toJSON: () ->
