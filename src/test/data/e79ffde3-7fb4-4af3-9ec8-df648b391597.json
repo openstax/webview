@@ -22,7 +22,7 @@
     "id": "e79ffde3-7fb4-4af3-9ec8-df648b391597@1.7",
     "contents": [{
       "id": "209deb1f-1a46-4369-9e0d-18674cf58a3e@1.7",
-      "title": "Preface to College Physics"
+      "title": "Preface"
     }, {
       "id": "subcol",
       "contents": [{
@@ -41,12 +41,12 @@
         "id": "5838b105-41cd-4c3d-a957-3ac004a48af3@1.5",
         "title": "Approximation"
       }],
-      "title": "73"
+      "title": "Introduction: The Nature of Science and Physics"
     }, {
       "id": "subcol",
       "contents": [{
         "id": "24a2ed13-22a6-47d6-97a3-c8aa8d54ac6d@1.2",
-        "title": "Introduction: Further Applications of Newton’s Laws"
+        "title": "Introduction: Further Applications of Newton\u2019s Laws"
       }, {
         "id": "ea271306-f7f2-46ac-b2ec-1d80ff186a59@1.5",
         "title": "Friction"
@@ -57,7 +57,7 @@
         "id": "56f1c5c1-4014-450d-a477-2121e276beca@1.8",
         "title": "Elasticity: Stress and Strain"
       }],
-      "title": "70"
+      "title": "Further Applications of Newton's Laws: Friction, Drag, and Elasticity"
     }, {
       "id": "f6024d8a-1868-44c7-ab65-45419ef54881@1.3",
       "title": "Atomic Masses"
@@ -71,7 +71,7 @@
       "id": "ae3e18de-638d-4738-b804-dc69cd4db3a3@1.4",
       "title": "Glossary of Key Symbols and Notation"
     }],
-    "title": "67"
+    "title": "College Physics"
   },
   "doctype": "",
   "submitter": "",
