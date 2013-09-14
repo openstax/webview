@@ -20,7 +20,7 @@ define (require) ->
       _.each data.share, (value, key, list) ->
         list[key] = encodeURI(value)
 
-      return {share: data.share}
+      return {share: data.share, encodedTitle: encodeURI(data.title)}
 
     onRender: () ->
       $share = @$el.find('.share')
