@@ -1,0 +1,24 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Edited</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {{#each results.items}}
+      <tr>
+        <td>{{type}}</td>
+        <td>
+          <h4>{{title}}</h4>
+          <span>{{summarySnippet}}</span>
+        </td>
+        <td>{{author}}</td>
+        <td>{{date pubDate}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
