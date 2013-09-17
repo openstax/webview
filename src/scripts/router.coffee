@@ -16,13 +16,7 @@ define (require) ->
       @route 'content/:uuid(/:page)', 'media', (uuid, page) ->
         @appView.render('content', {uuid: uuid, page: page})
 
-      # Backbone will ignore query strings when parsing unless
-      # explicitly sent with router.navigate(), so we need
-      # two different routes to handle searches.
-      @route 'search', 'search', () ->
-        @appView.render('search')
-
-      @route /^search\?q=(.+)/, 'search', () ->
+      @route /^search/, 'search', () ->
         @appView.render('search')
 
     # Helper function to determine the current route's parameters
