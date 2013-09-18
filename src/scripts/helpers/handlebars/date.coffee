@@ -1,40 +1,20 @@
 define (require) ->
   Handlebars = require('Handlebars')
 
-  MONTHS = [
-    'January'
-    'February'
-    'March'
-    'April'
-    'May'
-    'June'
-    'July'
-    'August'
-    'September'
-    'October'
-    'November'
-    'December'
-  ]
-
-  DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-
   convertDate = (date) ->
-    month = MONTHS[date.getMonth()].substr(0,3)
-    day = date.getDate()
-    year = date.getFullYear()
-
-    return "#{month} #{day}, #{year}"
+    options = {year: 'numeric', month: 'short', day: 'numeric'}
+    return date.toLocaleDateString(navigator.language, options)
 
   Handlebars.registerHelper 'date', (period) ->
-    date = new Date()
-
     if period instanceof Date
       html = convertDate(period)
     else
+      date = new Date()
       switch period
         when 'year' then html = date.getFullYear()
-        when 'month' then html = MONTHS[date.getMonth()]
-        when 'day' then html = DAYS[date.getDay()]
+        when 'month' then html = date.toLocaleDateString(navigator.language, {month: "long"})
+        when 'day' then html = date.toLocaleDateString(navigator.language, {day: "numeric"})
+        when 'weekday' then html = date.toLocaleDateString(navigator.language, {weekday: "long"})
         else html = convertDate(new Date(period))
 
     return new Handlebars.SafeString(html.toString())
