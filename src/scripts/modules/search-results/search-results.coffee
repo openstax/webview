@@ -4,11 +4,11 @@ define (require) ->
   SearchHeaderView = require('cs!./header/header')
   SearchFilterView = require('cs!./filter/filter')
   SearchBreadcrumbsView = require('cs!./breadcrumbs/breadcrumbs')
-  SearchResultsView = require('cs!./results/results')
-  template = require('hbs!./search-template')
-  require('less!./search')
+  SearchResultsListView = require('cs!./results/results')
+  template = require('hbs!./search-results-template')
+  require('less!./search-results')
 
-  return class SearchView extends BaseView
+  return class SearchResultsView extends BaseView
     template: template
 
     initialize: (options) ->
@@ -30,4 +30,4 @@ define (require) ->
       @regions.header.show(new SearchHeaderView({model: @results}))
       @regions.filter.show(new SearchFilterView({model: @results}))
       @regions.breadcrumbs.show(new SearchBreadcrumbsView({model: @results}))
-      @regions.results.show(new SearchResultsView({model: @results}))
+      @regions.results.show(new SearchResultsListView({model: @results}))
