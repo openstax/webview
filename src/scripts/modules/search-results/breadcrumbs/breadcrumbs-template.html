@@ -1,0 +1,7 @@
+{{#each query.limits}}
+  {{#each this}}
+    <span class="breadcrumb">
+      <span class="limit">{{@key}}</span><span class="value">{{this}}</span>
+    </span>
+  {{/each}}
+{{/each}}

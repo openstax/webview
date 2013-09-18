@@ -8,7 +8,7 @@ define (require) ->
   template = require('hbs!./home-template')
   require('less!./home')
 
-  return class HomeView extends BaseView
+  return class HomePage extends BaseView
     template: template
 
     regions:
