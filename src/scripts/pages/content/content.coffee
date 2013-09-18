@@ -7,7 +7,7 @@ define (require) ->
   template = require('hbs!./content-template')
   require('less!./content')
 
-  return class ContentView extends BaseView
+  return class ContentPage extends BaseView
     template: template
 
     initialize: (options) ->

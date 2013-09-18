@@ -88,7 +88,7 @@ module.exports = (grunt) ->
           value: 120
         cyclomatic_complexity:
           level: 'error'
-          value: 10
+          value: 13
 
       source: ['src/**/*.coffee']
       grunt: 'Gruntfile.coffee'
@@ -129,6 +129,7 @@ module.exports = (grunt) ->
               'main'
               'cs!pages/home/home'
               'cs!pages/content/content'
+              'cs!pages/search/search'
             ]
             excludeShallow: [
               'css/css-builder'

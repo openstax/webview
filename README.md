@@ -4,6 +4,8 @@
 
 Below are instructions for hosting and building the site and a layout of how the code is organized.
 
+CNX webview is designed to be run as a frontend for [cnx-archive](https://github.com/Connexions/cnx-archive).
+
 ### Installing & Hosting
 
 #### Installing
@@ -74,6 +76,8 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
 When running the development version of the site with its corresponding config, you can
 access a test version of the site that simulates AJAX requests by appending `/test` to the root URI
 (for example: `http://localhost/test`).
+
+Note: Mock test data is only available for the [College Physics](http://localhost/test/content/e79ffde3-7fb4-4af3-9ec8-df648b391597) book.
 
 ### Directory Layout
 

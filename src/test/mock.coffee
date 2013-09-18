@@ -5,8 +5,15 @@ define (require) ->
   # GET
 
   $.mockjax (settings) ->
-    # settings.url == '/content/<uuid>'
-    service = settings.url.match(/\/content\/(.*)$/)
+    # settings.url == '/contents/<uuid>'
+    service = settings.url.match(/\/contents\/(.*)$/)
 
     if service
-      return {proxy: '/test/data/' + service[1] + '.json'}
+      return {proxy: 'data/' + service[1] + '.json'}
+
+  $.mockjax (settings) ->
+    # settings.url == '/search?q=physics'
+    service = settings.url.match(/\/search\?q=physics$/)
+
+    if service
+      return {proxy: 'data/search.json'}
