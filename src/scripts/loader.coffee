@@ -32,6 +32,10 @@ define (require) ->
       pushState: true
       root: root
 
+    # Force Backbone to register the full path including the query in its history
+    if location.search
+      router.navigate(location.pathname + location.search, {replace: true})
+
     # Prefix all non-external AJAX requests with the root URI
     $.ajaxPrefilter (options, originalOptions, jqXHR) ->
       if not external.test(options.url)
