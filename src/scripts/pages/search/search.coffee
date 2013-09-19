@@ -3,8 +3,7 @@ define (require) ->
   HeaderView = require('cs!modules/header/header')
   FooterView = require('cs!modules/footer/footer')
   FindContentView = require('cs!modules/find-content/find-content')
-  SearchResultsView = require('cs!modules/search-results/search-results')
-  AdvancedSearchView = require('cs!modules/advanced-search/advanced-search')
+  SearchView = require('cs!modules/search/search')
   template = require('hbs!./search-template')
   require('less!./search')
 
@@ -21,8 +20,4 @@ define (require) ->
       @parent?.regions.header.show(new HeaderView({page: 'search'}))
       @parent?.regions.footer.show(new FooterView({page: 'search'}))
       @regions.search.show(new FindContentView())
-
-      if location.search
-        @regions.search.append(new SearchResultsView({query: location.search}))
-      else
-        @regions.search.append(new AdvancedSearchView())
+      @regions.search.append(new SearchView())
