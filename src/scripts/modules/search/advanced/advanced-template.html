@@ -8,7 +8,7 @@
       <label>
         <span class="control-label col-sm-2">Author</span>
         <div class="col-sm-10">
-          <input type="text" class="form-control" />
+          <input type="text" name="author" class="form-control" />
         </div>
       </label>
     </div>
@@ -17,7 +17,7 @@
       <label>
         <span class="control-label col-sm-2">Title</span>
         <div class="col-sm-10">
-          <input type="text" class="form-control" />
+          <input type="text" name="title" class="form-control" />
         </div>
       </label>
     </div>
@@ -26,7 +26,8 @@
       <label>
         <span class="control-label col-sm-2">Subject</span>
         <div class="col-sm-10">
-          <select class="form-control">
+          <select name="subject" class="form-control">
+            <option value="">Any</option>
             <option>Arts</option>
             <option>Business</option>
             <option>Humanities</option>
@@ -42,7 +43,7 @@
       <label>
         <span class="control-label col-sm-2">Keywords</span>
         <div class="col-sm-10">
-          <input type="text" class="form-control" />
+          <input type="text" name="keywords" class="form-control" />
         </div>
       </label>
     </div>
@@ -51,9 +52,10 @@
       <label>
         <span class="control-label col-sm-2">Type</span>
         <div class="col-sm-10">
-          <select class="form-control">
-            <option>Any</option>
-            <option>Books Only</option>
+          <select name="type" class="form-control">
+            <option value="">Any</option>
+            <option value="book">Books</option>
+            <option value="page">Pages</option>
           </select>
         </div>
       </label>
@@ -63,11 +65,11 @@
       <label>
         <span class="control-label col-sm-2">Language</span>
         <div class="col-sm-10">
-          <select class="form-control">
-            <option>Any</option>
-            <option>English</option>
-            <option>Vietnamese (Tiếng Việt)</option>
-            <option>Spanish (Español)</option>
+          <select name="language" class="form-control">
+            <option value="">Any</option>
+            <option value="english">English</option>
+            <option value="vietnamese">Vietnamese (Tiếng Việt)</option>
+            <option value="spanish">Spanish (Español)</option>
           </select>
         </div>
       </label>
@@ -77,8 +79,8 @@
       <label>
         <span class="control-label col-sm-2">Publication Date</span>
         <div class="col-sm-10">
-          <select class="form-control">
-            <option>Any</option>
+          <select name="pubDate" class="form-control">
+            <option value="">Any</option>
             <option>2013</option>
             <option>2012</option>
             <option>2011</option>
@@ -91,10 +93,10 @@
       <label>
         <span class="control-label col-sm-2">Sort By</span>
         <div class="col-sm-10">
-          <select class="form-control">
-            <option>Relevance</option>
-            <option>Publication Date</option>
-            <option>Popularity</option>
+          <select name="sort" class="form-control">
+            <option value="relevance">Relevance</option>
+            <option value="pubDate">Publication Date</option>
+            <option value="popularity">Popularity</option>
           </select>
         </div>
       </label>
