@@ -13,7 +13,7 @@ define (require) ->
     initialize: () ->
       super()
 
-      if location.search
+      if location.search and location.search isnt '?q='
         @results = new SearchResults({query: location.search})
 
     regions:
