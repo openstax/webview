@@ -1,7 +1,6 @@
 define (require) ->
   SearchResults = require('cs!models/search-results')
   BaseView = require('cs!helpers/backbone/views/base')
-  SearchHeaderView = require('cs!./header/header')
   AdvancedSearchView = require('cs!./advanced/advanced')
   SearchResultsView = require('cs!./results/results')
   template = require('hbs!./search-template')
@@ -20,9 +19,7 @@ define (require) ->
       search: '.search'
 
     onRender: () ->
-      @regions.search.show(new SearchHeaderView({model: @results}))
-
       if @results
-        @regions.search.append(new SearchResultsView({results: @results}))
+        @regions.search.show(new SearchResultsView({results: @results}))
       else
-        @regions.search.append(new AdvancedSearchView())
+        @regions.search.show(new AdvancedSearchView())

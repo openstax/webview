@@ -2,13 +2,15 @@
 @import "../../../../styles/mixins.less";
 
 .search .results {
-  .make-row();
+  .wrapper {
+    .make-row();
 
-  .filter {
-    .make-xs-column(3);
-  }
+    .filter {
+      .make-xs-column(3);
+    }
 
-  .info {
-    .make-xs-column(9);
+    .info {
+      .make-xs-column(9);
+    }
   }
 }
