@@ -36,9 +36,10 @@ define (require) ->
         _.map obj, (limit, index) ->
           if not limit.value then return
 
+          # Split keywords into multiple keyword:value pairs
           if limit.name is 'keywords'
-            # split into multiple keyword:value pairs
-            keywords = _.map limit.value.split(' '), (value) -> {name: 'keyword', value: value}
+            keywords = limit.value.match(/(?:[^\s"]+|"[^"]*")+/g)
+            keywords = _.map keywords, (value) -> {name: 'keyword', value: value}
             return format(keywords)
 
           if /\s/g.test(limit.value) and not /"/g.test(limit.value)
