@@ -19,7 +19,7 @@ define (require) ->
       href = $(this).attr('href')
 
       # Only handle links intended to be processed by Backbone
-      if e.isDefaultPrevented() or href.charAt(0) is '#' or /^mailto:.+/.test(link) then return
+      if e.isDefaultPrevented() or href.charAt(0) is '#' or /^mailto:.+/.test(href) then return
 
       e.preventDefault()
 
