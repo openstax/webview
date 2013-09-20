@@ -32,12 +32,18 @@ define (require) ->
       router.navigate("search?q=#{query}", {trigger: true})
 
     formatQuery: (obj) ->
-      query = _.map obj, (limit, index) ->
-        if not limit.value then return
+      format = (obj) ->
+        _.map obj, (limit, index) ->
+          if not limit.value then return
 
-        if /\s/g.test(limit.value) and not /"/g.test(limit.value)
-          limit.value = "\"#{limit.value}\""
+          if limit.name is 'keywords'
+            # split into multiple keyword:value pairs
+            keywords = _.map limit.value.split(' '), (value) -> {name: 'keyword', value: value}
+            return format(keywords)
 
-        return "#{limit.name}:#{limit.value}"
+          if /\s/g.test(limit.value) and not /"/g.test(limit.value)
+            limit.value = "\"#{limit.value}\""
 
-      return _.compact(query).join(' ')
+          return "#{limit.name}:#{limit.value}"
+
+      return _.compact(_.flatten(format(obj))).join(' ')
