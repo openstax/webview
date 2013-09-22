@@ -19,7 +19,7 @@ define (require) ->
       content: '#content'
 
     onRender: () ->
-      @parent?.regions.header.show(new HeaderView({page: 'content'}))
-      @parent?.regions.footer.show(new FooterView({page: 'content'}))
+      @parent.regions.header.show(new HeaderView({page: 'content'}))
+      @parent.regions.footer.show(new FooterView({page: 'content'}))
       @regions.content.append(new FindContentView())
       @regions.content.append(new MediaView({uuid: @uuid, page: @page}))

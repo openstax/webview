@@ -19,8 +19,8 @@ define (require) ->
       #spotlight: '#spotlight'
 
     onRender: () ->
-      @parent?.regions.header.show(new HeaderView({page: 'home'}))
-      @parent?.regions.footer.show(new FooterView({page: 'home'}))
+      @parent.regions.header.show(new HeaderView({page: 'home'}))
+      @parent.regions.footer.show(new FooterView({page: 'home'}))
 
       @regions.splash.show(new SplashView())
       @regions.featured.show(new FeaturedBooksView())
