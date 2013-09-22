@@ -10,15 +10,17 @@ define (require) ->
     template: template
 
     events:
-      'click .dropdown-toggle': 'clickToggle'
+      'click .dropdown-menu > li': 'selectSubject'
       'keyup input': 'triggerSearch'
 
-    clickToggle: (e) ->
+    selectSubject: (e) ->
       e.preventDefault()
+
+      @search("subject:\"#{$(e.currentTarget).text()}\"")
 
     triggerSearch: (e) ->
       if e.keyCode is 13
         @search($(e.currentTarget).val())
-    
+
     search: (query) ->
       router.navigate("search?q=#{query}", {trigger: true})
