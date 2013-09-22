@@ -17,8 +17,8 @@ define (require) ->
       search: '#search'
 
     onRender: () ->
-      @parent?.regions.header.show(new HeaderView({page: 'search'}))
-      @parent?.regions.footer.show(new FooterView({page: 'search'}))
+      @parent.regions.header.show(new HeaderView({page: 'search'}))
+      @parent.regions.footer.show(new FooterView({page: 'search'}))
 
       @regions.search.append(new FindContentView())
       @regions.search.append(new SearchView({query: location.search}))
