@@ -7,7 +7,7 @@ define (require) ->
   template = require('hbs!./content-template')
   require('less!./content')
 
-  return class ContentView extends BaseView
+  return class ContentPage extends BaseView
     template: template
 
     initialize: (options) ->
@@ -19,8 +19,8 @@ define (require) ->
       content: '#content'
 
     onRender: () ->
-      @parent?.regions.header.show(new HeaderView({page: 'content'}))
-      @parent?.regions.footer.show(new FooterView({page: 'content'}))
+      @parent.regions.header.show(new HeaderView({page: 'content'}))
+      @parent.regions.footer.show(new FooterView({page: 'content'}))
 
       if @uuid
         @regions.content.append(new FindContentView())

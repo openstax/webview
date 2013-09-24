@@ -10,3 +10,10 @@ define (require) ->
 
     if service
       return {proxy: 'data/' + service[1] + '.json'}
+
+  $.mockjax (settings) ->
+    # settings.url == '/search?q=physics'
+    service = settings.url.match(/\/search\?q=physics$/)
+
+    if service
+      return {proxy: 'data/search.json'}

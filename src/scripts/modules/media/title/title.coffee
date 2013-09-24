@@ -8,19 +8,21 @@ define (require) ->
 
   return class MediaTitleView extends BaseView
     template: template
-    templateHelpers: (data) ->
-      data.share =
+    templateHelpers: () ->
+      title = @model.get('title')
+      currentPage = @model.get('currentPage')
+      share =
         url: Backbone.history.fragment
-        source: data.source or data.currentPage.source or 'OpenStax College'
-        summary: data.summary or data.currentPage.summary or 'An OpenStax College book.'
-        title: data.title or data.currentPage.title
-        image: data.image or data.currentPage.image or "#{Backbone.history.location.host}/images/logo.png"
+        source: @model.get('source') or currentPage.get('source') or 'OpenStax College'
+        summary: @model.get('summary') or currentPage.get('summary') or 'An OpenStax College book.'
+        title: title or currentPage.get('title')
+        image: @model.get('image') or currentPage.get('image') or "#{Backbone.history.location.host}/images/logo.png"
 
       # Encode all of the shared values for a URI
-      _.each data.share, (value, key, list) ->
+      _.each share, (value, key, list) ->
         list[key] = encodeURI(value)
 
-      return {share: data.share, encodedTitle: encodeURI(data.title)}
+      return {share: share, encodedTitle: encodeURI(title)}
 
     onRender: () ->
       $share = @$el.find('.share')

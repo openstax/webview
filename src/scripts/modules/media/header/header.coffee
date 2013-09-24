@@ -7,9 +7,10 @@ define (require) ->
 
   return class MediaHeaderView extends BaseView
     template: template
-    templateHelpers: (data) ->
-      data.currentPage.encodedTitle = encodeURI(data.currentPage.title)
-      return data.currentPage
+    templateHelpers: () ->
+      currentPage = @model.get('currentPage').toJSON()
+      currentPage.encodedTitle = encodeURI(currentPage.title)
+      return {currentPage: currentPage}
 
     initialize: () ->
       super()
