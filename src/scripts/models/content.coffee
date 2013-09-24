@@ -2,12 +2,13 @@ define (require) ->
   $ = require('jquery')
   _ = require('underscore')
   Backbone = require('backbone')
+  settings = require('cs!settings')
 
   MEDIA_TYPES =
     'application/vnd.org.cnx.collection' : 'book'
-    'application/vnd.org.cnx.module': 'module'
+    'application/vnd.org.cnx.module': 'page'
 
-  CONTENT_URI = "#{location.protocol}//#{location.hostname}:6543/contents"
+  CONTENT_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/contents"
 
   class CurrentPage extends Backbone.Model
     url: () -> "#{CONTENT_URI}/#{@id}"

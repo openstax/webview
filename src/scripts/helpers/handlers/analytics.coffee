@@ -1,5 +1,6 @@
-define (require, exports, module) ->
+define (require) ->
   Backbone = require('backbone')
+  settings = require('cs!settings')
   router = require('cs!router')
 
   # Class to handle loading analytics scripts and wrapping
@@ -13,11 +14,11 @@ define (require, exports, module) ->
       window.ga.l = 1 * new Date()
 
       # Initialize analytics.js account
-      window.ga('create', module.config().analyticsID)
+      window.ga('create', settings.analyticsID)
 
       # ## Setup ga.js
       window._gaq ?= []
-      window._gaq.push(['_setAccount', module.config().analyticsID])
+      window._gaq.push(['_setAccount', settings.analyticsID])
 
       # Add tracking
       router.on 'route', () =>
