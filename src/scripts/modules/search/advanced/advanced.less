@@ -1,0 +1,53 @@
+@import "../../../../styles/variables.less";
+
+.search .advanced {
+  position: relative;
+  margin: 60px auto;
+  width: 75%;
+
+  @media screen and (max-width: @screen-xs-max) {
+    width: 90%;
+  }
+
+  h1 {
+    margin-bottom: 30px;
+  }
+
+  .help {
+    position: absolute;
+    top: 1.2rem;
+    right: 0;
+    color: @brand-primary;
+
+    .glyphicon-question-sign {
+      font-size: 2rem;
+      color: @brand-secondary;
+      vertical-align: text-bottom;
+      cursor: pointer;
+    }
+
+    .tips {
+      vertical-align: middle;
+    }
+  }
+
+  form {
+    padding: 45px 30px;
+    border-radius: 4px;
+    border: 1px solid @gray-lighter;
+
+    label {
+      display: block;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    button {
+      @media screen and (max-width: @screen-xs-max) {
+        width: 100%;
+      }
+    }
+  }
+}

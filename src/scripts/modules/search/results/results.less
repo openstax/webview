@@ -1,23 +1,16 @@
 @import "../../../../styles/variables.less";
+@import "../../../../styles/mixins.less";
 
 .search .results {
-  h4 {
-    font-weight: 400;
-  }
+  .wrapper {
+    .make-row();
 
-  .type {
-    min-width: 50px;
-  }
+    .filter {
+      .make-xs-column(3);
+    }
 
-  .title {
-    min-width: 300px;
-  }
-
-  .author {
-    min-width: 150px;
-  }
-
-  .edited {
-    min-width: 115px;
+    .info {
+      .make-xs-column(9);
+    }
   }
 }

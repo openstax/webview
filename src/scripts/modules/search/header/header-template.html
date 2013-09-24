@@ -1,2 +1,16 @@
-<h1>Search Results</h1>
-<span><strong>{{results.total}}</strong> results found</span>
+<div class="header">
+  {{#if results}}
+    <h1>Search Results</h1>
+  {{else}}
+    <h1>Advanced Search</h1>
+  {{/if}}
+
+  <span class="help">
+    <span class="glyphicon glyphicon-question-sign"></span>
+    <span class="tips">Search Tips &amp; Help</span>
+  </span>
+
+  {{#if results}}
+    <span><strong>{{results.total}}</strong> results found</span>
+  {{/if}}
+</div>

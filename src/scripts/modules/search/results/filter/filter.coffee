@@ -3,5 +3,5 @@ define (require) ->
   template = require('hbs!./filter-template')
   require('less!./filter')
 
-  return class SearchFilterView extends BaseView
+  return class SearchResultsFilterView extends BaseView
     template: template

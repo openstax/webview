@@ -3,5 +3,5 @@ define (require) ->
   template = require('hbs!./breadcrumbs-template')
   require('less!./breadcrumbs')
 
-  return class SearchBreadcrumbsView extends BaseView
+  return class SearchResultsBreadcrumbsView extends BaseView
     template: template
