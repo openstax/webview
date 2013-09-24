@@ -1,5 +1,24 @@
 @import "../../../../styles/variables.less";
 
 .search .header {
+  position: relative;
   margin-bottom: 30px;
+
+  .help {
+    position: absolute;
+    top: 1.2rem;
+    right: 0;
+    color: @brand-primary;
+
+    .glyphicon-question-sign {
+      font-size: 2rem;
+      color: @brand-secondary;
+      vertical-align: text-bottom;
+      cursor: pointer;
+    }
+
+    .tips {
+      vertical-align: middle;
+    }
+  }
 }
