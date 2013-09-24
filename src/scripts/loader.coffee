@@ -24,7 +24,10 @@ define (require) ->
       e.preventDefault()
 
       if external.test(href)
-        window.open(href, '_blank')
+        if /^((f|ht)tps?:)?\/\/cnx.org/.test(href)
+          location.href = href
+        else
+          window.open(href, '_blank')
       else
         router.navigate(href, {trigger: true})
 
