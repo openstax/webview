@@ -2,7 +2,7 @@
   "query": {
     "sort": [],
     "limits": [{
-      "title": "physics"
+      "text": "physics"
     }]
   },
   "results": {
