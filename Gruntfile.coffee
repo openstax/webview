@@ -168,6 +168,7 @@ module.exports = (grunt) ->
           'dist/**/.*'
           'dist/build.txt'
           'dist/scripts/**/*'
+          'dist/styles/**/*.less'
           '!dist/scripts/main.js'
           '!dist/scripts/require.js'
         ]
@@ -182,8 +183,8 @@ module.exports = (grunt) ->
           # Ignore files
           if not grunt.file.isDir(filepath) then return false
 
-          # Remove /dist/styles, /dist/test, and all directories inside /dist/scripts
-          if filepath.match(/^dist\/(scripts\/|styles|test)/) then return true
+          # Remove /dist/test, and all directories inside /dist/scripts
+          if filepath.match(/^dist\/(scripts\/|test)/) then return true
 
           # Remove empty directories
           return fs.readdirSync(filepath).length is 0
