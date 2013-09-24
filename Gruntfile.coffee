@@ -129,6 +129,7 @@ module.exports = (grunt) ->
               'main'
               'cs!pages/home/home'
               'cs!pages/content/content'
+              'cs!pages/search/search'
             ]
             excludeShallow: [
               'css/css-builder'

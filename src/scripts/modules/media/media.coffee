@@ -1,8 +1,6 @@
 define (require) ->
   Content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
-  HeaderView = require('cs!modules/header/header')
-  FooterView = require('cs!modules/footer/footer')
   MediaEndorsedView = require('cs!./endorsed/endorsed')
   MediaTitleView = require('cs!./title/title')
   MediaTabsView = require('cs!./tabs/tabs')

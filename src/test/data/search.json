@@ -1,0 +1,48 @@
+{
+  "query": {
+    "sort": [],
+    "limits": [{
+      "text": "physics"
+    }]
+  },
+  "results": {
+    "items": [{
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-08-13T12:12Z",
+      "title": "College Physics",
+      "keywords": [],
+      "authors": [],
+      "type": "book",
+      "id": "b1509954-7460-43a4-8c52-262f1ddd7f2f"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-08-13T12:12Z",
+      "title": "Preface to College Physics",
+      "keywords": [],
+      "authors": [],
+      "type": "page",
+      "id": "85baef5b-acd6-446e-99bf-f2204caa25bc"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-08-13T12:12Z",
+      "title": "Introduction to Science and the Realm of Physics, Physical Quantities, and Units",
+      "keywords": [],
+      "authors": [],
+      "type": "page",
+      "id": "bace454a-6c56-443f-8422-6ea9c4d5e6c0"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-08-13T12:12Z",
+      "title": "Physics: An Introduction",
+      "keywords": [],
+      "authors": [],
+      "type": "page",
+      "id": "e3f8051d-7fde-4f14-92f6-7f31019887b3"
+    }],
+    "total": 4
+  }
+}
