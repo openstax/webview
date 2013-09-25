@@ -181,20 +181,4 @@
       }
     }
   }
-
-  // Table backgrounds
-  //
-  // Exact selectors below required to override `.table-striped` and prevent
-  // inheritance to nested tables.
-
-  table > thead > tr,
-  table > tbody > tr,
-  table > tfoot > tr {
-    > td.active,
-    > th.active,
-    &.active > td,
-    &.active > th  {
-      background-color: @table-bg-active;
-    }
-  }
 }
