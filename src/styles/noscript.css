@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+}
+
+.noscript-container {
+  position: absolute;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+}
+
+.noscript {
+  position: absolute;
+  left: 50%;
+  width: 300px;
+  margin-left: -150px;
+}
+
+p {
+  margin-bottom: 5px;
+}
