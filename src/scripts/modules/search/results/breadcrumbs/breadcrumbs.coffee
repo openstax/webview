@@ -9,15 +9,7 @@ define (require) ->
     template: template
 
     events:
-      'mouseover .breadcrumb': 'hoverBreadcrumb'
-      'mouseout .breadcrumb': 'unhoverBreadcrumb'
       'click .remove': 'removeBreadcrumb'
-
-    hoverBreadcrumb: (e) ->
-      $(e.currentTarget).find('.remove').css('opacity', 1)
-
-    unhoverBreadcrumb: (e) ->
-      $(e.currentTarget).find('.remove').css('opacity', 0)
 
     removeBreadcrumb: (e) ->
       limits = @model.get('query').limits
