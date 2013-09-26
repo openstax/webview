@@ -1,39 +1,203 @@
 @import "../../../../styles/variables.less";
 
+@blue: @brand-primary;
+@page-width: 75%;
+
 .media-body {
   margin: 0 60px;
   padding: 40px 0;
 
-  h1, h2, h3, h4, h5, h6 {
-    margin-bottom: 15px;
-  }
-
-  p {
-    color: @gray;
-  }
-
-  .figure {
-    float: right;
-    padding: 0 0 30px 30px;
-
-    caption {
-      padding: 10px;
-      font-size: 1.2rem;
-      background-color: @gray-lightest;
+  > section,
+  > figure,
+  > p,
+  > .abstract,
+  > table {
+    &:first-child {
+      margin-top: 0 !important; // Ensure first element has no top margin
     }
   }
 
-  .section {
-    .title {
-      font-size: 2.1rem;
-      font-weight: 300;
-      color: @link-color;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 15px;
+  }
+
+  > section,
+  > figure {
+    margin-top: 60px;
+  }
+
+  p {
+    margin: 10px 0 0;
+    color: @gray;
+  }
+
+  .footnote {
+    font-size: 1rem;
+  }
+
+  .abstract {
+    position: relative;
+    background-color: @gray-lightest;
+    padding: 15px;
+    margin: 1rem 5rem;
+
+    ul {
+      margin: 30px 0 0 0;
+
+      &::after {
+        content: "Abstract";
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: @gray;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+  }
+
+  .example,
+  .exercise,
+  .note {
+    background-color: @gray-lightest;
+    padding: 15px;
+    margin: 30px 6rem 0 6rem;
+
+    > .title {
+      margin-bottom: 30px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: @gray;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+
+      &::before {
+        content: ""; // Override content below if desired
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .example > .title {
+    &::before {
+      content: "Example:";
+    }
+  }
+
+  .exercise > .title {
+    &::before {
+      content: "Exercise:";
     }
   }
 
   .note {
-    padding: 10px;
-    margin: 10px;
     background-color: #fbf2e2;
+
+    > .title {
+      &::before {
+        content: "Note:";
+      }
+    }
+  }
+
+  figure {
+    > figcaption {
+      padding: 10px;
+      font-size: 1.2rem;
+      background-color: @gray-lightest;
+    }
+
+    > .media {
+      display: block;
+      margin: 0;
+      text-align: center;
+    }
+  }
+
+  section > section,
+  section > figure {
+    margin-top: 30px;
+  }
+
+  //
+  // Tables
+  // --------------------------------------------------
+  table {
+    margin-top: 60px;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: @line-height-computed;
+    background-color: @table-bg;
+
+    caption {
+      font-size: 1.75rem;
+
+      sup {
+        top: auto;
+        line-height: inherit;
+      }
+    }
+
+    // Cells
+    thead,
+    tbody,
+    tfoot {
+      > tr {
+        > th,
+        > td {
+          padding: @table-cell-padding;
+          line-height: @line-height-base;
+          vertical-align: top;
+          border-top: 1px solid @table-border-color;
+        }
+      }
+    }
+
+    // Bottom align for column headings
+    thead > tr > th,
+    thead > tr > td {
+      vertical-align: bottom;
+      border-bottom: 2px solid @table-border-color;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    // Remove top border from thead by default
+    caption + thead,
+    colgroup + thead,
+    thead:first-child {
+      tr:first-child {
+        th, td {
+          border-top: 0;
+        }
+      }
+    }
+
+    // Account for multiple tbody instances
+    tbody + tbody {
+      border-top: 2px solid @table-border-color;
+    }
+
+    // Nesting
+    table {
+      background-color: @body-bg;
+    }
+
+    // Zebra striping
+    > tbody {
+      > tr:nth-child(odd) {
+        > td,
+        > th {
+          background-color: @table-bg-accent;
+        }
+      }
+    }
   }
 }
