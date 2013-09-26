@@ -1,6 +1,9 @@
 {{#each query.limits}}
   {{#each this}}
-    <span class="breadcrumb">
+    <span class="breadcrumb" data-index="{{@index}}">
+      <div class="remove">
+        <span class="glyphicon glyphicon-remove"></span>
+      </div>
       <span class="limit">{{@key}}</span><span class="value">{{this}}</span>
     </span>
   {{/each}}
