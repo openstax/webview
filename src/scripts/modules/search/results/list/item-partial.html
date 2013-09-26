@@ -3,7 +3,11 @@
     {{#is mediaType 'Collection'}}
       <span class="glyphicon glyphicon-book"></span>
     {{else}}
-      <span class="glyphicon glyphicon-file"></span>
+      {{#is mediaType 'Module'}}
+        <span class="glyphicon glyphicon-file"></span>
+      {{else}}
+        <span class="glyphicon glyphicon-question-sign"></span>
+      {{/is}}
     {{/is}}
   </td>
   <td class="title">
