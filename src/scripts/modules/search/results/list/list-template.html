@@ -1,14 +1,17 @@
-{{! Books }}
-{{#if books.length}}
-  {{> modules_search_results_list_table-partial books}}
-{{/if}}
+{{#if results.items.length}}
+  {{! Books }}
+  {{#if books.length}}
+    {{> modules_search_results_list_table-partial books}}
+  {{/if}}
 
-{{! Pages }}
-{{#if pages.length}}
-  {{> modules_search_results_list_table-partial pages}}
-{{/if}}
+  {{! Pages }}
+  {{#if pages.length}}
+    {{> modules_search_results_list_table-partial pages}}
+  {{/if}}
 
-{{! Results of an unknown type }}
-{{#if misc.length}}
-  {{> modules_search_results_list_table-partial misc}}
+  {{! Results of an unknown type }}
+  {{#if misc.length}}
+    {{> modules_search_results_list_table-partial misc}}
+{{else}}
+  <p>No results found. Please try expanding your search.</p>
 {{/if}}
