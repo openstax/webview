@@ -71,6 +71,9 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
     }
   ```
 
+Update settings in `src/scripts/settings.coffee` if necessary to, for example, include
+the correct Google Analytics ID, and to point to wherever cnxarchive is being hosted.
+
 #### Test Site
 
 When running the development version of the site with its corresponding config, you can
@@ -81,27 +84,28 @@ Note: Mock test data is only available for the [College Physics](http://localhos
 
 ### Directory Layout
 
-* `bower_components/`          3rd Party Libraries *(added after install)*
-* `node_modules/`              Node Modules *(added after install)*
-* `dist/`                      Production version of the site *(added after build)*
-* `src/`                       Development version of the site
-* `src/data/`                  Hardcoded data
-* `src/images/`                Images used throughout the site
-* `src/scripts/`               Site scripts and 3rd party libraries
-* `src/scripts/collections`    Backbone Collections
-* `src/scripts/helpers`        Helpers for Handlebars, Backbone, and generic code
-* `src/scripts/models`         Backbone Models
-* `src/scripts/modules`        Self-contained, reusable Modules used to construct pages
-* `src/scripts/pages`          Backbone Views representing an entire page (or the entire viewport)
-* `src/scripts/config.js`      Require.js configuration
-* `src/scripts/loader.coffee`  App loader, responsible for setting up global listeners
-* `src/scripts/main.js`        Initial script called by Requirejs
-* `src/scripts/router.coffee`  Backbone Router
-* `src/scripts/session.coffee` Session state singleton (Backbone Model)
-* `src/styles/`                App-specific LESS variables and mixins
-* `src/test/`                  Test site
-* `src/index.html`             App's HTML Page
-* `tests/`                     Unit tests
+* `bower_components/`           3rd Party Libraries *(added after install)*
+* `node_modules/`               Node Modules *(added after install)*
+* `dist/`                       Production version of the site *(added after build)*
+* `src/`                        Development version of the site
+* `src/data/`                   Hardcoded data
+* `src/images/`                 Images used throughout the site
+* `src/scripts/`                Site scripts and 3rd party libraries
+* `src/scripts/collections`     Backbone Collections
+* `src/scripts/helpers`         Helpers for Handlebars, Backbone, and generic code
+* `src/scripts/models`          Backbone Models
+* `src/scripts/modules`         Self-contained, reusable Modules used to construct pages
+* `src/scripts/pages`           Backbone Views representing an entire page (or the entire viewport)
+* `src/scripts/config.js`       Require.js configuration
+* `src/scripts/loader.coffee`   App loader, responsible for setting up global listeners
+* `src/scripts/main.js`         Initial script called by Requirejs
+* `src/scripts/router.coffee`   Backbone Router
+* `src/scripts/session.coffee`  Session state singleton (Backbone Model)
+* `src/scripts/settings.coffee` Global application config settings
+* `src/styles/`                 App-specific LESS variables and mixins
+* `src/test/`                   Test site
+* `src/index.html`              App's HTML Page
+* `tests/`                      Unit tests
 
 License
 -------
