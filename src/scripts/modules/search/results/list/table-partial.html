@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th class="type">Type</th>
+      <th class="title">Title</th>
+      <th class="author">Author</th>
+      <th class="edited">Edited</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {{#each this}}
+      {{> modules_search_results_list_item-partial}}
+    {{/each}}
+  </tbody>
+</table>
