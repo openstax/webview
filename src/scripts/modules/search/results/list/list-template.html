@@ -1,33 +1,37 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th class="type">Type</th>
-      <th class="title">Title</th>
-      <th class="author">Author</th>
-      <th class="edited">Edited</th>
-    </tr>
-  </thead>
+{{#if results.items.length}}
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="type">Type</th>
+        <th class="title">Title</th>
+        <th class="author">Author</th>
+        <th class="edited">Edited</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    {{#each books}}
-      {{> modules_search_results_list_item-partial}}
-    {{/each}}
-  </tbody>
-</table>
+    <tbody>
+      {{#each books}}
+        {{> modules_search_results_list_item-partial}}
+      {{/each}}
+    </tbody>
+  </table>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th class="type">Type</th>
-      <th class="title">Title</th>
-      <th class="author">Author</th>
-      <th class="edited">Edited</th>
-    </tr>
-  </thead>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="type">Type</th>
+        <th class="title">Title</th>
+        <th class="author">Author</th>
+        <th class="edited">Edited</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    {{#each pages}}
-      {{> modules_search_results_list_item-partial}}
-    {{/each}}
-  </tbody>
-</table>
+    <tbody>
+      {{#each pages}}
+        {{> modules_search_results_list_item-partial}}
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>No results found. Please try expanding your search.</p>
+{{/if}}
