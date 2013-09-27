@@ -31,7 +31,8 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
 
 2. Ensure resources are being served with the correct MIME type, including fonts.
   * Example nginx MIME types that may need to be added:
-  ```
+
+  ```nginx
     types {
       image/svg+xml           svg svgz;
       font/truetype           ttf;
@@ -45,7 +46,8 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
   * If not hosting the site from the domain root, update `root` in `src/scripts/config.js` (line 8)
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
   * Example nginx development config:
-  ```
+
+  ```nginx
     server {
         listen 80;
         server_name $hostname;
@@ -71,7 +73,8 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
     }
   ```
   * Example nginx production config:
-  ```
+
+  ```nginx
     server {
         listen 80;
         server_name $hostname;
