@@ -1,11 +1,12 @@
 @import "../../../styles/variables.less";
 
 @logo-width: 300px;
-@logo-height: 140px;
+@logo-height: 106px;
+@header-height: 140px;
 
 .page-header {
   position: relative;
-  height: @logo-height;
+  height: @header-height;
   padding-bottom: 0;
   margin: 0;
   overflow: hidden;
@@ -18,9 +19,12 @@
   }
 
   > .logo {
+    position: absolute;
+    bottom: (@header-height - @logo-height)/2; // center the logo vertically
     width: @logo-width;
     height: @logo-height;
     background: url(images/logo.png) center center no-repeat;
+    background-size: contain;
   }
 
   > .links {
