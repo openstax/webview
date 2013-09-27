@@ -46,7 +46,7 @@ define (require) ->
           @$el.find('.arrow').css({top: '-7px', left: '100%'})
           @$el.css
             'left': 'auto'
-            'right': document.body.clientWidth - (@$owner.offset().left + @$owner.outerWidth())
+            'right': $('html').outerWidth(true) - (@$owner.offset().left + @$owner.outerWidth())
 
     render: () -> return @ # noop
 
