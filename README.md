@@ -34,10 +34,10 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
 
   ```nginx
     types {
-      image/svg+xml           svg svgz;
-      font/truetype           ttf;
-      font/opentype           otf;
-      application/font-woff   woff;
+        image/svg+xml           svg svgz;
+        font/truetype           ttf;
+        font/opentype           otf;
+        application/font-woff   woff;
     }
   ```
 
