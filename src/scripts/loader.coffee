@@ -1,11 +1,12 @@
 define (require) ->
   $ = require('jquery')
   Backbone = require('backbone')
+  settings = require('cs!settings')
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics') # Setup Analytics Handler
 
   # The root URI prefixed on all non-external AJAX and Backbone URIs
-  root = '/'
+  root = settings.root
 
   init = (options = {}) ->
     # Append /test to the root if the app is in test mode

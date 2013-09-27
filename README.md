@@ -43,7 +43,7 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
 
 3. Configure your server to point at `dist/index.html` (or `src/index.html` for development)
   * Unresolveable URIs should load `dist/index.html` or `src/index.html`
-  * If not hosting the site from the domain root, update `root` in `src/scripts/config.js` (line 8)
+  * If not hosting the site from the domain root, update `root` in `src/scripts/settings.coffee`
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
   * Example nginx development config:
 
