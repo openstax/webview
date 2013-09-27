@@ -8,40 +8,40 @@
   "results": {
     "items": [{
       "bodySnippet": null,
-      "summarySnippet": null,
-      "pubDate": "2013-08-13T12:12Z",
+      "summarySnippet": "algebra-based, two-semester college <b>physics</b> book is grounded with real-world examples, illustrations, and explanations to help students grasp key, fundamental <b>physics</b> concepts. This online, fully editable and customizable title includes learning objectives, concept questions, links to labs and simulations, and ample practice opportunities to solve traditional <b>physics</b> application problems.",
+      "pubDate": "2013-07-31 15:07:20.342798-04",
       "title": "College Physics",
-      "keywords": [],
+      "keywords": ["college physics", "physics", "friction", "ac circuits", "atomic physics", "bioelectricity", "biological and medical applications", "circuits", "collisions", "dc instruments", "drag", "elasticity", "electric charge and electric field", "electric current", "electric potential", "electrical technologies", "electromagnetic induction", "electromagnetic waves", "energy", "fluid dynamics", "fluid statics", "forces", "frontiers of physics", "gas laws", "geometric optics", "heat and transfer methods", "kinematics", "kinetic theory", "linear momentum", "magnetism", "medical applications of nuclear physics", "Newton\u2019s Laws of Motion", "Ohm\u2019s Law", "oscillatory motion and waves", "particle physics", "physics of hearing", "quantum physics", "radioactivity and nuclear physics", "resistance", "rotational motion and angular momentum", "special relativity", "statics and torque", "temperature", "thermodynamics", "uniform circular motion and gravitation", "vision and optical instruments", "wave optics", "work"],
       "authors": [],
-      "type": "book",
-      "id": "e79ffde3-7fb4-4af3-9ec8-df648b391597"
+      "id": "e79ffde3-7fb4-4af3-9ec8-df648b391597",
+      "mediaType": "Collection"
     }, {
       "bodySnippet": null,
       "summarySnippet": null,
-      "pubDate": "2013-08-13T12:12Z",
+      "pubDate": "2013-07-31 15:07:20.542211-04",
       "title": "Preface to College Physics",
-      "keywords": [],
+      "keywords": ["college physics", "introduction", "physics"],
       "authors": [],
-      "type": "page",
-      "id": "209deb1f-1a46-4369-9e0d-18674cf58a3e"
+      "id": "209deb1f-1a46-4369-9e0d-18674cf58a3e",
+      "mediaType": "Module"
     }, {
       "bodySnippet": null,
       "summarySnippet": null,
-      "pubDate": "2013-08-13T12:12Z",
+      "pubDate": "2013-07-31 15:07:20.590652-04",
       "title": "Introduction to Science and the Realm of Physics, Physical Quantities, and Units",
-      "keywords": [],
+      "keywords": ["Accuracy", "Approximation", "Classical physics", "Conversion factor", "Customary system", "Derived units", "English units", "Fundamental units", "Kilogram", "Law", "Meter", "Metric system", "Model", "Modern physics", "Order of magnitude", "Percent uncertainty", "Physical quantity", "Physics", "Precision", "Quantum mechanics", "Relativity", "Scientific method", "Second", "Significant figures", "SI units", "Theory", "Uncertainty", "Units"],
       "authors": [],
-      "type": "page",
-      "id": "f3c9ab70-a916-4d8c-9256-42953287b4e9"
+      "id": "f3c9ab70-a916-4d8c-9256-42953287b4e9",
+      "mediaType": "Module"
     }, {
       "bodySnippet": null,
       "summarySnippet": null,
-      "pubDate": "2013-08-13T12:12Z",
+      "pubDate": "2013-07-31 15:07:20.75499-04",
       "title": "Physics: An Introduction",
-      "keywords": [],
+      "keywords": ["Classical physics", "Law", "Model", "Modern physics", "Physics", "Quantum mechanics", "Relativity", "Scientific method", "Theory"],
       "authors": [],
-      "type": "page",
-      "id": "d395b566-5fe3-4428-bcb2-19016e3aa3ce"
+      "id": "d395b566-5fe3-4428-bcb2-19016e3aa3ce",
+      "mediaType": "Module"
     }],
     "total": 4
   }
