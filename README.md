@@ -26,7 +26,21 @@ The `dist` directory containing the built site will be added to the root `webvie
 
 #### Hosting
 
-Configure your server to point at `dist/index.html` (or `src/index.html` for development)
+1. Update settings in `src/scripts/settings.coffee` if necessary to, for example, include
+the correct Google Analytics ID, and to point to wherever `cnxarchive` is being hosted.
+
+2. Ensure resources are being served with the correct MIME type, including fonts.
+  * Example nginx MIME types that may need to be added:
+  ```
+    types {
+      image/svg+xml           svg svgz;
+      font/truetype           ttf;
+      font/opentype           otf;
+      application/font-woff   woff;
+    }
+  ```
+
+3. Configure your server to point at `dist/index.html` (or `src/index.html` for development)
   * Unresolveable URIs should load `dist/index.html` or `src/index.html`
   * If not hosting the site from the domain root, update `root` in `src/scripts/config.js` (line 8)
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
@@ -70,9 +84,6 @@ Configure your server to point at `dist/index.html` (or `src/index.html` for dev
         }
     }
   ```
-
-Update settings in `src/scripts/settings.coffee` if necessary to, for example, include
-the correct Google Analytics ID, and to point to wherever cnxarchive is being hosted.
 
 #### Test Site
 
