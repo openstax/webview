@@ -1,19 +1,45 @@
 <div class="media-tabs">
   <ul>
-    <li>
-      <img src="images/icons/contents.png" width="13" height="14" alt="Contents" />
-      <span class="title">Contents</span>
-      <span class="expand">+</span>
-    </li>
-    <li>
+    {{#is type 'book'}}
+      <li>
+        <img src="images/icons/contents.png" width="13" height="14" alt="Contents" />
+        <span class="tab">Contents</span>
+        <span class="expand">&minus; −</span>
+      </li>
+    {{/is}}
+    <li class="inactive">
       <img src="images/icons/tools.png" width="17" height="17" alt="Tools" />
-      <span class="title">Tools</span>
-      <span class="expand">+</span>
+      <span class="tab">Tools</span>
+      <span class="expand">&plus; +</span>
     </li>
-    <li>
+    <li class="inactive">
       <img src="images/icons/lists.png" width="14" height="17" alt="Reading Lists" />
-      <span class="title">Reading Lists</span>
+      <span class="tab">Reading Lists</span>
       <span class="expand">+</span>
     </li>
   </ul>
+
+  <div class="contents">
+    <ul>
+      {{#each toc}}
+        <li>
+          <a href="/content/{{../id}}/{{@index}}">
+            {{#if parent}}
+            <span class="expand">&#9656;</span>
+              <span class="unit">{{parent}}.</span>
+            {{/if}}
+            <span class="title">{{title}}</span>
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="tools">
+
+  </div>
+
+  <div class="reading-lists">
+
+  </div>
 </div>

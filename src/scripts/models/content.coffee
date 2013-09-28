@@ -39,8 +39,10 @@ define (require) ->
 
     toJSON: () ->
       currentPage = @get('currentPage').toJSON()
+      toc = @get('toc')?.toJSON()
       json = super()
       json.currentPage = currentPage
+      json.toc = toc
       return json
 
     initialize: (options = {}) ->
@@ -62,7 +64,7 @@ define (require) ->
     # Create a flat collection to store all the pages
     setupToc: () ->
       toc = new Backbone.Collection()
-      index = 0
+      index = 1
 
       traverse = (o, sub) ->
         if typeof o isnt 'object' then return

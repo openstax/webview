@@ -1,4 +1,5 @@
 @import "../../../../styles/variables.less";
+@import "../../../../styles/mixins.less";
 
 .media-tabs {
   background-color: @gray-lightest;
@@ -19,7 +20,7 @@
       background-color: white;
       cursor: pointer;
 
-      > .title {
+      > .tab {
         margin-left: 2px;
         vertical-align: middle;
       }
@@ -28,5 +29,56 @@
         font-weight: bold;
       }
     }
+
+    > .inactive {
+      #gradient.vertical(#fff; #ededed; 60%; 100%);
+    }
+  }
+
+  > div {
+    background-color: white;
+  }
+
+  .contents {
+    margin-right: -1px; // Hide 3rd column rule
+    padding: 15px;
+
+    -moz-columns: 290px auto;
+    -webkit-columns: 290px auto;
+    columns: 290px auto;
+
+    -moz-column-fill: balance;
+    -webkit-column-fill: balance;
+    column-fill: balance;
+
+    -moz-column-gap: 30px;
+    -webkit-column-gap: 30px;
+    column-gap: 30px;
+
+    -moz-column-rule: 4px solid @gray-lightest;
+    -webkit-column-rule: 1px solid @gray-lightest;
+    column-rule: 1px solid @gray-lightest;
+
+    ul {
+      padding: 0 20px;
+      font-size: 1.25rem;
+      list-style-type: none;
+
+      li {
+        padding: 8px 0;
+        border-bottom: 1px solid @gray-lightest;
+
+        .unit {
+          display: inline-block;
+          min-width: 20px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .tools,
+  .reading-lists {
+    display: none;
   }
 }
