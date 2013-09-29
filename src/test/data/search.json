@@ -9,10 +9,20 @@
     "items": [{
       "bodySnippet": null,
       "summarySnippet": "algebra-based, two-semester college <b>physics</b> book is grounded with real-world examples, illustrations, and explanations to help students grasp key, fundamental <b>physics</b> concepts. This online, fully editable and customizable title includes learning objectives, concept questions, links to labs and simulations, and ample practice opportunities to solve traditional <b>physics</b> application problems.",
-      "pubDate": "2013-07-31 15:07:20.342798-04",
+      "pubDate": "2012-01-23 13:03:30-06",
       "title": "College Physics",
       "keywords": ["college physics", "physics", "friction", "ac circuits", "atomic physics", "bioelectricity", "biological and medical applications", "circuits", "collisions", "dc instruments", "drag", "elasticity", "electric charge and electric field", "electric current", "electric potential", "electrical technologies", "electromagnetic induction", "electromagnetic waves", "energy", "fluid dynamics", "fluid statics", "forces", "frontiers of physics", "gas laws", "geometric optics", "heat and transfer methods", "kinematics", "kinetic theory", "linear momentum", "magnetism", "medical applications of nuclear physics", "Newton\u2019s Laws of Motion", "Ohm\u2019s Law", "oscillatory motion and waves", "particle physics", "physics of hearing", "quantum physics", "radioactivity and nuclear physics", "resistance", "rotational motion and angular momentum", "special relativity", "statics and torque", "temperature", "thermodynamics", "uniform circular motion and gravitation", "vision and optical instruments", "wave optics", "work"],
-      "authors": [],
+      "authors": [{
+        "website": "http://openstaxcollege.org",
+        "surname": "OpenStax College",
+        "suffix": "",
+        "firstname": "",
+        "title": "",
+        "othername": "",
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "OpenStaxCollege"
+      }],
       "id": "e79ffde3-7fb4-4af3-9ec8-df648b391597",
       "mediaType": "Collection"
     }, {
