@@ -1,45 +1,58 @@
 <div class="media-tabs">
   <ul>
     {{#is type 'book'}}
-      <li>
+      <li class="tab" data-content="contents">
         <img src="images/icons/contents.png" width="13" height="14" alt="Contents" />
-        <span class="tab">Contents</span>
+        <span class="tab-title">Contents</span>
         <span class="expand">&minus; −</span>
       </li>
     {{/is}}
-    <li class="inactive">
+    <li class="tab inactive" data-content="tools">
       <img src="images/icons/tools.png" width="17" height="17" alt="Tools" />
-      <span class="tab">Tools</span>
+      <span class="tab-title">Tools</span>
       <span class="expand">&plus; +</span>
     </li>
-    <li class="inactive">
+    <li class="tab inactive" data-content="reading-lists">
       <img src="images/icons/lists.png" width="14" height="17" alt="Reading Lists" />
-      <span class="tab">Reading Lists</span>
+      <span class="tab-title">Reading Lists</span>
       <span class="expand">+</span>
     </li>
   </ul>
 
-  <div class="contents">
+  <div class="contents tab-content">
     <ul>
-      {{#each toc}}
+      {{#each tree.contents}}
         <li>
-          <a href="/content/{{../id}}/{{@index}}">
-            {{#if parent}}
-            <span class="expand">&#9656;</span>
-              <span class="unit">{{parent}}.</span>
-            {{/if}}
-            <span class="title">{{title}}</span>
-          </a>
+          <div>
+            {{#is id 'subcol'}}
+              <span class="expand">&#9656;</span>
+            {{/is}}
+            <a href="/content/{{../id}}/{{@index}}">
+              {{#if @index}}
+                <span class="unit">{{@index}}.</span>
+              {{/if}}
+              <span class="title">{{title}}</span>
+              {{#is id 'subcol'}}
+                <ul>
+                  {{#each contents}}
+                    <li>
+                      <span class="title">{{title}}</span>
+                    </li>
+                  {{/each}}
+                </ul>
+              {{/is}}
+            </a>
+          </div>
         </li>
       {{/each}}
     </ul>
   </div>
 
-  <div class="tools">
-
+  <div class="tools tab-content">
+    <p>Tools</p>
   </div>
 
-  <div class="reading-lists">
-
+  <div class="reading-lists tab-content">
+    <p>Reading Lists</p>
   </div>
 </div>
