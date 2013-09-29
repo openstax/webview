@@ -20,10 +20,15 @@ define (require) ->
 
     switchTab: ($tab) ->
       @$el.find('.tab').addClass('inactive')
-      $tab.removeClass('inactive')
-
       @$el.find('.tab-content').hide()
-      @$el.find(".#{$tab.data('content')}").show()
+
+      if $tab.data('content') isnt @currentTab
+        $tab.removeClass('inactive')
+        @currentTab = $tab.data('content')
+        @$el.find(".#{@currentTab}").show()
+      else
+        @currentTab = null
+        @$el.find('.tab').removeClass('inactive')
 
     toggleSubcollection: (e) ->
       $(e.currentTarget).parent().siblings('ul').toggle()
