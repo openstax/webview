@@ -14,6 +14,11 @@ define (require) ->
       'click .contents .subcollection': 'toggleSubcollection'
       'click .contents a': 'loadPage'
 
+    initialize: () ->
+      super()
+      @stopListening(@model)
+      @listenTo(@model, 'change:toc', @render) if @model
+
     selectTab: (e) ->
       $tab = $(e.currentTarget)
       @switchTab($tab)
