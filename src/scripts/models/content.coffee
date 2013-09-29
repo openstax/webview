@@ -64,17 +64,21 @@ define (require) ->
     # Create a flat collection to store all the pages
     setupToc: () ->
       toc = new Backbone.Collection()
-      index = 1
+      depth = 0
+      parent = -1
 
-      traverse = (o, sub) ->
-        if typeof o isnt 'object' then return
+      traverse = (o = {}, sub) ->
         for item in o.contents
+          item.depth = depth
+          if depth is 1 then item.parent = parent
+          else if depth is 0 then parent++
           if item.contents
+            depth++
             traverse(item, true)
-            index++
           else
-            if sub then item.parent = index # Item parents are numbered by their position in the tree
             toc.add(item)
+
+        depth--
 
       traverse(@get('tree'))
       @set('toc', toc)
