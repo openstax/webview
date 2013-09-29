@@ -9,6 +9,7 @@ define (require) ->
 
     events:
       'click .tab': 'selectTab'
+      'click .contents .subcollection': 'toggleSubcollection'
 
     selectTab: (e) ->
       $tab = $(e.currentTarget)
@@ -20,3 +21,7 @@ define (require) ->
 
       @$el.find('.tab-content').hide()
       @$el.find(".#{$tab.data('content')}").show()
+
+    toggleSubcollection: (e) ->
+      e.preventDefault()
+      $(e.currentTarget).parent().siblings('ul').toggle()
