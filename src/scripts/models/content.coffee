@@ -64,12 +64,16 @@ define (require) ->
     # Create a flat collection to store all the pages
     setupToc: () ->
       toc = new Backbone.Collection()
+      id = @get('id')
       depth = 0
+      page = 1
       parent = -1
 
       traverse = (o = {}, sub) ->
         for item in o.contents
+          item.collectionId = id
           item.depth = depth
+          item.page = page++
           if depth is 1 then item.parent = parent
           else if depth is 0 then parent++
           if item.contents
