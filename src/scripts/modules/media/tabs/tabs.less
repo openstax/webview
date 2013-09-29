@@ -3,6 +3,7 @@
 
 .media-tabs {
   background-color: @gray-lightest;
+  color: @brand-primary;
 
   > ul {
     margin: 0;
@@ -70,12 +71,23 @@
 
         > div {
           display: inline-block; // Prevent links from spilling into multiple-columns
+
+          .unit {
+            display: inline-block;
+            font-weight: bold;
+          }
+          
+          .title {
+            cursor: pointer;
+            
+            &:hover {
+              text-decoration: underline;
+            }
+          }
         }
 
-        .unit {
-          display: inline-block;
-          min-width: 20px;
-          font-weight: bold;
+        > ul {
+          display: none; // Hide nested lists until they are toggled open
         }
       }
     }
