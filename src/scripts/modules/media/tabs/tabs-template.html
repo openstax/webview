@@ -20,32 +20,7 @@
   </ul>
 
   <div class="contents tab-content">
-    <ul>
-      {{#each tree.contents}}
-        <li>
-          <div>
-            {{#is id 'subcol'}}
-              <span class="expand">&#9656;</span>
-            {{/is}}
-            <a href="/content/{{../id}}/{{@index}}">
-              {{#if @index}}
-                <span class="unit">{{@index}}.</span>
-              {{/if}}
-              <span class="title">{{title}}</span>
-              {{#is id 'subcol'}}
-                <ul>
-                  {{#each contents}}
-                    <li>
-                      <span class="title">{{title}}</span>
-                    </li>
-                  {{/each}}
-                </ul>
-              {{/is}}
-            </a>
-          </div>
-        </li>
-      {{/each}}
-    </ul>
+    {{> modules_media_tabs_toc-partial tree.contents}}
   </div>
 
   <div class="tools tab-content">
