@@ -16,9 +16,13 @@
             {{/if}}
           {{/is}}
         {{/or}}
-        <a href="/content/{{../id}}/{{@index}}">
+        {{#is id 'subcol'}}
           <span class="title">{{title}}</span>
-        </a>
+        {{else}}
+          <a href="/content/{{collectionId}}/{{page}}">
+            <span class="title">{{title}}</span>
+          </a>
+        {{/is}}
       </div>
       {{#is id 'subcol'}}
         {{#lt depth 3}}
