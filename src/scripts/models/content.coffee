@@ -73,13 +73,13 @@ define (require) ->
         for item in o.contents
           item.collectionId = id
           item.depth = depth
-          item.page = page++
           if depth is 1 then item.parent = parent
           else if depth is 0 then parent++
           if item.contents
             depth++
             traverse(item, true)
           else
+            item.page = page++
             toc.add(item)
 
         depth--
