@@ -25,7 +25,7 @@ define (require) ->
       e.preventDefault()
 
       if external.test(href)
-        if /^((f|ht)tps?:)?\/\/cnx.org/.test(href)
+        if /^((f|ht)tps?:)?\/\/(\w*\.?)cnx\.org/.test(href)
           location.href = href
         else
           window.open(href, '_blank')
