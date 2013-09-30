@@ -14,9 +14,9 @@
     <h4><a href="content/{{id}}">{{title}}</a></h4>
     <span>{{include summarySnippet}}</span>
   </td>
-  <td class="author">
+  <td class="authors">
     {{#each authors}}
-      <a href="mailto:{{email}}">{{fullname}}</a>
+      <span class="author">{{fullname}}</span>
     {{/each}}
   </td>
   <td class="edited">{{date pubDate}}</td>
