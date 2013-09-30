@@ -82,7 +82,7 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
         index index.html;
         try_files $uri $uri/ /index.html;
 
-        location ~ ^.*/(data|scripts|styles|images)/(.*) {
+        location ~ ^.*/(data|scripts|styles|images|fonts)/(.*) {
             try_files $uri $uri/ /$1/$2;
         }
     }
