@@ -38,7 +38,7 @@ define (require) ->
 
     # Force Backbone to register the full path including the query in its history
     if location.search
-      router.navigate(location.pathname + location.search, {replace: true})
+      router.navigate(Backbone.history.fragment, {replace: true})
 
     # Prefix all non-external AJAX requests with the root URI
     $.ajaxPrefilter (options, originalOptions, jqXHR) ->
