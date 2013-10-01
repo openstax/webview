@@ -12,7 +12,17 @@
   "parentId": null,
   "stateid": null,
   "maintainers": [],
-  "authors": [],
+  "authors": [{
+    "website": "http://openstaxcollege.org",
+    "surname": "OpenStax College",
+    "suffix": "",
+    "firstname": "",
+    "title": "",
+    "othername": "",
+    "email": "info@openstaxcollege.org",
+    "fullname": "OpenStax College",
+    "id": "OpenStaxCollege"
+  }],
   "parentVersion": null,
   "licensors": [],
   "license": "http://creativecommons.org/licenses/by/3.0/",
@@ -75,17 +85,5 @@
   },
   "doctype": "",
   "submitter": "",
-  "parentAuthors": [],
-  "authors": [{
-    "website": null,
-    "surname": null,
-    "suffix": null,
-    "firstname": null,
-    "title": null,
-    "_legacy_id": null,
-    "othername": null,
-    "email": "cnx@cnx.org",
-    "fullname": "OpenStax College",
-    "id": "e09581bb-87ab-45bd-a05b-72762a3829a2"
-  }]
+  "parentAuthors": []
 }

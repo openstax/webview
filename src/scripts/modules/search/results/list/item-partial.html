@@ -14,6 +14,10 @@
     <h4><a href="content/{{id}}">{{title}}</a></h4>
     <span>{{include summarySnippet}}</span>
   </td>
-  <td class="author">{{author}}</td>
+  <td class="authors">
+    {{#each authors}}
+      <span class="author">{{fullname}}</span>
+    {{/each}}
+  </td>
   <td class="edited">{{date pubDate}}</td>
 </tr>
