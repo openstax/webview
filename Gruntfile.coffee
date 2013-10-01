@@ -160,6 +160,12 @@ module.exports = (grunt) ->
       dist:
         src: 'bower_components/requirejs/require.js'
         dest: 'dist/scripts/require.js'
+      fonts:
+        expand: true
+        filter: 'isFile'
+        flatten: true
+        src: ['bower_components/bootstrap/fonts/**']
+        dest: 'dist/fonts/'
 
     # Clean
     clean:
@@ -242,6 +248,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'dist', [
     'requirejs'
     'copy:dist'
+    'copy:fonts'
     'targethtml:dist'
     'clean'
     'uglify:dist'
@@ -254,6 +261,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'default', [
     'requirejs'
     'copy:dist'
+    'copy:fonts'
     'targethtml:dist'
     'clean'
     'uglify:dist'
