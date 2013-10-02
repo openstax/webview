@@ -13,6 +13,7 @@ define (require) ->
       @route 'content', 'content', () ->
         @appView.render('content')
 
+      # Match and extract uuid and page numbers separated by a colon
       @route /^content\/([^:]+):?(.*)/, 'media', (uuid, page) ->
         @appView.render('content', {uuid: uuid, page: page})
 
