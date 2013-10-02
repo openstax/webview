@@ -13,7 +13,7 @@ define (require) ->
       @route 'content', 'content', () ->
         @appView.render('content')
 
-      @route 'content/:uuid(/:page)', 'media', (uuid, page) ->
+      @route /^content\/([^:]+):?(.*)/, 'media', (uuid, page) ->
         @appView.render('content', {uuid: uuid, page: page})
 
       @route /^search/, 'search', () ->
