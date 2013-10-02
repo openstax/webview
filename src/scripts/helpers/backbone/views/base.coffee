@@ -30,6 +30,7 @@ define (require) ->
     close: () ->
       @clean()
       delete @[key] for key of @
+      console.log @
 
   class Regions
     constructor: (regions = {}, $context) ->
@@ -75,7 +76,6 @@ define (require) ->
         region.close()
 
       @detachPopovers()
-      @stopListening()
       @remove()
       @unbind()
       delete @[key] for key of @
