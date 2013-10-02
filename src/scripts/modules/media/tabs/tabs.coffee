@@ -1,23 +1,24 @@
 define (require) ->
   $ = require('jquery')
-  router = require('cs!router')
-  analytics = require('cs!helpers/handlers/analytics')
+  content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
+  TocTreeView = require('cs!./content/toc')
   template = require('hbs!./tabs-template')
   require('less!./tabs')
 
   return class MediaTabsView extends BaseView
     template: template
 
+    regions:
+      contents: '.contents'
+      tools: '.tools'
+      reading: '.reading-lists'
+
     events:
       'click .tab': 'selectTab'
-      'click .contents .subcollection': 'toggleSubcollection'
-      'click .contents a': 'loadPage'
 
-    initialize: () ->
-      super()
-      @stopListening(@model)
-      @listenTo(@model, 'change:toc', @render) if @model
+    onRender: () ->
+      @regions.contents.show(new TocTreeView({model: @model}))
 
     selectTab: (e) ->
       $tab = $(e.currentTarget)
@@ -34,15 +35,3 @@ define (require) ->
       else
         @currentTab = null
         @$el.find('.tab').removeClass('inactive')
-
-    toggleSubcollection: (e) ->
-      $(e.currentTarget).parent().siblings('ul').toggle()
-
-    loadPage: (e) ->
-      e.preventDefault()
-      $a = $(e.currentTarget)
-
-      @model.setPage($a.data('page'))
-      route = $a.attr('href')
-      router.navigate(route) # Update browser URL to reflect the new route
-      analytics.send() # Send the analytics information for the new route

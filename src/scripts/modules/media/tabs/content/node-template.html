@@ -1,0 +1,26 @@
+<div>
+  {{#is id 'subcol'}}
+    <span class="expand">&#9656;</span>
+  {{/is}}
+  {{#or depth @index}}
+    {{#is depth 2}}
+      <span>-</span>
+    {{else}}
+      {{#if depth}}
+        <span class="unit">{{parent}}-{{add @index 1}}.</span>
+      {{else}}
+        <span class="unit">{{@index}}.</span>
+      {{/if}}
+    {{/is}}
+  {{/or}}
+  {{#is id 'subcol'}}
+    <span class="title subcollection">{{title}}</span>
+  {{else}}
+    <a href="/content/{{collectionId}}/{{page}}" data-page="{{page}}">
+      <span class="title">{{title}}</span>
+    </a>
+  {{/is}}
+</div>
+<ul class="subcollection">
+  {{! Toc Tree View (if necessary) }}
+</ul>
