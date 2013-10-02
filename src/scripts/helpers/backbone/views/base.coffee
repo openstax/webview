@@ -30,7 +30,6 @@ define (require) ->
     close: () ->
       @clean()
       delete @[key] for key of @
-      console.log @
 
   class Regions
     constructor: (regions = {}, $context) ->
