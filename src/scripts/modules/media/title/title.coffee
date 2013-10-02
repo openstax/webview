@@ -23,6 +23,10 @@ define (require) ->
         list[key] = encodeURI(value)
 
       return {share: share, encodedTitle: encodeURI(title)}
+    
+    initialize: () ->
+      super()
+      @listenTo(@model, 'change', @render) if @model
 
     onRender: () ->
       $share = @$el.find('.share')

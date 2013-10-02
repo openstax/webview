@@ -9,3 +9,4 @@ define (require) ->
     initialize: () ->
       @model = @model.get('currentPage')
       super()
+      @listenTo(@model, 'change', @render) if @model

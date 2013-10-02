@@ -5,3 +5,7 @@ define (require) ->
 
   return class EndorsedView extends BaseView
     template: template
+
+    initialize: () ->
+      super()
+      @listenTo(@model, 'change', @render) if @model
