@@ -9,26 +9,29 @@ define (require) ->
       @el = el
 
     show: (view) ->
-      @clean()
-      @views = null
+      @empty()
       @append(view)
 
     append: (view) ->
+      @appendAs('div', view)
+
+    appendAs: (type, view) ->
       @$el = @parent.$el.find(@el)
       view.parent = @parent
       @views ?= []
       @views.push(view)
-      view.setElement($('<div>').appendTo(@$el)).render()
+      view.setElement($("<#{type}>").appendTo(@$el)).render()
 
-    clean: () ->
+    empty: () ->
       _.each @views, (view) ->
         view.close()
 
       @$el?.empty()
       @$el = null
+      @views = null
 
     close: () ->
-      @clean()
+      empty()
       delete @[key] for key of @
 
   class Regions
