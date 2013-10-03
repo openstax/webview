@@ -55,6 +55,10 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
         index index.html;
         try_files $uri $uri/ /index.html;
 
+        location /resources/ {
+            proxy_pass http://localhost:6543;
+        }
+
         location ~ ^.*/bower_components/(.*)$ {
             alias /path/to/webview/bower_components/$1;
         }
@@ -82,10 +86,15 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
         index index.html;
         try_files $uri $uri/ /index.html;
 
+        location /resources/ {
+            proxy_pass http://localhost:6543;
+        }
+
         location ~ ^.*/(data|scripts|styles|images|fonts)/(.*) {
             try_files $uri $uri/ /$1/$2;
         }
     }
+
   ```
 
 #### Test Site
