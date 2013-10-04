@@ -98,7 +98,6 @@ define (require) ->
     setPage: (num) ->
       if num < 1 then num = 1
       if num > @pages then num = @pages
-      if not num then return
 
       @set('page', num)
 
