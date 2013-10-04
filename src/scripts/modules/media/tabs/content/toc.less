@@ -2,20 +2,9 @@
 @import "../../../../../styles/mixins.less";
 
 .media-tabs .contents {
+  .columns(290px; 30px; 1px solid @gray-lightest);
   margin-right: -1px; // Hide 3rd column rule
   padding: 15px;
-
-  -moz-columns: 290px auto;
-  -webkit-columns: 290px auto;
-  columns: 290px auto;
-
-  -moz-column-gap: 30px;
-  -webkit-column-gap: 30px;
-  column-gap: 30px;
-
-  -moz-column-rule: 4px solid @gray-lightest;
-  -webkit-column-rule: 1px solid @gray-lightest;
-  column-rule: 1px solid @gray-lightest;
 
   .expand {
     margin-right: 5px;
