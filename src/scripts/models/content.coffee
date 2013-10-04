@@ -41,6 +41,9 @@ define (require) ->
       toc = @get('toc')
       @set('type', type)
 
+      # Keep the id with the desired version number included
+      delete response.id
+
       if type isnt 'book' then return response
 
       depth = 0
@@ -99,7 +102,6 @@ define (require) ->
 
       @set('page', num)
 
-      window.x = @
       page = @get('toc').at(num-1)
       @get('currentPage')?.set('active', false)
       @set('currentPage', page)
