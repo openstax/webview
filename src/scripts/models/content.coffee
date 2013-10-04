@@ -84,7 +84,7 @@ define (require) ->
 
       traverse(response.tree)
 
-      @set('pages', page)
+      @set('pages', page-1)
 
       return response
 
