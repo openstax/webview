@@ -37,7 +37,6 @@ define (require) ->
     relations: [{
       type: Backbone.Many
       key: 'contents'
-      parse: true
       relatedModel: Toc
     }]
 
@@ -62,7 +61,7 @@ define (require) ->
 
     toJSON: () ->
       currentPage = @get('currentPage').toJSON()
-      toc = @get('toc')?.toJSON()
+      toc = @get('toc').toJSON()
       json = super()
       json.currentPage = currentPage
       json.toc = toc
