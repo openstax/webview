@@ -12,11 +12,6 @@ define (require) ->
   CONTENT_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/contents"
 
   class Toc extends Backbone.AssociatedModel
-    defaults:
-      title: 'Untitled'
-      content: 'No content'
-      authors: []
-
     relations: [{
       type: Backbone.Many
       key: 'contents'
