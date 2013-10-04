@@ -35,8 +35,11 @@ define (require) ->
       @$el.find('.tab').addClass('inactive')
       @$el.find('.tab-content').hide()
 
+      @$el.find('.tab').find('.expand').text('+')
+
       if $tab.data('content') isnt @currentTab
         $tab.removeClass('inactive')
+        $tab.find('.expand').html('&minus;')
         @currentTab = $tab.data('content')
         @$el.find(".#{@currentTab}").show()
       else
