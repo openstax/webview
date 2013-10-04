@@ -9,10 +9,10 @@ define (require) ->
     template: template
     templateHelpers:
       _hideProgress: () -> @hideProgress
-    
+
     initialize: (options) ->
       super()
-      @listenTo(@model, 'change', @render) if @model
+      @listenTo(@model, 'change:page change:pages', @render) if @model
       @hideProgress = options.hideProgress
 
     events:

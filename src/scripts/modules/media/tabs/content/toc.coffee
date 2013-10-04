@@ -19,7 +19,7 @@ define (require) ->
         container: @itemViewContainer
 
       super()
-      @listenTo(@model, 'change:contents', @render)
+      @listenTo(@model, 'change:unit change:title change:subcollection', @render)
 
     onRender: () ->
       @regions.container.empty()

@@ -16,7 +16,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change', @render) if @model
+      @listenTo(@model, 'change:page change:unit change:title', @render) if @model
 
     loadPage: (e) ->
       e.preventDefault()
