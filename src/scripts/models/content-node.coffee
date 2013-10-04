@@ -9,10 +9,13 @@ define (require) ->
   return class Node extends Backbone.AssociatedModel
     url: () -> "#{CONTENT_URI}/#{@id}"
     defaults:
-      title: 'Untitled'
       authors: []
 
     parse: (response, options) ->
+      # Don't overwrite the title from the book's table of contents
+      if @get('title')
+        delete response.title
+
       if not response.content then return response
       # jQuery can not build a jQuery object with <head> or <body> tags,
       # and will instead move all elements in them up one level.
