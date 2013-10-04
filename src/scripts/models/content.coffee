@@ -49,7 +49,7 @@ define (require) ->
       depth = 0
       page = 1
 
-      traverse = (o = {}, sub) =>
+      traverse = (o = {}) =>
         for item, index in o.contents
           item.book = @
           item.depth = depth
@@ -64,7 +64,7 @@ define (require) ->
             item.subcollection = true
             delete item.id
             depth++
-            traverse(item, true)
+            traverse(item)
           else
             item.page = page++
 
