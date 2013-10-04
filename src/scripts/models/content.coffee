@@ -89,7 +89,6 @@ define (require) ->
       return response
 
     initialize: (options = {}) ->
-      window.x = @
       @set('toc', new Backbone.Collection())
       @fetch
         success: () => @load(options.page)
