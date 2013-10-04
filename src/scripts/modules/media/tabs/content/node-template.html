@@ -1,6 +1,6 @@
 <div>
-  <span class="unit {{#if active}}active{{/if}}">{{unit}}.</span>
+  <span class="unit">{{unit}}.</span>
   <a href="/content/{{book.id}}:{{page}}" data-page="{{page}}">
-    <span class="title">{{title}}</span>
+    <span class="title {{#if active}}active{{/if}}">{{title}}</span>
   </a>
 </div>
