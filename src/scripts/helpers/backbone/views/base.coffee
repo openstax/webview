@@ -31,7 +31,7 @@ define (require) ->
       @views = null
 
     close: () ->
-      empty()
+      @empty()
       delete @[key] for key of @
 
   class Regions
