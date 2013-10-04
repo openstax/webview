@@ -1,8 +1,7 @@
 define (require) ->
-  $ = require('jquery')
-  _ = require('underscore')
   Backbone = require('backbone')
   settings = require('cs!settings')
+  Node = require('cs!models/content-node')
   require('backbone-associations')
 
   MEDIA_TYPES =
@@ -10,42 +9,6 @@ define (require) ->
     'application/vnd.org.cnx.module': 'page'
 
   CONTENT_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/contents"
-
-  class Node extends Backbone.AssociatedModel
-    url: () -> "#{CONTENT_URI}/#{@id}"
-    defaults:
-      title: 'Untitled'
-      authors: []
-
-    parse: (response, options) ->
-      if not response.content then return response
-      # jQuery can not build a jQuery object with <head> or <body> tags,
-      # and will instead move all elements in them up one level.
-      # Use a regex to extract everything in the body and put it into a div instead.
-      $body = $('<div>' + response.content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>')
-      $body.find('.title').eq(0).remove()
-      response.content = $body.html()
-
-      return response
-
-    relations: [{
-      type: Backbone.Many
-      key: 'contents'
-      relatedModel: Node
-    }]
-
-    findPage: (num) ->
-      search = (item) ->
-        contents = item.get('contents')
-        for item in contents.models
-          if item.get('page') is num
-            return item
-          else if item.get('contents')
-            result = search(item)
-            return result if result
-        return
-
-      return search(@)
 
   return class Content extends Backbone.AssociatedModel
     url: () -> "#{CONTENT_URI}/#{@id}"
