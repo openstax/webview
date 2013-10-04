@@ -22,7 +22,7 @@ define (require) ->
       e.preventDefault()
       $a = $(e.currentTarget)
 
-      @model.setPage($a.data('page'))
+      @model.get('book').setPage($a.data('page'))
       route = $a.attr('href')
       router.navigate(route) # Update browser URL to reflect the new route
       analytics.send() # Send the analytics information for the new route
