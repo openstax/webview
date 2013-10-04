@@ -11,29 +11,17 @@ define (require) ->
 
   CONTENT_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/contents"
 
-  class CurrentPage extends Backbone.Model
-    url: () -> "#{CONTENT_URI}/#{@id}"
-
+  class Toc extends Backbone.AssociatedModel
     defaults:
       title: 'Untitled'
       content: 'No content'
       authors: []
 
-    parse: (response, options) ->
-      # jQuery can not build a jQuery object with <head> or <body> tags,
-      # and will instead move all elements in them up one level.
-      # Use a regex to extract everything in the body and put it into a div instead.
-      $body = $('<div>' + response.content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>')
-      $body.find('.title').eq(0).remove()
-      response.content = $body.html()
-
-      return response
-
-  class Toc extends Backbone.AssociatedModel
     relations: [{
       type: Backbone.Many
       key: 'contents'
       relatedModel: Toc
+      parse: true
     }]
 
   return class Content extends Backbone.AssociatedModel
@@ -43,7 +31,11 @@ define (require) ->
       title: 'Untitled Book'
       pages: 1
       authors: []
-      currentPage: new CurrentPage()
+      currentPage: new Backbone.Model
+        defaults:
+          title: 'Untitled'
+          content: 'No content'
+          authors: []
 
     relations: [{
       type: Backbone.One
@@ -56,7 +48,7 @@ define (require) ->
     }]
 
     toJSON: () ->
-      currentPage = @get('currentPage').toJSON()
+      currentPage = @get('currentPage')?.toJSON()
       toc = @get('toc').toJSON()
       json = super()
       json.currentPage = currentPage
@@ -102,6 +94,7 @@ define (require) ->
       return response
 
     initialize: (options = {}) ->
+      window.x = @
       @set('toc', new Backbone.Collection())
       @fetch
         success: () => @load(options.page)
@@ -110,10 +103,8 @@ define (require) ->
       if @get('type') is 'book'
         @setPage(page or 1) # Default to page 1
       else
-        currentPage = @get('currentPage')
-        currentPage.clear({silent: true}).set(currentPage.defaults) # Reset the current page
-        currentPage.id = @id
-        currentPage.fetch()
+        @set('currentPage', new Toc({id: @id}))
+        @get('currentPage').fetch()
 
     setPage: (num) ->
       if num < 1 then num = 1
@@ -122,13 +113,25 @@ define (require) ->
 
       @set('page', num)
 
-      currentPage = @get('currentPage')
-      currentPage.clear({silent: true}).set(currentPage.defaults) # Reset the current page
-      contents = @get('toc').at(num-1).toJSON()
-      currentPage.id = contents.id
-      currentPage.fetch
-        success: (model, response, options) ->
-          currentPage.set('title', contents.title) if contents.title
+      page = @get('toc').at(num-1)
+      @get('currentPage')?.set('active', false)
+      @set('currentPage', page)
+      page.set('active', true)
+      page.url = "#{CONTENT_URI}/#{page.id}"
+      page.parse = (response, options) ->
+        if not response.content then return response
+        # jQuery can not build a jQuery object with <head> or <body> tags,
+        # and will instead move all elements in them up one level.
+        # Use a regex to extract everything in the body and put it into a div instead.
+        $body = $('<div>' + response.content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>')
+        $body.find('.title').eq(0).remove()
+        response.content = $body.html()
+
+        return response
+
+      if not page.loaded
+        page.fetch
+          success: () -> page.loaded = true
 
     nextPage: () ->
       currentPage = @get('currentPage')

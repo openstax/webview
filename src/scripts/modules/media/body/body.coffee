@@ -7,6 +7,9 @@ define (require) ->
     template: template
 
     initialize: () ->
-      @model = @model.get('currentPage')
       super()
-      @listenTo(@model, 'change:content', @render) if @model
+      @listenTo(@model, 'change:currentPage', @update)
+
+    update: () ->
+      @listenTo(@model.get('currentPage'), 'change:content', @render)
+      @render()

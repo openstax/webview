@@ -11,12 +11,13 @@ define (require) ->
     templateHelpers: () ->
       title = @model.get('title')
       currentPage = @model.get('currentPage')
-      share =
-        url: Backbone.history.fragment
-        source: @model.get('source') or currentPage.get('source') or 'OpenStax College'
-        summary: @model.get('summary') or currentPage.get('summary') or 'An OpenStax College book.'
-        title: title or currentPage.get('title')
-        image: @model.get('image') or currentPage.get('image') or "#{Backbone.history.location.host}/images/logo.png"
+      if currentPage
+        share =
+          url: Backbone.history.fragment
+          source: @model.get('source') or currentPage.get('source') or 'OpenStax College'
+          summary: @model.get('summary') or currentPage.get('summary') or 'An OpenStax College book.'
+          title: title or currentPage.get('title')
+          image: @model.get('image') or currentPage.get('image') or "#{Backbone.history.location.host}/images/logo.png"
 
       # Encode all of the shared values for a URI
       _.each share, (value, key, list) ->
