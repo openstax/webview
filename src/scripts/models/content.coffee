@@ -29,10 +29,6 @@ define (require) ->
 
       return response
 
-  class Author extends Backbone.AssociatedModel
-    defaults:
-      name: 'Unknown'
-
   class Toc extends Backbone.AssociatedModel
     relations: [{
       type: Backbone.Many
@@ -56,7 +52,7 @@ define (require) ->
     }, {
       type: Backbone.Many
       key: 'authors'
-      relatedModel: Author
+      collectionType: Backbone.Collection
     }]
 
     toJSON: () ->
