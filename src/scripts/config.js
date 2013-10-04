@@ -15,7 +15,7 @@
       backbone: '../../bower_components/backbone/backbone',
 
       // ## Backbone plugins
-      'backbone-relational': '../../bower_components/backbone-relational/backbone-relational',
+      'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
 
       // ## UI Libraries
       // Boostrap Plugins
@@ -64,7 +64,7 @@
       },
 
       // ## Backbone plugins
-      'backbone-relational': {
+      'backbone-associations': {
         deps: ['backbone']
       },
 
