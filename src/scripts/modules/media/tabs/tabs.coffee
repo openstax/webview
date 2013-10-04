@@ -17,8 +17,15 @@ define (require) ->
     events:
       'click .tab': 'selectTab'
 
+    initialize: () ->
+      super()
+      @listenTo(@model, 'change:tree', @render)
+
     onRender: () ->
-      @regions.contents.show(new TocTreeView({model: @model}))
+      tree = @model.get('tree')
+
+      if tree
+        @regions.contents.show(new TocTreeView({model: tree}))
 
     selectTab: (e) ->
       $tab = $(e.currentTarget)

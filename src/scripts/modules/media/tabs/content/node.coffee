@@ -12,8 +12,8 @@ define (require) ->
     itemViewContainer: '.subcollection'
 
     events:
-      'click .contents a': 'loadPage'
-    
+      'click a': 'loadPage'
+
     initialize: () ->
       super()
       @listenTo(@model, 'change', @render) if @model

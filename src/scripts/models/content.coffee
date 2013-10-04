@@ -3,6 +3,7 @@ define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
   settings = require('cs!settings')
+  require('backbone-associations')
 
   MEDIA_TYPES =
     'application/vnd.org.cnx.collection' : 'book'
@@ -28,7 +29,19 @@ define (require) ->
 
       return response
 
-  return class Content extends Backbone.Model
+  class Author extends Backbone.AssociatedModel
+    defaults:
+      name: 'Unknown'
+
+  class Toc extends Backbone.AssociatedModel
+    relations: [{
+      type: Backbone.Many
+      key: 'contents'
+      parse: true
+      relatedModel: Toc
+    }]
+
+  return class Content extends Backbone.AssociatedModel
     url: () -> "#{CONTENT_URI}/#{@id}"
 
     defaults:
@@ -36,6 +49,16 @@ define (require) ->
       pages: 1
       authors: []
       currentPage: new CurrentPage()
+
+    relations: [{
+      type: Backbone.One
+      key: 'tree'
+      relatedModel: Toc
+    }, {
+      type: Backbone.Many
+      key: 'authors'
+      relatedModel: Author
+    }]
 
     toJSON: () ->
       currentPage = @get('currentPage').toJSON()
@@ -45,37 +68,30 @@ define (require) ->
       json.toc = toc
       return json
 
-    initialize: (options = {}) ->
-      @fetch
-        success: () => @setup(options.page)
-
-    setup: (page) ->
-      type = MEDIA_TYPES[@get('mediaType')]
+    parse: (response) ->
+      type = MEDIA_TYPES[response.mediaType]
+      toc = @get('toc')
       @set('type', type)
 
-      if type is 'book'
-        @setupToc()
-        @setPage(page or 1) # Default to page 1
-      else
-        currentPage = @get('currentPage')
-        currentPage.id = @id
-        currentPage.fetch()
+      if type isnt 'book' then return response
 
-    # Create a flat collection to store all the pages
-    setupToc: () ->
-      toc = new Backbone.Collection()
-      id = @get('id')
       depth = 0
       page = 1
-      parent = -1
 
-      traverse = (o = {}, sub) ->
-        for item in o.contents
-          item.collectionId = id
+      traverse = (o = {}, sub) =>
+        for item, index in o.contents
+          item.collectionId = @id
           item.depth = depth
-          if depth is 1 then item.parent = parent
-          else if depth is 0 then parent++
+
+          if depth
+            item.parent = o.id
+            item.unit = "#{o.unit}-#{index+1}"
+          else
+            item.unit = "#{index+1}"
+
           if item.contents
+            item.subcollection = true
+            delete item.id
             depth++
             traverse(item, true)
           else
@@ -84,9 +100,25 @@ define (require) ->
 
         depth--
 
-      traverse(@get('tree'))
-      @set('toc', toc)
-      @set('pages', toc.models.length)
+      traverse(response.tree)
+
+      @set('pages', page)
+
+      return response
+
+    initialize: (options = {}) ->
+      @set('toc', new Backbone.Collection())
+      @fetch
+        success: () => @load(options.page)
+
+    load: (page) ->
+      if @get('type') is 'book'
+        @setPage(page or 1) # Default to page 1
+      else
+        currentPage = @get('currentPage')
+        currentPage.clear({silent: true}).set(currentPage.defaults) # Reset the current page
+        currentPage.id = @id
+        currentPage.fetch()
 
     setPage: (num) ->
       if num < 1 then num = 1
