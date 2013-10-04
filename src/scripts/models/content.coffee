@@ -16,7 +16,6 @@ define (require) ->
     defaults:
       title: 'Untitled'
       authors: []
-      content: 'No content'
 
     parse: (response, options) ->
       if not response.content then return response
