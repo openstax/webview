@@ -80,11 +80,11 @@ define (require) ->
 
       traverse = (o = {}, sub) =>
         for item, index in o.contents
-          item.collectionId = @id
+          item.book = @
           item.depth = depth
 
           if depth
-            item.parent = o.id
+            item.parent = o
             item.unit = "#{o.unit}-#{index+1}"
           else
             item.unit = "#{index+1}"
