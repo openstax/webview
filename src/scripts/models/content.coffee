@@ -11,13 +11,42 @@ define (require) ->
 
   CONTENT_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/contents"
 
-  class Toc extends Backbone.AssociatedModel
+  class Node extends Backbone.AssociatedModel
+    url: () -> "#{CONTENT_URI}/#{@id}"
+    defaults:
+      title: 'Untitled'
+      authors: []
+      content: 'No content'
+
+    parse: (response, options) ->
+      if not response.content then return response
+      # jQuery can not build a jQuery object with <head> or <body> tags,
+      # and will instead move all elements in them up one level.
+      # Use a regex to extract everything in the body and put it into a div instead.
+      $body = $('<div>' + response.content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>')
+      $body.find('.title').eq(0).remove()
+      response.content = $body.html()
+
+      return response
+
     relations: [{
       type: Backbone.Many
       key: 'contents'
-      relatedModel: Toc
-      parse: true
+      relatedModel: Node
     }]
+
+    findPage: (num) ->
+      search = (item) ->
+        contents = item.get('contents')
+        for item in contents.models
+          if item.get('page') is num
+            return item
+          else if item.get('contents')
+            result = search(item)
+            return result if result
+        return
+
+      return search(@)
 
   return class Content extends Backbone.AssociatedModel
     url: () -> "#{CONTENT_URI}/#{@id}"
@@ -26,16 +55,11 @@ define (require) ->
       title: 'Untitled Book'
       pages: 1
       authors: []
-      currentPage: new Backbone.Model
-        defaults:
-          title: 'Untitled'
-          content: 'No content'
-          authors: []
 
     relations: [{
       type: Backbone.One
       key: 'tree'
-      relatedModel: Toc
+      relatedModel: Node
     }, {
       type: Backbone.Many
       key: 'authors'
@@ -78,7 +102,6 @@ define (require) ->
             traverse(item, true)
           else
             item.page = page++
-            toc.add(item)
 
         depth--
 
@@ -95,10 +118,17 @@ define (require) ->
 
     load: (page) ->
       if @get('type') is 'book'
+        toc = @get('toc')
+        for i in [0..@get('pages')] by 1
+          toc.add(@findPage(i+1))
+
         @setPage(page or 1) # Default to page 1
       else
-        @set('currentPage', new Toc({id: @id}))
+        @set('currentPage', new Node({id: @id}))
         @get('currentPage').fetch()
+
+    findPage: (num) ->
+      @get('tree').findPage(num)
 
     setPage: (num) ->
       if num < 1 then num = 1
@@ -107,21 +137,11 @@ define (require) ->
 
       @set('page', num)
 
+      window.x = @
       page = @get('toc').at(num-1)
       @get('currentPage')?.set('active', false)
       @set('currentPage', page)
       page.set('active', true)
-      page.url = "#{CONTENT_URI}/#{page.id}"
-      page.parse = (response, options) ->
-        if not response.content then return response
-        # jQuery can not build a jQuery object with <head> or <body> tags,
-        # and will instead move all elements in them up one level.
-        # Use a regex to extract everything in the body and put it into a div instead.
-        $body = $('<div>' + response.content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>')
-        $body.find('.title').eq(0).remove()
-        response.content = $body.html()
-
-        return response
 
       if not page.loaded
         page.fetch
