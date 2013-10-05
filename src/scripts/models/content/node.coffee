@@ -16,7 +16,9 @@ define (require) ->
       if @get('title')
         delete response.title
 
+      # If this model has no content field (like a book), then don't try to process it.
       if not response.content then return response
+
       # jQuery can not build a jQuery object with <head> or <body> tags,
       # and will instead move all elements in them up one level.
       # Use a regex to extract everything in the body and put it into a div instead.
