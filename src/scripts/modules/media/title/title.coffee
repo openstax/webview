@@ -12,6 +12,7 @@ define (require) ->
       title = @model.get('title')
       currentPage = @model.get('currentPage')
       if currentPage
+        # Set information used for social media links
         share =
           url: Backbone.history.fragment
           source: @model.get('source') or currentPage.get('source') or 'OpenStax College'
