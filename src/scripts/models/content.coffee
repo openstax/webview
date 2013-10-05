@@ -37,9 +37,7 @@ define (require) ->
       return json
 
     parse: (response) ->
-      type = MEDIA_TYPES[response.mediaType]
-      toc = @get('toc')
-      @set('type', type)
+      type = response.type = MEDIA_TYPES[response.mediaType]
 
       # Keep the id with the desired version number included
       delete response.id
@@ -75,7 +73,7 @@ define (require) ->
 
       traverse(response.tree)
 
-      @set('pages', page-1)
+      response.pages = page - 1
 
       return response
 
