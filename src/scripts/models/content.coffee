@@ -49,6 +49,9 @@ define (require) ->
       depth = 0
       page = 1
 
+      # Traverse a book's tree and setup page, unit, parent, depth, and subcollection
+      # information on each node of the tree prior to the tree being processed
+      # by backbone-associations.
       traverse = (o = {}) =>
         for item, index in o.contents
           item.book = @
