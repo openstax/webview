@@ -1,7 +1,7 @@
 define (require) ->
   Backbone = require('backbone')
   settings = require('cs!settings')
-  Node = require('cs!models/content-node')
+  Node = require('cs!models/content/node')
   require('backbone-associations')
 
   MEDIA_TYPES =
