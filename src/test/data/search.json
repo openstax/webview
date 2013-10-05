@@ -9,19 +9,19 @@
     "items": [{
       "bodySnippet": null,
       "summarySnippet": "algebra-based, two-semester college <b>physics</b> book is grounded with real-world examples, illustrations, and explanations to help students grasp key, fundamental <b>physics</b> concepts. This online, fully editable and customizable title includes learning objectives, concept questions, links to labs and simulations, and ample practice opportunities to solve traditional <b>physics</b> application problems.",
-      "pubDate": "2012-01-23 13:03:30-06",
+      "pubDate": "2013-07-31 15:07:20.342798-04",
       "title": "College Physics",
       "keywords": ["college physics", "physics", "friction", "ac circuits", "atomic physics", "bioelectricity", "biological and medical applications", "circuits", "collisions", "dc instruments", "drag", "elasticity", "electric charge and electric field", "electric current", "electric potential", "electrical technologies", "electromagnetic induction", "electromagnetic waves", "energy", "fluid dynamics", "fluid statics", "forces", "frontiers of physics", "gas laws", "geometric optics", "heat and transfer methods", "kinematics", "kinetic theory", "linear momentum", "magnetism", "medical applications of nuclear physics", "Newton\u2019s Laws of Motion", "Ohm\u2019s Law", "oscillatory motion and waves", "particle physics", "physics of hearing", "quantum physics", "radioactivity and nuclear physics", "resistance", "rotational motion and angular momentum", "special relativity", "statics and torque", "temperature", "thermodynamics", "uniform circular motion and gravitation", "vision and optical instruments", "wave optics", "work"],
       "authors": [{
-        "website": "http://openstaxcollege.org",
-        "surname": "OpenStax College",
-        "suffix": "",
-        "firstname": "",
-        "title": "",
-        "othername": "",
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
         "email": "info@openstaxcollege.org",
         "fullname": "OpenStax College",
-        "id": "OpenStaxCollege"
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
       }],
       "id": "e79ffde3-7fb4-4af3-9ec8-df648b391597",
       "mediaType": "Collection"
@@ -31,7 +31,17 @@
       "pubDate": "2013-07-31 15:07:20.542211-04",
       "title": "Preface to College Physics",
       "keywords": ["college physics", "introduction", "physics"],
-      "authors": [],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
       "id": "209deb1f-1a46-4369-9e0d-18674cf58a3e",
       "mediaType": "Module"
     }, {
@@ -40,7 +50,17 @@
       "pubDate": "2013-07-31 15:07:20.590652-04",
       "title": "Introduction to Science and the Realm of Physics, Physical Quantities, and Units",
       "keywords": ["Accuracy", "Approximation", "Classical physics", "Conversion factor", "Customary system", "Derived units", "English units", "Fundamental units", "Kilogram", "Law", "Meter", "Metric system", "Model", "Modern physics", "Order of magnitude", "Percent uncertainty", "Physical quantity", "Physics", "Precision", "Quantum mechanics", "Relativity", "Scientific method", "Second", "Significant figures", "SI units", "Theory", "Uncertainty", "Units"],
-      "authors": [],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
       "id": "f3c9ab70-a916-4d8c-9256-42953287b4e9",
       "mediaType": "Module"
     }, {
@@ -49,10 +69,557 @@
       "pubDate": "2013-07-31 15:07:20.75499-04",
       "title": "Physics: An Introduction",
       "keywords": ["Classical physics", "Law", "Model", "Modern physics", "Physics", "Quantum mechanics", "Relativity", "Scientific method", "Theory"],
-      "authors": [],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
       "id": "d395b566-5fe3-4428-bcb2-19016e3aa3ce",
       "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31 15:07:21.597444-04",
+      "title": "Physical Quantities and Units",
+      "keywords": ["Conversion factor", "Customary system", "Derived units", "English units", "Fundamental units", "Kilogram", "Meter", "Metric system", "Order of magnitude", "Physical quantity", "Second", "SI units", "Units"],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
+      "id": "c8bdbabc-62b1-4a5f-b291-982ab25756d7",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31 15:07:21.833994-04",
+      "title": "Accuracy, Precision, and Significant Figures",
+      "keywords": ["Accuracy", "Percent uncertainty", "Precision", "Significant figures", "Uncertainty"],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
+      "id": "5152cea8-829a-4aaf-bcc5-c58a416ecb66",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31 15:07:22.245879-04",
+      "title": "Approximation",
+      "keywords": ["Approximation"],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
+      "id": "5838b105-41cd-4c3d-a957-3ac004a48af3",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31 15:07:22.410554-04",
+      "title": "Introduction: Further Applications of Newton\u2019s Laws",
+      "keywords": ["bulk modulus", "compression", "deformation", "drag coefficient", "drag force", "force", "friction", "Hooke\u2019s law", "kinetic friction", "length", "magnitude", "magnitude of kinetic friction", "magnitude of static friction", "motion", "normal force", "position", "shear modulus", "sliding friction", "static friction", "Stokes\u2019 law", "strain", "stress", "tension", "velocity", "Young\u2019s modulus"],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
+      "id": "24a2ed13-22a6-47d6-97a3-c8aa8d54ac6d",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31 15:07:22.528746-04",
+      "title": "Friction",
+      "keywords": ["force", "friction", "kinetic friction", "magnitude", "magnitude of kinetic friction", "magnitude of static friction", "normal force", "sliding friction", "static friction"],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
+      "id": "ea271306-f7f2-46ac-b2ec-1d80ff186a59",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31 15:07:24.211068-04",
+      "title": "Drag Forces",
+      "keywords": ["drag coefficient", "drag force", "friction", "Stokes\u2019 law", "velocity"],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
+      "id": "26346a42-84b9-48ad-9f6a-62303c16ad41",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31 15:07:24.856663-04",
+      "title": "Elasticity: Stress and Strain",
+      "keywords": ["bulk modulus", "compression", "deformation", "force", "Hooke\u2019s law", "length", "shear modulus", "strain", "stress", "tension", "Young\u2019s modulus", "shear deformation", "tensile strength"],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
+      "id": "56f1c5c1-4014-450d-a477-2121e276beca",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31 15:07:25.422884-04",
+      "title": "Atomic Masses",
+      "keywords": [],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
+      "id": "f6024d8a-1868-44c7-ab65-45419ef54881",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31 15:07:25.542258-04",
+      "title": "Selected Radioactive Isotopes",
+      "keywords": [],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
+      "id": "7250386b-14a7-41a2-b8bf-9e9ab872f0dc",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31 15:07:25.616481-04",
+      "title": "Useful Information",
+      "keywords": [],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
+      "id": "c0a76659-c311-405f-9a99-15c71af39325",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31 15:07:25.745201-04",
+      "title": "Glossary of Key Symbols and Notation",
+      "keywords": [],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "email": "info@openstaxcollege.org",
+        "fullname": "OpenStax College",
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+      }],
+      "id": "ae3e18de-638d-4738-b804-dc69cd4db3a3",
+      "mediaType": "Module"
     }],
-    "total": 4
+    "total": 15,
+    "limits": [{
+      "count": 15,
+      "pubYear": "2013"
+    }, {
+      "count": 15,
+      "author": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+    }, {
+      "count": 1,
+      "mediaType": "application/vnd.org.cnx.collection"
+    }, {
+      "count": 14,
+      "mediaType": "application/vnd.org.cnx.module"
+    }, {
+      "count": 1,
+      "keyword": "electric potential"
+    }, {
+      "count": 2,
+      "keyword": "Modern physics"
+    }, {
+      "count": 1,
+      "keyword": "resistance"
+    }, {
+      "count": 4,
+      "keyword": "friction"
+    }, {
+      "count": 2,
+      "keyword": "Quantum mechanics"
+    }, {
+      "count": 1,
+      "keyword": "fluid statics"
+    }, {
+      "count": 2,
+      "keyword": "Scientific method"
+    }, {
+      "count": 2,
+      "keyword": "Theory"
+    }, {
+      "count": 2,
+      "keyword": "magnitude of kinetic friction"
+    }, {
+      "count": 1,
+      "keyword": "thermodynamics"
+    }, {
+      "count": 1,
+      "keyword": "quantum physics"
+    }, {
+      "count": 2,
+      "keyword": "Percent uncertainty"
+    }, {
+      "count": 2,
+      "keyword": "deformation"
+    }, {
+      "count": 2,
+      "keyword": "Kilogram"
+    }, {
+      "count": 1,
+      "keyword": "tensile strength"
+    }, {
+      "count": 1,
+      "keyword": "dc instruments"
+    }, {
+      "count": 1,
+      "keyword": "gas laws"
+    }, {
+      "count": 2,
+      "keyword": "Young\u2019s modulus"
+    }, {
+      "count": 2,
+      "keyword": "Derived units"
+    }, {
+      "count": 1,
+      "keyword": "geometric optics"
+    }, {
+      "count": 2,
+      "keyword": "magnitude"
+    }, {
+      "count": 2,
+      "keyword": "drag force"
+    }, {
+      "count": 2,
+      "keyword": "shear modulus"
+    }, {
+      "count": 3,
+      "keyword": "force"
+    }, {
+      "count": 2,
+      "keyword": "tension"
+    }, {
+      "count": 2,
+      "keyword": "Conversion factor"
+    }, {
+      "count": 1,
+      "keyword": "energy"
+    }, {
+      "count": 1,
+      "keyword": "ac circuits"
+    }, {
+      "count": 1,
+      "keyword": "electric current"
+    }, {
+      "count": 1,
+      "keyword": "statics and torque"
+    }, {
+      "count": 2,
+      "keyword": "Units"
+    }, {
+      "count": 1,
+      "keyword": "particle physics"
+    }, {
+      "count": 1,
+      "keyword": "fluid dynamics"
+    }, {
+      "count": 1,
+      "keyword": "atomic physics"
+    }, {
+      "count": 1,
+      "keyword": "collisions"
+    }, {
+      "count": 1,
+      "keyword": "electric charge and electric field"
+    }, {
+      "count": 1,
+      "keyword": "rotational motion and angular momentum"
+    }, {
+      "count": 1,
+      "keyword": "kinetic theory"
+    }, {
+      "count": 2,
+      "keyword": "Physical quantity"
+    }, {
+      "count": 2,
+      "keyword": "Uncertainty"
+    }, {
+      "count": 1,
+      "keyword": "magnetism"
+    }, {
+      "count": 2,
+      "keyword": "velocity"
+    }, {
+      "count": 1,
+      "keyword": "electromagnetic waves"
+    }, {
+      "count": 1,
+      "keyword": "physics of hearing"
+    }, {
+      "count": 2,
+      "keyword": "SI units"
+    }, {
+      "count": 1,
+      "keyword": "electromagnetic induction"
+    }, {
+      "count": 2,
+      "keyword": "Fundamental units"
+    }, {
+      "count": 1,
+      "keyword": "linear momentum"
+    }, {
+      "count": 1,
+      "keyword": "oscillatory motion and waves"
+    }, {
+      "count": 1,
+      "keyword": "motion"
+    }, {
+      "count": 1,
+      "keyword": "introduction"
+    }, {
+      "count": 2,
+      "keyword": "length"
+    }, {
+      "count": 1,
+      "keyword": "Ohm\u2019s Law"
+    }, {
+      "count": 2,
+      "keyword": "Stokes\u2019 law"
+    }, {
+      "count": 1,
+      "keyword": "elasticity"
+    }, {
+      "count": 1,
+      "keyword": "vision and optical instruments"
+    }, {
+      "count": 2,
+      "keyword": "Accuracy"
+    }, {
+      "count": 1,
+      "keyword": "biological and medical applications"
+    }, {
+      "count": 2,
+      "keyword": "compression"
+    }, {
+      "count": 1,
+      "keyword": "Newton\u2019s Laws of Motion"
+    }, {
+      "count": 2,
+      "keyword": "Precision"
+    }, {
+      "count": 2,
+      "keyword": "college physics"
+    }, {
+      "count": 1,
+      "keyword": "kinematics"
+    }, {
+      "count": 1,
+      "keyword": "electrical technologies"
+    }, {
+      "count": 2,
+      "keyword": "bulk modulus"
+    }, {
+      "count": 1,
+      "keyword": "wave optics"
+    }, {
+      "count": 1,
+      "keyword": "heat and transfer methods"
+    }, {
+      "count": 2,
+      "keyword": "drag coefficient"
+    }, {
+      "count": 1,
+      "keyword": "radioactivity and nuclear physics"
+    }, {
+      "count": 1,
+      "keyword": "frontiers of physics"
+    }, {
+      "count": 1,
+      "keyword": "circuits"
+    }, {
+      "count": 1,
+      "keyword": "work"
+    }, {
+      "count": 2,
+      "keyword": "Approximation"
+    }, {
+      "count": 2,
+      "keyword": "sliding friction"
+    }, {
+      "count": 1,
+      "keyword": "bioelectricity"
+    }, {
+      "count": 2,
+      "keyword": "Customary system"
+    }, {
+      "count": 2,
+      "keyword": "English units"
+    }, {
+      "count": 2,
+      "keyword": "magnitude of static friction"
+    }, {
+      "count": 2,
+      "keyword": "Relativity"
+    }, {
+      "count": 2,
+      "keyword": "Order of magnitude"
+    }, {
+      "count": 2,
+      "keyword": "strain"
+    }, {
+      "count": 2,
+      "keyword": "Classical physics"
+    }, {
+      "count": 2,
+      "keyword": "static friction"
+    }, {
+      "count": 1,
+      "keyword": "uniform circular motion and gravitation"
+    }, {
+      "count": 1,
+      "keyword": "forces"
+    }, {
+      "count": 2,
+      "keyword": "Metric system"
+    }, {
+      "count": 2,
+      "keyword": "Law"
+    }, {
+      "count": 1,
+      "keyword": "medical applications of nuclear physics"
+    }, {
+      "count": 2,
+      "keyword": "Hooke\u2019s law"
+    }, {
+      "count": 1,
+      "keyword": "special relativity"
+    }, {
+      "count": 1,
+      "keyword": "drag"
+    }, {
+      "count": 2,
+      "keyword": "normal force"
+    }, {
+      "count": 1,
+      "keyword": "position"
+    }, {
+      "count": 2,
+      "keyword": "kinetic friction"
+    }, {
+      "count": 2,
+      "keyword": "Model"
+    }, {
+      "count": 2,
+      "keyword": "Physics"
+    }, {
+      "count": 2,
+      "keyword": "stress"
+    }, {
+      "count": 1,
+      "keyword": "shear deformation"
+    }, {
+      "count": 2,
+      "keyword": "Meter"
+    }, {
+      "count": 2,
+      "keyword": "Second"
+    }, {
+      "count": 1,
+      "keyword": "temperature"
+    }, {
+      "count": 2,
+      "keyword": "Significant figures"
+    }, {
+      "count": 2,
+      "keyword": "physics"
+    }, {
+      "count": 8,
+      "subject": "Mathematics and Statistics"
+    }, {
+      "count": 7,
+      "subject": "Science and Technology"
+    }]
   }
 }
