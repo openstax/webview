@@ -2,9 +2,9 @@ define (require) ->
   $ = require('jquery')
   _ = require('underscore')
   BaseView = require('cs!helpers/backbone/views/base')
-  TocNodeView = require('cs!./node')
-  template = require('hbs!./toc-template')
-  require('less!./toc')
+  TocLeafView = require('cs!./leaf')
+  template = require('hbs!./tree-template')
+  require('less!./tree')
 
   return class TocTreeView extends BaseView
     template: template
@@ -28,7 +28,7 @@ define (require) ->
         if node.get('subcollection')
           @regions.container.appendAs('li', new TocTreeView({model: node}))
         else
-          @regions.container.appendAs('li', new TocNodeView({model: node}))
+          @regions.container.appendAs('li', new TocLeafView({model: node}))
 
     toggleSubcollection: (e) ->
       parent = $(e.currentTarget).parent()

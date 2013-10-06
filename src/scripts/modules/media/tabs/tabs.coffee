@@ -2,7 +2,7 @@ define (require) ->
   $ = require('jquery')
   content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
-  TocTreeView = require('cs!./content/toc')
+  TocTreeView = require('cs!./contents/tree')
   template = require('hbs!./tabs-template')
   require('less!./tabs')
 
