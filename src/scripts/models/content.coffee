@@ -114,7 +114,6 @@ define (require) ->
           success: () -> page.loaded = true
 
     nextPage: () ->
-      currentPage = @get('currentPage')
       page = @get('page')
 
       # Show the next page if there is one
@@ -124,7 +123,6 @@ define (require) ->
       return page
 
     previousPage: () ->
-      currentPage = @get('currentPage')
       page = @get('page')
 
       # Show the previous page if there is one
