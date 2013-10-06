@@ -9,16 +9,7 @@ define (require) ->
     'application/vnd.org.cnx.collection' : 'book'
     'application/vnd.org.cnx.module': 'page'
 
-  CONTENT_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/contents"
-
-  return class Content extends Backbone.AssociatedModel
-    url: () -> "#{CONTENT_URI}/#{@id}"
-
-    defaults:
-      title: 'Untitled Book'
-      pages: 1
-      authors: []
-
+  return class Content extends Collection
     relations: [{
       type: Backbone.Many
       key: 'contents'
@@ -41,6 +32,12 @@ define (require) ->
       key: 'toc'
       collectionType: Backbone.Collection
     }]
+    
+    initialize: (options = {}) ->
+      @set('toc', [])
+
+      @fetch
+        success: () => @load(options.page)
 
     parse: (response) ->
       type = response.type = MEDIA_TYPES[response.mediaType]
@@ -86,11 +83,6 @@ define (require) ->
       response.pages = page - 1
 
       return response
-
-    initialize: (options = {}) ->
-      @set('toc', [])
-      @fetch
-        success: () => @load(options.page)
 
     load: (page) ->
       if @get('type') is 'book'
