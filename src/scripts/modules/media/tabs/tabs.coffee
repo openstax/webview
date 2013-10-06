@@ -19,7 +19,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:tree', @render)
+      @listenTo(@model, 'change:contents', @render)
 
     onRender: () ->
       @regions.contents.show(new TocTreeView({model: @model}))
