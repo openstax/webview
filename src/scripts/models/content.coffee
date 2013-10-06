@@ -1,6 +1,5 @@
 define (require) ->
   Backbone = require('backbone')
-  settings = require('cs!settings')
   Collection = require('cs!models/content/collection')
   toc = require('cs!collections/toc')
   Page = require('cs!models/content/page')

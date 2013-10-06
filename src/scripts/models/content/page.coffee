@@ -1,19 +1,10 @@
-# Representation of individual nodes in a book's tree (table of contents).
-# A Node can represent both a tree (subcollection), or leaf (page).
-# Page Nodes also are used to cache a page's content once loaded.
-
 define (require) ->
   $ = require('jquery')
-  _ = require('underscore')
-  Backbone = require('backbone')
-  settings = require('cs!settings')
   toc = require('cs!collections/toc')
+  Node = require('cs!models/content/node')
   require('backbone-associations')
 
-  CONTENT_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/contents"
-
-  return class Page extends Backbone.AssociatedModel
-    url: () -> "#{CONTENT_URI}/#{@id}"
+  return class Page extends Node
     defaults:
       authors: []
 
@@ -22,9 +13,7 @@ define (require) ->
       toc.add(@)
 
     parse: (response, options) ->
-      # Don't overwrite the title from the book's table of contents
-      if @get('title')
-        delete response.title
+      resonse = super(arguments...)
 
       # jQuery can not build a jQuery object with <head> or <body> tags,
       # and will instead move all elements in them up one level.
