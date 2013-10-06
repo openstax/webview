@@ -26,15 +26,15 @@ define (require) ->
       type: Backbone.Many
       key: 'authors'
       collectionType: Backbone.Collection
+    }, {
+      type: Backbone.One
+      key: 'currentPage'
+      relatedModel: Node
+    }, {
+      type: Backbone.Many
+      key: 'toc'
+      collectionType: Backbone.Collection
     }]
-
-    toJSON: () ->
-      currentPage = @get('currentPage')?.toJSON()
-      toc = @get('toc').toJSON()
-      json = super()
-      json.currentPage = currentPage
-      json.toc = toc
-      return json
 
     parse: (response) ->
       type = response.type = MEDIA_TYPES[response.mediaType]
@@ -47,7 +47,7 @@ define (require) ->
       depth = 0
       page = 1
 
-      # Traverse a book's tree and setup page, unit, parent, depth, and subcollection
+      # Traverse a book's tree and set book, depth, unit, parent, subcollection, and page
       # information on each node of the tree prior to the tree being processed
       # by backbone-associations.
       traverse = (o = {}) =>
@@ -61,6 +61,7 @@ define (require) ->
           else
             item.unit = "#{index+1}"
 
+          # Determine if the item is a subcollection or a page
           if item.contents
             item.subcollection = true
             delete item.id
@@ -73,6 +74,7 @@ define (require) ->
 
       traverse(response.tree)
 
+      # Total number of pages in the book
       response.pages = page - 1
 
       return response
