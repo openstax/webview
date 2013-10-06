@@ -1,7 +1,7 @@
 define (require) ->
   Backbone = require('backbone')
-  Collection = require('cs!models/content/collection')
   toc = require('cs!collections/toc')
+  Collection = require('cs!models/content/collection')
   Page = require('cs!models/content/page')
   require('backbone-associations')
 
@@ -46,6 +46,7 @@ define (require) ->
       # Keep the id with the desired version number included
       delete response.id
 
+      # Only setup a toc for a book
       if type isnt 'book' then return response
 
       response.contents = response.tree.contents
