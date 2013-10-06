@@ -88,7 +88,6 @@ define (require) ->
       return response
 
     initialize: (options = {}) ->
-      window.x = @
       @set('toc', [])
       @fetch
         success: () => @load(options.page)
