@@ -15,6 +15,7 @@ define (require) ->
   return class Collection extends Backbone.AssociatedModel
     url: () -> "#{CONTENT_URI}/#{@id}"
     defaults:
+      title: 'Untitled'
       authors: []
 
     parse: (response, options) ->
