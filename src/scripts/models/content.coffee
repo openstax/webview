@@ -64,7 +64,7 @@ define (require) ->
           # Determine if the item is a subcollection or a page
           if item.contents
             item.subcollection = true
-            delete item.id
+            delete item.id # Get rid of the 'subcol' id so the subcollection is unique
             depth++
             traverse(item)
           else
@@ -80,7 +80,7 @@ define (require) ->
       return response
 
     initialize: (options = {}) ->
-      @set('toc', new Backbone.Collection())
+      @set('toc', [])
       @fetch
         success: () => @load(options.page)
 
