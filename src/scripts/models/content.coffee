@@ -2,6 +2,7 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('cs!settings')
   Collection = require('cs!models/content/collection')
+  toc = require('cs!collections/toc')
   Page = require('cs!models/content/page')
   require('backbone-associations')
 
@@ -34,7 +35,7 @@ define (require) ->
     }]
     
     initialize: (options = {}) ->
-      @set('toc', [])
+      @set('toc', toc)
 
       @fetch
         success: () => @load(options.page)
@@ -86,26 +87,11 @@ define (require) ->
 
     load: (page) ->
       if @get('type') is 'book'
-        toc = @get('toc')
-        for i in [0..@get('pages')] by 1
-          toc.add(@findPage(i+1))
-
         @setPage(page or 1) # Default to page 1
       else
         @set('currentPage', new Page({id: @id}))
         @get('currentPage').fetch()
-
-    findPage: (num) ->
-      search = (contents) ->
-        for item in contents.models
-          if item.get('page') is num
-            return item
-          else if item.get('contents')
-            result = search(item.get('contents'))
-            return result if result
-        return
-
-      return search(@get('contents'))
+        @trigger('changePage')
 
     setPage: (num) ->
       if num < 1 then num = 1
@@ -117,10 +103,13 @@ define (require) ->
       @get('currentPage')?.set('active', false)
       @set('currentPage', page)
       page.set('active', true)
+      @trigger('changePage')
 
       if not page.loaded
         page.fetch
-          success: () -> page.loaded = true
+          success: () =>
+            page.loaded = true
+            @trigger('changePage:content')
 
     nextPage: () ->
       page = @get('page')
