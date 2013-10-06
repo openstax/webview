@@ -24,7 +24,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'changePage', @render)
+      @listenTo(@model, 'changePage changePage:content', @render)
 
     onRender: () ->
       @attachPopover new BookPopoverView
