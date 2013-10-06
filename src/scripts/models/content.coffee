@@ -33,8 +33,9 @@ define (require) ->
       key: 'toc'
       collectionType: Backbone.Collection
     }]
-    
+
     initialize: (options = {}) ->
+      toc.reset()
       @set('toc', toc)
 
       @fetch
