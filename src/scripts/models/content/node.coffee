@@ -4,6 +4,7 @@
 
 define (require) ->
   $ = require('jquery')
+  _ = require('underscore')
   Backbone = require('backbone')
   settings = require('cs!settings')
   require('backbone-associations')
@@ -37,16 +38,3 @@ define (require) ->
       key: 'contents'
       relatedModel: Node
     }]
-
-    findPage: (num) ->
-      search = (item) ->
-        contents = item.get('contents')
-        for item in contents.models
-          if item.get('page') is num
-            return item
-          else if item.get('contents')
-            result = search(item)
-            return result if result
-        return
-
-      return search(@)

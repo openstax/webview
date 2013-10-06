@@ -19,8 +19,8 @@ define (require) ->
       authors: []
 
     relations: [{
-      type: Backbone.One
-      key: 'tree'
+      type: Backbone.Many
+      key: 'contents'
       relatedModel: Node
     }, {
       type: Backbone.Many
@@ -43,6 +43,8 @@ define (require) ->
       delete response.id
 
       if type isnt 'book' then return response
+
+      response.contents = response.tree.contents
 
       depth = 0
       page = 1
@@ -96,7 +98,16 @@ define (require) ->
         @get('currentPage').fetch()
 
     findPage: (num) ->
-      @get('tree').findPage(num)
+      search = (contents) ->
+        for item in contents.models
+          if item.get('page') is num
+            return item
+          else if item.get('contents')
+            result = search(item.get('contents'))
+            return result if result
+        return
+
+      return search(@get('contents'))
 
     setPage: (num) ->
       if num < 1 then num = 1

@@ -24,7 +24,9 @@ define (require) ->
     onRender: () ->
       @regions.container.empty()
 
-      _.each @model.get('contents').models, (node) =>
+      nodes = @model.get('contents')?.models
+
+      _.each nodes, (node) =>
         if node.get('subcollection')
           @regions.container.appendAs('li', new TocTreeView({model: node}))
         else

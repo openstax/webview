@@ -22,10 +22,7 @@ define (require) ->
       @listenTo(@model, 'change:tree', @render)
 
     onRender: () ->
-      tree = @model.get('tree')
-
-      if tree
-        @regions.contents.show(new TocTreeView({model: tree}))
+      @regions.contents.show(new TocTreeView({model: @model}))
 
     selectTab: (e) ->
       $tab = $(e.currentTarget)
