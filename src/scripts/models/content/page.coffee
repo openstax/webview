@@ -7,6 +7,7 @@ define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
   settings = require('cs!settings')
+  toc = require('cs!collections/toc')
   require('backbone-associations')
 
   CONTENT_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/contents"
@@ -15,6 +16,10 @@ define (require) ->
     url: () -> "#{CONTENT_URI}/#{@id}"
     defaults:
       authors: []
+
+    constructor: () ->
+      super(arguments...)
+      toc.add(@)
 
     parse: (response, options) ->
       # Don't overwrite the title from the book's table of contents
