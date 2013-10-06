@@ -11,7 +11,7 @@ define (require) ->
 
   CONTENT_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/contents"
 
-  return class Node extends Backbone.AssociatedModel
+  return class Page extends Backbone.AssociatedModel
     url: () -> "#{CONTENT_URI}/#{@id}"
     defaults:
       authors: []
@@ -21,9 +21,6 @@ define (require) ->
       if @get('title')
         delete response.title
 
-      # If this model has no content field (like a book), then don't try to process it.
-      if not response.content then return response
-
       # jQuery can not build a jQuery object with <head> or <body> tags,
       # and will instead move all elements in them up one level.
       # Use a regex to extract everything in the body and put it into a div instead.
@@ -32,9 +29,3 @@ define (require) ->
       response.content = $body.html()
 
       return response
-
-    relations: [{
-      type: Backbone.Many
-      key: 'contents'
-      relatedModel: Node
-    }]

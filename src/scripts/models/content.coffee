@@ -1,7 +1,8 @@
 define (require) ->
   Backbone = require('backbone')
   settings = require('cs!settings')
-  Node = require('cs!models/content/node')
+  Collection = require('cs!models/content/collection')
+  Page = require('cs!models/content/page')
   require('backbone-associations')
 
   MEDIA_TYPES =
@@ -21,7 +22,12 @@ define (require) ->
     relations: [{
       type: Backbone.Many
       key: 'contents'
-      relatedModel: Node
+      relatedModel: (relation, attributes) ->
+        return (attrs, options) ->
+          if _.isArray(attrs.contents)
+            return new Collection(attrs)
+
+          return new Page(attrs)
     }, {
       type: Backbone.Many
       key: 'authors'
@@ -29,7 +35,7 @@ define (require) ->
     }, {
       type: Backbone.One
       key: 'currentPage'
-      relatedModel: Node
+      relatedModel: Page
     }, {
       type: Backbone.Many
       key: 'toc'
@@ -82,6 +88,7 @@ define (require) ->
       return response
 
     initialize: (options = {}) ->
+      window.x = @
       @set('toc', [])
       @fetch
         success: () => @load(options.page)
@@ -94,7 +101,7 @@ define (require) ->
 
         @setPage(page or 1) # Default to page 1
       else
-        @set('currentPage', new Node({id: @id}))
+        @set('currentPage', new Page({id: @id}))
         @get('currentPage').fetch()
 
     findPage: (num) ->
