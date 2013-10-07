@@ -5,3 +5,7 @@ define (require) ->
 
   return class SearchHeaderView extends BaseView
     template: template
+
+    initialize: () ->
+      super()
+      @listenTo(@model, 'change:results', @render) if @model

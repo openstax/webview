@@ -14,6 +14,9 @@
       underscore: '../../bower_components/lodash/dist/lodash.underscore',
       backbone: '../../bower_components/backbone/backbone',
 
+      // ## Backbone plugins
+      'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
+
       // ## UI Libraries
       // Boostrap Plugins
       bootstrapAffix: '../../bower_components/bootstrap/js/affix',
@@ -58,6 +61,11 @@
       backbone: {
         deps: ['underscore', 'jquery'],
         exports: 'Backbone'
+      },
+
+      // ## Backbone plugins
+      'backbone-associations': {
+        deps: ['backbone']
       },
 
       // ## UI Libraries
