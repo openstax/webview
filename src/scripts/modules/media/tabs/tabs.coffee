@@ -29,16 +29,16 @@ define (require) ->
       @switchTab($tab)
 
     switchTab: ($tab) ->
-      @$el.find('.tab').addClass('inactive')
+      $allTabs = @$el.find('.tab')
+      $allTabs.addClass('inactive')
+      $allTabs.removeClass('active')
       @$el.find('.tab-content').hide()
-
-      @$el.find('.tab').find('.expand').text('+')
 
       if $tab.data('content') isnt @currentTab
         $tab.removeClass('inactive')
-        $tab.find('.expand').html('&minus;')
+        $tab.addClass('active')
         @currentTab = $tab.data('content')
         @$el.find(".#{@currentTab}").show()
       else
         @currentTab = null
-        @$el.find('.tab').removeClass('inactive')
+        $allTabs.removeClass('inactive')

@@ -25,10 +25,17 @@
       > .tab-title {
         margin-left: 2px;
         vertical-align: middle;
+
+        &::after {
+          font-weight: bold;
+          margin-left: 5px;
+          vertical-align: top;
+          content: "+";
+        }
       }
 
-      > .expand {
-        font-weight: bold;
+      &.active > .tab-title::after {
+        content: "\2212"; // &minus; (−)
       }
     }
 
