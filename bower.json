@@ -12,7 +12,7 @@
         "jquery": "~2.0.3",
         "lodash": "~2.2.1",
         "backbone": "~1.0.0",
-        "backbone-associations": "~0.5.3",
+        "backbone-associations": "dak1/backbone-associations#polymorphic-models",
         "bootstrap": "~3.0.0",
         "requirejs": "~2.1.8",
         "requirejs-text": "~2.0.10",
