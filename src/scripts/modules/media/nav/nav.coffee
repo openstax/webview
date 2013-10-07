@@ -26,6 +26,7 @@ define (require) ->
       @navigate(@model.previousPage())
 
     navigate: (page) ->
+      window.scrollTo(0, 300)
       route = "/content/#{router.current().params[0]}:#{page}" # Deterimine the new route
       router.navigate(route) # Update browser URL to reflect the new route
       analytics.send() # Send the analytics information for the new route
