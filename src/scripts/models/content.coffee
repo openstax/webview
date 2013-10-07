@@ -54,7 +54,7 @@ define (require) ->
       depth = 0
       page = 1
 
-      # Traverse a book's tree and set book, depth, unit, parent, subcollection, and page
+      # Traverse a book's tree and set book, depth, parent, subcollection, and page
       # information on each node of the tree prior to the tree being processed
       # by backbone-associations.
       traverse = (o = {}) =>
