@@ -91,9 +91,14 @@ define (require) ->
         @setPage(page or 1) # Default to page 1
       else
         @set('currentPage', new Page({id: @id}))
-        @get('currentPage').fetch
-          success: () =>
-            @trigger('changePage')
+        @fetchPage()
+
+    fetchPage: () ->
+      page = @get('currentPage')
+      page.fetch
+        success: () =>
+          page.loaded = true
+          @trigger('changePage:content')
 
     setPage: (num) ->
       if num < 1 then num = 1
@@ -108,10 +113,7 @@ define (require) ->
       @trigger('changePage')
 
       if not page.loaded
-        page.fetch
-          success: () =>
-            page.loaded = true
-            @trigger('changePage:content')
+        @fetchPage()
 
     nextPage: () ->
       page = @get('page')
