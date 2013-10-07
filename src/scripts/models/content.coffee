@@ -58,15 +58,12 @@ define (require) ->
       # information on each node of the tree prior to the tree being processed
       # by backbone-associations.
       traverse = (o = {}) =>
-        for item, index in o.contents
+        for item in o.contents
           item.book = @
           item.depth = depth
 
           if depth
             item.parent = o
-            item.unit = "#{o.unit}-#{index+1}"
-          else
-            item.unit = "#{index+1}"
 
           # Determine if the item is a subcollection or a page
           if item.contents

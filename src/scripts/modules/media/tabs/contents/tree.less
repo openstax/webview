@@ -6,13 +6,19 @@
   margin-right: -1px; // Hide 3rd column rule
   padding: 15px;
 
-  .expand {
-    margin-right: 5px;
-  }
-
   ul {
     padding: 0 20px;
     font-size: 1.25rem;
+    counter-reset: section;
     list-style-type: none;
+
+    li .title::before {
+      display: inline-block;
+      margin-right: 5px;
+      font-weight: bold;
+      color: @brand-primary;
+      counter-increment: section;
+      content: counters(section, "-") ".";
+    }
   }
 }
