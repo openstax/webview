@@ -2,6 +2,8 @@ define (require) ->
   $ = require('jquery')
   require('mockjax')
 
+  $.mockjaxSettings.responseTime = 500 # Set the mock latency for all requests
+
   # GET
 
   $.mockjax (settings) ->

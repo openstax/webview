@@ -7,5 +7,5 @@ define (require) ->
     template: template
 
     initialize: () ->
-      @model = @model.get('currentPage')
       super()
+      @listenTo(@model, 'changePage changePage:content', @render)

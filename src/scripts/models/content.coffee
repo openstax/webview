@@ -1,100 +1,116 @@
 define (require) ->
-  $ = require('jquery')
-  _ = require('underscore')
   Backbone = require('backbone')
-  settings = require('cs!settings')
+  toc = require('cs!collections/toc')
+  Collection = require('cs!models/content/collection')
+  Page = require('cs!models/content/page')
+  require('backbone-associations')
 
   MEDIA_TYPES =
     'application/vnd.org.cnx.collection' : 'book'
     'application/vnd.org.cnx.module': 'page'
 
-  CONTENT_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/contents"
+  return class Content extends Collection
+    relations: [{
+      type: Backbone.Many
+      key: 'contents'
+      relatedModel: (relation, attributes) ->
+        return (attrs, options) ->
+          if _.isArray(attrs.contents)
+            return new Collection(attrs)
 
-  class CurrentPage extends Backbone.Model
-    url: () -> "#{CONTENT_URI}/#{@id}"
+          return new Page(attrs)
+    }, {
+      type: Backbone.Many
+      key: 'authors'
+      collectionType: Backbone.Collection
+    }, {
+      type: Backbone.One
+      key: 'currentPage'
+      relatedModel: Page
+    }, {
+      type: Backbone.Many
+      key: 'toc'
+      collectionType: Backbone.Collection
+    }]
 
-    defaults:
-      title: 'Untitled'
-      content: 'No content'
-      authors: []
+    initialize: (options = {}) ->
+      toc.reset()
+      @set('toc', toc)
 
-    parse: (response, options) ->
-      # jQuery can not build a jQuery object with <head> or <body> tags,
-      # and will instead move all elements in them up one level.
-      # Use a regex to extract everything in the body and put it into a div instead.
-      $body = $('<div>' + response.content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>')
-      $body.find('.title').eq(0).remove()
-      response.content = $body.html()
+      @fetch
+        success: () => @load(options.page)
+
+    parse: (response) ->
+      type = response.type = MEDIA_TYPES[response.mediaType]
+
+      # Keep the id with the desired version number included
+      delete response.id
+
+      # Only setup a toc for a book
+      if type isnt 'book' then return response
+
+      response.contents = response.tree.contents
+
+      depth = 0
+      page = 1
+
+      # Traverse a book's tree and set book, depth, parent, subcollection, and page
+      # information on each node of the tree prior to the tree being processed
+      # by backbone-associations.
+      traverse = (o = {}) =>
+        for item in o.contents
+          item.book = @
+          item.depth = depth
+          item.parent = o
+
+          # Determine if the item is a subcollection or a page
+          if item.contents
+            item.subcollection = true
+            delete item.id # Get rid of the 'subcol' id so the subcollection is unique
+            depth++
+            traverse(item)
+          else
+            item.page = page++
+
+        depth--
+
+      traverse(response.tree)
+
+      # Total number of pages in the book
+      response.pages = page - 1
 
       return response
 
-  return class Content extends Backbone.Model
-    url: () -> "#{CONTENT_URI}/#{@id}"
-
-    defaults:
-      title: 'Untitled Book'
-      pages: 1
-      authors: []
-      currentPage: new CurrentPage()
-
-    toJSON: () ->
-      currentPage = @get('currentPage').toJSON()
-      json = super()
-      json.currentPage = currentPage
-      return json
-
-    initialize: (options = {}) ->
-      @fetch
-        success: () => @setup(options.page)
-
-    setup: (page) ->
-      type = MEDIA_TYPES[@get('mediaType')]
-      @set('type', type)
-
-      if type is 'book'
-        @setupToc()
+    load: (page) ->
+      if @get('type') is 'book'
         @setPage(page or 1) # Default to page 1
       else
-        currentPage = @get('currentPage')
-        currentPage.id = @id
-        currentPage.fetch()
+        @set('currentPage', new Page({id: @id}))
+        @fetchPage()
 
-    # Create a flat collection to store all the pages
-    setupToc: () ->
-      toc = new Backbone.Collection()
-      index = 0
-
-      traverse = (o, sub) ->
-        if typeof o isnt 'object' then return
-        for item in o.contents
-          if item.contents
-            traverse(item, true)
-            index++
-          else
-            if sub then item.parent = index # Item parents are numbered by their position in the tree
-            toc.add(item)
-
-      traverse(@get('tree'))
-      @set('toc', toc)
-      @set('pages', toc.models.length)
+    fetchPage: () ->
+      page = @get('currentPage')
+      page.fetch
+        success: () =>
+          page.loaded = true
+          @trigger('changePage:content')
 
     setPage: (num) ->
       if num < 1 then num = 1
       if num > @pages then num = @pages
-      if not num then return
 
       @set('page', num)
 
-      currentPage = @get('currentPage')
-      currentPage.clear({silent: true}).set(currentPage.defaults) # Reset the current page
-      contents = @get('toc').at(num-1).toJSON()
-      currentPage.id = contents.id
-      currentPage.fetch
-        success: (model, response, options) ->
-          currentPage.set('title', contents.title) if contents.title
+      page = @get('toc').at(num-1)
+      @get('currentPage')?.set('active', false)
+      @set('currentPage', page)
+      page.set('active', true)
+      @trigger('changePage')
+
+      if not page.loaded
+        @fetchPage()
 
     nextPage: () ->
-      currentPage = @get('currentPage')
       page = @get('page')
 
       # Show the next page if there is one
@@ -104,7 +120,6 @@ define (require) ->
       return page
 
     previousPage: () ->
-      currentPage = @get('currentPage')
       page = @get('page')
 
       # Show the previous page if there is one

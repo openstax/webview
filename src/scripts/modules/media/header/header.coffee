@@ -8,13 +8,23 @@ define (require) ->
   return class MediaHeaderView extends BaseView
     template: template
     templateHelpers: () ->
-      currentPage = @model.get('currentPage').toJSON()
-      currentPage.encodedTitle = encodeURI(currentPage.title)
+      currentPage = @model.get('currentPage')
+
+      if currentPage
+        currentPage = currentPage.toJSON()
+        currentPage.encodedTitle = encodeURI(currentPage.title)
+      else
+        currentPage = {
+          title: 'Untitled'
+          encodedTitle: 'Untitled'
+          authors: []
+        }
+
       return {currentPage: currentPage}
 
     initialize: () ->
       super()
-      @listenTo(@model.get('currentPage'), 'change', @render)
+      @listenTo(@model, 'changePage changePage:content', @render)
 
     onRender: () ->
       @attachPopover new BookPopoverView

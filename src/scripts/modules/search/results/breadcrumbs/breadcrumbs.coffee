@@ -10,6 +10,10 @@ define (require) ->
 
     events:
       'click .remove': 'removeBreadcrumb'
+    
+    initialize: () ->
+      super()
+      @listenTo(@model, 'change:query', @render) if @model
 
     removeBreadcrumb: (e) ->
       limits = @model.get('query').limits

@@ -9,22 +9,30 @@ define (require) ->
       @el = el
 
     show: (view) ->
-      @close()
-      @views = null
+      @empty()
       @append(view)
 
     append: (view) ->
-      @$el = @$el or @parent.$el.find(@el)
+      @appendAs('div', view)
+
+    appendAs: (type, view) ->
+      @$el = @parent.$el.find(@el)
       view.parent = @parent
       @views ?= []
       @views.push(view)
-      view.setElement($('<div>').appendTo(@$el)).render()
+      view.setElement($("<#{type}>").appendTo(@$el)).render()
 
-    close: () ->
+    empty: () ->
       _.each @views, (view) ->
         view.close()
 
       @$el?.empty()
+      @$el = null
+      @views = null
+
+    close: () ->
+      @empty()
+      delete @[key] for key of @
 
   class Regions
     constructor: (regions = {}, $context) ->
@@ -35,10 +43,9 @@ define (require) ->
     initialize: () ->
       @_popovers = []
       @regions = new Regions(@regions, @)
-      @listenTo(@model, 'change', @render) if @model
 
     _renderDom: (data) ->
-      @$el.html(@template?(data) or @template)
+      @$el?.html(@template?(data) or @template)
 
     _render: () ->
       data = @model?.toJSON() or {}
@@ -71,7 +78,6 @@ define (require) ->
         region.close()
 
       @detachPopovers()
-      @stopListening()
       @remove()
       @unbind()
       delete @[key] for key of @
