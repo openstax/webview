@@ -13,7 +13,7 @@ define (require) ->
     
     initialize: () ->
       super()
-      @listenTo(@model, 'change', @render) if @model
+      @listenTo(@model, 'change:query', @render) if @model
 
     removeBreadcrumb: (e) ->
       limits = @model.get('query').limits

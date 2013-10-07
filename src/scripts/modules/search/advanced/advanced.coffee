@@ -15,10 +15,6 @@ define (require) ->
 
     events:
       'submit form': 'submitForm'
-    
-    initialize: () ->
-      super()
-      @listenTo(@model, 'change', @render) if @model
 
     onRender: () ->
       @regions.header.show(new SearchHeaderView())
