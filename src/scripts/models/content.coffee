@@ -61,9 +61,7 @@ define (require) ->
         for item in o.contents
           item.book = @
           item.depth = depth
-
-          if depth
-            item.parent = o
+          item.parent = o
 
           # Determine if the item is a subcollection or a page
           if item.contents
