@@ -14,5 +14,13 @@
     {{> modules_search_results_list_table-partial misc}}
   {{/if}}
 {{else}}
-  <p>No results found. Please try expanding your search.</p>
+  {{#if loaded}}
+    <p>No results found. Please try expanding your search.</p>
+  {{else}}
+    <div class="progress progress-striped active">
+      <div class="progress-bar secondary" role="progressbar" style="width: 100%">
+        <span class="sr-only">Loading</span>
+      </div>
+    </div>
+  {{/if}}
 {{/if}}

@@ -10,14 +10,6 @@ define (require) ->
   return class SearchResultsView extends BaseView
     template: template
 
-    initialize: (options = {}) ->
-      super()
-
-      if not options.results
-        throw new Error('A search results view must be instantiated with search results')
-
-      @results = options.results
-
     regions:
       header: '.header'
       filter: '.filter'
@@ -25,7 +17,7 @@ define (require) ->
       list: '.list'
 
     onRender: () ->
-      @regions.header.show(new SearchHeaderView({model: @results}))
-      @regions.filter.show(new SearchResultsFilterView({model: @results}))
-      @regions.breadcrumbs.show(new SearchResultsBreadcrumbsView({model: @results}))
-      @regions.list.show(new SearchResultsListView({model: @results}))
+      @regions.header.show(new SearchHeaderView({model: @model}))
+      @regions.filter.show(new SearchResultsFilterView({model: @model}))
+      @regions.breadcrumbs.show(new SearchResultsBreadcrumbsView({model: @model}))
+      @regions.list.show(new SearchResultsListView({model: @model}))
