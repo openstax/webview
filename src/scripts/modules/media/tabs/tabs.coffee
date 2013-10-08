@@ -2,7 +2,7 @@ define (require) ->
   $ = require('jquery')
   content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
-  TocTreeView = require('cs!./content/toc')
+  TocTreeView = require('cs!./contents/tree')
   template = require('hbs!./tabs-template')
   require('less!./tabs')
 
@@ -19,26 +19,26 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:tree', @render)
+      @listenTo(@model, 'change:contents', @render)
 
     onRender: () ->
-      tree = @model.get('tree')
-
-      if tree
-        @regions.contents.show(new TocTreeView({model: tree}))
+      @regions.contents.show(new TocTreeView({model: @model}))
 
     selectTab: (e) ->
       $tab = $(e.currentTarget)
       @switchTab($tab)
 
     switchTab: ($tab) ->
-      @$el.find('.tab').addClass('inactive')
+      $allTabs = @$el.find('.tab')
+      $allTabs.addClass('inactive')
+      $allTabs.removeClass('active')
       @$el.find('.tab-content').hide()
 
       if $tab.data('content') isnt @currentTab
         $tab.removeClass('inactive')
+        $tab.addClass('active')
         @currentTab = $tab.data('content')
         @$el.find(".#{@currentTab}").show()
       else
         @currentTab = null
-        @$el.find('.tab').removeClass('inactive')
+        $allTabs.removeClass('inactive')

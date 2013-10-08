@@ -16,4 +16,5 @@ define (require) ->
 
     initialize: (options = {}) ->
       @query = options.query or ''
-      @fetch()
+      @fetch
+        success: () => @set('loaded', true)

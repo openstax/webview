@@ -3,8 +3,8 @@ define (require) ->
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics')
   BaseView = require('cs!helpers/backbone/views/base')
-  template = require('hbs!./node-template')
-  require('less!./node')
+  template = require('hbs!./leaf-template')
+  require('less!./leaf')
 
   return class TocNodeView extends BaseView
     template: template

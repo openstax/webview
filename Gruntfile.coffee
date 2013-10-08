@@ -88,7 +88,7 @@ module.exports = (grunt) ->
           value: 120
         cyclomatic_complexity:
           level: 'error'
-          value: 15
+          value: 12
 
       source: ['src/**/*.coffee']
       grunt: 'Gruntfile.coffee'
@@ -98,6 +98,7 @@ module.exports = (grunt) ->
       dist:
         options:
           strictPropertyOrder: false
+          noOverqualifying: false
         src: ['src/**/*.less', '!src/scripts/pages/app/app.less'] # Don't lint bootstrap
 
     # Dist

@@ -1,30 +1,24 @@
 <div class="media-tabs">
   <ul>
     {{#is type 'book'}}
-      <li class="tab" data-content="contents">
-        <img src="images/icons/contents.png" width="13" height="14" alt="Contents" />
+      <li class="tab contents-tab" data-content="contents">
         <span class="tab-title">Contents</span>
-        <span class="expand">&minus;</span>
       </li>
     {{/is}}
-    <li class="tab" data-content="tools">
-      <img src="images/icons/tools.png" width="17" height="17" alt="Tools" />
+    <li class="tab tools-tab" data-content="tools">
       <span class="tab-title">Tools</span>
-      <span class="expand">+</span>
     </li>
-    {{! <li class="tab" data-content="reading-lists">
-      <img src="images/icons/lists.png" width="14" height="17" alt="Reading Lists" />
+    {{! <li class="tab reading-lists-tab" data-content="reading-lists">
       <span class="tab-title">Reading Lists</span>
-      <span class="expand">+</span>
     </li> }}
   </ul>
 
   <div class="contents tab-content">
-    {{! Content Toc Tree View }}
+    {{! Content View }}
   </div>
 
   <div class="tools tab-content">
-    <p>Tools</p>
+    {{! Tools View }}
   </div>
 
   {{! <div class="reading-lists tab-content"></div> }}

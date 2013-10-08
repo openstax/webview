@@ -24,11 +24,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:currentPage', @update)
-
-    update: () ->
-      @listenTo(@model.get('currentPage'), 'change:authors change:title change:abstract', @render)
-      @render()
+      @listenTo(@model, 'changePage changePage:content', @render)
 
     onRender: () ->
       @attachPopover new BookPopoverView

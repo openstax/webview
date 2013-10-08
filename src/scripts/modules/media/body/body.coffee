@@ -8,8 +8,4 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:currentPage', @update)
-
-    update: () ->
-      @listenTo(@model.get('currentPage'), 'change:content', @render)
-      @render()
+      @listenTo(@model, 'changePage changePage:content', @render)
