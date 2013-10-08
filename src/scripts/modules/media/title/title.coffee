@@ -2,7 +2,7 @@ define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
   BaseView = require('cs!helpers/backbone/views/base')
-  MailPopoverView = require('cs!./popovers/mail/mail')
+  #MailPopoverView = require('cs!./popovers/mail/mail')
   template = require('hbs!./title-template')
   require('less!./title')
 
@@ -30,6 +30,6 @@ define (require) ->
       super()
       @listenTo(@model, 'change:title change:authors change:id', @render) if @model
 
-    onRender: () ->
-      $share = @$el.find('.share')
-      @attachPopover new MailPopoverView({owner: $share.find('.mail'), model: @model})
+    #onRender: () ->
+    #  $share = @$el.find('.share')
+    #  @attachPopover new MailPopoverView({owner: $share.find('.mail'), model: @model})
