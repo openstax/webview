@@ -13,13 +13,13 @@ define (require) ->
       super()
 
       if location.search and location.search isnt '?q='
-        @results = new SearchResults({query: location.search})
+        @model = new SearchResults({query: location.search})
 
     regions:
       search: '.search'
 
     onRender: () ->
-      if @results
-        @regions.search.show(new SearchResultsView({results: @results}))
+      if @model
+        @regions.search.show(new SearchResultsView({model: @model}))
       else
         @regions.search.show(new AdvancedSearchView())
