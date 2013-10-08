@@ -67,39 +67,15 @@
         <div class="col-sm-10">
           <select name="language" class="form-control">
             <option value="">Any</option>
-            <option value="af">Afrikaans</option>
-            <option value="ar">العربية (Arabic)</option>
-            <option value="bn">বাংলা (Bengali)</option>
-            <option value="ca">Català (Catalan)</option>
-            <option value="zh">中文 (Chinese)</option>
-            <option value="hr">Hrvatski (Croatian)</option>
-            <option value="da">Dansk (Danish)</option>
-            <option value="nl">Nederlands (Dutch)</option>
-            <option value="en">English</option>
-            <option value="eo">Esperanto</option>
-            <option value="et">Eesti (Estonian)</option>
-            <option value="fi">Suomi (Finnish)</option>
-            <option value="fr">Français (French)</option>
-            <option value="de">Deutsch (German)</option>
-            <option value="el">Ελληνικά (Greek)</option>
-            <option value="hu">Magyar (Hungarian)</option>
-            <option value="it">Italiano (Italian)</option>
-            <option value="ja">日本語 (Japanese)</option>
-            <option value="ko">한국어 (Korean)</option>
-            <option value="lv">Latviešu (Latvian)</option>
-            <option value="mk">Македонски (Macedonian)</option>
-            <option value="pl">Polski (Polish)</option>
-            <option value="pt">Português (Portuguese)</option>
-            <option value="ro">Română (Romanian)</option>
-            <option value="ru">Русский (Russian)</option>
-            <option value="sr">српски (Serbian)</option>
-            <option value="sh">Serbo-Croatian</option>
-            <option value="es">Spanish (Español)</option>
-            <option value="th">ไทย (Thai)</option>
-            <option value="ts">Tsonga</option>
-            <option value="tr">Türkçe (Turkish)</option>
-            <option value="uk">Українська (Ukrainian)</option>
-            <option value="vi">Tiếng Việt (Vietnamese)</option>
+            {{#each languages}}
+              <option value="{{@key}}">
+                {{#is native english}}
+                  {{native}}
+                {{else}}
+                  {{native}} ({{english}})
+                {{/is}}
+              </option>
+            {{/each}}
           </select>
         </div>
       </label>
