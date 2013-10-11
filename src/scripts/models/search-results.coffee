@@ -1,7 +1,8 @@
 define (require) ->
   Backbone = require('backbone')
+  settings = require('cs!settings')
 
-  SEARCH_URI = "#{location.protocol}//#{location.hostname}:6543/search"
+  SEARCH_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/search"
 
   return class SearchResults extends Backbone.Model
     url: () -> "#{SEARCH_URI}#{@query}"
