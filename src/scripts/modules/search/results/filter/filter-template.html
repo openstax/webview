@@ -1,23 +1,20 @@
 <h3>Filters</h3>
-<ul style="list-style-type: none; padding: 0;">
-  {{#each results.limits}}
+<ul class="filters">
+  {{#each filters}}
     <li>
-      <div>
+      <h5 class="filter-name">{{@key}}</h5>
+      <ul>
         {{#each this}}
-          {{#is @key 'count'}}
-            <span class="count" style="float: right;">{{this}}</span>
-          {{else}}
-            <span class="limit">
-              <span>{{@key}}:</span>
-              <span style="">
-                <a href="/search?q=physics%20{{@key}}:{{this}}">
-                  {{this}}
-                </a>
-              </span>
+          <li class="limit">
+            <span class="limit-name">
+              <a href="{{../../url}} {{this.filter}}:&quot;{{@key}}&quot;">
+                {{@key}}
+              </a>
             </span>
-          {{/is}}
+            <span class="count">{{this.count}}</span>
+          </li>
         {{/each}}
-      </div>
+      </ul>
     </li>
   {{/each}}
 </ul>
