@@ -55,9 +55,6 @@
     // # Shims
     shim: {
       // ## Core Libraries
-      underscore: {
-        exports: '_'
-      },
       backbone: {
         deps: ['underscore', 'jquery'],
         exports: 'Backbone'
