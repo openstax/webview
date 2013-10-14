@@ -11,8 +11,8 @@
     "dependencies": {
         "jquery": "~2.0.3",
         "lodash": "~2.2.1",
-        "backbone": "~1.0.0",
-        "backbone-associations": "6572126f126080f658272c8e00e24bc6aa5c40b1",
+        "backbone": "~1.1.0",
+        "backbone-associations": "2d39402a8aa2d30e6bba510a1047a103cedd513a",
         "bootstrap": "~3.0.0",
         "requirejs": "~2.1.9",
         "requirejs-text": "~2.0.10",
