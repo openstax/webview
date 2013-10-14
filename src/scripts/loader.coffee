@@ -34,6 +34,7 @@ define (require) ->
 
     Backbone.history.start
       pushState: true
+      query: true
       root: root
 
     # Force Backbone to register the full path including the query in its history
