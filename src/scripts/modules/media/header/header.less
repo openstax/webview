@@ -1,4 +1,5 @@
 @import "../../../../styles/variables.less";
+@import "../../../../styles/mixins.less";
 
 .media-header {
   margin: 0 60px;
@@ -25,5 +26,36 @@
 
   > .summary {
     margin-top: 15px;
+
+    h5 {
+      .user-select(none);
+      cursor: pointer;
+
+      &::before {
+        margin-right: .5rem;
+        content: "\25b8"; // ▸
+      }
+
+      &.active::before {
+        content: "\25be"; // ▾
+      }
+    }
+
+    > .abstract {
+      display: none; // Hide until the summary is toggled open
+      max-width: 67%;
+
+      > ul, > list {
+        display: block;
+        padding-left: 40px;
+        margin-top: 10px;
+
+        > li, > item {
+          display: list-item;
+          margin: 3px 0;
+          color: @gray;
+        }
+      }
+    }
   }
 }

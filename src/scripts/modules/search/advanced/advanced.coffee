@@ -1,6 +1,7 @@
 define (require) ->
   $ = require('jquery')
   _ = require('underscore')
+  settings = require('cs!settings')
   router = require('cs!router')
   SearchHeaderView = require('cs!../header/header')
   BaseView = require('cs!helpers/backbone/views/base')
@@ -9,6 +10,8 @@ define (require) ->
 
   return class AdvancedSearchView extends BaseView
     template: template
+    templateHelpers:
+      languages: settings.languages
 
     regions:
       header: '.header'
