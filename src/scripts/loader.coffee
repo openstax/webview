@@ -4,6 +4,7 @@ define (require) ->
   settings = require('cs!settings')
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics') # Setup Analytics Handler
+  require('cs!helpers/backbone/history')
 
   # The root URI prefixed on all non-external AJAX and Backbone URIs
   root = settings.root
@@ -34,7 +35,6 @@ define (require) ->
 
     Backbone.history.start
       pushState: true
-      query: true
       root: root
 
     # Force Backbone to register the full path including the query in its history
