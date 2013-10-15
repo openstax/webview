@@ -22,12 +22,8 @@
 
   {{#if currentPage.abstract}}
     <div class="summary">
-      <h5>
-        <a href="#">
-          <span class="expand">▸</span>
-          Summary
-        </a>
-      <h5>
+      <h5>Summary</h5>
+      <div class="abstract">{{include currentPage.abstract}}</div>
     </div>
   {{/if}}
 </div>

@@ -1,5 +1,4 @@
 define (require) ->
-  $ = require('jquery')
   BaseView = require('cs!helpers/backbone/views/base')
   BookPopoverView = require('cs!./popovers/book/book')
   template = require('hbs!./header-template')
@@ -22,6 +21,9 @@ define (require) ->
 
       return {currentPage: currentPage}
 
+    events:
+      'click .summary h5': 'toggleSummary'
+
     initialize: () ->
       super()
       @listenTo(@model, 'changePage changePage:content', @render)
@@ -30,3 +32,9 @@ define (require) ->
       @attachPopover new BookPopoverView
         owner: @$el.find('.info .btn')
         content: @model.toJSON()
+
+    toggleSummary: (e) ->
+      $summary = @$el.find('.summary')
+
+      $summary.find('h5').toggleClass('active')
+      @$el.find('.abstract').toggle()
