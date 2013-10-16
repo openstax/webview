@@ -25,7 +25,7 @@
         "grunt-coffeelint": "~0.0.7",
         "grunt-recess": "~0.4",
         "grunt-jsbeautifier": "~0.2.2",
-        "grunt-targethtml": "~0.2.4",
+        "grunt-targethtml": "~0.2.6",
         "grunt-contrib-copy": "~0.4.1",
         "grunt-contrib-uglify": "~0.2.4",
         "grunt-contrib-htmlmin": "~0.1.3",
