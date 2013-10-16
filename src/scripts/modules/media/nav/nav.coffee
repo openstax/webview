@@ -13,7 +13,7 @@ define (require) ->
 
     initialize: (options) ->
       super()
-      @listenTo(@model, 'change:page change:pages', @render) if @model
+      @listenTo(@model, 'change:page change:pages', @render)
       @hideProgress = options.hideProgress
 
     events:

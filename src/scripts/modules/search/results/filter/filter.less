@@ -9,4 +9,38 @@
     border-bottom: 1px solid white;
     font-weight: 400;
   }
+  
+  h5 {
+    color: black;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  .filters {
+    padding: 0;
+
+    > li {
+      margin: 15px 0;
+    }
+
+    ul {
+      padding-left: 15px;
+
+      > .limit {
+        margin: 5px 0;
+
+        > .limit-name {
+          display: inline-block;
+          max-width: 160px;
+          overflow-wrap: break-word;
+        }
+
+        > .count {
+          float: right;
+        }
+      }
+    }
+  }
 }

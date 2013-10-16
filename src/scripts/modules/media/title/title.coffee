@@ -28,7 +28,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:title change:authors change:id', @render) if @model
+      @listenTo(@model, 'change:title change:authors change:id', @render)
 
     #onRender: () ->
     #  $share = @$el.find('.share')
