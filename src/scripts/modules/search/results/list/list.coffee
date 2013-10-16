@@ -16,4 +16,4 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change', @render) if @model
+      @listenTo(@model, 'change', @render)

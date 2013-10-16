@@ -1,1 +1,20 @@
 <h3>Filters</h3>
+<ul class="filters">
+  {{#each filters}}
+    <li>
+      <h5 class="filter-name">{{@key}}</h5>
+      <ul>
+        {{#each this}}
+          <li class="limit">
+            <span class="limit-name">
+              <a href="{{../../url}} {{this.filter}}:&quot;{{@key}}&quot;">
+                {{@key}}
+              </a>
+            </span>
+            <span class="count">{{this.count}}</span>
+          </li>
+        {{/each}}
+      </ul>
+    </li>
+  {{/each}}
+</ul>
