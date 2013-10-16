@@ -4,7 +4,7 @@ define (require) ->
   settings = require('cs!settings')
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics') # Setup Analytics Handler
-  require('cs!helpers/backbone/history')
+  require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
 
   # The root URI prefixed on all non-external AJAX and Backbone URIs
   root = settings.root
