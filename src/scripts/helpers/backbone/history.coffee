@@ -27,14 +27,6 @@ define (require) ->
 
       if fragment is '' and url isnt '/' then url = url.slice(0, -1)
 
-      if @_hasPushState
-        @history[if options.replace then 'replaceState' else 'pushState']({}, document.title, url);
-      else if @_wantsHashChange
-        @_updateHash(@location, fragment, options.replace)
-        if @iframe and (fragment isnt @getFragment(@getHash(@iframe)))
-          if not options.replace then @iframe.document.open().close()
-          @_updateHash(@iframe.location, fragment, options.replace)
-      else
-        return this.location.assign(url)
+      @history[if options.replace then 'replaceState' else 'pushState']({}, document.title, url)
 
       if options.trigger then return @loadUrl(fragment)
