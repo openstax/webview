@@ -25,7 +25,7 @@
 
 <p>See the citation section below for examples you can copy.</p>
 
-<br />
+<hr />
 
 <h3>How to Cite &amp; Attribute This Content</h3>
 
@@ -33,3 +33,14 @@
   The following citation styles comply with the attribution requirements for the license
   ({{currentPage.license}}) of this work:
 </p>
+
+<div class="citation">
+  <div class="source">
+    <strong>American Chemical Society (ACS) Style Guide:</strong>
+  </div>
+  <div class="style">
+    <span>{{#each currentPage.authors}}<span class="name">{{fullname}}</span>{{/each}}.</span>
+    <span>{{currentPage.title}}, Connexions Web site. </span>
+    <span>http://cnx.org/content/{{id}}@{{version}}, {{date revised}}.</span>
+  </div>
+</div>
