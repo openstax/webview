@@ -1,0 +1,24 @@
+<div class="license-info">
+  {{#or licensors.length license.name}}
+    <span>This work is licensed</span>
+    {{#if licensors.length}}
+      <span> by </span>
+      {{#each licensors}}
+        <span class="name"><a href="mailto:{{email}}">{{fullname}}</a></span>
+      {{/each}}
+    {{/if}}
+    {{#if license.name}}
+      <span> under a <a href="{{license.url}}">{{license.name}} {{license.version}}</a>.</span>
+    {{/if}}
+  {{/or}}
+</div>
+
+<div class="last-edit">
+  <span>Last edited</span>
+  {{#if submitter.fullname}}
+    <span> by <span class="name"><a href="mailto:{{submitter.email}}">{{submitter.fullname}}</a></span></span>
+  {{/if}}
+  {{#if revised}}
+    <span> on {{date revised}}.</span>
+  {{/if}}
+</div>
