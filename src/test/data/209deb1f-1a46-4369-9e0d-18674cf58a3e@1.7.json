@@ -32,5 +32,36 @@
   "created": "2013-07-31 15:07:20.542211-04",
   "doctype": "",
   "submitter": "",
-  "parentAuthors": []
+  "parentAuthors": [],
+  "history": [{
+    "changes": "New version 1.7",
+    "version": "1.7",
+    "revised": "2013-08-31 21:07:20.342798+02",
+    "publisher": {
+      "website": null,
+      "surname": null,
+      "suffix": null,
+      "firstname": "OpenStax College",
+      "title": null,
+      "othername": null,
+      "email": "info@openstaxcollege.org",
+      "fullname": "OpenStax College",
+      "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+    }
+  }, {
+    "changes": "Updated something",
+    "version": "1.6",
+    "revised": "2013-07-31 21:07:20.342798+02",
+    "publisher": {
+      "website": null,
+      "surname": null,
+      "suffix": null,
+      "firstname": "OpenStax College",
+      "title": null,
+      "othername": null,
+      "email": "info@openstaxcollege.org",
+      "fullname": "OpenStax College",
+      "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+    }
+  }]
 }
