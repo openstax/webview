@@ -9,6 +9,3 @@ define (require) ->
     initialize: () ->
       super()
       @listenTo(@model, 'changePage', @render)
-
-    onRender: () ->
-      console.log @model.toJSON()
