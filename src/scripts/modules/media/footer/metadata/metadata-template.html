@@ -11,7 +11,13 @@
     </dd>
   <dt>Language:</dt>
     <dd>
-      <div>{{currentPage.language}}</div>
+      <div>
+        {{#is currentPage.languageName.native currentPage.languageName.english}}
+          {{currentPage.languageName.native}}
+        {{else}}
+          {{currentPage.languageName.native}} ({{currentPage.languageName.english}})
+        {{/is}}
+      </div>
     </dd>
   <dt>Summary:</dt>
     <dd>
