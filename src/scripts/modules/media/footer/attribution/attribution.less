@@ -4,4 +4,15 @@
   h3 {
     font-weight: 300;
   }
+
+  dd, dt {
+    display: inline;
+  }
+
+  dd {
+    &::after {
+      white-space: pre; // preserve line feed
+      content: "\a"; // line feed
+    }
+  }
 }
