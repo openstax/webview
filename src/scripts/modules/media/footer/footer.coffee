@@ -3,7 +3,7 @@ define (require) ->
   MetadataView = require('cs!./metadata/metadata')
   DownloadsView = require('cs!./downloads/downloads')
   HistoryView = require('cs!./history/history')
-  AttributionView = require('cs!./metadata/metadata')
+  AttributionView = require('cs!./attribution/attribution')
   template = require('hbs!./footer-template')
   require('less!./footer')
 
