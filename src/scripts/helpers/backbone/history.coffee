@@ -1,11 +1,12 @@
 define (require) ->
+  _ = require('underscore')
   Backbone = require('backbone')
 
   hashStripper = /[#].*$/
   routeStripper = /^[#\/]|\s+$/g
   trailingSlash = /\/$/
 
-  return Backbone.history = new class History extends Backbone.History
+  return _.extend Backbone.history, {
     getFragment: (fragment, forcePushState) ->
       if not fragment
         fragment = @location.pathname + @location.search
@@ -30,3 +31,4 @@ define (require) ->
       @history[if options.replace then 'replaceState' else 'pushState']({}, document.title, url)
 
       if options.trigger then return @loadUrl(fragment)
+  }
