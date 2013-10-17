@@ -4,6 +4,7 @@ define (require) ->
   DownloadsView = require('cs!./downloads/downloads')
   HistoryView = require('cs!./history/history')
   AttributionView = require('cs!./attribution/attribution')
+  LicenseView = require('cs!./license/license')
   template = require('hbs!./footer-template')
   require('less!./footer')
 
@@ -15,6 +16,7 @@ define (require) ->
       downloads: '.downloads'
       history: '.history'
       attribution: '.attribution'
+      license: '.license'
 
     events:
       'click .tab': 'selectTab'
@@ -24,6 +26,7 @@ define (require) ->
       @regions.downloads.show(new DownloadsView({model: @model}))
       @regions.history.show(new HistoryView({model: @model}))
       @regions.attribution.show(new AttributionView({model: @model}))
+      @regions.license.show(new LicenseView({model: @model}))
 
     selectTab: (e) ->
       $tab = $(e.currentTarget)
