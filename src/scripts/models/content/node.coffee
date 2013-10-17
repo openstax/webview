@@ -25,6 +25,9 @@ define (require) ->
       # Don't overwrite the title from the book's table of contents
       if @get('title') then delete response.title
 
+      return @parseInfo(response)
+
+    parseInfo: (response) ->
       # Determine the license name, version, and url
       license = response.license.match(/^http:\/\/creativecommons\.org\/licenses\/(.+)\/(.+)\//)
       if _.isArray(license) and license.length > 1
