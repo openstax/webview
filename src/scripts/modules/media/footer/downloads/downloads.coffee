@@ -5,3 +5,7 @@ define (require) ->
 
   return class DownloadsView extends BaseView
     template: template
+
+    initialize: () ->
+      super()
+      @listenTo(@model, 'changePage', @render)

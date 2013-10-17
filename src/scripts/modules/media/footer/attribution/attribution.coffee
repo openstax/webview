@@ -5,3 +5,7 @@ define (require) ->
 
   return class AttributionView extends BaseView
     template: template
+
+    initialize: () ->
+      super()
+      @listenTo(@model, 'changePage', @render)
