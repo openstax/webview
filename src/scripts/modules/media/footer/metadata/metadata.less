@@ -6,6 +6,8 @@
   }
 
   dl {
+    margin-bottom: 0;
+
     > dt {
       padding: 10px 0;
       width: 225px;
@@ -16,18 +18,22 @@
     > dd {
       margin: 0;
       border-bottom: 1px solid @gray-lighter;
-      
+
+      &:last-child {
+        border: none;
+      }
+
       div {
         padding: 10px 10px 10px 225px;
       }
     }
   }
-  
+
   .name {
     &::after {
       content: ",";
     }
-    
+
     &:last-child::after {
       content: "";
     }
