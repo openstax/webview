@@ -84,6 +84,16 @@
     "title": "College Physics"
   },
   "doctype": "",
-  "submitter": "",
+  "submitter": {
+    "website": null,
+    "surname": null,
+    "suffix": null,
+    "firstname": "OpenStax College",
+    "title": null,
+    "othername": null,
+    "email": "info@openstaxcollege.org",
+    "fullname": "OpenStax College",
+    "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+  },
   "parentAuthors": []
 }

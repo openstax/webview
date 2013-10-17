@@ -38,9 +38,11 @@ define (require) ->
       @set('toc', toc)
 
       @fetch
+        reset: true
         success: () => @load(options.page)
 
     parse: (response) ->
+      response = @parseInfo(response)
       type = response.type = MEDIA_TYPES[response.mediaType]
 
       # Keep the id with the desired version number included
