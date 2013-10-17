@@ -29,11 +29,11 @@ define (require) ->
       license = response.license.match(/^http:\/\/creativecommons\.org\/licenses\/(.+)\/(.+)\//)
       if _.isArray(license) and license.length > 1
         license =
-          type: "Creative Commons #{LICENSES[license[1]]}"
+          name: "Creative Commons #{LICENSES[license[1]]}"
           version: license[2]
           url: response.license
       else
-        license = {type: null, version: null, url: response.license}
+        license = {name: null, version: null, url: response.license}
 
       response.license = license
 
