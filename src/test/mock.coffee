@@ -7,15 +7,22 @@ define (require) ->
   # GET
 
   $.mockjax (settings) ->
-    # settings.url == '/contents/<uuid>'
+    # settings.url === '/contents/<uuid>'
     service = settings.url.match(/\/contents\/(.*)$/)
 
     if service
       return {proxy: 'data/' + service[1] + '.json'}
 
   $.mockjax (settings) ->
-    # settings.url == '/search?q=physics'
+    # settings.url === '/search?q=physics'
     service = settings.url.match(/\/search\?q=physics$/)
 
     if service
       return {proxy: 'data/search.json'}
+
+  $.mockjax (settings) ->
+    # settings.url === 'exports-allowable-types/<uuid>'
+    service = settings.url.match(/\/exports-allowable-types\/(.*)$/)
+
+    if service
+      return {proxy: 'data/downloads.json'}
