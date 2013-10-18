@@ -1,0 +1,34 @@
+@import "../../../styles/variables.less";
+
+.browse-content {
+  color: @gray-medium;
+
+  h1 {
+    margin: 30px 0 20px 0;
+  }
+
+  h3 {
+    margin-bottom: 15px;
+    font-weight: 300;
+  }
+
+  ul {
+    padding: 0;
+    margin-bottom: 30px;
+    list-style-type: none;
+    text-align: center;
+
+    > li {
+      display: inline-block;
+      padding: 33px; // FIX: Make li spacing and positioning responsive
+      text-align: left;
+    }
+  }
+
+  .data {
+    padding: 10px 15px;
+    font-weight: 300;
+    color: @gray-lightest;
+    background-color: @gray-medium;
+  }
+}
