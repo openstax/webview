@@ -52,7 +52,10 @@ define (require) ->
 
       @set('downloads', 'loading')
 
-      $.get "#{SERVER}/exports-allowable-types/#{@id}", (response) =>
-        @set('downloads', JSON.parse(response))
+      $.ajax
+        url: "#{SERVER}/exports-allowable-types/#{@id}"
+        dataType: 'json'
+      .done (response) =>
+        @set('downloads', response)
       .fail () =>
-        @set('downloads', 'error')
+        @set('downloads', [])
