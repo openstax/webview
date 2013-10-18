@@ -12,7 +12,7 @@
     counter-reset: section;
     list-style-type: none;
 
-    li .title::before {
+    li .title:not([data-depth="0"])::before {
       display: inline-block;
       margin-right: 5px;
       font-weight: bold;
