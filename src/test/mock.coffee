@@ -22,7 +22,7 @@ define (require) ->
 
   $.mockjax (settings) ->
     # settings.url === 'exports-allowable-types/<uuid>'
-    service = settings.url.match(/\/exports-allowable-types\/(.*)$/)
+    service = settings.url.match(/\/extra\/(.*)$/)
 
     if service
-      return {proxy: 'data/downloads.json'}
+      return {proxy: 'data/extra.json'}
