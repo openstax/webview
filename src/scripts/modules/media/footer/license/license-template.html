@@ -8,7 +8,9 @@
       {{/each}}
     {{/if}}
     {{#if license.name}}
-      <span> under a <a href="{{license.url}}">{{license.name}} {{license.version}}</a>.</span>
+      <span> under a <a href="{{license.url}}">
+        Creative Commons {{license.name}} License ({{license.code}} {{license.version}})
+      </a>.</span>
     {{/if}}
   {{/or}}
 </div>
