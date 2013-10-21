@@ -17,6 +17,9 @@
       // ## Backbone plugins
       'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
 
+      // ## Mathjax
+      mathjax: 'http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-MML-AM_HTMLorMML-full&amp;delayStartupUntil=configured',
+
       // ## UI Libraries
       // Boostrap Plugins
       bootstrapAffix: '../../bower_components/bootstrap/js/affix',
@@ -78,7 +81,17 @@
       bootstrapScrollspy: ['jquery'],
       bootstrapTab: ['jquery'],
       bootstrapTooltip: ['jquery'],
-      bootstrapTransition: ['jquery']
+      bootstrapTransition: ['jquery'],
+
+      mathjax: {
+        deps: ['cs!configs/mathjax'],
+        exports: 'MathJax',
+        init: function (mathjaxConfig) {
+          MathJax.Hub.Config(mathjaxConfig);
+          MathJax.Hub.Startup.onload();
+          return MathJax;
+        }
+      }
     },
 
     // Handlebars Requirejs Plugin Configuration
