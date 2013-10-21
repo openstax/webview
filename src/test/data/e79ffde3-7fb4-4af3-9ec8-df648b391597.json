@@ -1,89 +1,127 @@
 {
   "googleAnalytics": "UA-XXXXX-Y",
-  "submitlog": "",
+  "submitlog": "New version 1.7",
   "abstract": "This introductory, algebra-based, two-semester college physics book is grounded with real-world examples, illustrations, and explanations to help students grasp key, fundamental physics concepts. This online, fully editable and customizable title includes learning objectives, concept questions, links to labs and simulations, and ample practice opportunities to solve traditional physics application problems.",
-  "revised": "2013-07-31 15:07:20.342798-04",
+  "revised": "2013-08-31 15:07:20.342798-04",
   "roles": null,
   "id": "e79ffde3-7fb4-4af3-9ec8-df648b391597",
-  "subject": "",
+  "subject": "Mathematics and Statistics,Science and Technology",
   "title": "College Physics",
   "mediaType": "application/vnd.org.cnx.collection",
   "version": "1.7",
+  "legacy_id": "col11406",
   "parentId": null,
   "stateid": null,
-  "maintainers": [],
-  "authors": [{
-    "website": "http://openstaxcollege.org",
-    "surname": "OpenStax College",
-    "suffix": "",
-    "firstname": "",
-    "title": "",
-    "othername": "",
+  "maintainers": [{
+    "website": null,
+    "surname": "Physics",
+    "suffix": null,
+    "firstname": "College",
+    "title": null,
+    "othername": null,
+    "email": "info@openstaxcollege.org",
+    "fullname": "OSC Physics Maintainer",
+    "id": "1df3bab1-1dc7-4017-9b3a-960a87e706b1"
+  }, {
+    "website": null,
+    "surname": null,
+    "suffix": null,
+    "firstname": "OpenStax College",
+    "title": null,
+    "othername": null,
     "email": "info@openstaxcollege.org",
     "fullname": "OpenStax College",
-    "id": "OpenStaxCollege"
+    "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
   }],
-  "parentVersion": null,
-  "licensors": [],
-  "license": "http://creativecommons.org/licenses/by/3.0/",
+  "authors": [{
+    "website": null,
+    "surname": null,
+    "suffix": null,
+    "firstname": "OpenStax College",
+    "title": null,
+    "othername": null,
+    "email": "info@openstaxcollege.org",
+    "fullname": "OpenStax College",
+    "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+  }],
+  "parentVersion": "",
+  "legacy_version": "1.7",
+  "licensors": [{
+    "website": null,
+    "surname": "University",
+    "suffix": null,
+    "firstname": "Rice",
+    "title": null,
+    "othername": null,
+    "email": "daniel@openstaxcollege.org",
+    "fullname": "Rice University",
+    "id": "9366c786-e3c8-4960-83d4-aec1269ac5e5"
+  }],
+  "license": {
+    "url": "http://creativecommons.org/licenses/by/3.0/",
+    "code": "by",
+    "version": "3.0",
+    "name": "Attribution"
+  },
   "language": "en",
   "created": "2013-07-31 15:07:20.342798-04",
   "tree": {
     "id": "e79ffde3-7fb4-4af3-9ec8-df648b391597@1.7",
     "contents": [{
-      "id": "209deb1f-1a46-4369-9e0d-18674cf58a3e@1.7",
+      "id": "209deb1f-1a46-4369-9e0d-18674cf58a3e@7",
       "title": "Preface"
     }, {
       "id": "subcol",
       "contents": [{
-        "id": "f3c9ab70-a916-4d8c-9256-42953287b4e9@1.3",
+        "id": "f3c9ab70-a916-4d8c-9256-42953287b4e9@3",
         "title": "Introduction to Science and the Realm of Physics, Physical Quantities, and Units"
       }, {
-        "id": "d395b566-5fe3-4428-bcb2-19016e3aa3ce@1.4",
+        "id": "d395b566-5fe3-4428-bcb2-19016e3aa3ce@4",
         "title": "Physics: An Introduction"
       }, {
-        "id": "c8bdbabc-62b1-4a5f-b291-982ab25756d7@1.6",
+        "id": "c8bdbabc-62b1-4a5f-b291-982ab25756d7@6",
         "title": "Physical Quantities and Units"
       }, {
-        "id": "5152cea8-829a-4aaf-bcc5-c58a416ecb66@1.7",
+        "id": "5152cea8-829a-4aaf-bcc5-c58a416ecb66@7",
         "title": "Accuracy, Precision, and Significant Figures"
       }, {
-        "id": "5838b105-41cd-4c3d-a957-3ac004a48af3@1.5",
+        "id": "5838b105-41cd-4c3d-a957-3ac004a48af3@5",
         "title": "Approximation"
       }],
       "title": "Introduction: The Nature of Science and Physics"
     }, {
       "id": "subcol",
       "contents": [{
-        "id": "24a2ed13-22a6-47d6-97a3-c8aa8d54ac6d@1.2",
+        "id": "24a2ed13-22a6-47d6-97a3-c8aa8d54ac6d@2",
         "title": "Introduction: Further Applications of Newton\u2019s Laws"
       }, {
-        "id": "ea271306-f7f2-46ac-b2ec-1d80ff186a59@1.5",
+        "id": "ea271306-f7f2-46ac-b2ec-1d80ff186a59@5",
         "title": "Friction"
       }, {
-        "id": "26346a42-84b9-48ad-9f6a-62303c16ad41@1.6",
+        "id": "26346a42-84b9-48ad-9f6a-62303c16ad41@6",
         "title": "Drag Forces"
       }, {
-        "id": "56f1c5c1-4014-450d-a477-2121e276beca@1.8",
+        "id": "56f1c5c1-4014-450d-a477-2121e276beca@8",
         "title": "Elasticity: Stress and Strain"
       }],
       "title": "Further Applications of Newton's Laws: Friction, Drag, and Elasticity"
     }, {
-      "id": "f6024d8a-1868-44c7-ab65-45419ef54881@1.3",
+      "id": "f6024d8a-1868-44c7-ab65-45419ef54881@3",
       "title": "Atomic Masses"
     }, {
-      "id": "7250386b-14a7-41a2-b8bf-9e9ab872f0dc@1.2",
+      "id": "7250386b-14a7-41a2-b8bf-9e9ab872f0dc@2",
       "title": "Selected Radioactive Isotopes"
     }, {
-      "id": "c0a76659-c311-405f-9a99-15c71af39325@1.5",
+      "id": "c0a76659-c311-405f-9a99-15c71af39325@5",
       "title": "Useful Information"
     }, {
-      "id": "ae3e18de-638d-4738-b804-dc69cd4db3a3@1.4",
+      "id": "ae3e18de-638d-4738-b804-dc69cd4db3a3@5",
       "title": "Glossary of Key Symbols and Notation"
     }],
     "title": "College Physics"
   },
   "doctype": "",
+  "buyLink": null,
   "submitter": {
     "website": null,
     "surname": null,
@@ -95,5 +133,36 @@
     "fullname": "OpenStax College",
     "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
   },
-  "parentAuthors": []
+  "parentAuthors": [],
+  "history": [{
+    "changes": "New version 1.7",
+    "version": "1.7",
+    "revised": "2013-08-31 15:07:20.342798-04",
+    "publisher": {
+      "website": null,
+      "surname": null,
+      "suffix": null,
+      "firstname": "OpenStax College",
+      "title": null,
+      "othername": null,
+      "email": "info@openstaxcollege.org",
+      "fullname": "OpenStax College",
+      "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+    }
+  }, {
+    "changes": "Updated something",
+    "version": "1.6",
+    "revised": "2013-07-31 15:07:20.342798-04",
+    "publisher": {
+      "website": null,
+      "surname": null,
+      "suffix": null,
+      "firstname": "OpenStax College",
+      "title": null,
+      "othername": null,
+      "email": "info@openstaxcollege.org",
+      "fullname": "OpenStax College",
+      "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+    }
+  }]
 }
