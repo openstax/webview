@@ -69,10 +69,10 @@ module.exports = (grunt) ->
     jsbeautifier:
       files: ['src/**/*.js']
       options:
+        mode: "VERIFY_ONLY"
         js:
-          mode: "VERIFY_ONLY"
           space_after_anon_function: true
-          wrap_line_length: 120
+          wrapLineLength: 120
           indent_size: 2
 
     # CoffeeLint
