@@ -1,6 +1,8 @@
 (function () {
   'use strict';
 
+  var MATHJAX_CONFIG = '?config=TeX-MML-AM_HTMLorMML-full&amp;delayStartupUntil=configured';
+
   require.config({
     // # Paths
     paths: {
@@ -18,7 +20,7 @@
       'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
 
       // ## Mathjax
-      mathjax: 'http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js' + '?config=TeX-MML-AM_HTMLorMML-full&amp;delayStartupUntil=configured',
+      mathjax: 'http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js' + MATHJAX_CONFIG,
 
       // ## UI Libraries
       // Boostrap Plugins
