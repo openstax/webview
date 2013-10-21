@@ -18,7 +18,7 @@
       'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
 
       // ## Mathjax
-      mathjax: 'http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-MML-AM_HTMLorMML-full&amp;delayStartupUntil=configured',
+      mathjax: 'http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js' + '?config=TeX-MML-AM_HTMLorMML-full&amp;delayStartupUntil=configured',
 
       // ## UI Libraries
       // Boostrap Plugins
@@ -87,6 +87,7 @@
         deps: ['cs!configs/mathjax'],
         exports: 'MathJax',
         init: function (mathjaxConfig) {
+          var MathJax = window.MathJax; // Explicitly use global MathJax variable
           MathJax.Hub.Config(mathjaxConfig);
           MathJax.Hub.Startup.onload();
           return MathJax;
