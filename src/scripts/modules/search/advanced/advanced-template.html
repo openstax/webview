@@ -87,9 +87,9 @@
         <div class="col-sm-10">
           <select name="pubDate" class="form-control">
             <option value="">Any</option>
-            <option>2013</option>
-            <option>2012</option>
-            <option>2011</option>
+            {{#each years}}
+              <option>{{this}}</option>
+            {{/each}}
           </select>
         </div>
       </label>
