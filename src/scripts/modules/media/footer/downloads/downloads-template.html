@@ -1,1 +1,35 @@
 <h3>Downloads</h3>
+
+{{#is currentPage.downloads 'loading'}}
+  <div class="progress progress-striped active">
+    <div class="progress-bar secondary" role="progressbar" style="width: 100%">
+      <span class="sr-only">Loading</span>
+    </div>
+  </div>
+{{else}}
+  {{#if currentPage.downloads.length}}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Format:</th>
+          <th>File Name:</th>
+          <th>Details:</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {{#each currentPage.downloads}}
+          <tr>
+            <td>{{format}}</td>
+            <td>
+              <a href="{{path}}">{{filename}}</a>
+            </td>
+            <td>{{details}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{else}}
+    <p>No downloads are available at this time.</p>
+  {{/if}}
+{{/is}}

@@ -1,0 +1,16 @@
+[{
+  "path": "/exports/e79ffde3-7fb4-4af3-9ec8-df648b391597@1.7.pdf",
+  "filename": "college-physics.pdf",
+  "details": "PDF file, for viewing content offline and printing.",
+  "format": "PDF"
+}, {
+  "path": "/exports/e79ffde3-7fb4-4af3-9ec8-df648b391597@1.7.epub",
+  "filename": "college-physics.epub",
+  "details": "Electronic book format file, for viewing on mobile devices.",
+  "format": "EPUB"
+}, {
+  "path": "/exports/e79ffde3-7fb4-4af3-9ec8-df648b391597@1.7.zip",
+  "filename": "college-physics.zip",
+  "details": "An offline HTML copy of the content.  Also includes XML, included media files, and other support files.",
+  "format": "Offline ZIP"
+}]

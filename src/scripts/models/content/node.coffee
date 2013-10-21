@@ -7,7 +7,7 @@ define (require) ->
   settings = require('cs!settings')
   require('backbone-associations')
 
-  CONTENT_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/contents"
+  SERVER = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
 
   LICENSES = {
     'by': 'Attribution License CC BY'
@@ -19,7 +19,7 @@ define (require) ->
   }
 
   return class Node extends Backbone.AssociatedModel
-    url: () -> "#{CONTENT_URI}/#{@id}"
+    url: () -> "#{SERVER}/contents/#{@id}"
 
     parse: (response, options) ->
       # Don't overwrite the title from the book's table of contents
@@ -44,3 +44,18 @@ define (require) ->
       response.languageName = settings.languages[response.language]
 
       return response
+
+    fetch: (options) ->
+      super(arguments...)
+
+      if not @id then return
+
+      @set('downloads', 'loading')
+
+      $.ajax
+        url: "#{SERVER}/exports-allowable-types/#{@id}"
+        dataType: 'json'
+      .done (response) =>
+        @set('downloads', response)
+      .fail () =>
+        @set('downloads', [])
