@@ -3,6 +3,17 @@ define (require) ->
   template = require('hbs!./filter-template')
   require('less!./filter')
 
+  FILTER_NAMES = {
+    "author": "Author"
+    "keyword": "Keyword"
+    "mediaType": "Type"
+    "pubYear": "Publication Date"
+    "subject": "Subject"
+  }
+
+  capitalize: (str) ->
+    return (str.split(' ').map (word) -> word[0].toUpperCase() + word[1..-1].toLowerCase()).join ' '
+
   return class SearchResultsFilterView extends BaseView
     template: template
     templateHelpers: () ->
@@ -12,9 +23,8 @@ define (require) ->
       _.each limits, (limit) ->
         _.each _.keys(limit), (key) ->
           if key isnt 'count'
+            filterName = FILTER_NAMES[key] or capitalize(key)
             name = limit[key]
-            filterName = key
-            if filterName is 'mediaType' then filterName = 'type'
             if name is 'application/vnd.org.cnx.collection' then name = 'book'
             else if name is 'application/vnd.org.cnx.module' then name = 'page'
             filters[filterName] = filters[filterName] or {}
