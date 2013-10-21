@@ -12,6 +12,7 @@ define (require) ->
     template: template
     templateHelpers:
       languages: settings.languages
+      years: [2003..(new Date).getFullYear()]
 
     regions:
       header: '.header'
