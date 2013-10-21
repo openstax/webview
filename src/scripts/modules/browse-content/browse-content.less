@@ -1,0 +1,54 @@
+@import "../../../styles/variables.less";
+@import "../../../styles/mixins.less";
+
+@grid-columns: 24;
+@block-width: 250px;
+
+.browse-content {
+  position: relative;
+  padding: 30px;
+  color: @gray-medium;
+
+  > h1 {
+    margin-bottom: 20px;
+  }
+
+  > .advanced-search {
+    position: absolute;
+    top: 35px;
+    right: 30px;
+  }
+
+  > ul {
+    .make-row();
+    padding: 0;
+    margin-bottom: 30px;
+    list-style-type: none;
+    text-align: center;
+
+    > li {
+      .make-lg-column(8);
+      display: inline-block;
+      padding: 20px 0;
+      width: 33%;
+
+      > h3 {
+        margin-bottom: 15px;
+        width: 250px;
+        font-weight: 300;
+        margin: 0 auto 15px auto;
+        text-align: left;
+      }
+
+      > .data {
+        display: inline-block;
+        padding: 10px 15px;
+        width: @block-width;
+        font-weight: 300;
+        text-align: left;
+        color: @gray-lightest;
+        background-color: @gray-medium;
+      }
+    }
+  }
+}

@@ -213,15 +213,14 @@ module.exports = (grunt) ->
 
     # Imagemin
     imagemin:
-      png:
+      images:
         options:
           optimizationLevel: 7
         files: [{
           expand: true
           cwd: 'dist/images/'
-          src: ['**/*.png']
+          src: ['**/*.{png,jpg,gif}']
           dest: 'dist/images/'
-          ext: '.png'
         }]
 
   # Dependencies
