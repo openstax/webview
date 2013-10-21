@@ -32,9 +32,10 @@ define (require) ->
       @set('downloads', 'loading')
 
       $.ajax
-        url: "#{SERVER}/exports-allowable-types/#{@id}"
+        url: "#{SERVER}/extra/#{@id}"
         dataType: 'json'
       .done (response) =>
-        @set('downloads', response)
+        @set('downloads', response.downloads)
+        @set('isLatest', response.isLatest)
       .fail () =>
         @set('downloads', [])
