@@ -17,6 +17,9 @@
       // ## Backbone plugins
       'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
 
+      // ## MathJax
+      mathjax: 'http://cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=MML_HTMLorMML',
+
       // ## UI Libraries
       // Boostrap Plugins
       bootstrapAffix: '../../bower_components/bootstrap/js/affix',
@@ -63,6 +66,11 @@
       // ## Backbone plugins
       'backbone-associations': {
         deps: ['backbone']
+      },
+
+      // ## MathJax
+      mathjax: {
+        exports: 'MathJax'
       },
 
       // ## UI Libraries

@@ -1,4 +1,5 @@
 define (require) ->
+  Mathjax = require('mathjax')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./body-template')
   require('less!./body')
@@ -9,3 +10,6 @@ define (require) ->
     initialize: () ->
       super()
       @listenTo(@model, 'changePage changePage:content', @render)
+
+    onRender: () ->
+      MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
