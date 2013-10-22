@@ -93,7 +93,18 @@
       bootstrapScrollspy: ['jquery'],
       bootstrapTab: ['jquery'],
       bootstrapTooltip: ['jquery'],
-      bootstrapTransition: ['jquery']
+      bootstrapTransition: ['jquery'],
+
+      mathjax: {
+        deps: ['cs!configs/mathjax'],
+        exports: 'MathJax',
+        init: function (mathjaxConfig) {
+          var MathJax = window.MathJax; // Explicitly use global MathJax variable
+          MathJax.Hub.Config(mathjaxConfig);
+          MathJax.Hub.Startup.onload();
+          return MathJax;
+        }
+      }
     },
 
     // Handlebars Requirejs Plugin Configuration
