@@ -3,8 +3,7 @@
 #
 define (require) ->
 
-  config =
-<<<<<<< HEAD
+  return {
     extensions: [
       'mml2jax.js'
       'MathZoom.js'
@@ -18,42 +17,4 @@ define (require) ->
       'output/HTML-CSS'
       'output/NativeMML'
     ]
-=======
-    jax: [
-      'input/MathML'
-      'input/TeX'
-      'input/AsciiMath'
-      'output/NativeMML'
-      'output/HTML-CSS'
-    ]
-    extensions: [
-      'asciimath2jax.js'
-      'tex2jax.js'
-      'mml2jax.js'
-      'MathMenu.js'
-      'MathZoom.js'
-    ]
-    tex2jax:
-      inlineMath: [
-        ['[TEX_START]','[TEX_END]']
-        ['\\(', '\\)']
-      ]
-
-    # Apparently we cannot change the escape sequence for ASCIIMath (MathJax does not find it)
-    #
-    #     asciimath2jax: { inlineMath: [['[ASCIIMATH_START]', '[ASCIIMATH_END]']], },
-
-    TeX:
-      extensions: [
-        'AMSmath.js'
-        'AMSsymbols.js'
-        'noErrors.js'
-        'noUndefined.js'
-      ]
-      noErrors: {disabled:true}
-
-    AsciiMath:
-      noErrors: {disabled:true}
->>>>>>> 709c5b1c189396efffaf9e04945fa80df28a99b0
-
-  return config
+  }
