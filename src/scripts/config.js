@@ -18,7 +18,7 @@
       'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
 
       // ## MathJax
-      mathjax: 'http://cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-MML-AM_HTMLorMML-full',
+      mathjax: 'http://cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=MML_HTMLorMML-full',
 
       // ## UI Libraries
       // Boostrap Plugins
