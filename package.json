@@ -3,7 +3,7 @@
     "version": "0.7.1",
     "description": "Connexions (cnx.org) web site",
     "scripts": {
-        "prepublish": "bower install",
+        "prepublish": "./node_modules/.bin/bower install",
         "test": "grunt test --verbose",
         "dist": "grunt dist --verbose"
     },
@@ -14,7 +14,8 @@
     },
 
     "dependencies": {
-        "grunt": "~0.4.1"
+        "grunt": "~0.4.1",
+        "bower": "~1.2.7"
     },
 
     "devDependencies": {
