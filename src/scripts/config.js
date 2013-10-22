@@ -1,8 +1,6 @@
 (function () {
   'use strict';
 
-  var MATHJAX_CONFIG = '?config=TeX-MML-AM_HTMLorMML-full&amp;delayStartupUntil=configured';
-
   require.config({
     // # Paths
     paths: {
@@ -19,8 +17,8 @@
       // ## Backbone plugins
       'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
 
-      // ## Mathjax
-      mathjax: 'http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js' + MATHJAX_CONFIG,
+      // ## MathJax
+      mathjax: '../../bower_components/mathjax/unpacked/MathJax',
 
       // ## UI Libraries
       // Boostrap Plugins
@@ -70,6 +68,18 @@
         deps: ['backbone']
       },
 
+      // ## MathJax
+      mathjax: {
+        deps: ['cs!configs/mathjax'],
+        exports: 'MathJax',
+        init: function (mathjaxConfig) {
+          var MathJax = window.MathJax; // Explicitly use global MathJax variable
+          MathJax.Hub.Config(mathjaxConfig);
+          MathJax.Hub.Configured();
+          return MathJax;
+        }
+      },
+
       // ## UI Libraries
       // # Bootstrap Plugins
       bootstrapAffix: ['jquery'],
@@ -83,18 +93,7 @@
       bootstrapScrollspy: ['jquery'],
       bootstrapTab: ['jquery'],
       bootstrapTooltip: ['jquery'],
-      bootstrapTransition: ['jquery'],
-
-      mathjax: {
-        deps: ['cs!configs/mathjax'],
-        exports: 'MathJax',
-        init: function (mathjaxConfig) {
-          var MathJax = window.MathJax; // Explicitly use global MathJax variable
-          MathJax.Hub.Config(mathjaxConfig);
-          MathJax.Hub.Startup.onload();
-          return MathJax;
-        }
-      }
+      bootstrapTransition: ['jquery']
     },
 
     // Handlebars Requirejs Plugin Configuration

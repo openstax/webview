@@ -12,4 +12,4 @@ define (require) ->
       @listenTo(@model, 'changePage changePage:content', @render)
 
     onRender: () ->
-      MathJax.Hub.Queue(['Typeset', MathJax.Hub])
+      MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
