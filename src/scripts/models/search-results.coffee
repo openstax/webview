@@ -19,3 +19,16 @@ define (require) ->
       @query = options.query or ''
       @fetch
         success: () => @set('loaded', true)
+
+    parse: (response, options) ->
+      response = super(arguments...)
+
+      authors = new Backbone.Collection()
+      _.each response.results.limits, (limit) ->
+        if limit.author then authors.add(limit.author)
+
+      _.each response.results.items, (item) ->
+        _.each item.authors, (author, index) ->
+          item.authors[index] = authors.get(author).toJSON()
+
+      return response
