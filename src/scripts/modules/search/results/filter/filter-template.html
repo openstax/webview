@@ -7,9 +7,15 @@
         {{#each this}}
           <li class="limit">
             <span class="limit-name">
-              <a href="{{../../url}} {{this.key}}:&quot;{{@key}}&quot;">
-                {{@key}}
-              </a>
+              {{#is this.key 'author'}}
+                <a href="{{../../../url}} {{this.key}}:&quot;{{this.id}}&quot;">
+                  {{@key}}
+                </a>
+              {{else}}
+                <a href="{{../../../url}} {{this.key}}:&quot;{{@key}}&quot;">
+                  {{@key}}
+                </a>
+              {{/is}}
             </span>
             <span class="count">{{this.count}}</span>
           </li>

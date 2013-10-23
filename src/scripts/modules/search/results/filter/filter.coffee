@@ -25,11 +25,17 @@ define (require) ->
           if key isnt 'count'
             filterName = FILTER_NAMES[key] or capitalize(key)
             name = limit[key]
+
             if name is 'application/vnd.org.cnx.collection' then name = 'book'
             else if name is 'application/vnd.org.cnx.module' then name = 'page'
+
             if key is 'mediaType' then key = 'type'
+
+            if key is 'author'
+              name = limit[key].fullname
+
             filters[filterName] = filters[filterName] or {}
-            filters[filterName][name] = {count: limit['count'], filter: filterName, key: key}
+            filters[filterName][name] = {count: limit['count'], filter: filterName, key: key, id: limit[key]?.id}
 
       return {filters: filters, url: Backbone.history.fragment}
 
