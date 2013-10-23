@@ -1,28 +1,25 @@
 {
-    "name": "connexions-webview",
-    "version": "0.7.1",
-
-    "ignore": [
-        "**/.*",
-        "dist",
-        "node_modules"
-    ],
-
-    "dependencies": {
-        "jquery": "~2.0.3",
-        "lodash": "~2.2.1",
-        "backbone": "~1.1.0",
-        "backbone-associations": "7d15bfcb0622f64437f92ae98573e12fe02bff27",
-        "bootstrap": "~3.0.0",
-        "requirejs": "~2.1.9",
-        "requirejs-text": "~2.0.10",
-        "require-cs": "~0.4.4",
-        "require-css": "~0.0.8",
-        "require-less": "~0.0.8",
-        "require-handlebars-plugin": "a9819e78f54dd5655b18dea976a2507baf660e1c"
-    },
-
-    "devDependencies": {
-        "jquery-mockjax": "~v1.5.2"
-    }
+  "name": "connexions-webview",
+  "version": "0.7.1",
+  "ignore": [
+    "**/.*",
+    "dist",
+    "node_modules"
+  ],
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "lodash": "~2.2.1",
+    "backbone": "~1.1.0",
+    "backbone-associations": "7d15bfcb0622f64437f92ae98573e12fe02bff27",
+    "bootstrap": "~3.0.0",
+    "requirejs": "~2.1.9",
+    "requirejs-text": "~2.0.10",
+    "require-cs": "~0.4.4",
+    "require-css": "~0.0.8",
+    "require-less": "~0.0.8",
+    "require-handlebars-plugin": "a9819e78f54dd5655b18dea976a2507baf660e1c"
+  },
+  "devDependencies": {
+    "jquery-mockjax": "~v1.5.2"
+  }
 }
