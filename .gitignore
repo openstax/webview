@@ -1,3 +1,6 @@
-node_modules
-bower_components
+bower_components/
+node_modules/
 src/scripts/libs
+dist/
+
+.DS_Store
