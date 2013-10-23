@@ -71,9 +71,9 @@ module.exports = (grunt) ->
       options:
         mode: "VERIFY_ONLY"
         js:
-          space_after_anon_function: true
+          spaceAfterAnonFunction: true
           wrapLineLength: 120
-          indent_size: 2
+          indentSize: 2
 
     # CoffeeLint
     coffeelint:
