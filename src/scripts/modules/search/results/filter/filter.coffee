@@ -27,8 +27,9 @@ define (require) ->
             name = limit[key]
             if name is 'application/vnd.org.cnx.collection' then name = 'book'
             else if name is 'application/vnd.org.cnx.module' then name = 'page'
+            if key is 'mediaType' then key = 'type'
             filters[filterName] = filters[filterName] or {}
-            filters[filterName][name] = {count: limit['count'], filter: filterName}
+            filters[filterName][name] = {count: limit['count'], filter: filterName, key: key}
 
       return {filters: filters, url: Backbone.history.fragment}
 
