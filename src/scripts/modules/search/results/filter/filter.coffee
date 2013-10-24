@@ -1,4 +1,5 @@
 define (require) ->
+  $ = require('jquery')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./filter-template')
   require('less!./filter')
@@ -43,15 +44,19 @@ define (require) ->
               key: key
               index: filters[filterName]._index
               id: limit[key]?.id
+              url: Backbone.history.fragment
 
-      return {filters: filters, url: Backbone.history.fragment}
+      return {filters: filters}
+
+    events:
+      'click .more': 'expandLimits'
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:results', @render)
 
     onRender: () ->
-      @$el.find('.collapsed').append '
-        <li class="more">
-          <span class="glyphicon glyphicon-chevron-down"></span><span class="text">More...</span>
-        </li>'
+      @$el.find('.collapsed').append '<li class="more"><span class="text">More...</span></li>'
+
+    expandLimits: (e) ->
+      $(e.currentTarget).siblings().removeClass('hidden')

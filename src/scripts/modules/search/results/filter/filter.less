@@ -52,14 +52,14 @@
         &:hover {
           text-decoration: underline;
         }
-        
-        .glyphicon {
-          margin-right: 3px;
-          font-size: 0.9rem;
-        }
-        
+
         .text {
           vertical-align: middle;
+
+          &::before {
+            margin-right: 5px;
+            content: "\25b8";
+          }
         }
       }
     }

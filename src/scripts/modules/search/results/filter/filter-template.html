@@ -9,11 +9,11 @@
             <li class="limit {{#gt this.index 5}}hidden{{/gt}}">
               <span class="limit-name">
                 {{#is this.key 'author'}}
-                  <a href="{{../../../url}} authorID:&quot;{{this.id}}&quot;">
+                  <a href="{{this.url}} authorID:&quot;{{this.id}}&quot;">
                     {{@key}}
                   </a>
                 {{else}}
-                  <a href="{{../../../url}} {{this.key}}:&quot;{{@key}}&quot;">
+                  <a href="{{this.url}} {{this.key}}:&quot;{{@key}}&quot;">
                     {{@key}}
                   </a>
                 {{/is}}
