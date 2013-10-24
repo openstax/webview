@@ -1,4 +1,5 @@
 define (require) ->
+  $ = require('jquery')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./filter-template')
   require('less!./filter')
@@ -35,10 +36,40 @@ define (require) ->
               name = limit[key].fullname
 
             filters[filterName] = filters[filterName] or {}
-            filters[filterName][name] = {count: limit['count'], filter: filterName, key: key, id: limit[key]?.id}
+            filters[filterName]._index = filters[filterName]._index or 0
+            filters[filterName]._index++
+            filters[filterName][name] =
+              count: limit['count']
+              filter: filterName
+              key: key
+              index: filters[filterName]._index
+              id: limit[key]?.id
+              url: Backbone.history.fragment
 
-      return {filters: filters, url: Backbone.history.fragment}
+      return {filters: filters}
+
+    events:
+      'click .toggle': 'toggleLimits'
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:results', @render)
+
+    onRender: () ->
+      @$el.find('.collapsed').append('<li class="toggle"><span class="text">More...</span></li>')
+
+    toggleLimits: (e) ->
+      $target = $(e.currentTarget)
+      $limits = $target.siblings('.overflow')
+      $text = $target.children('.text')
+
+      if @expanded
+        $limits.addClass('hidden')
+        $text.text('More...')
+        $text.removeClass('less')
+        @expanded = false
+      else
+        $limits.removeClass('hidden')
+        $text.text('Less...')
+        $text.addClass('less')
+        @expanded = true
