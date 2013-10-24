@@ -1,6 +1,7 @@
 define (require) ->
   $ = require('jquery')
   router = require('cs!router')
+  subjects = require('cs!collections/subjects')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./find-content-template')
   require('less!./find-content')
@@ -8,10 +9,15 @@ define (require) ->
 
   return class FindContentView extends BaseView
     template: template
+    collection: subjects
 
     events:
       'click .dropdown-menu > li': 'selectSubject'
       'keyup input': 'triggerSearch'
+
+    initialize: () ->
+      super()
+      @listenTo(@collection, 'reset', @render)
 
     selectSubject: (e) ->
       e.preventDefault()
