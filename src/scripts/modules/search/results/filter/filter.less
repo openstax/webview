@@ -42,7 +42,7 @@
         }
       }
 
-      .more {
+      .toggle {
         margin-top: 10px;
         padding-top: 5px;
         border-top: 1px solid @gray-light;
@@ -59,6 +59,10 @@
           &::before {
             margin-right: 5px;
             content: "\25b8";
+          }
+          
+          &.less::before {
+            content: "\25b4";
           }
         }
       }

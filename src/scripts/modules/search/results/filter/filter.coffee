@@ -49,14 +49,27 @@ define (require) ->
       return {filters: filters}
 
     events:
-      'click .more': 'expandLimits'
+      'click .toggle': 'toggleLimits'
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:results', @render)
 
     onRender: () ->
-      @$el.find('.collapsed').append '<li class="more"><span class="text">More...</span></li>'
+      @$el.find('.collapsed').append('<li class="toggle"><span class="text">More...</span></li>')
 
-    expandLimits: (e) ->
-      $(e.currentTarget).siblings().removeClass('hidden')
+    toggleLimits: (e) ->
+      $target = $(e.currentTarget)
+      $limits = $target.siblings('.overflow')
+      $text = $target.children('.text')
+
+      if @expanded
+        $limits.addClass('hidden')
+        $text.text('More...')
+        $text.removeClass('less')
+        @expanded = false
+      else
+        $limits.removeClass('hidden')
+        $text.text('Less...')
+        $text.addClass('less')
+        @expanded = true
