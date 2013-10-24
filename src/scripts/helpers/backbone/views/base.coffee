@@ -48,7 +48,7 @@ define (require) ->
       @$el?.html(@template?(data) or @template)
 
     _render: () ->
-      data = @model?.toJSON() or {}
+      data = @model?.toJSON() or @collection?.toJSON() or {}
 
       if typeof @templateHelpers is 'function'
         _.extend(data, @templateHelpers())
