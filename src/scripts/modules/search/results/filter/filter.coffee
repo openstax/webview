@@ -35,10 +35,23 @@ define (require) ->
               name = limit[key].fullname
 
             filters[filterName] = filters[filterName] or {}
-            filters[filterName][name] = {count: limit['count'], filter: filterName, key: key, id: limit[key]?.id}
+            filters[filterName]._index = filters[filterName]._index or 0
+            filters[filterName]._index++
+            filters[filterName][name] =
+              count: limit['count']
+              filter: filterName
+              key: key
+              index: filters[filterName]._index
+              id: limit[key]?.id
 
       return {filters: filters, url: Backbone.history.fragment}
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:results', @render)
+
+    onRender: () ->
+      @$el.find('.collapsed').append '
+        <li class="more">
+          <span class="glyphicon glyphicon-chevron-down"></span><span class="text">More...</span>
+        </li>'
