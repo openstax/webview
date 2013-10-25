@@ -2,6 +2,7 @@ define (require) ->
   $ = require('jquery')
   _ = require('underscore')
   Backbone = require('backbone')
+  settings = require('cs!settings')
 
   class Region
     constructor: (el, parent) ->
@@ -47,6 +48,11 @@ define (require) ->
     _renderDom: (data) ->
       @$el?.html(@template?(data) or @template)
 
+    # Update page title
+    updateTitle: () ->
+      if @pageTitle
+        document.title = settings.titlePrefix + @pageTitle
+
     _render: () ->
       data = @model?.toJSON() or @collection?.toJSON() or {}
 
@@ -60,6 +66,7 @@ define (require) ->
           else
             data[key] = value
 
+      @updateTitle()
       @_renderDom(data)
 
     render: () ->
