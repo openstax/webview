@@ -10,6 +10,7 @@ define (require) ->
 
   return class AdvancedSearchView extends BaseView
     template: template
+    pageTitle: 'Advanced Search'
     templateHelpers:
       languages: settings.languages
       years: [(new Date).getFullYear()..2003]

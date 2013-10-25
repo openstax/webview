@@ -23,8 +23,14 @@ define (require) ->
       @uuid = options.uuid
       @model = new Content({id: @uuid, page: options.page})
 
+      @listenTo(@model, 'change:title', @updateTitle)
+
     regions:
       media: '.media'
+
+    updateTitle: () ->
+      @pageTitle = @model.get('title')
+      super()
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))
