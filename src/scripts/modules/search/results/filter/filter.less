@@ -9,7 +9,7 @@
     border-bottom: 1px solid white;
     font-weight: 400;
   }
-  
+
   h5 {
     color: black;
   }
@@ -39,6 +39,31 @@
 
         > .count {
           float: right;
+        }
+      }
+
+      .toggle {
+        margin-top: 10px;
+        padding-top: 5px;
+        border-top: 1px solid @gray-light;
+        color: @brand-primary;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        .text {
+          vertical-align: middle;
+
+          &::before {
+            margin-right: 5px;
+            content: "\25b8";
+          }
+          
+          &.less::before {
+            content: "\25b4";
+          }
         }
       }
     }
