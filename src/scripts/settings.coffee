@@ -10,6 +10,9 @@ define (require) ->
       host: location.hostname
       port: 6543
 
+    # Prefix to prepend to page titles
+    titlePrefix: 'Connexions - '
+
     # Google Analytics tracking ID
     analyticsID: 'UA-7903479-1'
 

@@ -10,6 +10,7 @@ define (require) ->
 
   return class ContentPage extends BaseView
     template: template
+    pageTitle: 'Content Library'
 
     initialize: (options) ->
       super()

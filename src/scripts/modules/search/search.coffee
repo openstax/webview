@@ -8,6 +8,7 @@ define (require) ->
 
   return class SearchView extends BaseView
     template: template
+    pageTitle: 'Search'
 
     initialize: () ->
       super()
