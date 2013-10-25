@@ -18,4 +18,7 @@ define (require) ->
 
     # Supported languages
     languages: languages
+
+    # Legacy URL
+    legacy: 'http://cnx.org/'
   }
