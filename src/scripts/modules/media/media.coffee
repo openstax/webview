@@ -24,6 +24,7 @@ define (require) ->
       @model = new Content({id: @uuid, page: options.page})
 
       @listenTo(@model, 'change:title', @updateTitle)
+      @listenTo(@model, 'change:legacy_id change:legacy_version', @updateLegacyLink)
 
     regions:
       media: '.media'
@@ -31,6 +32,11 @@ define (require) ->
     updateTitle: () ->
       @pageTitle = @model.get('title')
       super()
+
+    updateLegacyLink: () ->
+      id = @model.get('legacy_id')
+      version = @model.get('legacy_version')
+      @parent.parent.regions.header.views[0].setLegacyLink("content/#{id}/#{version}")
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))

@@ -20,7 +20,7 @@ define (require) ->
       #spotlight: '#spotlight'
 
     onRender: () ->
-      @parent.regions.header.show(new HeaderView({page: 'home'}))
+      @parent.regions.header.show(new HeaderView({page: 'home', url: 'content'}))
       @parent.regions.footer.show(new FooterView({page: 'home'}))
 
       @regions.splash.show(new SplashView())

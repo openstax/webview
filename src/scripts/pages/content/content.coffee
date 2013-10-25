@@ -21,7 +21,7 @@ define (require) ->
       content: '#content'
 
     onRender: () ->
-      @parent.regions.header.show(new HeaderView({page: 'content'}))
+      @parent.regions.header.show(new HeaderView({page: 'content', url: 'content'}))
       @parent.regions.footer.show(new FooterView({page: 'content'}))
       @regions.content.show(new FindContentView())
 
