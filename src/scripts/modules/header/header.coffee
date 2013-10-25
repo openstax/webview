@@ -12,11 +12,13 @@ define (require) ->
       url: @url
     }
 
-    initialize: (options) ->
+    initialize: (options = {}) ->
       super()
-      @page = options?.page
-      @url = options?.url or 'content'
+      @page = options.page
+      @url = @createLink(options.url or 'content')
 
     setLegacyLink: (url) ->
-      @url = "#{settings.legacy}/#{url}"
+      @url = @createLink(url)
       @render()
+
+    createLink: (url) -> "#{location.protocol}//#{settings.legacy}/#{url}"
