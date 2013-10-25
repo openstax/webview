@@ -20,5 +20,8 @@ define (require) ->
     languages: languages
 
     # Legacy URL
-    legacy: 'http://cnx.org/'
+    # URLS are concatenated using the following logic: location.protocol + legacy + '/' + url
+    #   Example: 'http://' + 'cnx.org' + '/' + 'content'
+    # Do not include the protocol or a trailing slash
+    legacy: 'cnx.org'
   }
