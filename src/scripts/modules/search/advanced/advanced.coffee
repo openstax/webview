@@ -13,7 +13,7 @@ define (require) ->
     pageTitle: 'Advanced Search'
     templateHelpers:
       languages: settings.languages
-      years: [(new Date).getFullYear()..2003]
+      years: [(new Date).getFullYear()..1999]
 
     regions:
       header: '.header'
