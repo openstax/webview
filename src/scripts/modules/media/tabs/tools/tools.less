@@ -1,0 +1,19 @@
+@import "../../../../../styles/variables.less";
+@import "../../../../../styles/mixins.less";
+
+.media-tabs .tools {
+  .columns(290px; 30px; 1px solid @gray-lighter);
+  margin-right: -1px; // Hide 3rd column rule
+  padding: 15px;
+  font-size: 1.5rem;
+
+  .email a::before {
+    display: inline-block;
+    margin-right: 5px;
+    width: 17px;
+    height: 12px;
+    background: url(scripts/modules/media/tabs/tools/images/icons/mail.png) no-repeat  center center;
+    background-size: contain;
+    content: "";
+  }
+}
