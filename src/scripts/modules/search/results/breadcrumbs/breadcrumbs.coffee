@@ -5,12 +5,35 @@ define (require) ->
   template = require('hbs!./breadcrumbs-template')
   require('less!./breadcrumbs')
 
+  QUERY_NAMES = {
+    "author": "Author"
+    "authorID": "Author ID"
+    "keyword": "Keyword"
+    "mediaType": "Type"
+    "type": "Type"
+    "pubYear": "Publication Date"
+    "subject": "Subject"
+    "text": "Text"
+  }
+
   return class SearchResultsBreadcrumbsView extends BaseView
     template: template
+    templateHelpers: () ->
+      limits = @model.toJSON().query.limits
+
+      queries = []
+      _.each limits, (limit) ->
+        _.each _.keys(limit), (key) ->
+          queries.push
+            limit: key
+            value: limit[key]
+            name: QUERY_NAMES[key]
+
+      return {queries: queries}
 
     events:
       'click .remove': 'removeBreadcrumb'
-    
+
     initialize: () ->
       super()
       @listenTo(@model, 'change:query', @render)
