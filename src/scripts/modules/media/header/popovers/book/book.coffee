@@ -8,4 +8,5 @@ define (require) ->
       options:
         html: true
         placement: 'bottom'
-        content: template()
+        content: template
+          model: @model
