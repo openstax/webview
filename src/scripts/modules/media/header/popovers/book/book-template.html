@@ -23,5 +23,7 @@
     </ul>
   </div>
 
-  <a href="#" class="btn order">Order Printed Collection</a>
+  {{#if buyLink}}
+    <a href="{{buyLink}}" class="btn order">Order Printed Collection</a>
+  {{/if}}
 </div>
