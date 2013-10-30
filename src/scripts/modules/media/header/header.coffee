@@ -31,7 +31,7 @@ define (require) ->
     onRender: () ->
       @attachPopover new BookPopoverView
         owner: @$el.find('.info .btn')
-        content: @model.toJSON()
+        model: @model.toJSON()
 
     toggleSummary: (e) ->
       $summary = @$el.find('.summary')
