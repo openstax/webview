@@ -3,6 +3,7 @@ define (require) ->
   content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
   TocTreeView = require('cs!./contents/tree')
+  ToolsView = require('cs!./tools/tools')
   template = require('hbs!./tabs-template')
   require('less!./tabs')
 
@@ -23,6 +24,7 @@ define (require) ->
 
     onRender: () ->
       @regions.contents.show(new TocTreeView({model: @model}))
+      @regions.tools.show(new ToolsView({model: @model}))
 
     selectTab: (e) ->
       $tab = $(e.currentTarget)
