@@ -2,7 +2,7 @@
   <div class="header">
     <img src="images/icons/download.png" width="16" height="16" alt="Download" />
     <h4>Get This Book</h4>
-    <p>Lorem ipsum dolore sit amet consectetaur sed ut diem.</p>
+    <p>{{! Copy}}</p>
   </div>
 
   <div class="download-collection">
@@ -23,5 +23,7 @@
     </ul>
   </div>
 
-  <a href="#" class="btn order">Order Printed Collection</a>
+  {{#if buyLink}}
+    <a href="{{buyLink}}" class="btn order">Order Printed Collection</a>
+  {{/if}}
 </div>
