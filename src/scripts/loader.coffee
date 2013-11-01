@@ -14,7 +14,8 @@ define (require) ->
     if options.test
       root += 'test/'
 
-    external = new RegExp('^((f|ht)tps?:)?//')
+    external = new RegExp('^((f|ht)tps?:)?\/\/')
+    resources = new RegExp('\/resources\/')
 
     # Catch internal application links and let Backbone handle the routing
     $(document).on 'click', 'a:not([data-bypass])', (e) ->
@@ -30,6 +31,8 @@ define (require) ->
           location.href = href
         else
           window.open(href, '_blank')
+      else if resources.test(href)
+        window.open(href, '_blank')
       else
         router.navigate(href, {trigger: true})
 
