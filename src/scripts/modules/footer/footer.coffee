@@ -6,8 +6,11 @@ define (require) ->
 
   return class FooterView extends BaseView
     template: template
-    templateHelpers:
-      url: () -> location.origin + settings.root
+    templateHelpers: () ->
+      return {
+        url: location.origin + settings.root
+        webmaster: settings.webmaster
+      }
 
     onRender: () ->
       height = @$el.find('.copyright').height()
