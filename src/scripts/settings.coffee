@@ -24,4 +24,7 @@ define (require) ->
     #   Example: 'http:' + '//' + 'cnx.org' + '/' + 'content'
     # Do not include the protocol or a trailing slash
     legacy: 'cnx.org'
+
+    # Webmaster E-mail address
+    webmaster: 'cnx@cnx.org'
   }
