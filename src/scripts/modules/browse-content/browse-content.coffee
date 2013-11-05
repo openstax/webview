@@ -1,5 +1,5 @@
 define (require) ->
-  subjects = require('cs!/scripts/collections/subjects')
+  subjects = require('cs!collections/subjects')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./browse-content-template')
   require('less!./browse-content')
