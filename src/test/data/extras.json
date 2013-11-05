@@ -2,26 +2,32 @@
   "subjects": [{
     "id": 1,
     "name": "Arts",
-    "count": 127
+    "modules": 127,
+    "collections": 94
   }, {
     "id": 2,
     "name": "Business",
-    "count": 8191
+    "modules": 8191,
+    "collections": 7757
   }, {
     "id": 3,
     "name": "Humanities",
-    "count": 26951
+    "modules": 26951,
+    "collections": 787
   }, {
     "id": 4,
     "name": "Mathematics and Statistics",
-    "count": 131071
+    "modules": 131071,
+    "collections": 6551
   }, {
     "id": 5,
     "name": "Science and Technology",
-    "count": 39916801
+    "modules": 39916801,
+    "collections": 110059
   }, {
     "id": 6,
     "name": "Social Sciences",
-    "count": 357686312646216567629137
+    "modules": 357686312646216567629137,
+    "collections": 524287
   }]
 }
