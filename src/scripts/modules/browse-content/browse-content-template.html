@@ -9,77 +9,19 @@
     use and reuse of all our content.</p>
 
   <ul>
-    <li>
-      <h3>
-        <a href="/search?q=subject:Arts">Arts</a>
-      </h3>
-      <a href="/search?q=subject:Arts">
-        <img src="/images/subjects/art.jpg" width="250" height="125" alt="Arts" />
-      </a>
-      <div class="data">
-        <div>Modules: XX</div>
-        <div>Collections: XX</div>
-      </div>
-    </li>
-    <li>
-      <h3>
-        <a href="/search?q=subject:Business">Business</a>
-      </h3>
-      <a href="/search?q=subject:Business">
-        <img src="/images/subjects/business.jpg" width="250" height="125" alt="Business" />
-      </a>
-      <div class="data">
-        <div>Modules: XX</div>
-        <div>Collections: XX</div>
-      </div>
-    </li>
-    <li>
-      <h3>
-        <a href="/search?q=subject:Humanities">Humanities</a>
-      </h3>
-      <a href="/search?q=subject:Humanities">
-        <img src="/images/subjects/humanities.jpg" width="250" height="125" alt="Humanities" />
-      </a>
-      <div class="data">
-        <div>Modules: XX</div>
-        <div>Collections: XX</div>
-      </div>
-    </li>
-    <li>
-      <h3>
-        <a href="/search?q=subject:&quot;Mathematics and Statistics&quot;">Mathematics &amp; Statistics</a>
-      </h3>
-      <a href="/search?q=subject:&quot;Mathematics and Statistics&quot;">
-        <img src="/images/subjects/math.jpg" width="250" height="125" alt="Math" />
-      </a>
-      <div class="data">
-        <div>Modules: XX</div>
-        <div>Collections: XX</div>
-      </div>
-    </li>
-    <li>
-      <h3>
-        <a href="/search?q=subject:&quot;Science and Technology&quot;">Science &amp; Technology</a>
-      </h3>
-      <a href="/search?q=subject:&quot;Science and Technology&quot;">
-        <img src="/images/subjects/science.jpg" width="250" height="125" alt="Science" />
-      </a>
-      <div class="data">
-        <div>Modules: XX</div>
-        <div>Collections: XX</div>
-      </div>
-    </li>
-    <li>
-      <h3>
-        <a href="/search?q=subject:&quot;Social Science&quot;">Social Sciences</a>
-      </h3>
-      <a href="/search?q=subject:&quot;Social Science&quot;">
-        <img src="/images/subjects/social_science.jpg" width="250" height="125" alt="Social Sciences" />
-      </a>
-      <div class="data">
-        <div>Modules: XX</div>
-        <div>Collections: XX</div>
-      </div>
-    </li>
+    {{#each this}}
+      <li>
+        <h3>
+          <a href="/search?q=subject:&quot;{{name}}&quot;">{{name}}</a>
+        </h3>
+        <a href="/search?q=subject:&quot;{{name}}&quot;">
+          <img src="{{image}}" width="250" height="125" alt="{{name}}" />
+        </a>
+        <div class="data">
+          <div>Modules: {{count.module}}</div>
+          <div>Collections: {{count.collection}}</div>
+        </div>
+      </li>
+    {{/each}}
   </ul>
 </div>
