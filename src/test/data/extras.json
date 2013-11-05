@@ -2,32 +2,44 @@
   "subjects": [{
     "id": 1,
     "name": "Arts",
-    "modules": 127,
-    "collections": 94
+    "count": {
+      "modules": 127,
+      "collections": 94
+    }
   }, {
     "id": 2,
     "name": "Business",
-    "modules": 8191,
-    "collections": 7757
+    "count": {
+      "modules": 8191,
+      "collections": 7757
+    }
   }, {
     "id": 3,
     "name": "Humanities",
-    "modules": 26951,
-    "collections": 787
+    "count": {
+      "modules": 26951,
+      "collections": 787
+    }
   }, {
     "id": 4,
     "name": "Mathematics and Statistics",
-    "modules": 131071,
-    "collections": 6551
+    "count": {
+      "modules": 131071,
+      "collections": 6551
+    }
   }, {
     "id": 5,
     "name": "Science and Technology",
-    "modules": 39916801,
-    "collections": 110059
+    "count": {
+      "modules": 39916801,
+      "collections": 110059
+    }
   }, {
     "id": 6,
     "name": "Social Sciences",
-    "modules": 357686312646216567629137,
-    "collections": 524287
+    "count": {
+      "modules": 357686312646216567629137,
+      "collections": 524287
+    }
   }]
 }
