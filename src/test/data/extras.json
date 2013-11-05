@@ -1,19 +1,27 @@
 {
-  "downloads": [{
-    "path": "/exports/e79ffde3-7fb4-4af3-9ec8-df648b391597@1.7.pdf",
-    "filename": "college-physics.pdf",
-    "details": "PDF file, for viewing content offline and printing.",
-    "format": "PDF"
+  "subjects": [{
+    "id": 1,
+    "name": "Arts",
+    "count": 127
   }, {
-    "path": "/exports/e79ffde3-7fb4-4af3-9ec8-df648b391597@1.7.epub",
-    "filename": "college-physics.epub",
-    "details": "Electronic book format file, for viewing on mobile devices.",
-    "format": "EPUB"
+    "id": 2,
+    "name": "Business",
+    "count": 8191
   }, {
-    "path": "/exports/e79ffde3-7fb4-4af3-9ec8-df648b391597@1.7.zip",
-    "filename": "college-physics.zip",
-    "details": "An offline HTML copy of the content.  Also includes XML, included media files, and other support files.",
-    "format": "Offline ZIP"
-  }],
-  "isLatest": true
+    "id": 3,
+    "name": "Humanities",
+    "count": 26951
+  }, {
+    "id": 4,
+    "name": "Mathematics and Statistics",
+    "count": 131071
+  }, {
+    "id": 5,
+    "name": "Science and Technology",
+    "count": 39916801
+  }, {
+    "id": 6,
+    "name": "Social Sciences",
+    "count": 357686312646216567629137
+  }]
 }
