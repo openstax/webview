@@ -9,20 +9,19 @@ define (require) ->
   $.mockjax (settings) ->
     # settings.url === '/contents/<uuid>'
     service = settings.url.match(/\/contents\/(.*)$/)
-
-    if service
-      return {proxy: 'data/' + service[1] + '.json'}
+    return {proxy: 'data/' + service[1] + '.json'} if service
 
   $.mockjax (settings) ->
     # settings.url === '/search?q=physics'
     service = settings.url.match(/\/search\?q=physics$/)
-
-    if service
-      return {proxy: 'data/search.json'}
+    return {proxy: 'data/search.json'} if service
 
   $.mockjax (settings) ->
-    # settings.url === 'exports-allowable-types/<uuid>'
-    service = settings.url.match(/\/extra\/(.*)$/)
+    # settings.url === 'extras/<uuid>'
+    service = settings.url.match(/\/extras\/(.*)$/)
+    return {proxy: 'data/content-extras.json'} if service
 
-    if service
-      return {proxy: 'data/extra.json'}
+  $.mockjax (settings) ->
+    # settings.url === 'extras'
+    service = settings.url.match(/\/extras$/)
+    return {proxy: 'data/extras.json'} if service

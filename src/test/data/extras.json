@@ -1,0 +1,27 @@
+{
+  "subjects": [{
+    "id": 1,
+    "name": "Arts",
+    "count": 127
+  }, {
+    "id": 2,
+    "name": "Business",
+    "count": 8191
+  }, {
+    "id": 3,
+    "name": "Humanities",
+    "count": 26951
+  }, {
+    "id": 4,
+    "name": "Mathematics and Statistics",
+    "count": 131071
+  }, {
+    "id": 5,
+    "name": "Science and Technology",
+    "count": 39916801
+  }, {
+    "id": 6,
+    "name": "Social Sciences",
+    "count": 357686312646216567629137
+  }]
+}
