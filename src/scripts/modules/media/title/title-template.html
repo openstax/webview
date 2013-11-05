@@ -3,7 +3,7 @@
 
   <div class="info">
     {{#if authors.length}}
-      <span>Collection by:</span>
+      <span>{{#is type 'book'}}Collection{{else}}Module{{/is}} by:</span>
       <span class="collection-author">
         {{#each authors}}
           <a href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
