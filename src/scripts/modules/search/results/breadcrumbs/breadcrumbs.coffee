@@ -17,7 +17,7 @@ define (require) ->
     "text": "Text"
   }
 
-  capitalize: (str) ->
+  capitalize = (str) ->
     return (str.split(' ').map (word) -> word[0].toUpperCase() + word[1..-1].toLowerCase()).join ' '
 
   return class SearchResultsBreadcrumbsView extends BaseView
