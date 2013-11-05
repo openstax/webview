@@ -13,8 +13,12 @@ define (require) ->
     "type": "Type"
     "pubYear": "Publication Date"
     "subject": "Subject"
+    "title": "Title"
     "text": "Text"
   }
+
+  capitalize: (str) ->
+    return (str.split(' ').map (word) -> word[0].toUpperCase() + word[1..-1].toLowerCase()).join ' '
 
   return class SearchResultsBreadcrumbsView extends BaseView
     template: template
@@ -27,7 +31,7 @@ define (require) ->
           queries.push
             limit: key
             value: limit[key]
-            name: QUERY_NAMES[key]
+            name: QUERY_NAMES[key] or capitalize(key)
 
       return {queries: queries}
 
