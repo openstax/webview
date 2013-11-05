@@ -20,6 +20,10 @@ define (require) ->
       @route /^search/, 'search', () ->
         @appView.render('search')
 
+    navigate: () ->
+      super(arguments...)
+      @trigger('navigate')
+
     # Helper function to determine the current route's parameters
     current: () ->
       routes = []
