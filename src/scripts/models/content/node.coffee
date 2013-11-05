@@ -32,7 +32,7 @@ define (require) ->
       @set('downloads', 'loading')
 
       $.ajax
-        url: "#{SERVER}/extra/#{@id}"
+        url: "#{SERVER}/extras/#{@id}"
         dataType: 'json'
       .done (response) =>
         @set('downloads', response.downloads)

@@ -5,7 +5,7 @@ define (require) ->
   SERVER = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
 
   return new class Subjects extends Backbone.Collection
-    url: () -> "#{SERVER}/config"
+    url: () -> "#{SERVER}/extras"
 
     initialize: () ->
       @fetch({reset: true})
