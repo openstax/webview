@@ -16,6 +16,16 @@
     text-align: right;
     .user-select(none);
 
+    > .collection-author a {
+      &::after {
+        content: ",";
+      }
+
+      &:last-of-type::after {
+        content: "";
+      }
+    }
+
     > .share {
       margin-top: 35px;
 
