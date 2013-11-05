@@ -9,7 +9,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'changePage changePage:content', @render)
+      @listenTo(@model, 'change:currentPage.content', @render)
 
     onRender: () ->
       MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
