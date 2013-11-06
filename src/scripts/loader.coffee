@@ -15,7 +15,7 @@ define (require) ->
       root += 'test/'
 
     external = new RegExp('^((f|ht)tps?:)?\/\/')
-    resources = new RegExp('\/resources\/')
+    resources = new RegExp('\/(resources|exports)\/')
 
     # Catch internal application links and let Backbone handle the routing
     $(document).on 'click', 'a:not([data-bypass])', (e) ->
