@@ -31,4 +31,11 @@ define (require) ->
         _.each item.authors, (author, index) ->
           item.authors[index] = authors.get(author).toJSON()
 
+      #response.queryFormatted = _.cloneDeep(response.query)
+      response.queryFormatted = JSON.parse(JSON.stringify(response.query)) # HACK to deep clone
+      _.each response.queryFormatted.limits, (limit) ->
+        if limit.authorID
+          author = authors.get(limit.authorID).toJSON()
+          limit.authorID = "#{author.fullname} (#{author.id})"
+
       return response

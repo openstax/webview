@@ -23,7 +23,7 @@ define (require) ->
   return class SearchResultsBreadcrumbsView extends BaseView
     template: template
     templateHelpers: () ->
-      limits = @model.toJSON().query.limits
+      limits = @model.toJSON().queryFormatted?.limits
 
       queries = []
       _.each limits, (limit) ->
