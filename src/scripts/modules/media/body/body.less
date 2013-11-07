@@ -6,6 +6,7 @@
 .media-body {
   margin: 0 60px;
   padding: 40px 0;
+  counter-reset: figure;
 
   > section,
   > figure,
@@ -24,6 +25,7 @@
   h5,
   h6 {
     margin-bottom: 15px;
+    color: @gray-dark;
   }
 
   > section,
@@ -85,33 +87,32 @@
     }
   }
 
-  .example > .title {
-    &::before {
-      content: "Example:";
-    }
+  .example > .title::before {
+    content: "Example:";
   }
 
-  .exercise > .title {
-    &::before {
-      content: "Exercise:";
-    }
+  .exercise > .title::before {
+    content: "Exercise:";
   }
 
-  .note {
-    background-color: #fbf2e2;
-
-    > .title {
-      &::before {
-        content: "Note:";
-      }
-    }
+  .note > .title::before {
+    content: "Note:";
   }
 
   figure {
+    color: @gray;
+    counter-increment: figure;
+
     > figcaption {
       padding: 10px;
-      font-size: 1.2rem;
-      background-color: @gray-lightest;
+      font-size: 1.3rem;
+
+      &::before {
+        margin-right: 5px;
+        color: @gray-medium;
+        font-weight: bold;
+        content: "Figure " counter(figure) ".";
+      }
     }
 
     > .media {
