@@ -27,8 +27,8 @@ define (require) ->
             filterName = FILTER_NAMES[key] or capitalize(key)
             name = limit[key]
 
-            if name is 'application/vnd.org.cnx.collection' then name = 'book'
-            else if name is 'application/vnd.org.cnx.module' then name = 'page'
+            if name is 'application/vnd.org.cnx.collection' then name = 'collection'
+            else if name is 'application/vnd.org.cnx.module' then name = 'module'
 
             if key is 'mediaType' then key = 'type'
 
