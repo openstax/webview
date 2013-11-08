@@ -1,6 +1,7 @@
 define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
+  settings = require('cs!settings')
   router = require('cs!router')
   BaseView = require('cs!helpers/backbone/views/base')
   #MailPopoverView = require('cs!./popovers/mail/mail')
@@ -14,11 +15,11 @@ define (require) ->
 
       # Set information used for social media links
       share =
-        url: Backbone.history.fragment
+        url: location.origin + settings.root + Backbone.history.fragment
         source: 'Connexions'
         summary: @model.get('abstract') or 'An OpenStax College book.'
         title: title or 'Untitled'
-        image: @model.get('image') or "#{Backbone.history.location.host}/images/logo.png"
+        image: @model.get('image') or "#{Backbone.history.location.origin}/images/logo.png"
 
       # Encode all of the shared values for a URI
       _.each share, (value, key, list) ->
