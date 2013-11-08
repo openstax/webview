@@ -1,7 +1,6 @@
 define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
-  settings = require('cs!settings')
   router = require('cs!router')
   BaseView = require('cs!helpers/backbone/views/base')
   #MailPopoverView = require('cs!./popovers/mail/mail')
@@ -15,7 +14,7 @@ define (require) ->
 
       # Set information used for social media links
       share =
-        url: location.origin + settings.root + Backbone.history.fragment
+        url: window.location
         source: 'Connexions'
         summary: @model.get('abstract') or 'An OpenStax College book.'
         title: title or 'Untitled'
