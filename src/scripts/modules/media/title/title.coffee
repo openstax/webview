@@ -14,7 +14,7 @@ define (require) ->
 
       # Set information used for social media links
       share =
-        url: window.location
+        url: window.location.href
         source: 'Connexions'
         summary: @model.get('abstract') or 'An OpenStax College book.'
         title: title or 'Untitled'
