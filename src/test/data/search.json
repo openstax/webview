@@ -294,332 +294,67 @@
     }],
     "total": 15,
     "limits": [{
-      "count": 15,
-      "pubYear": "2013"
-    }, {
-      "count": 15,
-      "author": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
-    }, {
-      "count": 1,
-      "mediaType": "application/vnd.org.cnx.collection"
-    }, {
-      "count": 14,
-      "mediaType": "application/vnd.org.cnx.module"
-    }, {
-      "count": 1,
-      "keyword": "electric potential"
-    }, {
-      "count": 2,
-      "keyword": "Modern physics"
-    }, {
-      "count": 1,
-      "keyword": "resistance"
-    }, {
-      "count": 4,
-      "keyword": "friction"
-    }, {
-      "count": 2,
-      "keyword": "Quantum mechanics"
-    }, {
-      "count": 1,
-      "keyword": "fluid statics"
-    }, {
-      "count": 2,
-      "keyword": "Scientific method"
-    }, {
-      "count": 2,
-      "keyword": "Theory"
-    }, {
-      "count": 2,
-      "keyword": "magnitude of kinetic friction"
-    }, {
-      "count": 1,
-      "keyword": "thermodynamics"
-    }, {
-      "count": 1,
-      "keyword": "quantum physics"
-    }, {
-      "count": 2,
-      "keyword": "Percent uncertainty"
-    }, {
-      "count": 2,
-      "keyword": "deformation"
-    }, {
-      "count": 2,
-      "keyword": "Kilogram"
-    }, {
-      "count": 1,
-      "keyword": "tensile strength"
-    }, {
-      "count": 1,
-      "keyword": "dc instruments"
-    }, {
-      "count": 1,
-      "keyword": "gas laws"
-    }, {
-      "count": 2,
-      "keyword": "Young\u2019s modulus"
-    }, {
-      "count": 2,
-      "keyword": "Derived units"
-    }, {
-      "count": 1,
-      "keyword": "geometric optics"
-    }, {
-      "count": 2,
-      "keyword": "magnitude"
-    }, {
-      "count": 2,
-      "keyword": "drag force"
-    }, {
-      "count": 2,
-      "keyword": "shear modulus"
-    }, {
-      "count": 3,
-      "keyword": "force"
-    }, {
-      "count": 2,
-      "keyword": "tension"
-    }, {
-      "count": 2,
-      "keyword": "Conversion factor"
-    }, {
-      "count": 1,
-      "keyword": "energy"
-    }, {
-      "count": 1,
-      "keyword": "ac circuits"
-    }, {
-      "count": 1,
-      "keyword": "electric current"
-    }, {
-      "count": 1,
-      "keyword": "statics and torque"
-    }, {
-      "count": 2,
-      "keyword": "Units"
-    }, {
-      "count": 1,
-      "keyword": "particle physics"
-    }, {
-      "count": 1,
-      "keyword": "fluid dynamics"
-    }, {
-      "count": 1,
-      "keyword": "atomic physics"
-    }, {
-      "count": 1,
-      "keyword": "collisions"
-    }, {
-      "count": 1,
-      "keyword": "electric charge and electric field"
-    }, {
-      "count": 1,
-      "keyword": "rotational motion and angular momentum"
-    }, {
-      "count": 1,
-      "keyword": "kinetic theory"
-    }, {
-      "count": 2,
-      "keyword": "Physical quantity"
-    }, {
-      "count": 2,
-      "keyword": "Uncertainty"
-    }, {
-      "count": 1,
-      "keyword": "magnetism"
-    }, {
-      "count": 2,
-      "keyword": "velocity"
-    }, {
-      "count": 1,
-      "keyword": "electromagnetic waves"
-    }, {
-      "count": 1,
-      "keyword": "physics of hearing"
-    }, {
-      "count": 2,
-      "keyword": "SI units"
-    }, {
-      "count": 1,
-      "keyword": "electromagnetic induction"
-    }, {
-      "count": 2,
-      "keyword": "Fundamental units"
-    }, {
-      "count": 1,
-      "keyword": "linear momentum"
-    }, {
-      "count": 1,
-      "keyword": "oscillatory motion and waves"
-    }, {
-      "count": 1,
-      "keyword": "motion"
-    }, {
-      "count": 1,
-      "keyword": "introduction"
-    }, {
-      "count": 2,
-      "keyword": "length"
-    }, {
-      "count": 1,
-      "keyword": "Ohm\u2019s Law"
-    }, {
-      "count": 2,
-      "keyword": "Stokes\u2019 law"
-    }, {
-      "count": 1,
-      "keyword": "elasticity"
-    }, {
-      "count": 1,
-      "keyword": "vision and optical instruments"
-    }, {
-      "count": 2,
-      "keyword": "Accuracy"
-    }, {
-      "count": 1,
-      "keyword": "biological and medical applications"
-    }, {
-      "count": 2,
-      "keyword": "compression"
-    }, {
-      "count": 1,
-      "keyword": "Newton\u2019s Laws of Motion"
-    }, {
-      "count": 2,
-      "keyword": "Precision"
-    }, {
-      "count": 2,
-      "keyword": "college physics"
-    }, {
-      "count": 1,
-      "keyword": "kinematics"
-    }, {
-      "count": 1,
-      "keyword": "electrical technologies"
-    }, {
-      "count": 2,
-      "keyword": "bulk modulus"
-    }, {
-      "count": 1,
-      "keyword": "wave optics"
-    }, {
-      "count": 1,
-      "keyword": "heat and transfer methods"
-    }, {
-      "count": 2,
-      "keyword": "drag coefficient"
-    }, {
-      "count": 1,
-      "keyword": "radioactivity and nuclear physics"
-    }, {
-      "count": 1,
-      "keyword": "frontiers of physics"
-    }, {
-      "count": 1,
-      "keyword": "circuits"
-    }, {
-      "count": 1,
-      "keyword": "work"
-    }, {
-      "count": 2,
-      "keyword": "Approximation"
-    }, {
-      "count": 2,
-      "keyword": "sliding friction"
-    }, {
-      "count": 1,
-      "keyword": "bioelectricity"
-    }, {
-      "count": 2,
-      "keyword": "Customary system"
-    }, {
-      "count": 2,
-      "keyword": "English units"
-    }, {
-      "count": 2,
-      "keyword": "magnitude of static friction"
-    }, {
-      "count": 2,
-      "keyword": "Relativity"
-    }, {
-      "count": 2,
-      "keyword": "Order of magnitude"
-    }, {
-      "count": 2,
-      "keyword": "strain"
-    }, {
-      "count": 2,
-      "keyword": "Classical physics"
-    }, {
-      "count": 2,
-      "keyword": "static friction"
-    }, {
-      "count": 1,
-      "keyword": "uniform circular motion and gravitation"
-    }, {
-      "count": 1,
-      "keyword": "forces"
-    }, {
-      "count": 2,
-      "keyword": "Metric system"
-    }, {
-      "count": 2,
-      "keyword": "Law"
-    }, {
-      "count": 1,
-      "keyword": "medical applications of nuclear physics"
-    }, {
-      "count": 2,
-      "keyword": "Hooke\u2019s law"
-    }, {
-      "count": 1,
-      "keyword": "special relativity"
-    }, {
-      "count": 1,
-      "keyword": "drag"
-    }, {
-      "count": 2,
-      "keyword": "normal force"
-    }, {
-      "count": 1,
-      "keyword": "position"
-    }, {
-      "count": 2,
-      "keyword": "kinetic friction"
-    }, {
-      "count": 2,
-      "keyword": "Model"
-    }, {
-      "count": 2,
-      "keyword": "Physics"
-    }, {
-      "count": 2,
-      "keyword": "stress"
-    }, {
-      "count": 1,
-      "keyword": "shear deformation"
-    }, {
-      "count": 2,
-      "keyword": "Meter"
-    }, {
-      "count": 2,
-      "keyword": "Second"
-    }, {
-      "count": 1,
-      "keyword": "temperature"
-    }, {
-      "count": 2,
-      "keyword": "Significant figures"
-    }, {
-      "count": 2,
-      "keyword": "physics"
-    }, {
-      "count": 8,
-      "subject": "Mathematics and Statistics"
-    }, {
-      "count": 7,
-      "subject": "Science and Technology"
+      "tag": "type",
+      "values": [{
+        "value": "Book",
+        "meta": {
+          "mediaType": "application/vnd.org.cnx.collection"
+        },
+        "count": 201
+      }, {
+        "value": "Page",
+        "meta": {
+          "mediaType": "application/vnd.org.cnx.module"
+        },
+        "count": 967
+      }]
+    }, {
+      "tag": "authorID",
+      "values": [{
+        "value": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8",
+        "meta": {
+          "website": null,
+          "surname": "Physics",
+          "suffix": null,
+          "firstname": "College",
+          "title": null,
+          "othername": null,
+          "email": "info@openstaxcollege.org",
+          "fullname": "OSC Physics Maintainer",
+          "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
+        },
+        "count": 1
+      }]
+    }, {
+      "tag": "pubYear",
+      "values": [{
+        "value": "2013",
+        "count": 15
+      }, {
+        "value": "2012",
+        "count": 90
+      }]
+    }, {
+      "tag": "subject",
+      "values": [{
+        "value": "Mathematics and Statistics",
+        "count": 151
+      }, {
+        "value": "Science and Technology",
+        "count": 72
+      }]
+    }, {
+      "tag": "keyword",
+      "values": [{
+        "value": "Accuracy",
+        "count": 2
+      }, {
+        "value": "Approximation",
+        "count": 2
+      }, {
+        "value": "Drag",
+        "count": 1
+      }]
     }]
   }
 }
