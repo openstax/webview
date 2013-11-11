@@ -99,7 +99,7 @@ module.exports = (grunt) ->
         options:
           strictPropertyOrder: false
           noOverqualifying: false
-        src: ['src/**/*.less', '!src/scripts/pages/app/app.less'] # Don't lint bootstrap
+        src: ['src/**/*.less', '!src/styles/main.less'] # Don't lint bootstrap
 
     # Dist
     # ----

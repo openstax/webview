@@ -1,47 +1,37 @@
 <h3>How to Reuse &amp; Attribute This Content</h3>
 
 <p>
-  If you derive a copy of this content using a Connexions account and publish your version,
-  proper attribution of the original work will be automatically done for you.
+  <span>© {{date revised}}</span>
+  <span>{{#each currentPage.authors}}<span class="name">{{fullname}}</span>{{/each}}.</span>
+  <span>Textbook content produced by
+    <span>{{#each currentPage.authors}}<span class="name">{{fullname}}</span>{{/each}}</span>
+    is licensed under a <a href="{{currentPage.url}}">Creative Commons
+    {{currentPage.license.name}} {{currentPage.license.version}}</a> license.
+  </span>
 </p>
-
 <p>
-  If you reuse this work elsewhere, in order to comply with the attribution requirements of
-  the license (<a href="{{currentPage.url}}">{{currentPage.license.code}} {{currentPage.license.version}}</a>),
-  you must include:
+  <span>Under this license, any user of this textbook or the textbook contents herein must provide proper attribution as follows:</span>
 </p>
 
-<dl>
-  <dt>Authors' Names:</dt>
-    <dd>
-      {{#each currentPage.authors}}
-        {{fullname}}
-      {{/each}}
-    </dd>
-  <dt>Title of the Work:</dt>
-    <dd>{{currentPage.title}}</dd>
-  <dt>Connexions URL (where the work can be found):</dt>
-    <dd>http://cnx.org/content/{{currentPage.id}}@{{currentPage.version}}</dd>
-</dl>
-
-<p>See the citation section below for examples you can copy.</p>
-
-<hr />
-
-<h3>How to Cite &amp; Attribute This Content</h3>
-
-<p>
-  The following citation styles comply with the attribution requirements for the license
-  (<a href="{{currentPage.url}}">{{currentPage.license.code}} {{currentPage.license.version}}</a>) of this work:
-</p>
-
-<div class="citation">
-  <div class="source">
-    <strong>American Chemical Society (ACS) Style Guide:</strong>
-  </div>
-  <div class="style">
-    <span>{{#each currentPage.authors}}<span class="name">{{fullname}}</span>{{/each}}.</span>
-    <span>{{currentPage.title}}, Connexions Web site. </span>
-    <span>http://cnx.org/content/{{id}}@{{version}}, {{date revised}}.</span>
-  </div>
-</div>
+<ul>
+  <li>
+    If you redistribute this textbook in a print format,
+    then you must include on every physical page the following attribution:<br />
+    "Download for free at http://cnx.org/content/{{id}}@{{version}}."
+  </li>
+  <li>
+    If you redistribute part of this textbook, then you must retain in every
+    digital format page view (including but not limited to EPUB, PDF, and HTML)
+    and on every physical printed page the following attribution:<br />
+    "Download for free at http://cnx.org/content/{{id}}@{{version}}."
+  </li>
+  <li>
+    If you use this textbook as a bibliographic reference,
+    then you should cite it as follows:
+    <div class="citation">
+      <span>{{#each currentPage.authors}}<span class="name">{{fullname}}</span>{{/each}}, </span>
+      <span>{{currentPage.title}}. OpenStaxCNX. </span>
+      <span>{{date revised}} http://cnx.org/content/{{id}}@{{version}}.</span>
+    </div>
+  </li>
+</ul>
