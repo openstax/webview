@@ -132,10 +132,6 @@ module.exports = (grunt) ->
               'cs!pages/content/content'
               'cs!pages/search/search'
             ]
-            excludeShallow: [
-              'less/less-builder'
-              'less/lessc'
-            ]
             exclude: ['coffee-script', 'less/normalize']
           }]
 
