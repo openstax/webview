@@ -46,10 +46,6 @@
 
     // # Packages
     packages: [{
-      name: 'css',
-      location: '../../bower_components/require-css',
-      main: 'css'
-    }, {
       name: 'less',
       location: '../../bower_components/require-less',
       main: 'less'
