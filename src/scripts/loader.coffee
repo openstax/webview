@@ -5,6 +5,7 @@ define (require) ->
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics') # Setup Analytics Handler
   require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
+  require('less!bootstrapLESS')
   require('less!../styles/main')
 
   # The root URI prefixed on all non-external AJAX and Backbone URIs

@@ -121,23 +121,18 @@ module.exports = (grunt) ->
           # CSS Base points to project root for bower_components (https://github.com/jrburke/r.js/issues/412)
           cssBase: '../../'
 
+          paths:
+            'bootstrapLESS': '../../bower_components/bootstrap/less/bootstrap'
+
           stubModules: ['cs']
           modules: [{
             name: 'main'
-            create: true
             include: [
-              'css'
-              'main'
               'cs!pages/home/home'
               'cs!pages/content/content'
               'cs!pages/search/search'
             ]
-            excludeShallow: [
-              'css/css-builder'
-              'less/lessc-server'
-              'less/lessc'
-            ]
-            exclude: ['coffee-script']
+            exclude: ['coffee-script', 'less/normalize']
           }]
 
           done: (done, output) ->

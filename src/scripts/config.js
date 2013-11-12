@@ -22,6 +22,7 @@
 
       // ## UI Libraries
       // Boostrap Plugins
+      bootstrapLESS: '../bower_components/bootstrap/less/bootstrap', // Root URL for LESS is '../'
       bootstrapAffix: '../../bower_components/bootstrap/js/affix',
       bootstrapAlert: '../../bower_components/bootstrap/js/alert',
       bootstrapButton: '../../bower_components/bootstrap/js/button',
@@ -46,10 +47,6 @@
 
     // # Packages
     packages: [{
-      name: 'css',
-      location: '../../bower_components/require-css',
-      main: 'css'
-    }, {
       name: 'less',
       location: '../../bower_components/require-less',
       main: 'less'
