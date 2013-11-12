@@ -124,20 +124,16 @@ module.exports = (grunt) ->
           stubModules: ['cs']
           modules: [{
             name: 'main'
-            create: true
             include: [
-              'css'
-              'main'
               'cs!pages/home/home'
               'cs!pages/content/content'
               'cs!pages/search/search'
             ]
             excludeShallow: [
-              'css/css-builder'
-              'less/lessc-server'
+              'less/less-builder'
               'less/lessc'
             ]
-            exclude: ['coffee-script']
+            exclude: ['coffee-script', 'less/normalize']
           }]
 
           done: (done, output) ->
