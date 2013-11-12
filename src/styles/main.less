@@ -1,3 +1,4 @@
+@import "/bower_components/bootstrap/less/bootstrap.less"; // Bootstrap
 @import "./variables.less";
 
 // Limit the site to a max width of 960px
@@ -40,14 +41,18 @@ h5 {
   font-weight: bold;
 }
 
-a {
-  color: @link-color;
+//
+// Background colors
+//
 
-  &:hover, &:focus {
-    color: @link-hover-color;
-  }
+.primary {
+  background-color: @brand-primary;
+}
 
-  &:active {
-    color: @link-active-color;
-  }
+.secondary {
+  background-color: @brand-secondary;
+}
+
+.highlight {
+  background-color: @brand-highlight;
 }
