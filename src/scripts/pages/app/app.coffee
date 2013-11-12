@@ -2,7 +2,6 @@ define (require) ->
   $ = require('jquery')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./app-template')
-  require('less!./app')
 
   return class AppView extends BaseView
     el: 'body'
