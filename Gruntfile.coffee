@@ -118,9 +118,6 @@ module.exports = (grunt) ->
           preserveLicenseComments: false
           skipDirOptimize: true
           optimize: 'uglify2'
-          # CSS Base points to project root for bower_components (https://github.com/jrburke/r.js/issues/412)
-          cssBase: '../../'
-
           stubModules: ['cs']
           modules: [{
             name: 'main'
