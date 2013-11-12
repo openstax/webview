@@ -93,7 +93,9 @@ define (require) ->
     fetchPage: () ->
       page = @get('currentPage')
       page.fetch
-        success: () -> page.loaded = true
+        success: () =>
+          page.loaded = true
+          @trigger('changePage')
 
     setPage: (num) ->
       if num < 1 then num = 1
@@ -105,6 +107,7 @@ define (require) ->
       @get('currentPage')?.set('active', false)
       @set('currentPage', page)
       page.set('active', true)
+      @trigger('changePage')
 
       if not page.loaded
         @fetchPage()
