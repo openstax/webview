@@ -22,6 +22,7 @@
 
       // ## UI Libraries
       // Boostrap Plugins
+      bootstrapLESS: '../bower_components/bootstrap/less/bootstrap',
       bootstrapAffix: '../../bower_components/bootstrap/js/affix',
       bootstrapAlert: '../../bower_components/bootstrap/js/alert',
       bootstrapButton: '../../bower_components/bootstrap/js/button',

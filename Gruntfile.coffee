@@ -121,6 +121,9 @@ module.exports = (grunt) ->
           # CSS Base points to project root for bower_components (https://github.com/jrburke/r.js/issues/412)
           cssBase: '../../'
 
+          paths:
+            'bootstrapLESS': '../../bower_components/bootstrap/less/bootstrap'
+
           stubModules: ['cs']
           modules: [{
             name: 'main'
