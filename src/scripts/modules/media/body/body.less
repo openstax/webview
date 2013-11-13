@@ -70,60 +70,77 @@
   .exercise,
   .note {
     margin: 30px 6rem 0 6rem;
-    background-color: @gray-lightest;
 
-    > .title {
-      padding: 0.1em 1em;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: @gray;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    > header {
+      border-bottom: 1px solid @gray;
 
-      &::before {
-        content: ""; // Override content below if desired
-        margin-right: 10px;
-      }
+      > .title {
+        display: inline-block;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
 
-      + * {
-        border-top: 1px solid @gray;
-        clear: left;
+        &::before {
+          content: ""; // Override content below if desired
+          margin-right: 10px;
+        }
       }
     }
-    
-    > * {
+
+    > section {
       padding: 5px 15px;
+      background-color: @gray-lightest;
     }
   }
 
-  .example > .title::before {
+  .example,
+  .exercise {
+    > header {
+      border-bottom: 1px solid @gray;
+
+      > .title {
+        padding: 0.1em 1em;
+        font-weight: bold;
+        color: @gray-lightest;
+        background-color: @gray;
+      }
+    }
+  }
+
+  .example > header > .title::before {
     content: "Example:";
   }
 
-  .exercise > .title::before {
+  .exercise > header > .title::before {
     content: "Exercise:";
   }
 
-  .note > .title::before {
+  .note > header > .title::before {
     content: "Note:";
   }
 
   .note {
     padding: 15px;
+    background-color: @gray-lightest;
 
-    > .title {
-      display: inline-block;
-      padding: 0;
-      font-weight: normal;
-      border-bottom: 1px solid;
+    > header {
+      border-bottom: none;
 
-      + * {
-        border-top: none;
+      > .title {
+        padding: 0;
+        font-weight: normal;
+        border-bottom: 1px solid;
+        color: @gray;
+        background-color: none;
       }
     }
   }
 
   .exercise, .example {
+    header {
+      border-bottom: 1px solid @gray;
+    }
+
     &[data-type=check-understanding] .title::before {
       margin-right: 0;
       content: "";
@@ -145,10 +162,6 @@
         letter-spacing: 1px;
       }
 
-      .problem {
-        border-top: none;
-      }
-
       .problem::before {
         content: "Problem";
       }
@@ -158,14 +171,11 @@
       }
     }
 
-    .title {
-      float: left;
-      background-color: @gray;
-      color: @gray-lightest;
-    }
-
     .problem, .solution {
       padding: 0.5em 1em;
+    }
+
+    .solution {
       border-top: 1px solid @gray;
     }
   }
