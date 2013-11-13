@@ -4,6 +4,14 @@ define (require) ->
 
   SEARCH_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/search"
 
+  FILTER_NAMES = {
+    "authorID": "Author"
+    "keyword": "Keyword"
+    "type": "Type"
+    "pubYear": "Publication Date"
+    "subject": "Subject"
+  }
+
   return class SearchResults extends Backbone.Model
     url: () -> "#{SEARCH_URI}#{@query}"
 
@@ -25,7 +33,10 @@ define (require) ->
 
       authors = new Backbone.Collection()
       _.each response.results.limits, (limit) ->
-        if limit.author then authors.add(limit.author)
+        limit.name = FILTER_NAMES[limit.tag]
+
+        if limit.tag is 'authorID'
+          authors.add(_.map limit.values, (value) -> value.meta)
 
       _.each response.results.items, (item) ->
         _.each item.authors, (author, index) ->
