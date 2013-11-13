@@ -21,6 +21,13 @@ define (require) ->
       $body = $('<div>' + response.content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>')
       $body.children('.title').eq(0).remove()
       $body.children('.abstract').eq(0).remove()
+
+      # Wrap title and content elements in header and section elements, respectively
+      $body.find('.example, .exercise, .note').each (index, el) ->
+        $el = $(el)
+        $el.children(':not(.title)').wrapAll('<section>')
+        $el.children('.title').wrap('<header>')
+
       response.content = $body.html()
 
       return response
