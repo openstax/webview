@@ -9,16 +9,6 @@
   padding: 40px 0;
   counter-reset: figure;
 
-  > section,
-  > figure,
-  > p,
-  > .abstract,
-  > table {
-    &:first-child {
-      margin-top: 0 !important; // Ensure first element has no top margin
-    }
-  }
-
   h1,
   h2,
   h3,
@@ -29,14 +19,60 @@
     color: @gray-dark;
   }
 
+  p {
+    margin: 10px 0 0;
+    color: @gray;
+  }
+
+  > section,
+  > figure,
+  > p,
+  > .abstract,
+  > table {
+    &:first-child {
+      margin-top: 0 !important; // Ensure first element has no top margin
+    }
+  }
+
   > section,
   > figure {
     margin-top: 60px;
   }
 
-  p {
-    margin: 10px 0 0;
+  section > section,
+  section > figure {
+    margin-top: 30px;
+  }
+
+  figure {
+    display: table;
+    width: 100%;
     color: @gray;
+    counter-increment: figure;
+
+    > figcaption {
+      display: table-caption;
+      padding: 10px;
+      font-size: 1.3rem;
+      caption-side: bottom;
+
+      &::before {
+        margin-right: 5px;
+        color: @gray-medium;
+        font-weight: bold;
+        content: "Figure " counter(figure) ".";
+      }
+    }
+
+    > .media {
+      display: block;
+      margin: 0;
+      text-align: center;
+    }
+
+    > figure {
+      display: table-cell;
+    }
   }
 
   .footnote {
@@ -53,7 +89,6 @@
       margin: 15px 0 0 0;
 
       &::after {
-        content: "Abstract";
         position: absolute;
         top: 15px;
         left: 15px;
@@ -62,6 +97,7 @@
         color: @gray;
         text-transform: uppercase;
         letter-spacing: 1px;
+        content: "Abstract";
       }
     }
   }
@@ -106,6 +142,15 @@
       }
     }
 
+    .problem,
+    .solution {
+      padding: 0.5em 1em;
+    }
+
+    .solution {
+      border-top: 1px solid @gray;
+    }
+
     &[data-type=check-understanding] .title::before {
       margin-right: 0;
       content: "";
@@ -134,15 +179,6 @@
       .solution::before {
         content: "Solution"
       }
-    }
-
-    .problem,
-    .solution {
-      padding: 0.5em 1em;
-    }
-
-    .solution {
-      border-top: 1px solid @gray;
     }
   }
 
@@ -173,34 +209,6 @@
 
   .note > header > .title::before {
     content: "Note:";
-  }
-
-  figure {
-    color: @gray;
-    counter-increment: figure;
-
-    > figcaption {
-      padding: 10px;
-      font-size: 1.3rem;
-
-      &::before {
-        margin-right: 5px;
-        color: @gray-medium;
-        font-weight: bold;
-        content: "Figure " counter(figure) ".";
-      }
-    }
-
-    > .media {
-      display: block;
-      margin: 0;
-      text-align: center;
-    }
-  }
-
-  section > section,
-  section > figure {
-    margin-top: 30px;
   }
 
   //
