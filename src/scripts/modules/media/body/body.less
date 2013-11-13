@@ -44,12 +44,17 @@
     margin-top: 30px;
   }
 
+  > figure,
+  :not(figure) > figure {
+    counter-increment: figure;
+    counter-reset: subfigure;
+  }
+
   figure {
     display: table;
     table-layout: fixed;
     width: 100%;
     color: @gray;
-    counter-increment: figure;
 
     > figcaption {
       display: table-caption;
@@ -73,6 +78,13 @@
 
     > figure {
       display: table-cell;
+      counter-increment: subfigure;
+
+      &::after {
+        display: block;
+        text-align: center;
+        content: counter(figure) counter(subfigure, lower-alpha);
+      }
     }
   }
 
