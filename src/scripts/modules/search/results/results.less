@@ -12,8 +12,13 @@
     .info {
       .make-xs-column(9);
 
-      tbody {
-        word-break: break-all;
+      table {
+        table-layout: fixed;
+        overflow: hidden;
+
+        tbody {
+          word-wrap: break-word;
+        }
       }
     }
   }
