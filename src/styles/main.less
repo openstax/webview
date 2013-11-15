@@ -1,5 +1,6 @@
 @import "/bower_components/bootstrap/less/bootstrap.less"; // Bootstrap
 @import "./variables.less";
+@import "./mixins-app.less";
 
 // Limit the site to a max width of 960px
 html {
@@ -55,4 +56,63 @@ h5 {
 
 .highlight {
   background-color: @brand-highlight;
+}
+
+//
+// Buttons
+//
+
+.btn {
+  .button-variant(white; @brand-secondary);
+}
+
+.btn-plain {
+  .button-variant(@gray-dark; white);
+  border: 1px solid @gray-dark;
+}
+
+.btn-primary {
+  .button-variant(white; @brand-primary);
+}
+
+.circle {
+  display: inline-block;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+//
+// Social buttons
+//
+
+.mail {
+  .social-button();
+}
+
+.facebook {
+  .social-button("images/social/facebook.png");
+  background-size: 0.9rem 2rem;
+}
+
+.twitter {
+  .social-button("images/social/twitter.png");
+}
+
+.google {
+  .social-button("images/social/google.png");
+  background-position: 0 0.5rem;
+  background-size: 2.4rem 2.4rem;
+}
+
+.linkedin {
+  .social-button("images/social/linkedin.png");
+  background-size: 60%;
+  background-position: 50% 45%;
+}
+
+.pinterest {
+  .social-button("images/social/pinterest.png");
+  background-size: 50%;
 }
