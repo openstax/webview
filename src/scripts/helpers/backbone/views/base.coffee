@@ -16,8 +16,7 @@ define (require) ->
 
     appendAs: (type, view) ->
       @$el = @parent.$el
-      if @el
-        @$el = @parent.$el.find(@el)
+      if @el then @$el = @parent.$el.find(@el)
       view.parent = @parent
       @views ?= []
       @views.push(view)
