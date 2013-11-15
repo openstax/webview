@@ -5,9 +5,7 @@ define (require) ->
   settings = require('cs!settings')
 
   class Region
-    constructor: (el, parent) ->
-      @parent = parent
-      @el = el
+    constructor: (@el, @parent) ->
 
     show: (view) ->
       @empty()
@@ -17,7 +15,9 @@ define (require) ->
       @appendAs('div', view)
 
     appendAs: (type, view) ->
-      @$el = @parent.$el.find(@el)
+      @$el = @parent.$el
+      if @el
+        @$el = @parent.$el.find(@el)
       view.parent = @parent
       @views ?= []
       @views.push(view)
@@ -40,9 +40,11 @@ define (require) ->
       _.each _.keys(regions), (region) =>
         @[region] = new Region(regions[region], $context)
 
+      # Add a self-referential region to attach views to
+      @self = new Region(null, $context)
+
   return class BaseView extends Backbone.View
     initialize: () ->
-      @_popovers = []
       @regions = new Regions(@regions, @)
 
     _renderDom: (data) ->
@@ -71,7 +73,6 @@ define (require) ->
 
     render: () ->
       @onBeforeRender?()
-      @detachPopovers()
       @_render()
       @onRender?()
       if @_rendered then @onDomRefresh?() else @_rendered = true
@@ -84,14 +85,7 @@ define (require) ->
       _.each @regions, (region) ->
         region.close()
 
-      @detachPopovers()
       @remove()
       @unbind()
       delete @[key] for key of @
       return @
-
-    detachPopovers: () ->
-      @_popovers.pop().close() while @_popovers?.length
-
-    attachPopover: (popover) ->
-      @_popovers.push popover
