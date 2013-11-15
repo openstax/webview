@@ -20,6 +20,9 @@ define (require) ->
         }
 
       return {currentPage: currentPage}
+    
+    regions:
+      'button': '.info .btn'
 
     events:
       'click .summary h5': 'toggleSummary'
@@ -29,9 +32,9 @@ define (require) ->
       @listenTo(@model, 'changePage', @render)
 
     onRender: () ->
-      @attachPopover new BookPopoverView
+      @regions.button.append new BookPopoverView
+        model: @model
         owner: @$el.find('.info .btn')
-        model: @model.toJSON()
 
     toggleSummary: (e) ->
       $summary = @$el.find('.summary')
