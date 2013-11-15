@@ -26,6 +26,8 @@ The `dist` directory containing the built site will be added to the root `webvie
 
 #### Hosting
 
+**For Development:** Simply install [nginx](http://nginx.org/) and run `grunt nginx:start`.
+
 1. Update settings in `src/scripts/settings.coffee` if necessary to, for example, include
 the correct Google Analytics ID, and to point to wherever `cnxarchive` is being hosted.
 
