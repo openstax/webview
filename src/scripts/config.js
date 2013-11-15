@@ -20,7 +20,9 @@
       // ## MathJax
       mathjax: 'http://cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=MML_HTMLorMML',
 
-      // ## UI Libraries
+      // ## UI Libraries and Helpers
+      tooltip: 'helpers/backbone/views/attached/tooltip/tooltip',
+      popover: 'helpers/backbone/views/attached/popover/popover',
       // Boostrap Plugins
       bootstrapAffix: '../../bower_components/bootstrap/js/affix',
       bootstrapAlert: '../../bower_components/bootstrap/js/alert',
