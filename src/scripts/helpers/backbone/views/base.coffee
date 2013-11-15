@@ -51,8 +51,7 @@ define (require) ->
 
     # Update page title
     updateTitle: () ->
-      if @pageTitle
-        document.title = settings.titlePrefix + @pageTitle
+      document.title = settings.titlePrefix + @pageTitle if @pageTitle
 
     _render: () ->
       data = @model?.toJSON() or @collection?.toJSON() or {}
