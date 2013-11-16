@@ -21,9 +21,7 @@ define (require) ->
       @$owner = $(options.owner)
 
     onShow: () ->
-      events = @parent.events or {}
-      events[@trigger] = () => @toggle()
-      @parent.delegateEvents(events)
+      @$owner.on "#{@trigger}.#{@type}", () => @toggle()
 
     toggle: () ->
       @reposition()
@@ -34,16 +32,25 @@ define (require) ->
 
       switch @placement
         when 'top'
-          console.log 'top'
+          $container.css
+            'top': @$owner.offset().top + @$owner.outerHeight()
+            'left': 'auto'
+            'right': $(document).outerWidth(true) - (@$owner.offset().left + @$owner.outerWidth())
         when 'right'
-          console.log 'right'
+          $container.css
+            'top': @$owner.offset().top + @$owner.outerHeight()
+            'left': 'auto'
+            'right': $(document).outerWidth(true) - (@$owner.offset().left + @$owner.outerWidth())
         when 'bottom'
           $container.css
             'top': @$owner.offset().top + @$owner.outerHeight()
             'left': 'auto'
             'right': $(document).outerWidth(true) - (@$owner.offset().left + @$owner.outerWidth())
         when 'left'
-          console.log 'left'
+          $container.css
+            'top': @$owner.offset().top + @$owner.outerHeight()
+            'left': 'auto'
+            'right': $(document).outerWidth(true) - (@$owner.offset().left + @$owner.outerWidth())
 
     onBeforeClose: () ->
-      @parent.delegateEvents(@parent.events)
+      @$owner.off "#{@trigger}.#{@type}"
