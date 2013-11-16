@@ -33,24 +33,23 @@ define (require) ->
       switch @placement
         when 'top'
           $container.css
-            'top': @$owner.offset().top + @$owner.outerHeight()
+            'top': Math.floor(@$owner.offset().top - @$el.children('.popover').outerHeight())
             'left': 'auto'
-            'right': $(document).outerWidth(true) - (@$owner.offset().left + @$owner.outerWidth())
+            'right': Math.floor($(document).outerWidth(true) - (@$owner.offset().left + @$owner.outerWidth()))
         when 'right'
           $container.css
-            'top': @$owner.offset().top + @$owner.outerHeight()
-            'left': 'auto'
-            'right': $(document).outerWidth(true) - (@$owner.offset().left + @$owner.outerWidth())
+            'top': Math.floor(@$owner.offset().top)
+            'left': Math.floor(@$owner.offset().left + @$owner.outerWidth())
         when 'bottom'
           $container.css
-            'top': @$owner.offset().top + @$owner.outerHeight()
+            'top': Math.floor(@$owner.offset().top + @$owner.outerHeight())
             'left': 'auto'
-            'right': $(document).outerWidth(true) - (@$owner.offset().left + @$owner.outerWidth())
+            'right': Math.floor($(document).outerWidth(true) - (@$owner.offset().left + @$owner.outerWidth()))
         when 'left'
           $container.css
-            'top': @$owner.offset().top + @$owner.outerHeight()
+            'top': Math.floor(@$owner.offset().top)
             'left': 'auto'
-            'right': $(document).outerWidth(true) - (@$owner.offset().left + @$owner.outerWidth())
+            'right': Math.floor($(document).outerWidth(true) - @$owner.offset().left)
 
     onBeforeClose: () ->
       @$owner.off "#{@trigger}.#{@type}"
