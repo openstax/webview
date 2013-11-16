@@ -20,7 +20,7 @@ define (require) ->
         }
 
       return {currentPage: currentPage}
-
+    
     regions:
       'button': '.info .btn'
 
@@ -34,7 +34,7 @@ define (require) ->
     onRender: () ->
       @regions.button.append new BookPopoverView
         model: @model
-        owner: @
+        owner: @$el.find('.info .btn')
 
     toggleSummary: (e) ->
       $summary = @$el.find('.summary')
