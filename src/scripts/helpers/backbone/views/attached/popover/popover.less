@@ -3,11 +3,14 @@
   border-radius: 0;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
 
-  > .arrow {
+  &.bottom > .arrow {
+    top: -7px;
+    left: 100%;
     border: none;
 
     &::after {
       border-width: 6px;
+      border-top-width: 0;
     }
   }
 }

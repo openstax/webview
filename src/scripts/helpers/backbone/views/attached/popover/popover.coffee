@@ -5,3 +5,7 @@ define (require) ->
 
   return class Popover extends Tooltip
     containerTemplate: template
+
+    type: 'popover'
+    trigger: 'click'
+    placement: 'bottom'

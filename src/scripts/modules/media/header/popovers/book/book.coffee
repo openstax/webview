@@ -6,3 +6,7 @@ define (require) ->
   return class BookPopoverView extends Popover
     template: template
     placement: 'bottom'
+
+    initialize: () ->
+      super(arguments...)
+      @listenTo(@model, 'changePage change:downloads change:currentPage.downloads', @render)
