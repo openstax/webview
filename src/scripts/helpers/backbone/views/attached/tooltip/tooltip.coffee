@@ -21,11 +21,24 @@ define (require) ->
       @$owner = $(options.owner)
 
     onShow: () ->
-      @$owner.on "#{@trigger}.#{@type}.#{@cid}", () => @toggle()
+      switch @trigger
+        when 'click'
+          @$owner.on "click.#{@type}.#{@cid}", () => @toggle()
+        when 'hover'
+          @$owner.on "mouseenter.#{@type}.#{@cid}", () => @show()
+          @$owner.on "mouseleave.#{@type}.#{@cid}", () => @hide()
+
+    show: () ->
+      @reposition()
+      @$el.children(".#{@type}").show().addClass('in')
+
+    hide: () ->
+      @reposition()
+      @$el.children(".#{@type}").hide().removeClass('in')
 
     toggle: () ->
       @reposition()
-      @$el.children('.popover').toggle()
+      @$el.children(".#{@type}").toggle().toggleClass('in')
 
     reposition: () ->
       $container = @$el.children(".#{@type}")
@@ -52,4 +65,6 @@ define (require) ->
             'right': Math.floor($(document).outerWidth(true) - @$owner.offset().left)
 
     onBeforeClose: () ->
-      @$owner.off "#{@trigger}.#{@type}.#{@cid}"
+      @$owner.off "click.#{@type}.#{@cid}"
+      @$owner.off "mouseenter.#{@type}.#{@cid}"
+      @$owner.off "mouseleave.#{@type}.#{@cid}"
