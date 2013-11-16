@@ -18,18 +18,18 @@ define (require) ->
 
     initialize: (options = {}) ->
       super()
-      @owner = options.owner
+      @$owner = $(options.owner)
 
-      events = @owner.events or {}
+    onShow: () ->
+      events = @parent.events or {}
       events[@trigger] = () => @toggle()
-      @owner.delegateEvents(events)
+      @parent.delegateEvents(events)
 
     toggle: () ->
       @reposition()
       @$el.children('.popover').toggle()
 
     reposition: () ->
-      $owner = @$el.parent()
       $container = @$el.children(".#{@type}")
 
       switch @placement
@@ -39,8 +39,11 @@ define (require) ->
           console.log 'right'
         when 'bottom'
           $container.css
-            'top': $owner.offset().top + $owner.outerHeight()
+            'top': @$owner.offset().top + @$owner.outerHeight()
             'left': 'auto'
-            'right': $(document).outerWidth(true) - ($owner.offset().left + $owner.outerWidth())
+            'right': $(document).outerWidth(true) - (@$owner.offset().left + @$owner.outerWidth())
         when 'left'
           console.log 'left'
+
+    onBeforeClose: () ->
+      @parent.delegateEvents(@parent.events)
