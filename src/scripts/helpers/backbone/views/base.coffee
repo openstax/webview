@@ -4,6 +4,9 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('cs!settings')
 
+  cleanObject = (obj) ->
+    delete obj[key] for key of obj
+
   class Region
     constructor: (@el, @parent) ->
 
@@ -21,6 +24,7 @@ define (require) ->
       @views ?= []
       @views.push(view)
       view.setElement($("<#{type}>").appendTo(@$el)).render()
+      view.onShow()
 
     empty: () ->
       _.each @views, (view) ->
@@ -32,7 +36,7 @@ define (require) ->
 
     close: () ->
       @empty()
-      delete @[key] for key of @
+      cleanObject()
 
   class Regions
     constructor: (regions = {}, $context) ->
@@ -70,20 +74,25 @@ define (require) ->
       @_renderDom(data)
 
     render: () ->
-      @onBeforeRender?()
+      @onBeforeRender()
       @_render()
-      @onRender?()
+      @onRender()
       if @_rendered then @onDomRefresh?() else @_rendered = true
 
       return @
 
+    onShow: () -> # noop
+    onBeforeRender: () -> # noop
+    onRender: () -> # noop
+    onBeforeClose: () -> # noop
+
     close: () ->
-      @onBeforeClose?()
+      @onBeforeClose()
 
       _.each @regions, (region) ->
         region.close()
 
       @remove()
       @unbind()
-      delete @[key] for key of @
+      cleanObject()
       return @
