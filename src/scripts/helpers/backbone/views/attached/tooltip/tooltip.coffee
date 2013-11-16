@@ -5,7 +5,7 @@ define (require) ->
   require('less!helpers/backbone/views/attached/tooltip/tooltip')
 
   # Close tooltips and popovers when clicking outside of them
-  $(document).click () ->
+  $(document).on 'click', ':not(a)', () ->
     $('.popover, .tooltip').hide().removeClass('in')
 
   return class Tooltip extends BaseView
@@ -26,7 +26,7 @@ define (require) ->
       @$owner = $(options.owner)
 
     stopPropagation: (e) ->
-      e.stopPropagation()
+      e.stopPropagation() if e.target.localName isnt 'a'
 
     onShow: () ->
       # Don't close due to clicks on this element
@@ -40,16 +40,16 @@ define (require) ->
           @$owner.on "mouseleave.#{@type}.#{@cid}", (e) => @hide(e)
 
     show: (e) ->
-      e.stopPropagation()
+      @stopPropagation(e)
       @reposition()
       @$el.children(".#{@type}").show().addClass('in')
 
     hide: (e) ->
-      e.stopPropagation()
+      @stopPropagation(e)
       @$el.children(".#{@type}").hide().removeClass('in')
 
     toggle: (e) ->
-      e.stopPropagation()
+      @stopPropagation(e)
       @reposition()
       @$el.children(".#{@type}").toggle().toggleClass('in')
 
