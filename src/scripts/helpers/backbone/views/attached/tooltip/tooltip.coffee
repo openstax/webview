@@ -1,7 +1,12 @@
 define (require) ->
+  $ = require('jquery')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!helpers/backbone/views/attached/tooltip/tooltip-template')
   require('less!helpers/backbone/views/attached/tooltip/tooltip')
+
+  # Close tooltips and popovers when clicking outside of them
+  $(document).click () ->
+    $('.popover, .tooltip').hide().removeClass('in')
 
   return class Tooltip extends BaseView
     containerTemplate: template
@@ -20,23 +25,31 @@ define (require) ->
       super()
       @$owner = $(options.owner)
 
+    stopPropagation: (e) ->
+      e.stopPropagation()
+
     onShow: () ->
+      # Don't close due to clicks on this element
+      @$el.on "click.#{@type}.#{@cid}", @stopPropagation
+
       switch @trigger
         when 'click'
-          @$owner.on "click.#{@type}.#{@cid}", () => @toggle()
+          @$owner.on "click.#{@type}.#{@cid}", (e) => @toggle(e)
         when 'hover'
-          @$owner.on "mouseenter.#{@type}.#{@cid}", () => @show()
-          @$owner.on "mouseleave.#{@type}.#{@cid}", () => @hide()
+          @$owner.on "mouseenter.#{@type}.#{@cid}", (e) => @show(e)
+          @$owner.on "mouseleave.#{@type}.#{@cid}", (e) => @hide(e)
 
-    show: () ->
+    show: (e) ->
+      e.stopPropagation()
       @reposition()
       @$el.children(".#{@type}").show().addClass('in')
 
-    hide: () ->
-      @reposition()
+    hide: (e) ->
+      e.stopPropagation()
       @$el.children(".#{@type}").hide().removeClass('in')
 
-    toggle: () ->
+    toggle: (e) ->
+      e.stopPropagation()
       @reposition()
       @$el.children(".#{@type}").toggle().toggleClass('in')
 
@@ -65,6 +78,7 @@ define (require) ->
             'right': Math.floor($(document).outerWidth(true) - @$owner.offset().left)
 
     onBeforeClose: () ->
+      @$el.off "click.#{@type}.#{@cid}"
       @$owner.off "click.#{@type}.#{@cid}"
       @$owner.off "mouseenter.#{@type}.#{@cid}"
       @$owner.off "mouseleave.#{@type}.#{@cid}"
