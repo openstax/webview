@@ -21,7 +21,7 @@ define (require) ->
       @$owner = $(options.owner)
 
     onShow: () ->
-      @$owner.on "#{@trigger}.#{@type}", () => @toggle()
+      @$owner.on "#{@trigger}.#{@type}.#{@cid}", () => @toggle()
 
     toggle: () ->
       @reposition()
@@ -52,4 +52,4 @@ define (require) ->
             'right': Math.floor($(document).outerWidth(true) - @$owner.offset().left)
 
     onBeforeClose: () ->
-      @$owner.off "#{@trigger}.#{@type}"
+      @$owner.off "#{@trigger}.#{@type}.#{@cid}"
