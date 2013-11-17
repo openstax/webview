@@ -9,7 +9,6 @@ define (require) ->
     template: template
     templateHelpers: () ->
       currentPage = @model.get('currentPage')
-      hasDownloads = _.isArray(@model.get 'downloads') or _.isArray(currentPage?.get('downloads'))
 
       if currentPage
         currentPage = currentPage.toJSON()
@@ -21,7 +20,14 @@ define (require) ->
           authors: []
         }
 
-      return {currentPage: currentPage, hasDownloads: hasDownloads}
+      downloads = @model.get('downloads')
+      pageDownloads = currentPage?.get?('downloads')
+
+      return {
+        currentPage: currentPage
+        hasDownloads: (_.isArray(downloads) and downloads?.length) or
+          (_.isArray(pageDownloads) and pageDownloads?.length)
+      }
 
     regions:
       'button': '.info .btn'
