@@ -3,11 +3,13 @@
 
   <div class="info">
     <div>
-      {{#is type 'book'}}
-        <button class="btn">Get This Book!</button>
-      {{else}}
-        <button class="btn">Get This Module!</button>
-      {{/is}}
+      {{#if hasDownloads}}
+        {{#is type 'book'}}
+          <button class="btn">Get This Book!</button>
+        {{else}}
+          <button class="btn">Get This Module!</button>
+        {{/is}}
+      {{/if}}
     </div>
     {{#if currentPage.authors.length}}
       <span>Module by:</span>

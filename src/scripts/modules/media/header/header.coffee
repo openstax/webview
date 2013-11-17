@@ -1,4 +1,5 @@
 define (require) ->
+  _ = require('underscore')
   BaseView = require('cs!helpers/backbone/views/base')
   BookPopoverView = require('cs!./popovers/book/book')
   template = require('hbs!./header-template')
@@ -8,6 +9,7 @@ define (require) ->
     template: template
     templateHelpers: () ->
       currentPage = @model.get('currentPage')
+      hasDownloads = _.isArray(@model.get 'downloads') or _.isArray(currentPage?.get('downloads'))
 
       if currentPage
         currentPage = currentPage.toJSON()
@@ -19,8 +21,8 @@ define (require) ->
           authors: []
         }
 
-      return {currentPage: currentPage}
-    
+      return {currentPage: currentPage, hasDownloads: hasDownloads}
+
     regions:
       'button': '.info .btn'
 
@@ -29,7 +31,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'changePage', @render)
+      @listenTo(@model, 'change:downloads changePage', @render)
 
     onRender: () ->
       @regions.button.append new BookPopoverView
