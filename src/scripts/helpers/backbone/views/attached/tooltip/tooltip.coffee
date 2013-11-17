@@ -25,12 +25,9 @@ define (require) ->
       super()
       @$owner = $(options.owner)
 
-    stopPropagation: (e) ->
-      e.stopPropagation() if e.target.localName isnt 'a'
-
     onShow: () ->
       # Don't close due to clicks on this element
-      @$el.on "click.#{@type}.#{@cid}", @stopPropagation
+      @$el.on "click.#{@type}.#{@cid}", (e) -> e.stopPropagation(e)
 
       switch @trigger
         when 'click'
@@ -40,16 +37,16 @@ define (require) ->
           @$owner.on "mouseleave.#{@type}.#{@cid}", (e) => @hide(e)
 
     show: (e) ->
-      @stopPropagation(e)
+      e.stopPropagation(e)
       @reposition()
       @$el.children(".#{@type}").show().addClass('in')
 
     hide: (e) ->
-      @stopPropagation(e)
+      e.stopPropagation(e)
       @$el.children(".#{@type}").hide().removeClass('in')
 
     toggle: (e) ->
-      @stopPropagation(e)
+      e.stopPropagation(e)
       @reposition()
       @$el.children(".#{@type}").toggle().toggleClass('in')
 
