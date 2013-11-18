@@ -4,10 +4,11 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('cs!settings')
 
+  cleanObject = (obj) ->
+    delete obj[key] for key of obj
+
   class Region
-    constructor: (el, parent) ->
-      @parent = parent
-      @el = el
+    constructor: (@el, @parent) ->
 
     show: (view) ->
       @empty()
@@ -17,11 +18,13 @@ define (require) ->
       @appendAs('div', view)
 
     appendAs: (type, view) ->
-      @$el = @parent.$el.find(@el)
+      @$el = @parent.$el
+      if @el then @$el = @parent.$el.find(@el)
       view.parent = @parent
       @views ?= []
       @views.push(view)
       view.setElement($("<#{type}>").appendTo(@$el)).render()
+      view.onShow()
 
     empty: () ->
       _.each @views, (view) ->
@@ -33,16 +36,18 @@ define (require) ->
 
     close: () ->
       @empty()
-      delete @[key] for key of @
+      cleanObject()
 
   class Regions
     constructor: (regions = {}, $context) ->
       _.each _.keys(regions), (region) =>
         @[region] = new Region(regions[region], $context)
 
+      # Add a self-referential region to attach views to
+      @self = new Region(null, $context)
+
   return class BaseView extends Backbone.View
     initialize: () ->
-      @_popovers = []
       @regions = new Regions(@regions, @)
 
     _renderDom: (data) ->
@@ -50,8 +55,7 @@ define (require) ->
 
     # Update page title
     updateTitle: () ->
-      if @pageTitle
-        document.title = settings.titlePrefix + @pageTitle
+      document.title = settings.titlePrefix + @pageTitle if @pageTitle
 
     _render: () ->
       data = @model?.toJSON() or @collection?.toJSON() or {}
@@ -70,28 +74,26 @@ define (require) ->
       @_renderDom(data)
 
     render: () ->
-      @onBeforeRender?()
-      @detachPopovers()
+      @onBeforeRender()
       @_render()
-      @onRender?()
-      if @_rendered then @onDomRefresh?() else @_rendered = true
+      @onRender()
+      if @_rendered then @onDomRefresh() else @_rendered = true
 
       return @
 
+    onShow: () -> # noop
+    onBeforeRender: () -> # noop
+    onRender: () -> # noop
+    onDomRefresh: () -> # noop
+    onBeforeClose: () -> # noop
+
     close: () ->
-      @onBeforeClose?()
+      @onBeforeClose()
 
       _.each @regions, (region) ->
         region.close()
 
-      @detachPopovers()
       @remove()
       @unbind()
-      delete @[key] for key of @
+      cleanObject()
       return @
-
-    detachPopovers: () ->
-      @_popovers.pop().close() while @_popovers?.length
-
-    attachPopover: (popover) ->
-      @_popovers.push popover

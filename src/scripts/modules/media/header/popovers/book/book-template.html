@@ -5,23 +5,27 @@
     <p>{{! Copy}}</p>
   </div>
 
-  <div class="download-collection">
-    <h5>Download Collection:</h5>
-    <ul>
-      <li><a href="#">PDF</a></li>
-      <li><a href="#">EPUB</a></li>
-      <li><a href="#">Other</a></li>
-    </ul>
-  </div>
+  {{#if downloads}}
+    <div class="download-collection">
+      <h5>Download Collection:</h5>
+      <ul>
+        {{#each downloads}}
+          <li><a href="{{path}}" target="_blank">{{format}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
 
-  <div>
-    <h5>Download Module:</h5>
-    <ul>
-      <li><a href="#">PDF</a></li>
-      <li><a href="#">EPUB</a></li>
-      <li><a href="#">Other</a></li>
-    </ul>
-  </div>
+  {{#if currentPage.downloads}}
+    <div class="download-module">
+      <h5>Download Module:</h5>
+      <ul>
+        {{#each currentPage.downloads}}
+          <li><a href="{{path}}" target="_blank">{{format}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
 
   {{#if buyLink}}
     <a href="{{buyLink}}" class="btn order">Order Printed Collection</a>

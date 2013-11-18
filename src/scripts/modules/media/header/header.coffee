@@ -1,4 +1,5 @@
 define (require) ->
+  _ = require('underscore')
   BaseView = require('cs!helpers/backbone/views/base')
   BookPopoverView = require('cs!./popovers/book/book')
   template = require('hbs!./header-template')
@@ -19,19 +20,29 @@ define (require) ->
           authors: []
         }
 
-      return {currentPage: currentPage}
+      downloads = @model.get('downloads')
+      pageDownloads = currentPage?.get?('downloads')
+
+      return {
+        currentPage: currentPage
+        hasDownloads: (_.isArray(downloads) and downloads?.length) or
+          (_.isArray(pageDownloads) and pageDownloads?.length)
+      }
+
+    regions:
+      'button': '.info .btn'
 
     events:
       'click .summary h5': 'toggleSummary'
 
     initialize: () ->
       super()
-      @listenTo(@model, 'changePage', @render)
+      @listenTo(@model, 'change:downloads changePage', @render)
 
     onRender: () ->
-      @attachPopover new BookPopoverView
+      @regions.button.append new BookPopoverView
+        model: @model
         owner: @$el.find('.info .btn')
-        model: @model.toJSON()
 
     toggleSummary: (e) ->
       $summary = @$el.find('.summary')
