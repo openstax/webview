@@ -7,6 +7,14 @@ module.exports = (grunt) ->
   grunt.initConfig
     pkg: pkg
 
+    # Development nginx server
+    # ----
+    # Start with `grunt nginx:start`
+    nginx:
+      options:
+        config: 'nginx.development.conf'
+        prefix: './'
+
     # Lint
     # ----
 
