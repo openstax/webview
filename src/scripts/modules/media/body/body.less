@@ -163,6 +163,23 @@
 
     .solution {
       border-top: 1px solid @gray;
+      // Pointer is not in the `:before` because the whole solution is clickable
+      cursor: pointer;
+
+      // The Show/Hide Solution text
+      &::before {
+        display: block;
+        text-align: center;
+        font-weight: bold;
+      }
+      &:not(.js-visible) {
+        &::before { content: '[Show Solution]'; }
+        // Hide the actual solution
+        > .js-solution-wrapper { display: none; }
+      }
+      &.js-visible {
+        &::before { content: '[Hide Solution]'; }
+      }
     }
 
     &[data-type=check-understanding] .title::before {
@@ -191,7 +208,7 @@
       }
 
       .solution::before {
-        content: "Solution"
+        content: "Solution";
       }
     }
   }
