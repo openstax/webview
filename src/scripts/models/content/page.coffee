@@ -31,7 +31,10 @@ define (require) ->
       # Wrap solutions in a div so "Show/Hide Solutions" work
       $body.find('.solution')
       .wrapInner('<section class="ui-body">')
-      .prepend('<div class="ui-toggle-wrapper"><button class="btn-link ui-toggle" title="Show/Hide Solution"></button></div>')
+      .prepend('''
+        <div class="ui-toggle-wrapper">
+          <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
+        </div>''')
 
       response.content = $body.html()
 
