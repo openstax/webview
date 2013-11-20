@@ -161,24 +161,27 @@
       padding: 0.5em 1em;
     }
 
+    // Exercise Solutions contain a button to toggle showing or hiding the solution
     .solution {
       border-top: 1px solid @gray;
-      // Pointer is not in the `:before` because the whole solution is clickable
-      cursor: pointer;
 
       // The Show/Hide Solution text
-      &::before {
-        display: block;
+      > .ui-toggle-wrapper {
         text-align: center;
-        font-weight: bold;
+
+        > button.ui-toggle {
+          text-align: center;
+          font-weight: bold;
+        }
       }
-      &:not(.js-visible) {
-        &::before { content: '[Show Solution]'; }
-        // Hide the actual solution
-        > .js-solution-wrapper { display: none; }
+
+      &:not(.ui-solution-visible) {
+        > .ui-toggle-wrapper > button.ui-toggle::before { content: '[Show Solution]'; }
+        > section { display: none; }
       }
-      &.js-visible {
-        &::before { content: '[Hide Solution]'; }
+
+      &.ui-solution-visible {
+        > .ui-toggle-wrapper > button.ui-toggle::before { content: '[Hide Solution]'; }
       }
     }
 

@@ -8,6 +8,9 @@ define (require) ->
   return class MediaBodyView extends BaseView
     template: template
 
+    events:
+      'click .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
+
     initialize: () ->
       super()
       @listenTo(@model, 'changePage', @render)
@@ -15,8 +18,6 @@ define (require) ->
     onRender: () ->
       MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
 
-      # Add a "Show/Hide Solutions" button for all Exercise Solutions
-      $solutions = @$el.find('.solution')
-      $solutions.children().wrap('<div class="js-solution-wrapper"></div>').parent()
-      $solutions.on 'click', () ->
-        $(@).toggleClass('js-visible')
+    toggleSolution: (e) ->
+      $solution = $(e.target).closest('.solution')
+      $solution.toggleClass('ui-solution-visible')
