@@ -1,50 +1,55 @@
 <h3>Metadata</h3>
 
+<div class="book-page-toggle btn-group">
+  <span class="btn {{#is media 'book'}}active{{/is}}" data-media="book">Book</span>
+  <span class="btn {{#is media 'page'}}active{{/is}}" data-media="page">Page</span>
+</div>
+
 <dl class="dl-horizontal">
   <dt>Name:</dt>
     <dd>
       <div>
-        <a href="/content/{{currentPage.id}}">{{currentPage.title}}</a>
+        <a href="/content/{{model.id}}">{{model.title}}</a>
       </div>
     </dd>
   <dt>ID:</dt>
     <dd>
-      <div>{{currentPage.id}}</div>
+      <div>{{model.id}}</div>
     </dd>
   <dt>Language:</dt>
     <dd>
       <div>
-        {{#is currentPage.languageName.native currentPage.languageName.english}}
-          {{currentPage.languageName.native}}
+        {{#is model.languageName.native model.languageName.english}}
+          {{model.languageName.native}}
         {{else}}
-          {{currentPage.languageName.native}} ({{currentPage.languageName.english}})
+          {{model.languageName.native}} ({{model.languageName.english}})
         {{/is}}
       </div>
     </dd>
   <dt>Summary:</dt>
     <dd>
-      <div>{{currentPage.abstract}}</div>
+      <div>{{model.abstract}}</div>
     </dd>
   <dt>Subject:</dt>
     <dd>
-      <div>{{currentPage.subject}}</div>
+      <div>{{model.subject}}</div>
     </dd>
   <dt>Keywords:</dt>
     <dd>
-      <div>{{currentPage.keywords}}</div>
+      <div>{{model.keywords}}</div>
     </dd>
   <dt>License:</dt>
     <dd>
       <div>
-        <a href="{{currentPage.license.url}}">
-          {{currentPage.license.name}} ({{currentPage.license.code}} {{currentPage.license.version}})
+        <a href="{{model.license.url}}">
+          {{model.license.name}} ({{model.license.code}} {{model.license.version}})
         </a>
       </div>
     </dd>
   <dt>Authors:</dt>
     <dd>
       <div>
-        {{#each currentPage.authors}}
+        {{#each model.authors}}
           <span class="name"><a href="mailto:{{email}}">{{fullname}}</a></span>
         {{/each}}
       </div>
@@ -52,7 +57,7 @@
   <dt>Copyright Holders:</dt>
     <dd>
       <div>
-        {{#each currentPage.licensors}}
+        {{#each model.licensors}}
           <span class="name"><a href="mailto:{{email}}">{{fullname}}</a></span>
         {{/each}}
       </div>
@@ -60,21 +65,21 @@
   <dt>Maintainers:</dt>
     <dd>
       <div>
-        {{#each currentPage.maintainers}}
+        {{#each model.maintainers}}
           <span class="name"><a href="mailto:{{email}}">{{fullname}}</a></span>
         {{/each}}
       </div>
     </dd>
   <dt>Latest Version:</dt>
     <dd>
-      <div>{{currentPage.version}}</div>
+      <div>{{model.version}}</div>
     </dd>
   <dt>First Publication Date:</dt>
     <dd>
-      <div>{{date currentPage.created}}</div>
+      <div>{{date model.created}}</div>
     </dd>
   <dt>Latest Revision to Collection:</dt>
     <dd>
-      <div>{{date currentPage.revised}}</div>
+      <div>{{date model.revised}}</div>
     </dd>
 </dl>

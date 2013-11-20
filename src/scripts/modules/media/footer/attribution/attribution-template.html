@@ -1,12 +1,17 @@
 <h3>How to Reuse &amp; Attribute This Content</h3>
 
+<div class="book-page-toggle btn-group">
+  <span class="btn {{#is media 'book'}}active{{/is}}" data-media="book">Book</span>
+  <span class="btn {{#is media 'page'}}active{{/is}}" data-media="page">Page</span>
+</div>
+
 <p>
   <span>© {{date revised}}</span>
-  <span>{{#each currentPage.authors}}<span class="name">{{fullname}}</span>{{/each}}.</span>
+  <span>{{#each model.authors}}<span class="name">{{fullname}}</span>{{/each}}.</span>
   <span>Textbook content produced by
-    <span>{{#each currentPage.authors}}<span class="name">{{fullname}}</span>{{/each}}</span>
-    is licensed under a <a href="{{currentPage.url}}">Creative Commons
-    {{currentPage.license.name}} {{currentPage.license.version}}</a> license.
+    <span>{{#each model.authors}}<span class="name">{{fullname}}</span>{{/each}}</span>
+    is licensed under a <a href="{{model.url}}">Creative Commons
+    {{model.license.name}} {{model.license.version}}</a> license.
   </span>
 </p>
 <p>
@@ -29,8 +34,8 @@
     If you use this textbook as a bibliographic reference,
     then you should cite it as follows:
     <div class="citation">
-      <span>{{#each currentPage.authors}}<span class="name">{{fullname}}</span>{{/each}}, </span>
-      <span>{{currentPage.title}}. Connexions. </span>
+      <span>{{#each model.authors}}<span class="name">{{fullname}}</span>{{/each}}, </span>
+      <span>{{model.title}}. Connexions. </span>
       <span>{{date revised}} http://cnx.org/content/{{id}}@{{version}}.</span>
     </div>
   </li>
