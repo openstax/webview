@@ -1,4 +1,5 @@
 define (require) ->
+  $ = require('jquery')
   Mathjax = require('mathjax')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./body-template')
@@ -7,9 +8,16 @@ define (require) ->
   return class MediaBodyView extends BaseView
     template: template
 
+    events:
+      'click .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
+
     initialize: () ->
       super()
       @listenTo(@model, 'changePage', @render)
 
     onRender: () ->
       MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
+
+    toggleSolution: (e) ->
+      $solution = $(e.currentTarget).closest('.solution')
+      $solution.toggleClass('ui-solution-visible')

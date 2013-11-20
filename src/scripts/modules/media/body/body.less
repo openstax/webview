@@ -161,8 +161,28 @@
       padding: 0.5em 1em;
     }
 
+    // Exercise Solutions contain a button to toggle showing or hiding the solution
     .solution {
       border-top: 1px solid @gray;
+
+      // The Show/Hide Solution text
+      > .ui-toggle-wrapper {
+        text-align: center;
+
+        > button.ui-toggle {
+          text-align: center;
+          font-weight: bold;
+        }
+      }
+
+      &:not(.ui-solution-visible) {
+        > .ui-toggle-wrapper > button.ui-toggle::before { content: '[Show Solution]'; }
+        > section { display: none; }
+      }
+
+      &.ui-solution-visible {
+        > .ui-toggle-wrapper > button.ui-toggle::before { content: '[Hide Solution]'; }
+      }
     }
 
     &[data-type=check-understanding] .title::before {
@@ -191,7 +211,7 @@
       }
 
       .solution::before {
-        content: "Solution"
+        content: "Solution";
       }
     }
   }
