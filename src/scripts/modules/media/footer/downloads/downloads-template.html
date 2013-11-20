@@ -1,9 +1,11 @@
 <h3>Downloads</h3>
 
-<div class="book-page-toggle btn-group">
-  <span class="btn {{#is media 'book'}}active{{/is}}" data-media="book">Book</span>
-  <span class="btn {{#is media 'page'}}active{{/is}}" data-media="page">Page</span>
-</div>
+{{#is type 'book'}}
+  <div class="book-page-toggle btn-group">
+    <span class="btn {{#is media 'book'}}active{{/is}}" data-media="book">Book</span>
+    <span class="btn {{#is media 'page'}}active{{/is}}" data-media="page">Page</span>
+  </div>
+{{/is}}
 
 {{#is model.downloads 'loading'}}
   <div class="progress progress-striped active">
