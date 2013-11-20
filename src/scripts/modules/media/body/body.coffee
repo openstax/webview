@@ -19,5 +19,5 @@ define (require) ->
       MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
 
     toggleSolution: (e) ->
-      $solution = $(e.target).closest('.solution')
+      $solution = $(e.currentTarget).closest('.solution')
       $solution.toggleClass('ui-solution-visible')
