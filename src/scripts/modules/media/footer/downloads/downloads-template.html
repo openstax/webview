@@ -1,13 +1,20 @@
 <h3>Downloads</h3>
 
-{{#is currentPage.downloads 'loading'}}
+{{#is type 'book'}}
+  <div class="book-page-toggle btn-group">
+    <span class="btn {{#is media 'book'}}active{{/is}}" data-media="book">Book</span>
+    <span class="btn {{#is media 'page'}}active{{/is}}" data-media="page">Page</span>
+  </div>
+{{/is}}
+
+{{#is model.downloads 'loading'}}
   <div class="progress progress-striped active">
     <div class="progress-bar secondary" role="progressbar" style="width: 100%">
       <span class="sr-only">Loading</span>
     </div>
   </div>
 {{else}}
-  {{#if currentPage.downloads.length}}
+  {{#if model.downloads.length}}
     <table class="table">
       <thead>
         <tr>
@@ -18,7 +25,7 @@
       </thead>
 
       <tbody>
-        {{#each currentPage.downloads}}
+        {{#each model.downloads}}
           <tr>
             <td>{{format}}</td>
             <td>

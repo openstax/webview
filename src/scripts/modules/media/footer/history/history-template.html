@@ -1,5 +1,12 @@
 <h3>Version History</h3>
 
+{{#is type 'book'}}
+  <div class="book-page-toggle btn-group">
+    <span class="btn {{#is media 'book'}}active{{/is}}" data-media="book">Book</span>
+    <span class="btn {{#is media 'page'}}active{{/is}}" data-media="page">Page</span>
+  </div>
+{{/is}}
+
 <table class="table">
   <thead>
     <tr>
@@ -9,12 +16,12 @@
       <th>Publisher:</th>
     </tr>
   </thead>
-  
+
   <tbody>
-    {{#each currentPage.history}}
+    {{#each model.history}}
       <tr>
         <td>
-          <a href="/content/{{../currentPage.id}}@{{this.version}}">{{this.version}}</a>
+          <a href="/content/{{../model.id}}@{{this.version}}">{{this.version}}</a>
         </td>
         <td>{{date this.revised}}</td>
         <td>{{this.changes}}</td>

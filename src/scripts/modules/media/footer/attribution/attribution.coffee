@@ -1,11 +1,7 @@
 define (require) ->
-  BaseView = require('cs!helpers/backbone/views/base')
+  FooterTabView = require('cs!../inherits/tab/tab')
   template = require('hbs!./attribution-template')
   require('less!./attribution')
 
-  return class AttributionView extends BaseView
+  return class AttributionView extends FooterTabView
     template: template
-
-    initialize: () ->
-      super()
-      @listenTo(@model, 'changePage', @render)

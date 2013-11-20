@@ -1,11 +1,7 @@
 define (require) ->
-  BaseView = require('cs!helpers/backbone/views/base')
+  FooterTabView = require('cs!../inherits/tab/tab')
   template = require('hbs!./history-template')
   require('less!./history')
 
-  return class HistoryView extends BaseView
+  return class HistoryView extends FooterTabView
     template: template
-
-    initialize: () ->
-      super()
-      @listenTo(@model, 'changePage', @render)

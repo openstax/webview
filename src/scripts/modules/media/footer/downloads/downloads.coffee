@@ -1,11 +1,11 @@
 define (require) ->
-  BaseView = require('cs!helpers/backbone/views/base')
+  FooterTabView = require('cs!../inherits/tab/tab')
   template = require('hbs!./downloads-template')
   require('less!./downloads')
 
-  return class DownloadsView extends BaseView
+  return class DownloadsView extends FooterTabView
     template: template
 
     initialize: () ->
       super()
-      @listenTo(@model, 'changePage change:currentPage.downloads', @render)
+      @listenTo(@model, 'change:currentPage.downloads', @render)
