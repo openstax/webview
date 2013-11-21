@@ -24,13 +24,13 @@
   <li>
     If you redistribute this textbook in a print format,
     then you must include on every physical page the following attribution:<br />
-    "Download for free at http://cnx.org/content/{{id}}@{{version}}."
+    "Download for free at http://cnx.org/content/{{model.id}}@{{model.version}}."
   </li>
   <li>
     If you redistribute part of this textbook, then you must retain in every
     digital format page view (including but not limited to EPUB, PDF, and HTML)
     and on every physical printed page the following attribution:<br />
-    "Download for free at http://cnx.org/content/{{id}}@{{version}}."
+    "Download for free at http://cnx.org/content/{{model.id}}@{{model.version}}."
   </li>
   <li>
     If you use this textbook as a bibliographic reference,
@@ -38,7 +38,7 @@
     <div class="citation">
       <span>{{#each model.authors}}<span class="name">{{fullname}}</span>{{/each}}, </span>
       <span>{{model.title}}. Connexions. </span>
-      <span>{{date revised}} http://cnx.org/content/{{id}}@{{version}}.</span>
+      <span>{{date model.revised}} http://cnx.org/content/{{model.id}}@{{model.version}}.</span>
     </div>
   </li>
 </ul>
