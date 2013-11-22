@@ -7,17 +7,17 @@ var lastReceived = new Date().getTime(),
     requestIds = [],
     startTime = new Date().getTime();
 
-var checkComplete = function() {
-  // Return after all requests are finished or after 5 seconds
-  if ((new Date().getTime() - lastReceived > 300 && requestCount === responseCount) ||
-      new Date().getTime() - startTime > 5000) {
+var checkComplete = function () {
+  // Return after all requests are finished or after 20 seconds
+  if ((new Date().getTime() - lastReceived > 1500 && requestCount === responseCount) ||
+      new Date().getTime() - startTime > 20000) {
     clearInterval(checkCompleteInterval);
     console.log(page.content);
     phantom.exit();
   }
 }
 
-page.onResourceReceived = function(response) {
+page.onResourceReceived = function (response) {
   if (requestIds.indexOf(response.id) !== -1) {
     lastReceived = new Date().getTime();
     responseCount++;
@@ -25,7 +25,7 @@ page.onResourceReceived = function(response) {
   }
 };
 
-page.onResourceRequested = function(request) {
+page.onResourceRequested = function (request) {
   if (requestIds.indexOf(request.id) === -1) {
     requestIds.push(request.id);
     requestCount++;
@@ -33,7 +33,7 @@ page.onResourceRequested = function(request) {
 };
 
 // Open the page
-page.open(system.args[1], function() {});
+page.open(system.args[1], function () {});
 
 // Check to see if the page is finished rendering
-var checkCompleteInterval = setInterval(checkComplete, 1);
+var checkCompleteInterval = setInterval(checkComplete, 100);
