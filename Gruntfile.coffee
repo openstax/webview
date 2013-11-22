@@ -11,6 +11,7 @@ module.exports = (grunt) ->
     # ----
     # Start with `grunt nginx:start`
     nginx:
+      tasks: ['nginx']
       options:
         config: 'nginx.development.conf'
         prefix: './'
