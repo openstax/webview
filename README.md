@@ -95,6 +95,17 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
         index index.html;
         try_files $uri $uri/ /index.html;
 
+        if ($args ~ "_escaped_fragment_=(.*)") {
+            set $cleanuri $uri;
+            rewrite ^ /snapshot${uri};
+        }
+        location /snapshot {
+            proxy_set_header X-Rewrite-CleanURI $cleanuri;
+            proxy_set_header X-Rewrite-URI $request_uri;
+            proxy_pass        http://localhost:3000;
+            proxy_connect_timeout  60s;
+        }
+
         location /resources/ {
             proxy_pass http://localhost:6543;
         }
