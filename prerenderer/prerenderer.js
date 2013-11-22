@@ -24,7 +24,7 @@ var getContent = function(url, callback) {
 };
 
 var respond = function (req, res) {
-  url = 'http://localhost:8181';
+  url = 'http://localhost';
   if (req.headers['x-rewrite-cleanuri']) {
     url += req.headers['x-rewrite-cleanuri'];
   }
