@@ -8,11 +8,21 @@ var lastReceived = new Date().getTime(),
     startTime = new Date().getTime();
 
 var checkComplete = function () {
+  var content = '', matches;
+
   // Return after all requests are finished or after 20 seconds
   if ((new Date().getTime() - lastReceived > 1500 && requestCount === responseCount) ||
       new Date().getTime() - startTime > 20000) {
     clearInterval(checkCompleteInterval);
-    console.log(page.content);
+
+    content = page.content;
+    matches = content.match(/<script(?:.*?)>(?:[\S\s]*?)<\/script>/gi);
+
+    for (var i = 0; matches && i < matches.length; i++) {
+      content = content.replace(matches[i], '');
+    }
+
+    console.log(content);
     phantom.exit();
   }
 }
