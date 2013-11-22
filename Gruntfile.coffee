@@ -164,6 +164,9 @@ module.exports = (grunt) ->
         flatten: true
         src: ['bower_components/bootstrap/fonts/**']
         dest: 'dist/fonts/'
+      maintenance:
+        src: 'src/maintenance.html'
+        dest: 'dist/index.html'
 
     # Clean
     clean:
@@ -251,6 +254,12 @@ module.exports = (grunt) ->
     'uglify:dist'
     'htmlmin:dist'
     'imagemin'
+  ]
+
+  # Maintenance
+  # -----
+  grunt.registerTask 'maintenance', [
+    'copy:maintenance'
   ]
 
   # Default
