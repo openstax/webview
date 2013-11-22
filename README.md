@@ -102,8 +102,8 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
         location /snapshot {
             proxy_set_header X-Rewrite-CleanURI $cleanuri;
             proxy_set_header X-Rewrite-URI $request_uri;
-            proxy_pass        http://localhost:3000;
-            proxy_connect_timeout  60s;
+            proxy_pass http://localhost:3000;
+            proxy_connect_timeout 60s;
         }
 
         location /resources/ {
