@@ -1,11 +1,6 @@
 <h3>Metadata</h3>
 
-{{#is type 'book'}}
-  <div class="book-page-toggle btn-group">
-    <span class="btn {{#is media 'book'}}active{{/is}}" data-media="book">Book</span>
-    <span class="btn {{#is media 'page'}}active{{/is}}" data-media="page">Page</span>
-  </div>
-{{/is}}
+{{> modules_media_footer_inherits_tab_toggle-partial }}
 
 <dl class="dl-horizontal">
   <dt>Name:</dt>
