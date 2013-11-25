@@ -29,16 +29,20 @@
       padding-left: 15px;
 
       > .limit {
+        display: table;
         margin: 5px 0;
+        width: 100%;
+
+        > .limit-name, > .count {
+          display: table-cell;
+        }
 
         > .limit-name {
-          display: inline-block;
-          max-width: 160px;
           overflow-wrap: break-word;
         }
 
         > .count {
-          float: right;
+          text-align: right;
         }
       }
 
@@ -60,7 +64,7 @@
             margin-right: 5px;
             content: "\25b8";
           }
-          
+
           &.less::before {
             content: "\25b4";
           }
