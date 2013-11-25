@@ -12,7 +12,9 @@
     "url": "https://github.com/Connexions/webview.git"
   },
   "dependencies": {
-    "grunt": "~0.4.1"
+    "grunt": "~0.4.2",
+    "phantomjs": "~1.9.2-4",
+    "express": "~3.4.4"
   },
   "devDependencies": {
     "grunt-contrib-requirejs": "~0.4.1",

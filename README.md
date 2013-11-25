@@ -26,15 +26,6 @@ The `dist` directory containing the built site will be added to the root `webvie
 
 #### Hosting
 
-##### For Development
-
-1. Install [nginx](http://nginx.org/)
-2. Run `grunt nginx:start` (uses `nginx.development.conf`)
-3. Point your browser to [http://localhost:8000/test](http://localhost:8000/test) for mock data
-4. If you have https://gihub.com/Connexions/cnx-archive installed, you can point your browser to [http://localhost:8000](http://localhost:8000)
-
-###### Customization Notes
-
 1. Update settings in `src/scripts/settings.coffee` if necessary to, for example, include
 the correct Google Analytics ID, and to point to wherever `cnxarchive` is being hosted.
 
@@ -95,6 +86,18 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
         index index.html;
         try_files $uri $uri/ /index.html;
 
+        # Support page prerendering for web crawlers
+        if ($args ~ "_escaped_fragment_=(.*)") {
+            set $cleanuri $uri;
+            rewrite ^ /snapshot${uri};
+        }
+        location /snapshot {
+            proxy_set_header X-Rewrite-CleanURI $cleanuri;
+            proxy_set_header X-Rewrite-URI $request_uri;
+            proxy_pass http://localhost:3000;
+            proxy_connect_timeout 60s;
+        }
+
         location /resources/ {
             proxy_pass http://localhost:6543;
         }
@@ -105,6 +108,15 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
     }
 
   ```
+
+4. Run `node prerenderer/prerenderer.js` in the command line to prerender pages for web crawlers that support 'escaped fragment'.
+
+##### Quick Development Setup
+
+1. Install [nginx](http://nginx.org/)
+2. Run `grunt nginx:start` (uses `nginx.development.conf`)
+3. Point your browser to [http://localhost:8000/test](http://localhost:8000/test) for mock data
+4. If you have https://gihub.com/Connexions/cnx-archive installed, you can point your browser to [http://localhost:8000](http://localhost:8000)
 
 #### Test Site
 
