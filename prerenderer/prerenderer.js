@@ -1,11 +1,14 @@
-var express = require('express');
-var app = express();
+var path = require('path'),
+    spawn = require('child_process').spawn,
+    express = require('express'),
+    app = express();
 
 var getContent = function(url, callback) {
-  var content = '';
+  var phantom, content = '',
+      phantomjs = path.normalize(__dirname + '/../node_modules/.bin/phantomjs');
 
   // Spawn a phantom-server.js process
-  var phantom = require('child_process').spawn('../node_modules/phantomjs/bin/phantomjs', ['phantom-server.js', url]);
+  phantom = spawn(phantomjs, ['phantom-server.js', url], {cwd: __dirname});
   phantom.stdout.setEncoding('utf8');
 
   // phantom-server.js script is simply logging the output,
@@ -17,6 +20,7 @@ var getContent = function(url, callback) {
   phantom.on('exit', function(code) {
     if (code !== 0) {
       console.log('Error');
+      console.log(code);
     } else {
       callback(content);
     }
