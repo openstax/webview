@@ -8,18 +8,18 @@ define (require) ->
   CAROUSEL_SPEED = 7000 # The rate at which a new book will be shown (in ms).
 
   return class FeaturedBooksView extends InfoBlockView
-    template: () -> template({books: featuredBooks.toJSON()})
+    template: template
+    collection: featuredBooks
     title: 'Featured Books'
 
     initialize: () ->
       super()
-      @listenTo(featuredBooks, 'reset', @render)
+      @listenTo(@collection, 'reset', @render)
 
       # Don't run any animations while the window is being resized
-      @_resizer = () =>
+      $(window).on 'resize.featuredBooks', () =>
         @stopCarousel({finish: true})
         @startCarousel()
-      $(window).resize(@_resizer)
 
     events:
       'mouseenter .books': 'stopCarousel'
@@ -87,5 +87,5 @@ define (require) ->
       @_carousel = setInterval(nextFeatured, CAROUSEL_SPEED)
 
     onBeforeClose: () ->
-      $(window).off('resize', @_resizer)
+      $(window).off('resize.featuredBooks')
       @stopCarousel()
