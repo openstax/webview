@@ -38,7 +38,7 @@ define (require) ->
 
     close: () ->
       @empty()
-      dispose()
+      dispose(@)
 
   class Regions
     constructor: (regions = {}, $context) ->
