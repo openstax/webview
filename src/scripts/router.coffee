@@ -8,6 +8,9 @@ define (require) ->
 
       # Default Route
       @route '*actions', 'default', () ->
+        @appView.render('404')
+
+      @route '', 'index', () ->
         @appView.render('home')
 
       @route 'content', 'content', () ->
