@@ -5,8 +5,7 @@ define (require) ->
   settings = require('cs!settings')
 
   dispose = (obj) ->
-    obj?.__proto__ = null
-    obj?.constructor?.prototype = null
+    obj?.__proto__ = Function
     delete obj[key] for key of obj
 
   class Region
