@@ -4,7 +4,9 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('cs!settings')
 
-  cleanObject = (obj) ->
+  dispose = (obj) ->
+    obj?.__proto__ = null
+    obj?.constructor?.prototype = null
     delete obj[key] for key of obj
 
   class Region
@@ -36,7 +38,7 @@ define (require) ->
 
     close: () ->
       @empty()
-      cleanObject()
+      dispose()
 
   class Regions
     constructor: (regions = {}, $context) ->
@@ -50,14 +52,16 @@ define (require) ->
     initialize: () ->
       @regions = new Regions(@regions, @)
 
-    _renderDom: (data) ->
-      @$el?.html(@template?(data) or @template)
+    renderDom: () ->
+      @$el?.html(@getTemplate())
 
     # Update page title
     updateTitle: () ->
       document.title = settings.titlePrefix + @pageTitle if @pageTitle
 
-    _render: () ->
+    getTemplate: () -> @template?(@getTemplateData()) or @template
+
+    getTemplateData: () ->
       data = @model?.toJSON() or @collection?.toJSON() or {}
 
       if typeof @templateHelpers is 'function'
@@ -70,8 +74,11 @@ define (require) ->
           else
             data[key] = value
 
+      return data
+
+    _render: () ->
       @updateTitle()
-      @_renderDom(data)
+      @renderDom()
 
     render: () ->
       @onBeforeRender()
@@ -93,7 +100,8 @@ define (require) ->
       _.each @regions, (region) ->
         region.close()
 
+      @off() # Remove all event listeners
       @remove()
       @unbind()
-      cleanObject()
+      dispose(@)
       return @
