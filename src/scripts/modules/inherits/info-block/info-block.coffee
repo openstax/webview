@@ -6,17 +6,12 @@ define (require) ->
   require('less!./info-block')
 
   return class InfoBlockView extends BaseView
+    _infoTemplate: template
+
     title: 'Untitled'
     link: '#'
     linkTitle: 'More'
     linkExpandedTitle: 'Less'
-
-    templateHelpers: () -> {
-      title: @title
-      link: @link
-      linkTitle: @linkTitle
-      content: @template?() or @template
-    }
 
     initialize: () ->
       super()
@@ -28,8 +23,13 @@ define (require) ->
       @events = @events or {}
       _.extend(@_events, @events)
 
-    _renderDom: (data) ->
-      @$el.html(template(data))
+    renderDom: () ->
+      @$el.html @_infoTemplate
+        title: @title
+        link: @link
+        linkTitle: @linkTitle
+        content: @getTemplate()
+
       @delegateEvents(@_events)
 
     clickMore: (e) ->
