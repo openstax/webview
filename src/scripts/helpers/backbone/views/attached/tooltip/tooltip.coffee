@@ -39,16 +39,16 @@ define (require) ->
           @$owner.on "mouseleave.#{@type}.#{@cid}", (e) => @hide(e)
 
     show: (e) ->
-      e.stopPropagation(e)
+      e.stopPropagation()
       @reposition()
       @$el.children(".#{@type}").show().addClass('in')
 
     hide: (e) ->
-      e.stopPropagation(e)
+      e.stopPropagation()
       @$el.children(".#{@type}").hide().removeClass('in')
 
     toggle: (e) ->
-      e.stopPropagation(e)
+      e.stopPropagation()
       @reposition()
       @$el.children(".#{@type}").toggle().toggleClass('in')
 
