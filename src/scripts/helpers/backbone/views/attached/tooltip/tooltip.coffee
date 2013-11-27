@@ -5,7 +5,7 @@ define (require) ->
   require('less!helpers/backbone/views/attached/tooltip/tooltip')
 
   # Close tooltips and popovers when clicking outside of them
-  $(document).on 'click', ':not(a)', () ->
+  $(document).on 'click', (e) ->
     $('.popover, .tooltip').hide().removeClass('in')
 
   return class Tooltip extends BaseView
@@ -26,6 +26,8 @@ define (require) ->
       @$owner = $(options.owner)
 
     onShow: () ->
+      @onBeforeClose() # Remove event handlers in case they were previously added
+
       # Don't close due to clicks on this element
       @$el.on "click.#{@type}.#{@cid}", (e) -> e.stopPropagation(e)
 
