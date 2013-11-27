@@ -12,13 +12,17 @@ define (require) ->
     templateHelpers: () ->
       title = @model.get('title')
 
+      # Polyfill for location.origin since IE doesn't support it
+      port = if location.port then ":#{location.port}" else ''
+      location.origin = location.origin or "#{location.protocol}//#{location.hostname}#{port}"
+
       # Set information used for social media links
       share =
         url: window.location.href
         source: 'Connexions'
         summary: @model.get('abstract') or 'An OpenStax College book.'
         title: title or 'Untitled'
-        image: @model.get('image') or "#{Backbone.history.location.origin}/images/logo.png"
+        image: @model.get('image') or "#{location.origin}/images/logo.png"
 
       # Encode all of the shared values for a URI
       _.each share, (value, key, list) ->
