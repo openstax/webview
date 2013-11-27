@@ -29,7 +29,7 @@ define (require) ->
       @onBeforeClose() # Remove event handlers in case they were previously added
 
       # Don't close due to clicks on this element
-      @$el.on "click.#{@type}.#{@cid}", (e) -> e.stopPropagation(e)
+      @$el.on "click.#{@type}.#{@cid}", (e) -> e.stopPropagation()
 
       switch @trigger
         when 'click'
