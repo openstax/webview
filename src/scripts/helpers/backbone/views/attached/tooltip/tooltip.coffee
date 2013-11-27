@@ -15,11 +15,11 @@ define (require) ->
     trigger: 'hover'
     placement: 'top'
 
-    _renderDom: (data) ->
+    renderDom: (data) ->
       @$el?.html @containerTemplate
         title: @title
         placement: @placement
-        content: @template?(data) or @template
+        content: @getTemplate()
 
     initialize: (options = {}) ->
       super()
