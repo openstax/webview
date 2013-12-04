@@ -56,9 +56,9 @@ define (require) ->
             value.displayValue = "#{author.fullname} (#{author.id})"
 
         else if limit.tag is 'type'
-           _.each limit.values, (value) ->
-             type = types.get(value.value).toJSON()
-             value.displayValue = type.name
-             value.value = type.name
+          _.each limit.values, (value) ->
+            type = types.get(value.value).toJSON()
+            value.displayValue = type.name
+            value.value = type.name
 
       return response
