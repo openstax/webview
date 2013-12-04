@@ -53,7 +53,7 @@ define (require) ->
         if limit.tag is 'authorID'
           _.each limit.values, (value) ->
             author = authors.get(value.value).toJSON()
-            value.displayValue = author.fullname
+            value.displayValue = "#{author.fullname} (#{author.id})"
 
         else if limit.tag is 'type'
            _.each limit.values, (value) ->
