@@ -2,7 +2,8 @@
   "query": {
     "sort": [],
     "limits": [{
-      "text": "physics"
+      "tag": "text",
+      "value": "physics"
     }]
   },
   "results": {
@@ -28,15 +29,6 @@
       "bodySnippet": null,
       "summarySnippet": null,
       "pubDate": "2013-07-31T19:07:20Z",
-      "title": "Physics: An Introduction",
-      "keywords": ["Classical physics", "Law", "Model", "Modern physics", "Physics", "Quantum mechanics", "Relativity", "Scientific method", "Theory"],
-      "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
-      "id": "d395b566-5fe3-4428-bcb2-19016e3aa3ce",
-      "mediaType": "Module"
-    }, {
-      "bodySnippet": null,
-      "summarySnippet": null,
-      "pubDate": "2013-07-31T19:07:20Z",
       "title": "Introduction to Science and the Realm of Physics, Physical Quantities, and Units",
       "keywords": ["Accuracy", "Approximation", "Classical physics", "Conversion factor", "Customary system", "Derived units", "English units", "Fundamental units", "Kilogram", "Law", "Meter", "Metric system", "Model", "Modern physics", "Order of magnitude", "Percent uncertainty", "Physical quantity", "Physics", "Precision", "Quantum mechanics", "Relativity", "Scientific method", "Second", "Significant figures", "SI units", "Theory", "Uncertainty", "Units"],
       "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
@@ -45,11 +37,11 @@
     }, {
       "bodySnippet": null,
       "summarySnippet": null,
-      "pubDate": "2013-07-31T19:07:22Z",
-      "title": "Approximation",
-      "keywords": ["Approximation"],
+      "pubDate": "2013-07-31T19:07:20Z",
+      "title": "Physics: An Introduction",
+      "keywords": ["Classical physics", "Law", "Model", "Modern physics", "Physics", "Quantum mechanics", "Relativity", "Scientific method", "Theory"],
       "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
-      "id": "5838b105-41cd-4c3d-a957-3ac004a48af3",
+      "id": "d395b566-5fe3-4428-bcb2-19016e3aa3ce",
       "mediaType": "Module"
     }, {
       "bodySnippet": null,
@@ -59,6 +51,24 @@
       "keywords": ["force", "friction", "kinetic friction", "magnitude", "magnitude of kinetic friction", "magnitude of static friction", "normal force", "sliding friction", "static friction"],
       "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
       "id": "ea271306-f7f2-46ac-b2ec-1d80ff186a59",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31T19:07:21Z",
+      "title": "Physical Quantities and Units",
+      "keywords": ["Conversion factor", "Customary system", "Derived units", "English units", "Fundamental units", "Kilogram", "Meter", "Metric system", "Order of magnitude", "Physical quantity", "Second", "SI units", "Units"],
+      "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
+      "id": "c8bdbabc-62b1-4a5f-b291-982ab25756d7",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31T19:07:22Z",
+      "title": "Approximation",
+      "keywords": ["Approximation"],
+      "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
+      "id": "5838b105-41cd-4c3d-a957-3ac004a48af3",
       "mediaType": "Module"
     }, {
       "bodySnippet": null,
@@ -73,46 +83,10 @@
       "bodySnippet": null,
       "summarySnippet": null,
       "pubDate": "2013-07-31T19:07:21Z",
-      "title": "Physical Quantities and Units",
-      "keywords": ["Conversion factor", "Customary system", "Derived units", "English units", "Fundamental units", "Kilogram", "Meter", "Metric system", "Order of magnitude", "Physical quantity", "Second", "SI units", "Units"],
-      "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
-      "id": "c8bdbabc-62b1-4a5f-b291-982ab25756d7",
-      "mediaType": "Module"
-    }, {
-      "bodySnippet": null,
-      "summarySnippet": null,
-      "pubDate": "2013-07-31T19:07:21Z",
       "title": "Accuracy, Precision, and Significant Figures",
       "keywords": ["Accuracy", "Percent uncertainty", "Precision", "Significant figures", "Uncertainty"],
       "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
       "id": "5152cea8-829a-4aaf-bcc5-c58a416ecb66",
-      "mediaType": "Module"
-    }, {
-      "bodySnippet": null,
-      "summarySnippet": null,
-      "pubDate": "2013-07-31T19:07:25Z",
-      "title": "Glossary of Key Symbols and Notation",
-      "keywords": [],
-      "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
-      "id": "ae3e18de-638d-4738-b804-dc69cd4db3a3",
-      "mediaType": "Module"
-    }, {
-      "bodySnippet": null,
-      "summarySnippet": null,
-      "pubDate": "2013-07-31T19:07:22Z",
-      "title": "Introduction: Further Applications of Newton\u2019s Laws",
-      "keywords": ["bulk modulus", "compression", "deformation", "drag coefficient", "drag force", "force", "friction", "Hooke\u2019s law", "kinetic friction", "length", "magnitude", "magnitude of kinetic friction", "magnitude of static friction", "motion", "normal force", "position", "shear modulus", "sliding friction", "static friction", "Stokes\u2019 law", "strain", "stress", "tension", "velocity", "Young\u2019s modulus"],
-      "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
-      "id": "24a2ed13-22a6-47d6-97a3-c8aa8d54ac6d",
-      "mediaType": "Module"
-    }, {
-      "bodySnippet": null,
-      "summarySnippet": null,
-      "pubDate": "2013-07-31T19:07:24Z",
-      "title": "Drag Forces",
-      "keywords": ["drag coefficient", "drag force", "friction", "Stokes\u2019 law", "velocity"],
-      "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
-      "id": "26346a42-84b9-48ad-9f6a-62303c16ad41",
       "mediaType": "Module"
     }, {
       "bodySnippet": null,
@@ -127,6 +101,24 @@
       "bodySnippet": null,
       "summarySnippet": null,
       "pubDate": "2013-07-31T19:07:25Z",
+      "title": "Useful Information",
+      "keywords": [],
+      "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
+      "id": "c0a76659-c311-405f-9a99-15c71af39325",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31T19:07:25Z",
+      "title": "Glossary of Key Symbols and Notation",
+      "keywords": [],
+      "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
+      "id": "ae3e18de-638d-4738-b804-dc69cd4db3a3",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31T19:07:25Z",
       "title": "Selected Radioactive Isotopes",
       "keywords": [],
       "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
@@ -135,14 +127,53 @@
     }, {
       "bodySnippet": null,
       "summarySnippet": null,
-      "pubDate": "2013-07-31T19:07:25Z",
-      "title": "Useful Information",
-      "keywords": [],
+      "pubDate": "2013-07-31T19:07:24Z",
+      "title": "Drag Forces",
+      "keywords": ["drag coefficient", "drag force", "friction", "Stokes\u2019 law", "velocity"],
       "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
-      "id": "c0a76659-c311-405f-9a99-15c71af39325",
+      "id": "26346a42-84b9-48ad-9f6a-62303c16ad41",
+      "mediaType": "Module"
+    }, {
+      "bodySnippet": null,
+      "summarySnippet": null,
+      "pubDate": "2013-07-31T19:07:22Z",
+      "title": "Introduction: Further Applications of Newton\u2019s Laws",
+      "keywords": ["bulk modulus", "compression", "deformation", "drag coefficient", "drag force", "force", "friction", "Hooke\u2019s law", "kinetic friction", "length", "magnitude", "magnitude of kinetic friction", "magnitude of static friction", "motion", "normal force", "position", "shear modulus", "sliding friction", "static friction", "Stokes\u2019 law", "strain", "stress", "tension", "velocity", "Young\u2019s modulus"],
+      "authors": ["e5a07af6-09b9-4b74-aa7a-b7510bee90b8"],
+      "id": "24a2ed13-22a6-47d6-97a3-c8aa8d54ac6d",
       "mediaType": "Module"
     }],
     "total": 15,
+    "auxiliary": {
+      "types": [{
+        "id": "application/vnd.org.cnx.collection",
+        "name": "Collection"
+      }, {
+        "id": "application/vnd.org.cnx.module",
+        "name": "Module"
+      }],
+      "authors": [{
+        "website": null,
+        "surname": null,
+        "suffix": null,
+        "firstname": "OpenStax College",
+        "title": null,
+        "othername": null,
+        "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8",
+        "fullname": "OpenStax College",
+        "email": "info@openstaxcollege.org"
+      }, {
+        "website": null,
+        "surname": "Physics",
+        "suffix": null,
+        "firstname": "College",
+        "title": null,
+        "othername": null,
+        "id": "1df3bab1-1dc7-4017-9b3a-960a87e706b1",
+        "fullname": "OSC Physics Maintainer",
+        "email": "info@openstaxcollege.org"
+      }]
+    },
     "limits": [{
       "tag": "pubYear",
       "values": [{
@@ -153,47 +184,19 @@
       "tag": "authorID",
       "values": [{
         "count": 15,
-        "meta": {
-          "website": null,
-          "surname": null,
-          "suffix": null,
-          "firstname": "OpenStax College",
-          "title": null,
-          "othername": null,
-          "email": "info@openstaxcollege.org",
-          "fullname": "OpenStax College",
-          "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
-        },
         "value": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
       }, {
         "count": 1,
-        "meta": {
-          "website": null,
-          "surname": "Physics",
-          "suffix": null,
-          "firstname": "College",
-          "title": null,
-          "othername": null,
-          "email": "info@openstaxcollege.org",
-          "fullname": "OSC Physics Maintainer",
-          "id": "1df3bab1-1dc7-4017-9b3a-960a87e706b1"
-        },
         "value": "1df3bab1-1dc7-4017-9b3a-960a87e706b1"
       }]
     }, {
       "tag": "type",
       "values": [{
         "count": 1,
-        "meta": {
-          "mediaType": "application/vnd.org.cnx.collection"
-        },
-        "value": "Book"
+        "value": "application/vnd.org.cnx.collection"
       }, {
         "count": 14,
-        "meta": {
-          "mediaType": "application/vnd.org.cnx.module"
-        },
-        "value": "Page"
+        "value": "application/vnd.org.cnx.module"
       }]
     }, {
       "tag": "keyword",
@@ -248,9 +251,6 @@
       }, {
         "count": 2,
         "value": "Derived units"
-      }, {
-        "count": 1,
-        "value": "drag"
       }, {
         "count": 2,
         "value": "drag coefficient"
@@ -435,9 +435,6 @@
         "count": 2,
         "value": "Second"
       }, {
-        "count": 1,
-        "value": "shear deformation"
-      }, {
         "count": 2,
         "value": "shear modulus"
       }, {
@@ -449,9 +446,6 @@
       }, {
         "count": 2,
         "value": "sliding friction"
-      }, {
-        "count": 1,
-        "value": "special relativity"
       }, {
         "count": 2,
         "value": "static friction"
