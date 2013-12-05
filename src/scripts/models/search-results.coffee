@@ -16,7 +16,7 @@ define (require) ->
     "text": "Text"
   }
 
-  return class SearchResults extends Backbone.Model
+  return new class SearchResults extends Backbone.Model
     url: () -> "#{SEARCH_URI}#{@query}"
 
     defaults:
@@ -26,14 +26,32 @@ define (require) ->
       results:
         items: []
         total: 0
+        auxiliary:
+          authors: []
+          types: []
 
     initialize: (options = {}) ->
       @query = options.query or ''
       @fetch
         success: () => @set('loaded', true)
 
+    load: (query) ->
+      if query isnt @query
+        # Reset search results
+        @clear().set(@defaults)
+        @set('loaded', false)
+
+        @query = query or ''
+        @fetch
+          success: () =>
+            @set('loaded', true)
+
+      return @
+
     parse: (response, options) ->
       response = super(arguments...)
+
+      response.results.auxiliary or= {}
 
       authors = new Backbone.Collection(response.results.auxiliary.authors)
       types = new Backbone.Collection(response.results.auxiliary.types)
