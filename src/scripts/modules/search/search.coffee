@@ -1,5 +1,5 @@
 define (require) ->
-  SearchResults = require('cs!models/search-results')
+  searchResults = require('cs!models/search-results')
   BaseView = require('cs!helpers/backbone/views/base')
   AdvancedSearchView = require('cs!./advanced/advanced')
   SearchResultsView = require('cs!./results/results')
@@ -14,7 +14,7 @@ define (require) ->
       super()
 
       if location.search and location.search isnt '?q='
-        @model = new SearchResults({query: location.search})
+        @model = searchResults.load(location.search)
 
     regions:
       search: '.search'
