@@ -1,26 +1,26 @@
 [{
     "title": "College Physics",
     "cover": "images/books/college_physics.png",
-    "link": "content/57f1ca2e-efd9-4142-8536-f7739d127d9b",
+    "link": "contents/57f1ca2e-efd9-4142-8536-f7739d127d9b",
     "description": "A two-semester introductory physics book that's algebra-based, grounded with real-world examples, illustrations and explanations to help students grasp key, fundamental physics concepts."
 }, {
     "title": "College Introduction to Sociology",
     "cover": "images/books/college_introduction_to_sociology.png",
-    "link": "content/30a3ada8-41a4-4ab1-ba79-d4e49b044964",
+    "link": "contents/30a3ada8-41a4-4ab1-ba79-d4e49b044964",
     "description": "A one-semester, introductory sociology course including sociology theory and research, real-world applications, simplify and debate features, and learning objectives."
 }, {
     "title": "Biology",
     "cover": "images/books/biology.png",
-    "link": "content/aa0c81ca-2246-49c2-93ff-03f31569a740",
+    "link": "contents/aa0c81ca-2246-49c2-93ff-03f31569a740",
     "description": "Biology is grounded in an evolutionary basis and includes exciting features that highlight careers in the biological sciences and everyday applications of the concepts at hand."
 }, {
     "title": "Concepts of Biology",
     "cover": "images/books/concepts_of_biology.png",
-    "link": "content/81c53958-672b-4e07-8025-535602180078",
+    "link": "contents/81c53958-672b-4e07-8025-535602180078",
     "description": "Concepts of Biology is designed for the introductory biology course for nonmajors taught at most two- and four-year colleges. The scope, sequence, and level of the program are designed to match typical course syllabi in the market."
 }, {
     "title": "Anatomy and Physiology",
     "cover": "images/books/anatomy_and_physiology.png",
-    "link": "content/12b7fdb3-23e3-48d1-adf6-7e3c8b73fa21",
+    "link": "contents/12b7fdb3-23e3-48d1-adf6-7e3c8b73fa21",
     "description": "Anatomy and Physiology is a dynamic textbook for the yearlong Human Anatomy and Physiology course taught at most two- and four-year colleges and universities to students majoring in nursing and allied health."
 }]

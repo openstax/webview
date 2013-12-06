@@ -5,10 +5,10 @@ define (require) ->
   FindContentView = require('cs!modules/find-content/find-content')
   BrowseContentView = require('cs!modules/browse-content/browse-content')
   MediaView = require('cs!modules/media/media')
-  template = require('hbs!./content-template')
-  require('less!./content')
+  template = require('hbs!./contents-template')
+  require('less!./contents')
 
-  return class ContentPage extends BaseView
+  return class ContentsPage extends BaseView
     template: template
     pageTitle: 'Content Library'
 
@@ -18,14 +18,14 @@ define (require) ->
       @page = options?.page
 
     regions:
-      content: '#content'
+      contents: '#contents'
 
     onRender: () ->
-      @parent.regions.header.show(new HeaderView({page: 'content', url: 'content'}))
-      @parent.regions.footer.show(new FooterView({page: 'content'}))
-      @regions.content.show(new FindContentView())
+      @parent.regions.header.show(new HeaderView({page: 'contents', url: 'contents'}))
+      @parent.regions.footer.show(new FooterView({page: 'contents'}))
+      @regions.contents.show(new FindContentView())
 
       if @uuid
-        @regions.content.append(new MediaView({uuid: @uuid, page: @page}))
+        @regions.contents.append(new MediaView({uuid: @uuid, page: @page}))
       else
-        @regions.content.append(new BrowseContentView())
+        @regions.contents.append(new BrowseContentView())

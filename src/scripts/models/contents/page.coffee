@@ -1,7 +1,7 @@
 define (require) ->
   $ = require('jquery')
   toc = require('cs!collections/toc')
-  Node = require('cs!models/content/node')
+  Node = require('cs!./node')
   require('backbone-associations')
 
   return class Page extends Node
