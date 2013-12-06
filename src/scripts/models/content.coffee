@@ -1,8 +1,8 @@
 define (require) ->
   Backbone = require('backbone')
   toc = require('cs!collections/toc')
-  Collection = require('cs!models/content/collection')
-  Page = require('cs!models/content/page')
+  Collection = require('cs!models/contents/collection')
+  Page = require('cs!models/contents/page')
   require('backbone-associations')
 
   MEDIA_TYPES =

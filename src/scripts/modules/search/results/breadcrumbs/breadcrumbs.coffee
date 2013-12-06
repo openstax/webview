@@ -29,12 +29,10 @@ define (require) ->
     formatQuery: (obj) ->
       format = (obj) ->
         _.map obj, (limit) ->
-          key = _.keys(limit)[0]
-
           # Values with spaces in them must have been surrounded by quote strings
-          if /\s/g.test(limit[key]) and not /"/g.test(limit[key])
-            limit[key] = "\"#{limit[key]}\""
+          if /\s/g.test(limit.value) and not /"/g.test(limit.value)
+            limit.value = "\"#{limit[key]}\""
 
-          return "#{key}:#{limit[key]}" # Limit strings are in the format `limit:value`
+          return "#{limit.tag}:#{limit.value}" # Limit strings are in the format `limit:value`
 
       return _.compact(_.flatten(format(obj))).join(' ')
