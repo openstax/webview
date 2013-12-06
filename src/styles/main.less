@@ -2,6 +2,13 @@
 @import "./variables.less";
 @import "./mixins-app.less";
 
+// Debugging: mark elements that have not been converted yet
+// FIXME: remove this once all content is converted
+.not-converted-yet {
+  background-color: #fcc;
+  border: 2px dotted #f00;
+}
+
 // Limit the site to a max width of 960px
 html {
   max-width: 960px;
