@@ -134,7 +134,7 @@ module.exports = (grunt) ->
             include: [
               'cs!pages/404/404'
               'cs!pages/home/home'
-              'cs!pages/content/content'
+              'cs!pages/contents/contents'
               'cs!pages/search/search'
             ]
             exclude: ['coffee-script', 'less/normalize']
