@@ -3,6 +3,13 @@
     <div class="remove">
       <span class="glyphicon glyphicon-remove"></span>
     </div>
-    <span class="limit">{{this.name}}</span><span class="value">{{this.value}}</span>
+    <span class="limit">{{this.name}}</span>
+    <span class="value">
+      {{#if this.displayValue}}
+        {{this.displayValue}}
+      {{else}}
+        {{this.value}}
+      {{/if}}
+    </span>
   </span>
 {{/each}}
