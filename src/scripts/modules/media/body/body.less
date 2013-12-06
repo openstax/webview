@@ -51,16 +51,12 @@
   }
 
   figure {
-    display: table;
-    table-layout: fixed;
     width: 100%;
     color: @gray;
 
     > figcaption {
-      display: table-caption;
       padding: 10px;
       font-size: 1.3rem;
-      caption-side: bottom;
 
       &::before {
         margin-right: 5px;
@@ -78,7 +74,6 @@
 
     // Subfigures
     > figure {
-      display: table-cell;
       counter-increment: subfigure;
 
       &::after {
@@ -88,6 +83,31 @@
       }
     }
   }
+
+  // By default, figures are laid out horizontally
+  // unless they have the data-orient="vertical" attribute.
+  figure:not([data-orient="vertical"]) {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+
+    > figcaption {
+      display: table-caption;
+      caption-side: bottom;
+    }
+
+    // Subfigures
+    > figure {
+      display: table-cell;
+    }
+  }
+
+
+  figure[data-orient="vertical"] {
+    // The display defaults are correct for figures and subfigures
+    // that are displayed vertically.
+  }
+
 
   .footnote {
     font-size: 1rem;
