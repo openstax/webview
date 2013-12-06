@@ -13,12 +13,12 @@ define (require) ->
       @route '', 'index', () ->
         @appView.render('home')
 
-      @route 'content', 'content', () ->
-        @appView.render('content')
+      @route 'contents', 'contents', () ->
+        @appView.render('contents')
 
       # Match and extract uuid and page numbers separated by a colon
-      @route /^content\/([^:]+):?([0-9]*)/, 'media', (uuid, page) ->
-        @appView.render('content', {uuid: uuid, page: page})
+      @route /^contents\/([^:]+):?([0-9]*)/, 'media', (uuid, page) ->
+        @appView.render('contents', {uuid: uuid, page: page})
 
       @route /^search/, 'search', () ->
         @appView.render('search')

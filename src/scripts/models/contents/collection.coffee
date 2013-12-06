@@ -1,8 +1,8 @@
 define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
-  Node = require('cs!models/content/node')
-  Page = require('cs!models/content/page')
+  Node = require('cs!./node')
+  Page = require('cs!./page')
   require('backbone-associations')
 
   return class Collection extends Node
