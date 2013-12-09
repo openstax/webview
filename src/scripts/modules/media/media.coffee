@@ -2,6 +2,7 @@ define (require) ->
   Content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
   MediaEndorsedView = require('cs!./endorsed/endorsed')
+  LatestView = require('cs!./latest/latest')
   MediaTitleView = require('cs!./title/title')
   MediaTabsView = require('cs!./tabs/tabs')
   MediaNavView = require('cs!./nav/nav')
@@ -40,6 +41,7 @@ define (require) ->
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))
+      @regions.media.append(new LatestView({model: @model}))
       @regions.media.append(new MediaTitleView({model: @model}))
       @regions.media.append(new MediaTabsView({model: @model}))
       @regions.media.append(new MediaNavView({model: @model}))
