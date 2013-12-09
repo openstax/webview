@@ -33,6 +33,6 @@ define (require) ->
       if y > maxY
         window.scrollTo(0, maxY)
 
-      route = "/content/#{router.current().params[0]}:#{page}" # Deterimine the new route
+      route = "/contents/#{router.current().params[0]}:#{page}" # Deterimine the new route
       router.navigate(route) # Update browser URL to reflect the new route
       analytics.send() # Send the analytics information for the new route
