@@ -3,7 +3,7 @@
 .media-footer > .metadata {
   position: relative;
 
-  dl {
+  > div > dl {
     margin-bottom: 0;
 
     > dt {
@@ -21,19 +21,17 @@
         border: none;
       }
 
-      div {
+      > div {
         padding: 10px 10px 10px 225px;
+
+        > ul {
+          padding: 0 0 0 15px;
+        }
+
+        > .name:not(:last-child)::after {
+          content: ",";
+        }
       }
-    }
-  }
-
-  .name {
-    &::after {
-      content: ",";
-    }
-
-    &:last-child::after {
-      content: "";
     }
   }
 }
