@@ -32,8 +32,6 @@ define (require) ->
 
     initialize: (options = {}) ->
       @query = options.query or ''
-      @fetch
-        success: () => @set('loaded', true)
 
     load: (query) ->
       if query isnt @query
