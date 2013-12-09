@@ -28,14 +28,8 @@
           padding: 0 0 0 15px;
         }
 
-        > .name {
-          &::after {
-            content: ",";
-          }
-
-          &:last-child::after {
-            content: "";
-          }
+        > .name:not(:last-child)::after {
+          content: ",";
         }
       }
     }
