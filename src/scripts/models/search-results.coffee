@@ -60,6 +60,11 @@ define (require) ->
       _.each response.query.limits, (limit) ->
         limit.name = FILTER_NAMES[limit.tag]
 
+        if limit.tag is 'authorID'
+          limit.name = 'Author ID'
+          author = authors.get(limit.value).toJSON()
+          limit.displayValue = "#{author.fullname} (#{author.id})"
+
       # Substitute author IDs in results with author objects
       _.each response.results.items, (item) ->
         _.each item.authors, (author, index) ->
