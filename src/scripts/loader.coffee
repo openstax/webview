@@ -29,7 +29,13 @@ define (require) ->
 
       if external.test(href)
         if /^((f|ht)tps?:)?\/\/(\w*\.?)cnx\.org/.test(href)
-          location.href = href
+          if document.cookie.indexOf('legacy') >= 0
+            location.href = href
+
+          # Going to the legacy site
+          else if confirm('You are now entering the legacy site. To return, use your browser\'s back button.')
+            document.cookie = "legacy; max-age=#{60*60*24*30*365*4}; path=/;"
+            location.href = href
         else
           window.open(href, '_blank')
       else if resources.test(href)
