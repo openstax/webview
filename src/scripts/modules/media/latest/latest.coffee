@@ -9,7 +9,7 @@ define (require) ->
     templateHelpers:
       url: () ->
         id = @model.get('id').split('@', 1)[0] # Remove the version from the id
-        return "#{settings.root}content/#{id}"
+        return "#{settings.root}contents/#{id}"
 
     initialize: () ->
       super()
