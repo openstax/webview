@@ -161,6 +161,9 @@ module.exports = (grunt) ->
       dist:
         src: 'bower_components/requirejs/require.js'
         dest: 'dist/scripts/require.js'
+      maintenance:
+        src: 'src/maintenance.html'
+        dest: 'dist/maintenance.html'
       fonts:
         expand: true
         filter: 'isFile'
@@ -210,6 +213,7 @@ module.exports = (grunt) ->
           collapseWhitespace: true
         files:
           'dist/index.html': 'dist/index.html'
+          'dist/maintenance.html': 'dist/maintenance.html'
 
     # Imagemin
     imagemin:
@@ -248,6 +252,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'dist', [
     'requirejs'
     'copy:dist'
+    'copy:maintenance'
     'copy:fonts'
     'targethtml:dist'
     'clean'
@@ -261,6 +266,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'default', [
     'requirejs'
     'copy:dist'
+    'copy:maintenance'
     'copy:fonts'
     'targethtml:dist'
     'clean'
