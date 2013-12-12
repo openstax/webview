@@ -14,11 +14,12 @@
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.9);
 
-  > .logo, > .links {
+  > a > .logo,
+  > .links {
     display: inline-block;
   }
 
-  > .logo {
+  > a > .logo {
     position: absolute;
     bottom: (@header-height - @logo-height)/2; // center the logo vertically
     width: @logo-width;
