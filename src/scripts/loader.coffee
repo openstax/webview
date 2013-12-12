@@ -6,6 +6,7 @@ define (require) ->
   analytics = require('cs!helpers/handlers/analytics') # Setup Analytics Handler
   require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
   require('less!../styles/main')
+  require('bootstrapModal')
 
   # The root URI prefixed on all non-external AJAX and Backbone URIs
   root = settings.root
@@ -29,13 +30,12 @@ define (require) ->
 
       if external.test(href)
         if /^((f|ht)tps?:)?\/\/(\w*\.?)cnx\.org/.test(href)
+          # Going to the legacy site
           if document.cookie.indexOf('legacy') >= 0
             location.href = href
-
-          # Going to the legacy site
-          else if confirm('You are now entering the legacy site. To return, use your browser\'s back button.')
-            document.cookie = "legacy; max-age=#{60*60*24*30*365*4}; path=/;"
-            location.href = href
+          else
+            $('#legacy-modal').data('href', href) # Hack to pass href to legacy modal
+            $('#legacy-modal').modal()
         else
           window.open(href, '_blank')
       else if resources.test(href)

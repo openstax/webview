@@ -81,6 +81,10 @@
         text-align: center;
         content: counter(figure) counter(subfigure, lower-alpha);
       }
+
+      > figcaption::before {
+        content: "Figure " counter(figure)counter(subfigure,lower-alpha)".";
+      }
     }
   }
 
