@@ -8,6 +8,13 @@ define (require) ->
 
   return class TocNodeView extends BaseView
     template: template
+    templateHelpers: () ->
+      book = @model.get('book').toJSON()
+      # Ensure the version number is appended to the book id
+      if book.id.indexOf('@') is -1
+        book.id = "#{book.id}@#{book.version}"
+      return {book: book}
+
     tagName: 'li'
     itemViewContainer: '.subcollection'
 
