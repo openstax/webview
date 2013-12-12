@@ -1,5 +1,6 @@
 define (require) ->
   Backbone = require('backbone')
+  settings = require('cs!settings')
   AppView = require('cs!pages/app/app')
 
   return new class Router extends Backbone.Router
@@ -18,6 +19,7 @@ define (require) ->
 
       # Match and extract uuid and page numbers separated by a colon
       @route /^contents\/([^:]+):?([0-9]*)/, 'media', (uuid, page) ->
+        uuid = settings.shortcodes[uuid] if settings.shortcodes[uuid]
         @appView.render('contents', {uuid: uuid, page: page})
 
       @route /^search/, 'search', () ->
