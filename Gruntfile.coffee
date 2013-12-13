@@ -109,6 +109,9 @@ module.exports = (grunt) ->
           strictPropertyOrder: false
           noOverqualifying: false
           noIDs: false
+          # Universal selectors should **ONLY** be used for debug messages
+          # (see body.less)
+          noUniversalSelectors: false
         src: ['src/**/*.less', '!src/styles/main.less'] # Don't lint bootstrap
 
     # Dist
