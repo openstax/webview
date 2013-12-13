@@ -45,9 +45,6 @@ define (require) ->
       response = @parseInfo(response)
       type = response.type = MEDIA_TYPES[response.mediaType]
 
-      # Keep the id with the desired version number included
-      delete response.id
-
       # Only setup a toc for a book
       if type isnt 'book' then return response
 
