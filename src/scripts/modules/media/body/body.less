@@ -156,50 +156,6 @@
 
   #list {
 
-    .style(@list-style; @attr-value; @style-type) { }
-    .style(bulleted;      @attr-value; @style-type) {
-      &[data-bullet-style="@{attr-value}"] { list-style-type: @style-type; }
-    }
-    .style(enumerated;    @attr-value; @style-type) {
-      &[data-number-style="@{attr-value}"] { list-style-type: @style-type; }
-    }
-
-    // Only applicable to bulleted lists
-    .bulleted-char(block; @attr-value; @char) {
-      &[data-bullet-style="@{attr-value}"] {
-        list-style-type: none;
-        > li::before {
-          content: @char;
-          margin-right: 0.5em;
-        }
-      }
-    }
-    .bulleted-char(block; @attr-value; none) {
-      &[data-bullet-style="@{attr-value}"] {
-        list-style-type: none;
-      }
-    }
-    .bulleted-char(inline; @attr-value; @char) {
-      &[data-bullet-style="@{attr-value}"] {
-        > .item::before {
-          content: @char;
-          margin-right: 0.5em;
-        }
-      }
-    }
-    .bulleted-char(inline; @attr-value; none) {
-      &[data-bullet-style="@{attr-value}"] {
-      }
-    }
-
-
-    // For debugging, show NOT_IMPLEMENTED_YET for anything else
-    .bulleted-catchall() {
-      &[data-bullet-style]:not([data-bullet-style='bullet']):not([data-bullet-style='open-circle']):not([data-bullet-style='pilcrow']):not([data-bullet-style='rpilcrow']):not([data-bullet-style='section']):not([data-bullet-style='asterisk']):not([data-bullet-style='dash']):not([data-bullet-style='none']) {
-        &::before { .x-not-implemented('data-bullet-style=CUSTOM'); }
-      }
-    }
-
     // Item separators are so far only supported for inline lists
     .item-sep(block)  {
       // If data-item-sep occurs on a block list then show an error
@@ -216,6 +172,56 @@
         .x-not-implemented('data-item-sep=CUSTOM');
       }
     }
+
+    // Use the browser `list-style-type:` for some bulleted lists and all numbered lists
+    // NOTE: Inline lists cannot use this and need to "emulate" this.
+    .browser-style(@list-style;   @attr-value; @style-type) { }
+    .browser-style(bulleted;      @attr-value; @style-type) {
+      &[data-bullet-style="@{attr-value}"] { list-style-type: @style-type; }
+    }
+    .browser-style(enumerated;    @attr-value; @style-type) {
+      &[data-number-style="@{attr-value}"] { list-style-type: @style-type; }
+    }
+
+    // Create a `::before` element and use the bulleted char for bullets
+    // not supportd by the browser (most, but not all).
+    .bulleted-char(block; @attr-value; @char) {
+      &[data-bullet-style="@{attr-value}"] {
+        list-style-type: none;
+        > li::before {
+          content: @char;
+          margin-right: 0.5em;
+        }
+      }
+    }
+    // For Block lists with `none`, skip the pseudoelement
+    .bulleted-char(block; @attr-value; none) {
+      &[data-bullet-style="@{attr-value}"] {
+        list-style-type: none;
+      }
+    }
+    .bulleted-char(inline; @attr-value; @char) {
+      &[data-bullet-style="@{attr-value}"] {
+        // Note: since this is inline, the `li` is actually a `span.item`
+        > .item::before {
+          content: @char;
+          margin-right: 0.5em;
+        }
+      }
+    }
+    // For Inline lists with `none`, skip the pseudoelement
+    .bulleted-char(inline; @attr-value; none) {
+      &[data-bullet-style="@{attr-value}"] {
+      }
+    }
+
+    // For debugging, show NOT_IMPLEMENTED_YET for anything else
+    .bulleted-catchall() {
+      &[data-bullet-style]:not([data-bullet-style='bullet']):not([data-bullet-style='open-circle']):not([data-bullet-style='pilcrow']):not([data-bullet-style='rpilcrow']):not([data-bullet-style='section']):not([data-bullet-style='asterisk']):not([data-bullet-style='dash']):not([data-bullet-style='none']) {
+        &::before { .x-not-implemented('data-bullet-style=CUSTOM'); }
+      }
+    }
+
 
     .inner(@display; @list-type) {
       // This mixin applies to all display and list-types
@@ -240,9 +246,9 @@
       .bulleted-catchall();
     }
     .inner(block; bulleted) {
-      // Use the browser to display some of the bullets and "emulate" the rest
-      .style(bulleted; 'bullet';       disc);
-      .style(bulleted; 'open-circle';  circle);
+      // Use the browser to display these bullet types
+      .browser-style(bulleted; 'bullet';       disc);
+      .browser-style(bulleted; 'open-circle';  circle);
     }
     .inner(inline; bulleted) {
       // "emulate" all the bullets because inline lists are spans
@@ -252,11 +258,11 @@
 
     .inner(block; enumerated) {
       // Use the browser to display the numbering
-      .style(enumerated; 'arabic';      decimal);
-      .style(enumerated; 'upper-alpha'; upper-alpha);
-      .style(enumerated; 'lower-alpha'; lower-alpha);
-      .style(enumerated; 'upper-roman'; upper-roman);
-      .style(enumerated; 'lower-roman'; lower-roman);
+      .browser-style(enumerated; 'arabic';      decimal);
+      .browser-style(enumerated; 'upper-alpha'; upper-alpha);
+      .browser-style(enumerated; 'lower-alpha'; lower-alpha);
+      .browser-style(enumerated; 'upper-roman'; upper-roman);
+      .browser-style(enumerated; 'lower-roman'; lower-roman);
     }
 
     .inner(inline; enumerated) {
