@@ -29,21 +29,3 @@ define (require) ->
     navigate: () ->
       super(arguments...)
       @trigger('navigate')
-
-    # Helper function to determine the current route's parameters
-    current: () ->
-      routes = []
-      params = null
-
-      # Find the route matching the current URL
-      _.each Backbone.history.handlers, (handler) -> routes.push(handler.route)
-      matched = _.find routes, (route) -> route.test(Backbone.history.fragment)
-
-      # Determine the matching route parameters
-      if matched then params = @_extractParameters(matched, Backbone.history.fragment)
-
-      return {
-        regex: matched
-        fragment: Backbone.history.fragment
-        params: params
-      }
