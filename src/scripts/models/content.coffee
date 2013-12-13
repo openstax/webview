@@ -116,7 +116,7 @@ define (require) ->
 
     getPreviousPage: () ->
       page = @get('page')
-      if page isnt 1 then --page
+      if page > 1 then --page
       return page
 
     nextPage: () ->
