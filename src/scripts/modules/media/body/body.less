@@ -11,9 +11,7 @@
 
 // For content with labels we have not converted yet try to show
 .x-not-implemented(@msg) when (@DEBUG-NOT-IMPLEMENTED) {
-  content: @msg ' NOT_IMPLEMENTED_YET';
-  border: 1px dashed black;
-  background-color: pink;
+  content: '[' @msg ' NOT_IMPLEMENTED_YET' ']';
 }
 
 // Mark unimplemented custom labels
@@ -335,45 +333,111 @@
     }
   }
 
-  .example,
-  .exercise,
-  .note {
-    margin: 30px 6rem 0 6rem;
 
-    > header {
-      border-bottom: 1px solid @gray;
+  // --------------------------------
+  // Blockish things (note, example, exercise)
+  // --------------------------------
 
-      > .title {
-        display: inline-block;
-        font-size: 1.5rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+  // Slots for various blockish pieces of content (things with a label, title, and body)
+  // This **ONLY** contains rules, no selectors.
+  #blockish {
 
-        &::before {
-          content: ""; // Override content below if desired
-          margin-right: 10px;
-        }
-      }
-    }
+    // Slot descriptions:
+    //
+    // - `@type` can be something like `note`, `exercise`, `example`, etc
+    // - `.style()` : styling for the blockish element
+    // - `.default-label()` : the default text if there is no custom label
+    // - `.label()` : styling for the label part
+    // - `.title()` : styling for the title (if there is one since they are optional)
+    // - `.body()` : styling for the rest
+    .style(@type) { }
+    .default-label(@type) { }
+    .label(@type) { display: inline-block; }
+    .title(@type) { display: inline-block; }
+    .body(@type) { }
 
-    > section {
-      padding: 5px 15px;
+
+    // Style the note
+    .style(note) {
+      margin: 30px 6rem 0 6rem;
+      padding: 15px;
       background-color: @gray-lightest;
     }
+    .default-label(note) { content: 'Note'; }
+    .label(note) { .title(note); } // Style the label the same as the title
+    .title(note) {
+      color: @gray;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .body(note) {
+      padding: 5px 15px;
+      border-top: 1px solid @gray;
+      background-color: @gray-lightest;
+    }
+
+    // Style the example
+    .default-label(example) { content: 'Example'; }
+    .label(example) {
+      padding-top: 0.1em;
+      padding-bottom: 0.1em;
+      padding-left: 1em;
+      font-weight: bold;
+      color: @gray-lightest;
+      background-color: @gray;
+    }
+    .title(example) {
+      padding-top: 0.1em;
+      padding-bottom: 0.1em;
+      padding-right: 1em;
+      font-weight: bold;
+      color: @gray-lightest;
+      background-color: @gray;
+    }
+    // Style the body of an example the same as a note
+    .body(example) { .body(note); }
+
+    //Style the exercise the same as an example
+    .default-label(exercise) { content: 'Exercise'; }
+    .label(exercise) { .label(example); }
+    .title(exercise) { .title(example); }
+    .body(exercise)  { .body(example); }
+
   }
+
+  // Skeleton for constructing the blockish elements
+  // This contains all the selectors for the styling
+
+  // Helper mixin for expanding all the selectors
+  .make-block(@type) {
+    #blockish>.style(@type);
+
+    // Style the label (using the default if none is provided)
+    &:not([data-label])::before { #blockish>.default-label(@type); }
+    &[data-label]::before       { content: attr(data-label); }
+    // Put a colon between the label and title if there is a label and a title.
+    &:not([data-label='']) > header > .title::before {
+      content: ': ';
+    }
+
+    // Style the title (if one exists)
+    &::before { #blockish>.label(@type); }
+    > header {
+      display: inline-block; // For the pseudo-element to fall in to the left
+      > .title { #blockish>.title(@type); }
+    }
+    > section { #blockish>.body(@type); }
+  }
+
+  .note     { .make-block(note); }
+  .example  { .make-block(example); }
+  .exercise { .make-block(exercise); }
+
+
 
   .example,
   .exercise {
-    > header {
-      border-bottom: 1px solid @gray;
-
-      > .title {
-        padding: 0.1em 1em;
-        font-weight: bold;
-        color: @gray-lightest;
-        background-color: @gray;
-      }
-    }
 
     .problem,
     .solution {
@@ -434,35 +498,6 @@
         content: "Solution";
       }
     }
-  }
-
-  .note {
-    padding: 15px;
-    background-color: @gray-lightest;
-
-    > header {
-      border-bottom: none;
-
-      > .title {
-        padding: 0;
-        font-weight: normal;
-        border-bottom: 1px solid;
-        color: @gray;
-        background-color: none;
-      }
-    }
-  }
-
-  .example > header > .title::before {
-    content: "Example:";
-  }
-
-  .exercise > header > .title::before {
-    content: "Exercise:";
-  }
-
-  .note > header > .title::before {
-    content: "Note:";
   }
 
   //
