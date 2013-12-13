@@ -1,7 +1,5 @@
 define (require) ->
   $ = require('jquery')
-  router = require('cs!router')
-  analytics = require('cs!helpers/handlers/analytics')
   linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./nav-template')
