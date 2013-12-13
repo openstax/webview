@@ -165,7 +165,7 @@
     }
 
     // Only applicable to bulleted lists
-    .char(block; @attr-value; @char) {
+    .bulleted-char(block; @attr-value; @char) {
       &[data-bullet-style="@{attr-value}"] {
         list-style-type: none;
         > li::before {
@@ -174,12 +174,12 @@
         }
       }
     }
-    .char(block; @attr-value; none) {
+    .bulleted-char(block; @attr-value; none) {
       &[data-bullet-style="@{attr-value}"] {
         list-style-type: none;
       }
     }
-    .char(inline; @attr-value; @char) {
+    .bulleted-char(inline; @attr-value; @char) {
       &[data-bullet-style="@{attr-value}"] {
         > .item::before {
           content: @char;
@@ -187,25 +187,26 @@
         }
       }
     }
-    .char(inline; @attr-value; none) {
+    .bulleted-char(inline; @attr-value; none) {
       &[data-bullet-style="@{attr-value}"] {
       }
     }
 
 
     // For debugging, show NOT_IMPLEMENTED_YET for anything else
-    .bullet-catchall() {
+    .bulleted-catchall() {
       &[data-bullet-style]:not([data-bullet-style='bullet']):not([data-bullet-style='open-circle']):not([data-bullet-style='pilcrow']):not([data-bullet-style='rpilcrow']):not([data-bullet-style='section']):not([data-bullet-style='asterisk']):not([data-bullet-style='dash']):not([data-bullet-style='none']) {
         &::before { .x-not-implemented('data-bullet-style=CUSTOM'); }
       }
     }
 
     // Item separators are so far only supported for inline lists
-    .sep(block)  {
+    .item-sep(block)  {
+      // If data-item-sep occurs on a block list then show an error
       &[data-item-sep] { .x-not-implemented('data-item-sep'); }
       // The default item separator for block items is nothing
     }
-    .sep(inline) {
+    .item-sep(inline) {
       &:not([data-item-sep]) > .item:not(:last-child)::after {
         content: @default-inline-list-item-sep;
       }
@@ -217,8 +218,10 @@
     }
 
     .inner(@display; @list-type) {
+      // This mixin applies to all display and list-types
+
       // Enter rules for the separator character (mostly for inline lists)
-      .sep(@display);
+      .item-sep(@display);
 
       // if mark-prefix or mark-suffix are used then show this is not implemented yet
       &[data-mark-prefix],
@@ -226,15 +229,15 @@
     }
     .inner(@display; bulleted) {
       // These are always "emulated" for bulleted lists
-      .char(@display; 'pilcrow';      '\00b6');
-      .char(@display; 'rpilcrow';     '\204b');
-      .char(@display; 'section';      '\00a7');
-      .char(@display; 'asterisk';     '*');
-      .char(@display; 'dash';         '-');
-      .char(@display; 'none';         none);
+      .bulleted-char(@display; 'pilcrow';      '\00b6');
+      .bulleted-char(@display; 'rpilcrow';     '\204b');
+      .bulleted-char(@display; 'section';      '\00a7');
+      .bulleted-char(@display; 'asterisk';     '*');
+      .bulleted-char(@display; 'dash';         '-');
+      .bulleted-char(@display; 'none';         none);
 
       // For debugging, show NOT_IMPLEMENTED_YET for anything else
-      .bullet-catchall();
+      .bulleted-catchall();
     }
     .inner(block; bulleted) {
       // Use the browser to display some of the bullets and "emulate" the rest
@@ -243,8 +246,8 @@
     }
     .inner(inline; bulleted) {
       // "emulate" all the bullets because inline lists are spans
-      .char(inline; 'bullet';       '\25cf'); // black circle
-      .char(inline; 'open-circle';  '\25cb'); // white circle
+      .bulleted-char(inline; 'bullet';       '\25cf'); // black circle
+      .bulleted-char(inline; 'open-circle';  '\25cb'); // white circle
     }
 
     .inner(block; enumerated) {
