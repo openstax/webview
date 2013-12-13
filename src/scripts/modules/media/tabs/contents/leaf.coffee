@@ -2,6 +2,7 @@ define (require) ->
   $ = require('jquery')
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics')
+  linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./leaf-template')
   require('less!./leaf')
@@ -9,7 +10,9 @@ define (require) ->
   return class TocNodeView extends BaseView
     template: template
     templateHelpers:
-      book: () -> @model.get('book').toJSON()
+      url: () ->
+        book = @model.get('book').toJSON()
+        return linksHelper.getPath('contents', {id: book.id, version: book.version})
 
     tagName: 'li'
     itemViewContainer: '.subcollection'
