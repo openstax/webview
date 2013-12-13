@@ -45,9 +45,6 @@ define (require) ->
       response = @parseInfo(response)
       type = response.type = MEDIA_TYPES[response.mediaType]
 
-      # Keep the id with the desired version number included
-      delete response.id
-
       # Only setup a toc for a book
       if type isnt 'book' then return response
 
@@ -112,20 +109,30 @@ define (require) ->
       if not page.loaded
         @fetchPage()
 
+    getNextPage: () ->
+      page = @get('page')
+      if page < @get('pages') then ++page
+      return page
+
+    getPreviousPage: () ->
+      page = @get('page')
+      if page > 1 then --page
+      return page
+
     nextPage: () ->
       page = @get('page')
+      nextPage = @getNextPage()
 
       # Show the next page if there is one
-      if page < @get('pages')
-        @setPage(++page)
+      @setPage(nextPage) if page isnt nextPage
 
-      return page
+      return nextPage
 
     previousPage: () ->
       page = @get('page')
+      previousPage = @getPreviousPage()
 
       # Show the previous page if there is one
-      if page isnt 1
-        @setPage(--page)
+      @setPage(previousPage) if page isnt previousPage
 
-      return page
+      return previousPage

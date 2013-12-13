@@ -48,13 +48,16 @@
       }
     }
 
-    > .next, > .back {
+    > .nav {
       display: inline-block;
       font-size: 1.6rem;
       line-height: @nav-height;
       color: @brand-primary;
-      cursor: pointer;
       .flex(1; 0; 100px);
+
+      &.disabled {
+        opacity: 0.5;
+      }
     }
 
     > .back {

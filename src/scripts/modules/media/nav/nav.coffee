@@ -1,15 +1,23 @@
 define (require) ->
   $ = require('jquery')
-  router = require('cs!router')
-  analytics = require('cs!helpers/handlers/analytics')
+  linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./nav-template')
   require('less!./nav')
 
   return class MediaNavView extends BaseView
     template: template
-    templateHelpers:
-      _hideProgress: () -> @hideProgress
+    templateHelpers: () ->
+      model = @model.toJSON()
+      nextPage = @model.getNextPage()
+      previousPage = @model.getPreviousPage()
+
+      if model.page isnt nextPage
+        next = linksHelper.getPath('contents', {id: model.id, version: model.version, page: nextPage})
+      if model.page isnt previousPage
+        back = linksHelper.getPath('contents', {id: model.id, version: model.version, page: previousPage})
+
+      return {_hideProgress: @hideProgress, next: next, back: back}
 
     initialize: (options) ->
       super()
@@ -21,18 +29,15 @@ define (require) ->
       'click .back': 'previousPage'
 
     nextPage: () ->
-      @navigate(@model.nextPage())
+      @model.nextPage()
+      @scrollToTop()
 
     previousPage: () ->
-      @navigate(@model.previousPage())
+      @model.previousPage()
+      @scrollToTop()
 
-    navigate: (page) ->
+    scrollToTop: () ->
       maxY = $('.media-header').offset().top
-      y = window.pageYOffset || document.documentElement.scrollTop
+      y = window.pageYOffset or document.documentElement.scrollTop
 
-      if y > maxY
-        window.scrollTo(0, maxY)
-
-      route = "/contents/#{router.current().params[0]}:#{page}" # Deterimine the new route
-      router.navigate(route) # Update browser URL to reflect the new route
-      analytics.send() # Send the analytics information for the new route
+      window.scrollTo(0, maxY) if y > maxY
