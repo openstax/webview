@@ -26,7 +26,11 @@ define (require) ->
       $body.find('.example, .exercise, .note').each (index, el) ->
         $el = $(el)
         $el.children(':not(.title)').wrapAll('<section>')
-        $el.children('.title').wrap('<header>')
+        $title = $el.children('.title')
+        $title.wrap('<header>')
+        # Add a class for styling since CSS does not support `:has(> .title)`
+        $el.toggleClass('ui-has-child-title', $title.length)
+
 
       # Wrap solutions in a div so "Show/Hide Solutions" work
       $body.find('.solution')

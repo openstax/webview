@@ -347,13 +347,13 @@
     // - `@type` can be something like `note`, `exercise`, `example`, etc
     // - `.style()` : styling for the blockish element
     // - `.default-label()` : the default text if there is no custom label
-    // - `.label()` : styling for the label part
+    // - `.label()` : styling for the label part; @has-title is true if there is a title child
     // - `.title()` : styling for the title (if there is one since they are optional)
     // - `.body()` : styling for the rest
     .style(@type) { }
     .default-label(@type) { }
-    .label(@type) { display: inline-block; }
-    .title(@type) { display: inline-block; }
+    .label(@type; @has-title) { display: inline-block; }
+    .title(@type)             { display: inline-block; }
     .body(@type) { }
 
 
@@ -364,7 +364,7 @@
       background-color: @gray-lightest;
     }
     .default-label(note) { content: 'Note'; }
-    .label(note) { .title(note); } // Style the label the same as the title
+    .label(note; @has-title) { .title(note); } // Style the label the same as the title
     .title(note) {
       color: @gray;
       font-size: 1.5rem;
@@ -379,13 +379,17 @@
 
     // Style the example
     .default-label(example) { content: 'Example'; }
-    .label(example) {
+    .label(example; @has-title) {
       padding-top: 0.1em;
       padding-bottom: 0.1em;
       padding-left: 1em;
       font-weight: bold;
       color: @gray-lightest;
       background-color: @gray;
+    }
+    // When there is no title add some padding to the right
+    .label(example; false) {
+      padding-right: 1em;
     }
     .title(example) {
       padding-top: 0.1em;
@@ -400,7 +404,7 @@
 
     //Style the exercise the same as an example
     .default-label(exercise) { content: 'Exercise'; }
-    .label(exercise) { .label(example); }
+    .label(exercise; @has-title) { .label(example; @has-title); }
     .title(exercise) { .title(example); }
     .body(exercise)  { .body(example); }
 
@@ -423,7 +427,8 @@
     }
 
     // Style the title (if one exists)
-    &::before         { #blockish>.label(@type); }
+    &.ui-has-child-title::before         { #blockish>.label(@type; true); }
+    &:not(.ui-has-child-title)::before   { #blockish>.label(@type; false); }
     > header {
       display: inline-block; // So the label can slide in on the left
       > .title { #blockish>.title(@type); }
