@@ -1,8 +1,26 @@
 @import "../../../../styles/variables.less";
 @import "../../../../styles/mixins.less";
 
+@DEBUG-NOT-IMPLEMENTED: true;
+
 @blue: @brand-primary;
 @page-width: 75%;
+
+// Default character that separates inline list items.
+@default-inline-list-item-sep: ';';
+
+// For content with labels we have not converted yet try to show
+.x-not-implemented(@msg) when (@DEBUG-NOT-IMPLEMENTED) {
+  content: @msg ' NOT_IMPLEMENTED_YET';
+  border: 1px dashed black;
+  background-color: pink;
+}
+
+// Mark unimplemented custom labels
+*[data-label]::before {
+  .x-not-implemented('data-label');
+}
+
 
 .media-body {
   margin: 0 60px;
@@ -110,6 +128,176 @@
   figure[data-orient="vertical"] {
     // The display defaults are correct for figures and subfigures
     // that are displayed vertically.
+  }
+
+
+  // ----------------------
+  // Lists
+  // ----------------------
+
+
+  // A list with a title
+  .list {
+    > .title {
+      font-weight: bold;
+    }
+  }
+
+
+  // A list contains the following:
+  // - list-type-char
+  //   - for bulleted lists this is the bullet-char
+  //   - for enumerated lists this is the numbering scheme
+  //
+  // For block lists the numbering and some of the bullets can be handled by the browser;
+  // for the rest we need to "simulate".
+  //
+  // For inline lists we need to "simulate" all of the numbering/bullets
+
+  #list {
+
+    // Item separators are so far only supported for inline lists
+    .item-sep(block)  {
+      // If data-item-sep occurs on a block list then show an error
+      &[data-item-sep] { .x-not-implemented('data-item-sep'); }
+      // The default item separator for block items is nothing
+    }
+    .item-sep(inline) {
+      &:not([data-item-sep]) > .item:not(:last-child)::after {
+        content: @default-inline-list-item-sep;
+      }
+      &[data-item-sep] > .item:not(:last-child)::after {
+        // FIXME: Use the default separator character for now
+        content: @default-inline-list-item-sep;
+        .x-not-implemented('data-item-sep=CUSTOM');
+      }
+    }
+
+    // Use the browser `list-style-type:` for some bulleted lists and all numbered lists
+    // NOTE: Inline lists cannot use this and need to "emulate" this.
+    .browser-style(@list-style;   @attr-value; @style-type) { }
+    .browser-style(bulleted;      @attr-value; @style-type) {
+      &[data-bullet-style="@{attr-value}"] { list-style-type: @style-type; }
+    }
+    .browser-style(enumerated;    @attr-value; @style-type) {
+      &[data-number-style="@{attr-value}"] { list-style-type: @style-type; }
+    }
+
+    // Create a `::before` element and use the bulleted char for bullets
+    // not supportd by the browser (most, but not all).
+    .bulleted-char(block; @attr-value; @char) {
+      &[data-bullet-style="@{attr-value}"] {
+        list-style-type: none;
+        > li::before {
+          content: @char;
+          margin-right: 0.5em;
+        }
+      }
+    }
+    // For Block lists with `none`, skip the pseudoelement
+    .bulleted-char(block; @attr-value; none) {
+      &[data-bullet-style="@{attr-value}"] {
+        list-style-type: none;
+      }
+    }
+    .bulleted-char(inline; @attr-value; @char) {
+      &[data-bullet-style="@{attr-value}"] {
+        // Note: since this is inline, the `li` is actually a `span.item`
+        > .item::before {
+          content: @char;
+          margin-right: 0.5em;
+        }
+      }
+    }
+    // For Inline lists with `none`, skip the pseudoelement
+    .bulleted-char(inline; @attr-value; none) {
+      &[data-bullet-style="@{attr-value}"] {
+      }
+    }
+
+    // For debugging, show NOT_IMPLEMENTED_YET for anything else
+    .bulleted-catchall() {
+      &[data-bullet-style]:not([data-bullet-style='bullet']):not([data-bullet-style='open-circle']):not([data-bullet-style='pilcrow']):not([data-bullet-style='rpilcrow']):not([data-bullet-style='section']):not([data-bullet-style='asterisk']):not([data-bullet-style='dash']):not([data-bullet-style='none']) {
+        &::before { .x-not-implemented('data-bullet-style=CUSTOM'); }
+      }
+    }
+
+
+    .inner(@display; @list-type) {
+      // This mixin applies to all display and list-types
+
+      // Enter rules for the separator character (mostly for inline lists)
+      .item-sep(@display);
+
+      // if mark-prefix or mark-suffix are used then show this is not implemented yet
+      &[data-mark-prefix],
+      &[data-mark-suffix] { &::after { .x-not-implemented('data-mark-prefix/suffix'); } }
+    }
+    .inner(@display; bulleted) {
+      // These are always "emulated" for bulleted lists
+      .bulleted-char(@display; 'pilcrow';      '\00b6');
+      .bulleted-char(@display; 'rpilcrow';     '\204b');
+      .bulleted-char(@display; 'section';      '\00a7');
+      .bulleted-char(@display; 'asterisk';     '*');
+      .bulleted-char(@display; 'dash';         '-');
+      .bulleted-char(@display; 'none';         none);
+
+      // For debugging, show NOT_IMPLEMENTED_YET for anything else
+      .bulleted-catchall();
+    }
+    .inner(block; bulleted) {
+      // Use the browser to display these bullet types
+      .browser-style(bulleted; 'bullet';       disc);
+      .browser-style(bulleted; 'open-circle';  circle);
+    }
+    .inner(inline; bulleted) {
+      // "emulate" all the bullets because inline lists are spans
+      .bulleted-char(inline; 'bullet';       '\25cf'); // black circle
+      .bulleted-char(inline; 'open-circle';  '\25cb'); // white circle
+    }
+
+    .inner(block; enumerated) {
+      // Use the browser to display the numbering
+      .browser-style(enumerated; 'arabic';      decimal);
+      .browser-style(enumerated; 'upper-alpha'; upper-alpha);
+      .browser-style(enumerated; 'lower-alpha'; lower-alpha);
+      .browser-style(enumerated; 'upper-roman'; upper-roman);
+      .browser-style(enumerated; 'lower-roman'; lower-roman);
+    }
+
+    .inner(inline; enumerated) {
+      // "Emulate" the numbering for inline numbered lists
+      .style-emulate(@attr-name; @counter-type) {
+        &[data-number-style="@{attr-name}"] > .item::before {
+          content: counter(list-item, @counter-type);
+          margin-right: 0.5em;
+        }
+      }
+      .style-emulate('arabic';      decimal);
+      .style-emulate('upper-alpha'; upper-alpha);
+      .style-emulate('lower-alpha'; lower-alpha);
+      .style-emulate('upper-roman'; upper-roman);
+      .style-emulate('lower-roman'; lower-roman);
+    }
+  }
+
+
+  // Block-ish lists
+  ul:not([data-display='inline'])         { #list>.inner(block; bulleted); }
+  ol:not([data-display='inline'])         { #list>.inner(block; enumerated); }
+
+  // Inline lists (with `data-display='inline'`)
+  ul[data-display='inline']               { #list>.inner(inline; bulleted); }
+  ol[data-display='inline']               { #list>.inner(inline; enumerated); }
+
+  // Inline lists (in a para)
+  p span.list[data-list-type='bulleted']  { #list>.inner(inline; bulleted); }
+  p span.list[data-list-type='enumerated']  {
+    // Since we have to "emulate" the list, reset and increment the `list-item` counter.
+    counter-reset: list-item;
+    #list>.inner(inline; enumerated);
+
+    > .item { counter-increment: list-item; }
   }
 
 
