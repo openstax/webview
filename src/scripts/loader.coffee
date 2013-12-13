@@ -20,7 +20,8 @@ define (require) ->
 
     # Catch internal application links and let Backbone handle the routing
     $(document).on 'click', 'a:not([data-bypass])', (e) ->
-      href = $(this).attr('href')
+      $this = $(this)
+      href = $this.attr('href')
 
       # Only handle links intended to be processed by Backbone
       if e.isDefaultPrevented() or href.charAt(0) is '#' or /^mailto:.+/.test(href) then return
@@ -40,7 +41,8 @@ define (require) ->
       else if resources.test(href)
         window.open(href, '_blank')
       else
-        router.navigate(href, {trigger: true})
+        if $this.data('trigger') is false then trigger = false else trigger = true
+        router.navigate(href, {trigger: trigger})
 
     Backbone.history.start
       pushState: true
