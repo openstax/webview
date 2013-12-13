@@ -210,9 +210,9 @@
         content: @default-inline-list-item-sep;
       }
       &[data-item-sep] > .item:not(:last-child)::after {
-        .x-not-implemented('data-item-sep=CUSTOM');
         // FIXME: Use the default separator character for now
         content: @default-inline-list-item-sep;
+        .x-not-implemented('data-item-sep=CUSTOM');
       }
     }
 
