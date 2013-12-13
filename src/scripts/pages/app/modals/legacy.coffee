@@ -3,6 +3,8 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./legacy-template')
   require('less!./legacy')
+  require('bootstrapTransition')
+  require('bootstrapModal')
 
   return class LegacyModal extends BaseView
     template: template
