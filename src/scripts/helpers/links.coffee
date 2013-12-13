@@ -13,6 +13,7 @@ define (require) ->
         when 'contents'
           uuid = "#{data.id}@#{data.version}"
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
-          url += "contents/#{uuid}:#{data.page}"
+          url += "contents/#{uuid}"
+          url += ":#{data.page}" if data.page
 
       return url
