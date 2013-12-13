@@ -145,14 +145,22 @@
 
 
   // A list contains the following:
-  // - list-type-char
-  //   - for bulleted lists this is the bullet-char
-  //   - for enumerated lists this is the numbering scheme
+  //
+  // - data-item-sep     : default for inline lists is ';', but can be any character
+  // - data-list-type    : ONLY on inline lists (since they cannot be `<ul>` or `<ol>`)
+  // - data-bullet-style : literal text, none, bullet, open-circle, pilcrow, rpilcrow, section, asterisk, dash
+  // - data-number-style : arabic, upper-alpha, lower-alpha, upper-roman, lower-roman
   //
   // For block lists the numbering and some of the bullets can be handled by the browser;
-  // for the rest we need to "simulate".
+  // for the rest we need to "emulate".
   //
-  // For inline lists we need to "simulate" all of the numbering/bullets
+  // For inline lists we need to "emulate" all of the enumerated/bulleted lists.
+  //
+  // Mixin descriptions:
+  //
+  // - `.browser-style()`       : Use the browser `list-style-type`
+  // - `.emulate-bulleted()`    : Emulate bullets using `::before`
+  // - `.emulate-enumerated()`  : Emulate numbers using a `list-item` counter
 
   #list {
 
@@ -185,7 +193,7 @@
 
     // Create a `::before` element and use the bulleted char for bullets
     // not supportd by the browser (most, but not all).
-    .bulleted-char(block; @attr-value; @char) {
+    .emulate-bulleted(block; @attr-value; @char) {
       &[data-bullet-style="@{attr-value}"] {
         list-style-type: none;
         > li::before {
@@ -195,12 +203,12 @@
       }
     }
     // For Block lists with `none`, skip the pseudoelement
-    .bulleted-char(block; @attr-value; none) {
+    .emulate-bulleted(block; @attr-value; none) {
       &[data-bullet-style="@{attr-value}"] {
         list-style-type: none;
       }
     }
-    .bulleted-char(inline; @attr-value; @char) {
+    .emulate-bulleted(inline; @attr-value; @char) {
       &[data-bullet-style="@{attr-value}"] {
         // Note: since this is inline, the `li` is actually a `span.item`
         > .item::before {
@@ -210,7 +218,7 @@
       }
     }
     // For Inline lists with `none`, skip the pseudoelement
-    .bulleted-char(inline; @attr-value; none) {
+    .emulate-bulleted(inline; @attr-value; none) {
       &[data-bullet-style="@{attr-value}"] {
       }
     }
@@ -223,7 +231,7 @@
     }
 
 
-    .inner(@display; @list-type) {
+    .style(@display; @list-type) {
       // This mixin applies to all display and list-types
 
       // Enter rules for the separator character (mostly for inline lists)
@@ -233,31 +241,32 @@
       &[data-mark-prefix],
       &[data-mark-suffix] { &::after { .x-not-implemented('data-mark-prefix/suffix'); } }
     }
-    .inner(@display; bulleted) {
+    .style(@display; bulleted) {
       // These are always "emulated" for bulleted lists
-      .bulleted-char(@display; 'pilcrow';      '\00b6');
-      .bulleted-char(@display; 'rpilcrow';     '\204b');
-      .bulleted-char(@display; 'section';      '\00a7');
-      .bulleted-char(@display; 'asterisk';     '*');
-      .bulleted-char(@display; 'dash';         '-');
-      .bulleted-char(@display; 'none';         none);
+      .emulate-bulleted(@display; 'pilcrow';      '\00b6');
+      .emulate-bulleted(@display; 'rpilcrow';     '\204b');
+      .emulate-bulleted(@display; 'section';      '\00a7');
+      .emulate-bulleted(@display; 'asterisk';     '*');
+      .emulate-bulleted(@display; 'dash';         '-');
+      .emulate-bulleted(@display; 'none';         none);
 
       // For debugging, show NOT_IMPLEMENTED_YET for anything else
       .bulleted-catchall();
     }
-    .inner(block; bulleted) {
+    .style(block; bulleted) {
       // Use the browser to display these bullet types
       .browser-style(bulleted; 'bullet';       disc);
       .browser-style(bulleted; 'open-circle';  circle);
     }
-    .inner(inline; bulleted) {
+    .style(inline; bulleted) {
       // "emulate" all the bullets because inline lists are spans
-      .bulleted-char(inline; 'bullet';       '\25cf'); // black circle
-      .bulleted-char(inline; 'open-circle';  '\25cb'); // white circle
+      .emulate-bulleted(inline; 'bullet';       '\25cf'); // black circle
+      .emulate-bulleted(inline; 'open-circle';  '\25cb'); // white circle
     }
 
-    .inner(block; enumerated) {
+    .style(block; enumerated) {
       // Use the browser to display the numbering
+      .browser-style(enumerated; 'none';        none);
       .browser-style(enumerated; 'arabic';      decimal);
       .browser-style(enumerated; 'upper-alpha'; upper-alpha);
       .browser-style(enumerated; 'lower-alpha'; lower-alpha);
@@ -265,40 +274,38 @@
       .browser-style(enumerated; 'lower-roman'; lower-roman);
     }
 
-    .inner(inline; enumerated) {
+    .style(inline; enumerated) {
+      // Since we have to "emulate" the list, reset and increment the `list-item` counter.
+      counter-reset: list-item;
+      > .item { counter-increment: list-item; }
+
       // "Emulate" the numbering for inline numbered lists
-      .style-emulate(@attr-name; @counter-type) {
+      .emulate-enumerated(@attr-name; @counter-type) {
         &[data-number-style="@{attr-name}"] > .item::before {
           content: counter(list-item, @counter-type);
           margin-right: 0.5em;
         }
       }
-      .style-emulate('arabic';      decimal);
-      .style-emulate('upper-alpha'; upper-alpha);
-      .style-emulate('lower-alpha'; lower-alpha);
-      .style-emulate('upper-roman'; upper-roman);
-      .style-emulate('lower-roman'; lower-roman);
+      .emulate-enumerated('arabic';      decimal);
+      .emulate-enumerated('upper-alpha'; upper-alpha);
+      .emulate-enumerated('lower-alpha'; lower-alpha);
+      .emulate-enumerated('upper-roman'; upper-roman);
+      .emulate-enumerated('lower-roman'; lower-roman);
     }
   }
 
 
   // Block-ish lists
-  ul:not([data-display='inline'])         { #list>.inner(block; bulleted); }
-  ol:not([data-display='inline'])         { #list>.inner(block; enumerated); }
+  ul:not([data-display='inline'])          { #list>.style(block; bulleted); }
+  ol:not([data-display='inline'])          { #list>.style(block; enumerated); }
 
   // Inline lists (with `data-display='inline'`)
-  ul[data-display='inline']               { #list>.inner(inline; bulleted); }
-  ol[data-display='inline']               { #list>.inner(inline; enumerated); }
+  ul[data-display='inline']                { #list>.style(inline; bulleted); }
+  ol[data-display='inline']                { #list>.style(inline; enumerated); }
 
   // Inline lists (in a para)
-  p span.list[data-list-type='bulleted']  { #list>.inner(inline; bulleted); }
-  p span.list[data-list-type='enumerated']  {
-    // Since we have to "emulate" the list, reset and increment the `list-item` counter.
-    counter-reset: list-item;
-    #list>.inner(inline; enumerated);
-
-    > .item { counter-increment: list-item; }
-  }
+  p span.list[data-list-type='bulleted']   { #list>.style(inline; bulleted); }
+  p span.list[data-list-type='enumerated'] { #list>.style(inline; enumerated); }
 
 
   .footnote {
