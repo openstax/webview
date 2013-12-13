@@ -219,6 +219,10 @@
     .inner(@display; @list-type) {
       // Enter rules for the separator character (mostly for inline lists)
       .sep(@display);
+
+      // if mark-prefix or mark-suffix are used then show this is not implemented yet
+      &[data-mark-prefix],
+      &[data-mark-suffix] { &::after { .x-not-implemented('data-mark-prefix/suffix'); } }
     }
     .inner(@display; bulleted) {
       // These are always "emulated" for bulleted lists
