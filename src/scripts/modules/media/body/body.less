@@ -6,6 +6,9 @@
 @blue: @brand-primary;
 @page-width: 75%;
 
+// Default character that separates inline list items.
+@default-inline-list-item-sep: ';';
+
 // For content with labels we have not converted yet try to show
 .x-not-implemented(@msg) when (@DEBUG-NOT-IMPLEMENTED) {
   content: @msg ' NOT_IMPLEMENTED_YET';
@@ -197,7 +200,26 @@
       }
     }
 
-    .inner(@display; @list-type) {}
+    // Item separators are so far only supported for inline lists
+    .sep(block)  {
+      &[data-item-sep] { .x-not-implemented('data-item-sep'); }
+      // The default item separator for block items is nothing
+    }
+    .sep(inline) {
+      &:not([data-item-sep]) > .item:not(:last-child)::after {
+        content: @default-inline-list-item-sep;
+      }
+      &[data-item-sep] > .item:not(:last-child)::after {
+        .x-not-implemented('data-item-sep=CUSTOM');
+        // FIXME: Use the default separator character for now
+        content: @default-inline-list-item-sep;
+      }
+    }
+
+    .inner(@display; @list-type) {
+      // Enter rules for the separator character (mostly for inline lists)
+      .sep(@display);
+    }
     .inner(@display; bulleted) {
       // These are always "emulated" for bulleted lists
       .char(@display; 'pilcrow';      '\00b6');
