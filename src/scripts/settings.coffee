@@ -27,4 +27,12 @@ define (require) ->
 
     # Webmaster E-mail address
     webmaster: 'cnx@cnx.org'
+    
+    # Content shortcodes
+    shortcodes:
+      'college_physics': 'e79ffde3-7fb4-4af3-9ec8-df648b391597@1.7'
+      'college_introduction_to_sociology': '30a3ada8-41a4-4ab1-ba79-d4e49b044964@7.119'
+      'biology': 'aa0c81ca-2246-49c2-93ff-03f31569a740@9.123'
+      'concepts_of_biology': '81c53958-672b-4e07-8025-535602180078@8.17'
+      'anatomy_and_physiology': '12b7fdb3-23e3-48d1-adf6-7e3c8b73fa21@6.148'
   }
