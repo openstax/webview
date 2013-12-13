@@ -292,20 +292,27 @@
       .emulate-enumerated('upper-roman'; upper-roman);
       .emulate-enumerated('lower-roman'; lower-roman);
     }
+
+    .style(block; labeled-item) {
+      list-style-type: none;
+    }
   }
 
 
   // Block-ish lists
   ul:not([data-display='inline'])          { #list>.style(block; bulleted); }
   ol:not([data-display='inline'])          { #list>.style(block; enumerated); }
+  ul[data-labeled-item]                    { #list>.style(block; labeled-item); }
 
   // Inline lists (with `data-display='inline'`)
   ul[data-display='inline']                { #list>.style(inline; bulleted); }
   ol[data-display='inline']                { #list>.style(inline; enumerated); }
+  ul[data-labeled-item]                    { #list>.style(inline; labeled-item); }
 
   // Inline lists (in a para)
-  p span.list[data-list-type='bulleted']   { #list>.style(inline; bulleted); }
-  p span.list[data-list-type='enumerated'] { #list>.style(inline; enumerated); }
+  p span.list[data-list-type='bulleted']     { #list>.style(inline; bulleted); }
+  p span.list[data-list-type='enumerated']   { #list>.style(inline; enumerated); }
+  p span.list[data-list-type='labeled-item'] { #list>.style(inline; labeled-item); }
 
 
   .footnote {
