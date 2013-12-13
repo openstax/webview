@@ -415,19 +415,17 @@
 
     // Style the label (using the default if none is provided)
     &:not([data-label])::before { #blockish>.default-label(@type); }
+    // Use the data-label if one is provided
     &[data-label]::before       { content: attr(data-label); }
-    // Put a colon between the label and title if there is a label and a title.
+    // Put a colon between the label and title if there is a non-empty label and a title.
     &:not([data-label='']) > header > .title::before {
       content: ': ';
     }
 
     // Style the title (if one exists)
-    &::before { #blockish>.label(@type); }
-    > header {
-      display: inline-block; // For the pseudo-element to fall in to the left
-      > .title { #blockish>.title(@type); }
-    }
-    > section { #blockish>.body(@type); }
+    &::before         { #blockish>.label(@type); }
+    > header > .title { #blockish>.title(@type); }
+    > section         { #blockish>.body(@type); }
   }
 
   .note     { .make-block(note); }
