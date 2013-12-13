@@ -424,7 +424,10 @@
 
     // Style the title (if one exists)
     &::before         { #blockish>.label(@type); }
-    > header > .title { #blockish>.title(@type); }
+    > header {
+      display: inline-block; // So the label can slide in on the left
+      > .title { #blockish>.title(@type); }
+    }
     > section         { #blockish>.body(@type); }
   }
 
