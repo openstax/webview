@@ -25,7 +25,9 @@ define (require) ->
       # Wrap title and content elements in header and section elements, respectively
       $body.find('.example, .exercise, .note').each (index, el) ->
         $el = $(el)
-        $el.children(':not(.title)').wrapAll('<section>')
+        $contents = $body.contents().filter (node) ->
+          return !$(node).hasClass('title')
+        $contents.wrapAll('<section>')
         $title = $el.children('.title')
         $title.wrap('<header>')
         # Add a class for styling since CSS does not support `:has(> .title)`
