@@ -112,7 +112,7 @@ When running the development version of the site with its corresponding config, 
 access a test version of the site that simulates AJAX requests by appending `/test` to the root URI
 (for example: `http://localhost/test`).
 
-Note: Mock test data is only available for the [College Physics](http://localhost/test/content/e79ffde3-7fb4-4af3-9ec8-df648b391597) book.
+Note: Mock test data is only available for the [College Physics](http://localhost/test/contents/college_physics) book.
 
 ### Directory Layout
 
