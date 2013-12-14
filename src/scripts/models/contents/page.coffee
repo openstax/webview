@@ -25,7 +25,7 @@ define (require) ->
       # Wrap title and content elements in header and section elements, respectively
       $body.find('.example, .exercise, .note').each (index, el) ->
         $el = $(el)
-        $contents = $body.contents().filter (node) ->
+        $contents = $el.contents().filter (i, node) ->
           return !$(node).hasClass('title')
         $contents.wrapAll('<section>')
         $title = $el.children('.title')
