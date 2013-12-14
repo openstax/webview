@@ -15,7 +15,7 @@
 }
 
 // Mark unimplemented custom labels
-*[data-label]::before {
+*[data-label]:not([data-label]="")::before {
   .x-not-implemented('data-label');
 }
 
@@ -360,7 +360,7 @@
     .style(@type) { }
     .default-label(@type) { }
     .label(@type; @has-title) { display: inline-block; }
-    .title(@type)             { display: inline-block; }
+    .title(@type; @has-label) { display: inline-block; }
     .body(@type) { }
 
 
@@ -371,8 +371,8 @@
       background-color: @gray-lightest;
     }
     .default-label(note) { content: 'Note'; }
-    .label(note; @has-title) { .title(note); } // Style the label the same as the title
-    .title(note) {
+    .label(note; @has-title) { .title(note; true); } // Style the label the same as the title
+    .title(note; @has-label) {
       color: @gray;
       font-size: 1.5rem;
       text-transform: uppercase;
@@ -398,7 +398,7 @@
     .label(example; false) {
       padding-right: 1em;
     }
-    .title(example) {
+    .title(example; @has-label) {
       padding-top: 0.1em;
       padding-bottom: 0.1em;
       padding-right: 1em;
@@ -406,13 +406,16 @@
       color: @gray-lightest;
       background-color: @gray;
     }
+    .title(example; false) {
+      padding-left: 1em;
+    }
     // Style the body of an example the same as a note
     .body(example) { .body(note); }
 
     //Style the exercise the same as an example
     .default-label(exercise) { content: 'Exercise'; }
     .label(exercise; @has-title) { .label(example; @has-title); }
-    .title(exercise) { .title(example); }
+    .title(exercise; @has-label) { .title(example; @has-label); }
     .body(exercise)  { .body(example); }
 
   }
@@ -427,7 +430,7 @@
     // Style the label (using the default if none is provided)
     &:not([data-label])::before { #blockish>.default-label(@type); }
     // Use the data-label if one is provided
-    &[data-label]::before       { content: attr(data-label); }
+    &[data-label]:not([data-label=''])::before       { content: attr(data-label); }
     // Put a colon between the label and title if there is a non-empty label and a title.
     &:not([data-label='']) > header > .title::before {
       content: ': ';
@@ -436,9 +439,16 @@
     // Style the title (if one exists)
     &.ui-has-child-title::before         { #blockish>.label(@type; true); }
     &:not(.ui-has-child-title)::before   { #blockish>.label(@type; false); }
-    > header {
+    &[data-label]:not([data-label]='') > header {
       display: inline-block; // So the label can slide in on the left
-      > .title { #blockish>.title(@type); }
+      > .title { #blockish>.title(@type; true); }
+    }
+    &:not([data-label]),
+    &[data-label=''] {
+      > header {
+        display: inline-block; // So the label can slide in on the left
+        > .title { #blockish>.title(@type; false); }
+      }
     }
     > section         { #blockish>.body(@type); }
   }
