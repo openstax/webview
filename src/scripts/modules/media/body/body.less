@@ -3,9 +3,6 @@
 
 @DEBUG-NOT-IMPLEMENTED: true;
 
-@blue: @brand-primary;
-@page-width: 75%;
-
 // Default character that separates inline list items.
 @default-inline-list-item-sep: ';';
 
@@ -67,12 +64,17 @@
   }
 
   figure {
+    display: table;
     width: 100%;
     color: @gray;
+    table-layout: fixed;
 
     > figcaption {
+      display: table-caption;
       padding: 10px;
       font-size: 1.3rem;
+      text-align: center;
+      caption-side: bottom;
 
       &::before {
         margin-right: 5px;
@@ -387,24 +389,21 @@
     // Style the example
     .default-label(example) { content: 'Example'; }
     .label(example; @has-title) {
-      padding-top: 0.1em;
-      padding-bottom: 0.1em;
-      padding-left: 1em;
+      padding: 0.1rem 1rem;
       font-weight: bold;
       color: @gray-lightest;
       background-color: @gray;
-    }
-    // When there is no title add some padding to the right
-    .label(example; false) {
-      padding-right: 1em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     .title(example) {
-      padding-top: 0.1em;
-      padding-bottom: 0.1em;
-      padding-right: 1em;
+      padding: 0.1rem 1rem 0.1rem 0;
+      margin-left: -0.9rem;
       font-weight: bold;
       color: @gray-lightest;
       background-color: @gray;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     // Style the body of an example the same as a note
     .body(example) { .body(note); }
@@ -447,11 +446,10 @@
   .example  { .make-block(example); }
   .exercise { .make-block(exercise); }
 
-
-
   .example,
   .exercise {
-
+    margin-top: 30px;
+    
     .problem,
     .solution {
       padding: 0.5em 1em;
