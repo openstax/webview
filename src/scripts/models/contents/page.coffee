@@ -31,7 +31,8 @@ define (require) ->
         $title = $el.children('.title')
         $title.wrap('<header>')
         # Add a class for styling since CSS does not support `:has(> .title)`
-        $el.toggleClass('ui-has-child-title', $title.length)
+        # NOTE: `.toggleClass()` explicitly requires a `false` (not falsy) 2nd argument
+        $el.toggleClass('ui-has-child-title', $title.length > 0)
 
 
       # Wrap solutions in a div so "Show/Hide Solutions" work
