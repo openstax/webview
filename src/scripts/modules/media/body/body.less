@@ -427,31 +427,31 @@
   .make-block(@type) {
     #blockish>.style(@type);
 
-    // Style the label (using the default if none is provided)
+    // Use the default label if none is provided
     &:not([data-label])::before { #blockish>.default-label(@type); }
     // Use the data-label if one is provided
     &[data-label]:not([data-label=''])::before       { content: attr(data-label); }
+
+    // Style the label (depending on if there is a title)
+    &.ui-has-child-title::before         { #blockish>.label(@type; true); }
+    &:not(.ui-has-child-title)::before   { #blockish>.label(@type; false); }
+
+    // Style the title (if one exists) based on if there is a label
+    // NOTE: If there is no `data-label` then there **is** a default label.
+    &:not([data-label]),
+    &[data-label]:not([data-label='']) { > header > .title { #blockish>.title(@type; true); } }
+    &[data-label='']                     > header > .title { #blockish>.title(@type; false); }
     // Put a colon between the label and title if there is a non-empty label and a title.
     &:not([data-label='']) > header > .title::before {
       content: ': ';
     }
 
-    // Style the title (if one exists)
-    &.ui-has-child-title::before         { #blockish>.label(@type; true); }
-    &:not(.ui-has-child-title)::before   { #blockish>.label(@type; false); }
-    &[data-label]:not([data-label]='') > header {
-      display: inline-block; // So the label can slide in on the left
-      > .title { #blockish>.title(@type; true); }
-    }
-    &:not([data-label]),
-    &[data-label=''] {
-      > header {
-        display: inline-block; // So the label can slide in on the left
-        > .title { #blockish>.title(@type; false); }
-      }
-    }
+    > header { display: inline-block; } // So the label can slide in on the left
+
+    // Style the Body
     > section         { #blockish>.body(@type); }
   }
+
 
   .note     { .make-block(note); }
   .example  { .make-block(example); }
