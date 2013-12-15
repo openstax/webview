@@ -1,7 +1,7 @@
 define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
-  settings = require('cs!settings')
+  settings = require('settings')
 
   SERVER = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
 

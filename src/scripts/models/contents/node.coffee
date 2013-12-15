@@ -4,7 +4,7 @@
 
 define (require) ->
   Backbone = require('backbone')
-  settings = require('cs!settings')
+  settings = require('settings')
   require('backbone-associations')
 
   SERVER = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"

@@ -1,6 +1,6 @@
 define (require) ->
   _ = require('underscore')
-  settings = require('cs!settings')
+  settings = require('settings')
 
   shortcodes = settings.shortcodes
   inverseShortcodes = _.invert(shortcodes)

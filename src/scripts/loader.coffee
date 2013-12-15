@@ -1,7 +1,7 @@
 define (require) ->
   $ = require('jquery')
   Backbone = require('backbone')
-  settings = require('cs!settings')
+  settings = require('settings')
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics') # Setup Analytics Handler
   require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
