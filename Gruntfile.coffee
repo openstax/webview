@@ -148,7 +148,7 @@ module.exports = (grunt) ->
           done: (done, output) ->
             duplicates = require('rjs-build-analysis').duplicates(output)
 
-            if (duplicates.length > 0)
+            if duplicates.length > 0
               grunt.log.subhead('Duplicates found in requirejs build:')
               grunt.log.warn(duplicates)
               done(new Error('r.js built duplicate modules, please check the excludes option.'))
