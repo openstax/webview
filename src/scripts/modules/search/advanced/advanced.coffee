@@ -1,7 +1,7 @@
 define (require) ->
   $ = require('jquery')
   _ = require('underscore')
-  settings = require('cs!settings')
+  settings = require('settings')
   router = require('cs!router')
   SearchHeaderView = require('cs!../header/header')
   BaseView = require('cs!helpers/backbone/views/base')

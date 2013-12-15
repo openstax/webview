@@ -2,7 +2,7 @@ define (require) ->
   $ = require('jquery')
   _ = require('underscore')
   Backbone = require('backbone')
-  settings = require('cs!settings')
+  settings = require('settings')
 
   dispose = (obj) ->
     obj?.__proto__ = Function

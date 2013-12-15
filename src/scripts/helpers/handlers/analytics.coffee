@@ -1,6 +1,6 @@
 define (require) ->
   Backbone = require('backbone')
-  settings = require('cs!settings')
+  settings = require('settings')
   router = require('cs!router')
 
   # Class to handle loading analytics scripts and wrapping
