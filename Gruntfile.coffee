@@ -24,6 +24,7 @@ module.exports = (grunt) ->
       options:
         globals:
           require: true
+          define: true
 
         # Enforcing options
         camelcase: true
@@ -141,6 +142,7 @@ module.exports = (grunt) ->
               'cs!pages/search/search'
             ]
             exclude: ['coffee-script', 'less/normalize']
+            excludeShallow: ['settings']
           }]
 
           done: (done, output) ->
@@ -181,6 +183,7 @@ module.exports = (grunt) ->
           'dist/styles/**/*.less'
           '!dist/scripts/main.js'
           '!dist/scripts/require.js'
+          '!dist/scripts/settings.js'
         ]
         filter: 'isFile'
       directories:

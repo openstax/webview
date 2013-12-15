@@ -1,6 +1,6 @@
 define (require) ->
   Backbone = require('backbone')
-  settings = require('cs!settings')
+  settings = require('settings')
   AppView = require('cs!pages/app/app')
 
   return new class Router extends Backbone.Router

@@ -1,6 +1,6 @@
 define (require) ->
   Backbone = require('backbone')
-  settings = require('cs!settings')
+  settings = require('settings')
 
   SEARCH_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/search"
 

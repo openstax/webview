@@ -1,6 +1,6 @@
 define (require) ->
   $ = require('jquery')
-  settings = require('cs!settings')
+  settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./header-template')
   require('less!./header')
