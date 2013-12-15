@@ -386,6 +386,7 @@
 
     // Style the example
     .default-label(example) { content: 'Example'; }
+    .style(example) { margin-top: 30px; }
     .label(example; @has-title) {
       padding-top: 0.1em;
       padding-bottom: 0.1em;
@@ -414,6 +415,7 @@
 
     //Style the exercise the same as an example
     .default-label(exercise) { content: 'Exercise'; }
+    .style(exercise) { .style(example); }
     .label(exercise; @has-title) { .label(example; @has-title); }
     .title(exercise; @has-label) { .title(example; @has-label); }
     .body(exercise)  { .body(example); }
