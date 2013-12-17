@@ -8,4 +8,4 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:results', @render) if @model
+      @listenTo(@model, 'change:results change:loaded', @render) if @model
