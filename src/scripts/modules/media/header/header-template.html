@@ -3,13 +3,13 @@
 
   <div class="info">
     <div>
-      {{#if hasDownloads}}
+      {{#or hasDownloads buyLink}}
         {{#is type 'book'}}
           <a class="btn">Get This Book!</a>
         {{else}}
           <a class="btn">Get This Module!</a>
         {{/is}}
-      {{/if}}
+      {{/or}}
     </div>
     {{#if currentPage.authors.length}}
       <span>Module by:</span>
