@@ -39,6 +39,7 @@
         'biology': 'aa0c81ca-2246-49c2-93ff-03f31569a740@9.123',
         'concepts_of_biology': '81c53958-672b-4e07-8025-535602180078@8.17',
         'anatomy_and_physiology': '12b7fdb3-23e3-48d1-adf6-7e3c8b73fa21@6.148',
+        'introductory_statistics': '30189442-6998-4686-ac05-ed152b91b9de@16.2',
       }
     };
 
