@@ -10,7 +10,9 @@
     <span class="tips">Search Tips &amp; Help</span>
   </span> }}
 
-  {{#if results}}
-    <span><strong>{{results.total}}</strong> results found</span>
+  {{#if loaded}}
+    {{#if results}}
+      <span><strong>{{results.total}}</strong> results found</span>
+    {{/if}}
   {{/if}}
 </div>
