@@ -30,6 +30,10 @@ define (require) ->
         $contents.wrapAll('<section>')
         $title = $el.children('.title')
         $title.wrap('<header>')
+        # Add an attribute for the parents' `data-label`
+        # since CSS does not support `parent(attr(data-label))`.
+        # When the title exists, this attribute is added before it
+        $title.attr('data-label-parent', $el.attr('data-label'))
         # Add a class for styling since CSS does not support `:has(> .title)`
         # NOTE: `.toggleClass()` explicitly requires a `false` (not falsy) 2nd argument
         $el.toggleClass('ui-has-child-title', $title.length > 0)
