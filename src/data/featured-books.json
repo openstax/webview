@@ -1,4 +1,9 @@
 [{
+    "title": "Introductory Statistics",
+    "cover": "images/books/introductory_statistics.png",
+    "link": "contents/introductory_statistics",
+    "description": "A one-semester introduction to statistics course for students who are not mathematics or engineering majors. It focuses on the interpretation of statistical results, especially in real world settings."
+}, {
     "title": "College Physics",
     "cover": "images/books/college_physics.png",
     "link": "contents/college_physics",
