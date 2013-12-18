@@ -1,6 +1,7 @@
 define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
+  analytics = require('cs!helpers/handlers/analytics')
   AppView = require('cs!pages/app/app')
 
   return new class Router extends Backbone.Router
@@ -28,4 +29,5 @@ define (require) ->
 
     navigate: () ->
       super(arguments...)
+      analytics.send()
       @trigger('navigate')

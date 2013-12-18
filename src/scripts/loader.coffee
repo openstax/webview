@@ -2,8 +2,8 @@ define (require) ->
   $ = require('jquery')
   Backbone = require('backbone')
   settings = require('settings')
+  analytics = require('cs!helpers/handlers/analytics')
   router = require('cs!router')
-  analytics = require('cs!helpers/handlers/analytics') # Setup Analytics Handler
   require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
   require('less!../styles/main')
 
@@ -51,6 +51,8 @@ define (require) ->
     # Force Backbone to register the full path including the query in its history
     if location.search
       router.navigate(Backbone.history.fragment, {replace: true})
+
+    analytics.send() # Track analytics for the initial page
 
     # Prefix all non-external AJAX requests with the root URI
     $.ajaxPrefilter (options, originalOptions, jqXHR) ->

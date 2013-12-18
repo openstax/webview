@@ -1,7 +1,6 @@
 define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
-  router = require('cs!router')
 
   # Class to handle loading analytics scripts and wrapping
   # handlers around them so that modules don't have to
@@ -19,10 +18,6 @@ define (require) ->
       # ## Setup ga.js
       window._gaq ?= []
       window._gaq.push(['_setAccount', settings.analyticsID])
-
-      # Add tracking
-      router.on 'route', () =>
-        @send()
 
       # Asynchronously load analytics.js.
       require(['https://www.google-analytics.com/analytics.js'])
