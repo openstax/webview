@@ -37,7 +37,7 @@ define (require) ->
       @scrollToTop()
 
     scrollToTop: () ->
-      maxY = $('.media-header').offset().top
+      maxY = $('.media-title').offset().top
       y = window.pageYOffset or document.documentElement.scrollTop
 
       window.scrollTo(0, maxY) if y > maxY

@@ -37,9 +37,12 @@ define (require) ->
       toc.reset()
       @set('toc', toc)
 
+      @set('loaded', false)
       @fetch
         reset: true
-        success: () => @load(options.page)
+        success: () =>
+          @set('loaded', true)
+          @load(options.page)
 
     parse: (response) ->
       response = @parseInfo(response)
@@ -91,7 +94,7 @@ define (require) ->
       page = @get('currentPage')
       page.fetch
         success: () =>
-          page.loaded = true
+          page.set('loaded', true)
           @trigger('changePage')
 
     setPage: (num) ->
@@ -106,7 +109,7 @@ define (require) ->
       page.set('active', true)
       @trigger('changePage')
 
-      if not page.loaded
+      if not page.get('loaded')
         @fetchPage()
 
     getNextPage: () ->

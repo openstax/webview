@@ -32,7 +32,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:title', @render)
+      @listenTo(@model, 'change:title change:loaded', @render)
       @listenTo(router, 'navigate', @render)
 
     #onRender: () ->

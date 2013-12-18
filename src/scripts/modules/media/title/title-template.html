@@ -1,27 +1,29 @@
 <div class="media-title">
-  <h1>{{title}}</h1>
+  {{#if loaded}}
+    <h1>{{title}}</h1>
 
-  <div class="info">
-    {{#if authors.length}}
-      <span>{{#is type 'book'}}Collection{{else}}Module{{/is}} by:</span>
-      <span class="collection-author">
-        {{#each authors}}
-          <a href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
-        {{/each}}
-        <img src="images/icons/mail.png" width="18" height="12" alt="Mail" />
-      </span>
-    {{/if}}
+    <div class="info">
+      {{#if authors.length}}
+        <span>{{#is type 'book'}}Collection{{else}}Module{{/is}} by:</span>
+        <span class="collection-author">
+          {{#each authors}}
+            <a href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
+          {{/each}}
+          <img src="images/icons/mail.png" width="18" height="12" alt="Mail" />
+        </span>
+      {{/if}}
 
-    <div class="share">
-      <span class="title">Share</span>
-      <ul>
-        <li><a href="https://facebook.com/sharer.php?u={{share.url}}" class="btn-primary facebook circle">Facebook</a></li>
-        <li><a href="https://twitter.com/intent/tweet?url={{share.url}}&amp;text={{share.title}}&amp;via=cnxorg" class="btn-primary twitter circle">Twitter</a></li>
-        <li><a href="https://plus.google.com/share?url={{share.url}}" class="btn-primary google circle">Google+</a></li>
-        <li><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{share.url}}&amp;title={{share.title}}&amp;summary={{share.summary}}&amp;source={{share.source}}" class="btn-primary linkedin circle">LinkedIn</a></li>
-        <li><a href="https://pinterest.com/pin/create/button/?url={{share.url}}&amp;media={{share.image}}&amp;description={{share.summary}}" class="btn-primary pinterest circle">Pinterest</a></li>
-        {{! <li><button class="btn-primary mail circle">E-mail</button></li> }}
-      </ul>
+      <div class="share">
+        <span class="title">Share</span>
+        <ul>
+          <li><a href="https://facebook.com/sharer.php?u={{share.url}}" class="btn-primary facebook circle">Facebook</a></li>
+          <li><a href="https://twitter.com/intent/tweet?url={{share.url}}&amp;text={{share.title}}&amp;via=cnxorg" class="btn-primary twitter circle">Twitter</a></li>
+          <li><a href="https://plus.google.com/share?url={{share.url}}" class="btn-primary google circle">Google+</a></li>
+          <li><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{share.url}}&amp;title={{share.title}}&amp;summary={{share.summary}}&amp;source={{share.source}}" class="btn-primary linkedin circle">LinkedIn</a></li>
+          <li><a href="https://pinterest.com/pin/create/button/?url={{share.url}}&amp;media={{share.image}}&amp;description={{share.summary}}" class="btn-primary pinterest circle">Pinterest</a></li>
+          {{! <li><button class="btn-primary mail circle">E-mail</button></li> }}
+        </ul>
+      </div>
     </div>
-  </div>
+  {{/if}}
 </div>

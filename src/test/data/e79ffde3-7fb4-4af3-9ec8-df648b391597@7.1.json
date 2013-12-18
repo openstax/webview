@@ -1,6 +1,6 @@
 {
   "googleAnalytics": "UA-XXXXX-Y",
-  "submitlog": "New version 1.7",
+  "submitlog": "New version 7.1",
   "abstract": "This introductory, algebra-based, two-semester college physics book is grounded with real-world examples, illustrations, and explanations to help students grasp key, fundamental physics concepts. This online, fully editable and customizable title includes learning objectives, concept questions, links to labs and simulations, and ample practice opportunities to solve traditional physics application problems.",
   "revised": "2013-08-31 15:07:20.342798-04",
   "roles": null,
@@ -8,7 +8,7 @@
   "subject": "Mathematics and Statistics,Science and Technology",
   "title": "College Physics",
   "mediaType": "application/vnd.org.cnx.collection",
-  "version": "1.7",
+  "version": "7.1",
   "legacy_id": "col11406",
   "parentId": null,
   "stateid": null,
@@ -45,7 +45,7 @@
     "id": "e5a07af6-09b9-4b74-aa7a-b7510bee90b8"
   }],
   "parentVersion": "",
-  "legacy_version": "1.7",
+  "legacy_version": "7.1",
   "licensors": [{
     "website": null,
     "surname": "University",
@@ -66,7 +66,7 @@
   "language": "en",
   "created": "2013-07-31 15:07:20.342798-04",
   "tree": {
-    "id": "e79ffde3-7fb4-4af3-9ec8-df648b391597@1.7",
+    "id": "e79ffde3-7fb4-4af3-9ec8-df648b391597@7.1",
     "contents": [{
       "id": "209deb1f-1a46-4369-9e0d-18674cf58a3e@7",
       "title": "Preface"
@@ -135,8 +135,8 @@
   },
   "parentAuthors": [],
   "history": [{
-    "changes": "New version 1.7",
-    "version": "1.7",
+    "changes": "New version 7.1",
+    "version": "7.1",
     "revised": "2013-08-31 15:07:20.342798-04",
     "publisher": {
       "website": null,
@@ -151,7 +151,7 @@
     }
   }, {
     "changes": "Updated something",
-    "version": "1.6",
+    "version": "6.1",
     "revised": "2013-07-31 15:07:20.342798-04",
     "publisher": {
       "website": null,
