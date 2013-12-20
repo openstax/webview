@@ -37,7 +37,7 @@ define (require) ->
       @scrollToTop()
 
     scrollToTop: () ->
-      $mediaNav = $('.media-nav')
+      $mediaNav = $('.media-nav').first()
       maxY = $mediaNav.offset().top + $mediaNav.height()
       y = window.pageYOffset or document.documentElement.scrollTop
 
