@@ -37,7 +37,8 @@ define (require) ->
       @scrollToTop()
 
     scrollToTop: () ->
-      maxY = $('.media-title').offset().top
+      $mediaNav = $('.media-nav')
+      maxY = $mediaNav.offset().top + $mediaNav.height()
       y = window.pageYOffset or document.documentElement.scrollTop
 
       window.scrollTo(0, maxY) if y > maxY
