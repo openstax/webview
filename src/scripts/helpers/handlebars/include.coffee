@@ -1,5 +1,5 @@
 define (require) ->
-  Handlebars = require('Handlebars')
+  Handlebars = require('hbs/handlebars')
 
   Handlebars.registerHelper 'include', (html) ->
     if html is null or html is undefined then return
