@@ -19,16 +19,16 @@ define (require) ->
       # and will instead move all elements in them up one level.
       # Use a regex to extract everything in the body and put it into a div instead.
       $body = $('<div>' + response.content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>')
-      $body.children('.title').eq(0).remove()
-      $body.children('.abstract').eq(0).remove()
+      $body.children('[data-type="title"]').eq(0).remove()
+      $body.children('[data-type="abstract"]').eq(0).remove()
 
       # Wrap title and content elements in header and section elements, respectively
-      $body.find('.example, .exercise, .note').each (index, el) ->
+      $body.find('[data-type="example"], [data-type="exercise"], [data-type="note"]').each (index, el) ->
         $el = $(el)
         $contents = $el.contents().filter (i, node) ->
           return !$(node).hasClass('title')
         $contents.wrapAll('<section>')
-        $title = $el.children('.title')
+        $title = $el.children('[data-type="title"]')
         $title.wrap('<header>')
         # Add an attribute for the parents' `data-label`
         # since CSS does not support `parent(attr(data-label))`.
@@ -40,7 +40,7 @@ define (require) ->
 
 
       # Wrap solutions in a div so "Show/Hide Solutions" work
-      $body.find('.solution')
+      $body.find('[data-type="solution"]')
       .wrapInner('<section class="ui-body">')
       .prepend('''
         <div class="ui-toggle-wrapper">

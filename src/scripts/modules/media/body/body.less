@@ -138,7 +138,7 @@
   .list {
     overflow-wrap: break-word;
 
-    > .title {
+    > [data-type="title"] {
       font-weight: bold;
     }
   }
@@ -432,7 +432,7 @@
     // Add the label to the title element (if one exists) or to the blockish element
     .place-label(@type; @label-type) {
       // A title exists so style it and put the label in `.title::before`
-      &.ui-has-child-title > header > .title {
+      &.ui-has-child-title > header > [data-type="title"] {
         #blockish>.title(@type);
         &::before { .format-label(@type; @label-type; true); }
       }
@@ -453,22 +453,22 @@
   }
 
 
-  .note     { .make-block(note); }
-  .example  { .make-block(example); }
-  .exercise { .make-block(exercise); }
+  [data-type="note"]     { .make-block(note); }
+  [data-type="example"]  { .make-block(example); }
+  [data-type="exercise"] { .make-block(exercise); }
 
 
 
-  .example,
-  .exercise {
+  [data-type="example"],
+  [data-type="exercise"] {
 
-    .problem,
-    .solution {
+    [data-type="problem"],
+    [data-type="solution"] {
       padding: 0.5em 1em;
     }
 
     // Exercise Solutions contain a button to toggle showing or hiding the solution
-    .solution {
+    [data-type="solution"] {
       border-top: 1px solid @gray;
 
       // The Show/Hide Solution text
@@ -492,12 +492,12 @@
       }
     }
 
-    &[data-type=check-understanding] .title::before {
+    &.check-understanding [data-type="title"]::before {
       margin-right: 0;
       content: "";
     }
 
-    &[data-type=conceptual-questions] .problem {
+    &.conceptual-questions [data-type="problem"] {
       border-top: none;
 
       p {
@@ -505,19 +505,20 @@
       }
     }
 
-    &[data-type=problems-exercises] {
-      .problem::before, .solution::before {
+    &.problems-exercises {
+      [data-type="problem"]::before,
+      [data-type="solution"]::before {
         font-weight: bold;
         color: @gray;
         text-transform: uppercase;
         letter-spacing: 1px;
       }
 
-      .problem::before {
+      [data-type="problem"]::before {
         content: "Problem";
       }
 
-      .solution::before {
+      [data-type="solution"]::before {
         content: "Solution";
       }
     }
