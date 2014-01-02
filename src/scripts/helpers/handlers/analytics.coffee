@@ -13,7 +13,7 @@ define (require) ->
       window.ga.l = 1 * new Date()
 
       # Initialize analytics.js account
-      window.ga('create', settings.analyticsID)
+      window.ga('create', settings.analyticsID, 'auto')
 
       # ## Setup ga.js
       window._gaq ?= []
