@@ -21,11 +21,12 @@ define (require) ->
       contents: '#contents'
 
     onRender: () ->
-      @parent.regions.header.show(new HeaderView({page: 'contents', url: 'contents'}))
       @parent.regions.footer.show(new FooterView({page: 'contents'}))
       @regions.contents.show(new FindContentView())
 
       if @uuid
+        @parent.regions.header.show(new HeaderView({page: 'contents'}))
         @regions.contents.append(new MediaView({uuid: @uuid, page: @page}))
       else
+        @parent.regions.header.show(new HeaderView({page: 'contents', url: 'contents'}))
         @regions.contents.append(new BrowseContentView())
