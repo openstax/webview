@@ -8,31 +8,31 @@ define (require) ->
   return new class AnalyticsHandler
     constructor: () ->
       # Setup temporary analytics.js objects
-      window.GoogleAnalyticsObject = 'ga'
-      window.ga = () -> (window.ga.q ?= []).push(arguments)
-      window.ga.l = 1 * new Date()
+      # window.GoogleAnalyticsObject = 'ga'
+      # window.ga = () -> (window.ga.q ?= []).push(arguments)
+      # window.ga.l = 1 * new Date()
 
       # Initialize analytics.js account
-      window.ga('create', settings.analyticsID)
+      # window.ga('create', settings.analyticsID, 'auto')
 
       # ## Setup ga.js
       window._gaq ?= []
       window._gaq.push(['_setAccount', settings.analyticsID])
 
       # Asynchronously load analytics.js.
-      require(['https://www.google-analytics.com/analytics.js'])
+      # require(['https://www.google-analytics.com/analytics.js'])
 
       # Asynchronously load ga.js
       require(['https://www.google-analytics.com/ga.js'])
 
     # Wrapper functions to add analytics events
-    ga: () -> window.ga?.apply(@, arguments) # analytics.js
-    gaq: () -> window._gaq?.push(arguments) # ga.js
+    # ga: () -> window.ga?.apply(@, arguments) # analytics.js
+    gaq: () -> window._gaq?.push(arguments[0]) # ga.js
 
     # Send the current page to every analytics service
     send: () ->
       fragment = Backbone.history.fragment
       if not /^\//.test(fragment) then fragment = '/' + fragment
 
-      @ga('send', 'pageview')
+      # @ga('send', 'pageview')
       @gaq(['_trackPageview', fragment])

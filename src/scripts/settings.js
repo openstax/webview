@@ -24,7 +24,7 @@
       languages: languages,
 
       // Legacy URL
-      // URLS are concatenated using the following logic: location.protocol + '//' + legacy + '/' + view.url
+      // URLs are concatenated using the following logic: location.protocol + '//' + legacy + '/' + view.url
       //   Example: 'http:' + '//' + 'cnx.org' + '/' + 'contents'
       // Do not include the protocol or a trailing slash
       legacy: 'cnx.org',
