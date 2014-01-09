@@ -27,7 +27,7 @@ define (require) ->
 
     # Wrapper functions to add analytics events
     # ga: () -> window.ga?.apply(@, arguments) # analytics.js
-    gaq: () -> window._gaq?.push(arguments) # ga.js
+    gaq: () -> window._gaq?.push(arguments[0]) # ga.js
 
     # Send the current page to every analytics service
     send: () ->
