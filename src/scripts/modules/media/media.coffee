@@ -44,10 +44,11 @@ define (require) ->
         if currentPage
           moduleID = currentPage?.get('legacy_id')
           moduleVersion = currentPage?.get('legacy_version')
-          headerView.setLegacyLink("content/#{moduleID}/#{moduleVersion}/?collection=#{id}/#{version}")
-          return
+          if moduleID and moduleVersion
+            headerView.setLegacyLink("content/#{moduleID}/#{moduleVersion}/?collection=#{id}/#{version}")
+        return
 
-      headerView.setLegacyLink("content/#{id}/#{version}")
+      headerView.setLegacyLink("content/#{id}/#{version}") if id and version
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))

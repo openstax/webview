@@ -15,10 +15,16 @@ define (require) ->
     initialize: (options = {}) ->
       super()
       @page = options.page
-      @url = @createLink(options.url or 'content')
+      @url = @createLink(options.url) if options.url
 
     setLegacyLink: (url) ->
-      @url = @createLink(url)
+      if url
+        @url = @createLink(url)
+      else
+        @url = null
       @render()
+
+    removeLegacyLink: (url) ->
+      @setLegacyLink()
 
     createLink: (url) -> "#{location.protocol}//#{settings.legacy}/#{url}"
