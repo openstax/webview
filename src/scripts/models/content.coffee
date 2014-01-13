@@ -41,8 +41,12 @@ define (require) ->
       @fetch
         reset: true
         success: () =>
-          @set('loaded', true)
+          @set('error', false)
           @load(options.page)
+        error: () =>
+          @set('error', true)
+      .always () =>
+        @set('loaded', true)
 
     parse: (response) ->
       response = @parseInfo(response)
