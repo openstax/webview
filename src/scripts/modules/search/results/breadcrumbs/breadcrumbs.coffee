@@ -31,7 +31,7 @@ define (require) ->
         _.map obj, (limit) ->
           # Values with spaces in them must have been surrounded by quote strings
           if /\s/g.test(limit.value) and not /"/g.test(limit.value)
-            limit.value = "\"#{limit[key]}\""
+            limit.value = "\"#{limit.value}\""
 
           return "#{limit.tag}:#{limit.value}" # Limit strings are in the format `limit:value`
 
