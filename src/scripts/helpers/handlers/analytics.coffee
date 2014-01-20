@@ -26,7 +26,9 @@ define (require) ->
 
     # Wrapper functions to add analytics events
     # ga: () -> window.ga?.apply(@, arguments) # analytics.js
-    gaq: () -> window._gaq?.push(arguments[0]) # ga.js
+    gaq: () ->
+      console.log arguments[0] + ', ' + arguments[1]
+      window._gaq?.push(arguments[0], arguments[1]) # ga.js
 
     # Send the current page to every analytics service
     send: (account) ->
@@ -37,5 +39,4 @@ define (require) ->
       account ?= settings.analyticsID
 
       # @ga('send', 'pageview')
-      @gaq(['_trackPageview', fragment])
-      @gaq.push(['_setAccount', account], ['_trackPageview'])
+      @gaq(['_setAccount', account], ['_trackPageview', fragment])
