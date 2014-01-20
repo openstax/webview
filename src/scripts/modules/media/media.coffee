@@ -1,4 +1,5 @@
 define (require) ->
+  analytics = require('cs!helpers/handlers/analytics')
   Content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
   MediaEndorsedView = require('cs!./endorsed/endorsed')
@@ -15,6 +16,9 @@ define (require) ->
   return class MediaView extends BaseView
     template: template
 
+    regions:
+      media: '.media'
+
     initialize: (options) ->
       super()
 
@@ -24,11 +28,14 @@ define (require) ->
       @uuid = options.uuid
       @model = new Content({id: @uuid, page: options.page})
 
+      @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title', @updateTitle)
       @listenTo(@model, 'change:legacy_id change:legacy_version changePage', @updateLegacyLink)
 
-    regions:
-      media: '.media'
+    trackAnalytics: () ->
+      # Track loading using the media's own analytics ID, if specified
+      analyticsID = @model.get('googleAnalytics')
+      analytics.send(analyticsID) if analyticsID
 
     updateTitle: () ->
       @pageTitle = @model.get('title')
