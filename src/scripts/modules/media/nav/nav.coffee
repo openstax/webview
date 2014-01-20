@@ -1,6 +1,7 @@
 define (require) ->
   $ = require('jquery')
   linksHelper = require('cs!helpers/links')
+  router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./nav-template')
@@ -30,18 +31,24 @@ define (require) ->
       'click .next': 'nextPage'
       'click .back': 'previousPage'
 
-    nextPage: () ->
-      @trackNav(@model.nextPage())
+    nextPage: (e) ->
+      @model.nextPage()
+      @changePage(e)
+
+    previousPage: (e) ->
+      @model.previousPage()
+      @changePage(e)
+
+    changePage: (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+      href = $(e.currentTarget).attr('href')
+      router.navigate href, {trigger: false}, () => @trackNav()
       @scrollToTop()
 
-    previousPage: () ->
-      @trackNav(@model.previousPage())
-      @scrollToTop()
-
-    trackNav: (page) ->
+    trackNav: () ->
       analyticsID = @model.get('googleAnalytics')
-      fragment = "contents/#{@model.get('id')}:#{page}"
-      analytics.send(analyticsID, fragment) if analyticsID
+      analytics.send(analyticsID) if analyticsID
 
     scrollToTop: () ->
       $mediaNav = $('.media-nav').first()
