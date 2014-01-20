@@ -30,7 +30,7 @@ define (require) ->
         if node.get('subcollection')
           @regions.container.appendAs('li', new TocTreeView({model: node}))
         else
-          @regions.container.appendAs('li', new TocLeafView({model: node}))
+          @regions.container.appendAs('li', new TocLeafView({model: node, collection: @model}))
 
     toggleSubcollection: (e) ->
       parent = $(e.currentTarget).parent()
