@@ -27,12 +27,10 @@ define (require) ->
     # Wrapper functions to add analytics events
     # ga: () -> window.ga?.apply(@, arguments) # analytics.js
     gaq: () ->
-      console.log arguments[0] + ', ' + arguments[1]
       window._gaq?.push(arguments[0], arguments[1]) # ga.js
 
     # Send the current page to every analytics service
-    send: (account) ->
-      fragment = Backbone.history.fragment
+    send: (account, fragment = Backbone.history.fragment) ->
       if not /^\//.test(fragment) then fragment = '/' + fragment
 
       # Use the default analytics ID in settings if no account is specified
