@@ -17,7 +17,6 @@ define (require) ->
 
       # ## Setup ga.js
       window._gaq ?= []
-      window._gaq.push(['_setAccount', settings.analyticsID])
 
       # Asynchronously load analytics.js.
       # require(['https://www.google-analytics.com/analytics.js'])
@@ -27,12 +26,14 @@ define (require) ->
 
     # Wrapper functions to add analytics events
     # ga: () -> window.ga?.apply(@, arguments) # analytics.js
-    gaq: () -> window._gaq?.push(arguments[0]) # ga.js
+    gaq: () -> window._gaq?.push(arguments[0], arguments[1]) # ga.js
 
     # Send the current page to every analytics service
-    send: () ->
-      fragment = Backbone.history.fragment
+    send: (account, fragment = Backbone.history.fragment) ->
       if not /^\//.test(fragment) then fragment = '/' + fragment
 
+      # Use the default analytics ID in settings if no account is specified
+      account ?= settings.analyticsID
+
       # @ga('send', 'pageview')
-      @gaq(['_trackPageview', fragment])
+      @gaq(['_setAccount', account], ['_trackPageview', fragment])
