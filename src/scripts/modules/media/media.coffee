@@ -65,4 +65,4 @@ define (require) ->
 
     displayError: () ->
       error = arguments[1] # @model.get('error')
-      router.appView.render('error', {code: error, message: 'Media Not Found'}) if error
+      router.appView.render('error', {code: error}) if error
