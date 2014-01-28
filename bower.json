@@ -7,16 +7,17 @@
     "node_modules"
   ],
   "dependencies": {
-    "jquery": "~2.0.3",
+    "jquery": "~2.1.0",
     "lodash": "~2.4.1",
     "backbone": "~1.1.0",
-    "backbone-associations": "~0.5.4",
-    "bootstrap": "3.0.2",
+    "backbone-associations": "~0.5.5",
+    "bootstrap": "50ad304bb52b344828352e888b6f8ddc042ba176",
     "requirejs": "~2.1.10",
     "requirejs-text": "~2.0.10",
     "require-cs": "~0.4.4",
     "require-less": "~0.1.0",
-    "require-handlebars-plugin": "~0.7.0"
+    "require-handlebars-plugin": "~0.7.0",
+    "aloha-editor": "alohaeditor/Aloha-Editor#master"
   },
   "devDependencies": {
     "jquery-mockjax": "~v1.5.2"
