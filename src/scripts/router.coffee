@@ -27,7 +27,8 @@ define (require) ->
       @route /^search/, 'search', () ->
         @appView.render('search')
 
-    navigate: () ->
+    navigate: (fragment, options, cb) ->
       super(arguments...)
       analytics.send()
+      cb?()
       @trigger('navigate')

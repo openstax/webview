@@ -1,5 +1,6 @@
 define (require) ->
   router = require('cs!router')
+  analytics = require('cs!helpers/handlers/analytics')
   Content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
   MediaEndorsedView = require('cs!./endorsed/endorsed')
@@ -28,6 +29,7 @@ define (require) ->
       @uuid = options.uuid
       @model = new Content({id: @uuid, page: options.page})
 
+      @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title', @updateTitle)
       @listenTo(@model, 'change:legacy_id change:legacy_version changePage', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
@@ -42,6 +44,11 @@ define (require) ->
       @regions.media.append(new MediaBodyView({model: @model}))
       @regions.media.append(new MediaFooterView({model: @model}))
       @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
+
+    trackAnalytics: () ->
+      # Track loading using the media's own analytics ID, if specified
+      analyticsID = @model.get('googleAnalytics')
+      analytics.send(analyticsID) if analyticsID
 
     updateTitle: () ->
       @pageTitle = @model.get('title')

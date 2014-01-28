@@ -31,7 +31,7 @@ The `dist` directory containing the built site will be added to the root `webvie
 1. Install [nginx](http://nginx.org/)
 2. Run `grunt nginx:start` (uses `nginx.development.conf`)
 3. Point your browser to [http://localhost:8000/test](http://localhost:8000/test) for mock data
-4. If you have https://gihub.com/Connexions/cnx-archive installed, you can point your browser to [http://localhost:8000](http://localhost:8000)
+4. If you have https://github.com/Connexions/cnx-archive installed, you can point your browser to [http://localhost:8000](http://localhost:8000)
 
 ###### Customization Notes
 
