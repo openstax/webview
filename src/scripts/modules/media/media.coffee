@@ -1,4 +1,5 @@
 define (require) ->
+  router = require('cs!router')
   Content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
   MediaEndorsedView = require('cs!./endorsed/endorsed')
@@ -15,6 +16,9 @@ define (require) ->
   return class MediaView extends BaseView
     template: template
 
+    regions:
+      media: '.media'
+
     initialize: (options) ->
       super()
 
@@ -26,9 +30,18 @@ define (require) ->
 
       @listenTo(@model, 'change:title', @updateTitle)
       @listenTo(@model, 'change:legacy_id change:legacy_version changePage', @updateLegacyLink)
+      @listenTo(@model, 'change:error', @displayError)
 
-    regions:
-      media: '.media'
+    onRender: () ->
+      @regions.media.append(new MediaEndorsedView({model: @model}))
+      @regions.media.append(new LatestView({model: @model}))
+      @regions.media.append(new MediaTitleView({model: @model}))
+      @regions.media.append(new MediaTabsView({model: @model}))
+      @regions.media.append(new MediaNavView({model: @model}))
+      @regions.media.append(new MediaHeaderView({model: @model}))
+      @regions.media.append(new MediaBodyView({model: @model}))
+      @regions.media.append(new MediaFooterView({model: @model}))
+      @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
 
     updateTitle: () ->
       @pageTitle = @model.get('title')
@@ -50,13 +63,6 @@ define (require) ->
 
       headerView.setLegacyLink("content/#{id}/#{version}") if id and version
 
-    onRender: () ->
-      @regions.media.append(new MediaEndorsedView({model: @model}))
-      @regions.media.append(new LatestView({model: @model}))
-      @regions.media.append(new MediaTitleView({model: @model}))
-      @regions.media.append(new MediaTabsView({model: @model}))
-      @regions.media.append(new MediaNavView({model: @model}))
-      @regions.media.append(new MediaHeaderView({model: @model}))
-      @regions.media.append(new MediaBodyView({model: @model}))
-      @regions.media.append(new MediaFooterView({model: @model}))
-      @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
+    displayError: () ->
+      error = arguments[1] # @model.get('error')
+      router.appView.render('error', {code: error, message: 'Media Not Found'}) if error
