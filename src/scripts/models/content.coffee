@@ -43,8 +43,8 @@ define (require) ->
         success: () =>
           @set('error', false)
           @load(options.page)
-        error: () =>
-          @set('error', true)
+        error: (model, response, options) =>
+          @set('error', response.status)
       .always () =>
         @set('loaded', true)
 

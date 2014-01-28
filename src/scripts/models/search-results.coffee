@@ -43,8 +43,8 @@ define (require) ->
         @fetch
           success: () =>
             @set('error', false)
-          error: () =>
-            @set('error', true)
+          error: (model, response, options) =>
+            @set('error', response.status)
         .always () =>
           @set('loaded', true)
 
