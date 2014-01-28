@@ -18,8 +18,8 @@ define (require) ->
         switch @error.code
           when 403 then @error.message = 'Forbidden'
           when 404 then @error.message = 'Page Not Found'
-          when 500 then @errror.message = 'Internal Server Error'
-          when 503 then @errror.message = 'Service Unavailable'
+          when 500 then @error.message = 'Internal Server Error'
+          when 503 then @error.message = 'Service Unavailable'
           else @error.messsage = 'Unknown Error'
 
       @pageTitle = @error.message
