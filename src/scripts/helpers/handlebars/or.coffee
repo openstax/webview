@@ -1,5 +1,5 @@
 define (require) ->
-  Handlebars = require('Handlebars')
+  Handlebars = require('hbs/handlebars')
 
   Handlebars.registerHelper 'or', (testA, testB, options) ->
     if testA or testB then options.fn(@) else options.inverse(@)

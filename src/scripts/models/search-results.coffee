@@ -42,7 +42,11 @@ define (require) ->
         @query = query or ''
         @fetch
           success: () =>
-            @set('loaded', true)
+            @set('error', false)
+          error: (model, response, options) =>
+            @set('error', response.status)
+        .always () =>
+          @set('loaded', true)
 
       return @
 

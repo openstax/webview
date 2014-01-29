@@ -1,6 +1,6 @@
 {
   "name": "connexions-webview",
-  "version": "0.8.4",
+  "version": "0.9.0",
   "ignore": [
     "**/.*",
     "dist",
@@ -12,11 +12,11 @@
     "backbone": "~1.1.0",
     "backbone-associations": "~0.5.4",
     "bootstrap": "3.0.2",
-    "requirejs": "~2.1.9",
+    "requirejs": "~2.1.10",
     "requirejs-text": "~2.0.10",
     "require-cs": "~0.4.4",
     "require-less": "~0.1.0",
-    "require-handlebars-plugin": "a9819e78f54dd5655b18dea976a2507baf660e1c"
+    "require-handlebars-plugin": "~0.7.0"
   },
   "devDependencies": {
     "jquery-mockjax": "~v1.5.2"

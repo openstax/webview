@@ -11,8 +11,9 @@
 
       // ## Core Libraries
       jquery: '../../bower_components/jquery/jquery',
-      underscore: '../../bower_components/lodash/dist/lodash.underscore',
+      underscore: '../../bower_components/lodash/dist/lodash',
       backbone: '../../bower_components/backbone/backbone',
+      'hbs/handlebars': '../../bower_components/require-handlebars-plugin/hbs/handlebars',
 
       // ## Backbone plugins
       'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
@@ -36,11 +37,6 @@
       bootstrapTab: '../../bower_components/bootstrap/js/tab',
       bootstrapTooltip: '../../bower_components/bootstrap/js/tooltip',
       bootstrapTransition: '../../bower_components/bootstrap/js/transition',
-
-      // ## Handlebars Dependencies
-      Handlebars: '../../bower_components/require-handlebars-plugin/Handlebars',
-      i18nprecompile: '../../bower_components/require-handlebars-plugin/hbs/i18nprecompile',
-      json2: '../../bower_components/require-handlebars-plugin/hbs/json2',
 
       // ## CoffeeScript Compiler
       'coffee-script': '../../bower_components/coffee-script/index'
@@ -90,11 +86,10 @@
     // Handlebars Requirejs Plugin Configuration
     // Used when loading templates `'hbs!...'`.
     hbs: {
-      disableI18n: true,
+      templateExtension: 'html',
       helperPathCallback: function (name) {
         return 'cs!helpers/handlebars/' + name;
-      },
-      templateExtension: 'html'
+      }
     }
   });
 

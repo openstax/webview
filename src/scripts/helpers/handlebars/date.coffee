@@ -1,5 +1,5 @@
 define (require) ->
-  Handlebars = require('Handlebars')
+  Handlebars = require('hbs/handlebars')
 
   convertDate = (date) ->
     options = {year: 'numeric', month: 'short', day: 'numeric'}

@@ -1,6 +1,8 @@
 define (require) ->
   $ = require('jquery')
   linksHelper = require('cs!helpers/links')
+  router = require('cs!router')
+  analytics = require('cs!helpers/handlers/analytics')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./nav-template')
   require('less!./nav')
@@ -21,20 +23,32 @@ define (require) ->
 
     initialize: (options) ->
       super()
-      @listenTo(@model, 'change:page change:pages', @render)
       @hideProgress = options.hideProgress
+
+      @listenTo(@model, 'change:page change:pages', @render)
 
     events:
       'click .next': 'nextPage'
       'click .back': 'previousPage'
 
-    nextPage: () ->
+    nextPage: (e) ->
       @model.nextPage()
+      @changePage(e)
+
+    previousPage: (e) ->
+      @model.previousPage()
+      @changePage(e)
+
+    changePage: (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+      href = $(e.currentTarget).attr('href')
+      router.navigate href, {trigger: false}, () => @trackNav()
       @scrollToTop()
 
-    previousPage: () ->
-      @model.previousPage()
-      @scrollToTop()
+    trackNav: () ->
+      analyticsID = @model.get('googleAnalytics')
+      analytics.send(analyticsID) if analyticsID
 
     scrollToTop: () ->
       $mediaNav = $('.media-nav').first()
