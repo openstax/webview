@@ -15,7 +15,7 @@
     "requirejs": "~2.1.10",
     "requirejs-text": "~2.0.10",
     "require-cs": "~0.4.4",
-    "require-less": "~0.1.0",
+    "require-less": "~0.1.1",
     "require-handlebars-plugin": "~0.7.0",
     "aloha-editor": "alohaeditor/Aloha-Editor#master"
   },
