@@ -1,4 +1,5 @@
 define (require) ->
+  router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics')
   Content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
@@ -31,6 +32,18 @@ define (require) ->
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title', @updateTitle)
       @listenTo(@model, 'change:legacy_id change:legacy_version changePage', @updateLegacyLink)
+      @listenTo(@model, 'change:error', @displayError)
+
+    onRender: () ->
+      @regions.media.append(new MediaEndorsedView({model: @model}))
+      @regions.media.append(new LatestView({model: @model}))
+      @regions.media.append(new MediaTitleView({model: @model}))
+      @regions.media.append(new MediaTabsView({model: @model}))
+      @regions.media.append(new MediaNavView({model: @model}))
+      @regions.media.append(new MediaHeaderView({model: @model}))
+      @regions.media.append(new MediaBodyView({model: @model}))
+      @regions.media.append(new MediaFooterView({model: @model}))
+      @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
 
     trackAnalytics: () ->
       # Track loading using the media's own analytics ID, if specified
@@ -57,13 +70,6 @@ define (require) ->
 
       headerView.setLegacyLink("content/#{id}/#{version}") if id and version
 
-    onRender: () ->
-      @regions.media.append(new MediaEndorsedView({model: @model}))
-      @regions.media.append(new LatestView({model: @model}))
-      @regions.media.append(new MediaTitleView({model: @model}))
-      @regions.media.append(new MediaTabsView({model: @model}))
-      @regions.media.append(new MediaNavView({model: @model}))
-      @regions.media.append(new MediaHeaderView({model: @model}))
-      @regions.media.append(new MediaBodyView({model: @model}))
-      @regions.media.append(new MediaFooterView({model: @model}))
-      @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
+    displayError: () ->
+      error = arguments[1] # @model.get('error')
+      router.appView.render('error', {code: error}) if error
