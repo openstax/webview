@@ -11,7 +11,7 @@
     "lodash": "~2.4.1",
     "backbone": "~1.1.0",
     "backbone-associations": "~0.5.5",
-    "bootstrap": "9195d8e8eb51208e4272e4c7e0851e2695da1a0d",
+    "bootstrap": "~3.1.0",
     "requirejs": "~2.1.10",
     "requirejs-text": "~2.0.10",
     "require-cs": "~0.4.4",
