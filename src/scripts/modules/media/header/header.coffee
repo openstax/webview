@@ -38,6 +38,7 @@ define (require) ->
     initialize: () ->
       super()
       @listenTo(@model, 'change:downloads change:buyLink changePage', @render)
+      @listenTo(@model, 'change:edit', @toggleEdit)
 
     onRender: () ->
       @regions.button.append new BookPopoverView
@@ -49,3 +50,6 @@ define (require) ->
 
       $summary.find('h5').toggleClass('active')
       @$el.find('.abstract').toggle()
+
+    toggleEdit: () ->
+      @$el.children('.media-header').children('h2').attr('contenteditable', @model.get('edit'))
