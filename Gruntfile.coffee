@@ -136,7 +136,7 @@ module.exports = (grunt) ->
           modules: [{
             name: 'main'
             include: [
-              'cs!pages/404/404'
+              'cs!pages/error/error'
               'cs!pages/home/home'
               'cs!pages/contents/contents'
               'cs!pages/search/search'
