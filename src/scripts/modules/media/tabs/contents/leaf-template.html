@@ -2,4 +2,8 @@
   <a href="{{url}}:{{page}}" data-page="{{page}}" data-trigger="false">
     <span class="title {{#if active}}active{{/if}}" data-depth="{{depth}}">{{title}}</span>
   </a>
+  
+  {{~#if changed}}
+    <small><i>changed</i></small>
+  {{/if~}}
 </div>
