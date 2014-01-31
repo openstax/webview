@@ -1,11 +1,23 @@
 <div class="media-title">
   {{#if loaded}}
-    <h1>{{title}}</h1>
+    <div class="title">
+      <h1>{{title}}</h1>
+      {{#if parentId}}
+        <span>
+          Derived from <a href="/content/{{parentId}}@{{parentVersion}}">{{parentTitle}}</a> by
+          <span class="collection-authors">
+            {{#each parentAuthors}}
+              <a href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
+            {{/each}}
+          </span>
+        </span>
+      {{/if}}
+    </div>
 
     <div class="info">
       {{#if authors.length}}
         <span>{{#is type 'book'}}Collection{{else}}Module{{/is}} by:</span>
-        <span class="collection-author">
+        <span class="collection-authors">
           {{#each authors}}
             <a href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
           {{/each}}

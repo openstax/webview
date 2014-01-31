@@ -5,11 +5,26 @@
   padding: 30px 30px 40px 30px;
   background-color: @gray-lightest;
 
-  > h1 {
+  .collection-authors a {
+    &::after {
+      content: ",";
+    }
+
+    &:last-of-type::after {
+      content: "";
+    }
+  }
+
+  > .title {
     display: inline-block;
     margin-right: 7%;
     width: 60%;
     overflow-wrap: break-word;
+
+    > span {
+      display: block;
+      margin-top: 5px;
+    }
   }
 
   > .info {
@@ -20,16 +35,6 @@
     vertical-align: top;
     overflow-wrap: break-word;
     .user-select(none);
-
-    > .collection-author a {
-      &::after {
-        content: ",";
-      }
-
-      &:last-of-type::after {
-        content: "";
-      }
-    }
 
     > .share {
       margin-top: 35px;
