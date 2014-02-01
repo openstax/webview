@@ -4,7 +4,7 @@
       <h1>{{title}}</h1>
       {{#if parentId}}
         <span>
-          Derived from <a href="/content/{{parentId}}@{{parentVersion}}">{{parentTitle}}</a> by
+          Derived from <a href="/contents/{{parentId}}@{{parentVersion}}">{{parentTitle}}</a> by
           <span class="collection-authors">
             {{#each parentAuthors}}
               <a href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
