@@ -17,7 +17,7 @@ define (require) ->
       if location.search and location.search isnt '?q='
         @model = searchResults.load(location.search)
 
-      @listenTo(@model, 'change:error', @displayError)
+      @listenTo(@model, 'change:error', @displayError) if @model
 
     regions:
       search: '.search'
