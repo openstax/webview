@@ -10,7 +10,7 @@ define (require) ->
 
       # Default Route
       @route '*actions', 'default', () ->
-        @appView.render('error', {error: 404, message: 'Page Not Found'})
+        @appView.render('error', {code: 404})
 
       @route '', 'index', () ->
         @appView.render('home')
