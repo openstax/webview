@@ -247,7 +247,7 @@ module.exports = (grunt) ->
     'jshint'
     'jsbeautifier'
     'coffeelint'
-    'recess'
+    #'recess' NOTE: Disabled until recess is upgraded to support LESS 1.6+
   ]
 
   # Dist
