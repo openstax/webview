@@ -222,6 +222,7 @@ module.exports = (grunt) ->
     imagemin:
       images:
         options:
+          cache: false
           optimizationLevel: 7
         files: [{
           expand: true
