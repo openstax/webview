@@ -21,7 +21,7 @@ define (require) ->
 
     toggleEdit: () ->
       edit = @model.get('edit')
-      $editable = @$el.children(@editable)
+      $editable = @$el.find(@editable)
 
       $editable.attr('contenteditable', edit)
 
