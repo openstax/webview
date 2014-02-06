@@ -4,7 +4,7 @@ define (require) ->
   require('less!./header')
   require('bootstrapDropdown')
 
-  return class SearchHeaderView extends BaseView
+  return class WorkspaceHeaderView extends BaseView
     template: template
 
     initialize: () ->
