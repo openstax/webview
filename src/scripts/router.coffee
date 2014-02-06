@@ -18,6 +18,9 @@ define (require) ->
       @route 'contents', 'contents', () ->
         @appView.render('contents')
 
+      @route 'me', 'me', () ->
+        @appView.render('me')
+
       # Match and extract uuid and page numbers separated by a colon
       @route /^contents\/([^:]+):?([0-9]*)/, 'media', (uuid, page) ->
         uuid = uuid.toLowerCase()

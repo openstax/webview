@@ -1,0 +1,23 @@
+<tr>
+  <td class="type">
+    {{#is mediaType 'Collection'}}
+      <span class="glyphicon glyphicon-book"></span>
+    {{else}}
+      {{#is mediaType 'Module'}}
+        <span class="glyphicon glyphicon-file"></span>
+      {{else}}
+        <span class="glyphicon glyphicon-question-sign"></span>
+      {{/is}}
+    {{/is}}
+  </td>
+  <td class="title">
+    <h4><a href="contents/{{id}}">{{title}}</a></h4>
+    <span>{{include summarySnippet}}</span>
+  </td>
+  <td class="authors">
+    {{#each authors}}
+      <span class="author">{{fullname}}</span>
+    {{/each}}
+  </td>
+  <td class="edited">{{date pubDate}}</td>
+</tr>
