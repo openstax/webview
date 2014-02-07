@@ -84,12 +84,14 @@ define (require) ->
       @_render()
       @onRender()
       if @_rendered then @onDomRefresh() else @_rendered = true
+      @onAfterRender()
 
       return @
 
     onShow: () -> # noop
     onBeforeRender: () -> # noop
     onRender: () -> # noop
+    onAfterRender: () -> # noop
     onDomRefresh: () -> # noop
     onBeforeClose: () -> # noop
 
