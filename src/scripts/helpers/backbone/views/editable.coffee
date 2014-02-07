@@ -50,7 +50,7 @@ define (require) ->
                 page = @model.get('currentPage')
 
                 @model.set('changed', true)
-                page.set('changed', true)
+                page.set('changed', true) if /^currentPage\./.test(options.value)
 
                 @model.set(options.value, $($editable.get(index)).html())
 
