@@ -41,7 +41,7 @@ define (require) ->
             when 'contenteditable' then $editable.attr('contenteditable', true)
             when 'aloha' then console.log 'FIX: enable aloha'
 
-          options.onEditable?()
+          options.onEditable?($editable)
           $editable.each (index) =>
             if @observers[selector] then @observers[selector].disconnect()
 
@@ -69,7 +69,7 @@ define (require) ->
             when 'contenteditable' then $editable.attr('contenteditable', false)
             when 'aloha' then console.log 'FIX: disable aloha'
 
-          options.onUneditable?()
+          options.onUneditable?($editable)
           @observers[selector].disconnect()
           delete @observers[selector]
 
