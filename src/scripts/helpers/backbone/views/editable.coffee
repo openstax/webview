@@ -1,4 +1,6 @@
 define (require) ->
+  $ = require('jquery')
+  _ = require('underscore')
   BaseView = require('cs!helpers/backbone/views/base')
 
   observerConfig =
@@ -9,24 +11,43 @@ define (require) ->
   return class EditableView extends BaseView
     initialize: () ->
       super()
+      @observers = {}
 
-      @listenTo(@model, 'change:edit', @toggleEdit)
+      @listenTo(@model, 'change:editable', @_toggleEditable)
 
-      @observer = new MutationObserver (mutations) =>
-        mutations.forEach (mutation) =>
-          page = @model.get('currentPage')
+    onBeforeEditable: () -> # noop
+    onEditable: () -> # noop
 
-          @model.set('changed', true)
-          page.set('changed', true)
+    _toggleEditable: () ->
+      @onBeforeEditable()
 
-    toggleEdit: () ->
-      edit = @model.get('edit')
-      $editable = @$el.find(@editable)
+      if @editable
+        edit = @model.get('editable')
 
-      $editable.attr('contenteditable', edit)
+        _.each @editable, (options, selector) =>
+          $editable = @$el.find(selector)
 
-      if edit
-        $editable.each (index) =>
-          @observer.observe($editable.get(index), observerConfig)
-      else
-        @observer.disconnect()
+          switch options.type
+            when 'contenteditable' then $editable.attr('contenteditable', edit)
+            when 'aloha' then console.log 'FIX: enable aloha'
+
+          if edit
+            options.onEditable?()
+            $editable.each (index) =>
+              if @observers[selector] then @observers[selector].disconnect()
+
+              @observers[selector] = new MutationObserver (mutations) =>
+                mutations.forEach (mutation) =>
+                  page = @model.get('currentPage')
+
+                  @model.set('changed', true)
+                  page.set('changed', true)
+
+                  @model.set(options.value, $($editable.get(index)).html())
+
+              @observers[selector].observe($editable.get(index), options.config or observerConfig)
+          else
+            options.onUneditable?()
+            @observers[selector].disconnect()
+
+      @onEditable()
