@@ -2,12 +2,12 @@ define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
   router = require('cs!router')
-  BaseView = require('cs!helpers/backbone/views/base')
+  EditableView = require('cs!helpers/backbone/views/editable')
   #MailPopoverView = require('cs!./popovers/mail/mail')
   template = require('hbs!./title-template')
   require('less!./title')
 
-  return class MediaTitleView extends BaseView
+  return class MediaTitleView extends EditableView
     template: template
     templateHelpers: () ->
       title = @model.get('title')
@@ -29,6 +29,11 @@ define (require) ->
         list[key] = encodeURI(value)
 
       return {share: share, encodedTitle: encodeURI(title)}
+
+    editable:
+      '.media-title > .title > h1':
+        value: 'title'
+        type: 'contenteditable'
 
     initialize: () ->
       super()
