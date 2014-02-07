@@ -8,7 +8,10 @@ define (require) ->
   return class MediaBodyView extends EditableView
     template: template
 
-    editable: '.media-body'
+    editable:
+      '.media-body':
+        value: 'currentPage.content'
+        type: 'contenteditable'
 
     events:
       'click .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'

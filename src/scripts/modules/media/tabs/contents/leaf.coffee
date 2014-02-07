@@ -22,7 +22,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:active change:page change:changed', @render)
+      @listenTo(@model, 'change:active change:page change:changed change:title', @render)
 
     changePage: (e) ->
       e.preventDefault()

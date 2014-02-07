@@ -29,7 +29,10 @@ define (require) ->
           (_.isArray(pageDownloads) and pageDownloads?.length)
       }
 
-    editable: '.media-header > h2'
+    editable:
+      '.media-header > h2':
+        value: 'currentPage.title'
+        type: 'contenteditable'
 
     regions:
       'button': '.info .btn'
