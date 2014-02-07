@@ -12,6 +12,7 @@ define (require) ->
       'click .edit, .browse': 'toggleEditor'
 
     initialize: () ->
+      super()
       @listenTo(@model, 'change:editable change:title', @render)
 
     toggleEditor: () ->

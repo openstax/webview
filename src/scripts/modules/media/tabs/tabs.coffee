@@ -2,7 +2,7 @@ define (require) ->
   $ = require('jquery')
   content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
-  TocTreeView = require('cs!./contents/tree')
+  ContentsView = require('cs!./contents/contents')
   ToolsView = require('cs!./tools/tools')
   template = require('hbs!./tabs-template')
   require('less!./tabs')
@@ -23,7 +23,7 @@ define (require) ->
       @listenTo(@model, 'change:contents', @render)
 
     onRender: () ->
-      @regions.contents.show(new TocTreeView({model: @model}))
+      @regions.contents.show(new ContentsView({model: @model}))
       @regions.tools.show(new ToolsView({model: @model}))
 
     selectTab: (e) ->
