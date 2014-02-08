@@ -46,11 +46,11 @@
           content: "\2212"; // &minus; (−)
         }
       }
-      
+
       &.disabled {
-        color: @gray-light;
-        background-color: @gray-medium;
-        cursor: no-drop;
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: 0.65;
       }
     }
   }
