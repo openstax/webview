@@ -1,6 +1,18 @@
 {{#if currentPage.loaded}}
   <div class="media-header">
-    <h2>{{currentPage.title}}</h2>
+    <div class="title">
+      <h2>{{currentPage.title}}</h2>
+      {{#if currentPage.parentId}}
+        <span>
+          Derived from <a href="/contents/{{currentPage.parentId}}@{{currentPage.parentVersion}}">{{currentPage.parentTitle}}</a> by
+          <span class="collection-authors">
+            {{#each currentPage.parentAuthors}}
+              <a href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
+            {{/each}}
+          </span>
+        </span>
+      {{/if}}
+    </div>
 
     <div class="info">
       <div>
