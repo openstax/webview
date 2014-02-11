@@ -7,3 +7,7 @@ define (require) ->
 
   return class EditbarView extends BaseView
     template: template
+
+    initialize: () ->
+      super()
+      @listenTo(@model, 'change:changed', @render)
