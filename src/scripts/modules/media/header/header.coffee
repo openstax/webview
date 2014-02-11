@@ -30,7 +30,7 @@ define (require) ->
       }
 
     editable:
-      '.media-header > h2':
+      '.media-header > .title > h2':
         value: 'currentPage.title'
         type: 'contenteditable'
 
