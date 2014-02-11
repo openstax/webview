@@ -3,6 +3,7 @@ define (require) ->
   template = require('hbs!./editbar-template')
   require('less!./editbar')
   require('bootstrapButton')
+  require('bootstrapCollapse')
 
   return class EditbarView extends BaseView
     template: template
