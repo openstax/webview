@@ -38,12 +38,19 @@
       bootstrapTooltip: '../../bower_components/bootstrap/js/tooltip',
       bootstrapTransition: '../../bower_components/bootstrap/js/transition',
 
+      // # Select2 multiselect widget
+      select2: '../../bower_components/select2/select2',
+
       // ## CoffeeScript Compiler
       'coffee-script': '../../bower_components/coffee-script/index'
     },
 
     // # Packages
     packages: [{
+      name: 'css',
+      location: '../../bower_components/require-css',
+      main: 'css'
+    }, {
       name: 'less',
       location: '../../bower_components/require-less',
       main: 'less'
@@ -80,7 +87,13 @@
       bootstrapScrollspy: ['jquery'],
       bootstrapTab: ['jquery'],
       bootstrapTooltip: ['jquery'],
-      bootstrapTransition: ['jquery']
+      bootstrapTransition: ['jquery'],
+
+      // Select2
+      select2: {
+        deps: ['jquery', 'css!../../bower_components/select2/select2'],
+        exports: 'Select2'
+      }
     },
 
     // Handlebars Requirejs Plugin Configuration
