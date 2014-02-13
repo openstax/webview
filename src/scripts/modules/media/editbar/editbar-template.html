@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#editbar-navbar-collapse">
@@ -10,47 +10,38 @@
       <a class="navbar-brand" href="#">Edit</a>
     </div>
 
-    <div class="navbar-collapse collapse" id="editbar-navbar-collapse">
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-plain navbar-btn">
-          <input type="checkbox"> <span class="glyphicon glyphicon-bold"></span>
-        </label>
-        <label class="btn btn-plain navbar-btn">
-          <input type="checkbox"> <span class="glyphicon glyphicon-italic"></span>
-        </label>
-        <label class="btn btn-plain navbar-btn">
-          <input type="checkbox"> <span class="glyphicon glyphicon-font"></span>
-        </label>
+    <div class="navbar-collapse collapse toolbar" id="editbar-navbar-collapse" role="toolbar">
+      <div class="btn-group">
+        <button type="button" class="js-action-strong       btn btn-plain navbar-btn"><strong>B</strong></button>
+        <button type="button" class="js-action-emphasis     btn btn-plain navbar-btn"><em>I</em></button>
+        <button type="button" class="js-action-superscript  btn btn-plain navbar-btn">A<sup>S</sup></button>
+        <button type="button" class="js-action-subscript    btn btn-plain navbar-btn">A<sub>S</sub></button>
       </div>
 
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-plain navbar-btn">
-          <input type="radio"> <span class="glyphicon glyphicon-align-left"></span>
-        </label>
-        <label class="btn btn-plain navbar-btn">
-          <input type="radio"> <span class="glyphicon glyphicon-align-center"></span>
-        </label>
-        <label class="btn btn-plain navbar-btn">
-          <input type="radio"> <span class="glyphicon glyphicon-align-right"></span>
-        </label>
-        <label class="btn btn-plain navbar-btn">
-          <input type="radio"> <span class="glyphicon glyphicon-align-justify"></span>
-        </label>
+      <div class="btn-group">
+        <button type="button" class="js-action-link btn btn-plain navbar-btn"><span class="glyphicon glyphicon-link"></span></button>
       </div>
 
-      <div class="btn-group" data-toggle="buttons">
-        <button type="button" class="btn btn-plain navbar-btn">
-          <span class="glyphicon glyphicon-list"></span>
-        </button>
-        <button type="button" class="btn btn-plain navbar-btn">
-          <span class="glyphicon glyphicon-indent-left"></span>
-        </button>
-        <button type="button" class="btn btn-plain navbar-btn">
-          <span class="glyphicon glyphicon-indent-right"></span>
-        </button>
+      <div class="btn-group">
+        <button type="button" class="js-action-list     btn btn-plain navbar-btn"><span class="glyphicon glyphicon-list"></span></button>
+        <button type="button" class="js-action-outdent  btn btn-plain navbar-btn"><span class="glyphicon glyphicon-indent-left"></span></button>
+        <button type="button" class="js-action-indent   btn btn-plain navbar-btn"><span class="glyphicon glyphicon-indent-right"></span></button>
       </div>
 
-      <button type="button" class="btn btn-default navbar-btn navbar-right {{#unless changed}}disabled{{/unless}}">Save</button>
-    </div>
-  </div>
+      <div class="btn-group">
+        <button type="button" class="js-action-image  btn btn-plain navbar-btn"><span class="glyphicon glyphicon-picture"></span></button>
+        <button type="button" class="js-action-table  btn btn-plain navbar-btn"><span class="glyphicon glyphicon-align-justify"></span></button>
+        <button type="button" class="js-action-math   btn btn-plain navbar-btn">x+y<sup>2</sup></button>
+      </div>
+
+      <div class="navbar-right">
+        {{#if changed}}
+          <button type="button" class="js-action-revert  btn btn-plain navbar-btn">Revert</button>
+          <button type="button" class="js-action-save    btn btn-default navbar-btn"><i class="glyphicon glyphicon-save"></i> Save Draft</button>
+        {{else}}
+          <button type="button" class="js-action-publish btn btn-primary navbar-btn">Publish...</button>
+        {{/if}}
+      </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
