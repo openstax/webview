@@ -11,6 +11,19 @@
     </div>
 
     <div class="navbar-collapse collapse toolbar" id="editbar-navbar-collapse" role="toolbar">
+      <div class="btn-group headings">
+        <button class="btn btn-plain navbar-btn current-heading" rel="tooltip" title="Text Heading">Nothing</button>
+        <button class="btn btn-plain navbar-btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Change Heading">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="action changeHeading" data-tagname="p">Normal Text</a></li>
+          <li><a class="action changeHeading" data-tagname="h1">Heading</a></li>
+          <li><a class="action changeHeading" data-tagname="h2">Subheading</a></li>
+          <li><a class="action changeHeading" data-tagname="h3">SubSubHeading</a></li>
+        </ul>
+      </div>
+
       <div class="btn-group">
         <button type="button" class="js-action-strong       btn btn-plain navbar-btn"><strong>B</strong></button>
         <button type="button" class="js-action-emphasis     btn btn-plain navbar-btn"><em>I</em></button>
