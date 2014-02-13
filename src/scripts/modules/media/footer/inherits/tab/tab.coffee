@@ -1,7 +1,7 @@
 define (require) ->
-  BaseView = require('cs!helpers/backbone/views/base')
+  EditableView = require('cs!helpers/backbone/views/editable')
 
-  return class FooterTabView extends BaseView
+  return class FooterTabView extends EditableView
     templateHelpers: () ->
       if @media is 'book'
         model = @model.toJSON()
