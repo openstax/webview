@@ -16,11 +16,25 @@
   <dt>Language:</dt>
     <dd>
       <div>
-        {{#is model.languageName.native model.languageName.english}}
-          {{model.languageName.native}}
+        {{#unless editable}}
+          {{#is model.languageName.native model.languageName.english}}
+            {{model.languageName.native}}
+          {{else}}
+            {{model.languageName.native}} ({{model.languageName.english}})
+          {{/is}}
         {{else}}
-          {{model.languageName.native}} ({{model.languageName.english}})
-        {{/is}}
+          <select name="language" class="js-metadata-language-select">
+            {{#each languages}}
+              <option value="{{@key}}" {{#is @key ../language}}selected{{/is}}>
+                {{~#is native english~}}
+                  {{native}}
+                {{~else~}}
+                  {{native}} ({{english}})
+                {{~/is~}}
+              </option>
+            {{/each}}
+          </select>
+        {{/unless}}
       </div>
     </dd>
   <dt>Summary:</dt>
