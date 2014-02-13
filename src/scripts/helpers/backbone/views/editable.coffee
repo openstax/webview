@@ -36,10 +36,14 @@ define (require) ->
       if @editable
         _.each @editable, (options, selector) =>
           $editable = @$el.find(selector)
+          value = options.value?() or options.value
 
           switch options.type
             when 'contenteditable' then $editable.attr('contenteditable', true)
             when 'aloha' then console.log 'FIX: enable aloha'
+            when 'select2'
+              require ['select2'], (select2) =>
+                $editable.select2(options?.select2 or {})
 
           options.onEditable?($editable)
           $editable.each (index) =>
@@ -50,9 +54,9 @@ define (require) ->
                 page = @model.get('currentPage')
 
                 @model.set('changed', true)
-                page.set('changed', true) if /^currentPage\./.test(options.value)
+                page.set('changed', true) if /^currentPage\./.test(value)
 
-                @model.set(options.value, $($editable.get(index)).html())
+                @model.set(value, $($editable.get(index)).html())
 
             @observers[selector].observe($editable.get(index), options.config or observerConfig)
 
