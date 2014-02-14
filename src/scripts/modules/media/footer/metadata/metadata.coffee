@@ -9,6 +9,7 @@ define (require) ->
     templateHelpers: () ->
       model = super()
       model.languages = settings.languages
+      model.languageName = settings.languages[model.language]
       return model
 
     editable:
