@@ -13,7 +13,7 @@ define (require) ->
       return model
 
     editable:
-      '.js-metadata-language-select':
+      '.metadata-language-select':
         value: () -> if @media is 'book' then return 'language' else return 'currentPage.language'
         type: 'select2'
         select2:
