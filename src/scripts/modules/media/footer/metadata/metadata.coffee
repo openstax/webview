@@ -13,7 +13,7 @@ define (require) ->
 
     editable:
       '.js-metadata-language-select':
-        value: if @media is 'book' then 'currentPage.language' else 'language'
+        value: () -> if @media is 'book' then return 'language' else return 'currentPage.language'
         type: 'select2'
         select2:
           width: 300
