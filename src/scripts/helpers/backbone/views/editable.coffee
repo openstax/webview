@@ -42,10 +42,11 @@ define (require) ->
           else
             value = options.value
 
-          setChanged = () =>
+          setChanged = (onEdit) =>
             page = @model.get('currentPage')
             @model.set('changed', true)
             page.set('changed', true) if /^currentPage\./.test(value)
+            onEdit.apply(@) if typeof onEdit is 'function'
 
           options.onBeforeEditable?($editable)
 
@@ -58,7 +59,7 @@ define (require) ->
 
                 @observers[selector] = new MutationObserver (mutations) =>
                   mutations.forEach (mutation) =>
-                    setChanged()
+                    setChanged(options.onEdit)
                     @model.set(value, $($editable.get(index)).html())
 
                 @observers[selector].observe($editable.get(index), options.config or observerConfig)
@@ -71,7 +72,7 @@ define (require) ->
 
                 $editable.off 'change.editable'
                 $editable.on 'change.editable', (e) =>
-                  setChanged()
+                  setChanged(options.onEdit)
                   @model.set(value, $editable.select2('val'))
 
           options.onEditable?($editable)
