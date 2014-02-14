@@ -15,7 +15,7 @@
     </dd>
   <dt>Language:</dt>
     <dd>
-      <div>
+      <div class="language">
         {{~#unless editable~}}
           {{#is languageName.native languageName.english~}}
             {{languageName.native}}
@@ -23,7 +23,7 @@
             {{languageName.native}} ({{languageName.english}})
           {{~/is~}}
         {{else~}}
-          <select name="language" class="metadata-language-select">
+          <select name="language">
             {{~#each languages~}}
               <option value="{{@key}}" {{#is @key ../language}}selected{{/is}}>
                 {{~#is native english~}}
@@ -39,15 +39,15 @@
     </dd>
   <dt>Summary:</dt>
     <dd>
-      <div>{{include abstract}}</div>
+      <div class="summary">{{include abstract}}</div>
     </dd>
   <dt>Subject:</dt>
     <dd>
-      <div>{{subject}}</div>
+      <div class="subject">{{subject}}</div>
     </dd>
   <dt>Keywords:</dt>
     <dd>
-      <div>{{keywords}}</div>
+      <div class="keywords">{{keywords}}</div>
     </dd>
   <dt>License:</dt>
     <dd>

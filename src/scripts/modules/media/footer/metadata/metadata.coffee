@@ -13,11 +13,14 @@ define (require) ->
       return model
 
     editable:
-      '.metadata-language-select':
+      '.language > select':
         value: () -> if @media is 'book' then return 'language' else return 'currentPage.language'
         type: 'select2'
         select2:
           width: 300
+      '.summary':
+        value: () -> if @media is 'book' then return 'abstract' else return 'currentPage.abstract'
+        type: 'contenteditable'
 
     initialize: () ->
       super()
