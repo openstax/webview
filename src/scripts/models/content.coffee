@@ -49,7 +49,6 @@ define (require) ->
         @set('loaded', true)
 
     parse: (response) ->
-      response = @parseInfo(response)
       type = response.type = MEDIA_TYPES[response.mediaType]
 
       # Only setup a toc for a book

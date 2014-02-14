@@ -16,12 +16,6 @@ define (require) ->
       # Don't overwrite the title from the book's table of contents
       if @get('title') then delete response.title
 
-      return @parseInfo(response)
-
-    parseInfo: (response) ->
-      # Add languageName property to nodes for faster references in views
-      response.languageName = settings.languages[response.language]
-
       return response
 
     fetch: (options) ->
