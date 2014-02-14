@@ -9,7 +9,7 @@ define (require) ->
         @media = 'page'
         model = @model.get('currentPage')?.toJSON()
 
-      return {media: @media, model: model}
+      return model or {}
 
     events:
       'click > .book-page-toggle > .btn:not(.active)': 'toggleMedia'
