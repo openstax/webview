@@ -9,9 +9,9 @@
   "dependencies": {
     "jquery": "components/jquery#2.1.0",
     "lodash": "~2.4.1",
-    "backbone": "~1.1.0",
+    "backbone": "~1.1.1",
     "backbone-associations": "~0.5.5",
-    "bootstrap": "~3.1.0",
+    "bootstrap": "~3.1.1",
     "requirejs": "~2.1.10",
     "requirejs-text": "~2.0.10",
     "require-cs": "~0.4.4",
@@ -19,6 +19,6 @@
     "require-handlebars-plugin": "~0.7.0"
   },
   "devDependencies": {
-    "jquery-mockjax": "~v1.5.2"
+    "jquery-mockjax": "~v1.5.3"
   }
 }
