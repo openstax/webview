@@ -43,7 +43,17 @@
     </dd>
   <dt>Subject:</dt>
     <dd>
-      <div class="subject">{{subject}}</div>
+      <div class="subject">
+        {{~#unless editable~}}
+          {{subject}}
+        {{~else~}}
+          <select name="subject" multiple>
+            {{~#each subjects~}}
+              <option value="{{@key}}" {{#is @key ../subject}}selected{{/is}}>{{@key}}</option>
+            {{~/each~}}
+          </select>
+        {{~/unless~}}
+      </div>
     </dd>
   <dt>Keywords:</dt>
     <dd>
