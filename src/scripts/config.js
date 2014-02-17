@@ -58,17 +58,6 @@
 
     // # Shims
     shim: {
-      // ## Core Libraries
-      backbone: {
-        deps: ['underscore', 'jquery'],
-        exports: 'Backbone'
-      },
-
-      // ## Backbone plugins
-      'backbone-associations': {
-        deps: ['backbone']
-      },
-
       // ## MathJax
       mathjax: {
         exports: 'MathJax'

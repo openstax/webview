@@ -22,7 +22,7 @@ define (require) ->
     }, {
       type: Backbone.Many
       key: 'authors'
-      collectionType: Backbone.Collection
+      collectionType: () -> Backbone.Collection
     }, {
       type: Backbone.One
       key: 'currentPage'
@@ -30,7 +30,7 @@ define (require) ->
     }, {
       type: Backbone.Many
       key: 'toc'
-      collectionType: Backbone.Collection
+      collectionType: () -> Backbone.Collection
     }]
 
     initialize: (options = {}) ->
