@@ -41,15 +41,17 @@
     <dd>
       <div class="summary">{{include abstract}}</div>
     </dd>
-  <dt>Subject:</dt>
+  <dt>Subjects:</dt>
     <dd>
-      <div class="subject">
+      <div class="subjects">
         {{~#unless editable~}}
-          {{subject}}
+          {{~#each subjects~}}
+            <span class="list-comma">{{this}}</span>
+          {{~/each~}}
         {{~else~}}
           <select name="subject" multiple>
-            {{~#each subjects~}}
-              <option value="{{@key}}" {{#is @key ../subject}}selected{{/is}}>{{@key}}</option>
+            {{~#each subjectsList~}}
+              <option value="{{@key}}" {{#inArray ../subjects @key}}selected{{/inArray}}>{{@key}}</option>
             {{~/each~}}
           </select>
         {{~/unless~}}
@@ -57,7 +59,11 @@
     </dd>
   <dt>Keywords:</dt>
     <dd>
-      <div class="keywords">{{keywords}}</div>
+      <div class="keywords">
+        {{~#each keywords~}}
+          <span class="list-comma">{{this}}</span>
+        {{~/each~}}
+      </div>
     </dd>
   <dt>License:</dt>
     <dd>

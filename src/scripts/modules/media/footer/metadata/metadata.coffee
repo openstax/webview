@@ -13,7 +13,7 @@ define (require) ->
       model = super()
       model.languages = settings.languages
       model.languageName = settings.languages[model.language]
-      model.subjects = subjects.list
+      model.subjectsList = subjects.list
       return model
 
     editable:
@@ -24,8 +24,8 @@ define (require) ->
       '.summary':
         value: () -> if @media is 'book' then return 'abstract' else return 'currentPage.abstract'
         type: 'contenteditable'
-      '.subject > select':
-        value: () -> if @media is 'book' then return 'subject' else return 'currentPage.subject'
+      '.subjects > select':
+        value: () -> if @media is 'book' then return 'subjects' else return 'currentPage.subjects'
         type: 'select2'
         select2: s2Defaults
 
