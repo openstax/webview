@@ -68,7 +68,12 @@ define (require) ->
 
             when 'select2'
               require ['select2'], (select2) =>
-                $editable.select2(options?.select2 or {})
+                if typeof options.select2 is 'function'
+                  s2 = options.select2.apply(@)
+                else
+                  s2 = options.select2 or {}
+
+                $editable.select2(s2)
 
                 $editable.off 'change.editable'
                 $editable.on 'change.editable', (e) =>
