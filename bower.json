@@ -10,7 +10,7 @@
     "jquery": "components/jquery#2.1.0",
     "lodash": "~2.4.1",
     "backbone": "~1.1.1",
-    "backbone-associations": "dak/backbone-associations#merged",
+    "backbone-associations": "942ef5929323c1ff0c074a990b8bfccbd2cc2005",
     "bootstrap": "~3.1.1",
     "requirejs": "~2.1.10",
     "requirejs-text": "~2.0.10",
