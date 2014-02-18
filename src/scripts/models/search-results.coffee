@@ -8,6 +8,7 @@ define (require) ->
     "author": "Author"
     "authorID": "Author"
     "keyword": "Keyword"
+    "language": "Language"
     "mediaType": "Type"
     "type": "Type"
     "pubYear": "Publication Date"
