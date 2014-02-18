@@ -5,12 +5,14 @@ define (require) ->
   template = require('hbs!./metadata-template')
   require('less!./metadata')
 
-  s2Defaults = {width: 300}
+  s2Defaults = width: 300
+  s2Multi = _.extend {}, s2Defaults, minimumInputLength: 2
 
   return class MetadataView extends FooterTabView
     template: template
     templateHelpers: () ->
       model = super()
+      window.x = @model
       model.languages = settings.languages
       model.languageName = settings.languages[model.language]
       model.subjectsList = subjects.list
@@ -18,17 +20,26 @@ define (require) ->
 
     editable:
       '.language > select':
-        value: () -> if @media is 'book' then return 'language' else return 'currentPage.language'
+        value: () -> @getModel('language')
         type: 'select2'
         select2: s2Defaults
       '.summary':
-        value: () -> if @media is 'book' then return 'abstract' else return 'currentPage.abstract'
+        value: () -> @getModel('abstract')
         type: 'contenteditable'
       '.subjects > select':
-        value: () -> if @media is 'book' then return 'subjects' else return 'currentPage.subjects'
+        value: () -> @getModel('subjects')
         type: 'select2'
         select2: s2Defaults
+      '.keywords > input':
+        value: () -> @getModel('keywords')
+        type: 'select2'
+        select2: () ->
+          @$el.find('.keywords > input').val(@model.get(@getModel('keywords')) or [])
+          _.extend({}, s2Multi, tags: @model.get(@getModel('keywords')) or [])
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:editable', @render)
+
+    getModel: (value) ->
+      if @media is 'book' then return value else return "currentPage.#{value}"

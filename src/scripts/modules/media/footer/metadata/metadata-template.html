@@ -49,7 +49,7 @@
             <span class="list-comma">{{this}}</span>
           {{~/each~}}
         {{~else~}}
-          <select name="subject" multiple>
+          <select name="subjects" multiple data-placeholder="Add Subjects">
             {{~#each subjectsList~}}
               <option value="{{@key}}" {{#inArray ../subjects @key}}selected{{/inArray}}>{{@key}}</option>
             {{~/each~}}
@@ -60,9 +60,13 @@
   <dt>Keywords:</dt>
     <dd>
       <div class="keywords">
-        {{~#each keywords~}}
-          <span class="list-comma">{{this}}</span>
-        {{~/each~}}
+        {{~#unless editable~}}
+          {{~#each keywords~}}
+            <span class="list-comma">{{this}}</span>
+          {{~/each~}}
+        {{~else~}}
+          <input type="hidden" data-placeholder="Add Keywords" />
+        {{~/unless~}}
       </div>
     </dd>
   <dt>License:</dt>
