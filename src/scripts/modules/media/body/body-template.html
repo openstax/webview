@@ -1,11 +1,13 @@
-<div class="media-body">
-  {{#if currentPage.content}}
-    {{include currentPage.content}}
-  {{else}}
-    <div class="progress progress-striped active">
-      <div class="progress-bar secondary" role="progressbar" style="width: 100%">
-        <span class="sr-only">Loading</span>
+{{#if contents.length}}
+  <div class="media-body">
+    {{#if currentPage.content}}
+      {{include currentPage.content}}
+    {{else}}
+      <div class="progress progress-striped active">
+        <div class="progress-bar secondary" role="progressbar" style="width: 100%">
+          <span class="sr-only">Loading</span>
+        </div>
       </div>
-    </div>
-  {{/if}}
-</div>
+    {{/if}}
+  </div>
+{{/if}}

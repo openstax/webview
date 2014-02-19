@@ -8,4 +8,4 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:currentPage.downloads', @render)
+      @listenTo(@model, 'change:downloads change:currentPage.downloads', @render)

@@ -3,11 +3,11 @@ define (require) ->
 
   return class FooterTabView extends EditableView
     templateHelpers: () ->
-      if @media is 'book'
-        model = @model.toJSON()
-      else
-        @media = 'page'
+      if @media is 'page'
         model = @model.get('currentPage')?.toJSON()
+      else
+        @media = 'book'
+        model = @model.toJSON()
 
       return model or {}
 

@@ -88,7 +88,10 @@ define (require) ->
 
     load: (page) ->
       if @get('type') is 'book'
-        @setPage(page or 1) # Default to page 1
+        if @get('contents').length
+          @setPage(page or 1) # Default to page 1
+        else
+          @trigger('changePage') # Don't setup an empty collection
       else
         @set('currentPage', new Page({id: @id}))
         @fetchPage()
