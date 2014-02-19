@@ -55,7 +55,7 @@ define (require) ->
       # Only setup a toc for a book
       if type isnt 'book' then return response
 
-      response.contents = response.tree.contents
+      response.contents = response.tree.contents or []
 
       depth = 0
       page = 1
@@ -64,6 +64,7 @@ define (require) ->
       # information on each node of the tree prior to the tree being processed
       # by backbone-associations.
       traverse = (o = {}) =>
+        o.contents or= []
         for item in o.contents
           item.book = @
           item.depth = depth
