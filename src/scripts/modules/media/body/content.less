@@ -1,0 +1,577 @@
+// Styles for the contents of a module.
+// This should **only** be imported inside a containing selector like:
+//
+//     #content { @import 'this_file.less'; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 15px;
+  color: @gray-dark;
+}
+
+p {
+  margin: 10px 0 0;
+  color: @gray;
+}
+
+> section,
+> figure,
+> p,
+> .abstract,
+> table {
+  &:first-child {
+    margin-top: 0 !important; // Ensure first element has no top margin
+  }
+}
+
+> section,
+> figure {
+  margin-top: 60px;
+}
+
+section > section,
+section > figure {
+  margin-top: 30px;
+}
+
+> figure,
+:not(figure) > figure {
+  counter-increment: figure;
+  counter-reset: subfigure;
+}
+
+figure {
+  width: 100%;
+  color: @gray;
+
+  > figcaption {
+    padding: 10px;
+    font-size: 1.3rem;
+
+    &::before {
+      margin-right: 5px;
+      color: @gray-medium;
+      font-weight: bold;
+      content: "Figure " counter(figure) ".";
+    }
+  }
+
+  > .media {
+    display: block;
+    margin: 0;
+    text-align: center;
+  }
+
+  // Subfigures
+  > figure {
+    counter-increment: subfigure;
+
+    &::after {
+      display: block;
+      text-align: center;
+      content: counter(figure) counter(subfigure, lower-alpha);
+    }
+
+    > figcaption::before {
+      content: "Figure " counter(figure)counter(subfigure,lower-alpha)".";
+    }
+  }
+}
+
+// By default, figures are laid out horizontally
+// unless they have the data-orient="vertical" attribute.
+figure:not([data-orient="vertical"]) {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+
+  > figcaption {
+    display: table-caption;
+    caption-side: bottom;
+  }
+
+  // Subfigures
+  > figure {
+    display: table-cell;
+  }
+}
+
+
+figure[data-orient="vertical"] {
+  // The display defaults are correct for figures and subfigures
+  // that are displayed vertically.
+}
+
+
+// ----------------------
+// Lists
+// ----------------------
+
+
+// A list with a title
+.list {
+  overflow-wrap: break-word;
+
+  > .title {
+    font-weight: bold;
+  }
+}
+
+
+// A list contains the following:
+//
+// - data-item-sep     : default for inline lists is ';', but can be any character
+// - data-list-type    : ONLY on inline lists (since they cannot be `<ul>` or `<ol>`)
+// - data-bullet-style : literal text, none, bullet, open-circle, pilcrow, rpilcrow, section, asterisk, dash
+// - data-number-style : arabic, upper-alpha, lower-alpha, upper-roman, lower-roman
+//
+// For block lists the numbering and some of the bullets can be handled by the browser;
+// for the rest we need to "emulate".
+//
+// For inline lists we need to "emulate" all of the enumerated/bulleted lists.
+//
+// Mixin descriptions:
+//
+// - `.browser-style()`       : Use the browser `list-style-type`
+// - `.emulate-bulleted()`    : Emulate bullets using `::before`
+// - `.emulate-enumerated()`  : Emulate numbers using a `list-item` counter
+
+#list {
+
+  // Item separators are so far only supported for inline lists
+  .item-sep(block)  {
+    // If data-item-sep occurs on a block list then show an error
+    &[data-item-sep] { .x-not-implemented('data-item-sep'); }
+    // The default item separator for block items is nothing
+  }
+  .item-sep(inline) {
+    &:not([data-item-sep]) > .item:not(:last-child)::after {
+      content: @default-inline-list-item-sep;
+    }
+    &[data-item-sep] > .item:not(:last-child)::after {
+      // FIXME: Use the default separator character for now
+      content: @default-inline-list-item-sep;
+      .x-not-implemented('data-item-sep=CUSTOM');
+    }
+  }
+
+  // Use the browser `list-style-type:` for some bulleted lists and all numbered lists
+  // NOTE: Inline lists cannot use this and need to "emulate" this.
+  .browser-style(@list-style;   @attr-value; @style-type) { }
+  .browser-style(bulleted;      @attr-value; @style-type) {
+    &[data-bullet-style="@{attr-value}"] { list-style-type: @style-type; }
+  }
+  .browser-style(enumerated;    @attr-value; @style-type) {
+    &[data-number-style="@{attr-value}"] { list-style-type: @style-type; }
+  }
+
+  // Create a `::before` element and use the bulleted char for bullets
+  // not supportd by the browser (most, but not all).
+  .emulate-bulleted(block; @attr-value; @char) {
+    &[data-bullet-style="@{attr-value}"] {
+      list-style-type: none;
+      > li::before {
+        content: @char;
+        margin-right: 0.5em;
+      }
+    }
+  }
+  // For Block lists with `none`, skip the pseudoelement
+  .emulate-bulleted(block; @attr-value; none) {
+    &[data-bullet-style="@{attr-value}"] {
+      list-style-type: none;
+    }
+  }
+  .emulate-bulleted(inline; @attr-value; @char) {
+    &[data-bullet-style="@{attr-value}"] {
+      // Note: since this is inline, the `li` is actually a `span.item`
+      > .item::before {
+        content: @char;
+        margin-right: 0.5em;
+      }
+    }
+  }
+  // For Inline lists with `none`, skip the pseudoelement
+  .emulate-bulleted(inline; @attr-value; none) {
+    &[data-bullet-style="@{attr-value}"] {
+    }
+  }
+
+  // For debugging, show NOT_IMPLEMENTED_YET for anything else
+  .bulleted-catchall() {
+    &[data-bullet-style]:not([data-bullet-style='bullet']):not([data-bullet-style='open-circle']):not([data-bullet-style='pilcrow']):not([data-bullet-style='rpilcrow']):not([data-bullet-style='section']):not([data-bullet-style='asterisk']):not([data-bullet-style='dash']):not([data-bullet-style='none']) {
+      &::before { .x-not-implemented('data-bullet-style=CUSTOM'); }
+    }
+  }
+
+
+  .style(@display; @list-type) {
+    // This mixin applies to all display and list-types
+
+    // Enter rules for the separator character (mostly for inline lists)
+    .item-sep(@display);
+
+    // if mark-prefix or mark-suffix are used then show this is not implemented yet
+    &[data-mark-prefix],
+    &[data-mark-suffix] { &::after { .x-not-implemented('data-mark-prefix/suffix'); } }
+  }
+  .style(@display; bulleted) {
+    // These are always "emulated" for bulleted lists
+    .emulate-bulleted(@display; 'pilcrow';      '\00b6');
+    .emulate-bulleted(@display; 'rpilcrow';     '\204b');
+    .emulate-bulleted(@display; 'section';      '\00a7');
+    .emulate-bulleted(@display; 'asterisk';     '*');
+    .emulate-bulleted(@display; 'dash';         '-');
+    .emulate-bulleted(@display; 'none';         none);
+
+    // For debugging, show NOT_IMPLEMENTED_YET for anything else
+    .bulleted-catchall();
+  }
+  .style(block; bulleted) {
+    // Use the browser to display these bullet types
+    .browser-style(bulleted; 'bullet';       disc);
+    .browser-style(bulleted; 'open-circle';  circle);
+  }
+  .style(inline; bulleted) {
+    // "emulate" all the bullets because inline lists are spans
+    .emulate-bulleted(inline; 'bullet';       '\25cf'); // black circle
+    .emulate-bulleted(inline; 'open-circle';  '\25cb'); // white circle
+  }
+
+  .style(block; enumerated) {
+    // Use the browser to display the numbering
+    .browser-style(enumerated; 'none';        none);
+    .browser-style(enumerated; 'arabic';      decimal);
+    .browser-style(enumerated; 'upper-alpha'; upper-alpha);
+    .browser-style(enumerated; 'lower-alpha'; lower-alpha);
+    .browser-style(enumerated; 'upper-roman'; upper-roman);
+    .browser-style(enumerated; 'lower-roman'; lower-roman);
+  }
+
+  .style(inline; enumerated) {
+    // Since we have to "emulate" the list, reset and increment the `list-item` counter.
+    counter-reset: list-item;
+    > .item { counter-increment: list-item; }
+
+    // "Emulate" the numbering for inline numbered lists
+    .emulate-enumerated(@attr-name; @counter-type) {
+      &[data-number-style="@{attr-name}"] > .item::before {
+        content: counter(list-item, @counter-type);
+        margin-right: 0.5em;
+      }
+    }
+    .emulate-enumerated('arabic';      decimal);
+    .emulate-enumerated('upper-alpha'; upper-alpha);
+    .emulate-enumerated('lower-alpha'; lower-alpha);
+    .emulate-enumerated('upper-roman'; upper-roman);
+    .emulate-enumerated('lower-roman'; lower-roman);
+  }
+
+  .style(block; labeled-item) {
+    list-style-type: none;
+  }
+}
+
+
+// Block-ish lists
+ul:not([data-display='inline'])          { #list>.style(block; bulleted); }
+ol:not([data-display='inline'])          { #list>.style(block; enumerated); }
+ul[data-labeled-item]                    { #list>.style(block; labeled-item); }
+
+// Inline lists (with `data-display='inline'`)
+ul[data-display='inline']                { #list>.style(inline; bulleted); }
+ol[data-display='inline']                { #list>.style(inline; enumerated); }
+ul[data-labeled-item]                    { #list>.style(inline; labeled-item); }
+
+// Inline lists (in a div or para)
+span.list[data-list-type='bulleted']     { #list>.style(inline; bulleted); }
+span.list[data-list-type='enumerated']   { #list>.style(inline; enumerated); }
+span.list[data-list-type='labeled-item'] { #list>.style(inline; labeled-item); }
+
+
+.footnote {
+  font-size: 1rem;
+}
+
+.abstract {
+  position: relative;
+  background-color: @gray-lightest;
+  padding: 45px 15px 15px 15px;
+  margin: 30px 6rem 0 6rem;
+
+  ul {
+    margin: 15px 0 0 0;
+
+    &::after {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: @gray;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      content: "Abstract";
+    }
+  }
+}
+
+
+// --------------------------------
+// Blockish things (note, example, exercise)
+// --------------------------------
+
+// Slots for various blockish pieces of content (things with a label, title, and body)
+// This **ONLY** contains rules, no selectors.
+#blockish {
+
+  // Slot descriptions:
+  //
+  // - `@type` can be something like `note`, `exercise`, `example`, etc
+  // - `.style()` : styling for the blockish element
+  // - `.default-label()` : the default text if there is no custom label (@has-title is used to put a colon)
+  // - `.label()` : styling for the label part; @has-title is true if there is a title child
+  // - `.title()` : styling for the title (if there is one since they are optional)
+  // - `.body()` : styling for the rest
+  .style(@type) { }
+  .default-label(@type; @has-title) { }
+  .title(@type) { display: inline-block; }
+  .body(@type) { }
+
+
+  // Style the note
+  .default-label(note; false) { content: 'Note'; }
+  .default-label(note; true)  { content: 'Note: '; }
+  .style(note) {
+    margin: 30px 6rem 0 6rem;
+    padding: 15px;
+    background-color: @gray-lightest;
+  }
+  .title(note) {
+    color: @gray;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .body(note) {
+    padding: 5px 15px;
+    border-top: 1px solid @gray;
+    background-color: @gray-lightest;
+  }
+
+  // Style the example
+  .default-label(example; false) { content: 'Example'; }
+  .default-label(example; true)  { content: 'Example: '; }
+  .style(example) { margin-top: 30px; }
+  .title(example) {
+    padding: 0.1em 1em;
+    font-weight: bold;
+    color: @gray-lightest;
+    background-color: @gray;
+  }
+  // Style the body of an example the same as a note
+  .body(example) { .body(note); }
+
+  //Style the exercise the same as an example
+  .default-label(exercise; false) { content: 'Exercise'; }
+  .default-label(exercise; true)  { content: 'Exercise: '; }
+  .style(exercise) { .style(example); }
+  .title(exercise) { .title(example); }
+  .body(exercise)  { .body(example); }
+
+}
+
+// Skeleton for constructing the blockish elements
+// This contains all the selectors for the styling
+
+// Helper mixin for expanding all the selectors
+.make-block(@type) {
+  #blockish>.style(@type);
+
+  // There are 3 cases for a label:
+  // - none   : The attribute is not on the element so show the default label
+  // - empty  : The attribute is present and it is the empty string; the default label should be suppressed
+  // - custom : The attribute contains a custom string that should be displayed instead of the default label
+
+  // Puts in the text of the label. Depending on if there is a title
+  // it will be added either as a `:before` on the blockish element or on the title element
+  .format-label(@type; @label-type; @has-title) { }
+  .format-label(@type; none;        false) { #blockish>.default-label(@type; false); }
+  .format-label(@type; empty;       false) { } // Nothing will show up
+  .format-label(@type; custom;      false) { content: attr(data-label); }
+  .format-label(@type; none;        true)  { #blockish>.default-label(@type; true); }
+  .format-label(@type; empty;       true)  { } // Only the title will show up
+  .format-label(@type; custom;      true)  { content: attr(data-label-parent) ': '; }
+
+  // Add the label to the title element (if one exists) or to the blockish element
+  .place-label(@type; @label-type) {
+    // A title exists so style it and put the label in `.title::before`
+    &.ui-has-child-title > header > .title {
+      #blockish>.title(@type);
+      &::before { .format-label(@type; @label-type; true); }
+    }
+    // No title exists so style the blockish::before and put the label there
+    &:not(.ui-has-child-title)::before {
+      #blockish>.title(@type);
+      .format-label(@type; @label-type; false);
+    }
+  }
+
+  // Decide which case of the label we are dealing with
+  &:not([data-label])                 { .place-label(@type; none); }
+  &[data-label='']                    { .place-label(@type; empty); }
+  &[data-label]:not([data-label=''])  { .place-label(@type; custom); }
+
+  // Style the Body
+  > section         { #blockish>.body(@type); }
+}
+
+
+.note     { .make-block(note); }
+.example  { .make-block(example); }
+.exercise { .make-block(exercise); }
+
+
+
+.example,
+.exercise {
+
+  .problem,
+  .solution {
+    padding: 0.5em 1em;
+  }
+
+  // Exercise Solutions contain a button to toggle showing or hiding the solution
+  .solution {
+    border-top: 1px solid @gray;
+
+    // The Show/Hide Solution text
+    > .ui-toggle-wrapper {
+      text-align: center;
+
+      > .ui-toggle {
+        outline: 0;
+        text-align: center;
+        font-weight: bold;
+      }
+    }
+
+    &:not(.ui-solution-visible) {
+      > .ui-toggle-wrapper > button.ui-toggle::before { content: '[Show Solution]'; }
+      > section { display: none; }
+    }
+
+    &.ui-solution-visible {
+      > .ui-toggle-wrapper > button.ui-toggle::before { content: '[Hide Solution]'; }
+    }
+  }
+
+  &[data-type=check-understanding] .title::before {
+    margin-right: 0;
+    content: "";
+  }
+
+  &[data-type=conceptual-questions] .problem {
+    border-top: none;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &[data-type=problems-exercises] {
+    .problem::before, .solution::before {
+      font-weight: bold;
+      color: @gray;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .problem::before {
+      content: "Problem";
+    }
+
+    .solution::before {
+      content: "Solution";
+    }
+  }
+}
+
+//
+// Tables
+// --------------------------------------------------
+table {
+  margin-top: 60px;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: @line-height-computed;
+  background-color: @table-bg;
+
+  caption {
+    font-size: 1.75rem;
+
+    sup {
+      top: auto;
+      line-height: inherit;
+    }
+  }
+
+  // Cells
+  thead,
+  tbody,
+  tfoot {
+    > tr {
+      > th,
+      > td {
+        padding: @table-cell-padding;
+        line-height: @line-height-base;
+        vertical-align: top;
+        border-top: 1px solid @table-border-color;
+      }
+    }
+  }
+
+  // Bottom align for column headings
+  thead > tr > th,
+  thead > tr > td {
+    vertical-align: bottom;
+    border-bottom: 2px solid @table-border-color;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  // Remove top border from thead by default
+  caption + thead,
+  colgroup + thead,
+  thead:first-child {
+    tr:first-child {
+      th, td {
+        border-top: 0;
+      }
+    }
+  }
+
+  // Account for multiple tbody instances
+  tbody + tbody {
+    border-top: 2px solid @table-border-color;
+  }
+
+  // Nesting
+  table {
+    background-color: @body-bg;
+  }
+
+  // Zebra striping
+  > tbody {
+    > tr:nth-child(odd) {
+      > td,
+      > th {
+        background-color: @table-bg-accent;
+      }
+    }
+  }
+}
