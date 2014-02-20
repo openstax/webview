@@ -7,6 +7,8 @@ define (require) ->
 
   return class MediaBodyView extends EditableView
     template: template
+    templateHelpers:
+      hasBody: () -> @model.get('contents')?.length or @model.get('currentPage')
 
     editable:
       '.media-body':
