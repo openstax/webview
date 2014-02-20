@@ -29,7 +29,6 @@ define (require) ->
           return !$(node).hasClass('title')
         $contents.wrapAll('<section>')
         $title = $el.children('.title')
-        $title.wrap('<header>')
         # Add an attribute for the parents' `data-label`
         # since CSS does not support `parent(attr(data-label))`.
         # When the title exists, this attribute is added before it
