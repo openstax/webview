@@ -7,6 +7,8 @@ define (require) ->
 
   return class MediaBodyView extends BaseView
     template: template
+    templateHelpers:
+      hasBody: () -> @model.get('contents')?.length or @model.get('currentPage')
 
     events:
       'click .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
