@@ -10,7 +10,7 @@
     "jquery": "components/jquery#2.1.0",
     "lodash": "~2.4.1",
     "backbone": "~1.1.2",
-    "backbone-associations": "~0.6.0",
+    "backbone-associations": "~0.6.1",
     "bootstrap": "~3.1.1",
     "requirejs": "~2.1.11",
     "requirejs-text": "~2.0.10",
