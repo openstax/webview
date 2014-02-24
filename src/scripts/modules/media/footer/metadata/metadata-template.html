@@ -27,9 +27,13 @@
     <dd>
       <div>{{include model.abstract}}</div>
     </dd>
-  <dt>Subject:</dt>
+  <dt>Subjects:</dt>
     <dd>
-      <div>{{model.subject}}</div>
+      <div>
+        {{~#each model.subjects~}}
+          <span class="name">{{this}}</span>
+        {{~/each~}}
+      </div>
     </dd>
   <dt>Keywords:</dt>
     <dd>
@@ -46,9 +50,9 @@
   <dt>Authors:</dt>
     <dd>
       <div>
-        {{#each model.authors}}
+        {{~#each model.authors~}}
           <span class="name"><a href="mailto:{{email}}">{{fullname}}</a></span>
-        {{/each}}
+        {{~/each~}}
       </div>
     </dd>
   <dt>Copyright Holders:</dt>

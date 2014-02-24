@@ -22,7 +22,7 @@ define (require) ->
     }, {
       type: Backbone.Many
       key: 'authors'
-      collectionType: Backbone.Collection
+      collectionType: () -> Backbone.Collection
     }, {
       type: Backbone.One
       key: 'currentPage'
@@ -30,7 +30,7 @@ define (require) ->
     }, {
       type: Backbone.Many
       key: 'toc'
-      collectionType: Backbone.Collection
+      collectionType: () -> Backbone.Collection
     }]
 
     initialize: (options = {}) ->
@@ -55,7 +55,7 @@ define (require) ->
       # Only setup a toc for a book
       if type isnt 'book' then return response
 
-      response.contents = response.tree.contents
+      response.contents = response.tree.contents or []
 
       depth = 0
       page = 1
@@ -64,6 +64,7 @@ define (require) ->
       # information on each node of the tree prior to the tree being processed
       # by backbone-associations.
       traverse = (o = {}) =>
+        o.contents or= []
         for item in o.contents
           item.book = @
           item.depth = depth
@@ -89,7 +90,10 @@ define (require) ->
 
     load: (page) ->
       if @get('type') is 'book'
-        @setPage(page or 1) # Default to page 1
+        if @get('contents').length
+          @setPage(page or 1) # Default to page 1
+        else
+          @trigger('changePage') # Don't setup an empty collection
       else
         @set('currentPage', new Page({id: @id}))
         @fetchPage()

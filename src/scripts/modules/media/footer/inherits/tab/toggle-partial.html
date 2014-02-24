@@ -1,6 +1,8 @@
 {{#is type 'book'}}
-  <div class="book-page-toggle btn-group">
-    <span class="btn {{#is media 'book'}}active{{/is}}" data-media="book">Collection</span>
-    <span class="btn {{#is media 'page'}}active{{/is}}" data-media="page">Module</span>
-  </div>
+  {{#if contents.length}}
+    <div class="book-page-toggle btn-group">
+      <span class="btn {{#is media 'book'}}active{{/is}}" data-media="book">Collection</span>
+      <span class="btn {{#is media 'page'}}active{{/is}}" data-media="page">Module</span>
+    </div>
+  {{/if}}
 {{/is}}

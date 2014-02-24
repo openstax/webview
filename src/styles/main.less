@@ -54,6 +54,25 @@ h5 {
 }
 
 //
+// Description Lists
+//
+
+// Ensure Bootstrap styling applies everywhere, not just on small screens
+.dl-horizontal {
+  dt {
+    float: left;
+    width: (@component-offset-horizontal - 20);
+    clear: left;
+    text-align: right;
+    .text-overflow();
+  }
+  dd {
+    margin-left: @component-offset-horizontal;
+    &:extend(.clearfix all); // Clear the floated `dt` if an empty `dd` is present
+  }
+}
+
+//
 // Background colors
 //
 

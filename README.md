@@ -154,7 +154,7 @@ Note: Mock test data is only available for the [College Physics](http://localhos
 * `src/scripts/main.js`         Initial script called by Requirejs
 * `src/scripts/router.coffee`   Backbone Router
 * `src/scripts/session.coffee`  Session state singleton (Backbone Model)
-* `src/scripts/settings.coffee` Global application config settings
+* `src/scripts/settings.js`     Global application config settings (remains in place after build)
 * `src/styles/`                 App-specific LESS variables and mixins
 * `src/test/`                   Test site
 * `src/index.html`              App's HTML Page

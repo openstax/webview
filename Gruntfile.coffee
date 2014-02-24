@@ -98,7 +98,7 @@ module.exports = (grunt) ->
           value: 120
         cyclomatic_complexity:
           level: 'error'
-          value: 14
+          value: 16
 
       source: ['src/**/*.coffee']
       grunt: 'Gruntfile.coffee'
@@ -136,7 +136,7 @@ module.exports = (grunt) ->
           modules: [{
             name: 'main'
             include: [
-              'cs!pages/404/404'
+              'cs!pages/error/error'
               'cs!pages/home/home'
               'cs!pages/contents/contents'
               'cs!pages/search/search'
@@ -222,6 +222,7 @@ module.exports = (grunt) ->
     imagemin:
       images:
         options:
+          cache: false
           optimizationLevel: 7
         files: [{
           expand: true
@@ -247,7 +248,7 @@ module.exports = (grunt) ->
     'jshint'
     'jsbeautifier'
     'coffeelint'
-    'recess'
+    #'recess' NOTE: Disabled until recess is upgraded to support LESS 1.6+
   ]
 
   # Dist
