@@ -104,6 +104,7 @@ define (require) ->
       if @getPageNumber(node) < page
         @set('page', --page)
 
+      # BUG: Remove all nodes from the toc for a subcollection
       @get('toc').remove(node)
       node.get('parent').get('contents').remove(node)
 
