@@ -33,3 +33,17 @@ define (require) ->
         @set('isLatest', response.isLatest)
       .fail () =>
         @set('downloads', [])
+
+    get: (attr) ->
+      if @attributes[attr] isnt undefined
+        return @attributes[attr]
+
+      switch attr
+        when 'depth'
+          response = @attributes['parent'].get('depth') + 1
+          @set('depth', response)
+        when 'book'
+          response = @attributes['parent']?.get('book')
+          @set('book', response)
+
+      return response

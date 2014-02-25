@@ -14,8 +14,13 @@ define (require) ->
       type: Backbone.Many
       key: 'contents'
       relatedModel: (relation, attributes) ->
-        return (attrs, options) ->
+        return (attrs, options) =>
+          attrs.parent = @
+          attrs.depth = 0
+          attrs.book = @
           if _.isArray(attrs.contents)
+            attrs.subcollection = true
+            delete attrs.id # Get rid of the 'subcol' id so the subcollection is unique
             return new Collection(attrs)
 
           return new Page(attrs)
@@ -56,39 +61,11 @@ define (require) ->
 
       response.contents = response.tree.contents or []
 
-      depth = 0
-      page = 1
-
-      # Traverse a book's tree and set book, depth, parent, subcollection, and page
-      # information on each node of the tree prior to the tree being processed
-      # by backbone-associations.
-      traverse = (o = {}) =>
-        o.contents or= []
-        for item in o.contents
-          item.book = @
-          item.depth = depth
-          item.parent = o
-
-          # Determine if the item is a subcollection or a page
-          if item.contents
-            item.subcollection = true
-            delete item.id # Get rid of the 'subcol' id so the subcollection is unique
-            depth++
-            traverse(item)
-          else
-            item.page = page++
-
-        depth--
-
-      traverse(response.tree)
-
-      # Total number of pages in the book
-      response.pages = page - 1
-
       return response
 
     load: (page) ->
       if @get('type') is 'book'
+        @set('pages', @get('toc').length)
         if @get('contents').length
           @setPage(page or 1) # Default to page 1
         else
@@ -118,6 +95,20 @@ define (require) ->
 
       if not page.get('loaded')
         @fetchPage()
+
+    getPageNumber: (model) -> @get('toc').indexOf(model) + 1
+
+    removeNode: (node) ->
+      page = @get('page')
+
+      if @getPageNumber(node) < page
+        @set('page', --page)
+
+      @get('toc').remove(node)
+      node.get('parent').get('contents').remove(node)
+
+      @setPage(page)
+      @trigger('removeNode')
 
     getNextPage: () ->
       page = @get('page')
