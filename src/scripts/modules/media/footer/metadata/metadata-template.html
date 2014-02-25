@@ -31,13 +31,17 @@
     <dd>
       <div>
         {{~#each model.subjects~}}
-          <span class="name">{{this}}</span>
+          <span class="list-comma">{{this}}</span>
         {{~/each~}}
       </div>
     </dd>
   <dt>Keywords:</dt>
     <dd>
-      <div>{{model.keywords}}</div>
+      <div>
+        {{~#each model.keywords~}}
+          <span class="list-comma">{{this}}</span>
+        {{~/each~}}
+      </div>
     </dd>
   <dt>License:</dt>
     <dd>
@@ -51,7 +55,7 @@
     <dd>
       <div>
         {{~#each model.authors~}}
-          <span class="name"><a href="mailto:{{email}}">{{fullname}}</a></span>
+          <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
         {{~/each~}}
       </div>
     </dd>
@@ -59,7 +63,7 @@
     <dd>
       <div>
         {{#each model.licensors}}
-          <span class="name"><a href="mailto:{{email}}">{{fullname}}</a></span>
+          <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
         {{/each}}
       </div>
     </dd>
@@ -67,7 +71,7 @@
     <dd>
       <div>
         {{#each model.maintainers}}
-          <span class="name"><a href="mailto:{{email}}">{{fullname}}</a></span>
+          <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
         {{/each}}
       </div>
     </dd>
