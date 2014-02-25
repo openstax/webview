@@ -23,7 +23,7 @@ define (require) ->
       @listenTo(@model, 'changePage', @render)
 
     onRender: () ->
-      MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
+      # MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
 
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution')
