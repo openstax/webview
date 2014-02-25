@@ -11,23 +11,39 @@
 
   > div {
     display: inline-block; // Prevent links from spilling into multiple-columns
-    
-    small {
-      margin-left: 10px;
-      color: red;
-    }
+    width: 100%;
 
-    .title {
-      cursor: pointer;
+    > .name-wrapper {
+      display: inline-block;
+      width: 90%;
+      vertical-align: middle;
 
-      &:hover {
-        text-decoration: underline;
+      small {
+        margin-left: 10px;
+        color: red;
+      }
+
+      .title {
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .active {
+        font-weight: bold;
+        color: @brand-secondary;
       }
     }
 
-    .active {
-      font-weight: bold;
-      color: @brand-secondary;
+    > .remove {
+      display: inline-block;
+      width: 10%;
+      color: red;
+      vertical-align: middle;
+      text-align: right;
+      cursor: pointer;
     }
   }
 

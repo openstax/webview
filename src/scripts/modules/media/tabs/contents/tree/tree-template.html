@@ -1,7 +1,13 @@
 {{#if subcollection}}
   <div>
-    <span class="expand">&#9656;</span>
-    <span class="title subcollection">{{title}}</span>
+    <span class="name-wrapper">
+      <span class="expand">&#9656;</span>
+      <span class="title subcollection">{{title}}</span>
+    </span>
+    
+    {{~#if editable~}}
+      <span class="remove glyphicon glyphicon-remove"></span>
+    {{~/if~}}
   </div>
 {{/if}}
 <ul></ul>

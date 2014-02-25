@@ -12,7 +12,10 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable', @render)
+      @listenTo(@model, 'change:editable removeNode', @render)
 
     onRender: () ->
-      @regions.toc.show(new TocTreeView({model: @model}))
+      @regions.toc.show new TocTreeView
+        model: @model
+        editable: @model.get('editable')
+        content: @model

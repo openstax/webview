@@ -10,17 +10,22 @@ define (require) ->
   return class TocNodeView extends BaseView
     template: template
     templateHelpers:
+      page: () -> @content.getPageNumber(@model)
       url: () ->
         book = @model.get('book').toJSON()
         return linksHelper.getPath('contents', {id: book.id, version: book.version})
+      editable: () -> @editable
 
     tagName: 'li'
     itemViewContainer: '.subcollection'
 
     events:
       'click a': 'changePage'
+      'click .remove': 'removeNode'
 
-    initialize: () ->
+    initialize: (options = {}) ->
+      @content = options.content
+      @editable = options.editable
       super()
       @listenTo(@model, 'change:active change:page change:changed change:title', @render)
 
@@ -36,3 +41,5 @@ define (require) ->
       tree = @collection.get('book') or @collection
       analyticsID = tree.get('googleAnalytics')
       analytics.send(analyticsID) if analyticsID
+
+    removeNode: () -> @content.removeNode(@model)

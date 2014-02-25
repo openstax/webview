@@ -8,12 +8,16 @@ define (require) ->
 
   return class TocTreeView extends BaseView
     template: template
+    templateHelpers: editable: () -> @editable
     itemViewContainer: '> ul'
 
     events:
-      'click > div > .subcollection': 'toggleSubcollection'
+      'click > div > span > .subcollection': 'toggleSubcollection'
+      'click > div > .remove': 'removeNode'
 
     initialize: (options = {}) ->
+      @editable = options.editable
+      @content = options.content
       @expanded = true
       @regions =
         container: @itemViewContainer
@@ -28,12 +32,19 @@ define (require) ->
 
       _.each nodes, (node) =>
         if node.get('subcollection')
-          @regions.container.appendAs('li', new TocTreeView({model: node}))
+          @regions.container.appendAs 'li', new TocTreeView
+            model: node
+            content: @content
+            editable: @editable
         else
-          @regions.container.appendAs('li', new TocLeafView({model: node, collection: @model}))
+          @regions.container.appendAs 'li', new TocLeafView
+            model: node
+            content: @content
+            editable: @editable
+            collection: @model
 
     toggleSubcollection: (e) ->
-      parent = $(e.currentTarget).parent()
+      parent = $(e.currentTarget).parent().parent()
 
       if @expanded
         @expanded = false
@@ -43,3 +54,6 @@ define (require) ->
         parent.find('.expand').html('&#9656;')
 
       parent.siblings('ul').toggle()
+
+    removeNode: () ->
+      @content.removeNode(@model)
