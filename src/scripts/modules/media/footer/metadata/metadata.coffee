@@ -12,7 +12,6 @@ define (require) ->
     template: template
     templateHelpers: () ->
       model = super()
-      window.x = @model
       model.languages = settings.languages
       model.languageName = settings.languages[model.language]
       model.subjectsList = subjects.list
