@@ -6,9 +6,9 @@
         <span>
           Derived from <a href="/contents/{{parentId}}@{{parentVersion}}">{{parentTitle}}</a> by
           <span class="collection-authors">
-            {{#each parentAuthors}}
-              <a href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
-            {{/each}}
+            {{~#each parentAuthors~}}
+              <a class="list-comma" href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
+            {{~/each~}}
           </span>
         </span>
       {{/if}}
@@ -18,9 +18,9 @@
       {{#if authors.length}}
         <span>{{#is type 'book'}}Collection{{else}}Module{{/is}} by:</span>
         <span class="collection-authors">
-          {{#each authors}}
+          {{~#each authors~}}
             <a class="list-comma" href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
-          {{/each}}
+          {{~/each~}}
           <img src="images/icons/mail.png" width="18" height="12" alt="Mail" />
         </span>
       {{/if}}

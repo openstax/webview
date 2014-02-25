@@ -7,7 +7,7 @@
           Derived from <a href="/contents/{{currentPage.parentId}}@{{currentPage.parentVersion}}">{{currentPage.parentTitle}}</a> by
           <span class="collection-authors">
             {{#each currentPage.parentAuthors}}
-              <a href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
+              <a class="list-comma" href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
             {{/each}}
           </span>
         </span>
