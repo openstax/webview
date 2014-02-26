@@ -35,7 +35,6 @@ define (require) ->
     }]
 
     initialize: (options = {}) ->
-      window.x = @
       @set('loaded', false)
       @fetch
         reset: true
