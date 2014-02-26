@@ -4,9 +4,9 @@
 
 <p>
   <span>© {{date revised}}</span>
-  <span>{{#each authors}}<span class="name">{{fullname}}</span>{{/each}}.</span>
+  <span>{{#each authors}}<span class="list-comma">{{fullname}}</span>{{/each}}.</span>
   <span>Textbook content produced by
-    <span>{{#each authors}}<span class="name">{{fullname}}</span>{{/each}}</span>
+    <span>{{#each authors}}<span class="list-comma">{{fullname}}</span>{{/each}}</span>
     is licensed under a <a href="{{license.url}}">{{license.name}} {{license.version}}</a> license.
   </span>
 </p>
@@ -30,7 +30,7 @@
     If you use this textbook as a bibliographic reference,
     then you should cite it as follows:
     <div class="citation">
-      <span>{{#each authors}}<span class="name">{{fullname}}</span>{{/each}}, </span>
+      <span>{{#each authors}}<span class="list-comma">{{fullname}}</span>{{/each}}, </span>
       <span>{{title}}. Connexions. </span>
       <span>{{date revised}} http://cnx.org/contents/{{id}}@{{version}}.</span>
     </div>
