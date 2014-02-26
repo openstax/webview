@@ -1,9 +1,8 @@
 define (require) ->
+  _ = require('underscore')
   Backbone = require('backbone')
-  toc = require('cs!collections/toc')
   Collection = require('cs!models/contents/collection')
   Page = require('cs!models/contents/page')
-  require('backbone-associations')
 
   MEDIA_TYPES =
     'application/vnd.org.cnx.collection' : 'book'
@@ -15,6 +14,7 @@ define (require) ->
       key: 'contents'
       relatedModel: (relation, attributes) ->
         return (attrs, options) =>
+          # FIX: Consider putting all added fields under _meta to make removal before saving simple
           attrs.parent = @
           attrs.depth = 0
           attrs.book = @
@@ -32,16 +32,10 @@ define (require) ->
       type: Backbone.One
       key: 'currentPage'
       relatedModel: Page
-    }, {
-      type: Backbone.Many
-      key: 'toc'
-      collectionType: () -> Backbone.Collection
     }]
 
     initialize: (options = {}) ->
-      toc.reset()
-      @set('toc', toc)
-
+      window.x = @
       @set('loaded', false)
       @fetch
         reset: true
@@ -56,7 +50,6 @@ define (require) ->
     parse: (response) ->
       type = response.type = MEDIA_TYPES[response.mediaType]
 
-      # Only setup a toc for a book
       if type isnt 'book' then return response
 
       response.contents = response.tree.contents or []
@@ -65,7 +58,6 @@ define (require) ->
 
     load: (page) ->
       if @get('type') is 'book'
-        @set('pages', @get('toc').length)
         if @get('contents').length
           @setPage(page or 1) # Default to page 1
         else
@@ -82,12 +74,12 @@ define (require) ->
           @trigger('changePage')
 
     setPage: (num) ->
+      pages = @getTotalPages()
+
       if num < 1 then num = 1
-      if num > @pages then num = @pages
+      if num > pages then num = pages
 
-      @set('page', num)
-
-      page = @get('toc').at(num-1)
+      page = @getPage(num)
       @get('currentPage')?.set('active', false)
       @set('currentPage', page)
       page.set('active', true)
@@ -96,33 +88,42 @@ define (require) ->
       if not page.get('loaded')
         @fetchPage()
 
-    getPageNumber: (model) -> @get('toc').indexOf(model) + 1
+    getTotalPages: () ->
+      # FIX: cache total pages and recalculate on add/remove events?
+      @getTotalLength()
+
+    getPageNumber: (model = @get('currentPage')) -> 1 + model.previousPageCount()
 
     removeNode: (node) ->
-      page = @get('page')
+      # before removing a node, figure out what the current page number is
+      # if the current page no longer exists after removing the node,
+      # then call setPage on the old node's page number-1
 
-      if @getPageNumber(node) < page
-        @set('page', --page)
+      #previousPage = @getPageNumber(@getPreviousNode(node))
 
-      # BUG: Remove all nodes from the toc for a subcollection
-      @get('toc').remove(node)
       node.get('parent').get('contents').remove(node)
 
-      @setPage(page)
+      if not @get('currentPage')
+        @setPage(previousPage)
+
       @trigger('removeNode')
 
     getNextPage: () ->
-      page = @get('page')
-      if page < @get('pages') then ++page
+      if not @get('loaded') then return 0
+      pages = @getTotalPages()
+
+      page = @getPageNumber()
+      if page < pages then ++page
       return page
 
     getPreviousPage: () ->
-      page = @get('page')
+      if not @get('loaded') then return 0
+      page = @getPageNumber()
       if page > 1 then --page
       return page
 
     nextPage: () ->
-      page = @get('page')
+      page = @getPageNumber()
       nextPage = @getNextPage()
 
       # Show the next page if there is one
@@ -131,7 +132,7 @@ define (require) ->
       return nextPage
 
     previousPage: () ->
-      page = @get('page')
+      page = @getPageNumber()
       previousPage = @getPreviousPage()
 
       # Show the previous page if there is one

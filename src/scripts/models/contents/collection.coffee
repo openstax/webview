@@ -23,3 +23,19 @@ define (require) ->
 
           return new Page(attrs)
     }]
+
+    getTotalLength: () ->
+      return @get('contents').reduce ((memo, node) -> memo + node.getTotalLength()), 0
+
+    getPage: (num) ->
+      page = 0
+
+      for node in @get('contents').models
+        position = node.getTotalLength() + page
+
+        if position < num
+          page = position
+        else if num is position and not node.get('subcollection')
+          return node
+        else
+          return node.getPage(num-page)

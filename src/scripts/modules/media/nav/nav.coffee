@@ -19,13 +19,19 @@ define (require) ->
       if model.page isnt previousPage
         back = linksHelper.getPath('contents', {id: model.id, version: model.version, page: previousPage})
 
-      return {_hideProgress: @hideProgress, next: next, back: back}
+      return {
+        _hideProgress: @hideProgress
+        next: next
+        back: back
+        pages: if @model.get('loaded') then @model.getTotalPages() else 0
+        page: if @model.get('loaded') then @model.getPageNumber() else 0
+      }
 
     initialize: (options) ->
       super()
       @hideProgress = options.hideProgress
 
-      @listenTo(@model, 'change:page change:pages', @render)
+      @listenTo(@model, 'changePage', @render)
 
     events:
       'click .next': 'nextPage'

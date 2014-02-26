@@ -47,3 +47,18 @@ define (require) ->
           @set('book', response)
 
       return response
+
+    index: () -> @get('parent').get('contents').indexOf(@)
+
+    getTotalLength: () -> 1
+
+    previousPageCount: () ->
+      parent = @get('parent')
+      contents = parent.get('contents').slice(0, @index())
+
+      pages = _.reduceRight contents, ((memo, node) -> memo + node.getTotalLength()), 0
+
+      if parent isnt @get('book')
+        pages += parent.previousPageCount()
+
+      return pages

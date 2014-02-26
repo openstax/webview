@@ -1,6 +1,6 @@
 define (require) ->
   $ = require('jquery')
-  Mathjax = require('mathjax')
+  # Mathjax = require('mathjax')
   EditableView = require('cs!helpers/backbone/views/editable')
   template = require('hbs!./body-template')
   require('less!./body')
