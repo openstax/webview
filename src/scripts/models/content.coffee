@@ -94,15 +94,14 @@ define (require) ->
     getPageNumber: (model = @get('currentPage')) -> 1 + model.previousPageCount()
 
     removeNode: (node) ->
-      # before removing a node, figure out what the current page number is
-      # if the current page no longer exists after removing the node,
-      # then call setPage on the old node's page number-1
-
+      # FIX: get previous page even if removing a subcollection
       #previousPage = @getPageNumber(@getPreviousNode(node))
+      previousPage = @getPageNumber(node) - 1
 
       node.get('parent').get('contents').remove(node)
 
-      if not @get('currentPage')
+      # FIX: determine if node was inside a subcollection that got removed too
+      if node is @get('currentPage')
         @setPage(previousPage)
 
       @trigger('removeNode')

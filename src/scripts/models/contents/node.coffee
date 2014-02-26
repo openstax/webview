@@ -62,3 +62,18 @@ define (require) ->
         pages += parent.previousPageCount()
 
       return pages
+
+    ###
+    previousNode: () ->
+      parent = @get('parent')
+      index = @index()
+
+      if index is 0
+        if parent isnt @get('book') then return parent.getPreviousPage() else return null
+      else
+        contents = parent.get('contents').slice(0, index)
+        for node in contents by -1
+          if not node.get('subcollection')
+            return node
+          else
+    ###
