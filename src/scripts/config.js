@@ -10,7 +10,7 @@
       cs: '../../bower_components/require-cs/cs',
 
       // ## Core Libraries
-      jquery: '../../bower_components/jquery/jquery',
+      jquery: '../../bower_components/jquery/dist/jquery',
       underscore: '../../bower_components/lodash/dist/lodash',
       backbone: '../../bower_components/backbone/backbone',
       'hbs/handlebars': '../../bower_components/require-handlebars-plugin/hbs/handlebars',
