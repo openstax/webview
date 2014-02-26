@@ -91,7 +91,7 @@ define (require) ->
       # FIX: cache total pages and recalculate on add/remove events?
       @getTotalLength()
 
-    getPageNumber: (model = @get('currentPage')) -> 1 + model.previousPageCount()
+    getPageNumber: (model = @get('currentPage')) -> 1 + model?.previousPageCount()
 
     removeNode: (node) ->
       # FIX: get previous page even if removing a subcollection

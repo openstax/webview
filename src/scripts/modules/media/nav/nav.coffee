@@ -11,12 +11,13 @@ define (require) ->
     template: template
     templateHelpers: () ->
       model = @model.toJSON()
+      page = @model.getPageNumber()
       nextPage = @model.getNextPage()
       previousPage = @model.getPreviousPage()
 
-      if model.page isnt nextPage
+      if page isnt nextPage
         next = linksHelper.getPath('contents', {id: model.id, version: model.version, page: nextPage})
-      if model.page isnt previousPage
+      if page isnt previousPage
         back = linksHelper.getPath('contents', {id: model.id, version: model.version, page: previousPage})
 
       return {
