@@ -1,5 +1,14 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
+
+  <!-- ============= -->
+  <!-- HACK add class aloha-dialog so the editor never blurs -->
+  <!-- See src/lib/aloha.js
+       if (Aloha.activeEditable && !jQuery(".aloha-dialog").is(':visible') && !Aloha.eventHandled) {
+         Aloha.activeEditable.blur();
+       ...
+  -->
+  <!-- ============== -->
+  <div class="container-fluid aloha-dialog">
     <div class="navbar-header">
       <button type="button" class="disabled navbar-toggle collapsed" data-toggle="collapse" data-target="#editbar-navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
