@@ -3,6 +3,7 @@ define (require) ->
   _ = require('underscore')
   BaseView = require('cs!helpers/backbone/views/base')
   Aloha = require('aloha')
+  require('less!styles/aloha-hacks')
 
   observerConfig =
     subtree: true
