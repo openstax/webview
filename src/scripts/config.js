@@ -24,6 +24,10 @@
       // Use Minified Aloha ( `r.js -o build/aloha/build-profile-with-oer.js` )
       // because loading files in a different requirejs context is a royal pain
       aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
+      // Override location of jquery-ui and use our own. Because
+      // jquery-ui and bootstrap conflict in a few cases (buttons,
+      // tooltip) our copy has those removed.
+      jqueryui: '../../bower_components/aloha-editor/oerpub/js/jquery-ui-1.9.0.custom-aloha',
 
       // ## UI Libraries and Helpers
       tooltip: 'helpers/backbone/views/attached/tooltip/tooltip',
@@ -65,7 +69,7 @@
       // ## Aloha
       aloha: {
         // To disable MathJax comment out the `mathjax` entry in `deps` below.
-        deps: ['jquery', 'mathjax', 'cs!configs/aloha', 'bootstrapModal', 'bootstrapPopover'/*, 'css!aloha'*/],
+        deps: ['jquery', 'jqueryui', 'mathjax', 'cs!configs/aloha', 'bootstrapModal', 'bootstrapPopover'/*, 'css!aloha'*/],
         exports: 'Aloha',
         init: function() {
           return window.Aloha;

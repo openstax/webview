@@ -8,7 +8,7 @@
   </div>
 {{else}}
   {{#if hasBody}}
-    <div class="media-body">
+    <div class="media-body" id="content"><!-- set id because Aloha's semanticblock hardcodes this id -->
       {{#if currentPage.content}}
         {{include currentPage.content}}
       {{else}}
