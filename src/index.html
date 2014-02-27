@@ -11,6 +11,18 @@
     <style type="text/css">
       /* Hide Aloha's floating toolbar */
       .aloha-surface .aloha-ui-toolbar { display: none; }
+
+      .semantic-drag-source > * {
+        margin-left: 0;
+        width: auto;
+        display: inline-block;
+        padding-right: 10px;
+      }
+
+      .semantic-drag-source > .note::before    { content: 'Note'; }
+      .semantic-drag-source > .example::before { content: 'Example'; }
+      .semantic-drag-source > blockquote { font-size: inherit; }
+
     </style>
 
     <noscript>
