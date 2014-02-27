@@ -21,6 +21,10 @@
       // ## MathJax
       mathjax: 'http://cdn.mathjax.org/mathjax/2.3-latest/MathJax.js?config=MML_HTMLorMML',
 
+      // Use Minified Aloha ( `r.js -o build/aloha/build-profile-with-oer.js` )
+      // because loading files in a different requirejs context is a royal pain
+      aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
+
       // ## UI Libraries and Helpers
       tooltip: 'helpers/backbone/views/attached/tooltip/tooltip',
       popover: 'helpers/backbone/views/attached/popover/popover',
@@ -58,6 +62,16 @@
 
     // # Shims
     shim: {
+      // ## Aloha
+      aloha: {
+        // To disable MathJax comment out the `mathjax` entry in `deps` below.
+        deps: ['jquery', 'mathjax', 'cs!configs/aloha', 'bootstrapModal', 'bootstrapPopover'/*, 'css!aloha'*/],
+        exports: 'Aloha',
+        init: function($) {
+          return Aloha;
+        }
+      },
+
       // ## MathJax
       mathjax: {
         exports: 'MathJax'

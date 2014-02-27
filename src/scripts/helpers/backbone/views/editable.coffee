@@ -2,6 +2,7 @@ define (require) ->
   $ = require('jquery')
   _ = require('underscore')
   BaseView = require('cs!helpers/backbone/views/base')
+  Aloha = require('aloha')
 
   observerConfig =
     subtree: true
@@ -52,7 +53,9 @@ define (require) ->
 
           switch options.type
             when 'contenteditable'
-              $editable.attr('contenteditable', true)
+              $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
+              $HACK = Aloha.jQuery($editable[0])
+              $HACK.aloha()
 
               $editable.each (index) =>
                 if @observers[selector] then @observers[selector].disconnect()
@@ -95,7 +98,9 @@ define (require) ->
 
           switch options.type
             when 'contenteditable'
-              $editable.attr('contenteditable', false)
+              $HACK = Aloha.jQuery($editable[0])
+              $HACK.mahalo()
+
               @observers[selector].disconnect()
               delete @observers[selector]
 

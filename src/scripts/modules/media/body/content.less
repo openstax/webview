@@ -410,7 +410,10 @@ span.list[data-list-type='labeled-item'] { #list>.style(inline; labeled-item); }
   // Add the label to the title element (if one exists) or to the blockish element
   .place-label(@type; @label-type) {
     // A title exists so style it and put the label in `.title::before`
-    &.ui-has-child-title > header > .title {
+    // FIXME: Remove the following line.
+    // Aloha and webview have slightly different places for the title
+    &.ui-has-child-title > header > .title
+    &.ui-has-child-title > .title {
       #blockish>.title(@type);
       &::before { .format-label(@type; @label-type; true); }
     }
