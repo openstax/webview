@@ -69,8 +69,7 @@
       // ## Aloha
       aloha: {
         // To disable MathJax comment out the `mathjax` entry in `deps` below.
-        deps: ['jquery', 'jqueryui', 'mathjax', 'cs!configs/aloha', 'bootstrapModal',
-               'bootstrapPopover'],
+        deps: ['jquery', 'jqueryui', 'mathjax', 'cs!configs/aloha', 'bootstrapModal', 'bootstrapPopover'],
         exports: 'Aloha',
         init: function () {
           return window.Aloha;
