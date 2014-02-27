@@ -130,10 +130,10 @@ define ['jquery'], ($) ->
           '.default-block': {}
       image:
         handles: 'se'
-      copy:
-        path: () ->
-          # The path of the current document can be determined from the hash
-          decodeURI RegExp('^#repo/[^/]*/[^/]*(/branch/[^/]*)?/edit(/[^|]*)').exec(window.location.hash)[2]
+      # copy:
+      #   path: () ->
+      #     # The path of the current document can be determined from the hash
+      #     decodeURI RegExp('^#repo/[^/]*/[^/]*(/branch/[^/]*)?/edit(/[^|]*)').exec(window.location.hash)[2]
 
     smartContentChange:
       idle: 2000
