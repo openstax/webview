@@ -74,8 +74,6 @@ define ['jquery'], ($) ->
       ]
 
 
-# 'block/block', 'block/blockmanager', 'aloha/plugin', 'aloha/pluginmanager', 'jquery', 'aloha/ephemera', 'ui/ui', 'ui/button', 'copy/copy-plugin', 'css!semanticblock/css/semanticblock-plugin.css'
-
       # This whole thing is what's needed to:
       #
       # - set a custom URL to send files to
@@ -102,7 +100,7 @@ define ['jquery'], ($) ->
               # If the response is a URL then change the Image source to it
               # The URL could be absolute (`/^http/`) or relative (`/\//` or `[a-z]`).
               unless resp.match(/^http/) or resp.match(/^\//) or resp.match(/^[a-z]/)
-                alert 'You dropped a file and we sent a message to the server to do something with it.\nIt responded with some gibberish so we are showing you some other file to show it worked'
+                alert 'You dropped a file and we sent a message to the server to do something with it.'
                 resp = 'src/test/AlohaEditorLogo.png'
 
               # Drag and Drop creates an <img id='{this.id}'> element but the
