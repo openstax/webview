@@ -11,9 +11,7 @@ define (require) ->
     template: template
     templateHelpers:
       page: () -> @content.getPageNumber(@model)
-      url: () ->
-        book = @model.get('book').toJSON()
-        return linksHelper.getPath('contents', {id: book.id, version: book.version})
+      url: () -> linksHelper.getPath('contents', {id: @content.get('id'), version: @content.get('version')})
       editable: () -> @editable
 
     tagName: 'li'
@@ -55,10 +53,12 @@ define (require) ->
 
       return false
 
-    initialize: (options = {}) ->
-      @content = options.content
-      @editable = options.editable
+    initialize: () ->
       super()
+
+      @content = @model.get('book')
+      @editable = @content.get('editable')
+
       @listenTo(@model, 'change:active change:page change:changed change:title', @render)
 
     changePage: (e) ->

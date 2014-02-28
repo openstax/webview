@@ -16,9 +16,9 @@ define (require) ->
       'click > div > span > .subcollection': 'toggleSubcollection'
       'click > div > .remove': 'removeNode'
 
-    initialize: (options = {}) ->
-      @editable = options.editable
-      @content = options.content
+    initialize: () ->
+      @content = @model.get('book') or @model
+      @editable = @content.get('editable')
       @regions =
         container: @itemViewContainer
 
@@ -34,13 +34,9 @@ define (require) ->
         if node.get('subcollection')
           @regions.container.appendAs 'li', new TocTreeView
             model: node
-            content: @content
-            editable: @editable
         else
           @regions.container.appendAs 'li', new TocLeafView
             model: node
-            content: @content
-            editable: @editable
             collection: @model
 
     toggleSubcollection: (e) ->
