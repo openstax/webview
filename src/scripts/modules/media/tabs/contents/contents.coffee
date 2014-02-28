@@ -21,8 +21,6 @@ define (require) ->
     onRender: () ->
       @regions.toc.show new TocTreeView
         model: @model
-        editable: @model.get('editable')
-        content: @model
 
     onDragStart: (e) ->
       # Prevent children from interfering with drag events
