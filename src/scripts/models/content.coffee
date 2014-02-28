@@ -142,6 +142,10 @@ define (require) ->
       oldContainer = node.get('parent')
       container = marker.get('parent')
 
+      # Prevent a node from trying to become its own ancestor (infinite recursion)
+      if marker.hasAncestor(node)
+        return node
+
       # Remove the node
       oldContainer.get('contents').remove(node)
 

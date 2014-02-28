@@ -55,6 +55,17 @@ define (require) ->
 
     getPageNumber: (model = @) -> 1 + model?.previousPageCount()
 
+    # Determine if a model is an ancestor of this node
+    hasAncestor: (model) ->
+      parent = @get('parent')
+
+      if not parent
+        return false
+      else if parent is model
+        return true
+      else
+        return parent.hasAncestor(model)
+
     previousPageCount: () ->
       parent = @get('parent')
 
@@ -68,18 +79,3 @@ define (require) ->
         pages += parent.previousPageCount()
 
       return pages
-
-    ###
-    previousNode: () ->
-      parent = @get('parent')
-      index = @index()
-
-      if index is 0
-        if parent isnt @get('book') then return parent.getPreviousPage() else return null
-      else
-        contents = parent.get('contents').slice(0, index)
-        for node in contents by -1
-          if not node.get('subcollection')
-            return node
-          else
-    ###
