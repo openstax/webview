@@ -1,5 +1,4 @@
 define (require) ->
-  $ = require('jquery')
   _ = require('underscore')
   BaseView = require('cs!helpers/backbone/views/base')
   TocLeafView = require('cs!./leaf')
