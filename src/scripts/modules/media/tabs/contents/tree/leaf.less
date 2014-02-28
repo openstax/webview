@@ -51,6 +51,14 @@
       opacity: 0;
     }
 
+    &.expandable .name-wrapper::before {
+      content: "\25b8"; // ▸
+    }
+
+    &.expanded .name-wrapper::before {
+      content: "\25be"; // ▾
+    }
+
     &:hover > .remove {
       opacity: 1;
     }
@@ -59,5 +67,9 @@
   > ul {
     display: none; // Hide content of subcollections unless expanded
     font-size: 0.9em;
+
+    &.expanded {
+      display: block;
+    }
   }
 }
