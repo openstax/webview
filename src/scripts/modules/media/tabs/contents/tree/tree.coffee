@@ -1,11 +1,11 @@
 define (require) ->
   _ = require('underscore')
-  BaseView = require('cs!helpers/backbone/views/base')
+  TocDraggableView = require('cs!./draggable')
   TocLeafView = require('cs!./leaf')
   template = require('hbs!./tree-template')
   require('less!./tree')
 
-  return class TocTreeView extends BaseView
+  return class TocTreeView extends TocDraggableView
     template: template
     templateHelpers:
       editable: () -> @editable
@@ -15,6 +15,13 @@ define (require) ->
     events:
       'click > div > span > .subcollection': 'toggleSubcollection'
       'click > div > .remove': 'removeNode'
+
+      # Drag and Drop events
+      'dragstart > div': 'onDragStart'
+      'dragover > div': 'onDragOver'
+      'dragenter > div': 'onDragEnter'
+      'dragleave > div': 'onDragLeave'
+      'drop > div': 'onDrop'
 
     initialize: () ->
       @content = @model.get('book') or @model

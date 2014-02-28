@@ -3,11 +3,11 @@ define (require) ->
   linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics')
-  BaseView = require('cs!helpers/backbone/views/base')
+  TocDraggableView = require('cs!./draggable')
   template = require('hbs!./leaf-template')
   require('less!./leaf')
 
-  return class TocNodeView extends BaseView
+  return class TocNodeView extends TocDraggableView
     template: template
     templateHelpers:
       page: () -> @content.getPageNumber(@model)
@@ -27,31 +27,6 @@ define (require) ->
       'dragenter > div': 'onDragEnter'
       'dragleave > div': 'onDragLeave'
       'drop > div': 'onDrop'
-
-    onDragStart: (e) ->
-      e = e.originalEvent
-      e.dataTransfer.effectAllowed = 'move'
-      TocNodeView.dragging = @model
-
-    onDragOver: (e) ->
-      e = e.originalEvent
-      if e.preventDefault then e.preventDefault()
-      e.dataTransfer.dropEffect = 'move'
-      return false
-
-    onDragEnter: (e) ->
-      $(e.currentTarget).css('border-bottom', '3px solid #6ea244')
-
-    onDragLeave: (e) ->
-      $(e.currentTarget).css('border-bottom', '3px solid transparent')
-
-    onDrop: (e) ->
-      if e.stopPropagation then e.stopPropagation()
-
-      if TocNodeView.dragging isnt @
-        @model = @content.move(TocNodeView.dragging, @model, 'after')
-
-      return false
 
     initialize: () ->
       super()
