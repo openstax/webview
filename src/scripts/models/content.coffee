@@ -139,11 +139,24 @@ define (require) ->
       return previousPage
 
     move: (node, marker, position) ->
+      # Remove the node
       node.get('parent').get('contents').remove(node)
+
       index = marker.index()
       if position is 'after' then index++
+
+      # Re-add the node in the correct position
       container = marker.get('parent')
       container.get('contents').add(node, {at: index})
+
+      # Update the node's parent
       node.set('parent', container)
+
+      # Update the node's depth
+      if container.has('depth')
+        node.set('depth', 1 + container.get('depth'))
+      else
+        node.set('depth', 0)
+
       @trigger('moveNode')
       return node
