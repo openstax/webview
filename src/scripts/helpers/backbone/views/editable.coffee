@@ -53,7 +53,7 @@ define (require) ->
           options.onBeforeEditable?($editable)
 
           switch options.type
-            when 'contenteditable'
+            when 'aloha'
               $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
               $HACK = Aloha.jQuery($editable[0])
               $HACK.aloha()
@@ -98,14 +98,12 @@ define (require) ->
           options.onBeforeUneditable?($editable)
 
           switch options.type
-            when 'contenteditable'
+            when 'aloha'
               $HACK = Aloha.jQuery($editable[0])
               $HACK.mahalo()
 
               @observers[selector].disconnect()
               delete @observers[selector]
-
-            when 'aloha' then console.log 'FIX: disable aloha'
 
             when 'select2'
               $editable.off 'change.editable'

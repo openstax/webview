@@ -24,7 +24,7 @@ define (require) ->
         select2: s2Defaults
       '.summary':
         value: () -> @getModel('abstract')
-        type: 'contenteditable'
+        type: 'aloha'
       '.subjects > select':
         value: () -> @getModel('subjects')
         type: 'select2'
