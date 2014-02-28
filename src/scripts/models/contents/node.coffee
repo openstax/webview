@@ -52,8 +52,13 @@ define (require) ->
 
     getTotalLength: () -> 1
 
+    getPageNumber: (model = @) -> 1 + model?.previousPageCount()
+
     previousPageCount: () ->
       parent = @get('parent')
+
+      if not parent then return 0
+
       contents = parent.get('contents').slice(0, @index())
 
       pages = _.reduceRight contents, ((memo, node) -> memo + node.getTotalLength()), 0

@@ -49,7 +49,13 @@ define (require) ->
       if e.stopPropagation then e.stopPropagation()
 
       if TocNodeView.dragging isnt @
-        @content.move(TocNodeView.dragging, @model, 'after')
+        @model = @content.move(TocNodeView.dragging, @model, 'after')
+
+        href = linksHelper.getPath 'contents',
+          id: @model.get('id')
+          version: @model.get('version')
+          page: @model.getPageNumber()
+        router.navigate(href, {trigger: false, analytics: false})
 
       return false
 
