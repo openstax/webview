@@ -2,7 +2,6 @@
 @import "../../../../../../styles/mixins.less";
 
 .media-tabs .contents .contents > .toc ul > li {
-  padding: 8px 0;
   border-bottom: 1px solid @gray-lightest;
 
   &:last-child {
@@ -12,6 +11,11 @@
   > div {
     display: inline-block; // Prevent links from spilling into multiple-columns
     width: 100%;
+    padding: 5px 0;
+
+    // Add transparent borders to prevent jumping when DnD code adds a border
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
 
     > .name-wrapper {
       display: inline-block;
@@ -44,6 +48,11 @@
       vertical-align: middle;
       text-align: right;
       cursor: pointer;
+      opacity: 0;
+    }
+
+    &:hover > .remove {
+      opacity: 1;
     }
   }
 

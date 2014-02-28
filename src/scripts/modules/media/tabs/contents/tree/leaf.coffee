@@ -23,6 +23,38 @@ define (require) ->
       'click a': 'changePage'
       'click .remove': 'removeNode'
 
+      # Drag and Drop events
+      'dragstart > div': 'onDragStart'
+      'dragover > div': 'onDragOver'
+      'dragenter > div': 'onDragEnter'
+      'dragleave > div': 'onDragLeave'
+      'drop > div': 'onDrop'
+
+    onDragStart: (e) ->
+      e = e.originalEvent
+      e.dataTransfer.effectAllowed = 'move'
+      TocNodeView.dragging = @model
+
+    onDragOver: (e) ->
+      e = e.originalEvent
+      if e.preventDefault then e.preventDefault()
+      e.dataTransfer.dropEffect = 'move'
+      return false
+
+    onDragEnter: (e) ->
+      $(e.currentTarget).css('border-bottom', '3px solid #6ea244')
+
+    onDragLeave: (e) ->
+      $(e.currentTarget).css('border-bottom', '3px solid transparent')
+
+    onDrop: (e) ->
+      if e.stopPropagation then e.stopPropagation()
+
+      if TocNodeView.dragging isnt @
+        @content.move(TocNodeView.dragging, @model, 'after')
+
+      return false
+
     initialize: (options = {}) ->
       @content = options.content
       @editable = options.editable

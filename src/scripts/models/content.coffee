@@ -137,3 +137,11 @@ define (require) ->
       @setPage(previousPage) if page isnt previousPage
 
       return previousPage
+
+    move: (node, marker, position) ->
+      node.get('parent').get('contents').remove(node)
+      index = marker.index()
+      if position is 'after' then index++
+      marker.get('parent').get('contents').add(node, {at: index})
+      @trigger('moveNode')
+      return @
