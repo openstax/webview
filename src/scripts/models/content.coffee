@@ -139,14 +139,21 @@ define (require) ->
       return previousPage
 
     move: (node, marker, position) ->
+      oldContainer = node.get('parent')
+      container = marker.get('parent')
+
       # Remove the node
-      node.get('parent').get('contents').remove(node)
+      oldContainer.get('contents').remove(node)
+
+      # Mark the node's parent, node's old parent, and book as changed
+      oldContainer.set('changed', true)
+      container.set('changed', true)
+      @set('changed', true)
 
       index = marker.index()
       if position is 'after' then index++
 
       # Re-add the node in the correct position
-      container = marker.get('parent')
       container.get('contents').add(node, {at: index})
 
       # Update the node's parent
