@@ -40,7 +40,8 @@ define (require) ->
 
       switch attr
         when 'depth'
-          response = @attributes['parent'].get('depth') + 1
+          response = @attributes['parent']?.get('depth')
+          if response isnt undefined then response++
           @set('depth', response)
         when 'book'
           response = @attributes['parent']?.get('book')
