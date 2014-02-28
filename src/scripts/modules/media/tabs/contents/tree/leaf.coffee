@@ -51,12 +51,6 @@ define (require) ->
       if TocNodeView.dragging isnt @
         @model = @content.move(TocNodeView.dragging, @model, 'after')
 
-        href = linksHelper.getPath 'contents',
-          id: @model.get('id')
-          version: @model.get('version')
-          page: @model.getPageNumber()
-        router.navigate(href, {trigger: false, analytics: false})
-
       return false
 
     initialize: () ->
@@ -64,6 +58,14 @@ define (require) ->
 
       @content = @model.get('book')
       @editable = @content.get('editable')
+
+      # If this is the active page, update the URL bar to the correct page number
+      if @model.get('active')
+        href = linksHelper.getPath 'contents',
+          id: @content.get('id')
+          version: @content.get('version')
+          page: @model.getPageNumber()
+        router.navigate(href, {trigger: false, analytics: false})
 
       @listenTo(@model, 'change:active change:page change:changed change:title', @render)
 
