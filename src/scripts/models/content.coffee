@@ -142,6 +142,8 @@ define (require) ->
       node.get('parent').get('contents').remove(node)
       index = marker.index()
       if position is 'after' then index++
-      marker.get('parent').get('contents').add(node, {at: index})
+      container = marker.get('parent')
+      container.get('contents').add(node, {at: index})
+      node.set('parent', container)
       @trigger('moveNode')
       return @
