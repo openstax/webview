@@ -10,12 +10,22 @@ define (require) ->
     regions:
       toc: '.toc'
 
+    events:
+      'dragstart .toc .draggable': 'onDragStart'
+      'dragend .toc .draggable': 'onDragEnd'
+
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable removeNode', @render)
+      @listenTo(@model, 'change:editable removeNode moveNode', @render)
 
     onRender: () ->
       @regions.toc.show new TocTreeView
         model: @model
-        editable: @model.get('editable')
-        content: @model
+
+    onDragStart: (e) ->
+      # Prevent children from interfering with drag events
+      @$el.find('[draggable]').children().css('pointer-events', 'none')
+
+    onDragEnd: (e) ->
+      # Restore pointer events
+      @$el.find('[draggable]').children().css('pointer-events', 'auto')

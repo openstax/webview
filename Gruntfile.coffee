@@ -98,7 +98,7 @@ module.exports = (grunt) ->
           value: 120
         cyclomatic_complexity:
           level: 'error'
-          value: 18
+          value: 20
 
       source: ['src/**/*.coffee']
       grunt: 'Gruntfile.coffee'

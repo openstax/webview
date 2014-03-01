@@ -40,7 +40,8 @@ define (require) ->
 
       switch attr
         when 'depth'
-          response = @attributes['parent'].get('depth') + 1
+          response = @attributes['parent']?.get('depth')
+          if response isnt undefined then response++
           @set('depth', response)
         when 'book'
           response = @attributes['parent']?.get('book')
@@ -52,8 +53,24 @@ define (require) ->
 
     getTotalLength: () -> 1
 
+    getPageNumber: (model = @) -> 1 + model?.previousPageCount()
+
+    # Determine if a model is an ancestor of this node
+    hasAncestor: (model) ->
+      parent = @get('parent')
+
+      if not parent
+        return false
+      else if parent is model
+        return true
+      else
+        return parent.hasAncestor(model)
+
     previousPageCount: () ->
       parent = @get('parent')
+
+      if not parent then return 0
+
       contents = parent.get('contents').slice(0, @index())
 
       pages = _.reduceRight contents, ((memo, node) -> memo + node.getTotalLength()), 0
@@ -62,18 +79,3 @@ define (require) ->
         pages += parent.previousPageCount()
 
       return pages
-
-    ###
-    previousNode: () ->
-      parent = @get('parent')
-      index = @index()
-
-      if index is 0
-        if parent isnt @get('book') then return parent.getPreviousPage() else return null
-      else
-        contents = parent.get('contents').slice(0, index)
-        for node in contents by -1
-          if not node.get('subcollection')
-            return node
-          else
-    ###

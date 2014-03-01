@@ -1,7 +1,6 @@
 {{#if subcollection}}
-  <div>
+  <div {{#if editable}}draggable="true"{{/if}} class="draggable expandable {{#if expanded}}expanded{{/if}}">
     <span class="name-wrapper">
-      <span class="expand">&#9656;</span>
       <span class="title subcollection">{{title}}</span>
     </span>
     
@@ -10,4 +9,4 @@
     {{~/if~}}
   </div>
 {{/if}}
-<ul></ul>
+<ul {{#if expanded}}class="expanded"{{/if}}></ul>

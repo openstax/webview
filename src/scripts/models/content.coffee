@@ -91,7 +91,7 @@ define (require) ->
       # FIX: cache total pages and recalculate on add/remove events?
       @getTotalLength()
 
-    getPageNumber: (model = @get('currentPage')) -> 1 + model?.previousPageCount()
+    getPageNumber: (model = @get('currentPage')) -> super(model)
 
     removeNode: (node) ->
       # FIX: get previous page even if removing a subcollection
@@ -137,3 +137,37 @@ define (require) ->
       @setPage(previousPage) if page isnt previousPage
 
       return previousPage
+
+    move: (node, marker, position) ->
+      oldContainer = node.get('parent')
+      container = marker.get('parent')
+
+      # Prevent a node from trying to become its own ancestor (infinite recursion)
+      if marker.hasAncestor(node)
+        return node
+
+      # Remove the node
+      oldContainer.get('contents').remove(node)
+
+      # Mark the node's parent, node's old parent, and book as changed
+      oldContainer.set('changed', true)
+      container.set('changed', true)
+      @set('changed', true)
+
+      index = marker.index()
+      if position is 'after' then index++
+
+      # Re-add the node in the correct position
+      container.get('contents').add(node, {at: index})
+
+      # Update the node's parent
+      node.set('parent', container)
+
+      # Update the node's depth
+      if container.has('depth')
+        node.set('depth', 1 + container.get('depth'))
+      else
+        node.set('depth', 0)
+
+      @trigger('moveNode')
+      return node

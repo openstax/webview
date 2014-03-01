@@ -1,24 +1,31 @@
 define (require) ->
-  $ = require('jquery')
   _ = require('underscore')
-  BaseView = require('cs!helpers/backbone/views/base')
+  TocDraggableView = require('cs!./draggable')
   TocLeafView = require('cs!./leaf')
   template = require('hbs!./tree-template')
   require('less!./tree')
 
-  return class TocTreeView extends BaseView
+  return class TocTreeView extends TocDraggableView
     template: template
-    templateHelpers: editable: () -> @editable
+    templateHelpers:
+      editable: () -> @editable
+      expanded: () -> @model.expanded
     itemViewContainer: '> ul'
 
     events:
       'click > div > span > .subcollection': 'toggleSubcollection'
       'click > div > .remove': 'removeNode'
 
-    initialize: (options = {}) ->
-      @editable = options.editable
-      @content = options.content
-      @expanded = true
+      # Drag and Drop events
+      'dragstart > div': 'onDragStart'
+      'dragover > div': 'onDragOver'
+      'dragenter > div': 'onDragEnter'
+      'dragleave > div': 'onDragLeave'
+      'drop > div': 'onDrop'
+
+    initialize: () ->
+      @content = @model.get('book') or @model
+      @editable = @content.get('editable')
       @regions =
         container: @itemViewContainer
 
@@ -34,26 +41,18 @@ define (require) ->
         if node.get('subcollection')
           @regions.container.appendAs 'li', new TocTreeView
             model: node
-            content: @content
-            editable: @editable
         else
           @regions.container.appendAs 'li', new TocLeafView
             model: node
-            content: @content
-            editable: @editable
             collection: @model
 
     toggleSubcollection: (e) ->
-      parent = $(e.currentTarget).parent().parent()
-
-      if @expanded
-        @expanded = false
-        parent.find('.expand').html('&#9662;')
+      if @model.expanded
+        @model.expanded = false
+        @$el.children().removeClass('expanded')
       else
-        @expanded = true
-        parent.find('.expand').html('&#9656;')
-
-      parent.siblings('ul').toggle()
+        @model.expanded = true
+        @$el.children().addClass('expanded')
 
     removeNode: () ->
       @content.removeNode(@model)

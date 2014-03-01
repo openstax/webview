@@ -30,8 +30,8 @@ define (require) ->
       @route /^search/, 'search', () ->
         @appView.render('search')
 
-    navigate: (fragment, options, cb) ->
+    navigate: (fragment, options = {}, cb) ->
       super(arguments...)
-      analytics.send()
+      analytics.send() if options.analytics isnt false
       cb?()
       @trigger('navigate')
