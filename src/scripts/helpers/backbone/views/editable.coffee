@@ -2,8 +2,6 @@ define (require) ->
   $ = require('jquery')
   _ = require('underscore')
   BaseView = require('cs!helpers/backbone/views/base')
-  Aloha = require('aloha')
-  require('less!styles/aloha-hacks')
 
   observerConfig =
     subtree: true
@@ -54,21 +52,22 @@ define (require) ->
 
           switch options.type
             when 'aloha'
-              $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
-              $HACK = Aloha.jQuery($editable[0])
-              $HACK.aloha()
+              require ['aloha', 'less!styles/aloha-hacks'], (Aloha) =>
+                # Wait for Aloha to start up
+                Aloha.ready () =>
+                  $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
+                  $HACK = Aloha.jQuery($editable[0])
+                  $HACK.aloha()
 
-              $editable.each (index) =>
-                if @observers[selector] then @observers[selector].disconnect()
+                  $editable.each (index) =>
+                    if @observers[selector] then @observers[selector].disconnect()
 
-                @observers[selector] = new MutationObserver (mutations) =>
-                  mutations.forEach (mutation) =>
-                    setChanged(options.onEdit)
-                    @model.set(value, $($editable.get(index)).html())
+                    @observers[selector] = new MutationObserver (mutations) =>
+                      mutations.forEach (mutation) =>
+                        setChanged(options.onEdit)
+                        @model.set(value, $($editable.get(index)).html())
 
-                @observers[selector].observe($editable.get(index), options.config or observerConfig)
-
-            when 'aloha' then console.log 'FIX: enable aloha'
+                    @observers[selector].observe($editable.get(index), options.config or observerConfig)
 
             when 'select2'
               require ['select2'], (select2) =>
