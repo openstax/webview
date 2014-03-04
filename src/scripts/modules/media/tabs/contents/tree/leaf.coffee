@@ -23,7 +23,6 @@ define (require) ->
 
       # Drag and Drop events
       'dragstart > div': 'onDragStart'
-      'dragover > div': 'onDragOver'
       'dragenter > div': 'onDragEnter'
       'dragleave > div': 'onDragLeave'
       'drop > div': 'onDrop'
