@@ -55,27 +55,27 @@ define (require) ->
 
               require ['aloha', 'less!styles/aloha-hacks'], (Aloha) =>
                 # Wait for Aloha to start up
-                Aloha.ready () =>
+                Aloha.ready () ->
                   $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
                   $HACK = Aloha.jQuery($editable[0])
                   $HACK.aloha()
 
-
-                  updateModel = () =>
-                    alohaId = $HACK.attr('id')
-                    alohaEditable = Aloha.getEditableById(alohaId)
-
-                    if alohaEditable
-                      editableBody = alohaEditable.getContents()
-                      editableBody = editableBody.trim() # Trim for idempotence
-                      # Change the contents but do not update the Aloha editable area
-                      @model.set(value, editableBody) # TODO: Should we add a flag to not re-render the editable?
-
-
-
-                  Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
+                  # Update the model if an event for this editable was triggered
+                  Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) ->
                     updateModel() if d.triggerType != 'blur' and \
                       (d.editable.obj.is($HACK) or $.contains($HACK[0], d.editable.obj[0]))
+
+                # Update the model by retrieving the XHTML contents
+                updateModel = () =>
+                  alohaId = $editable.attr('id')
+                  alohaEditable = Aloha.getEditableById(alohaId)
+
+                  if alohaEditable
+                    editableBody = alohaEditable.getContents()
+                    editableBody = editableBody.trim() # Trim for idempotence
+                    # Change the contents but do not update the Aloha editable area
+                    @model.set(value, editableBody) # TODO: Should we add a flag to not re-render the editable?
+
 
             when 'select2'
               require ['select2'], (select2) =>
