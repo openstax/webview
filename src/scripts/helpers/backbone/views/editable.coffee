@@ -52,6 +52,7 @@ define (require) ->
 
           switch options.type
             when 'aloha'
+
               require ['aloha', 'less!styles/aloha-hacks'], (Aloha) =>
                 # Wait for Aloha to start up
                 Aloha.ready () =>
@@ -59,15 +60,22 @@ define (require) ->
                   $HACK = Aloha.jQuery($editable[0])
                   $HACK.aloha()
 
-                  $editable.each (index) =>
-                    if @observers[selector] then @observers[selector].disconnect()
 
-                    @observers[selector] = new MutationObserver (mutations) =>
-                      mutations.forEach (mutation) =>
-                        setChanged(options.onEdit)
-                        @model.set(value, $($editable.get(index)).html())
+                  updateModel = () =>
+                    alohaId = $HACK.attr('id')
+                    alohaEditable = Aloha.getEditableById(alohaId)
 
-                    @observers[selector].observe($editable.get(index), options.config or observerConfig)
+                    if alohaEditable
+                      editableBody = alohaEditable.getContents()
+                      editableBody = editableBody.trim() # Trim for idempotence
+                      # Change the contents but do not update the Aloha editable area
+                      @model.set(value, editableBody) # TODO: Should we add a flag to not re-render the editable?
+
+
+
+                  Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
+                    updateModel() if d.triggerType != 'blur' and \
+                      (d.editable.obj.is($HACK) or $.contains($HACK[0], d.editable.obj[0]))
 
             when 'select2'
               require ['select2'], (select2) =>
@@ -82,6 +90,21 @@ define (require) ->
                 $editable.on 'change.editable', (e) =>
                   setChanged(options.onEdit)
                   @model.set(value, $editable.select2('val'))
+
+
+            when 'contenteditable'
+              console.warn('Are you sure you do not want to use Aloha?')
+              $editable.attr('contenteditable', true)
+              $editable.each (index) =>
+                if @observers[selector] then @observers[selector].disconnect()
+
+                @observers[selector] = new MutationObserver (mutations) =>
+                  mutations.forEach (mutation) =>
+                    setChanged(options.onEdit)
+                    @model.set(value, $($editable.get(index)).html())
+
+                @observers[selector].observe($editable.get(index), options.config or observerConfig)
+
 
           options.onEditable?($editable)
 
@@ -101,11 +124,13 @@ define (require) ->
               $HACK = Aloha.jQuery($editable[0])
               $HACK.mahalo()
 
+            when 'select2'
+              $editable.off 'change.editable'
+
+            when 'contenteditable'
               @observers[selector].disconnect()
               delete @observers[selector]
 
-            when 'select2'
-              $editable.off 'change.editable'
 
           options.onUneditable?($editable)
 
