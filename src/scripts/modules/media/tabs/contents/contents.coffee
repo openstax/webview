@@ -1,6 +1,7 @@
 define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   TocTreeView = require('cs!./tree/tree')
+  AddPopoverView = require('cs!./popovers/add/add')
   template = require('hbs!./contents-template')
   require('less!./contents')
 
@@ -9,6 +10,7 @@ define (require) ->
 
     regions:
       toc: '.toc'
+      button: '.add.btn'
 
     events:
       'dragstart .toc .draggable': 'onDragStart'
@@ -16,11 +18,15 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable removeNode moveNode', @render)
+      @listenTo(@model, 'change:editable removeNode moveNode add', @render)
 
     onRender: () ->
       @regions.toc.show new TocTreeView
         model: @model
+
+      @regions.button.show new AddPopoverView
+        model: @model
+        owner: @$el.find('.add.btn')
 
     onDragStart: (e) ->
       # Prevent children from interfering with drag events
