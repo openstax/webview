@@ -44,3 +44,7 @@ define (require) ->
           return node
         else
           return node.getPage(num-page)
+
+    add: () ->
+      @get('contents').add(arguments...)
+      @trigger('add')

@@ -13,10 +13,9 @@ define (require) ->
       'click .add-subcollection': 'addSubcollection'
 
     addSubcollection: () ->
-      @model.get('contents').add
+      @model.add
         contents: [],
         title: "Untitled"
-      @model.trigger('add')
 
     addModule: () ->
       console.log 'add module'
