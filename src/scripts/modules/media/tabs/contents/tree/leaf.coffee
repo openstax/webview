@@ -3,17 +3,15 @@ define (require) ->
   linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics')
-  BaseView = require('cs!helpers/backbone/views/base')
+  TocDraggableView = require('cs!./draggable')
   template = require('hbs!./leaf-template')
   require('less!./leaf')
 
-  return class TocNodeView extends BaseView
+  return class TocNodeView extends TocDraggableView
     template: template
     templateHelpers:
       page: () -> @content.getPageNumber(@model)
-      url: () ->
-        book = @model.get('book').toJSON()
-        return linksHelper.getPath('contents', {id: book.id, version: book.version})
+      url: () -> linksHelper.getPath('contents', {id: @content.get('id'), version: @content.get('version')})
       editable: () -> @editable
 
     tagName: 'li'
@@ -23,10 +21,27 @@ define (require) ->
       'click a': 'changePage'
       'click .remove': 'removeNode'
 
-    initialize: (options = {}) ->
-      @content = options.content
-      @editable = options.editable
+      # Drag and Drop events
+      'dragstart > div': 'onDragStart'
+      'dragover > div': 'onDragOver'
+      'dragenter > div': 'onDragEnter'
+      'dragleave > div': 'onDragLeave'
+      'drop > div': 'onDrop'
+
+    initialize: () ->
       super()
+
+      @content = @model.get('book')
+      @editable = @content.get('editable')
+
+      # If this is the active page, update the URL bar to the correct page number
+      if @model.get('active')
+        href = linksHelper.getPath 'contents',
+          id: @content.get('id')
+          version: @content.get('version')
+          page: @model.getPageNumber()
+        router.navigate(href, {trigger: false, analytics: false})
+
       @listenTo(@model, 'change:active change:page change:changed change:title', @render)
 
     changePage: (e) ->

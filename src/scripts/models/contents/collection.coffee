@@ -25,7 +25,12 @@ define (require) ->
     }]
 
     getTotalLength: () ->
-      return @get('contents').reduce ((memo, node) -> memo + node.getTotalLength()), 0
+      contents = @get('contents')
+
+      if contents
+        return contents.reduce ((memo, node) -> memo + node.getTotalLength()), 0
+
+      return 0
 
     getPage: (num) ->
       page = 0
