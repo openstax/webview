@@ -1,5 +1,5 @@
 {{#if subcollection}}
-  <div {{#if editable}}draggable="true"{{/if}} class="draggable expandable {{#if expanded}}expanded{{/if}}">
+  <div {{#if editable}}draggable="true" ondragover="return false"{{/if}} class="draggable expandable {{#if expanded}}expanded{{/if}}">
     <span class="name-wrapper">
       <span class="title subcollection">{{title}}</span>
     </span>
