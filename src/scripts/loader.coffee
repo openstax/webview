@@ -19,7 +19,7 @@ define (require) ->
     resources = new RegExp('\/(resources|exports)\/')
 
     # Catch internal application links and let Backbone handle the routing
-    $(document).on 'click', 'a:not([data-bypass])', (e) ->
+    $(document).on 'click', 'a[href]:not([data-bypass]):not([href^="#"])', (e) ->
       $this = $(this)
       href = $this.attr('href')
 

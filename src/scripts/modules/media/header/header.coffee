@@ -32,7 +32,7 @@ define (require) ->
     editable:
       '.media-header > .title > h2':
         value: 'currentPage.title'
-        type: 'contenteditable'
+        type: 'aloha'
 
     regions:
       'button': '.info .btn'

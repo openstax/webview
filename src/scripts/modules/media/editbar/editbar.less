@@ -15,4 +15,21 @@
       text-align: left;
     }
   }
+
+  // These are the draggable HTML templates that are styled to look like buttons
+  .semantic-drag-source {
+
+    > * {
+      margin-left: 0;
+      width: auto;
+      display: inline-block;
+      padding-right: 10px;
+    }
+
+    > .note::before    { content: 'Note'; }
+    > .example::before { content: 'Example'; }
+    > blockquote { font-size: inherit; }
+  }
+
 }
+

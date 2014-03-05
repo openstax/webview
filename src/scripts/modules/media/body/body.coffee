@@ -13,7 +13,7 @@ define (require) ->
     editable:
       '.media-body':
         value: 'currentPage.content'
-        type: 'contenteditable'
+        type: 'aloha'
 
     events:
       'click .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'

@@ -21,6 +21,14 @@
       // ## MathJax
       mathjax: 'http://cdn.mathjax.org/mathjax/2.3-latest/MathJax.js?config=MML_HTMLorMML',
 
+      // Use Minified Aloha ( `r.js -o build/aloha/build-profile-with-oer.js` )
+      // because loading files in a different requirejs context is a royal pain
+      aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
+      // Override location of jquery-ui and use our own. Because
+      // jquery-ui and bootstrap conflict in a few cases (buttons,
+      // tooltip) our copy has those removed.
+      jqueryui: '../../bower_components/aloha-editor/oerpub/js/jquery-ui-1.9.0.custom-aloha',
+
       // ## UI Libraries and Helpers
       tooltip: 'helpers/backbone/views/attached/tooltip/tooltip',
       popover: 'helpers/backbone/views/attached/popover/popover',
@@ -58,6 +66,18 @@
 
     // # Shims
     shim: {
+      // ## Aloha
+      aloha: {
+        // To disable MathJax comment out the `mathjax` entry in `deps` below.
+        deps: ['jquery', 'jqueryui', 'mathjax', 'cs!configs/aloha', 'bootstrapModal', 'bootstrapPopover',
+          'css!../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha'
+        ],
+        exports: 'Aloha',
+        init: function () {
+          return window.Aloha;
+        }
+      },
+
       // ## MathJax
       mathjax: {
         exports: 'MathJax'

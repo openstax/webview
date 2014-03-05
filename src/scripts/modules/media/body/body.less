@@ -16,7 +16,7 @@
 
 // Mark unimplemented custom labels
 *[data-label]:not([data-label=""])::before {
-  .x-not-implemented('data-label');
+  content: attr(data-label) ': ';
 }
 
 
