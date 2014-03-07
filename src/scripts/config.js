@@ -80,7 +80,50 @@
 
       // ## MathJax
       mathjax: {
-        exports: 'MathJax'
+        // deps: ['cs!../../bower_components/aloha-editor/cnx/mathjax-config'],
+        exports: 'MathJax',
+        init: function () {
+          window.MathJax.Hub.Config({
+            jax: [
+              'input/MathML',
+              'input/TeX',
+              'input/AsciiMath',
+              'output/NativeMML',
+              'output/HTML-CSS'
+            ],
+            extensions: [
+              'asciimath2jax.js',
+              'tex2jax.js',
+              'mml2jax.js',
+              'MathMenu.js',
+              'MathZoom.js'
+            ],
+            tex2jax: {
+              inlineMath: [
+                ['[TEX_START]', '[TEX_END]'],
+                ['\\(', '\\)']
+              ]
+            },
+            TeX: {
+              extensions: [
+                'AMSmath.js',
+                'AMSsymbols.js',
+                'noErrors.js',
+                'noUndefined.js'
+              ],
+              noErrors: {
+                disabled: true
+              }
+            },
+            AsciiMath: {
+              noErrors: {
+                disabled: true
+              }
+            }
+          });
+
+          return window.MathJax;
+        }
       },
 
       // ## UI Libraries
