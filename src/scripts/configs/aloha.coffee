@@ -56,8 +56,8 @@ define ['jquery'], ($) ->
         'oer/paste'
         'oer/table'
         'extra/draganddropfiles'
-        # 'oer/overlay' # Need to upgrade Bootstrap
-        # 'oer/math'
+        'oer/overlay'
+        'oer/math'
         # 'oer/assorted'
         #'ghbook/image'
         # 'common/image' # Need to monkeypatch jQuery.live

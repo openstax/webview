@@ -6,7 +6,7 @@ define (require) ->
 
   # Close tooltips and popovers when clicking outside of them
   $(document).on 'click', (e) ->
-    $('.popover, .tooltip').hide().removeClass('in')
+    $('.popover:not(.math-popover), .tooltip').hide().removeClass('in')
 
   return class Tooltip extends BaseView
     containerTemplate: template
