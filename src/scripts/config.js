@@ -80,9 +80,16 @@
 
       // ## MathJax
       mathjax: {
-        // deps: ['cs!../../bower_components/aloha-editor/cnx/mathjax-config'],
         exports: 'MathJax',
         init: function () {
+          // This config is copied from
+          // `../../bower_components/aloha-editor/cnx/mathjax-config.coffee`
+          //
+          // It configures the TeX and AsciiMath inputs and the MML output
+          // mostly for the Math editor.
+          //
+          // MathMenu and Zoom may not be needed but the `noErrors` is useful
+          // for previewing as you type.
           window.MathJax.Hub.Config({
             jax: [
               'input/MathML',
