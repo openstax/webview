@@ -1,5 +1,4 @@
 define (require) ->
-  $ = require('jquery')
   BaseView = require('cs!helpers/backbone/views/base')
 
   return class TocDraggableView extends BaseView
