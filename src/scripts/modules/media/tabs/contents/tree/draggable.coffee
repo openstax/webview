@@ -10,16 +10,16 @@ define (require) ->
 
       if @model.get('subcollection')
         if pHeight/3 > y
-          position = 'top'
+          position = 'before'
         else if pHeight*2/3 > y
           position = 'insert'
         else
-          position = 'bottom'
+          position = 'after'
       else
         if pHeight/2 > y
-          position = 'top'
+          position = 'before'
         else
-          position = 'bottom'
+          position = 'after'
 
       return position
 
@@ -34,11 +34,11 @@ define (require) ->
 
       position = @getPosition(e)
 
-      if position is 'top'
+      if position is 'before'
         e.target.style.borderTop = '3px solid #6ea244'
         e.target.style.borderBottom = '3px solid transparent'
         e.target.style.backgroundColor = 'transparent'
-      else if position is 'bottom'
+      else if position is 'after'
         e.target.style.borderTop = '3px solid transparent'
         e.target.style.borderBottom = '3px solid #6ea244'
         e.target.style.backgroundColor = 'transparent'
