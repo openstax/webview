@@ -2,6 +2,27 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
 
   return class TocDraggableView extends BaseView
+    getPosition: (e) ->
+      $target = $(e.target)
+      pHeight = $target.outerHeight()
+      pOffset = $target.offset()
+      y = e.pageY - pOffset.top
+
+      if @model.get('subcollection')
+        if pHeight/3 > y
+          position = 'top'
+        else if pHeight*2/3 > y
+          position = 'insert'
+        else
+          position = 'bottom'
+      else
+        if pHeight/2 > y
+          position = 'top'
+        else
+          position = 'bottom'
+
+      return position
+
     onDragStart: (e) ->
       e.dataTransfer.effectAllowed = 'move'
       TocDraggableView.dragging = @model # Track the model being dragged on this class
@@ -9,33 +30,22 @@ define (require) ->
     onDragOver: (e) ->
       e.preventDefault()
 
-      $target = $(e.target)
-      pHeight = $target.outerHeight()
-      pOffset = $target.offset()
-      y = e.pageY - pOffset.top
-
       e.dataTransfer.dropEffect = 'move'
 
-      if @model.get('subcollection')
-        if pHeight/3 > y
-          e.target.style.borderTop = '3px solid #6ea244'
-          e.target.style.borderBottom = '3px solid transparent'
-          e.target.style.backgroundColor = 'transparent'
-        else if pHeight*2/3 > y
-          e.target.style.borderTop = '3px solid transparent'
-          e.target.style.borderBottom = '3px solid transparent'
-          e.target.style.backgroundColor = 'rgba(110, 162, 68, 0.5)'
-        else
-          e.target.style.borderTop = '3px solid transparent'
-          e.target.style.borderBottom = '3px solid #6ea244'
-          e.target.style.backgroundColor = 'transparent'
+      position = @getPosition(e)
+
+      if position is 'top'
+        e.target.style.borderTop = '3px solid #6ea244'
+        e.target.style.borderBottom = '3px solid transparent'
+        e.target.style.backgroundColor = 'transparent'
+      else if position is 'bottom'
+        e.target.style.borderTop = '3px solid transparent'
+        e.target.style.borderBottom = '3px solid #6ea244'
+        e.target.style.backgroundColor = 'transparent'
       else
-        if pHeight/2 > y
-          e.target.style.borderTop = '3px solid #6ea244'
-          e.target.style.borderBottom = '3px solid transparent'
-        else
-          e.target.style.borderTop = '3px solid transparent'
-          e.target.style.borderBottom = '3px solid #6ea244'
+        e.target.style.borderTop = '3px solid transparent'
+        e.target.style.borderBottom = '3px solid transparent'
+        e.target.style.backgroundColor = 'rgba(110, 162, 68, 0.5)'
 
       return false
 
@@ -47,23 +57,7 @@ define (require) ->
     onDrop: (e) ->
       if e.stopPropagation then e.stopPropagation()
 
-      $target = $(e.target)
-      pHeight = $target.outerHeight()
-      pOffset = $target.offset()
-      y = e.pageY - pOffset.top
-
-      if @model.get('subcollection')
-        if pHeight/3 > y
-          position = 'before'
-        else if pHeight*2/3 > y
-          position = 'insert'
-        else
-          position = 'after'
-      else
-        if pHeight/2 > y
-          position = 'before'
-        else
-          position = 'after'
+      position = @getPosition(e)
 
       # Reorganize the content's toc internal data representation
       if TocDraggableView.dragging isnt @model
