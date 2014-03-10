@@ -75,4 +75,3 @@ define (require) ->
         draggable.addEventListener('dragover', ((e) => @onDragOver.call(@, e)), false)
         draggable.addEventListener('dragleave', @onDragLeave, false)
         draggable.addEventListener('drop', ((e) => @onDrop.call(@, e)), false)
-        #@el.addEventListener('dragend', @onDragEnd, false)

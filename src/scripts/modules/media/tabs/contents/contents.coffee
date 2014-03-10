@@ -30,8 +30,14 @@ define (require) ->
 
     onDragStart: (e) ->
       # Prevent children from interfering with drag events
-      @$el.find('[draggable]').children().css('pointer-events', 'none')
+      @$el.find('.draggable').children().css('pointer-events', 'none')
 
     onDragEnd: (e) ->
+      $draggable = @$el.find('.draggable')
       # Restore pointer events
-      @$el.find('[draggable]').children().css('pointer-events', 'auto')
+      $draggable.children().css('pointer-events', 'auto')
+
+      # Reset styling for all draggable elements
+      $draggable.css('border-top', '3px solid transparent')
+      $draggable.css('border-bottom', '3px solid transparent')
+      $draggable.css('background-color', 'transparent')
