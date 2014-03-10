@@ -55,7 +55,7 @@ define (require) ->
       e.target.style.backgroundColor = 'transparent'
 
     onDrop: (e) ->
-      if e.stopPropagation then e.stopPropagation()
+      e.stopPropagation()
 
       position = @getPosition(e)
 
@@ -66,12 +66,24 @@ define (require) ->
       return false
 
     onRender: () ->
-      super()
-
       if @editable and @model.get('book')
         draggable = @$el.children('.draggable').get(0)
 
-        draggable.addEventListener('dragstart', ((e) => @onDragStart.call(@, e)), false)
-        draggable.addEventListener('dragover', ((e) => @onDragOver.call(@, e)), false)
+        onDragStart = ((e) => @onDragStart.call(@, e))
+        onDragOver = ((e) => @onDragOver.call(@, e))
+        onDrop = ((e) => @onDrop.call(@, e))
+
+        # Attach event listeners using vanilla JS after the view has been rendered
+        draggable.addEventListener('dragstart', onDragStart, false)
+        draggable.addEventListener('dragover', onDragOver, false)
         draggable.addEventListener('dragleave', @onDragLeave, false)
-        draggable.addEventListener('drop', ((e) => @onDrop.call(@, e)), false)
+        draggable.addEventListener('drop', onDrop, false)
+
+        # Remove event listeners when the view is destroyed
+        @onBeforeClose = () =>
+          draggable.removeEventListener('dragstart', onDragStart, false)
+          draggable.removeEventListener('dragover', onDragOver, false)
+          draggable.removeEventListener('dragleave', @onDragLeave, false)
+          draggable.removeEventListener('drop', onDrop, false)
+
+      return @
