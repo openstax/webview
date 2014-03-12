@@ -41,14 +41,28 @@
       }
     }
 
+    &.expandable {
+      > .name-wrapper {
+        width: 80%;
+      }
+
+      > .edit {
+        width: 8%;
+        text-align: right;
+        vertical-align: middle;
+        opacity: 0;
+        cursor: pointer;
+      }
+    }
+
     > .remove {
       display: inline-block;
       width: 10%;
       color: red;
       vertical-align: middle;
       text-align: right;
-      cursor: pointer;
       opacity: 0;
+      cursor: pointer;
     }
 
     &.expandable .name-wrapper::before {
@@ -59,7 +73,7 @@
       content: "\25be"; // ▾
     }
 
-    &:hover > .remove {
+    &:hover > .remove, &:hover > .edit {
       opacity: 1;
     }
   }

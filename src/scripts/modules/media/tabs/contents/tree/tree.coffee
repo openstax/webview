@@ -15,6 +15,7 @@ define (require) ->
     events:
       'click > div > span > .subcollection': 'toggleSubcollection'
       'click > div > .remove': 'removeNode'
+      'click > div > .edit': 'editNode'
 
     initialize: () ->
       @content = @model.get('book') or @model
@@ -51,3 +52,9 @@ define (require) ->
 
     removeNode: () ->
       @content.removeNode(@model)
+
+    editNode: () ->
+      title = prompt('Rename the subcollection:', @model.get('title'))
+
+      if title
+        @model.set('title', title)
