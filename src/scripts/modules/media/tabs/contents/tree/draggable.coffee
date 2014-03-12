@@ -31,28 +31,11 @@ define (require) ->
       e.preventDefault()
 
       e.dataTransfer.dropEffect = 'move'
-
-      position = @getPosition(e)
-
-      if position is 'before'
-        e.target.style.borderTop = '3px solid #6ea244'
-        e.target.style.borderBottom = '3px solid transparent'
-        e.target.style.backgroundColor = 'transparent'
-      else if position is 'after'
-        e.target.style.borderTop = '3px solid transparent'
-        e.target.style.borderBottom = '3px solid #6ea244'
-        e.target.style.backgroundColor = 'transparent'
-      else
-        e.target.style.borderTop = '3px solid transparent'
-        e.target.style.borderBottom = '3px solid transparent'
-        e.target.style.backgroundColor = 'rgba(110, 162, 68, 0.5)'
-
-      return false
+      $(e.currentTarget).removeClass('before after insert')
+      $(e.currentTarget).addClass(@getPosition(e))
 
     onDragLeave: (e) ->
-      e.target.style.borderTop = '3px solid transparent'
-      e.target.style.borderBottom = '3px solid transparent'
-      e.target.style.backgroundColor = 'transparent'
+      $(e.currentTarget).removeClass('before after insert')
 
     onDrop: (e) ->
       e.stopPropagation()

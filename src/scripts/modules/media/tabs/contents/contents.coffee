@@ -38,6 +38,4 @@ define (require) ->
       $draggable.children().css('pointer-events', 'auto')
 
       # Reset styling for all draggable elements
-      $draggable.css('border-top', '3px solid transparent')
-      $draggable.css('border-bottom', '3px solid transparent')
-      $draggable.css('background-color', 'transparent')
+      $draggable.removeClass('before after insert')
