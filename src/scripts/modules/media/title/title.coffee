@@ -19,7 +19,7 @@ define (require) ->
       # Set information used for social media links
       share =
         url: window.location.href
-        source: 'Connexions'
+        source: 'OpenStax CNX'
         summary: @model.get('abstract') or 'An OpenStax College book.'
         title: title or 'Untitled'
         image: @model.get('image') or "#{location.origin}/images/logo.png"
