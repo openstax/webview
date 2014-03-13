@@ -15,12 +15,7 @@ define (require) ->
     events:
       'click > div > span > .subcollection': 'toggleSubcollection'
       'click > div > .remove': 'removeNode'
-
-      # Drag and Drop events
-      'dragstart > div': 'onDragStart'
-      'dragenter > div': 'onDragEnter'
-      'dragleave > div': 'onDragLeave'
-      'drop > div': 'onDrop'
+      'click > div > .edit': 'editNode'
 
     initialize: () ->
       @content = @model.get('book') or @model
@@ -32,6 +27,8 @@ define (require) ->
       @listenTo(@model, 'change:unit change:title change:subcollection', @render)
 
     onRender: () ->
+      super()
+
       @regions.container.empty()
 
       nodes = @model.get('contents')?.models
@@ -55,3 +52,9 @@ define (require) ->
 
     removeNode: () ->
       @content.removeNode(@model)
+
+    editNode: () ->
+      title = prompt('Rename the subcollection:', @model.get('title'))
+
+      if title
+        @model.set('title', title)

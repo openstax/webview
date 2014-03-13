@@ -35,7 +35,7 @@ define (require) ->
         type: 'aloha'
 
     regions:
-      'button': '.info .btn'
+      button: '.info .btn'
 
     events:
       'click .summary h5': 'toggleSummary'

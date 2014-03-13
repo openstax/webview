@@ -96,9 +96,6 @@ module.exports = (grunt) ->
         max_line_length:
           level: 'error'
           value: 120
-        cyclomatic_complexity:
-          level: 'error'
-          value: 22
 
       source: ['src/**/*.coffee']
       grunt: 'Gruntfile.coffee'

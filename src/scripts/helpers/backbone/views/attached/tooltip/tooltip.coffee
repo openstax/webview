@@ -5,6 +5,7 @@ define (require) ->
   require('less!helpers/backbone/views/attached/tooltip/tooltip')
 
   # Close tooltips and popovers when clicking outside of them
+  # Ignore popover's with class .math-popover for Aloha
   $(document).on 'click', (e) ->
     $('.popover:not(.math-popover), .tooltip').hide().removeClass('in')
 

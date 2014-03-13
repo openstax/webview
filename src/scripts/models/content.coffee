@@ -149,13 +149,17 @@ define (require) ->
       # Remove the node
       oldContainer.get('contents').remove(node)
 
+      if position is 'insert'
+        index = 0
+        container = marker
+      else
+        index = marker.index()
+        if position is 'after' then index++
+
       # Mark the node's parent, node's old parent, and book as changed
       oldContainer.set('changed', true)
       container.set('changed', true)
       @set('changed', true)
-
-      index = marker.index()
-      if position is 'after' then index++
 
       # Re-add the node in the correct position
       container.get('contents').add(node, {at: index})

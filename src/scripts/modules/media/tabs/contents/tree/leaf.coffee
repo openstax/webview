@@ -21,12 +21,6 @@ define (require) ->
       'click a': 'changePage'
       'click .remove': 'removeNode'
 
-      # Drag and Drop events
-      'dragstart > div': 'onDragStart'
-      'dragenter > div': 'onDragEnter'
-      'dragleave > div': 'onDragLeave'
-      'drop > div': 'onDrop'
-
     initialize: () ->
       super()
 

@@ -17,6 +17,18 @@
     border-top: 3px solid transparent;
     border-bottom: 3px solid transparent;
 
+    &.before {
+      border-top: 3px solid #6ea244;
+    }
+
+    &.after {
+      border-bottom: 3px solid #6ea244;
+    }
+
+    &.insert {
+      background-color: rgba(110, 162, 68, 0.5);
+    }
+
     > .name-wrapper {
       display: inline-block;
       width: 90%;
@@ -41,14 +53,28 @@
       }
     }
 
+    &.expandable {
+      > .name-wrapper {
+        width: 80%;
+      }
+
+      > .edit {
+        width: 8%;
+        text-align: right;
+        vertical-align: middle;
+        opacity: 0;
+        cursor: pointer;
+      }
+    }
+
     > .remove {
       display: inline-block;
       width: 10%;
       color: red;
       vertical-align: middle;
       text-align: right;
-      cursor: pointer;
       opacity: 0;
+      cursor: pointer;
     }
 
     &.expandable .name-wrapper::before {
@@ -59,7 +85,7 @@
       content: "\25be"; // ▾
     }
 
-    &:hover > .remove {
+    &:hover > .remove, &:hover > .edit {
       opacity: 1;
     }
   }
