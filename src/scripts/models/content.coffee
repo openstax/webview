@@ -19,8 +19,7 @@ define (require) ->
           attrs.depth = 0
           attrs.book = @
           if _.isArray(attrs.contents)
-            attrs.subcollection = true
-            delete attrs.id # Get rid of the 'subcol' id so the subcollection is unique
+            delete attrs.id # Get rid of the 'subcol' id so the section is unique
             return new Collection(attrs)
 
           return new Page(attrs)
@@ -60,7 +59,7 @@ define (require) ->
         if @get('contents').length
           @setPage(page or 1) # Default to page 1
         else
-          @trigger('changePage') # Don't setup an empty collection
+          @trigger('changePage') # Don't setup an empty book
       else
         @set('currentPage', new Page({id: @id}))
         @fetchPage()
@@ -94,13 +93,13 @@ define (require) ->
     getPageNumber: (model = @get('currentPage')) -> super(model)
 
     removeNode: (node) ->
-      # FIX: get previous page even if removing a subcollection
+      # FIX: get previous page even if removing a section
       #previousPage = @getPageNumber(@getPreviousNode(node))
       previousPage = @getPageNumber(node) - 1
 
       node.get('parent').get('contents').remove(node)
 
-      # FIX: determine if node was inside a subcollection that got removed too
+      # FIX: determine if node was inside a section that got removed too
       if node is @get('currentPage')
         @setPage(previousPage)
 
@@ -175,3 +174,5 @@ define (require) ->
 
       @trigger('moveNode')
       return node
+
+    isSection: () -> return false

@@ -9,13 +9,13 @@ define (require) ->
     placement: 'bottom'
 
     events:
-      'click .add-module': 'addModule'
-      'click .add-subcollection': 'addSubcollection'
+      'click .add-page': 'addPage'
+      'click .add-section': 'addSection'
 
-    addSubcollection: () ->
+    addSection: () ->
       @model.add
         contents: [],
         title: "Untitled"
 
-    addModule: () ->
-      console.log 'add module'
+    addPage: () ->
+      console.log 'FIX: add page'

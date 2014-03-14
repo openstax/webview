@@ -8,7 +8,7 @@ define (require) ->
       pOffset = $target.offset()
       y = e.pageY - pOffset.top
 
-      if @model.get('subcollection')
+      if @model.isSection()
         if pHeight/3 > y
           position = 'before'
         else if pHeight*2/3 > y

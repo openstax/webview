@@ -1,5 +1,5 @@
 # Representation of individual nodes in a book's tree (table of contents).
-# A Node can represent both a tree (subcollection), or leaf (page).
+# A Node can represent both a tree (section), or leaf (page).
 # Page Nodes also are used to cache a page's content once loaded.
 
 define (require) ->
@@ -79,3 +79,5 @@ define (require) ->
         pages += parent.previousPageCount()
 
       return pages
+
+    isSection: () -> return @get('contents') instanceof Backbone.Collection

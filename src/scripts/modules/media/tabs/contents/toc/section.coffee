@@ -1,19 +1,18 @@
 define (require) ->
   _ = require('underscore')
   TocDraggableView = require('cs!./draggable')
-  TocLeafView = require('cs!./leaf')
-  template = require('hbs!./tree-template')
-  require('less!./tree')
+  TocPageView = require('cs!./page')
+  template = require('hbs!./section-template')
+  require('less!./section')
 
-  return class TocTreeView extends TocDraggableView
+  return class TocSectionView extends TocDraggableView
     template: template
     templateHelpers:
       editable: () -> @editable
-      expanded: () -> @model.expanded
     itemViewContainer: '> ul'
 
     events:
-      'click > div > span > .subcollection': 'toggleSubcollection'
+      'click > div > span > .section': 'toggleSection'
       'click > div > .remove': 'removeNode'
       'click > div > .edit': 'editNode'
 
@@ -24,7 +23,7 @@ define (require) ->
         container: @itemViewContainer
 
       super()
-      @listenTo(@model, 'change:unit change:title change:subcollection', @render)
+      @listenTo(@model, 'change:unit change:title change:expanded', @render)
 
     onRender: () ->
       super()
@@ -34,27 +33,25 @@ define (require) ->
       nodes = @model.get('contents')?.models
 
       _.each nodes, (node) =>
-        if node.get('subcollection')
-          @regions.container.appendAs 'li', new TocTreeView
+        if node.isSection()
+          @regions.container.appendAs 'li', new TocSectionView
             model: node
         else
-          @regions.container.appendAs 'li', new TocLeafView
+          @regions.container.appendAs 'li', new TocPageView
             model: node
             collection: @model
 
-    toggleSubcollection: (e) ->
-      if @model.expanded
-        @model.expanded = false
-        @$el.children().removeClass('expanded')
+    toggleSection: (e) ->
+      if @model.get('expanded')
+        @model.set('expanded', false)
       else
-        @model.expanded = true
-        @$el.children().addClass('expanded')
+        @model.set('expanded', true)
 
     removeNode: () ->
       @content.removeNode(@model)
 
     editNode: () ->
-      title = prompt('Rename the subcollection:', @model.get('title'))
+      title = prompt('Rename the section:', @model.get('title'))
 
       if title
         @model.set('title', title)
