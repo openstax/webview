@@ -4,10 +4,10 @@ define (require) ->
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics')
   TocDraggableView = require('cs!./draggable')
-  template = require('hbs!./leaf-template')
-  require('less!./leaf')
+  template = require('hbs!./page-template')
+  require('less!./page')
 
-  return class TocNodeView extends TocDraggableView
+  return class TocPageView extends TocDraggableView
     template: template
     templateHelpers:
       page: () -> @content.getPageNumber(@model)
@@ -15,7 +15,7 @@ define (require) ->
       editable: () -> @editable
 
     tagName: 'li'
-    itemViewContainer: '.subcollection'
+    itemViewContainer: '.section'
 
     events:
       'click a': 'changePage'

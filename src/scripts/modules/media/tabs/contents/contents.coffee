@@ -1,6 +1,6 @@
 define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
-  TocTreeView = require('cs!./tree/tree')
+  TocSectionView = require('cs!./toc/section')
   AddPopoverView = require('cs!./popovers/add/add')
   template = require('hbs!./contents-template')
   require('less!./contents')
@@ -21,7 +21,7 @@ define (require) ->
       @listenTo(@model, 'change:editable removeNode moveNode add', @render)
 
     onRender: () ->
-      @regions.toc.show new TocTreeView
+      @regions.toc.show new TocSectionView
         model: @model
 
       @regions.button.show new AddPopoverView

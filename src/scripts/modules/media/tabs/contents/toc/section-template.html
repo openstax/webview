@@ -1,9 +1,9 @@
-{{#if subcollection}}
+{{#if book}} {{! Only display if the model has a reference to the book, and therefore is not the book }}
   <div {{#if editable}}draggable="true"{{/if}} class="draggable expandable {{#if expanded}}expanded{{/if}}">
     <span class="name-wrapper">
-      <span class="title subcollection">{{title}}</span>
+      <span class="title section">{{title}}</span>
     </span>
-    
+
     {{~#if editable~}}
       <span class="edit glyphicon glyphicon-pencil"></span>
       <span class="remove glyphicon glyphicon-remove"></span>
