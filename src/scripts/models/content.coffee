@@ -59,7 +59,7 @@ define (require) ->
         if @get('contents').length
           @setPage(page or 1) # Default to page 1
         else
-          @trigger('changePage') # Don't setup an empty collection
+          @trigger('changePage') # Don't setup an empty book
       else
         @set('currentPage', new Page({id: @id}))
         @fetchPage()
