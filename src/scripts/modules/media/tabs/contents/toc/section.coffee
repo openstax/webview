@@ -9,7 +9,6 @@ define (require) ->
     template: template
     templateHelpers:
       editable: () -> @editable
-      expanded: () -> @model.expanded
     itemViewContainer: '> ul'
 
     events:
@@ -24,7 +23,7 @@ define (require) ->
         container: @itemViewContainer
 
       super()
-      @listenTo(@model, 'change:unit change:title', @render)
+      @listenTo(@model, 'change:unit change:title change:expanded', @render)
 
     onRender: () ->
       super()
@@ -43,12 +42,10 @@ define (require) ->
             collection: @model
 
     toggleSection: (e) ->
-      if @model.expanded
-        @model.expanded = false
-        @$el.children().removeClass('expanded')
+      if @model.get('expanded')
+        @model.set('expanded', false)
       else
-        @model.expanded = true
-        @$el.children().addClass('expanded')
+        @model.set('expanded', true)
 
     removeNode: () ->
       @content.removeNode(@model)
