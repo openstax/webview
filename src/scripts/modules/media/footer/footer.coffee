@@ -1,5 +1,5 @@
 define (require) ->
-  BaseView = require('cs!helpers/backbone/views/base')
+  EditableView = require('cs!helpers/backbone/views/editable')
   MetadataView = require('cs!./metadata/metadata')
   DownloadsView = require('cs!./downloads/downloads')
   HistoryView = require('cs!./history/history')
@@ -8,7 +8,7 @@ define (require) ->
   template = require('hbs!./footer-template')
   require('less!./footer')
 
-  return class MediaFooterView extends BaseView
+  return class MediaFooterView extends EditableView
     template: template
 
     regions:
@@ -20,6 +20,17 @@ define (require) ->
 
     events:
       'click .tab': 'selectTab'
+
+    editable:
+      '[data-content="downloads"]':
+        onEditable: ($el) -> $el.addClass('disabled')
+        onUneditable: ($el) -> $el.removeClass('disabled')
+      '[data-content="history"]':
+        onEditable: ($el) -> $el.addClass('disabled')
+        onUneditable: ($el) -> $el.removeClass('disabled')
+      '[data-content="attribution"]':
+        onEditable: ($el) -> $el.addClass('disabled')
+        onUneditable: ($el) -> $el.removeClass('disabled')
 
     onRender: () ->
       @regions.metadata.show(new MetadataView({model: @model}))
@@ -33,6 +44,8 @@ define (require) ->
       @switchTab($tab)
 
     switchTab: ($tab) ->
+      if $tab.hasClass('disabled') then return
+
       $allTabs = @$el.find('.tab')
       $allTabs.addClass('inactive')
       $allTabs.removeClass('active')

@@ -1,14 +1,19 @@
 define (require) ->
   $ = require('jquery')
-  Mathjax = require('mathjax')
-  BaseView = require('cs!helpers/backbone/views/base')
+  # Mathjax = require('mathjax')
+  EditableView = require('cs!helpers/backbone/views/editable')
   template = require('hbs!./body-template')
   require('less!./body')
 
-  return class MediaBodyView extends BaseView
+  return class MediaBodyView extends EditableView
     template: template
     templateHelpers:
       hasBody: () -> @model.get('contents')?.length or @model.get('currentPage')
+
+    editable:
+      '.media-body':
+        value: 'currentPage.content'
+        type: 'aloha'
 
     events:
       'click .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
@@ -18,7 +23,7 @@ define (require) ->
       @listenTo(@model, 'changePage', @render)
 
     onRender: () ->
-      MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
+      # MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
 
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution')

@@ -6,63 +6,89 @@
   <dt>Name:</dt>
     <dd>
       <div>
-        <a href="/contents/{{model.id}}">{{model.title}}</a>
+        <a href="/contents/{{id}}">{{title}}</a>
       </div>
     </dd>
   <dt>ID:</dt>
     <dd>
-      <div>{{model.id}}</div>
+      <div>{{id}}</div>
     </dd>
   <dt>Language:</dt>
     <dd>
-      <div>
-        {{#is model.languageName.native model.languageName.english}}
-          {{model.languageName.native}}
-        {{else}}
-          {{model.languageName.native}} ({{model.languageName.english}})
-        {{/is}}
+      <div class="language">
+        {{~#unless editable~}}
+          {{#is languageName.native languageName.english~}}
+            {{languageName.native}}
+          {{~else~}}
+            {{languageName.native}} ({{languageName.english}})
+          {{~/is~}}
+        {{else~}}
+          <select name="language">
+            {{~#each languages~}}
+              <option value="{{@key}}" {{#is @key ../language}}selected{{/is}}>
+                {{~#is native english~}}
+                  {{native}}
+                {{~else~}}
+                  {{native}} ({{english}})
+                {{~/is~}}
+              </option>
+            {{~/each~}}
+          </select>
+        {{~/unless~}}
       </div>
     </dd>
   <dt>Summary:</dt>
     <dd>
-      <div>{{include model.abstract}}</div>
+      <div class="summary">{{include abstract}}</div>
     </dd>
   <dt>Subjects:</dt>
     <dd>
-      <div>
-        {{~#each model.subjects~}}
-          <span class="list-comma">{{this}}</span>
-        {{~/each~}}
+      <div class="subjects">
+        {{~#unless editable~}}
+          {{~#each subjects~}}
+            <span class="list-comma">{{this}}</span>
+          {{~/each~}}
+        {{~else~}}
+          <select name="subjects" multiple data-placeholder="Add Subjects">
+            {{~#each subjectsList~}}
+              <option value="{{@key}}" {{#inArray ../subjects @key}}selected{{/inArray}}>{{@key}}</option>
+            {{~/each~}}
+          </select>
+        {{~/unless~}}
       </div>
     </dd>
   <dt>Keywords:</dt>
     <dd>
-      <div>
-        {{~#each model.keywords~}}
-          <span class="list-comma">{{this}}</span>
-        {{~/each~}}
+      <div class="keywords">
+        {{~#unless editable~}}
+          {{~#each keywords~}}
+            <span class="list-comma">{{this}}</span>
+          {{~/each~}}
+        {{~else~}}
+          <input type="hidden" data-placeholder="Add Keywords" />
+        {{~/unless~}}
       </div>
     </dd>
   <dt>License:</dt>
     <dd>
       <div>
-        <a href="{{model.license.url}}">
-          {{model.license.name}} ({{model.license.code}} {{model.license.version}})
+        <a href="{{license.url}}">
+          {{license.name}} ({{license.code}} {{license.version}})
         </a>
       </div>
     </dd>
   <dt>Authors:</dt>
     <dd>
       <div>
-        {{~#each model.authors~}}
+        {{#each authors}}
           <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
-        {{~/each~}}
+        {{/each}}
       </div>
     </dd>
   <dt>Copyright Holders:</dt>
     <dd>
       <div>
-        {{#each model.licensors}}
+        {{#each licensors}}
           <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
         {{/each}}
       </div>
@@ -70,21 +96,21 @@
   <dt>Maintainers:</dt>
     <dd>
       <div>
-        {{#each model.maintainers}}
+        {{#each maintainers}}
           <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
         {{/each}}
       </div>
     </dd>
   <dt>Latest Version:</dt>
     <dd>
-      <div>{{model.version}}</div>
+      <div>{{version}}</div>
     </dd>
   <dt>First Publication Date:</dt>
     <dd>
-      <div>{{date model.created}}</div>
+      <div>{{date created}}</div>
     </dd>
-  <dt>Latest Revision to Collection:</dt>
+  <dt>Latest Revision:</dt>
     <dd>
-      <div>{{date model.revised}}</div>
+      <div>{{date revised}}</div>
     </dd>
 </dl>

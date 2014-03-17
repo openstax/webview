@@ -1,0 +1,44 @@
+@import "../../../../../styles/variables.less";
+@import "../../../../../styles/mixins.less";
+
+.workspace .results .list {
+  margin-top: 40px;
+
+  table {
+    table-layout: fixed;
+    overflow: hidden;
+
+    tbody {
+      word-wrap: break-word;
+    }
+
+    caption {
+      font-size: 2.1rem;
+      color: @brand-primary;
+      text-align: left;
+    }
+
+    thead .type {
+      color: black;
+    }
+  }
+
+  .status,
+  .type {
+    width: 60px;
+    text-align: center;
+    color: @brand-primary;
+  }
+
+  .authors {
+    width: 165px;
+
+    .author {
+      display: block;
+    }
+  }
+
+  .edited {
+    width: 115px;
+  }
+}

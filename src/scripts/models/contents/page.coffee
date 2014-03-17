@@ -1,16 +1,10 @@
 define (require) ->
   $ = require('jquery')
-  toc = require('cs!collections/toc')
   Node = require('cs!./node')
-  require('backbone-associations')
 
   return class Page extends Node
     defaults:
       authors: []
-
-    constructor: () ->
-      super(arguments...)
-      toc.add(@)
 
     parse: (response, options) ->
       resonse = super(arguments...)
@@ -29,7 +23,6 @@ define (require) ->
           return !$(node).hasClass('title')
         $contents.wrapAll('<section>')
         $title = $el.children('.title')
-        $title.wrap('<header>')
         # Add an attribute for the parents' `data-label`
         # since CSS does not support `parent(attr(data-label))`.
         # When the title exists, this attribute is added before it
