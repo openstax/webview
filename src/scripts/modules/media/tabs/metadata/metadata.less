@@ -1,7 +1,28 @@
 @import "../../../../../styles/variables.less";
+@import "../../../../../styles/mixins.less";
 
-.media-footer > .metadata {
+.media-tabs .metadata {
   position: relative;
+  padding: 50px 40px 30px 40px;
+  color: black;
+
+  .book-page-toggle {
+    position: absolute;
+    right: 40px;
+    top: 20px;
+
+    .btn {
+      color: black;
+      border: 1px solid @gray-lightest;
+      background-color: white;
+    }
+
+    .active {
+      color: black;
+      border: 1px solid transparent;
+      background-color: @gray-lightest;
+    }
+  }
 
   > div > dl {
     margin-bottom: 0;

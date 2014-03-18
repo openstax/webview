@@ -1,6 +1,5 @@
 define (require) ->
   EditableView = require('cs!helpers/backbone/views/editable')
-  MetadataView = require('cs!./metadata/metadata')
   DownloadsView = require('cs!./downloads/downloads')
   HistoryView = require('cs!./history/history')
   AttributionView = require('cs!./attribution/attribution')
@@ -12,7 +11,6 @@ define (require) ->
     template: template
 
     regions:
-      metadata: '.metadata'
       downloads: '.downloads'
       history: '.history'
       attribution: '.attribution'
@@ -33,7 +31,6 @@ define (require) ->
         onUneditable: ($el) -> $el.removeClass('disabled')
 
     onRender: () ->
-      @regions.metadata.show(new MetadataView({model: @model}))
       @regions.downloads.show(new DownloadsView({model: @model}))
       @regions.history.show(new HistoryView({model: @model}))
       @regions.attribution.show(new AttributionView({model: @model}))

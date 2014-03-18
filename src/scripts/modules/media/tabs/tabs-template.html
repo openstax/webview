@@ -2,24 +2,28 @@
   <ul>
     {{#is type 'book'}}
       <li class="tab contents-tab" data-content="contents">
-        <span class="tab-title">Contents</span>
+        <span class="tab-title"><span class="glyphicon glyphicon-th-list"></span>Contents</span>
       </li>
     {{/is}}
-    <li class="tab tools-tab" data-content="tools">
-      <span class="tab-title">Tools</span>
+
+    <li class="tab metadata-tab" data-content="metadata">
+      <span class="tab-title"><span class="glyphicon glyphicon-info-sign"></span>Metadata</span>
     </li>
-    {{! <li class="tab reading-lists-tab" data-content="reading-lists">
-      <span class="tab-title">Reading Lists</span>
-    </li> }}
+
+    <li class="tab tools-tab" data-content="tools">
+      <span class="tab-title"><span class="glyphicon glyphicon-cog"></span>Tools</span>
+    </li>
   </ul>
 
   <div class="contents tab-content">
     {{! Content View }}
   </div>
 
+  <div class="metadata tab-content">
+    {{! Metadata View }}
+  </div>
+
   <div class="tools tab-content">
     {{! Tools View }}
   </div>
-
-  {{! <div class="reading-lists tab-content"></div> }}
 </div>
