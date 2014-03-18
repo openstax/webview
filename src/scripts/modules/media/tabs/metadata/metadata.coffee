@@ -1,7 +1,7 @@
 define (require) ->
   settings = require('settings')
   subjects = require('cs!collections/subjects')
-  FooterTabView = require('cs!../inherits/tab/tab')
+  FooterTabView = require('cs!modules/media/footer/inherits/tab/tab')
   template = require('hbs!./metadata-template')
   require('less!./metadata')
 
