@@ -3,18 +3,18 @@ define (require) ->
   HeaderView = require('cs!modules/header/header')
   FooterView = require('cs!modules/footer/footer')
   WorkspaceView = require('cs!modules/workspace/workspace')
-  template = require('hbs!./me-template')
-  require('less!./me')
+  template = require('hbs!./workspace-template')
+  require('less!./workspace')
 
   return class MePage extends BaseView
     template: template
     pageTitle: 'My Workspace'
 
     regions:
-      me: '#me'
+      workspace: '#workspace'
 
     onRender: () ->
-      @parent.regions.header.show(new HeaderView({page: 'me', url: 'mycnx'}))
-      @parent.regions.footer.show(new FooterView({page: 'me'}))
+      @parent.regions.header.show(new HeaderView({page: 'workspace', url: 'mycnx'}))
+      @parent.regions.footer.show(new FooterView({page: 'workspace'}))
 
-      @regions.me.append(new WorkspaceView())
+      @regions.workspace.append(new WorkspaceView())
