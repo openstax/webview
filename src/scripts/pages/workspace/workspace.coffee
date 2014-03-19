@@ -6,7 +6,7 @@ define (require) ->
   template = require('hbs!./workspace-template')
   require('less!./workspace')
 
-  return class MePage extends BaseView
+  return class WorkspacePage extends BaseView
     template: template
     pageTitle: 'My Workspace'
 
