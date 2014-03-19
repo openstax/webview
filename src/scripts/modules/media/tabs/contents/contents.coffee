@@ -13,8 +13,8 @@ define (require) ->
       button: '.add.btn'
 
     events:
-      'dragstart .toc .draggable': 'onDragStart'
-      'dragend .toc .draggable': 'onDragEnd'
+      'dragstart .toc [draggable]': 'onDragStart'
+      'dragend .toc [draggable]': 'onDragEnd'
 
     initialize: () ->
       super()
@@ -30,12 +30,11 @@ define (require) ->
 
     onDragStart: (e) ->
       # Prevent children from interfering with drag events
-      @$el.find('.draggable').children().css('pointer-events', 'none')
+      @$el.find('[draggable]').children().css('pointer-events', 'none')
 
     onDragEnd: (e) ->
-      $draggable = @$el.find('.draggable')
       # Restore pointer events
-      $draggable.children().css('pointer-events', 'auto')
+      @$el.find('[draggable]').children().css('pointer-events', 'auto')
 
       # Reset styling for all draggable elements
-      $draggable.removeClass('before after insert')
+      e.currentTarget.className = ''
