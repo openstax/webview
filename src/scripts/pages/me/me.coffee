@@ -2,7 +2,6 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   HeaderView = require('cs!modules/header/header')
   FooterView = require('cs!modules/footer/footer')
-  FindContentView = require('cs!modules/find-content/find-content')
   WorkspaceView = require('cs!modules/workspace/workspace')
   template = require('hbs!./me-template')
   require('less!./me')
