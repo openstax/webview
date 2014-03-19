@@ -53,7 +53,7 @@
       }
     }
 
-    &.expandable {
+    &[data-expandable="true"] {
       > .name-wrapper {
         width: 80%;
       }
@@ -77,11 +77,11 @@
       cursor: pointer;
     }
 
-    &.expandable .name-wrapper::before {
+    &[data-expandable="true"] .name-wrapper::before {
       content: "\25b8"; // ▸
     }
 
-    &.expanded .name-wrapper::before {
+    &[data-expanded="true"] .name-wrapper::before {
       content: "\25be"; // ▾
     }
 
@@ -94,7 +94,7 @@
     display: none; // Hide content of sections unless expanded
     font-size: 0.9em;
 
-    &.expanded {
+    &[data-expanded="true"] {
       display: block;
     }
   }

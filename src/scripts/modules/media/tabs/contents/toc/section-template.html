@@ -1,5 +1,5 @@
 {{#if book}} {{! Only display if the model has a reference to the book, and therefore is not the book }}
-  <div {{#if editable}}draggable="true"{{/if}} class="draggable expandable {{#if expanded}}expanded{{/if}}">
+  <div {{#if editable}}draggable="true"{{/if}} data-expandable="true" {{#if expanded}}data-expanded="true"{{/if}}>
     <span class="name-wrapper">
       <span class="title section">{{title}}</span>
     </span>
@@ -10,4 +10,4 @@
     {{~/if~}}
   </div>
 {{/if}}
-<ul {{#if expanded}}class="expanded"{{/if}}></ul>
+<ul {{#if expanded}}data-expanded="true"{{/if}}></ul>

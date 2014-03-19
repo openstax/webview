@@ -1,4 +1,5 @@
 define (require) ->
+  $ = require('jquery')
   BaseView = require('cs!helpers/backbone/views/base')
 
   return class TocDraggableView extends BaseView
@@ -31,11 +32,10 @@ define (require) ->
       e.preventDefault()
 
       e.dataTransfer.dropEffect = 'move'
-      $(e.currentTarget).removeClass('before after insert')
-      $(e.currentTarget).addClass(@getPosition(e))
+      e.currentTarget.className = @getPosition(e)
 
     onDragLeave: (e) ->
-      $(e.currentTarget).removeClass('before after insert')
+      e.currentTarget.className = ''
 
     onDrop: (e) ->
       e.stopPropagation()
@@ -50,7 +50,7 @@ define (require) ->
 
     onRender: () ->
       if @editable and @model.get('book')
-        draggable = @$el.children('.draggable').get(0)
+        draggable = @$el.children('[draggable]').get(0)
 
         onDragStart = ((e) => @onDragStart.call(@, e))
         onDragOver = ((e) => @onDragOver.call(@, e))
