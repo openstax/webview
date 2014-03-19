@@ -18,5 +18,4 @@ define (require) ->
       @parent.regions.header.show(new HeaderView({page: 'me', url: 'mycnx'}))
       @parent.regions.footer.show(new FooterView({page: 'me'}))
 
-      @regions.me.append(new FindContentView())
       @regions.me.append(new WorkspaceView())
