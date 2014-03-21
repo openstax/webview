@@ -176,3 +176,15 @@ define (require) ->
       return node
 
     isSection: () -> return false
+
+    newPage: (title, cb) ->
+      $.ajax
+        type: 'POST'
+        xhrFields:
+          withCredentials: true
+        url: 'http://localhost:8080/contents'
+        data: JSON.stringify
+          title: title
+        success: (data) =>
+          @add(data)
+          cb?(data)
