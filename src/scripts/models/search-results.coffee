@@ -18,7 +18,7 @@ define (require) ->
   }
 
   return new class SearchResults extends Backbone.Model
-    url: () -> "#{SEARCH_URI}#{@query}"
+    url: () -> "#{@searchUrl}#{@query}"
 
     defaults:
       query:
@@ -33,14 +33,16 @@ define (require) ->
 
     initialize: (options = {}) ->
       @query = options.query or ''
+      @searchUrl = options.url or SEARCH_URI
 
-    load: (query) ->
-      if query isnt @query
+    load: (query, url) ->
+      if query isnt @query or url isnt @searchUrl
         # Reset search results
         @clear().set(@defaults)
         @set('loaded', false)
 
         @query = query or ''
+        @searchUrl = url or SEARCH_URI
         @fetch
           success: () =>
             @set('error', false)
@@ -53,6 +55,16 @@ define (require) ->
 
     parse: (response, options) ->
       response = super(arguments...)
+
+      if not response.results
+        response =
+          query:
+            sort: []
+            limits: []
+
+          results:
+            items: response
+
 
       response.results.auxiliary or= {}
 
