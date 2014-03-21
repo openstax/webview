@@ -37,13 +37,13 @@ define (require) ->
       @set('loaded', false)
       @fetch
         reset: true
-        success: () =>
-          @set('error', false)
-          @load(options.page)
-        error: (model, response, options) =>
-          @set('error', response.status)
       .always () =>
         @set('loaded', true)
+      .done () =>
+        @set('error', false)
+        @load(options.page)
+      .fail (model, response, options) =>
+        @set('error', response.status)
 
     parse: (response) ->
       type = response.type = MEDIA_TYPES[response.mediaType]
@@ -61,8 +61,8 @@ define (require) ->
         else
           @trigger('changePage') # Don't setup an empty book
       else
-        @set('currentPage', new Page({id: @id}))
-        @fetchPage()
+        @set('currentPage', new Page(@toJSON(), {parse: true}))
+        @trigger('changePage')
 
     fetchPage: () ->
       page = @get('currentPage')
