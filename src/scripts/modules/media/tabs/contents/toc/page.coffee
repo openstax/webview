@@ -24,7 +24,7 @@ define (require) ->
     initialize: () ->
       super()
 
-      @content = @model.get('book')
+      @content = @model.get('book') or @model
       @editable = @content.get('editable')
 
       # If this is the active page, update the URL bar to the correct page number

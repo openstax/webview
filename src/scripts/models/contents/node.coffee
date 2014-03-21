@@ -10,7 +10,11 @@ define (require) ->
   SERVER = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
 
   return class Node extends Backbone.AssociatedModel
-    url: () -> "#{SERVER}/contents/#{@id}"
+    url: () ->
+      if @isNew()
+        return "#{SERVER}/contents"
+      else
+        return "#{SERVER}/contents/#{@id}"
 
     parse: (response, options) ->
       # Don't overwrite the title from the book's table of contents
