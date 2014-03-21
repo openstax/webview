@@ -1,0 +1,35 @@
+@import "../../../../styles/variables.less";
+
+.editbar .navbar > .container-fluid {
+  max-width: @max-viewport-width;
+
+  > .navbar-collapse {
+    height: 1px;
+
+    .navbar-btn {
+      margin-top: 9px; // Override Bootstrap to vertically-align buttons
+    }
+
+    .current-heading {
+      width: 12.3rem;
+      text-align: left;
+    }
+  }
+
+  // These are the draggable HTML templates that are styled to look like buttons
+  .semantic-drag-source {
+
+    > * {
+      margin-left: 0;
+      width: auto;
+      display: inline-block;
+      padding-right: 10px;
+    }
+
+    > .note::before    { content: 'Note'; }
+    > .example::before { content: 'Example'; }
+    > blockquote { font-size: inherit; }
+  }
+
+}
+

@@ -1,8 +1,9 @@
 @import "../../../styles/variables.less";
 
-@logo-width: 300px;
-@logo-height: 106px;
-@header-height: 140px;
+@logo-width: 251px;
+@logo-height: 51px;
+@header-height: 130px;
+@logo-offset: 10px;
 
 .page-header {
   position: relative;
@@ -22,6 +23,7 @@
   > a > .logo {
     position: absolute;
     bottom: (@header-height - @logo-height)/2; // center the logo vertically
+    left: @logo-offset;
     width: @logo-width;
     height: @logo-height;
     background: url(images/logo.png) center center no-repeat;
@@ -33,7 +35,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    left: @logo-width;
+    left: @logo-width + @logo-offset;
   }
 
   > .links > .login {

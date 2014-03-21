@@ -25,17 +25,11 @@
       > .tab-title {
         margin-left: 2px;
         vertical-align: middle;
-
-        &::before {
-          display: inline-block;
+        
+        .glyphicon {
           margin-right: 5px;
-          width: 17px;
-          height: 17px;
+          font-size: 1.6rem;
           vertical-align: text-top;
-          background-image: url(images/icons/contents.png);
-          background-repeat: no-repeat;
-          background-position: center center;
-          content: "";
         }
 
         &::after {
@@ -44,14 +38,6 @@
           vertical-align: top;
           content: "+";
         }
-      }
-
-      &.tools-tab > .tab-title::before {
-        background-image: url(images/icons/tools.png);
-      }
-
-      &.reading-lists-tab > .tab-title::before {
-        background-image: url(images/icons/lists.png);
       }
 
       &.active > .tab-title::after {

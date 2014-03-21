@@ -8,19 +8,21 @@ define (require) ->
   return new class Subjects extends Backbone.Collection
     url: () -> "#{SERVER}/extras"
 
+    list:
+      'Arts'                      : '/images/subjects/art.jpg'
+      'Business'                  : '/images/subjects/business.jpg'
+      'Humanities'                : '/images/subjects/humanities.jpg'
+      'Mathematics and Statistics': '/images/subjects/math.jpg'
+      'Science and Technology'    : '/images/subjects/science.jpg'
+      'Social Sciences'           : '/images/subjects/social_science.jpg'
+
     initialize: () ->
       @fetch({reset: true})
 
     parse: (response, options) ->
       subjects = response.subjects
 
-      _.each subjects, (subject) ->
-        switch subject.name
-          when 'Arts' then subject.image = '/images/subjects/art.jpg'
-          when 'Business' then subject.image = '/images/subjects/business.jpg'
-          when 'Humanities' then subject.image = '/images/subjects/humanities.jpg'
-          when 'Mathematics and Statistics' then subject.image = '/images/subjects/math.jpg'
-          when 'Science and Technology' then subject.image = '/images/subjects/science.jpg'
-          when 'Social Sciences' then subject.image = '/images/subjects/social_science.jpg'
+      _.each subjects, (subject) =>
+        subject.image = @list[subject.name]
 
       return subjects
