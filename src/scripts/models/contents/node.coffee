@@ -13,7 +13,8 @@ define (require) ->
     url: () ->
       if @isNew()
         return "#{SERVER}/contents"
-      # HACK: Node is instantiated twice when viewing a piece of draft content. once with the @draft and the second time without.
+      # HACK: Node is instantiated twice when viewing a piece of draft content.
+      # once with the @draft and the second time without.
       else if /@/.test(@id)
         return "#{SERVER}/contents/#{@id}.json"
       else
