@@ -6,13 +6,15 @@ define (require) ->
   template = require('hbs!./workspace-template')
   require('less!./workspace')
 
+  WORKSPACE_URI = "#{location.origin}/users/contents"
+
   return class SearchView extends BaseView
     template: template
 
     initialize: () ->
       super()
 
-      @model = searchResults.load('?q=author:"OpenStax%20College"')
+      @model = searchResults.load('', WORKSPACE_URI)
 
       @listenTo(@model, 'change:error', @displayError)
 
