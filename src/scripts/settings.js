@@ -11,7 +11,7 @@
       // Hostname and port for the cnxarchive server
       cnxarchive: {
         host: location.hostname,
-        port: 6543
+        port: location.port
       },
 
       // Prefix to prepend to page titles

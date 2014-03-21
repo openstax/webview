@@ -10,7 +10,14 @@ define (require) ->
   SERVER = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
 
   return class Node extends Backbone.AssociatedModel
-    url: () -> "#{SERVER}/contents/#{@id}"
+    url: () ->
+      if @isNew()
+        return "#{SERVER}/contents"
+      # HACK: Node is instantiated twice when viewing a piece of draft content. once with the @draft and the second time without.
+      else if /@/.test(@id)
+        return "#{SERVER}/contents/#{@id}.json"
+      else
+        return "#{SERVER}/contents/#{@id}@draft.json"
 
     parse: (response, options) ->
       # Don't overwrite the title from the book's table of contents
