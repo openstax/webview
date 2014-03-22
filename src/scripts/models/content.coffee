@@ -61,8 +61,8 @@ define (require) ->
         else
           @trigger('changePage') # Don't setup an empty book
       else
-        @set('currentPage', new Page({id: @id}))
-        @fetchPage()
+        @set('currentPage', new Page(@toJSON(), {parse: true}))
+        @trigger('changePage')
 
     fetchPage: () ->
       page = @get('currentPage')
