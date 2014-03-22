@@ -1,7 +1,3 @@
-<a href="http://conference.cnx.org/" data-bypass="true">
-  <img src="images/banners/cnx2014.png" width="960" height="90" alt="2014 Connexions Conference" />
-</a>
-
 <div class="page-header">
   <a href="/">
     <div class="logo"></div>
@@ -9,8 +5,12 @@
   <div class="links">
     <div class="login">
       <ul>
-        <li><a href="http://cnx.org/join_form">Sign Up</a></li>
-        <li><a href="http://cnx.org/login_form">Login</a></li>
+        {{#if username}}
+          <li><a data-bypass="true" href="/logout">Log Out {{username}}</a></li>
+        {{else}}
+          <li><a data-bypass="true" href="/login">Sign Up</a></li>
+          <li><a data-bypass="true" href="/login">Login</a></li>
+        {{/if}}
         {{#if url}}
           <li><a href="{{url}}" title="Switch to the CNX legacy web site">Legacy Site</a></li>
         {{/if}}
@@ -23,7 +23,7 @@
       <a href="/contents" {{#is page 'contents'}}class="active"{{/is}}>Content</a>
       <a href="http://cnx.org/lenses">Lenses</a>
       <a href="http://cnx.org/aboutus/">About Us</a>
-      <a href="http://cnx.org/mycnx">My CNX</a>
+      <a href="/workspace" {{#is page 'workspace'}}class="active"{{/is}}>My Workspace</a>
       <a href="http://www.rice.edu">
         <img src="images/rice.png" class="rice" alt="Rice University" width="92" height="40" />
       </a>

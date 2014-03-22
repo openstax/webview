@@ -18,17 +18,20 @@ define (require) ->
       @route 'contents', 'contents', () ->
         @appView.render('contents')
 
+      @route 'workspace', 'workspace', () ->
+        @appView.render('workspace')
+
       # Match and extract uuid and page numbers separated by a colon
       @route /^contents\/([^:]+):?([0-9]*)/, 'media', (uuid, page) ->
         uuid = uuid.toLowerCase()
         uuid = settings.shortcodes[uuid] if settings.shortcodes[uuid]
-        @appView.render('contents', {uuid: uuid, page: page})
+        @appView.render('contents', {uuid: uuid, page: Number(page)})
 
       @route /^search/, 'search', () ->
         @appView.render('search')
 
-    navigate: (fragment, options, cb) ->
+    navigate: (fragment, options = {}, cb) ->
       super(arguments...)
-      analytics.send()
+      analytics.send() if options.analytics isnt false
       cb?()
       @trigger('navigate')

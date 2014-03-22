@@ -1,11 +1,11 @@
 define (require) ->
   _ = require('underscore')
-  BaseView = require('cs!helpers/backbone/views/base')
+  EditableView = require('cs!helpers/backbone/views/editable')
   BookPopoverView = require('cs!./popovers/book/book')
   template = require('hbs!./header-template')
   require('less!./header')
 
-  return class MediaHeaderView extends BaseView
+  return class MediaHeaderView extends EditableView
     template: template
     templateHelpers: () ->
       currentPage = @model.get('currentPage')
@@ -29,8 +29,13 @@ define (require) ->
           (_.isArray(pageDownloads) and pageDownloads?.length)
       }
 
+    editable:
+      '.media-header > .title > h2':
+        value: 'currentPage.title'
+        type: 'aloha'
+
     regions:
-      'button': '.info .btn'
+      button: '.info .btn'
 
     events:
       'click .summary h5': 'toggleSummary'
