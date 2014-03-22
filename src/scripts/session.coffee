@@ -1,10 +1,13 @@
 define (require) ->
   Backbone = require('backbone')
+  settings = require('settings')
+
+  SERVER = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
 
   _authenticated = false
 
   return new class Session extends Backbone.Model
-    url: '/me'
+    url: "#{SERVER}/users/profile"
 
     login: () ->
       @fetch
