@@ -56,17 +56,6 @@ define (require) ->
     parse: (response, options) ->
       response = super(arguments...)
 
-      # HACK: FIXME: remove once the workspace list from archive returns a proper search result
-      if not response.results
-        response =
-          query:
-            sort: []
-            limits: []
-
-          results:
-            items: response
-
-
       response.results.auxiliary or= {}
 
       authors = new Backbone.Collection(response.results.auxiliary.authors)

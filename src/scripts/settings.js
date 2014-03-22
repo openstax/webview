@@ -11,7 +11,7 @@
       // Hostname and port for the cnx-archive server
       cnxarchive: {
         host: location.hostname,
-        port: location.port
+        port: 6543
       },
 
       // Hostname and port for the cnx-authoring server
