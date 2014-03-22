@@ -89,6 +89,7 @@ define (require) ->
                     editableBody = editableBody.trim() # Trim for idempotence
                     # Change the contents but do not update the Aloha editable area
                     @model.set(value, editableBody) # TODO: Should we add a flag to not re-render the editable?
+                    setChanged(options.onEdit)
 
             # Setup Select2
             when 'select2'
