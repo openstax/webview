@@ -32,9 +32,11 @@ define (require) ->
 
       data = $(e.originalEvent.target).serializeArray()
 
-      _.each data, (input) ->
-        if input.name isnt 'title' and input.value is 'on'
-          console.log 'FIX: add page id: ' + input.name
+      _.each data, (input) =>
+        if input.name isnt 'title'
+          @model.add({id: input.name, title: input.value})
+
+      $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
 
     newPage: () ->
       $modal = @$el.children('#add-page-modal')
@@ -42,4 +44,4 @@ define (require) ->
 
       @model.newPage(title)
 
-      $('.modal-backdrop').remove() # Hack to ensure bootstrap modal backdrop is removed
+      $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
