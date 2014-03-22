@@ -1,4 +1,6 @@
 define (require) ->
+  $ = require('jquery')
+  _ = require('underscore')
   searchResults = require('cs!models/search-results')
   BaseView = require('cs!helpers/backbone/views/base')
   AddPageSearchResultsView = require('cs!./results/results')
@@ -27,9 +29,12 @@ define (require) ->
 
     onSubmit: (e) ->
       e.preventDefault()
-      console.log 'FIX: Add selected pages'
-      
-      console.log e
+
+      data = $(e.originalEvent.target).serializeArray()
+
+      _.each data, (input) ->
+        if input.name isnt 'title' and input.value is 'on'
+          console.log 'FIX: add page id: ' + input.name
 
     newPage: () ->
       $modal = @$el.children('#add-page-modal')
