@@ -7,14 +7,17 @@ define (require) ->
   settings = require('settings')
   require('backbone-associations')
 
-  SERVER = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
+  ARCHIVE = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
+  AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
   return class Node extends Backbone.AssociatedModel
+    # url: () -> "#{SERVER}/contents/#{@id}"
     url: () ->
-      if @isNew()
-        return "#{SERVER}/contents"
+      version = @get('version')
+      if version is 'draft'
+        return "#{AUTHORING}/contents/#{@id}@draft"
       else
-        return "#{SERVER}/contents/#{@id}.json"
+        return "#{ARCHIVE}/contents/#{@id}"
 
     parse: (response, options) ->
       # Don't overwrite the title from the book's table of contents
@@ -29,14 +32,18 @@ define (require) ->
 
       @set('downloads', 'loading')
 
-      $.ajax
-        url: "#{SERVER}/extras/#{@id}"
-        dataType: 'json'
-      .done (response) =>
-        @set('downloads', response.downloads)
-        @set('isLatest', response.isLatest)
-      .fail () =>
+      if @get('version') is 'draft'
         @set('downloads', [])
+        @set('isLatest', true)
+      else
+        $.ajax
+          url: "#{ARCHIVE}/extras/#{@id}"
+          dataType: 'json'
+        .done (response) =>
+          @set('downloads', response.downloads)
+          @set('isLatest', response.isLatest)
+        .fail () =>
+          @set('downloads', [])
 
     get: (attr) ->
       if @attributes[attr] isnt undefined

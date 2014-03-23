@@ -44,28 +44,18 @@ define (require) ->
         @query = query or ''
         @searchUrl = url or SEARCH_URI
         @fetch
-          success: () =>
-            @set('error', false)
-          error: (model, response, options) =>
-            @set('error', response.status)
+          reset: true
         .always () =>
           @set('loaded', true)
+        .done () =>
+          @set('error', false)
+        .fail (model, response, options) =>
+          @set('error', response.status)
 
       return @
 
     parse: (response, options) ->
       response = super(arguments...)
-
-      # HACK: FIXME: remove once the workspace list from archive returns a proper search result
-      if not response.results
-        response =
-          query:
-            sort: []
-            limits: []
-
-          results:
-            items: response
-
 
       response.results.auxiliary or= {}
 

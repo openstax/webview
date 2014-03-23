@@ -1,5 +1,6 @@
 define (require) ->
   router = require('cs!router')
+  session  = require('cs!session')
   searchResults = require('cs!models/search-results')
   BaseView = require('cs!helpers/backbone/views/base')
   WorkspaceResultsView = require('cs!./results/results')
@@ -14,7 +15,7 @@ define (require) ->
     initialize: () ->
       super()
 
-      @model = searchResults.load('', WORKSPACE_URI)
+      @model = searchResults.load("authorID:#{session.get('id')}", WORKSPACE_URI)
 
       @listenTo(@model, 'change:error', @displayError)
 

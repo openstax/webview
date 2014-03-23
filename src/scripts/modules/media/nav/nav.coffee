@@ -32,7 +32,7 @@ define (require) ->
       super()
       @hideProgress = options.hideProgress
 
-      @listenTo(@model, 'changePage removeNode moveNode', @render)
+      @listenTo(@model, 'changePage removeNode moveNode add', @render)
 
     events:
       'click .next': 'nextPage'

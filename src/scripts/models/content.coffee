@@ -1,6 +1,7 @@
 define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
+  settings = require('settings')
   Collection = require('cs!models/contents/collection')
   Page = require('cs!models/contents/page')
 
@@ -37,13 +38,13 @@ define (require) ->
       @set('loaded', false)
       @fetch
         reset: true
-        success: () =>
-          @set('error', false)
-          @load(options.page)
-        error: (model, response, options) =>
-          @set('error', response.status)
       .always () =>
         @set('loaded', true)
+      .done () =>
+        @set('error', false)
+        @load(options.page)
+      .fail (model, response, options) =>
+        @set('error', response.status)
 
     parse: (response) ->
       type = response.type = MEDIA_TYPES[response.mediaType]
@@ -176,3 +177,14 @@ define (require) ->
       return node
 
     isSection: () -> return false
+
+    newPage: (options = {}, cb) ->
+      $.ajax
+        type: 'POST'
+        xhrFields:
+          withCredentials: true
+        url: "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}/contents"
+        data: JSON.stringify(options)
+      .done (data) =>
+        @add(data)
+        cb?(data)
