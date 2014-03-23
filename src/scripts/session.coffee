@@ -2,7 +2,7 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
 
-  SERVER = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
+  SERVER = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxauthoring.port}"
 
   _authenticated = false
 

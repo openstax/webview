@@ -44,12 +44,13 @@ define (require) ->
         @query = query or ''
         @searchUrl = url or SEARCH_URI
         @fetch
-          success: () =>
-            @set('error', false)
-          error: (model, response, options) =>
-            @set('error', response.status)
+          reset: true
         .always () =>
           @set('loaded', true)
+        .done () =>
+          @set('error', false)
+        .fail (model, response, options) =>
+          @set('error', response.status)
 
       return @
 

@@ -1,5 +1,4 @@
 define (require) ->
-  $ = require('jquery')
   session  = require('cs!session')
   settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
