@@ -13,12 +13,11 @@ define (require) ->
   return class Node extends Backbone.AssociatedModel
     # url: () -> "#{SERVER}/contents/#{@id}"
     url: () ->
-      if @get('version') is 'draft'
-        server = AUTHORING
+      version = @get('version')
+      if version is 'draft'
+        return "#{AUTHORING}/contents/#{@id}@draft"
       else
-        server = ARCHIVE
-
-      return "#{server}/contents/#{@id}"
+        return "#{ARCHIVE}/contents/#{@id}"
 
     parse: (response, options) ->
       # Don't overwrite the title from the book's table of contents
@@ -34,18 +33,17 @@ define (require) ->
       @set('downloads', 'loading')
 
       if @get('version') is 'draft'
-        server = AUTHORING
-      else
-        server = ARCHIVE
-
-      $.ajax
-        url: "#{server}/extras/#{@id}"
-        dataType: 'json'
-      .done (response) =>
-        @set('downloads', response.downloads)
-        @set('isLatest', response.isLatest)
-      .fail () =>
         @set('downloads', [])
+        @set('isLatest', true)
+      else
+        $.ajax
+          url: "#{ARCHIVE}/extras/#{@id}"
+          dataType: 'json'
+        .done (response) =>
+          @set('downloads', response.downloads)
+          @set('isLatest', response.isLatest)
+        .fail () =>
+          @set('downloads', [])
 
     get: (attr) ->
       if @attributes[attr] isnt undefined
