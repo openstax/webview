@@ -178,14 +178,13 @@ define (require) ->
 
     isSection: () -> return false
 
-    newPage: (title, cb) ->
+    newPage: (options = {}, cb) ->
       $.ajax
         type: 'POST'
         xhrFields:
           withCredentials: true
         url: "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}/contents"
-        data: JSON.stringify
-          title: title
-      .done(data) =>
+        data: JSON.stringify(options)
+      .done (data) =>
         @add(data)
         cb?(data)
