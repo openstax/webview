@@ -7,15 +7,18 @@ define (require) ->
   settings = require('settings')
   require('backbone-associations')
 
-  SERVER = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
+  ARCHIVE = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
+  AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
   return class Node extends Backbone.AssociatedModel
     # url: () -> "#{SERVER}/contents/#{@id}"
     url: () ->
-      if @isNew()
-        return "#{SERVER}/contents"
+      if @get('version') is 'draft'
+        server = AUTHORING
       else
-        return "#{SERVER}/contents/#{@id}.json" # FIX: Remove .json from URL
+        server = ARCHIVE
+
+      return "#{server}/contents/#{@id}"
 
     parse: (response, options) ->
       # Don't overwrite the title from the book's table of contents
@@ -30,8 +33,13 @@ define (require) ->
 
       @set('downloads', 'loading')
 
+      if @get('version') is 'draft'
+        server = AUTHORING
+      else
+        server = ARCHIVE
+
       $.ajax
-        url: "#{SERVER}/extras/#{@id}"
+        url: "#{server}/extras/#{@id}"
         dataType: 'json'
       .done (response) =>
         @set('downloads', response.downloads)
