@@ -1,6 +1,7 @@
 define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
+  settings = require('settings')
   Collection = require('cs!models/contents/collection')
   Page = require('cs!models/contents/page')
 
@@ -182,9 +183,9 @@ define (require) ->
         type: 'POST'
         xhrFields:
           withCredentials: true
-        url: 'http://localhost:8080/contents'
+        url: "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}/contents"
         data: JSON.stringify
           title: title
-        success: (data) =>
-          @add(data)
-          cb?(data)
+      .done(data) =>
+        @add(data)
+        cb?(data)
