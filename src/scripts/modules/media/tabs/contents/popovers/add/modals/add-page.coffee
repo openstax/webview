@@ -17,14 +17,32 @@ define (require) ->
 
     events:
       'click .new-page': 'newPage'
-      'click .search': 'onSearch'
-      'submit': 'onSubmit'
+      'click .search-pages': 'onSearch'
+      'submit form': 'onSubmit'
+      'keypress .page-title': 'onEnter'
+
+    # Intelligently determine if the user intended to search or add pages
+    # when hitting the 'enter' key
+    onEnter: (e) ->
+      if e.keyCode is 13
+        e.preventDefault()
+        e.stopPropagation()
+
+        $modal = @$el.children('#add-page-modal')
+        $input = $modal.find('.page-title')
+
+        if $input.is(':focus')
+          @search($input.val())
+        else
+          $modal.find('form').submit()
 
     onSearch: (e) ->
       $modal = @$el.children('#add-page-modal')
       title = encodeURIComponent($modal.find('.page-title').val())
-      results = searchResults.load("?q=title:#{title}%20type:page")
+      @search(title)
 
+    search: (title) ->
+      results = searchResults.load("?q=title:#{title}%20type:page")
       @regions.results.show(new AddPageSearchResultsView({model: results}))
 
     onSubmit: (e) ->
