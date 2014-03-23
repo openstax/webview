@@ -73,7 +73,7 @@ define (require) ->
                   $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
 
 
-                  # Undo everything added in `models/contents/page.coffee`
+                  # Undo everything added in `modules/media/body/body.coffee`
                   # Unwrap title and content elements in header and section elements, respectively
                   $editable.find('.example, .exercise, .note').each (index, el) ->
                     $el = $(el)
