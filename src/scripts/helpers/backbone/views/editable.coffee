@@ -71,6 +71,24 @@ define (require) ->
                 # Wait for Aloha to start up
                 Aloha.ready () ->
                   $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
+
+
+                  # Undo everything added in `modules/media/body/body.coffee`
+                  # Unwrap title and content elements in header and section elements, respectively
+                  $editable.find('.example, .exercise, .note').each (index, el) ->
+                    $el = $(el)
+                    # Remove the `<section>` element
+                    $el.children('section').children().unwrap()
+                    $title = $el.children('.title')
+                    $title.removeAttr('data-label-parent')
+                    $el.removeClass('ui-has-child-title')
+
+
+                  # UnWrap solutions in a div
+                  $solutions = $editable.find('.solution')
+                  $solutions.children('section.ui-body').unwrap()
+                  $solutions.find('ui-toggle-wrapper').remove()
+
                   $HACK = Aloha.jQuery($editable[0])
                   $HACK.aloha()
 
