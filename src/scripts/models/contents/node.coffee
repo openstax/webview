@@ -13,11 +13,14 @@ define (require) ->
   return class Node extends Backbone.AssociatedModel
     # url: () -> "#{SERVER}/contents/#{@id}"
     url: () ->
-      version = @get('version')
-      if version is 'draft'
-        return "#{AUTHORING}/contents/#{@id}@draft"
+      if @isNew()
+        url = "#{AUTHORING}/contents"
+      else if @get('version') is 'draft'
+        url = "#{AUTHORING}/contents/#{@id}@draft.json"
       else
-        return "#{ARCHIVE}/contents/#{@id}"
+        url = "#{ARCHIVE}/contents/#{@id}"
+
+      return url
 
     parse: (response, options) ->
       # Don't overwrite the title from the book's table of contents
@@ -92,3 +95,18 @@ define (require) ->
       return pages
 
     isSection: () -> return @get('contents') instanceof Backbone.Collection
+
+    toJSON: (options = {}) ->
+      results = super(arguments...)
+
+      if options.withoutTransient
+        delete results.meta
+        delete results.loaded
+        delete results.currentPage
+        delete results.parent
+        delete results.book
+        delete results.type
+        delete results.parent
+        delete results.depth
+
+      return results

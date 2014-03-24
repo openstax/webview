@@ -44,6 +44,21 @@ define (require) ->
         else
           return node.getPage(num-page)
 
+
+    #
+    # Proxy Backbone.Collection methods to make this model also work like a Collection
+    #
+
     add: () ->
       @get('contents').add(arguments...)
-      @trigger('add')
+
+    create: (models, options) ->
+      options.xhrFields =
+        withCredentials: true
+      options.wait = true
+      options.withoutTransient = true
+
+      if not _.isArray(models) then models = [models]
+
+      _.each models, (model) =>
+        @get('contents').create(model, options)
