@@ -66,21 +66,23 @@ define (require) ->
         contents.create(model, options)
 
     save: () ->
-      if arguments[0] is null or _.isObject(arguments[0])
-        options = arguments[2] = _.extend({xhrFields: {withCredentials: true}}, arguments[2])
-      else
-        options = arguments[1] = _.extend({xhrFields: {withCredentials: true}}, arguments[1])
+      # FIX: Pass the proper arguments to super
 
-      options = _.extend({
+      options =
         xhrFields:
           withCredentials: true
         wait: true # Wait for a server response before adding the model to the collection
         withoutTransient: true # Remove transient properties before saving to the server
-      }, options)
 
-      xhr = super(arguments...)
+      if arguments[0]? or not _.isObject(arguments[0])
+        arguments[1] = _.extend(options, arguments[1])
+      else
+        arguments[2] = _.extend(options, arguments[2])
+
+      xhr = super(null, options)
 
       _.each @get('contents')?.models, (model) ->
-        model.save(options)
+        if model.get('changed') or model.isNew()
+          model.save(null, options)
 
       return xhr
