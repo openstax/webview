@@ -29,24 +29,25 @@ define (require) ->
       return response
 
     fetch: (options) ->
-      super(arguments...)
+      results = super(arguments...)
 
-      if not @id then return
+      if @id
+        @set('downloads', 'loading')
 
-      @set('downloads', 'loading')
-
-      if @get('version') is 'draft'
-        @set('downloads', [])
-        @set('isLatest', true)
-      else
-        $.ajax
-          url: "#{ARCHIVE}/extras/#{@id}"
-          dataType: 'json'
-        .done (response) =>
-          @set('downloads', response.downloads)
-          @set('isLatest', response.isLatest)
-        .fail () =>
+        if @get('version') is 'draft'
           @set('downloads', [])
+          @set('isLatest', true)
+        else
+          $.ajax
+            url: "#{ARCHIVE}/extras/#{@id}"
+            dataType: 'json'
+          .done (response) =>
+            @set('downloads', response.downloads)
+            @set('isLatest', response.isLatest)
+          .fail () =>
+            @set('downloads', [])
+
+      return results
 
     get: (attr) ->
       if @attributes[attr] isnt undefined
