@@ -53,6 +53,12 @@ define (require) ->
 
       return results
 
+    save: () ->
+      xhr = super(arguments...)
+      xhr.done () => @set('changed', false)
+
+      return xhr
+
     get: (attr) ->
       if @attributes[attr] isnt undefined
         return @attributes[attr]
