@@ -52,12 +52,35 @@ define (require) ->
     add: () -> @get('contents').add(arguments...)
 
     create: (models, options = {}) ->
-      options.xhrFields =
-        withCredentials: true
-      options.wait = true # Always wait for a server response before adding the model to the collection
-      options.withoutTransient = true # Remove transient properties before saving to the server
+      options = _.extend({
+        xhrFields:
+          withCredentials: true
+        wait: true # Wait for a server response before adding the model to the collection
+        withoutTransient: true # Remove transient properties before saving to the server
+      }, options)
 
       if not _.isArray(models) then models = [models]
 
-      _.each models, (model) =>
-        @get('contents').create(model, options)
+      contents = @get('contents')
+      _.each models, (model) ->
+        contents.create(model, options)
+
+    save: () ->
+      if arguments[0] is null or _.isObject(arguments[0])
+        options = arguments[2] = _.extend({xhrFields: {withCredentials: true}}, arguments[2])
+      else
+        options = arguments[1] = _.extend({xhrFields: {withCredentials: true}}, arguments[1])
+
+      options = _.extend({
+        xhrFields:
+          withCredentials: true
+        wait: true # Wait for a server response before adding the model to the collection
+        withoutTransient: true # Remove transient properties before saving to the server
+      }, options)
+
+      xhr = super(arguments...)
+
+      _.each @get('contents')?.models, (model) ->
+        model.save(options)
+
+      return xhr
