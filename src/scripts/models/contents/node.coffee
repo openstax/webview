@@ -13,12 +13,16 @@ define (require) ->
   return class Node extends Backbone.AssociatedModel
     # url: () -> "#{SERVER}/contents/#{@id}"
     url: () ->
+      components = @id?.match(/([^:@]+)@?([^:]*):?([0-9]*)/) or []
+      id = components[1]
+      version = @get('version') or components[2]
+
       if @isNew()
         url = "#{AUTHORING}/contents"
-      else if @get('version') is 'draft'
-        url = "#{AUTHORING}/contents/#{@id}@draft.json" # FIX: Remove .json from URL
+      else if version is 'draft'
+        url = "#{AUTHORING}/contents/#{id}@draft.json" # FIX: Remove .json from URL
       else
-        url = "#{ARCHIVE}/contents/#{@id}"
+        url = "#{ARCHIVE}/contents/#{id}"
 
       return url
 
