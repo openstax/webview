@@ -18,7 +18,7 @@ define (require) ->
   }
 
   return new class SearchResults extends Backbone.Model
-    url: () -> "#{@searchUrl}#{@query}"
+    url: () -> "#{@searchUrl}?#{@query}"
 
     defaults:
       query:

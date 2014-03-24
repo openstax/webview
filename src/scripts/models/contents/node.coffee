@@ -11,14 +11,21 @@ define (require) ->
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
   return class Node extends Backbone.AssociatedModel
+
+    # There are apparently 2 ways to tell if a document is a draft.
+    # If `@id` ends in `@draft` (when the user went directly to the draft URL)
+    # and when the returned JSON has a `{version: 'draft'}`.
+    isDraft: () ->
+      return @get('version') == 'draft' or /@draft$/.test(@id)
+
     # url: () -> "#{SERVER}/contents/#{@id}"
     url: () ->
       if @isNew()
         url = "#{AUTHORING}/contents"
-      else if @get('version') is 'draft'
+      else if @isDraft() and not /@draft$/.test(@id)
         url = "#{AUTHORING}/contents/#{@id}@draft.json"
       else
-        url = "#{ARCHIVE}/contents/#{@id}"
+        url = "#{ARCHIVE}/contents/#{@id}.json"
 
       return url
 
@@ -34,7 +41,7 @@ define (require) ->
       if @id
         @set('downloads', 'loading')
 
-        if @get('version') is 'draft'
+        if @isDraft()
           @set('downloads', [])
           @set('isLatest', true)
         else
