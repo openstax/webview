@@ -55,8 +55,8 @@ define (require) ->
     create: (models, options) ->
       options.xhrFields =
         withCredentials: true
-      options.wait = true
-      options.withoutTransient = true
+      options.wait = true # Always wait for a server response before adding the model to the collection
+      options.withoutTransient = true # Remove transient properties before saving to the server
 
       if not _.isArray(models) then models = [models]
 

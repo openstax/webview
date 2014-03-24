@@ -58,7 +58,7 @@ define (require) ->
 
       # FIX: Currently always just derive a page from published content
       if models.length
-        @model.create(models, {wait: true})
+        @model.create(models)
 
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
 
@@ -66,6 +66,6 @@ define (require) ->
       $modal = @$el.children('#add-page-modal')
       title = $modal.find('.page-title').val()
 
-      @model.create({title: title}, {wait: true})
+      @model.create({title: title})
 
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
