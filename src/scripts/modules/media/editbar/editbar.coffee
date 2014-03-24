@@ -8,6 +8,12 @@ define (require) ->
   return class EditbarView extends BaseView
     template: template
 
+    events:
+      'click .save': 'save'
+
     initialize: () ->
       super()
       @listenTo(@model, 'change:changed', @render)
+
+    save: () ->
+      @model.save()
