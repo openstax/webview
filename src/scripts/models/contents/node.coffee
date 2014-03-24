@@ -16,7 +16,7 @@ define (require) ->
       if @isNew()
         url = "#{AUTHORING}/contents"
       else if @get('version') is 'draft'
-        url = "#{AUTHORING}/contents/#{@id}@draft.json"
+        url = "#{AUTHORING}/contents/#{@id}@draft.json" # FIX: Remove .json from URL
       else
         url = "#{ARCHIVE}/contents/#{@id}"
 
