@@ -49,10 +49,9 @@ define (require) ->
     # Proxy Backbone.Collection methods to make this model also work like a Collection
     #
 
-    add: () ->
-      @get('contents').add(arguments...)
+    add: () -> @get('contents').add(arguments...)
 
-    create: (models, options) ->
+    create: (models, options = {}) ->
       options.xhrFields =
         withCredentials: true
       options.wait = true # Always wait for a server response before adding the model to the collection
