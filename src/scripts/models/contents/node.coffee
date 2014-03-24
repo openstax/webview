@@ -26,9 +26,9 @@ define (require) ->
       return response
 
     fetch: (options) ->
-      super(arguments...)
+      results = super(arguments...)
 
-      if not @id then return
+      if not @id then return results
 
       @set('downloads', 'loading')
 
@@ -44,6 +44,8 @@ define (require) ->
           @set('isLatest', response.isLatest)
         .fail () =>
           @set('downloads', [])
+
+      return results
 
     get: (attr) ->
       if @attributes[attr] isnt undefined
