@@ -9,15 +9,7 @@
 {{else}}
   {{#if hasBody}}
     <div class="media-body" id="content"><!-- set id because Aloha's semanticblock hardcodes this id -->
-      {{#if currentPage.content}}
-        {{include currentPage.content}}
-      {{else}}
-        <div class="progress progress-striped active">
-          <div class="progress-bar secondary" role="progressbar" style="width: 100%">
-            <span class="sr-only">Loading</span>
-          </div>
-        </div>
-      {{/if}}
+      {{include currentPage.content}}
     </div>
   {{/if}}
 {{/unless}}
