@@ -13,14 +13,12 @@ define (require) ->
   return class Node extends Backbone.AssociatedModel
     # url: () -> "#{SERVER}/contents/#{@id}"
     url: () ->
-      components = @id?.match(/([^:@]+)@?([^:]*):?([0-9]*)/) or []
-      id = components[1]
-      version = @get('version') or components[2]
+      id = @getVersionedId()
 
       if @isNew()
         url = "#{AUTHORING}/contents"
-      else if version is 'draft'
-        url = "#{AUTHORING}/contents/#{id}@draft.json" # FIX: Remove .json from URL
+      else if @isDraft()
+        url = "#{AUTHORING}/contents/#{id}.json" # FIX: Remove .json from URL
       else
         url = "#{ARCHIVE}/contents/#{id}"
 
@@ -74,6 +72,37 @@ define (require) ->
 
       return response
 
+    toJSON: (options = {}) ->
+      results = super(arguments...)
+
+      results.id = @getVersionedId()
+
+      # FIX: Move all transient properties under 'meta'
+      if options.excludeTransient
+        delete results.meta
+        delete results.loaded
+        delete results.currentPage
+        delete results.parent
+        delete results.book
+        delete results.type
+        delete results.parent
+        delete results.depth
+        delete results.page
+
+      return results
+
+    #
+    # Utility Methods
+    #
+
+    getVersionedId: () ->
+      components = @id?.match(/([^:@]+)@?([^:]*):?([0-9]*)/) or []
+      id = components[1] or ''
+      version = @get('version') or components[2]
+      if version then version = "@#{version}" else version = ''
+
+      return "#{id}#{version}"
+
     index: () -> @get('parent').get('contents').indexOf(@)
 
     getTotalLength: () -> 1
@@ -105,19 +134,8 @@ define (require) ->
 
       return pages
 
-    isSection: () -> return @get('contents') instanceof Backbone.Collection
+    isSection: () -> @get('contents') instanceof Backbone.Collection
 
-    toJSON: (options = {}) ->
-      results = super(arguments...)
+    isBook: () -> @get('type') is 'book'
 
-      if options.withoutTransient
-        delete results.meta
-        delete results.loaded
-        delete results.currentPage
-        delete results.parent
-        delete results.book
-        delete results.type
-        delete results.parent
-        delete results.depth
-
-      return results
+    isDraft: () -> @get('version') is 'draft' or /@draft$/.test(@id)

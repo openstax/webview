@@ -44,6 +44,14 @@ define (require) ->
         else
           return node.getPage(num-page)
 
+    toJSON: (options = {}) ->
+      results = super(arguments...)
+
+      # FIX: Subcollections having the id 'subcol' is kind of awkward, can this be removed from the db?
+      results.id = @getVersionedId() or 'subcol'
+
+      return results
+
 
     #
     # Proxy Backbone.Collection methods to make this model also work like a Collection
@@ -72,7 +80,7 @@ define (require) ->
         xhrFields:
           withCredentials: true
         wait: true # Wait for a server response before adding the model to the collection
-        withoutTransient: true # Remove transient properties before saving to the server
+        excludeTransient: true # Remove transient properties before saving to the server
 
       if arguments[0]? or not _.isObject(arguments[0])
         arguments[1] = _.extend(options, arguments[1])

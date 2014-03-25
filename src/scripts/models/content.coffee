@@ -178,6 +178,20 @@ define (require) ->
 
     isSection: () -> return false
 
+    save: () ->
+      # FIX: Pass the proper arguments to super
+
+      options =
+        includeTree: true
+        excludeContents: true
+
+      if arguments[0]? or not _.isObject(arguments[0])
+        arguments[1] = _.extend(options, arguments[1])
+      else
+        arguments[2] = _.extend(options, arguments[2])
+
+      return super(null, options)
+
     toJSON: (options = {}) ->
       # FIX: Only calculate tree if specific option is set
       # FIX: Refactor code, move as much as possible into collection.coffee and node.coffee
@@ -186,38 +200,13 @@ define (require) ->
 
       results = super(arguments...)
 
-      components = @get('id')?.match(/([^:@]+)@?([^:]*)/) or []
-      id = components[1]
-      version = @get('version') or components[2]
+      if options.includeTree
+        results.tree =
+          id: @getVersionedId()
+          title: @get('title')
+          contents: @get('contents')?.toJSON?({serialize_keys: ['id', 'title', 'contents']}) or []
 
-      results.version = 'draft'
-
-      results.tree =
-        id: "#{id}@draft"
-        title: @get('title')
-        contents: []
-
-      _.each @get('contents')?.models, (model) ->
-        if model.id
-          version = model.get('version')
-          if version
-            id = "#{id}@#{version}"
-          else
-            id = model.id
-        else
-          id = 'subcol'
-        title = model.get('title')
-
-        obj =
-          id: id
-          title: title
-
-        if options.simplified
-          options = _.extend({serialize_keys: ['id', 'title', 'contents']}, options)
-        contents = model.get('contents')?.toJSON?(options)
-        if contents
-          obj.contents = contents
-
-        results.tree.contents.push(obj)
+      if options.excludeContents
+        delete results.contents
 
       return results
