@@ -183,7 +183,6 @@ define (require) ->
       # FIX: Refactor code, move as much as possible into collection.coffee and node.coffee
       # FIX: id@version is not being set properly on loaded modules in subcollections
       # FIX: Saves are currently going to cnxarchive instead of cnxauthoring
-      # FIX: Only save models that have changed
 
       results = super(arguments...)
 
