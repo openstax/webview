@@ -20,7 +20,7 @@ define (require) ->
       else if @isDraft()
         url = "#{AUTHORING}/contents/#{id}.json" # FIX: Remove .json from URL
       else
-        url = "#{ARCHIVE}/contents/#{id}"
+        url = "#{ARCHIVE}/contents/#{id}.json"
 
       return url
 
@@ -36,7 +36,7 @@ define (require) ->
       if @id
         @set('downloads', 'loading')
 
-        if @get('version') is 'draft'
+        if @get('version') is 'draft' or not @get('version') # HACK for Untitled module
           @set('downloads', [])
           @set('isLatest', true)
         else
