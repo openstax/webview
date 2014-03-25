@@ -52,7 +52,20 @@ define (require) ->
       return results
 
     save: () ->
-      xhr = super(arguments...)
+      # FIX: Pass the proper arguments to super
+
+      options =
+        xhrFields:
+          withCredentials: true
+        wait: true # Wait for a server response before adding the model to the collection
+        excludeTransient: true # Remove transient properties before saving to the server
+
+      if arguments[0]? or not _.isObject(arguments[0])
+        arguments[1] = _.extend(options, arguments[1])
+      else
+        arguments[2] = _.extend(options, arguments[2])
+
+      xhr = super(null, options)
       xhr.done () => @set('changed', false)
 
       return xhr

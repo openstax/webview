@@ -64,7 +64,7 @@ define (require) ->
         xhrFields:
           withCredentials: true
         wait: true # Wait for a server response before adding the model to the collection
-        withoutTransient: true # Remove transient properties before saving to the server
+        excludeTransient: true # Remove transient properties before saving to the server
       }, options)
 
       if not _.isArray(models) then models = [models]
