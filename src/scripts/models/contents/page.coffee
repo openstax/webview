@@ -3,11 +3,11 @@ define (require) ->
   Node = require('cs!./node')
 
   return class Page extends Node
-    defaults:
-      authors: []
-
     parse: (response, options) ->
-      resonse = super(arguments...)
+      response = super(arguments...)
+
+      # FIX: cnx-authoring should not return a null value for content
+      response.content = response.content or ''
 
       # jQuery can not build a jQuery object with <head> or <body> tags,
       # and will instead move all elements in them up one level.

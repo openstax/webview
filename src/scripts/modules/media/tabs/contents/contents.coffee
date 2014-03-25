@@ -18,7 +18,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable removeNode moveNode add', @render)
+      @listenTo(@model, 'change:editable removeNode moveNode add:contents', @render)
 
     onRender: () ->
       @regions.toc.show new TocSectionView

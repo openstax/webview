@@ -178,13 +178,30 @@ define (require) ->
 
     isSection: () -> return false
 
-    newPage: (options = {}, cb) ->
-      $.ajax
-        type: 'POST'
-        xhrFields:
-          withCredentials: true
-        url: "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}/contents"
-        data: JSON.stringify(options)
-      .done (data) =>
-        @add(data)
-        cb?(data)
+    save: () ->
+      # FIX: Pass the proper arguments to super
+
+      options =
+        includeTree: true
+        excludeContents: true
+
+      if arguments[0]? or not _.isObject(arguments[0])
+        arguments[1] = _.extend(options, arguments[1])
+      else
+        arguments[2] = _.extend(options, arguments[2])
+
+      return super(null, options)
+
+    toJSON: (options = {}) ->
+      results = super(arguments...)
+
+      if options.includeTree
+        results.tree =
+          id: @getVersionedId()
+          title: @get('title')
+          contents: @get('contents')?.toJSON?({serialize_keys: ['id', 'title', 'contents']}) or []
+
+      if options.excludeContents
+        delete results.contents
+
+      return results

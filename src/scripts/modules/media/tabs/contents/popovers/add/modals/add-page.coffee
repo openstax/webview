@@ -49,16 +49,16 @@ define (require) ->
       e.preventDefault()
 
       data = $(e.originalEvent.target).serializeArray()
-      options = []
+      models = []
 
       _.each data, (input) =>
         if input.name isnt 'title'
-          options.push
+          models.push
             derivedFrom: input.name
 
       # FIX: Currently always just derive a page from published content
-      if options.length
-        @model.newPage options
+      if models.length
+        @model.create(models)
 
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
 
@@ -66,6 +66,6 @@ define (require) ->
       $modal = @$el.children('#add-page-modal')
       title = $modal.find('.page-title').val()
 
-      @model.newPage({title: title})
+      @model.create({title: title})
 
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed

@@ -13,11 +13,16 @@ define (require) ->
   return class Node extends Backbone.AssociatedModel
     # url: () -> "#{SERVER}/contents/#{@id}"
     url: () ->
-      version = @get('version')
-      if version is 'draft'
-        return "#{AUTHORING}/contents/#{@id}@draft"
+      id = @getVersionedId()
+
+      if @isNew()
+        url = "#{AUTHORING}/contents"
+      else if @isDraft()
+        url = "#{AUTHORING}/contents/#{id}.json" # FIX: Remove .json from URL
       else
-        return "#{ARCHIVE}/contents/#{@id}"
+        url = "#{ARCHIVE}/contents/#{id}"
+
+      return url
 
     parse: (response, options) ->
       # Don't overwrite the title from the book's table of contents
@@ -26,24 +31,44 @@ define (require) ->
       return response
 
     fetch: (options) ->
-      super(arguments...)
+      results = super(arguments...)
 
-      if not @id then return
+      if @id
+        @set('downloads', 'loading')
 
-      @set('downloads', 'loading')
-
-      if @get('version') is 'draft'
-        @set('downloads', [])
-        @set('isLatest', true)
-      else
-        $.ajax
-          url: "#{ARCHIVE}/extras/#{@id}"
-          dataType: 'json'
-        .done (response) =>
-          @set('downloads', response.downloads)
-          @set('isLatest', response.isLatest)
-        .fail () =>
+        if @get('version') is 'draft'
           @set('downloads', [])
+          @set('isLatest', true)
+        else
+          $.ajax
+            url: "#{ARCHIVE}/extras/#{@id}"
+            dataType: 'json'
+          .done (response) =>
+            @set('downloads', response.downloads)
+            @set('isLatest', response.isLatest)
+          .fail () =>
+            @set('downloads', [])
+
+      return results
+
+    save: () ->
+      # FIX: Pass the proper arguments to super
+
+      options =
+        xhrFields:
+          withCredentials: true
+        wait: true # Wait for a server response before adding the model to the collection
+        excludeTransient: true # Remove transient properties before saving to the server
+
+      if arguments[0]? or not _.isObject(arguments[0])
+        arguments[1] = _.extend(options, arguments[1])
+      else
+        arguments[2] = _.extend(options, arguments[2])
+
+      xhr = super(null, options)
+      xhr.done () => @set('changed', false)
+
+      return xhr
 
     get: (attr) ->
       if @attributes[attr] isnt undefined
@@ -59,6 +84,37 @@ define (require) ->
           @set('book', response)
 
       return response
+
+    toJSON: (options = {}) ->
+      results = super(arguments...)
+
+      results.id = @getVersionedId()
+
+      # FIX: Move all transient properties under 'meta'
+      if options.excludeTransient
+        delete results.meta
+        delete results.loaded
+        delete results.currentPage
+        delete results.parent
+        delete results.book
+        delete results.type
+        delete results.parent
+        delete results.depth
+        delete results.page
+
+      return results
+
+    #
+    # Utility Methods
+    #
+
+    getVersionedId: () ->
+      components = @id?.match(/([^:@]+)@?([^:]*):?([0-9]*)/) or []
+      id = components[1] or ''
+      version = @get('version') or components[2]
+      if version then version = "@#{version}" else version = ''
+
+      return "#{id}#{version}"
 
     index: () -> @get('parent').get('contents').indexOf(@)
 
@@ -91,4 +147,8 @@ define (require) ->
 
       return pages
 
-    isSection: () -> return @get('contents') instanceof Backbone.Collection
+    isSection: () -> @get('contents') instanceof Backbone.Collection
+
+    isBook: () -> @get('type') is 'book'
+
+    isDraft: () -> @get('version') is 'draft' or /@draft$/.test(@id)
