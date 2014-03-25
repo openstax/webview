@@ -7,7 +7,7 @@ define (require) ->
   template = require('hbs!./workspace-template')
   require('less!./workspace')
 
-  WORKSPACE_URI = "#{location.origin}/users/contents"
+  WORKSPACE_URI = "#{location.origin}/contents"
 
   return class SearchView extends BaseView
     template: template
@@ -15,7 +15,7 @@ define (require) ->
     initialize: () ->
       super()
 
-      @model = searchResults.load("authorID:#{session.get('id')}", WORKSPACE_URI)
+      @model = searchResults.load("?authorID:#{session.get('id')}", WORKSPACE_URI)
 
       @listenTo(@model, 'change:error', @displayError)
 
