@@ -13,6 +13,7 @@ define ['jquery'], ($) ->
   # Hack for newer versions of jquery
   $.browser = {}
   $.browser.msie = false
+  $.fn.live = $.fn.on # (events, data, handler) -> @on(events, data, handler)
 
   @Aloha = @Aloha or {}
   @Aloha.settings =
@@ -58,7 +59,7 @@ define ['jquery'], ($) ->
         'extra/draganddropfiles'
         'oer/overlay'
         'oer/math'
-        # 'oer/assorted'
+        'oer/assorted'
         #'ghbook/image'
         # 'common/image' # Need to monkeypatch jQuery.live
         'oer/semanticblock'
