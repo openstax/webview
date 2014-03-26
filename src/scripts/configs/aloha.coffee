@@ -75,6 +75,14 @@ define ['jquery'], ($) ->
       ]
 
 
+      assorted:
+        image:
+          uploadSinglepart: false
+          parseresponse: false
+          uploadfield: 'file'
+          uploadurl: "#{location.origin}/resources"
+
+
       # This whole thing is what's needed to:
       #
       # - set a custom URL to send files to
