@@ -11,7 +11,7 @@ define (require) ->
     template: template
     templateHelpers:
       page: () -> @content.getPageNumber(@model)
-      url: () -> linksHelper.getPath('contents', {id: @content.get('id'), version: @content.get('version')})
+      url: () -> linksHelper.getPath('contents', {model: @content})
       editable: () -> @editable
 
     tagName: 'li'
@@ -30,8 +30,7 @@ define (require) ->
       # If this is the active page, update the URL bar to the correct page number
       if @model.get('active')
         href = linksHelper.getPath 'contents',
-          id: @content.get('id')
-          version: @content.get('version')
+          model: @content
           page: @model.getPageNumber()
         router.navigate(href, {trigger: false, analytics: false})
 
