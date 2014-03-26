@@ -77,8 +77,12 @@ define ['jquery'], ($) ->
 
       assorted:
         image:
+          # Do not send the image in the POST body (use uploadfield instead)
           uploadSinglepart: false
-          parseresponse: false
+          # Use the body of the response as the URL
+          parseresponse: (xhr) ->
+            return xhr.response
+          # Send files using the `file` field when POSTing
           uploadfield: 'file'
           uploadurl: "#{location.origin}/resources"
 
