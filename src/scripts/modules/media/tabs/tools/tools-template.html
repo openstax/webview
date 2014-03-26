@@ -2,12 +2,14 @@
   <a href="mailto:{{#each authors}}{{email}},{{/each}}?subject={{encodedTitle}}">E-mail Author(s)</a>
 </div>
 
-{{#unless editable}}
-  <div class="edit tool">
-    <span>Edit</span>
-  </div>
-{{else}}
-  <div class="browse tool">
-    <span>Browse</span>
-  </div>
-{{/unless}}
+{{#if authenticated}}
+  {{#unless editable}}
+    <div class="edit tool">
+      <span>Edit</span>
+    </div>
+  {{else}}
+    <div class="browse tool">
+      <span>Browse</span>
+    </div>
+  {{/unless}}
+{{/if}}

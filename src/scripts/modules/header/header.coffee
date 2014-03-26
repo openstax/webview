@@ -17,9 +17,8 @@ define (require) ->
       super()
       @page = options.page
       @url = @createLink(options.url) if options.url
-      session.fetch()
-      .fail(() -> console.error('problem fetching session'))
-      .done(() => @render())
+
+      @listenTo(session, 'change', @render)
 
     setLegacyLink: (url) ->
       if url
