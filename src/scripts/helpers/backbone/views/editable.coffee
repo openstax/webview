@@ -62,6 +62,7 @@ define (require) ->
               $editable.append($input)
               $input.on 'change', () =>
                 @model.set(value, $input.val())
+                setChanged(options.onEdit)
 
             # Setup contenteditable
             when 'contenteditable'
