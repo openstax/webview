@@ -54,6 +54,15 @@ define (require) ->
           options.onBeforeEditable?($editable)
 
           switch options.type
+            when 'textinput'
+              $editable.empty()
+              $input = jQuery('<input type="text"/>')
+              $input.attr('placeholder', "Enter a #{value} here")
+              $input.val(@model.get(value))
+              $editable.append($input)
+              $input.on 'change', () =>
+                @model.set(value, $input.val())
+
             # Setup contenteditable
             when 'contenteditable'
               $editable.attr('contenteditable', true)
@@ -139,6 +148,9 @@ define (require) ->
           options.onBeforeUneditable?($editable)
 
           switch options.type
+            when 'textinput'
+              $editable.text(@model.get(value))
+
             when 'contenteditable'
               @observers[selector].disconnect()
               delete @observers[selector]

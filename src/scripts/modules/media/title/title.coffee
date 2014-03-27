@@ -33,7 +33,7 @@ define (require) ->
     editable:
       '.media-title > .title > h1':
         value: 'title'
-        type: 'aloha'
+        type: 'textinput'
 
     initialize: () ->
       super()
