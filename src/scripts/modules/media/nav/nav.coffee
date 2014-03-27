@@ -21,6 +21,7 @@ define (require) ->
 
       return {
         _hideProgress: @hideProgress
+        book: @model.isBook()
         next: next
         back: back
         pages: if @model.get('loaded') then @model.getTotalPages() else 0
@@ -31,7 +32,7 @@ define (require) ->
       super()
       @hideProgress = options.hideProgress
 
-      @listenTo(@model, 'changePage removeNode moveNode add:contents', @render)
+      @listenTo(@model, 'change:currentPage removeNode moveNode add:contents', @render)
 
     events:
       'click .next': 'nextPage'

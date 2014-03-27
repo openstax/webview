@@ -8,7 +8,10 @@ define (require) ->
   return class MediaHeaderView extends EditableView
     template: template
     templateHelpers: () ->
-      currentPage = @model.get('currentPage')
+      if @model.isBook()
+        currentPage = @model.get('currentPage')
+      else
+        currentPage = @model
 
       if currentPage
         currentPage = currentPage.toJSON()
@@ -31,7 +34,7 @@ define (require) ->
 
     editable:
       '.media-header > .title > h2':
-        value: 'currentPage.title'
+        value: () -> @getModel('title')
         type: 'aloha'
 
     regions:
@@ -42,7 +45,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:downloads change:buyLink changePage', @render)
+      @listenTo(@model, 'change:downloads change:buyLink change:loaded change:currentPage', @render)
 
     onRender: () ->
       @regions.button.append new BookPopoverView
