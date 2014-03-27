@@ -105,20 +105,15 @@ define (require) ->
 
                     # Update the model if an event for this editable was triggered
                     Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) ->
-                      updateModel() if d.triggerType != 'blur' and \
+                      updateModel(d.editable.getContents()) if d.triggerType != 'blur' and \
                         (d.editable.obj.is($alohaEditable) or $.contains($alohaEditable[0], d.editable.obj[0]))
 
                 # Update the model by retrieving the XHTML contents
-                updateModel = () =>
-                  alohaId = $editable.attr('id')
-                  alohaEditable = Aloha.getEditableById(alohaId)
-
-                  if alohaEditable
-                    editableBody = alohaEditable.getContents()
-                    editableBody = editableBody.trim() # Trim for idempotence
-                    # Change the contents but do not update the Aloha editable area
-                    @model.set(value, editableBody) # TODO: Should we add a flag to not re-render the editable?
-                    setChanged(options.onEdit)
+                updateModel = (editableBody) =>
+                  editableBody = editableBody.trim() # Trim for idempotence
+                  # Change the contents but do not update the Aloha editable area
+                  @model.set(value, editableBody) # TODO: Should we add a flag to not re-render the editable?
+                  setChanged(options.onEdit)
 
             # Setup Select2
             when 'select2'
