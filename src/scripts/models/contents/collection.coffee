@@ -84,10 +84,13 @@ define (require) ->
       else
         arguments[2] = _.extend(options, arguments[2])
 
-      xhr = super(null, options)
+      if model.isSaveable()
+        xhr = super(null, options)
+      else
+        xhr = null
 
       _.each @get('contents')?.models, (model) ->
-        if (model.get('changed') or model.isNew()) and model.isSaveable()
+        if model.get('changed') or model.isNew()
           model.save(null, options)
 
       return xhr
