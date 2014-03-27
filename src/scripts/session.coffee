@@ -2,7 +2,7 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
 
-  SERVER = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxauthoring.port}"
+  SERVER = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
   INTERVAL = 1000 * 60 # 1 minute
   MINIMUM_INTERVAL = 1000 * 5 # 5 seconds
 
