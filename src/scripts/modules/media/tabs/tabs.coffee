@@ -1,6 +1,5 @@
 define (require) ->
   $ = require('jquery')
-  content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
   ContentsView = require('cs!./contents/contents')
   MetadataView = require('cs!./metadata/metadata')
