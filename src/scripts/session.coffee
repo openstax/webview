@@ -30,4 +30,4 @@ define (require) ->
       # Don't update faster than every 5 seconds
       if not _lastUpdate or currentTime - _lastUpdate > MINIMUM_INTERVAL
         _lastUpdate = currentTime
-        @fetch().fail () => @clear()
+        @fetch(xhrFields: withCredentials: true).fail () => @clear()

@@ -47,12 +47,15 @@ define (require) ->
       return response
 
     fetch: (options) ->
-      results = super(arguments...)
+      if @isDraft()
+        options.xhrFields = _.extend({withCredentials: true}, options.xhrFields)
+
+      results = super(options)
 
       if @id
         @set('downloads', 'loading')
 
-        if @get('version') is 'draft' or not @get('version') # HACK for Untitled module
+        if @isDraft() or not @get('version') # HACK for Untitled module
           @set('downloads', [])
           @set('isLatest', true)
         else
