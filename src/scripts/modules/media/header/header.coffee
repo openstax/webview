@@ -45,7 +45,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:downloads change:buyLink change:loaded change:currentPage', @render)
+      @listenTo(@model, 'change:downloads change:buyLink change:loaded change:currentPage change:title', @render)
 
     onRender: () ->
       @regions.button.append new BookPopoverView
