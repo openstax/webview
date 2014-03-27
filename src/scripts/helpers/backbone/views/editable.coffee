@@ -24,6 +24,9 @@ define (require) ->
     onEditable: () -> # noop
     onUneditable: () -> # noop
 
+    getModel: (value) ->
+      if @model.isBook() then return "currentPage.#{value}" else return value
+
     _toggleEditable: () ->
       if @model.get('editable')
         @_makeEditable()

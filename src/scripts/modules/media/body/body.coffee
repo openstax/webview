@@ -8,11 +8,22 @@ define (require) ->
   return class MediaBodyView extends EditableView
     template: template
     templateHelpers:
-      hasBody: () -> @model.get('contents')?.length or @model.get('currentPage')
+      loaded: () ->
+        if @model.isBook()
+          return @model.get('loaded') and
+            (@model.get('currentPage')?.get('loaded') or @model.get('contents')?.length is 0)
+
+        return @model.get('loaded')
+
+      content: () ->
+        if @model.isBook()
+          return @model.get('currentPage').get('content')
+
+        return @model.get('content')
 
     editable:
       '.media-body':
-        value: 'currentPage.content'
+        value: () -> @getModel('content')
         type: 'aloha'
 
     events:
@@ -20,7 +31,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'changePage', @render)
+      @listenTo(@model, 'change:loaded change:currentPage change:content', @render)
 
     onRender: () ->
       # MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))

@@ -28,6 +28,22 @@ define (require) ->
       # Don't overwrite the title from the book's table of contents
       if @get('title') then delete response.title
 
+      if response.mediaType is 'application/vnd.org.cnx.collection'
+        response.contents = response.tree.contents or []
+
+      else if response.mediaType is 'application/vnd.org.cnx.module'
+        # FIX: cnx-authoring should not return a null value for content
+        response.content = response.content or ''
+
+        # jQuery can not build a jQuery object with <head> or <body> tags,
+        # and will instead move all elements in them up one level.
+        # Use a regex to extract everything in the body and put it into a div instead.
+        $body = $('<div>' + response.content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>')
+        $body.children('.title').eq(0).remove()
+        $body.children('.abstract').eq(0).remove()
+
+        response.content = $body.html()
+
       return response
 
     fetch: (options) ->
@@ -149,6 +165,6 @@ define (require) ->
 
     isSection: () -> @get('contents') instanceof Backbone.Collection
 
-    isBook: () -> @get('type') is 'book'
+    isBook: () -> @get('mediaType') is 'application/vnd.org.cnx.collection'
 
     isDraft: () -> @get('version') is 'draft' or /@draft$/.test(@id)

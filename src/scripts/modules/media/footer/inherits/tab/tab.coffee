@@ -9,6 +9,8 @@ define (require) ->
         @media = 'book'
         model = @model.toJSON()
 
+      model.type = @model.get('mediaType')
+
       return model or {}
 
     events:
@@ -16,7 +18,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'changePage', @render)
+      @listenTo(@model, 'change:currentPage', @render)
 
     toggleMedia: (e) ->
       @media = $(e.currentTarget).data('media')

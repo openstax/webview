@@ -33,7 +33,7 @@ define (require) ->
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title', @updateTitle)
-      @listenTo(@model, 'change:legacy_id change:legacy_version changePage', @updateLegacyLink)
+      @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:editable', @toggleEditor)
 
@@ -62,7 +62,7 @@ define (require) ->
       id = @model.get('legacy_id')
       version = @model.get('legacy_version')
 
-      if @model.get('type') is 'book'
+      if @model.isBook()
         currentPage = @model.get('currentPage')
         if currentPage
           moduleID = currentPage?.get('legacy_id')

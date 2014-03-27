@@ -37,9 +37,5 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:loaded', @render)
+      @listenTo(@model, 'change:loaded change:title', @render)
       @listenTo(router, 'navigate', @render)
-
-    #onRender: () ->
-    #  $share = @$el.find('.share')
-    #  @attachPopover new MailPopoverView({owner: $share.find('.mail'), model: @model})

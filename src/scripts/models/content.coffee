@@ -5,10 +5,6 @@ define (require) ->
   Collection = require('cs!models/contents/collection')
   Page = require('cs!models/contents/page')
 
-  MEDIA_TYPES =
-    'application/vnd.org.cnx.collection' : 'book'
-    'application/vnd.org.cnx.module': 'page'
-
   return class Content extends Collection
     relations: [{
       type: Backbone.Many
@@ -46,31 +42,43 @@ define (require) ->
       .fail (model, response, options) =>
         @set('error', response.status)
 
-    parse: (response) ->
-      type = response.type = MEDIA_TYPES[response.mediaType]
+    save: () ->
+      # FIX: Pass the proper arguments to super
 
-      if type isnt 'book' then return response
+      options =
+        includeTree: true
+        excludeContents: true
 
-      response.contents = response.tree.contents or []
+      if arguments[0]? or not _.isObject(arguments[0])
+        arguments[1] = _.extend(options, arguments[1])
+      else
+        arguments[2] = _.extend(options, arguments[2])
 
-      return response
+      return super(null, options)
+
+    toJSON: (options = {}) ->
+      results = super(arguments...)
+
+      if options.includeTree and @isBook()
+        results.tree =
+          id: @getVersionedId()
+          title: @get('title')
+          contents: @get('contents')?.toJSON?({serialize_keys: ['id', 'title', 'contents']}) or []
+
+      if options.excludeContents
+        delete results.contents
+
+      return results
 
     load: (page) ->
-      if @get('type') is 'book'
+      if @isBook()
         if @get('contents').length
           @setPage(page or 1) # Default to page 1
-        else
-          @trigger('changePage') # Don't setup an empty book
-      else
-        @set('currentPage', new Page(@toJSON(), {parse: true}))
-        @trigger('changePage')
 
     fetchPage: () ->
       page = @get('currentPage')
-      page.fetch
-        success: () =>
-          page.set('loaded', true)
-          @trigger('changePage')
+      page.fetch().done () =>
+        page.set('loaded', true)
 
     setPage: (num) ->
       pages = @getTotalPages()
@@ -82,29 +90,15 @@ define (require) ->
       @get('currentPage')?.set('active', false)
       @set('currentPage', page)
       page.set('active', true)
-      @trigger('changePage')
 
       if not page.get('loaded')
         @fetchPage()
 
     getTotalPages: () ->
       # FIX: cache total pages and recalculate on add/remove events?
-      @getTotalLength()
+      return @getTotalLength()
 
     getPageNumber: (model = @get('currentPage')) -> super(model)
-
-    removeNode: (node) ->
-      # FIX: get previous page even if removing a section
-      #previousPage = @getPageNumber(@getPreviousNode(node))
-      previousPage = @getPageNumber(node) - 1
-
-      node.get('parent').get('contents').remove(node)
-
-      # FIX: determine if node was inside a section that got removed too
-      if node is @get('currentPage')
-        @setPage(previousPage)
-
-      @trigger('removeNode')
 
     getNextPage: () ->
       if not @get('loaded') then return 0
@@ -137,6 +131,19 @@ define (require) ->
       @setPage(previousPage) if page isnt previousPage
 
       return previousPage
+
+    removeNode: (node) ->
+      # FIX: get previous page even if removing a section
+      #previousPage = @getPageNumber(@getPreviousNode(node))
+      previousPage = @getPageNumber(node) - 1
+
+      node.get('parent').get('contents').remove(node)
+
+      # FIX: determine if node was inside a section that got removed too
+      if node is @get('currentPage')
+        @setPage(previousPage)
+
+      @trigger('removeNode')
 
     move: (node, marker, position) ->
       oldContainer = node.get('parent')
@@ -175,33 +182,3 @@ define (require) ->
 
       @trigger('moveNode')
       return node
-
-    isSection: () -> return false
-
-    save: () ->
-      # FIX: Pass the proper arguments to super
-
-      options =
-        includeTree: true
-        excludeContents: true
-
-      if arguments[0]? or not _.isObject(arguments[0])
-        arguments[1] = _.extend(options, arguments[1])
-      else
-        arguments[2] = _.extend(options, arguments[2])
-
-      return super(null, options)
-
-    toJSON: (options = {}) ->
-      results = super(arguments...)
-
-      if options.includeTree
-        results.tree =
-          id: @getVersionedId()
-          title: @get('title')
-          contents: @get('contents')?.toJSON?({serialize_keys: ['id', 'title', 'contents']}) or []
-
-      if options.excludeContents
-        delete results.contents
-
-      return results

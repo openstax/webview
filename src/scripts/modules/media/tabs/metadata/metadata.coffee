@@ -38,7 +38,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable', @render)
+      @listenTo(@model, 'change change:currentPage', @render)
 
     getModel: (value) ->
-      if @media is 'book' then return value else return "currentPage.#{value}"
+      if @media is 'page' and @model.isBook() then return "currentPage.#{value}" else return value

@@ -6,10 +6,6 @@ define (require) ->
   require('backbone-associations')
 
   return class Collection extends Node
-    defaults:
-      title: 'Untitled'
-      authors: []
-
     relations: [{
       type: Backbone.Many
       key: 'contents'
@@ -25,11 +21,12 @@ define (require) ->
 
     getTotalLength: () ->
       contents = @get('contents')
+      length = 0
 
       if contents
-        return contents.reduce ((memo, node) -> memo + node.getTotalLength()), 0
+        length = contents.reduce ((memo, node) -> memo + node.getTotalLength()), 0
 
-      return 0
+      return length
 
     getPage: (num) ->
       page = 0

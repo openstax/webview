@@ -10,18 +10,18 @@ define (require) ->
   return class MediaNavView extends BaseView
     template: template
     templateHelpers: () ->
-      model = @model.toJSON()
       page = @model.getPageNumber()
       nextPage = @model.getNextPage()
       previousPage = @model.getPreviousPage()
 
       if page isnt nextPage
-        next = linksHelper.getPath('contents', {id: model.id, version: model.version, page: nextPage})
+        next = linksHelper.getPath('contents', {model: @model, page: nextPage})
       if page isnt previousPage
-        back = linksHelper.getPath('contents', {id: model.id, version: model.version, page: previousPage})
+        back = linksHelper.getPath('contents', {model: @model, page: previousPage})
 
       return {
         _hideProgress: @hideProgress
+        book: @model.isBook()
         next: next
         back: back
         pages: if @model.get('loaded') then @model.getTotalPages() else 0
@@ -32,7 +32,7 @@ define (require) ->
       super()
       @hideProgress = options.hideProgress
 
-      @listenTo(@model, 'changePage removeNode moveNode add:contents', @render)
+      @listenTo(@model, 'change:currentPage removeNode moveNode add:contents', @render)
 
     events:
       'click .next': 'nextPage'
