@@ -7,7 +7,7 @@ define (require) ->
   template = require('hbs!./workspace-template')
   require('less!./workspace')
 
-  WORKSPACE_URI = "#{location.origin}/contents"
+  WORKSPACE_URI = "#{location.origin}/users/contents"
 
   return class SearchView extends BaseView
     template: template
