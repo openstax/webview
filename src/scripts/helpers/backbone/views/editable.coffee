@@ -70,35 +70,25 @@ define (require) ->
 
             # Setup Aloha
             when 'aloha'
+              $editable.text('Loading editor...')
               require ['aloha', 'less!styles/aloha-hacks'], (Aloha) =>
+                $editable.text('Starting up Aloha...')
                 # Wait for Aloha to start up
-                Aloha.ready () ->
-                  $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
+                Aloha.ready () =>
+                  $editable.text('Starting editor...')
 
+                  if not @model.get(value)?
+                    $editable.text('Problem starting editor')
+                  else
+                    $editable.html(@model.get(value))
+                    $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
+                    $HACK = Aloha.jQuery($editable)
+                    $HACK.aloha()
 
-                  # Undo everything added in `modules/media/body/body.coffee`
-                  # Unwrap title and content elements in header and section elements, respectively
-                  $editable.find('.example, .exercise, .note').each (index, el) ->
-                    $el = $(el)
-                    # Remove the `<section>` element
-                    $el.children('section').children().unwrap()
-                    $title = $el.children('.title')
-                    $title.removeAttr('data-label-parent')
-                    $el.removeClass('ui-has-child-title')
-
-
-                  # UnWrap solutions in a div
-                  $solutions = $editable.find('.solution')
-                  $solutions.children('section.ui-body').unwrap()
-                  $solutions.find('ui-toggle-wrapper').remove()
-
-                  $HACK = Aloha.jQuery($editable[0])
-                  $HACK.aloha()
-
-                  # Update the model if an event for this editable was triggered
-                  Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) ->
-                    updateModel() if d.triggerType != 'blur' and \
-                      (d.editable.obj.is($HACK) or $.contains($HACK[0], d.editable.obj[0]))
+                    # Update the model if an event for this editable was triggered
+                    Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) ->
+                      updateModel() if d.triggerType != 'blur' and \
+                        (d.editable.obj.is($HACK) or $.contains($HACK[0], d.editable.obj[0]))
 
                 # Update the model by retrieving the XHTML contents
                 updateModel = () =>
