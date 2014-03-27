@@ -1,34 +1,33 @@
 define (require) ->
   Backbone = require('backbone')
+  settings = require('settings')
 
-  _authenticated = false
+  SERVER = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxauthoring.port}"
+  INTERVAL = 1000 * 60 # 1 minute
+  MINIMUM_INTERVAL = 1000 * 5 # 5 seconds
+
+  _timer = null
+  _lastUpdate = null
 
   return new class Session extends Backbone.Model
-    url: '/me'
+    url: "#{SERVER}/users/profile"
 
-    login: () ->
-      @fetch
-        success: (model, response, options) =>
-          # Logged in
-          @set('user', response)
+    startChecking: () ->
+      @update() # Initially check immediately
+      _timer = setInterval(() =>
+        @update()
+      , INTERVAL)
 
-          _authenticated = true
-          @trigger('login')
+    stopChecking: () ->
+      clearInterval(_timer)
+      _timer = null
 
-        error: (model, response, options) ->
-          console.log 'Failed to load session.'
+    # Fetches the model, clear it if the server returns an error,
+    # and fires a change event any time the session status changes
+    update: () ->
+      currentTime = (new Date()).getTime()
 
-    logout: () ->
-      @reset()
-      @clear()
-      @trigger('logout')
-
-    reset: () ->
-      _authenticated = false
-      @set('user', null)
-
-    authenticated: () ->
-      return _authenticated
-
-    user: () ->
-      return @get('user')
+      # Don't update faster than every 5 seconds
+      if not _lastUpdate or currentTime - _lastUpdate > MINIMUM_INTERVAL
+        _lastUpdate = currentTime
+        @fetch().fail () => @clear()

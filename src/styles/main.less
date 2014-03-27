@@ -11,7 +11,7 @@
 
 // Limit the site to a max width of 960px
 html {
-  max-width: 960px;
+  max-width: @max-viewport-width;
   margin: 0 auto;
 }
 
@@ -51,6 +51,10 @@ h4 {
 h5 {
   font-size: 1.4rem;
   font-weight: bold;
+}
+
+[draggable="true"] {
+  cursor: move;
 }
 
 //

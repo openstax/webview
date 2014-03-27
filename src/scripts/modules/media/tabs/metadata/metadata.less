@@ -1,0 +1,54 @@
+@import "../../../../../styles/variables.less";
+@import "../../../../../styles/mixins.less";
+
+.media-tabs .metadata {
+  position: relative;
+  padding: 50px 40px 30px 40px;
+  color: black;
+
+  .book-page-toggle {
+    position: absolute;
+    right: 40px;
+    top: 20px;
+
+    .btn {
+      color: black;
+      border: 1px solid @gray-lightest;
+      background-color: white;
+    }
+
+    .active {
+      color: black;
+      border: 1px solid transparent;
+      background-color: @gray-lightest;
+    }
+  }
+
+  > div > dl {
+    margin-bottom: 0;
+
+    > dt {
+      padding: 10px 0;
+      width: 225px;
+      text-align: left;
+      color: @gray-dark;
+    }
+
+    > dd {
+      margin: 0;
+      border-bottom: 1px solid @gray-lighter;
+
+      &:last-child {
+        border: none;
+      }
+
+      > div {
+        padding: 10px 10px 10px 225px;
+
+        > ul {
+          padding: 0 0 0 15px;
+        }
+      }
+    }
+  }
+}

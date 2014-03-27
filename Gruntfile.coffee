@@ -96,9 +96,6 @@ module.exports = (grunt) ->
         max_line_length:
           level: 'error'
           value: 120
-        cyclomatic_complexity:
-          level: 'error'
-          value: 16
 
       source: ['src/**/*.coffee']
       grunt: 'Gruntfile.coffee'
@@ -140,6 +137,12 @@ module.exports = (grunt) ->
               'cs!pages/home/home'
               'cs!pages/contents/contents'
               'cs!pages/search/search'
+              'cs!pages/workspace/workspace'
+
+              # FIX: edit modules should be loaded in separate modules
+              'select2'
+              'cs!modules/media/editbar/editbar'
+              'cs!helpers/backbone/views/editable'
             ]
             exclude: ['coffee-script', 'less/normalize']
             excludeShallow: ['settings']
