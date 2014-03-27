@@ -17,21 +17,22 @@ define (require) ->
       @listenTo(@model, 'change:results change:loaded', @render) if @model
 
     addBook: () ->
-      alert('TODO: Not quite implemented yet.')
-      # title = prompt('What is the title for the new Book?')
-      # if title
-      #   newBook = new Content
-      #     title: title
-      #     contents: []
+      title = prompt('What is the title for the new Book?')
+      if title
+        newBook = new Content
+          mediaType: 'application/vnd.org.cnx.collection'
+          title: title
+          contents: []
 
-      #   newBook.save()
-      #   .fail(() -> alert('There was a problem saving. Please try again'))
-      #   .done () => @model.prependNew(newBook)
+        newBook.save()
+        .fail(() -> alert('There was a problem saving. Please try again'))
+        .done () => @model.prependNew(newBook)
 
     addPage: () ->
       title = prompt('What is the title for the new Page?')
       if title
         newPage = new Content
+          mediaType: 'application/vnd.org.cnx.module'
           title: title
           content: '<p>Please change this new Page</p>'
 
