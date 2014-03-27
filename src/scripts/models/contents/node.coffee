@@ -16,7 +16,7 @@ define (require) ->
       id = @getVersionedId()
 
       if @isNew()
-        url = "#{AUTHORING}/contents"
+        url = "#{AUTHORING}/users/contents"
       else if @isDraft()
         url = "#{AUTHORING}/contents/#{id}.json" # FIX: Remove .json from URL
       else
