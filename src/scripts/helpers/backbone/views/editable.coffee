@@ -54,6 +54,15 @@ define (require) ->
           options.onBeforeEditable?($editable)
 
           switch options.type
+            when 'textinput'
+              $editable.empty()
+              $input = jQuery('<input type="text"/>')
+              $input.attr('placeholder', "Enter a #{value} here")
+              $input.val(@model.get(value))
+              $editable.append($input)
+              $input.on 'change', () =>
+                @model.set(value, $input.val())
+
             # Setup contenteditable
             when 'contenteditable'
               $editable.attr('contenteditable', true)
@@ -77,18 +86,26 @@ define (require) ->
                 Aloha.ready () =>
                   $editable.text('Starting editor...')
 
-                  if not @model.get(value)?
+                  # HACK: backbone-associations does not return the HTML for some reason
+                  html = @model.get(value)
+                  if not html?
+                    temp = @model
+                    for attr in value.split('.')
+                      temp = temp.get(attr)
+                    html = temp
+
+                  if not html?
                     $editable.text('Problem starting editor')
                   else
-                    $editable.html(@model.get(value))
+                    $editable.html(html)
                     $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
-                    $HACK = Aloha.jQuery($editable)
-                    $HACK.aloha()
+                    $alohaEditable = Aloha.jQuery($editable)
+                    $alohaEditable.aloha()
 
                     # Update the model if an event for this editable was triggered
                     Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) ->
                       updateModel() if d.triggerType != 'blur' and \
-                        (d.editable.obj.is($HACK) or $.contains($HACK[0], d.editable.obj[0]))
+                        (d.editable.obj.is($alohaEditable) or $.contains($alohaEditable[0], d.editable.obj[0]))
 
                 # Update the model by retrieving the XHTML contents
                 updateModel = () =>
@@ -131,6 +148,9 @@ define (require) ->
           options.onBeforeUneditable?($editable)
 
           switch options.type
+            when 'textinput'
+              $editable.text(@model.get(value))
+
             when 'contenteditable'
               @observers[selector].disconnect()
               delete @observers[selector]

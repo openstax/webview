@@ -35,7 +35,7 @@ define (require) ->
     editable:
       '.media-header > .title > h2':
         value: () -> @getModel('title')
-        type: 'aloha'
+        type: 'textinput'
 
     regions:
       button: '.info .btn'
