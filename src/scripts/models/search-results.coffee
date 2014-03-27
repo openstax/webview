@@ -91,3 +91,10 @@ define (require) ->
             value.value = type.name
 
       return response
+
+
+    # Used when adding new content from the Workspace
+    prependNew: (content) ->
+      @get('results').items.unshift(content.toJSON())
+      @trigger('change:results')
+      @trigger('change')
