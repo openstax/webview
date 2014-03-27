@@ -17,7 +17,7 @@ define (require) ->
 
       content: () ->
         if @model.isBook()
-          return @model.get('currentPage').get('content')
+          return @model.get('currentPage.content')
 
         return @model.get('content')
 
