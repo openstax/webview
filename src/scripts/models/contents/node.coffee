@@ -47,12 +47,15 @@ define (require) ->
       return response
 
     fetch: (options) ->
-      results = super(arguments...)
+      if @isDraft()
+        options.xhrFields = _.extend({withCredentials: true}, options.xhrFields)
+
+      results = super(options)
 
       if @id
         @set('downloads', 'loading')
 
-        if @get('version') is 'draft' or not @get('version') # HACK for Untitled module
+        if @isDraft() or not @get('version') # HACK for Untitled module
           @set('downloads', [])
           @set('isLatest', true)
         else
@@ -87,17 +90,17 @@ define (require) ->
       return xhr
 
     get: (attr) ->
-      if @attributes[attr] isnt undefined
-        return @attributes[attr]
+      response = super(arguments...)
 
-      switch attr
-        when 'depth'
-          response = @attributes['parent']?.get('depth')
-          if response isnt undefined then response++
-          @set('depth', response)
-        when 'book'
-          response = @attributes['parent']?.get('book')
-          @set('book', response)
+      if response is undefined
+        switch attr
+          when 'depth'
+            response = @attributes['parent']?.get('depth')
+            if response isnt undefined then response++
+            @set('depth', response)
+          when 'book'
+            response = @attributes['parent']?.get('book')
+            @set('book', response)
 
       return response
 
@@ -168,3 +171,5 @@ define (require) ->
     isBook: () -> @get('mediaType') is 'application/vnd.org.cnx.collection'
 
     isDraft: () -> @get('version') is 'draft' or /@draft$/.test(@id)
+
+    isSaveable: () -> !!@get('mediaType')

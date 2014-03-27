@@ -56,7 +56,7 @@ define (require) ->
           switch options.type
             when 'textinput'
               $editable.empty()
-              $input = jQuery('<input type="text"/>')
+              $input = $('<input type="text" />')
               $input.attr('placeholder', "Enter a #{value} here")
               $input.val(@model.get(value))
               $editable.append($input)
