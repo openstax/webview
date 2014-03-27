@@ -40,7 +40,7 @@ define (require) ->
         @set('error', false)
         @load(options.page)
       .fail (model, response, options) =>
-        @set('error', response.status)
+        @set('error', response?.status or model?.status or 9000)
 
     save: () ->
       # FIX: Pass the proper arguments to super
