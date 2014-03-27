@@ -6,7 +6,7 @@ define (require) ->
 
   return class ToolsView extends BaseView
     template: template
-    templateHelpers: () -> 
+    templateHelpers: () ->
       return {
         authenticated: session.get('username')
         encodedTitle: encodeURI(@model.get('title'))
