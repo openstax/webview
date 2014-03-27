@@ -46,7 +46,7 @@ define (require) ->
 
       return response
 
-    fetch: (options) ->
+    fetch: (options = {}) ->
       if @isDraft()
         options.xhrFields = _.extend({withCredentials: true}, options.xhrFields)
 
