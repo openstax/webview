@@ -87,7 +87,7 @@ define (require) ->
       xhr = super(null, options)
 
       _.each @get('contents')?.models, (model) ->
-        if model.get('changed') or model.isNew()
+        if (model.get('changed') or model.isNew()) and model.isSaveable()
           model.save(null, options)
 
       return xhr

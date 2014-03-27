@@ -168,3 +168,5 @@ define (require) ->
     isBook: () -> @get('mediaType') is 'application/vnd.org.cnx.collection'
 
     isDraft: () -> @get('version') is 'draft' or /@draft$/.test(@id)
+
+    isSaveable: () -> !!@get('mediaType')
