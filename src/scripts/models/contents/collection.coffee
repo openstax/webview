@@ -84,7 +84,7 @@ define (require) ->
       else
         arguments[2] = _.extend(options, arguments[2])
 
-      if model.isSaveable()
+      if @isSaveable()
         xhr = super(null, options)
       else
         xhr = null
