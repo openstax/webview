@@ -90,17 +90,17 @@ define (require) ->
       return xhr
 
     get: (attr) ->
-      if @attributes[attr] isnt undefined
-        return @attributes[attr]
+      response = super(arguments...)
 
-      switch attr
-        when 'depth'
-          response = @attributes['parent']?.get('depth')
-          if response isnt undefined then response++
-          @set('depth', response)
-        when 'book'
-          response = @attributes['parent']?.get('book')
-          @set('book', response)
+      if response is undefined
+        switch attr
+          when 'depth'
+            response = @attributes['parent']?.get('depth')
+            if response isnt undefined then response++
+            @set('depth', response)
+          when 'book'
+            response = @attributes['parent']?.get('book')
+            @set('book', response)
 
       return response
 
