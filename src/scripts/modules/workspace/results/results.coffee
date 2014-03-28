@@ -5,7 +5,7 @@ define (require) ->
   template = require('hbs!./results-template')
   require('less!./results')
 
-  return class SearchResultsView extends BaseView
+  return class WorkspaceSearchResultsView extends BaseView
     template: template
 
     regions:
