@@ -86,10 +86,23 @@ define (require) ->
                   $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
                   $editable.aloha()
 
+                  # Grab the editable so we can call `.getContents()`
+                  alohaId = $editable.attr('id')
+                  alohaEditable = Aloha.getEditableById(alohaId)
+
                   # Update the model if an event for this editable was triggered
                   Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
-                    if d.editable.obj.is($editable)
-                      @model.set(value, d.editable.getContents().trim()) # Trim for idempotence
+                    isItThisEditable = d.editable.obj.is($editable)
+                    isItThisEditable = isItThisEditable or $.contains($editable[0], d.editable.obj[0])
+
+                    # If you're having blur problems I feel bad for you son: d.triggerType != 'blur'
+                    if isItThisEditable
+
+                      # Update the model by retrieving the XHTML contents
+                      editableBody = alohaEditable.getContents()
+                      editableBody = editableBody.trim() # Trim for idempotence
+                      # Change the contents but do not update the Aloha editable area
+                      @model.set(value, editableBody)
                       setChanged(@model, options.onEdit)
 
             # Setup Select2
