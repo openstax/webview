@@ -42,20 +42,6 @@ define (require) ->
       .fail (model, response, options) =>
         @set('error', response?.status or model?.status or 9000)
 
-    save: () ->
-      # FIX: Pass the proper arguments to super
-
-      options =
-        includeTree: true
-        excludeContents: true
-
-      if arguments[0]? or not _.isObject(arguments[0])
-        arguments[1] = _.extend(options, arguments[1])
-      else
-        arguments[2] = _.extend(options, arguments[2])
-
-      return super(null, options)
-
     toJSON: (options = {}) ->
       results = super(arguments...)
 
