@@ -45,10 +45,9 @@ define (require) ->
           else
             value = options.value
 
-          setChanged = (onEdit) =>
-            page = @model.get('currentPage')
-            @model.set('changed', true)
-            page.set('changed', true) if /^currentPage\./.test(value)
+          setChanged = (model, onEdit) =>
+            model.set('changed', true)
+            model.set('currentPage.changed', true) if /^currentPage\./.test(value)
             onEdit.apply(@) if typeof onEdit is 'function'
 
           options.onBeforeEditable?($editable)
@@ -62,7 +61,7 @@ define (require) ->
               $editable.append($input)
               $input.on 'change', () =>
                 @model.set(value, $input.val())
-                setChanged(options.onEdit)
+                setChanged(@model, options.onEdit)
 
             # Setup contenteditable
             when 'contenteditable'
@@ -73,7 +72,7 @@ define (require) ->
 
                 @observers[selector] = new MutationObserver (mutations) =>
                   mutations.forEach (mutation) =>
-                    setChanged(options.onEdit)
+                    setChanged(@model, options.onEdit)
                     @model.set(value, $($editable.get(index)).html())
 
                 @observers[selector].observe($editable.get(index), options.config or observerConfig)
@@ -134,7 +133,7 @@ define (require) ->
                           editableBody = editableBody.trim() # Trim for idempotence
                           # Change the contents but do not update the Aloha editable area
                           @model.set(value, editableBody) # TODO: Should we add a flag to not re-render the editable?
-                          setChanged(options.onEdit)
+                          setChanged(@model, options.onEdit)
 
             # Setup Select2
             when 'select2'
@@ -148,7 +147,7 @@ define (require) ->
 
                 $editable.off 'change.editable'
                 $editable.on 'change.editable', (e) =>
-                  setChanged(options.onEdit)
+                  setChanged(@model, options.onEdit)
                   @model.set(value, $editable.select2('val'))
 
           options.onEditable?($editable)
