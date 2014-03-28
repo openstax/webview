@@ -90,6 +90,7 @@ define (require) ->
       @get('currentPage')?.set('active', false)
       @set('currentPage', page)
       page.set('active', true)
+      @trigger('changePage')
 
       if not page.get('loaded')
         @fetchPage()
