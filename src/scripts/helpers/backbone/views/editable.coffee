@@ -54,11 +54,9 @@ define (require) ->
 
           switch options.type
             when 'textinput'
-              $editable.empty()
               $input = $('<input type="text" />')
-              $input.attr('placeholder', "Enter a #{value} here")
-              $input.val(@model.get(value))
-              $editable.append($input)
+              $input.attr('placeholder', "Enter a #{value} here").val(@model.get(value))
+              $editable.html($input)
               $input.on 'change', () =>
                 @model.set(value, $input.val())
                 setChanged(@model, options.onEdit)
@@ -72,57 +70,27 @@ define (require) ->
 
                 @observers[selector] = new MutationObserver (mutations) =>
                   mutations.forEach (mutation) =>
-                    setChanged(@model, options.onEdit)
                     @model.set(value, $($editable.get(index)).html())
+                    setChanged(@model, options.onEdit)
 
                 @observers[selector].observe($editable.get(index), options.config or observerConfig)
 
             # Setup Aloha
             when 'aloha'
-              # If this editable has an id, remove it so Aloha gives it a unique one
-              # otherwise Aloha.getEditableById will return the previous (now detached)
-              # DOM node if the page has re-rendered
-              $editable.removeAttr('id')
-
               $editable.text('Loading editor...')
               require ['aloha', 'less!styles/aloha-hacks'], (Aloha) =>
                 $editable.text('Starting up Aloha...')
                 # Wait for Aloha to start up
                 Aloha.ready () =>
-                  $editable.text('Starting editor...')
+                  $editable.html(@model.get(value) or '')
+                  $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
+                  $editable.aloha()
 
-                  # HACK: backbone-associations does not return the HTML for some reason
-                  html = @model.get(value)
-                  if not html?
-                    temp = @model
-                    for attr in value.split('.')
-                      temp = temp.get(attr)
-                    html = temp
-
-                  if not html?
-                    $editable.text('Problem starting editor')
-                  else
-                    $editable.html(html)
-                    $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
-                    $alohaEditable = Aloha.jQuery($editable)
-                    $alohaEditable.aloha()
-
-                    # Update the model if an event for this editable was triggered
-                    Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
-                      isItThisEditable = d.editable.obj.is($alohaEditable)
-                      isItThisEditable = isItThisEditable or $.contains($alohaEditable[0], d.editable.obj[0])
-                      if d.triggerType != 'blur' and isItThisEditable
-
-                        # Update the model by retrieving the XHTML contents
-                        alohaId = $editable.attr('id')
-                        alohaEditable = Aloha.getEditableById(alohaId)
-
-                        if alohaEditable
-                          editableBody = alohaEditable.getContents()
-                          editableBody = editableBody.trim() # Trim for idempotence
-                          # Change the contents but do not update the Aloha editable area
-                          @model.set(value, editableBody) # TODO: Should we add a flag to not re-render the editable?
-                          setChanged(@model, options.onEdit)
+                  # Update the model if an event for this editable was triggered
+                  Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
+                    if d.editable.obj.is($editable)
+                      @model.set(value, d.editable.getContents().trim()) # Trim for idempotence
+                      setChanged(@model, options.onEdit)
 
             # Setup Select2
             when 'select2'
@@ -136,8 +104,8 @@ define (require) ->
 
                 $editable.off 'change.editable'
                 $editable.on 'change.editable', (e) =>
-                  setChanged(@model, options.onEdit)
                   @model.set(value, $editable.select2('val'))
+                  setChanged(@model, options.onEdit)
 
           options.onEditable?($editable)
 
@@ -150,6 +118,11 @@ define (require) ->
         _.each @editable, (options, selector) =>
           $editable = @$el.find(selector)
 
+          if typeof options.value is 'function'
+            value = options.value.apply(@)
+          else
+            value = options.value
+
           options.onBeforeUneditable?($editable)
 
           switch options.type
@@ -157,12 +130,12 @@ define (require) ->
               $editable.text(@model.get(value))
 
             when 'contenteditable'
+              $editable.attr('contenteditable', false)
               @observers[selector].disconnect()
               delete @observers[selector]
 
             when 'aloha'
-              $HACK = Aloha.jQuery($editable[0])
-              $HACK.mahalo()
+              $editable.mahalo()
 
             when 'select2'
               $editable.off 'change.editable'
