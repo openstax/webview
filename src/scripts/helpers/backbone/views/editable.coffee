@@ -118,11 +118,16 @@ define (require) ->
         _.each @editable, (options, selector) =>
           $editable = @$el.find(selector)
 
+          if typeof options.value is 'function'
+            value = options.value.apply(@)
+          else
+            value = options.value
+
           options.onBeforeUneditable?($editable)
 
           switch options.type
             when 'textinput'
-              $editable.text($editable.children('input').val())
+              $editable.text(@model.get(value))
 
             when 'contenteditable'
               $editable.attr('contenteditable', false)
