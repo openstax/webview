@@ -110,7 +110,9 @@ define (require) ->
 
                     # Update the model if an event for this editable was triggered
                     Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
-                      isItThisEditable = d.editable.obj.is($alohaEditable) or $.contains($alohaEditable[0], d.editable.obj[0])
+                      isItThisEditable = d.editable.obj.is($alohaEditable)
+                      isItThisEditable = isItThisEditable or $.contains($alohaEditable[0], d.editable.obj[0])
+
                       if d.triggerType != 'blur' and isItThisEditable
 
                         # Update the model by retrieving the XHTML contents
