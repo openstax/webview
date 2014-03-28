@@ -80,6 +80,7 @@ define (require) ->
 
             # Setup Aloha
             when 'aloha'
+
               # If this editable has an id, remove it so Aloha gives it a unique one
               # otherwise Aloha.getEditableById will return the previous (now detached)
               # DOM node if the page has re-rendered
@@ -108,16 +109,26 @@ define (require) ->
                     $alohaEditable = Aloha.jQuery($editable)
                     $alohaEditable.aloha()
 
+                    # Grab the editable so we can call `.getContents()`
+                    alohaId = $editable.attr('id')
+                    alohaEditable = Aloha.getEditableById(alohaId)
+
+
+                    if 'content' == value
+                      window.GLOBAL_UPOADER_HACK = () =>
+                        editableBody = alohaEditable.getContents()
+                        @model.set(value, editableBody)
+                        setChanged(options.onEdit)
+
+
                     # Update the model if an event for this editable was triggered
                     Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
                       isItThisEditable = d.editable.obj.is($alohaEditable)
                       isItThisEditable = isItThisEditable or $.contains($alohaEditable[0], d.editable.obj[0])
+
                       if d.triggerType != 'blur' and isItThisEditable
 
                         # Update the model by retrieving the XHTML contents
-                        alohaId = $editable.attr('id')
-                        alohaEditable = Aloha.getEditableById(alohaId)
-
                         if alohaEditable
                           editableBody = alohaEditable.getContents()
                           editableBody = editableBody.trim() # Trim for idempotence
