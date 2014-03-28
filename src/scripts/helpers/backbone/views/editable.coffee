@@ -45,7 +45,7 @@ define (require) ->
           else
             value = options.value
 
-          setChanged = (model, onEdit) ->
+          setChanged = (model, onEdit) =>
             model.set('changed', true)
             model.set('currentPage.changed', true) if /^currentPage\./.test(value)
             onEdit.apply(@) if typeof onEdit is 'function'
@@ -82,9 +82,6 @@ define (require) ->
                 $editable.text('Starting up Aloha...')
                 # Wait for Aloha to start up
                 Aloha.ready () =>
-                  $ = Aloha.jQuery
-                  $editable = $($editable[0])
-
                   $editable.html(@model.get(value) or '')
                   $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
                   $editable.aloha()
