@@ -117,7 +117,7 @@ define (require) ->
                       window.GLOBAL_UPOADER_HACK = () =>
                         editableBody = alohaEditable.getContents()
                         @model.set(value, editableBody)
-                        setChanged(options.onEdit)
+                        setChanged(@model, options.onEdit)
 
 
                     # Update the model if an event for this editable was triggered
