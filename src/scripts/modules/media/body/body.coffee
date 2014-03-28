@@ -31,7 +31,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:loaded change:currentPage change:content', @render)
+      @listenTo(@model, 'change:loaded change:currentPage.loaded', @render)
 
     onRender: () ->
       # MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
