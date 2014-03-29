@@ -45,6 +45,10 @@ define (require) ->
 
         response.content = $body.html()
 
+      # Mark drafts as being in edit mode by default
+      if @isDraft()
+        response.editable = true
+
       return response
 
     fetch: (options = {}) ->
