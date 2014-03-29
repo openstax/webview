@@ -74,7 +74,7 @@ define (require) ->
 
     save: () ->
       # Save all the models in the collection
-      _.each @get('contents')?.models, (model) -> model.save(null, options)
+      _.each @get('contents')?.models, (model) -> model.save()
 
       # Don't save subcollections
       if @isSaveable()

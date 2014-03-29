@@ -80,12 +80,17 @@ define (require) ->
         attrs = {}
         attrs[key] = val
 
-      _.defaults options,
+      options = _.extend(
         xhrFields:
           withCredentials: true
         excludeTransient: true # Remove transient properties before saving to the server
+      , options)
 
-      xhr = super(attrs, options).done () => @set('changed', false)
+      # Only save models that have changed
+      if @get('changed') or @isNew()
+        xhr = super(attrs, options).done () => @set('changed', false)
+      else
+        xhr = $.Deferred().resolve().promise()
 
       return xhr
 

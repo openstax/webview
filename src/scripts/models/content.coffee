@@ -50,9 +50,10 @@ define (require) ->
         attrs = {}
         attrs[key] = val
 
-      _.defaults options,
+      options = _.extend(
         includeTree: true
         excludeContents: true
+      , options)
 
       return super(attrs, options).done () => @set('changed', false)
 
