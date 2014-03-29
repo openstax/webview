@@ -23,9 +23,9 @@ define ['jquery'], ($) ->
     errorhandling: false
     logLevels:
       error: true
-      warn: true
-      info: true
-      debug: true
+      warn: false
+      info: false
+      debug: false
 
     sidebar: {disabled:true}
 

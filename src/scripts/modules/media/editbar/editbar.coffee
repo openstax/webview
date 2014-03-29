@@ -9,7 +9,8 @@ define (require) ->
     template: template
 
     events:
-      'click .save': 'save'
+      'click .save':    'save'
+      'click .revert':  'revert'
 
     initialize: () ->
       super()
@@ -17,3 +18,8 @@ define (require) ->
 
     save: () ->
       @model.save()
+
+    revert: () ->
+      model = @model # `@model` is cleared when editable is set to false
+      model.set('editable', false)
+      model.fetch()

@@ -6,14 +6,13 @@ define (require) ->
 
   return class ToolsView extends BaseView
     template: template
-    templateHelpers: () ->
-      return {
-        authenticated: session.get('username')
-        encodedTitle: encodeURI(@model.get('title'))
-      }
+    templateHelpers: () -> {
+      authenticated: session.get('username')
+      encodedTitle: encodeURI(@model.get('title'))
+    }
 
     events:
-      'click .edit, .browse': 'toggleEditor'
+      'click .edit, .preview': 'toggleEditor'
 
     initialize: () ->
       super()

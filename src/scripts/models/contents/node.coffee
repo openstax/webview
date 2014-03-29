@@ -3,6 +3,7 @@
 # Page Nodes also are used to cache a page's content once loaded.
 
 define (require) ->
+  $ = require('jquery')
   Backbone = require('backbone')
   settings = require('settings')
   require('backbone-associations')
@@ -24,12 +25,13 @@ define (require) ->
 
       return url
 
-    parse: (response, options) ->
+    parse: (response, options = {}) ->
       # Don't overwrite the title from the book's table of contents
       if @get('title') then delete response.title
 
       if response.mediaType is 'application/vnd.org.cnx.collection'
-        response.contents = response.tree.contents or []
+        # Only load the contents once
+        response.contents = @get('contents') or response.tree.contents or []
 
       else if response.mediaType is 'application/vnd.org.cnx.module'
         # FIX: cnx-authoring should not return a null value for content
@@ -43,6 +45,10 @@ define (require) ->
         $body.children('.abstract').eq(0).remove()
 
         response.content = $body.html()
+
+      # Mark drafts as being in edit mode by default
+      if @isDraft()
+        response.editable = true
 
       return response
 
@@ -70,22 +76,25 @@ define (require) ->
 
       return results
 
-    save: () ->
-      # FIX: Pass the proper arguments to super
+    save: (key, val, options) ->
+      if not key? or typeof key is 'object'
+        attrs = key
+        options = val
+      else
+        attrs = {}
+        attrs[key] = val
 
-      options =
+      options = _.extend(
         xhrFields:
           withCredentials: true
-        wait: true # Wait for a server response before adding the model to the collection
         excludeTransient: true # Remove transient properties before saving to the server
+      , options)
 
-      if arguments[0]? or not _.isObject(arguments[0])
-        arguments[1] = _.extend(options, arguments[1])
+      # Only save models that have changed
+      if @get('changed') or @isNew()
+        xhr = super(attrs, options).done () => @set('changed', false)
       else
-        arguments[2] = _.extend(options, arguments[2])
-
-      xhr = super(null, options)
-      xhr.done () => @set('changed', false)
+        xhr = $.Deferred().resolve().promise()
 
       return xhr
 
@@ -111,15 +120,15 @@ define (require) ->
 
       # FIX: Move all transient properties under 'meta'
       if options.excludeTransient
-        delete results.meta
         delete results.loaded
         delete results.currentPage
         delete results.parent
         delete results.book
         delete results.type
-        delete results.parent
         delete results.depth
         delete results.page
+        delete results.changed
+        delete results.active
 
       return results
 
