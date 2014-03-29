@@ -25,6 +25,12 @@
   padding-top: 40px;
   counter-reset: figure;
 
+  &.draft {
+    background-color: #ffc;
+    // Add some padding so background color is still around images
+    padding: .5em;
+  }
+
   // Import the content styling from a separate file so it can be included in the editing code
   @import 'content.less';
 }
