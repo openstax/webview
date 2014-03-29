@@ -88,7 +88,7 @@ define (require) ->
 
                   # Update the model if an event for this editable was triggered
                   Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
-                    if d.editable.obj.is($editable)
+                    if d.editable.obj.is($editable) or $.contains($editable, d.editable.obj[0])
                       @model.set(value, d.editable.getContents().trim()) # Trim for idempotence
                       setChanged(@model, options.onEdit)
 

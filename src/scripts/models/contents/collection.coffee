@@ -70,27 +70,16 @@ define (require) ->
       _.each models, (model) ->
         contents.create(model, options)
 
+      return @
+
     save: () ->
-      # FIX: Pass the proper arguments to super
+      # Save all the models in the collection
+      _.each @get('contents')?.models, (model) -> model.save(null, options)
 
-      options =
-        xhrFields:
-          withCredentials: true
-        wait: true # Wait for a server response before adding the model to the collection
-        excludeTransient: true # Remove transient properties before saving to the server
-
-      if arguments[0]? or not _.isObject(arguments[0])
-        arguments[1] = _.extend(options, arguments[1])
-      else
-        arguments[2] = _.extend(options, arguments[2])
-
+      # Don't save subcollections
       if @isSaveable()
-        xhr = super(null, options)
+        xhr = super(arguments...).done () => @set('changed', false)
       else
-        xhr = null
-
-      _.each @get('contents')?.models, (model) ->
-        if model.get('changed') or model.isNew()
-          model.save(null, options)
+        xhr = $.Deferred().resolve().promise()
 
       return xhr

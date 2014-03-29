@@ -25,12 +25,13 @@ define (require) ->
 
       return url
 
-    parse: (response, options) ->
+    parse: (response, options = {}) ->
       # Don't overwrite the title from the book's table of contents
       if @get('title') then delete response.title
 
       if response.mediaType is 'application/vnd.org.cnx.collection'
-        response.contents = response.tree.contents or []
+        # Only load the contents once
+        response.contents = @get('contents') or response.tree.contents or []
 
       else if response.mediaType is 'application/vnd.org.cnx.module'
         # FIX: cnx-authoring should not return a null value for content
@@ -71,28 +72,20 @@ define (require) ->
 
       return results
 
-    save: () ->
-      options = _.extend(
+    save: (key, val, options) ->
+      if not key? or typeof key is 'object'
+        attrs = key
+        options = val
+      else
+        attrs = {}
+        attrs[key] = val
+
+      _.defaults options,
         xhrFields:
           withCredentials: true
-        wait: true # Wait for a server response before adding the model to the collection
         excludeTransient: true # Remove transient properties before saving to the server
-        includeTree: true
-      , options)
 
-      _.each @get('contents')?.models, (model) -> model.save()
-
-      if @isNew()
-        method = 'create'
-      else
-        method = 'update'
-
-      if @isSaveable() and (@get('changed') or @isNew())
-        xhr = @sync(method, @, options)
-      else
-        xhr = $.Deferred().resolve().promise()
-
-      xhr.done () => @set('changed', false)
+      xhr = super(attrs, options).done () => @set('changed', false)
 
       return xhr
 
