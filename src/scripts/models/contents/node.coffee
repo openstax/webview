@@ -93,6 +93,8 @@ define (require) ->
         xhr = $.Deferred().resolve().promise()
 
       xhr.done () => @set('changed', false)
+      xhr.done (response) =>
+        @set(@parse(response))
 
       return xhr
 
