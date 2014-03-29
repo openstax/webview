@@ -93,6 +93,7 @@ define (require) ->
                   alohaEditable = Aloha.getEditableById(alohaId)
 
                   if 'content' == value
+                    # See aloha.coffee for where this is used
                     window.GLOBAL_UPOADER_HACK = () =>
                       editableBody = alohaEditable.getContents()
                       @model.set(value, editableBody)
