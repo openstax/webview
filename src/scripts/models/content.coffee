@@ -42,6 +42,21 @@ define (require) ->
       .fail (model, response, options) =>
         @set('error', response?.status or model?.status or 9000)
 
+    save: (key, val, options) ->
+      if not key? or typeof key is 'object'
+        attrs = key
+        options = val
+      else
+        attrs = {}
+        attrs[key] = val
+
+      options = _.extend(
+        includeTree: true
+        excludeContents: true
+      , options)
+
+      return super(attrs, options).done () => @set('changed', false)
+
     toJSON: (options = {}) ->
       results = super(arguments...)
 
@@ -130,6 +145,7 @@ define (require) ->
       if node is @get('currentPage')
         @setPage(previousPage)
 
+      @set('changed', true)
       @trigger('removeNode')
 
     move: (node, marker, position) ->

@@ -12,7 +12,7 @@ define (require) ->
     }
 
     events:
-      'click .edit, .browse': 'toggleEditor'
+      'click .edit, .preview': 'toggleEditor'
 
     initialize: () ->
       super()

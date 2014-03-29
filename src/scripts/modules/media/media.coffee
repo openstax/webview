@@ -77,7 +77,12 @@ define (require) ->
       error = arguments[1] # @model.get('error')
       router.appView.render('error', {code: error}) if error
 
-    toggleEditor: () -> if @editing then @closeEditor() else @loadEditor()
+    toggleEditor: () ->
+      if @editing
+        @closeEditor()
+        @render()
+      else
+        @loadEditor()
 
     loadEditor: () ->
       @editing = true
