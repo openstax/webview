@@ -92,6 +92,13 @@ define (require) ->
                   alohaId = $editable.attr('id')
                   alohaEditable = Aloha.getEditableById(alohaId)
 
+                  if 'content' == value
+                    # See aloha.coffee for where this is used
+                    window.GLOBAL_UPOADER_HACK = () =>
+                      editableBody = alohaEditable.getContents()
+                      @model.set(value, editableBody)
+                      setChanged(@model, options.onEdit)
+
                   # Update the model if an event for this editable was triggered
                   Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
                     isItThisEditable = d.editable.obj.is($editable)
@@ -106,6 +113,7 @@ define (require) ->
                       # Change the contents but do not update the Aloha editable area
                       @model.set(value, editableBody)
                       setChanged(@model, options.onEdit)
+
 
             # Setup Select2
             when 'select2'
