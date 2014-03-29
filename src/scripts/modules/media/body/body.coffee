@@ -21,6 +21,13 @@ define (require) ->
 
         return @model.get('content')
 
+      isDraft: () ->
+        if @model.isBook()
+          version = @model.get('currentPage.version')
+        else
+          version = @model.get('version')
+        return 'draft' == version or true # No version means it is a draft
+
     editable:
       '.media-body':
         value: () -> @getModel('content')
