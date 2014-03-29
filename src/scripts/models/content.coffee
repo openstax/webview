@@ -145,6 +145,7 @@ define (require) ->
       if node is @get('currentPage')
         @setPage(previousPage)
 
+      @set('changed', true)
       @trigger('removeNode')
 
     move: (node, marker, position) ->

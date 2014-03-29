@@ -70,6 +70,8 @@ define (require) ->
       _.each models, (model) ->
         contents.create(model, options)
 
+      @set('changed', true)
+
       return @
 
     save: () ->
