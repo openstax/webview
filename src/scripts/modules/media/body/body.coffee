@@ -26,7 +26,7 @@ define (require) ->
           version = @model.get('currentPage.version')
         else
           version = @model.get('version')
-        return 'draft' == version or true # No version means it is a draft
+        return version is 'draft' or !version # No version means it is a draft
 
     editable:
       '.media-body':
