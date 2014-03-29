@@ -3,6 +3,7 @@
 # Page Nodes also are used to cache a page's content once loaded.
 
 define (require) ->
+  $ = require('jquery')
   Backbone = require('backbone')
   settings = require('settings')
   require('backbone-associations')
@@ -71,21 +72,29 @@ define (require) ->
       return results
 
     save: () ->
-      # FIX: Pass the proper arguments to super
-
-      options =
+      options = _.extend(
         xhrFields:
           withCredentials: true
         wait: true # Wait for a server response before adding the model to the collection
         excludeTransient: true # Remove transient properties before saving to the server
+        includeTree: true
+      , options)
 
-      if arguments[0]? or not _.isObject(arguments[0])
-        arguments[1] = _.extend(options, arguments[1])
+      _.each @get('contents')?.models, (model) -> model.save()
+
+      if @isNew()
+        method = 'create'
       else
-        arguments[2] = _.extend(options, arguments[2])
+        method = 'update'
 
-      xhr = super(null, options)
+      if @isSaveable() and (@get('changed') or @isNew())
+        xhr = @sync(method, @, options)
+      else
+        xhr = $.Deferred().resolve().promise()
+
       xhr.done () => @set('changed', false)
+      xhr.done (response) =>
+        @set(@parse(response))
 
       return xhr
 
@@ -111,15 +120,15 @@ define (require) ->
 
       # FIX: Move all transient properties under 'meta'
       if options.excludeTransient
-        delete results.meta
         delete results.loaded
         delete results.currentPage
         delete results.parent
         delete results.book
         delete results.type
-        delete results.parent
         delete results.depth
         delete results.page
+        delete results.changed
+        delete results.active
 
       return results
 
