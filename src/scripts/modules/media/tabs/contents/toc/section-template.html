@@ -1,0 +1,13 @@
+{{#if book}} {{! Only display if the model has a reference to the book, and therefore is not the book }}
+  <div {{#if editable}}draggable="true"{{/if}} data-expandable="true" {{#if expanded}}data-expanded="true"{{/if}}>
+    <span class="name-wrapper">
+      <span class="title section">{{title}}</span>
+    </span>
+
+    {{~#if editable~}}
+      <span class="edit glyphicon glyphicon-pencil"></span>
+      <span class="remove glyphicon glyphicon-remove"></span>
+    {{~/if~}}
+  </div>
+{{/if}}
+<ul {{#if expanded}}data-expanded="true"{{/if}}></ul>

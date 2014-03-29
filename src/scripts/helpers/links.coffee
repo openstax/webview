@@ -11,7 +11,7 @@ define (require) ->
 
       switch page
         when 'contents'
-          uuid = "#{data.id}@#{data.version}"
+          uuid = data.model.getVersionedId()
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
           url += "contents/#{uuid}"
           url += ":#{data.page}" if data.page

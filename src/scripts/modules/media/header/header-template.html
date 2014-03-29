@@ -5,7 +5,7 @@
       {{#if currentPage.parentId}}
         <span>
           Derived from <a href="/contents/{{currentPage.parentId}}@{{currentPage.parentVersion}}">{{currentPage.parentTitle}}</a> by
-          <span class="collection-authors">
+          <span class="book-authors">
             {{#each currentPage.parentAuthors}}
               <a class="list-comma" href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
             {{/each}}
@@ -20,16 +20,16 @@
           {{#is type 'book'}}
             <a class="btn">Get This Book!</a>
           {{else}}
-            <a class="btn">Get This Module!</a>
+            <a class="btn">Get This Page!</a>
           {{/is}}
         {{/or}}
       </div>
       {{#if currentPage.authors.length}}
-        <span>Module by:</span>
-        <span class="module-author">
-          {{#each currentPage.authors}}
-            <a href="mailto:{{email}}?subject={{../currentPage.encodedTitle}}">{{fullname}}</a>
-          {{/each}}
+        <span>Page by:</span>
+        <span class="page-authors">
+          {{~#each currentPage.authors~}}
+            <a class="list-comma" href="mailto:{{email}}?subject={{../currentPage.encodedTitle}}">{{fullname}}</a>
+          {{~/each}}
           <img src="images/icons/mail.png" width="18" height="12" alt="Mail" />
         </span>
       {{/if}}

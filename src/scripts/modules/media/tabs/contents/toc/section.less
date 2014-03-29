@@ -1,0 +1,20 @@
+@import "../../../../../../styles/variables.less";
+@import "../../../../../../styles/mixins.less";
+
+.media-tabs .contents .contents > .toc {
+  ul {
+    padding: 0 20px;
+    font-size: 1.25rem;
+    counter-reset: section;
+    list-style-type: none;
+
+    li .title:not([data-depth="0"])::before {
+      display: inline-block;
+      margin-right: 5px;
+      font-weight: bold;
+      color: @brand-primary;
+      counter-increment: section;
+      content: counters(section, "-") ".";
+    }
+  }
+}
