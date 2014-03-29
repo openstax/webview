@@ -1,18 +1,4 @@
 <table class="table">
-  <caption>
-    {{#is this.0.mediaType 'Collection'}}
-      {{! <span class="glyphicon glyphicon-book"></span> }}
-      <span>Books</span>
-    {{else}}
-      {{#is this.0.mediaType 'Module'}}
-        {{! <span class="glyphicon glyphicon-file"></span> }}
-        <span>Pages</span>
-      {{else}}
-        {{! <span class="glyphicon glyphicon-question-sign"></span> }}
-        <span>Miscellaneous</span>
-      {{/is}}
-    {{/is}}
-  </caption>
   <thead>
     <tr>
       <th class="type">Type</th>
