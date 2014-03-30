@@ -1,5 +1,6 @@
 define (require) ->
   $ = require('jquery')
+  _ = require('underscore')
   # Mathjax = require('mathjax')
   EditableView = require('cs!helpers/backbone/views/editable')
   template = require('hbs!./body-template')
@@ -24,12 +25,6 @@ define (require) ->
       hasContent: () ->
         return (_.isString(@model.get('content')) or _.isString(@model.get('currentPage.content')))
 
-      isDraft: () ->
-        if @model.isBook()
-          return @model.get('currentPage')?.isDraft()
-        else
-          return @model.isDraft()
-
     editable:
       '.media-body':
         value: () -> @getModel('content')
@@ -40,10 +35,12 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'changePage change:loaded change:currentPage.loaded change:editable', @render)
+      @listenTo(@model, 'changePage change:loaded change:currentPage.loaded', @render)
+      @listenTo(@model, 'change:editable', @toggleDraftMode)
 
     onRender: () ->
       # MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
+
       # Wrap title and content elements in header and section elements, respectively
       @$el.find('.example, .exercise, .note').each (index, el) ->
         $el = $(el)
@@ -71,3 +68,9 @@ define (require) ->
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution')
       $solution.toggleClass('ui-solution-visible')
+
+    toggleDraftMode: () ->
+      if @model.get('editable')
+        @$el.find('.media-body').addClass('draft')
+      else
+        @$el.find('.media-body').removeClass('draft')
