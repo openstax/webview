@@ -128,7 +128,7 @@ module.exports = (grunt) ->
           keepBuildDir: false
           preserveLicenseComments: false
           skipDirOptimize: true
-          optimize: 'none' # 'uglify2'
+          optimize: 'uglify2'
           stubModules: ['cs']
           modules: [{
             name: 'main'
