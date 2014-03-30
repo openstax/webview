@@ -143,6 +143,8 @@ module.exports = (grunt) ->
               'select2'
               'cs!modules/media/editbar/editbar'
               'cs!helpers/backbone/views/editable'
+
+              'cs!configs/aloha'
             ]
             exclude: ['coffee-script', 'less/normalize']
             excludeShallow: ['settings']

@@ -1,6 +1,11 @@
 define (require) ->
   $ = require('jquery')
   _ = require('underscore')
+  # Dist HACK:
+  # `styles/` puts us in `dist/scripts/styles`
+  # `../styles` puts us in `dist/scripts/helpers/backbone/styles`
+  # `../../../../styles` is JUUUSST RIGHT (not too hot and not too cold)
+  require('less!../../../../styles/aloha-hacks')
   BaseView = require('cs!helpers/backbone/views/base')
 
   observerConfig =
@@ -78,7 +83,7 @@ define (require) ->
             # Setup Aloha
             when 'aloha'
               $editable.text('Loading editor...')
-              require ['aloha', 'less!styles/aloha-hacks'], (Aloha) =>
+              require ['aloha'], (Aloha) =>
                 $editable.text('Starting up Aloha...')
                 # Wait for Aloha to start up
                 Aloha.ready () =>
