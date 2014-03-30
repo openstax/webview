@@ -1,9 +1,9 @@
 define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
-  template = require('hbs!./list-template')
+  template = require('hbs!./add-page-list-template')
   require('less!./list')
 
-  return class SearchResultsListView extends BaseView
+  return class AddPageSearchResultsListView extends BaseView
     template: template
     templateHelpers: () ->
       results = @model.get('results')?.items or []
