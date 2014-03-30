@@ -25,7 +25,10 @@
   padding-top: 40px;
   counter-reset: figure;
 
-  &.draft {
+  // Set a background color if the user is editing (otherwise the user is "Previewing")
+  // HACK: Use "aloha-editable" because clicking "Edit" after "Preview" does not
+  // re-render the template (should set "editing" class on a parent element to allow more styling)
+  &.aloha-editable {
     background-color: #ffc;
     // Add some padding so background color is still around images
     padding: .5em;
