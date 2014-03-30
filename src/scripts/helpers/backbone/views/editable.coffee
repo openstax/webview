@@ -82,38 +82,15 @@ define (require) ->
                 $editable.text('Starting up Aloha...')
                 # Wait for Aloha to start up
                 Aloha.ready () =>
-                  html = @model.get(value) or ''
-                  html += "<p> </p>" # Allow putting cursor after a Blockish. removed if empty.
-                  $editable.html(html)
+                  $editable.html(@model.get(value) or '')
                   $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
                   $editable.aloha()
 
-                  # Grab the editable so we can call `.getContents()`
-                  alohaId = $editable.attr('id')
-                  alohaEditable = Aloha.getEditableById(alohaId)
-
-                  if 'content' == value
-                    # See aloha.coffee for where this is used
-                    window.GLOBAL_UPOADER_HACK = () =>
-                      editableBody = alohaEditable.getContents()
-                      @model.set(value, editableBody)
-                      setChanged(@model, options.onEdit)
-
                   # Update the model if an event for this editable was triggered
                   Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
-                    isItThisEditable = d.editable.obj.is($editable)
-                    isItThisEditable = isItThisEditable or $.contains($editable[0], d.editable.obj[0])
-
-                    # If you're having blur problems I feel bad for you son: d.triggerType != 'blur'
-                    if isItThisEditable
-
-                      # Update the model by retrieving the XHTML contents
-                      editableBody = alohaEditable.getContents()
-                      editableBody = editableBody.trim() # Trim for idempotence
-                      # Change the contents but do not update the Aloha editable area
-                      @model.set(value, editableBody)
+                    if d.editable.obj.is($editable) or $.contains($editable[0], d.editable.obj[0])
+                      @model.set(value, d.editable.getContents().trim()) # Trim for idempotence
                       setChanged(@model, options.onEdit)
-
 
             # Setup Select2
             when 'select2'
