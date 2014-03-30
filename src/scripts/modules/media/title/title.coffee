@@ -2,12 +2,12 @@ define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
   router = require('cs!router')
-  BaseView = require('cs!helpers/backbone/views/base')
+  EditableView = require('cs!helpers/backbone/views/editable')
   #MailPopoverView = require('cs!./popovers/mail/mail')
   template = require('hbs!./title-template')
   require('less!./title')
 
-  return class MediaTitleView extends BaseView
+  return class MediaTitleView extends EditableView
     template: template
     templateHelpers: () ->
       title = @model.get('title')
@@ -19,7 +19,7 @@ define (require) ->
       # Set information used for social media links
       share =
         url: window.location.href
-        source: 'Connexions'
+        source: 'OpenStax CNX'
         summary: @model.get('abstract') or 'An OpenStax College book.'
         title: title or 'Untitled'
         image: @model.get('image') or "#{location.origin}/images/logo.png"
@@ -30,11 +30,12 @@ define (require) ->
 
       return {share: share, encodedTitle: encodeURI(title)}
 
+    editable:
+      '.media-title > .title > h1':
+        value: 'title'
+        type: 'textinput'
+
     initialize: () ->
       super()
-      @listenTo(@model, 'change:title change:loaded', @render)
+      @listenTo(@model, 'change:loaded change:title', @render)
       @listenTo(router, 'navigate', @render)
-
-    #onRender: () ->
-    #  $share = @$el.find('.share')
-    #  @attachPopover new MailPopoverView({owner: $share.find('.mail'), model: @model})

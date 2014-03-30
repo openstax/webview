@@ -8,14 +8,20 @@
       // Directory from which webview is served
       root: '/',
 
-      // Hostname and port for the cnxarchive server
+      // Hostname and port for the cnx-archive server
       cnxarchive: {
         host: location.hostname,
         port: 6543
       },
 
+      // Hostname and port for the cnx-authoring server
+      cnxauthoring: {
+        host: location.hostname,
+        port: 8080
+      },
+
       // Prefix to prepend to page titles
-      titlePrefix: 'Connexions - ',
+      titlePrefix: 'OpenStax CNX - ',
 
       // Google Analytics tracking ID
       analyticsID: 'UA-7903479-1',

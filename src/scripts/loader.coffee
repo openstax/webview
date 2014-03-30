@@ -2,6 +2,7 @@ define (require) ->
   $ = require('jquery')
   Backbone = require('backbone')
   settings = require('settings')
+  session = require('cs!session')
   analytics = require('cs!helpers/handlers/analytics')
   router = require('cs!router')
   require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
@@ -19,7 +20,7 @@ define (require) ->
     resources = new RegExp('\/(resources|exports)\/')
 
     # Catch internal application links and let Backbone handle the routing
-    $(document).on 'click', 'a:not([data-bypass])', (e) ->
+    $(document).on 'click', 'a[href]:not([data-bypass]):not([href^="#"])', (e) ->
       $this = $(this)
       href = $this.attr('href')
 
@@ -53,6 +54,8 @@ define (require) ->
       router.navigate(Backbone.history.fragment, {replace: true})
 
     analytics.send() # Track analytics for the initial page
+
+    session.startChecking() # Begin tracking session status
 
     # Prefix all non-external AJAX requests with the root URI
     $.ajaxPrefilter (options, originalOptions, jqXHR) ->

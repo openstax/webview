@@ -18,7 +18,7 @@ define (require) ->
   }
 
   return new class SearchResults extends Backbone.Model
-    url: () -> "#{SEARCH_URI}#{@query}"
+    url: () -> "#{@searchUrl}#{@query}"
 
     defaults:
       query:
@@ -33,21 +33,24 @@ define (require) ->
 
     initialize: (options = {}) ->
       @query = options.query or ''
+      @searchUrl = options.url or SEARCH_URI
 
-    load: (query) ->
-      if query isnt @query
+    load: (query, url) ->
+      if query isnt @query or url isnt @searchUrl
         # Reset search results
         @clear().set(@defaults)
         @set('loaded', false)
 
         @query = query or ''
+        @searchUrl = url or SEARCH_URI
         @fetch
-          success: () =>
-            @set('error', false)
-          error: (model, response, options) =>
-            @set('error', response.status)
+          reset: true
         .always () =>
           @set('loaded', true)
+        .done () =>
+          @set('error', false)
+        .fail (model, response, options) =>
+          @set('error', response.status)
 
       return @
 
@@ -88,3 +91,10 @@ define (require) ->
             value.value = type.name
 
       return response
+
+
+    # Used when adding new content from the Workspace
+    prependNew: (content) ->
+      @get('results').items.unshift(content.toJSON())
+      @trigger('change:results')
+      @trigger('change')
