@@ -11,6 +11,20 @@ define (require) ->
   # The root URI prefixed on all non-external AJAX and Backbone URIs
   root = settings.root
 
+  # Patch `Backbone.ajax` so unauthorized responses are redirected to `/login`
+  Backbone_ajax = Backbone.ajax
+  Backbone.ajax = () ->
+    promise = Backbone_ajax.apply(@, arguments)
+    promise.fail (jqXHR) ->
+      switch jqXHR.status
+        when 403 # HACK: this should be 401
+          window.location.href = '/login'
+        else
+          console.error(arguments)
+
+    return promise
+
+
   init = (options = {}) ->
     # Append /test to the root if the app is in test mode
     if options.test
