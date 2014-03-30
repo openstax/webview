@@ -3,13 +3,21 @@
 </div>
 
 {{#if authenticated}}
-  {{#unless editable}}
-    <div class="edit tool">
-      <span>Edit</span>
-    </div>
+  {{#if isDraft}}
+    {{#unless editable}}
+      <div class="edit tool">
+        <span>Edit</span>
+      </div>
+    {{else}}
+      <div class="preview tool">
+        <span>Preview</span>
+      </div>
+    {{/unless}}
   {{else}}
-    <div class="preview tool">
-      <span>Preview</span>
-    </div>
-  {{/unless}}
+    {{#if derivable}}
+      <div class="derive tool">
+        <span>Derive a Copy</span>
+      </div>
+    {{/if}}
+  {{/if}}
 {{/if}}

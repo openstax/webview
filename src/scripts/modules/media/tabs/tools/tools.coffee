@@ -1,5 +1,8 @@
 define (require) ->
+  router = require('cs!router')
   session = require('cs!session')
+  linksHelper = require('cs!helpers/links')
+  Page = require('cs!models/contents/page')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./tools-template')
   require('less!./tools')
@@ -9,10 +12,13 @@ define (require) ->
     templateHelpers: () -> {
       authenticated: session.get('username')
       encodedTitle: encodeURI(@model.get('title'))
+      derivable: not @model.isBook()
+      isDraft: @model.isDraft()
     }
 
     events:
       'click .edit, .preview': 'toggleEditor'
+      'click .derive': 'deriveCopy'
 
     initialize: () ->
       super()
@@ -21,3 +27,13 @@ define (require) ->
 
     toggleEditor: () ->
       @model.set('editable', not @model.get('editable'))
+
+    deriveCopy: () ->
+      page = new Page
+        derivedFrom: @model.getVersionedId()
+
+      page.save()
+      .fail(() -> alert('There was a problem deriving. Please try again'))
+      .done () =>
+        url = linksHelper.getPath('contents', {model: page})
+        router.navigate(url, {trigger: true})

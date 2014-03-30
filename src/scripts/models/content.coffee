@@ -32,15 +32,18 @@ define (require) ->
 
     initialize: (options = {}) ->
       @set('loaded', false)
-      @fetch
-        reset: true
-      .always () =>
-        @set('loaded', true)
-      .done () =>
-        @set('error', false)
-        @load(options.page)
-      .fail (model, response, options) =>
-        @set('error', response?.status or model?.status or 9000)
+
+      # Immediately load content that has an id
+      if @id
+        @fetch
+          reset: true
+        .always () =>
+          @set('loaded', true)
+        .done () =>
+          @set('error', false)
+          @load(options.page)
+        .fail (model, response, options) =>
+          @set('error', response?.status or model?.status or 9000)
 
     save: (key, val, options) ->
       if not key? or typeof key is 'object'
