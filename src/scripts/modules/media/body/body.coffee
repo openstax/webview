@@ -74,3 +74,4 @@ define (require) ->
         @$el.find('.media-body').addClass('draft')
       else
         @$el.find('.media-body').removeClass('draft')
+        @render() # Re-render body view to cleanup aloha issues
