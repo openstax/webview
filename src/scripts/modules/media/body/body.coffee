@@ -1,6 +1,7 @@
 define (require) ->
   $ = require('jquery')
-  # Mathjax = require('mathjax')
+  _ = require('underscore')
+  Mathjax = require('mathjax')
   EditableView = require('cs!helpers/backbone/views/editable')
   template = require('hbs!./body-template')
   require('less!./body')
@@ -21,12 +22,8 @@ define (require) ->
 
         return @model.get('content')
 
-      isDraft: () ->
-        if @model.isBook()
-          version = @model.get('currentPage.version')
-        else
-          version = @model.get('version')
-        return version is 'draft' or !version # No version means it is a draft
+      hasContent: () ->
+        return (_.isString(@model.get('content')) or _.isString(@model.get('currentPage.content')))
 
     editable:
       '.media-body':
@@ -39,9 +36,11 @@ define (require) ->
     initialize: () ->
       super()
       @listenTo(@model, 'changePage change:loaded change:currentPage.loaded', @render)
+      @listenTo(@model, 'change:editable', @toggleDraftMode)
 
     onRender: () ->
-      # MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
+      MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
+
       # Wrap title and content elements in header and section elements, respectively
       @$el.find('.example, .exercise, .note').each (index, el) ->
         $el = $(el)
@@ -69,3 +68,10 @@ define (require) ->
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution')
       $solution.toggleClass('ui-solution-visible')
+
+    toggleDraftMode: () ->
+      if @model.get('editable')
+        @$el.find('.media-body').addClass('draft')
+      else
+        @$el.find('.media-body').removeClass('draft')
+        @render() # Re-render body view to cleanup aloha issues

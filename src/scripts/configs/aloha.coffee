@@ -82,7 +82,7 @@ define ['jquery'], ($) ->
           # Use the body of the response as the URL
           parseresponse: (xhr) ->
 
-            setTimeout(window.GLOBAL_UPOADER_HACK, 100)
+            setTimeout(window.GLOBAL_UPLOADER_HACK, 100)
 
             return xhr.response
           # Send files using the `file` field when POSTing

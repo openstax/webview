@@ -11,6 +11,7 @@ define (require) ->
 
   return class AddPageModal extends BaseView
     template: template
+    _checkedCounter: 0
 
     regions:
       results: '.add-page-search-results'
@@ -19,22 +20,26 @@ define (require) ->
       'click .new-page': 'newPage'
       'click .search-pages': 'onSearch'
       'submit form': 'onSubmit'
-      'keypress .page-title': 'onEnter'
+      'change form': 'onChange'
 
-    # Intelligently determine if the user intended to search or add pages
-    # when hitting the 'enter' key
-    onEnter: (e) ->
-      if e.keyCode is 13
-        e.preventDefault()
-        e.stopPropagation()
+    onChange: (e) ->
+      $target = $(e.target)
 
-        $modal = @$el.children('#add-page-modal')
-        $input = $modal.find('.page-title')
-
-        if $input.is(':focus')
-          @search($input.val())
+      # Use a counter to determine how many check boxes are selected
+      # rather than looping through and counting them every time,
+      # since there could be a huge number of check boxes.
+      if $target.attr('type') is 'checkbox'
+        if $target.is(':checked')
+          @_checkedCounter++
         else
-          $modal.find('form').submit()
+          @_checkedCounter--
+
+      if @_checkedCounter is 0
+        @$el.find('.btn-submit').text('Create New Page')
+      else if @_checkedCounter is 1
+        @$el.find('.btn-submit').text('Add Selected Page')
+      else
+        @$el.find('.btn-submit').text('Add Selected Pages')
 
     onSearch: (e) ->
       $modal = @$el.children('#add-page-modal')
@@ -42,6 +47,7 @@ define (require) ->
       @search(title)
 
     search: (title) ->
+      @_checkedCounter = 0
       results = searchResults.load("?q=title:#{title}%20type:page")
       @regions.results.show(new AddPageSearchResultsView({model: results}))
 
@@ -51,21 +57,19 @@ define (require) ->
       data = $(e.originalEvent.target).serializeArray()
       models = []
 
-      _.each data, (input) =>
-        if input.name isnt 'title'
-          models.push
-            derivedFrom: input.name
+      if data.length is 1
+        @newPage(data[0].value)
+      else
+        _.each data, (input) =>
+          if input.name isnt 'title'
+            models.push
+              derivedFrom: input.name
 
-      # FIX: Currently always just derive a page from published content
-      if models.length
-        @model.create(models)
+        # FIX: Currently always just derive a page from published content
+        if models.length
+          @model.create(models)
 
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
 
-    newPage: () ->
-      $modal = @$el.children('#add-page-modal')
-      title = $modal.find('.page-title').val()
-
+    newPage: (title) ->
       @model.create({title: title})
-
-      $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed

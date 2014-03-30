@@ -27,7 +27,8 @@ define (require) ->
 
     parse: (response, options = {}) ->
       # Don't overwrite the title from the book's table of contents
-      if @get('title') then delete response.title
+      #if @get('title') then delete response.title
+      response.title = @get('title') or response.title
 
       if response.mediaType is 'application/vnd.org.cnx.collection'
         # Only load the contents once
@@ -130,6 +131,9 @@ define (require) ->
         delete results.changed
         delete results.active
 
+      if options.derivedOnly
+        results = {derivedFrom: results.derivedFrom}
+
       return results
 
     #
@@ -179,6 +183,6 @@ define (require) ->
 
     isBook: () -> @get('mediaType') is 'application/vnd.org.cnx.collection'
 
-    isDraft: () -> @get('version') is 'draft' or /@draft$/.test(@id)
+    isDraft: () -> return @get('version') is 'draft' or /@draft$/.test(@id)
 
     isSaveable: () -> !!@get('mediaType')
