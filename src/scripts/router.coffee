@@ -30,6 +30,9 @@ define (require) ->
       @route /^about-us/, 'about-us', () ->
         @appView.render('about-us')
 
+      @route /^people/, 'people', () ->
+        @appView.render('people')
+
     navigate: (fragment, options, cb) ->
       super(arguments...)
       analytics.send()
