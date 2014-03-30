@@ -130,12 +130,6 @@ module.exports = (grunt) ->
           skipDirOptimize: true
           optimize: 'none' # 'uglify2'
           stubModules: ['cs']
-          wrap:
-            # Use Minified Aloha ( `r.js -o bower_components/aloha-editor/build/aloha/build-profile-with-oer.js` )
-            # because loading files in a different requirejs context is a royal pain
-            #
-            # Include aloha here so requirejs does not try to load the CSS dependencies in plugins
-            endFile: 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha.js'
           modules: [{
             name: 'main'
             include: [
@@ -150,8 +144,7 @@ module.exports = (grunt) ->
               'cs!modules/media/editbar/editbar'
               'cs!helpers/backbone/views/editable'
 
-              # FIX: Move aloha to separate build file
-              # 'aloha'
+              'cs!configs/aloha'
             ]
             exclude: ['coffee-script', 'less/normalize']
             excludeShallow: ['settings']
@@ -271,7 +264,7 @@ module.exports = (grunt) ->
     'copy:fonts'
     'targethtml:dist'
     'clean'
-    # 'uglify:dist'
+    'uglify:dist'
     'htmlmin:dist'
     'imagemin'
   ]
