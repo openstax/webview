@@ -68,7 +68,10 @@ define (require) ->
 
       contents = @get('contents')
       _.each models, (model) ->
-        contents.create(model, options)
+        if model.derivedFrom
+          opts = _.extend({derivedOnly: true}, options)
+
+        contents.create(model, opts or options)
 
       @set('changed', true)
 

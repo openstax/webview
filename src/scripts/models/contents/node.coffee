@@ -131,6 +131,9 @@ define (require) ->
         delete results.changed
         delete results.active
 
+      if options.derivedOnly
+        results = {derivedFrom: results.derivedFrom}
+
       return results
 
     #
