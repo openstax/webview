@@ -21,12 +21,14 @@ define (require) ->
 
         return @model.get('content')
 
+      hasContent: () ->
+        return (_.isString(@model.get('content')) or _.isString(@model.get('currentPage.content')))
+
       isDraft: () ->
         if @model.isBook()
-          version = @model.get('currentPage.version')
+          return @model.get('currentPage')?.isDraft()
         else
-          version = @model.get('version')
-        return version is 'draft' or !version # No version means it is a draft
+          return @model.isDraft()
 
     editable:
       '.media-body':
@@ -38,7 +40,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'changePage change:loaded change:currentPage.loaded', @render)
+      @listenTo(@model, 'changePage change:loaded change:currentPage.loaded change:editable', @render)
 
     onRender: () ->
       # MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))

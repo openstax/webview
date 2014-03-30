@@ -7,7 +7,9 @@
     </div>
   </div>
 {{else}}
-  <div class="media-body {{#if isDraft}}{{#if editable}}draft{{/if}}{{/if}}" id="content"><!-- set id because Aloha's semanticblock hardcodes this id -->
-    {{include content}}
-  </div>
+  {{#if hasContent}}
+    <div class="media-body {{#if isDraft}}{{#if editable}}draft{{/if}}{{/if}}" id="content"><!-- set id because Aloha's semanticblock hardcodes this id -->
+      {{include content}}
+    </div>
+  {{/if}}
 {{/unless}}
