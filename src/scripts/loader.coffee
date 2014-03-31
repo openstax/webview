@@ -11,16 +11,20 @@ define (require) ->
   # The root URI prefixed on all non-external AJAX and Backbone URIs
   root = settings.root
 
-  # Patch `Backbone.ajax` so unauthorized responses are redirected to `/login`
-  Backbone_ajax = Backbone.ajax
-  Backbone.ajax = () ->
-    promise = Backbone_ajax.apply(@, arguments)
-    promise.fail (jqXHR) ->
-      switch jqXHR.status
-        when 403 # HACK: this should be 401
-          window.location.href = '/login'
-        else
-          console.error(arguments)
+  # Patch `Backbone.sync` so unauthorized responses are redirected to `/login`
+  Backbone_sync = Backbone.sync
+  Backbone.sync = (method, model, options) ->
+    promise = Backbone_sync.call(@, method, model, options)
+
+    # Do not redirect when trying to determine the login state
+    # But redirect otherwise
+    if model isnt session
+      promise.fail (jqXHR) ->
+        switch jqXHR.status
+          when 403 # HACK: this should be 401
+            window.location.href = '/login'
+          else
+            console.error(arguments)
 
     return promise
 
