@@ -9,9 +9,6 @@ define (require) ->
   return class AboutUsPage extends BaseView
     template: template
 
-    initialize: () ->
-      super()
-
     onRender: () ->
       @parent.regions.header.show(new HeaderView({page: 'search', url: 'content/search'}))
       @parent.regions.footer.show(new FooterView({page: 'search'}))
