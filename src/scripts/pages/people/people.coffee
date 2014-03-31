@@ -3,8 +3,8 @@ define (require) ->
   HeaderView = require('cs!modules/header/header')
   FooterView = require('cs!modules/footer/footer')
   FindContentView = require('cs!modules/find-content/find-content')
-  template = require('hbs!./about-us-template')
-  require('less!./about-us')
+  template = require('hbs!./people-template')
+  require('less!./people')
 
   return class AboutUsPage extends BaseView
     template: template

@@ -27,8 +27,11 @@ define (require) ->
       @route /^search/, 'search', () ->
         @appView.render('search')
 
-      @route /^about-us/, 'about-us', () ->
+      @route /about-us/, 'about-us', () ->
         @appView.render('about-us')
+
+      @route /people/, 'people', () ->
+        @appView.render('people')
 
     navigate: (fragment, options, cb) ->
       super(arguments...)
