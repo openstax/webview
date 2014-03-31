@@ -31,6 +31,12 @@ define (require) ->
       @route /^search/, 'search', () ->
         @appView.render('search')
 
+      @route 'about-us', 'about-us', () ->
+        @appView.render('about-us')
+
+      @route 'people', 'people', () ->
+        @appView.render('people')
+
     navigate: (fragment, options = {}, cb) ->
       super(arguments...)
       session.update() # Check for changes to the session status

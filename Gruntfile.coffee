@@ -145,6 +145,8 @@ module.exports = (grunt) ->
               'cs!helpers/backbone/views/editable'
 
               'cs!configs/aloha'
+              'cs!pages/about-us/about-us'
+              'cs!pages/people/people'
             ]
             exclude: ['coffee-script', 'less/normalize']
             excludeShallow: ['settings']
