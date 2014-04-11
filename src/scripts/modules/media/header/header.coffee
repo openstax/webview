@@ -1,5 +1,6 @@
 define (require) ->
   _ = require('underscore')
+  session = require('cs!session')
   EditableView = require('cs!helpers/backbone/views/editable')
   BookPopoverView = require('cs!./popovers/book/book')
   template = require('hbs!./header-template')
@@ -14,10 +15,10 @@ define (require) ->
         currentPage = @model
 
       if currentPage
-        currentPage = currentPage.toJSON()
-        currentPage.encodedTitle = encodeURI(currentPage.title)
+        currentPageData = currentPage.toJSON()
+        currentPageData.encodedTitle = encodeURI(currentPage.title)
       else
-        currentPage = {
+        currentPageData = {
           title: 'Untitled'
           encodedTitle: 'Untitled'
           authors: []
@@ -27,9 +28,11 @@ define (require) ->
       pageDownloads = currentPage?.get?('downloads')
 
       return {
-        currentPage: currentPage
+        currentPage: currentPageData
         hasDownloads: (_.isArray(downloads) and downloads?.length) or
           (_.isArray(pageDownloads) and pageDownloads?.length)
+        underivable: not currentPage?.isDraft()
+        authenticated: session.get('username')
       }
 
     editable:
@@ -46,6 +49,7 @@ define (require) ->
     initialize: () ->
       super()
       @listenTo(@model, 'change:downloads change:buyLink change:loaded change:currentPage change:title', @render)
+      @listenTo(session, 'change', @render)
 
     onRender: () ->
       @regions.button.append new BookPopoverView
