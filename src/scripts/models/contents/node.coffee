@@ -186,3 +186,9 @@ define (require) ->
     isDraft: () -> return @get('version') is 'draft' or /@draft$/.test(@id)
 
     isSaveable: () -> !!@get('mediaType')
+
+    isEditable: () ->
+      if @get('editable') or (@get('book.editable') and @isDraft())
+        return true
+
+      return false
