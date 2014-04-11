@@ -32,8 +32,12 @@ define (require) ->
     getModel: (value) ->
       if @model.isBook() then return "currentPage.#{value}" else return value
 
+    # Override this method to change the logic for determining
+    # whether or not the inherited view should be in edit mode.
+    isEditable: () -> @model.isEditable()
+
     _toggleEditable: () ->
-      if @model.get('editable')
+      if @isEditable()
         @_makeEditable()
       else
         @_makeUneditable()
@@ -51,8 +55,12 @@ define (require) ->
             value = options.value
 
           setChanged = (model, onEdit) =>
-            model.set('changed', true)
-            model.set('currentPage.changed', true) if /^currentPage\./.test(value)
+            if /^currentPage\./.test(value)
+              model.set('currentPage.changed', true)
+              model.set('childChanged', true)
+            else
+              model.set('changed', true)
+
             onEdit.apply(@) if typeof onEdit is 'function'
 
           options.onBeforeEditable?($editable)
@@ -162,7 +170,7 @@ define (require) ->
               delete @observers[selector]
 
             when 'aloha'
-              $editable.mahalo()
+              $editable.mahalo?()
 
             when 'select2'
               $editable.off 'change.editable'
