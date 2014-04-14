@@ -45,6 +45,7 @@ define (require) ->
 
     events:
       'click .summary h5': 'toggleSummary'
+      'click .derive .btn': 'derivePage'
 
     initialize: () ->
       super()
@@ -61,3 +62,17 @@ define (require) ->
 
       $summary.find('h5').toggleClass('active')
       @$el.find('.abstract').toggle()
+
+    derivePage: () ->
+      page = @model.get('currentPage') or @model
+      title = page.get('title')
+      id = page.id
+      index = @model.get('contents').indexOf(page)
+
+      #todo: move this code into the contents model
+      #todo: only update from contents if it is a book, otherwise update the model itself
+
+      @model.get('contents').remove(page)
+      @model.create({title: title, derivedFrom: id}, {at: index})
+
+      #todo: setpage to the page at the index to trigger other view updates
