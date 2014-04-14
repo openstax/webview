@@ -55,19 +55,13 @@ define (require) ->
       e.preventDefault()
 
       data = $(e.originalEvent.target).serializeArray()
-      models = []
 
       if data.length is 1
         @newPage(data[0].value)
       else
         _.each data, (input) =>
           if input.name isnt 'title'
-            models.push
-              derivedFrom: input.name
-
-        # FIX: Currently always just derive a page from published content
-        if models.length
-          @model.create(models)
+            @model.add({id: input.name, title: input.value})
 
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
 
