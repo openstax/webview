@@ -54,7 +54,12 @@ define (require) ->
     # Proxy Backbone.Collection methods to make this model also work like a Collection
     #
 
-    add: () -> @get('contents').add(arguments...)
+    add: () ->
+      results = @get('contents').add(arguments...)
+      @set('changed', true)
+
+      return results
+
 
     create: (models, options = {}) ->
       options = _.extend({
