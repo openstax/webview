@@ -78,6 +78,9 @@ define (require) ->
       return results
 
     setPage: (num) ->
+      # skip if the currentPage is the arg being passed in
+      return if num is @getPageNumber()
+
       pages = @getTotalPages()
 
       if num < 1 then num = 1
@@ -112,24 +115,6 @@ define (require) ->
       page = @getPageNumber()
       if page > 1 then --page
       return page
-
-    nextPage: () ->
-      page = @getPageNumber()
-      nextPage = @getNextPage()
-
-      # Show the next page if there is one
-      @setPage(nextPage) if page isnt nextPage
-
-      return nextPage
-
-    previousPage: () ->
-      page = @getPageNumber()
-      previousPage = @getPreviousPage()
-
-      # Show the previous page if there is one
-      @setPage(previousPage) if page isnt previousPage
-
-      return previousPage
 
     removeNode: (node) ->
       # FIX: get previous page even if removing a section

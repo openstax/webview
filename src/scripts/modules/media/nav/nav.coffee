@@ -39,11 +39,15 @@ define (require) ->
       'click .back': 'previousPage'
 
     nextPage: (e) ->
-      @model.nextPage()
+      nextPage = @model.getNextPage()
+      # Show the next page if there is one
+      @model.setPage(nextPage)
       @changePage(e)
 
     previousPage: (e) ->
-      @model.previousPage()
+      previousPage = @model.getPreviousPage()
+      # Show the previous page if there is one
+      @model.setPage(previousPage)
       @changePage(e)
 
     changePage: (e) ->
