@@ -58,6 +58,10 @@ define (require) ->
             if /^currentPage\./.test(value)
               model.set('currentPage.changed', true)
               model.set('childChanged', true)
+
+              # Changing a module's title also change's a book's ToC
+              if /^currentPage.title$/.test(value)
+                model.set('changed', true)
             else
               model.set('changed', true)
 
