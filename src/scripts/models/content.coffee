@@ -43,7 +43,7 @@ define (require) ->
           @set('error', false)
           if @isBook()
             if @get('contents').length
-              @setPage(options.page or 1) # Default to page 1
+              @setPageNumber(options.page or 1) # Default to page 1
 
         .fail (model, response, options) =>
           @set('error', response?.status or model?.status or 9000)
@@ -77,7 +77,7 @@ define (require) ->
 
       return results
 
-    setPage: (num) ->
+    setPageNumber: (num) ->
       # skip if the currentPage is the arg being passed in
       return if num is @getPageNumber()
 
@@ -102,7 +102,7 @@ define (require) ->
 
     getPageNumber: (model = @get('currentPage')) -> super(model)
 
-    getNextPage: () ->
+    getNextPageNumber: () ->
       if not @get('loaded') then return 0
       pages = @getTotalPages()
 
@@ -110,7 +110,7 @@ define (require) ->
       if page < pages then ++page
       return page
 
-    getPreviousPage: () ->
+    getPreviousPageNumber: () ->
       if not @get('loaded') then return 0
       page = @getPageNumber()
       if page > 1 then --page
@@ -125,7 +125,7 @@ define (require) ->
 
       # FIX: determine if node was inside a section that got removed too
       if node is @get('currentPage')
-        @setPage(previousPage)
+        @setPageNumber(previousPage)
 
       @set('changed', true)
       @trigger('removeNode')
