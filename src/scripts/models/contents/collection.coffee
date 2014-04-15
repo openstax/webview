@@ -88,7 +88,9 @@ define (require) ->
 
       # Don't save subcollections
       if @isSaveable()
-        xhr = super(arguments...).done () => @set('changed', false)
+        xhr = super(arguments...).done () =>
+          @set('changed', false)
+          @set('childChanged', false)
       else
         xhr = $.Deferred().resolve().promise()
 

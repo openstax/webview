@@ -58,7 +58,9 @@ define (require) ->
         excludeContents: true
       , options)
 
-      return super(attrs, options).done () => @set('changed', false)
+      return super(attrs, options).done () =>
+        @set('changed', false)
+        @set('childChanged', false)
 
     toJSON: (options = {}) ->
       results = super(arguments...)

@@ -130,6 +130,7 @@ define (require) ->
         delete results.page
         delete results.changed
         delete results.active
+        delete results.editable
 
       if options.derivedOnly
         results = {derivedFrom: results.derivedFrom}
