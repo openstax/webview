@@ -41,7 +41,10 @@ define (require) ->
           @set('loaded', true)
         .done () =>
           @set('error', false)
-          @load(options.page)
+          if @isBook()
+            if @get('contents').length
+              @setPage(options.page or 1) # Default to page 1
+
         .fail (model, response, options) =>
           @set('error', response?.status or model?.status or 9000)
 
@@ -74,16 +77,6 @@ define (require) ->
 
       return results
 
-    load: (page) ->
-      if @isBook()
-        if @get('contents').length
-          @setPage(page or 1) # Default to page 1
-
-    fetchPage: () ->
-      page = @get('currentPage')
-      page.fetch().done () =>
-        page.set('loaded', true)
-
     setPage: (num) ->
       pages = @getTotalPages()
 
@@ -97,7 +90,8 @@ define (require) ->
       @trigger('changePage')
 
       if not page.get('loaded')
-        @fetchPage()
+        page.fetch().done () =>
+          page.set('loaded', true)
 
     getTotalPages: () ->
       # FIX: cache total pages and recalculate on add/remove events?
