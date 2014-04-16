@@ -1,5 +1,13 @@
 {{#if currentPage.loaded}}
   <div class="media-header">
+    {{#if authenticated}}
+      {{#if underivable}}
+        <div class="derive tool">
+          <a class="btn">Derive an Editable Copy</a>
+        </div>
+      {{/if}}
+    {{/if}}
+
     <div class="title">
       <h2>{{currentPage.title}}</h2>
       {{#if currentPage.parentId}}

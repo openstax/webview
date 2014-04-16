@@ -1,5 +1,8 @@
 define (require) ->
   _ = require('underscore')
+  session = require('cs!session')
+  linksHelper = require('cs!helpers/links')
+  router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')
   BookPopoverView = require('cs!./popovers/book/book')
   template = require('hbs!./header-template')
@@ -14,10 +17,10 @@ define (require) ->
         currentPage = @model
 
       if currentPage
-        currentPage = currentPage.toJSON()
-        currentPage.encodedTitle = encodeURI(currentPage.title)
+        currentPageData = currentPage.toJSON()
+        currentPageData.encodedTitle = encodeURI(currentPage.title)
       else
-        currentPage = {
+        currentPageData = {
           title: 'Untitled'
           encodedTitle: 'Untitled'
           authors: []
@@ -27,9 +30,11 @@ define (require) ->
       pageDownloads = currentPage?.get?('downloads')
 
       return {
-        currentPage: currentPage
+        currentPage: currentPageData
         hasDownloads: (_.isArray(downloads) and downloads?.length) or
           (_.isArray(pageDownloads) and pageDownloads?.length)
+        underivable: not currentPage?.isDraft()
+        authenticated: session.get('username')
       }
 
     editable:
@@ -42,18 +47,38 @@ define (require) ->
 
     events:
       'click .summary h5': 'toggleSummary'
+      'click .derive .btn': 'derivePage'
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:downloads change:buyLink change:loaded change:currentPage change:title', @render)
+      @listenTo(session, 'change', @render)
 
     onRender: () ->
       @regions.button.append new BookPopoverView
         model: @model
         owner: @$el.find('.info .btn')
 
+    isEditable: () ->
+      if @model.isBook()
+        return @model.get('currentPage')?.isEditable()
+
+      return @model.isEditable()
+
     toggleSummary: (e) ->
       $summary = @$el.find('.summary')
 
       $summary.find('h5').toggleClass('active')
       @$el.find('.abstract').toggle()
+
+    derivePage: () ->
+      options =
+        success: (model) =>
+          @model.setPage(@model.get('contents').indexOf(model)+1)
+          # Update the url bar path
+          href = linksHelper.getPath 'contents',
+            model: @model
+            page: @model.getPageNumber()
+          router.navigate(href, {trigger: false, analytics: true})
+
+      @model.deriveCurrentPage(options)
