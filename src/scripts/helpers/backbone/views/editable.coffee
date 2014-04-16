@@ -22,7 +22,7 @@ define (require) ->
 
     onAfterRender: () ->
       # Make editable after rendering if editable flag is already set
-      @_makeEditable() if @model.get('editable')
+      @_makeEditable() if @isEditable()
 
     onBeforeEditable: () -> # noop
     onBeforeUneditable: () -> # noop
