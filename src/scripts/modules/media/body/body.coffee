@@ -25,6 +25,8 @@ define (require) ->
       hasContent: () ->
         return (_.isString(@model.get('content')) or _.isString(@model.get('currentPage.content')))
 
+      editable: () -> @isEditable()
+
     editable:
       '.media-body':
         value: () -> @getModel('content')
@@ -64,6 +66,12 @@ define (require) ->
         <div class="ui-toggle-wrapper">
           <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
         </div>''')
+
+    isEditable: () ->
+      if @model.isBook()
+        return @model.get('currentPage')?.isEditable()
+
+      return @model.isEditable()
 
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution')

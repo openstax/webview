@@ -23,8 +23,6 @@ define (require) ->
         switch jqXHR.status
           when 403 # HACK: this should be 401
             window.location.href = '/login'
-          else
-            console.error(arguments)
 
     return promise
 

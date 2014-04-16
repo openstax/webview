@@ -58,7 +58,9 @@ define (require) ->
         excludeContents: true
       , options)
 
-      return super(attrs, options).done () => @set('changed', false)
+      return super(attrs, options).done () =>
+        @set('changed', false)
+        @set('childChanged', false)
 
     toJSON: (options = {}) ->
       results = super(arguments...)
@@ -84,13 +86,15 @@ define (require) ->
       page.fetch().done () =>
         page.set('loaded', true)
 
-    setPage: (num) ->
-      pages = @getTotalPages()
+    setPage: (page) ->
+      if typeof page is 'number'
+        pages = @getTotalPages()
+        if page < 1 then page = 1
+        if page > pages then page = pages
+        page = @getPage(page)
+      else if typeof page is 'string'
+        page = @get('contents').get(page)
 
-      if num < 1 then num = 1
-      if num > pages then num = pages
-
-      page = @getPage(num)
       @get('currentPage')?.set('active', false)
       @set('currentPage', page)
       page.set('active', true)
@@ -136,6 +140,25 @@ define (require) ->
       @setPage(previousPage) if page isnt previousPage
 
       return previousPage
+
+    deriveCurrentPage: (options = {}) ->
+      if @isBook()
+        page = @get('currentPage')
+        title = page.get('title')
+        id = page.id
+        index = @get('contents').indexOf(page)
+
+        # Defaults
+        options = _.extend({
+          at: index
+          wait: true
+        }, options)
+
+        @get('contents').remove(page)
+        @create({title: title, derivedFrom: id}, options)
+      else
+        #todo: only update from contents if it is a book, otherwise update the model itself
+        console.log 'update this model'
 
     removeNode: (node) ->
       # FIX: get previous page even if removing a section

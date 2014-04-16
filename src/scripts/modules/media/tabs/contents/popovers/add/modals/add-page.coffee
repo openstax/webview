@@ -1,6 +1,8 @@
 define (require) ->
   $ = require('jquery')
   _ = require('underscore')
+  linksHelper = require('cs!helpers/links')
+  router = require('cs!router')
   searchResults = require('cs!models/search-results')
   BaseView = require('cs!helpers/backbone/views/base')
   AddPageSearchResultsView = require('cs!./results/results')
@@ -51,25 +53,33 @@ define (require) ->
       results = searchResults.load("?q=title:#{title}%20type:page")
       @regions.results.show(new AddPageSearchResultsView({model: results}))
 
+    updateUrl: () ->
+      # Update the url bar path
+      href = linksHelper.getPath 'contents',
+        model: @model
+        page: @model.getPageNumber()
+      router.navigate(href, {trigger: false, analytics: true})
+
     onSubmit: (e) ->
       e.preventDefault()
 
       data = $(e.originalEvent.target).serializeArray()
-      models = []
 
       if data.length is 1
         @newPage(data[0].value)
       else
         _.each data, (input) =>
           if input.name isnt 'title'
-            models.push
-              derivedFrom: input.name
-
-        # FIX: Currently always just derive a page from published content
-        if models.length
-          @model.create(models)
+            @model.add({id: input.name, title: input.value})
+            @model.setPage(input.name)
+            @updateUrl()
 
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
 
     newPage: (title) ->
-      @model.create({title: title})
+      options =
+        success: (model) =>
+          @model.setPage(@model.get('contents').indexOf(model)+1)
+          @updateUrl()
+
+      @model.create({title: title}, options)
