@@ -54,7 +54,12 @@ define (require) ->
     # Proxy Backbone.Collection methods to make this model also work like a Collection
     #
 
-    add: () -> @get('contents').add(arguments...)
+    add: () ->
+      results = @get('contents').add(arguments...)
+      @set('changed', true)
+
+      return results
+
 
     create: (models, options = {}) ->
       options = _.extend({
@@ -83,7 +88,9 @@ define (require) ->
 
       # Don't save subcollections
       if @isSaveable()
-        xhr = super(arguments...).done () => @set('changed', false)
+        xhr = super(arguments...).done () =>
+          @set('changed', false)
+          @set('childChanged', false)
       else
         xhr = $.Deferred().resolve().promise()
 

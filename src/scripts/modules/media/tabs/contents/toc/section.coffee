@@ -55,3 +55,6 @@ define (require) ->
 
       if title
         @model.set('title', title)
+        @model.set('changed', true)
+        @model.get('book').set('childChanged', true)
+        @model.get('book').set('changed', true)

@@ -130,6 +130,7 @@ define (require) ->
         delete results.page
         delete results.changed
         delete results.active
+        delete results.editable
 
       if options.derivedOnly
         results = {derivedFrom: results.derivedFrom}
@@ -186,3 +187,9 @@ define (require) ->
     isDraft: () -> return @get('version') is 'draft' or /@draft$/.test(@id)
 
     isSaveable: () -> !!@get('mediaType')
+
+    isEditable: () ->
+      if @get('editable') or (@get('book.editable') and @isDraft())
+        return true
+
+      return false
