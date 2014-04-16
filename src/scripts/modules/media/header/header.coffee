@@ -1,6 +1,8 @@
 define (require) ->
   _ = require('underscore')
   session = require('cs!session')
+  linksHelper = require('cs!helpers/links')
+  router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')
   BookPopoverView = require('cs!./popovers/book/book')
   template = require('hbs!./header-template')
@@ -56,7 +58,7 @@ define (require) ->
       @regions.button.append new BookPopoverView
         model: @model
         owner: @$el.find('.info .btn')
-    
+
     isEditable: () ->
       if @model.isBook()
         return @model.get('currentPage')?.isEditable()
@@ -69,4 +71,14 @@ define (require) ->
       $summary.find('h5').toggleClass('active')
       @$el.find('.abstract').toggle()
 
-    derivePage: () -> @model.deriveCurrentPage()
+    derivePage: () ->
+      options =
+        success: (model) =>
+          @model.setPage(@model.get('contents').indexOf(model)+1)
+          # Update the url bar path
+          href = linksHelper.getPath 'contents',
+            model: @model
+            page: @model.getPageNumber()
+          router.navigate(href, {trigger: false, analytics: true})
+
+      @model.deriveCurrentPage(options)
