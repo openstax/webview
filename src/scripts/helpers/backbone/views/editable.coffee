@@ -19,6 +19,7 @@ define (require) ->
       @observers = {}
 
       @listenTo(@model, 'change:editable', @_toggleEditable)
+      @listenTo(@model, 'change:currentPage', @_makeUneditable)
 
     onAfterRender: () ->
       # Make editable after rendering if editable flag is already set
@@ -54,29 +55,43 @@ define (require) ->
           else
             value = options.value
 
-          setChanged = (model, onEdit) =>
-            if /^currentPage\./.test(value)
-              model.set('currentPage.changed', true)
-              model.set('childChanged', true)
 
-              # Changing a module's title also change's a book's ToC
-              if /^currentPage.title$/.test(value)
-                model.set('changed', true)
-            else
-              model.set('changed', true)
+          # do not rely on `currentPage.` when setting the value because
+          # the currentPage may have changed in the meantime
+          if /^currentPage\./.test(value)
+            myModel = @model.asPage()
+            value = value.replace(/^currentPage\./, '')
+            isCurrentPage = true
+          else
+            myModel = @model
+            isCurrentPage = false
 
-            onEdit.apply(@) if typeof onEdit is 'function'
+          getValue = () ->
+            myModel.get(value)
+
+          setValue = (v) =>
+            return if myModel.get(value) is v
+
+            myModel.set(value, v)
+            myModel.set('changed', true)
+            @model.set('childChanged', true) if isCurrentPage
+
+            # Changing a module's title also change's a book's ToC
+            if isCurrentPage and value is 'title'
+              @model.set('changed', true)
+
+            options.onEdit.apply(@) if typeof options.onEdit is 'function'
+
 
           options.onBeforeEditable?($editable)
 
           switch options.type
             when 'textinput'
               $input = $('<input type="text" />')
-              $input.attr('placeholder', "Enter a #{value} here").val(@model.get(value))
+              $input.attr('placeholder', "Enter a #{value} here").val(getValue())
               $editable.html($input)
               $input.on 'change', () =>
-                @model.set(value, $input.val())
-                setChanged(@model, options.onEdit)
+                setValue($input.val())
 
             # Setup contenteditable
             when 'contenteditable'
@@ -87,8 +102,7 @@ define (require) ->
 
                 @observers[selector] = new MutationObserver (mutations) =>
                   mutations.forEach (mutation) =>
-                    @model.set(value, $($editable.get(index)).html())
-                    setChanged(@model, options.onEdit)
+                    setValue($($editable.get(index)).html())
 
                 @observers[selector].observe($editable.get(index), options.config or observerConfig)
 
@@ -99,7 +113,7 @@ define (require) ->
                 $editable.text('Starting up Aloha...')
                 # Wait for Aloha to start up
                 Aloha.ready () =>
-                  html = @model.get(value) or ''
+                  html = getValue() or ''
                   html += "<p> </p>" # Allow putting cursor after a Blockish. removed if empty.
                   $editable.html(html)
                   $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
@@ -113,8 +127,7 @@ define (require) ->
                     # See aloha.coffee for where this is used
                     window.GLOBAL_UPLOADER_HACK = () =>
                       editableBody = alohaEditable.getContents()
-                      @model.set(value, editableBody)
-                      setChanged(@model, options.onEdit)
+                      setValue(editableBody)
 
                   # Update the model if an event for this editable was triggered
                   Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
@@ -128,8 +141,7 @@ define (require) ->
                       editableBody = alohaEditable.getContents()
                       editableBody = editableBody.trim() # Trim for idempotence
                       # Change the contents but do not update the Aloha editable area
-                      @model.set(value, editableBody)
-                      setChanged(@model, options.onEdit)
+                      setValue(editableBody)
 
             # Setup Select2
             when 'select2'
@@ -143,8 +155,7 @@ define (require) ->
 
                 $editable.off 'change.editable'
                 $editable.on 'change.editable', (e) =>
-                  @model.set(value, $editable.select2('val'))
-                  setChanged(@model, options.onEdit)
+                  setValue($editable.select2('val'))
 
           options.onEditable?($editable)
 
