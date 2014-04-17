@@ -91,8 +91,8 @@ define (require) ->
           page.set('loaded', true)
 
     setPageNumber: (num) ->
-      # skip if the currentPage is the arg being passed in
-      return if num is @getPageNumber()
+      # Do not skip if the currentPage is the arg being passed in
+      # because otherwise it will not get fetched
       pages = @getTotalPages()
       if num < 1 then num = 1
       if num > pages then num = pages
