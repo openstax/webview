@@ -18,11 +18,10 @@ define (require) ->
 
       content: () ->
         page = @model.asPage()
-        return page.get('content')
+        return page?.get('content')
 
       hasContent: () ->
-        # return (_.isString(@model.get('content')) or _.isString(@model.get('currentPage.content')))
-        return _.isString(@model.asPage().get('content'))
+        return (_.isString(@model.get('content')) or _.isString(@model.get('currentPage.content')))
 
       editable: () -> @isEditable()
 
