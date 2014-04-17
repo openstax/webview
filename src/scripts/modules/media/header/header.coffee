@@ -11,10 +11,7 @@ define (require) ->
   return class MediaHeaderView extends EditableView
     template: template
     templateHelpers: () ->
-      if @model.isBook()
-        currentPage = @model.get('currentPage')
-      else
-        currentPage = @model
+      currentPage = @model.asPage()
 
       if currentPage
         currentPageData = currentPage.toJSON()

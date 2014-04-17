@@ -107,7 +107,7 @@ define (require) ->
       # FIX: cache total pages and recalculate on add/remove events?
       return @getTotalLength()
 
-    getPageNumber: (model = @get('currentPage')) -> super(model)
+    getPageNumber: (model = @asPage()) -> super(model)
 
     getNextPageNumber: () ->
       if not @get('loaded') then return 0
@@ -150,7 +150,7 @@ define (require) ->
       node.get('parent').get('contents').remove(node)
 
       # FIX: determine if node was inside a section that got removed too
-      if node is @get('currentPage')
+      if node is @asPage()
         @setPageNumber(previousPage)
 
       @set('changed', true)
@@ -193,3 +193,17 @@ define (require) ->
 
       @trigger('moveNode')
       return node
+
+
+    # Content can be a Book or a Page and some views render
+    # parts of the current page.
+    # This will return:
+    # - `null` if this content has not been loaded yet
+    # - the current page (if this is a book)
+    # - this if this is a page
+    asPage: () ->
+      if @isBook()
+        return @get('currentPage')
+      else
+        # TODO: Raise an error if this is called on a subcollection
+        return @
