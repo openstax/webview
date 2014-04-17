@@ -92,7 +92,7 @@ define (require) ->
               $input = $('<input type="text" />')
               $input.attr('placeholder', "Enter a #{attributeName} here").val(getValue())
               $editable.html($input)
-              $input.on 'change', () =>
+              $input.on 'change', () ->
                 setValue($input.val())
 
             # Setup contenteditable
@@ -102,8 +102,8 @@ define (require) ->
               $editable.each (index) =>
                 if @observers[selector] then @observers[selector].disconnect()
 
-                @observers[selector] = new MutationObserver (mutations) =>
-                  mutations.forEach (mutation) =>
+                @observers[selector] = new MutationObserver (mutations) ->
+                  mutations.forEach (mutation) ->
                     setValue($($editable.get(index)).html())
 
                 @observers[selector].observe($editable.get(index), options.config or observerConfig)
@@ -112,13 +112,13 @@ define (require) ->
             when 'aloha'
               $editable.mahalo?() # clicking Back/Next does not call mahalo so do it here
               $editable.text('Loading editor...')
-              require ['aloha'], (Aloha) =>
+              require ['aloha'], (Aloha) ->
                 # Create a new id for it so back/next do not cause
                 # the HTML from another page to get saved accidentally
                 $editable.attr('id', GENTICS.Utils.guid())
                 $editable.text('Starting up Aloha...')
                 # Wait for Aloha to start up
-                Aloha.ready () =>
+                Aloha.ready () ->
                   html = getValue() or ''
                   html += "<p> </p>" # Allow putting cursor after a Blockish. removed if empty.
                   $editable.html(html)
@@ -131,12 +131,12 @@ define (require) ->
 
                   if attributeName is 'content'
                     # See aloha.coffee for where this is used
-                    window.GLOBAL_UPLOADER_HACK = () =>
+                    window.GLOBAL_UPLOADER_HACK = () ->
                       editableBody = alohaEditable.getContents()
                       setValue(editableBody)
 
                   # Update the model if an event for this editable was triggered
-                  Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
+                  Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) ->
                     isItThisEditable = d.editable.obj.is($editable)
                     isItThisEditable = isItThisEditable or $.contains($editable[0], d.editable.obj[0])
 
@@ -160,7 +160,7 @@ define (require) ->
                 $editable.select2(s2)
 
                 $editable.off 'change.editable'
-                $editable.on 'change.editable', (e) =>
+                $editable.on 'change.editable', (e) ->
                   setValue($editable.select2('val'))
 
           options.onEditable?($editable)

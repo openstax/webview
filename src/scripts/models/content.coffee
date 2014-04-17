@@ -87,7 +87,7 @@ define (require) ->
       @trigger('changePage')
 
       if not page.get('loaded')
-        page.fetch().done () =>
+        page.fetch().done () ->
           page.set('loaded', true)
 
     setPageNumber: (num) ->
@@ -122,25 +122,6 @@ define (require) ->
       page = @getPageNumber()
       if page > 1 then --page
       return page
-
-    deriveCurrentPage: (options = {}) ->
-      if @isBook()
-        page = @get('currentPage')
-        title = page.get('title')
-        id = page.id
-        index = @get('contents').indexOf(page)
-
-        # Defaults
-        options = _.extend({
-          at: index
-          wait: true
-        }, options)
-
-        @get('contents').remove(page)
-        @create({title: title, derivedFrom: id}, options)
-      else
-        #todo: only update from contents if it is a book, otherwise update the model itself
-        console.log 'update this model'
 
     deriveCurrentPage: (options = {}) ->
       if @isBook()
