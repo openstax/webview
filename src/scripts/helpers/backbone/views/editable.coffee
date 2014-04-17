@@ -51,33 +51,33 @@ define (require) ->
           $editable = @$el.find(selector)
 
           if typeof options.value is 'function'
-            value = options.value.apply(@)
+            attributeName = options.value.apply(@)
           else
-            value = options.value
+            attributeName = options.value
 
 
           # do not rely on `currentPage.` when setting the value because
           # the currentPage may have changed in the meantime
-          if /^currentPage\./.test(value)
+          if /^currentPage\./.test(attributeName)
             myModel = @model.asPage()
-            value = value.replace(/^currentPage\./, '')
+            attributeName = attributeName.replace(/^currentPage\./, '')
             isCurrentPage = true
           else
             myModel = @model
             isCurrentPage = false
 
           getValue = () ->
-            myModel.get(value)
+            myModel.get(attributeName)
 
-          setValue = (v) =>
-            return if myModel.get(value) is v
+          setValue = (value) =>
+            return if getValue() is value
 
-            myModel.set(value, v)
+            myModel.set(attributeName, value)
             myModel.set('changed', true)
             @model.set('childChanged', true) if isCurrentPage
 
             # Changing a module's title also change's a book's ToC
-            if isCurrentPage and value is 'title'
+            if isCurrentPage and attributeName is 'title'
               @model.set('changed', true)
 
             options.onEdit.apply(@) if typeof options.onEdit is 'function'
@@ -88,7 +88,7 @@ define (require) ->
           switch options.type
             when 'textinput'
               $input = $('<input type="text" />')
-              $input.attr('placeholder', "Enter a #{value} here").val(getValue())
+              $input.attr('placeholder', "Enter a #{attributeName} here").val(getValue())
               $editable.html($input)
               $input.on 'change', () =>
                 setValue($input.val())
@@ -123,7 +123,7 @@ define (require) ->
                   alohaId = $editable.attr('id')
                   alohaEditable = Aloha.getEditableById(alohaId)
 
-                  if value is 'content'
+                  if attributeName is 'content'
                     # See aloha.coffee for where this is used
                     window.GLOBAL_UPLOADER_HACK = () =>
                       editableBody = alohaEditable.getContents()
