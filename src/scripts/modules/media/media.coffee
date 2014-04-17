@@ -63,7 +63,7 @@ define (require) ->
       version = @model.get('legacy_version')
 
       if @model.isBook()
-        currentPage = @asPage()
+        currentPage = @model.asPage()
         if currentPage
           moduleID = currentPage.get('legacy_id')
           moduleVersion = currentPage.get('legacy_version')

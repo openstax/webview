@@ -5,7 +5,7 @@ define (require) ->
     templateHelpers: () ->
       @media ?= 'book'
       page = @model.asPage()
-      model = page?.toJSON()
+      model = page?.toJSON() or {}
       model.type = @model.get('mediaType')
 
       return model or {}
