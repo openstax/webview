@@ -19,7 +19,9 @@ define (require) ->
       @observers = {}
 
       @listenTo(@model, 'change:editable', @_toggleEditable)
-      @listenTo(@model, 'change:currentPage', @_makeUneditable)
+      # Cannot makeUneditable `change:currentPage` because this event
+      # is fired even when `changeCurrentPage.title` changes
+      # @listenTo(@model, 'change:currentPage', @_makeUneditable)
 
     onAfterRender: () ->
       # Make editable after rendering if editable flag is already set
@@ -108,8 +110,12 @@ define (require) ->
 
             # Setup Aloha
             when 'aloha'
+              $editable.mahalo?() # clicking Back/Next does not call mahalo so do it here
               $editable.text('Loading editor...')
               require ['aloha'], (Aloha) =>
+                # Create a new id for it so back/next do not cause
+                # the HTML from another page to get saved accidentally
+                $editable.attr('id', GENTICS.Utils.guid())
                 $editable.text('Starting up Aloha...')
                 # Wait for Aloha to start up
                 Aloha.ready () =>
