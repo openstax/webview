@@ -1,5 +1,6 @@
 define (require) ->
   _ = require('underscore')
+  $ = require('jquery')
   Backbone = require('backbone')
   Node = require('cs!./node')
   Page = require('cs!./page')
@@ -83,15 +84,21 @@ define (require) ->
       return @
 
     save: () ->
-      # Save all the models in the collection
-      _.each @get('contents')?.models, (model) -> model.save()
+      # save args for call to `super()`
+      args = arguments
+      # First, save all the models in the collection
+      promises = _.map @get('contents')?.models, (model) -> model.save()
 
-      # Don't save subcollections
-      if @isSaveable()
-        xhr = super(arguments...).done () =>
-          @set('changed', false)
-          @set('childChanged', false)
-      else
-        xhr = $.Deferred().resolve().promise()
+      # Save the collection once all the models have completed saving
+      return $.when(promises...)
+      .then () =>
 
-      return xhr
+        # Don't save subcollections
+        if @isSaveable()
+          xhr = super(args...).then () =>
+            @set('changed', false)
+            @set('childChanged', false)
+        else
+          xhr = $.Deferred().resolve().promise()
+
+        return xhr
