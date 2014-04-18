@@ -16,15 +16,10 @@ define (require) ->
 
   # Each type of editable has a start and stop for enabling/disabling the editable
   allEditables =
-    'do-nothing' :
-      stop: (editableView, $editable, getValue) ->
-      start: (editableView, $editable, options, attributeName, getValue, setValue) ->
-
-
     'textinput':
-      stop: (editableView, $editable, getValue) ->
+      stop: ($editable, editableView, getValue) ->
         $editable.text(getValue())
-      start: (editableView, $editable, options, attributeName, getValue, setValue) ->
+      start: ($editable, editableView, options, attributeName, getValue, setValue) ->
         $input = $('<input type="text" />')
         $input.attr('placeholder', "Enter a #{attributeName} here").val(getValue())
         $editable.html($input)
@@ -33,11 +28,11 @@ define (require) ->
 
 
     'contenteditable':
-      stop: (editableView, $editable, getValue) ->
+      stop: ($editable, editableView, getValue) ->
         $editable.attr('contenteditable', false)
         editableView.observers[selector].disconnect()
         delete editableView.observers[selector]
-      start: (editableView, $editable, options, attributeName, getValue, setValue) ->
+      start: ($editable, editableView, options, attributeName, getValue, setValue) ->
         editableView.observers ?= {}
 
         $editable.attr('contenteditable', true)
@@ -53,9 +48,9 @@ define (require) ->
 
 
     'select2':
-      stop: (editableView, $editable, getValue) ->
+      stop: ($editable, editableView, getValue) ->
         $editable.off 'change.editable'
-      start: (editableView, $editable, options, attributeName, getValue, setValue) ->
+      start: ($editable, editableView, options, attributeName, getValue, setValue) ->
         require ['select2'], (select2) =>
           if typeof options.select2 is 'function'
             s2 = options.select2.apply(editableView)
@@ -70,9 +65,9 @@ define (require) ->
 
 
     'aloha':
-      stop: (editableView, $editable, getValue) ->
+      stop: ($editable, editableView, getValue) ->
         $editable.mahalo?()
-      start: (editableView, $editable, options, attributeName, getValue, setValue) ->
+      start: ($editable, editableView, options, attributeName, getValue, setValue) ->
         $editable.mahalo?() # clicking Back/Next does not call mahalo so do it here
         $editable.text('Loading editor...')
         require ['aloha'], (Aloha) ->
@@ -186,10 +181,11 @@ define (require) ->
 
           options.onBeforeEditable?($editable)
 
-          if allEditables[options.type]
-            allEditables[options.type].start(@, $editable, options, attributeName, getValue, setValue)
-          else throw new Error('BUG: Unsupported editable type')
-
+          if options.type
+            config = allEditables[options.type] or throw new Error('BUG: Unsupported editable type')
+          else
+            config = options
+          config.start($editable, @, options, attributeName, getValue, setValue)
           options.onEditable?($editable)
 
       @onEditable()
@@ -211,9 +207,11 @@ define (require) ->
 
           options.onBeforeUneditable?($editable)
 
-          if allEditables[options.type]
-            allEditables[options.type].stop(@, $editable, getValue)
-          else throw new Error('BUG: Unsupported editable type')
+          if options.type
+            config = allEditables[options.type] or throw new Error('BUG: Unsupported editable type')
+          else
+            config = options
+          config.stop($editable, @, getValue)
 
           options.onUneditable?($editable)
 
