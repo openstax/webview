@@ -13,10 +13,109 @@ define (require) ->
     childList: true
     characterData: true
 
+
+  # Each type of editable has a start and stop for enabling/disabling the editable
+  allEditables =
+    'do-nothing' :
+      stop: (editableView, $editable, getValue) ->
+      start: (editableView, $editable, options, attributeName, getValue, setValue) ->
+
+
+    'textinput':
+      stop: (editableView, $editable, getValue) ->
+        $editable.text(getValue())
+      start: (editableView, $editable, options, attributeName, getValue, setValue) ->
+        $input = $('<input type="text" />')
+        $input.attr('placeholder', "Enter a #{attributeName} here").val(getValue())
+        $editable.html($input)
+        $input.on 'change', () ->
+          setValue($input.val())
+
+
+    'contenteditable':
+      stop: (editableView, $editable, getValue) ->
+        $editable.attr('contenteditable', false)
+        editableView.observers[selector].disconnect()
+        delete editableView.observers[selector]
+      start: (editableView, $editable, options, attributeName, getValue, setValue) ->
+        editableView.observers ?= {}
+
+        $editable.attr('contenteditable', true)
+
+        $editable.each (index) =>
+          if editableView.observers[selector] then editableView.observers[selector].disconnect()
+
+          editableView.observers[selector] = new MutationObserver (mutations) ->
+            mutations.forEach (mutation) ->
+              setValue($($editable.get(index)).html())
+
+          editableView.observers[selector].observe($editable.get(index), options.config or observerConfig)
+
+
+    'select2':
+      stop: (editableView, $editable, getValue) ->
+        $editable.off 'change.editable'
+      start: (editableView, $editable, options, attributeName, getValue, setValue) ->
+        require ['select2'], (select2) =>
+          if typeof options.select2 is 'function'
+            s2 = options.select2.apply(editableView)
+          else
+            s2 = options.select2 or {}
+
+          $editable.select2(s2)
+
+          $editable.off 'change.editable'
+          $editable.on 'change.editable', (e) ->
+            setValue($editable.select2('val'))
+
+
+    'aloha':
+      stop: (editableView, $editable, getValue) ->
+        $editable.mahalo?()
+      start: (editableView, $editable, options, attributeName, getValue, setValue) ->
+        $editable.mahalo?() # clicking Back/Next does not call mahalo so do it here
+        $editable.text('Loading editor...')
+        require ['aloha'], (Aloha) ->
+          # Create a new id for it so back/next do not cause
+          # the HTML from another page to get saved accidentally
+          $editable.attr('id', GENTICS.Utils.guid())
+          $editable.text('Starting up Aloha...')
+          # Wait for Aloha to start up
+          Aloha.ready () ->
+            html = getValue() or ''
+            html += "<p> </p>" # Allow putting cursor after a Blockish. removed if empty.
+            $editable.html(html)
+            $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
+            $editable.aloha()
+
+            # Grab the editable so we can call `.getContents()`
+            alohaId = $editable.attr('id')
+            alohaEditable = Aloha.getEditableById(alohaId)
+
+            if attributeName is 'content'
+              # See aloha.coffee for where this is used
+              window.GLOBAL_UPLOADER_HACK = () ->
+                editableBody = alohaEditable.getContents()
+                setValue(editableBody)
+
+            # Update the model if an event for this editable was triggered
+            Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) ->
+              isItThisEditable = d.editable.obj.is($editable)
+              isItThisEditable = isItThisEditable or $.contains($editable[0], d.editable.obj[0])
+
+              # If you're having blur problems I feel bad for you son: d.triggerType != 'blur'
+              if isItThisEditable
+
+                # Update the model by retrieving the XHTML contents
+                editableBody = alohaEditable.getContents()
+                editableBody = editableBody.trim() # Trim for idempotence
+                # Change the contents but do not update the Aloha editable area
+                setValue(editableBody)
+
+
   return class EditableView extends BaseView
     initialize: () ->
       super()
-      @observers = {}
 
       @listenTo(@model, 'change:editable', @_toggleEditable)
       # Cannot makeUneditable `change:currentPage` because this event
@@ -87,81 +186,9 @@ define (require) ->
 
           options.onBeforeEditable?($editable)
 
-          switch options.type
-            when 'textinput'
-              $input = $('<input type="text" />')
-              $input.attr('placeholder', "Enter a #{attributeName} here").val(getValue())
-              $editable.html($input)
-              $input.on 'change', () ->
-                setValue($input.val())
-
-            # Setup contenteditable
-            when 'contenteditable'
-              $editable.attr('contenteditable', true)
-
-              $editable.each (index) =>
-                if @observers[selector] then @observers[selector].disconnect()
-
-                @observers[selector] = new MutationObserver (mutations) ->
-                  mutations.forEach (mutation) ->
-                    setValue($($editable.get(index)).html())
-
-                @observers[selector].observe($editable.get(index), options.config or observerConfig)
-
-            # Setup Aloha
-            when 'aloha'
-              $editable.mahalo?() # clicking Back/Next does not call mahalo so do it here
-              $editable.text('Loading editor...')
-              require ['aloha'], (Aloha) ->
-                # Create a new id for it so back/next do not cause
-                # the HTML from another page to get saved accidentally
-                $editable.attr('id', GENTICS.Utils.guid())
-                $editable.text('Starting up Aloha...')
-                # Wait for Aloha to start up
-                Aloha.ready () ->
-                  html = getValue() or ''
-                  html += "<p> </p>" # Allow putting cursor after a Blockish. removed if empty.
-                  $editable.html(html)
-                  $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
-                  $editable.aloha()
-
-                  # Grab the editable so we can call `.getContents()`
-                  alohaId = $editable.attr('id')
-                  alohaEditable = Aloha.getEditableById(alohaId)
-
-                  if attributeName is 'content'
-                    # See aloha.coffee for where this is used
-                    window.GLOBAL_UPLOADER_HACK = () ->
-                      editableBody = alohaEditable.getContents()
-                      setValue(editableBody)
-
-                  # Update the model if an event for this editable was triggered
-                  Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) ->
-                    isItThisEditable = d.editable.obj.is($editable)
-                    isItThisEditable = isItThisEditable or $.contains($editable[0], d.editable.obj[0])
-
-                    # If you're having blur problems I feel bad for you son: d.triggerType != 'blur'
-                    if isItThisEditable
-
-                      # Update the model by retrieving the XHTML contents
-                      editableBody = alohaEditable.getContents()
-                      editableBody = editableBody.trim() # Trim for idempotence
-                      # Change the contents but do not update the Aloha editable area
-                      setValue(editableBody)
-
-            # Setup Select2
-            when 'select2'
-              require ['select2'], (select2) =>
-                if typeof options.select2 is 'function'
-                  s2 = options.select2.apply(@)
-                else
-                  s2 = options.select2 or {}
-
-                $editable.select2(s2)
-
-                $editable.off 'change.editable'
-                $editable.on 'change.editable', (e) ->
-                  setValue($editable.select2('val'))
+          if allEditables[options.type]
+            allEditables[options.type].start(@, $editable, options, attributeName, getValue, setValue)
+          else throw new Error('BUG: Unsupported editable type')
 
           options.onEditable?($editable)
 
@@ -179,22 +206,14 @@ define (require) ->
           else
             value = options.value
 
+          getValue = () =>
+            @model.get(value)
+
           options.onBeforeUneditable?($editable)
 
-          switch options.type
-            when 'textinput'
-              $editable.text(@model.get(value))
-
-            when 'contenteditable'
-              $editable.attr('contenteditable', false)
-              @observers[selector].disconnect()
-              delete @observers[selector]
-
-            when 'aloha'
-              $editable.mahalo?()
-
-            when 'select2'
-              $editable.off 'change.editable'
+          if allEditables[options.type]
+            allEditables[options.type].stop(@, $editable, getValue)
+          else throw new Error('BUG: Unsupported editable type')
 
           options.onUneditable?($editable)
 
