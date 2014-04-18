@@ -41,7 +41,7 @@ define (require) ->
       e.stopPropagation()
 
       $link = $(e.currentTarget)
-      @model.get('book').setPageNumber($link.data('page'))
+      @model.get('book').lookupAndSetPage($link.data('page'))
       router.navigate $link.attr('href'), {trigger: false}, () => @trackNav()
 
     trackNav: () ->

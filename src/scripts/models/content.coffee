@@ -43,7 +43,7 @@ define (require) ->
           @set('error', false)
           if @isBook()
             if @get('contents').length
-              @setPageNumber(options.page or 1) # Default to page 1
+              @lookupAndSetPage(options.page or 1) # Default to page 1
 
         .fail (model, response, options) =>
           @set('error', response?.status or model?.status or 9000)
@@ -90,18 +90,23 @@ define (require) ->
         page.fetch().done () ->
           page.set('loaded', true)
 
-    setPageNumber: (num) ->
-      # Do not skip if the currentPage is the arg being passed in
-      # because otherwise it will not get fetched
-      pages = @getTotalPages()
-      if num < 1 then num = 1
-      if num > pages then num = pages
-      page = @getPage(num)
-      @_setPage(page)
+    _lookupPage: (numOrString) ->
+      switch typeof numOrString
+        when 'string'
+          return @get('contents').get(numOrString)
+        when 'number'
+          num = numOrString
+          # Do not skip if the currentPage is the arg being passed in
+          # because otherwise it will not get fetched
+          pages = @getTotalPages()
+          if num < 1 then num = 1
+          if num > pages then num = pages
+          return @getPage(num)
+        else
+          throw new Error('BUG: Invalid arg')
 
-    setPageId: (id) ->
-      page = @get('contents').get(id)
-      @_setPage(page)
+    lookupAndSetPage: (numOrString) ->
+      @_setPage(@_lookupPage(numOrString))
 
     getTotalPages: () ->
       # FIX: cache total pages and recalculate on add/remove events?
@@ -151,7 +156,7 @@ define (require) ->
 
       # FIX: determine if node was inside a section that got removed too
       if node is @asPage()
-        @setPageNumber(previousPage)
+        @lookupAndSetPage(previousPage)
 
       @set('changed', true)
       @trigger('removeNode')
