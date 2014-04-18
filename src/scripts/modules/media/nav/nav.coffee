@@ -11,8 +11,8 @@ define (require) ->
     template: template
     templateHelpers: () ->
       page = @model.getPageNumber()
-      nextPage = @model.getNextPage()
-      previousPage = @model.getPreviousPage()
+      nextPage = @model.getNextPageNumber()
+      previousPage = @model.getPreviousPageNumber()
 
       if page isnt nextPage
         next = linksHelper.getPath('contents', {model: @model, page: nextPage})
@@ -39,11 +39,15 @@ define (require) ->
       'click .back': 'previousPage'
 
     nextPage: (e) ->
-      @model.nextPage()
+      nextPage = @model.getNextPageNumber()
+      # Show the next page if there is one
+      @model.setPageNumber(nextPage)
       @changePage(e)
 
     previousPage: (e) ->
-      @model.previousPage()
+      previousPage = @model.getPreviousPageNumber()
+      # Show the previous page if there is one
+      @model.setPageNumber(previousPage)
       @changePage(e)
 
     changePage: (e) ->

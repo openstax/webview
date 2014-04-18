@@ -11,10 +11,7 @@ define (require) ->
   return class MediaHeaderView extends EditableView
     template: template
     templateHelpers: () ->
-      if @model.isBook()
-        currentPage = @model.get('currentPage')
-      else
-        currentPage = @model
+      currentPage = @model.asPage()
 
       if currentPage
         currentPageData = currentPage.toJSON()
@@ -74,7 +71,7 @@ define (require) ->
     derivePage: () ->
       options =
         success: (model) =>
-          @model.setPage(@model.get('contents').indexOf(model)+1)
+          @model.setPageNumber(@model.get('contents').indexOf(model)+1)
           # Update the url bar path
           href = linksHelper.getPath 'contents',
             model: @model

@@ -71,7 +71,7 @@ define (require) ->
         _.each data, (input) =>
           if input.name isnt 'title'
             @model.add({id: input.name, title: input.value})
-            @model.setPage(input.name)
+            @model.setPageId(input.name)
             @updateUrl()
 
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
@@ -79,7 +79,7 @@ define (require) ->
     newPage: (title) ->
       options =
         success: (model) =>
-          @model.setPage(@model.get('contents').indexOf(model)+1)
+          @model.setPageNumber(@model.get('contents').indexOf(model)+1)
           @updateUrl()
 
       @model.create({title: title}, options)

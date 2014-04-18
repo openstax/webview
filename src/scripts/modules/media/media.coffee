@@ -63,10 +63,10 @@ define (require) ->
       version = @model.get('legacy_version')
 
       if @model.isBook()
-        currentPage = @model.get('currentPage')
+        currentPage = @model.asPage()
         if currentPage
-          moduleID = currentPage?.get('legacy_id')
-          moduleVersion = currentPage?.get('legacy_version')
+          moduleID = currentPage.get('legacy_id')
+          moduleVersion = currentPage.get('legacy_version')
           if moduleID and moduleVersion
             headerView.setLegacyLink("content/#{moduleID}/#{moduleVersion}/?collection=#{id}/#{version}")
         return

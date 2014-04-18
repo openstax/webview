@@ -7,10 +7,7 @@ define (require) ->
     template: template
     templateHelpers:
       currentPage: () ->
-        if @model.isBook()
-          return @model.get('currentPage')
-        else
-          return @model
+        return @model.asPage()
 
     placement: 'bottom'
 
