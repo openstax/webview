@@ -1,6 +1,6 @@
 <div>
   <span class="name-wrapper">
-    <input type="checkbox" name="{{id}}" checked="checked">
+    {{#if isDraft}}<input type="checkbox" name="{{id}}" checked="checked">{{/if}}
     <span class="title" data-depth="{{depth}}">{{title}}</span>
   </span>
 </div>
