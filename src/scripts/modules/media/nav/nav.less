@@ -5,7 +5,9 @@
 @progress-height: 9px;
 
 .media-nav {
-  background-color: @gray-lightest;
+  &:not(.publishing) { background-color: @gray-lightest; }
+
+  .publishing();
 
   > .book-nav {
     .flexbox();
