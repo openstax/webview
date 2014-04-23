@@ -1,11 +1,15 @@
 define (require) ->
   $ = require('jquery')
+  _ = require('underscore')
+  settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
   PublishedListSectionView = require('cs!./list/section')
   template = require('hbs!./publish-template')
   require('less!./publish')
   require('bootstrapTransition')
   require('bootstrapModal')
+
+  PUBLISHING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}/publish"
 
   return class PublishModal extends BaseView
     template: template
@@ -15,6 +19,7 @@ define (require) ->
 
     events:
       'submit form': 'onSubmit'
+      'change [name="license"]': 'onToggleAcceptLicense'
 
     initialize: () ->
       super()
@@ -27,6 +32,26 @@ define (require) ->
     onSubmit: (e) ->
       e.preventDefault()
 
-      data = $(e.originalEvent.target).serializeArray()
+      formData = $(e.originalEvent.target).serializeArray()
+      data = []
 
+      _.each formData, (field) ->
+        if field.name isnt 'license'
+          data.push(field.name)
+
+      $.ajax
+        type: 'POST'
+        url: PUBLISHING
+        data: data
+        dataType: 'json'
+        xhrFields:
+          withCredentials: true
+
+      $('#publish-modal').hide() # Close the modal
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
+
+    onToggleAcceptLicense: (e) ->
+      if $(e.currentTarget).is(':checked')
+        @$el.find('.btn-submit').removeClass('disabled')
+      else
+        @$el.find('.btn-submit').addClass('disabled')
