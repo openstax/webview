@@ -2,6 +2,7 @@ define (require) ->
   $ = require('jquery')
   _ = require('underscore')
   settings = require('settings')
+  router = require('cs!router')
   BaseView = require('cs!helpers/backbone/views/base')
   PublishedListSectionView = require('cs!./list/section')
   template = require('hbs!./publish-template')
@@ -46,6 +47,9 @@ define (require) ->
         dataType: 'json'
         xhrFields:
           withCredentials: true
+      .done () ->
+        # Redirect to workspace
+        router.navigate('workspace', {trigger: true})
 
       $('#publish-modal').hide() # Close the modal
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
