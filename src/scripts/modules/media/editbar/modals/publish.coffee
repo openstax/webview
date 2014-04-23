@@ -16,7 +16,7 @@ define (require) ->
     template: template
 
     regions:
-      contents: '.publish-list'
+      contents: '.publish-contents'
 
     events:
       'submit form': 'onSubmit'
@@ -43,11 +43,13 @@ define (require) ->
       $.ajax
         type: 'POST'
         url: PUBLISHING
-        data: data
+        data: JSON.stringify(data)
         dataType: 'json'
         xhrFields:
           withCredentials: true
       .done () ->
+        # TODO: Close editor
+
         # Redirect to workspace
         router.navigate('workspace', {trigger: true})
 
