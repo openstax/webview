@@ -48,7 +48,8 @@ define (require) ->
         xhrFields:
           withCredentials: true
       .done () ->
-        # TODO: Close editor
+        # Close editor
+        @model.set('editable', false)
 
         # Redirect to workspace
         router.navigate('workspace', {trigger: true})
