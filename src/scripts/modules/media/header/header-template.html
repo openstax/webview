@@ -9,10 +9,11 @@
     {{/if}}
 
     <div class="title">
-      <h2>{{currentPage.title}}
-          {{#is status 'publishing'}}
-            <span class="label label-info">publishing</span>
-          {{/is}}
+      <h2>
+        {{#is status 'publishing'}}
+          <span class="label label-info">publishing</span>
+        {{/is}}
+        {{currentPage.title}}
       </h2>
       {{#if currentPage.parentId}}
         <span>
