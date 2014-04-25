@@ -2,6 +2,9 @@
   <div>
     <span class="name-wrapper">
       <span class="title section">{{title}}</span>
+      {{#is status 'publishing'}}
+        <span class="label label-info">publishing</span>
+      {{/is}}
     </span>
   </div>
 {{/if}}
