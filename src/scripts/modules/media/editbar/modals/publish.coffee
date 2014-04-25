@@ -21,7 +21,8 @@ define (require) ->
     events:
       'submit form': 'onSubmit'
       'change [name="license"]': 'onToggleAcceptLicense'
-      'change .collection-checkbox': 'toggleCollection'
+      'change .collection-checkbox': 'toggleBook'
+      'change .publish-contents input': 'togglePage'
 
     initialize: () ->
       super()
@@ -64,7 +65,12 @@ define (require) ->
       else
         @$el.find('.btn-submit').addClass('disabled')
 
-    toggleCollection: (e) ->
+    toggleBook: (e) ->
       if $(e.currentTarget).is(':checked')
         # Ensure everything else is checked
         @$el.find('.publish-contents').find('input').prop('checked', true)
+
+    togglePage: (e) ->
+      if not $(e.currentTarget).is(':checked')
+        # Uncheck the book
+        @$el.find('.collection-checkbox').prop('checked', false)
