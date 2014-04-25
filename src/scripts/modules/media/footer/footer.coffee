@@ -21,14 +21,14 @@ define (require) ->
 
     editable:
       '[data-content="downloads"]':
-        onEditable: ($el) -> $el.addClass('disabled')
-        onUneditable: ($el) -> $el.removeClass('disabled')
+        start: ($el) -> $el.addClass('disabled')
+        stop: ($el) -> $el.removeClass('disabled')
       '[data-content="history"]':
-        onEditable: ($el) -> $el.addClass('disabled')
-        onUneditable: ($el) -> $el.removeClass('disabled')
+        start: ($el) -> $el.addClass('disabled')
+        stop: ($el) -> $el.removeClass('disabled')
       '[data-content="attribution"]':
-        onEditable: ($el) -> $el.addClass('disabled')
-        onUneditable: ($el) -> $el.removeClass('disabled')
+        start: ($el) -> $el.addClass('disabled')
+        stop: ($el) -> $el.removeClass('disabled')
 
     onRender: () ->
       @regions.downloads.show(new DownloadsView({model: @model}))
