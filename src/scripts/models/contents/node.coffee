@@ -48,7 +48,7 @@ define (require) ->
         response.content = $body.html()
 
       # Mark drafts as being in edit mode by default
-      if @isDraft()
+      if @isDraft() and response.status isnt 'publishing'
         response.editable = true
 
       return response

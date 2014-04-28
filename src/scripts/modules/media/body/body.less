@@ -21,14 +21,15 @@
 
 
 .media-body {
-  padding: 1rem;
-  margin: 40px 60px 0 60px;
+  padding: 40px 60px 0 60px;
   min-height: 6rem;
   counter-reset: figure;
 
-  &.draft {
+  &.draft:not(.publishing) {
     background-color: #ffc;
   }
+
+  .publishing();
 
   // Import the content styling from a separate file so it can be included in the editing code
   @import 'content.less';
