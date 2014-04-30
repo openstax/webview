@@ -61,3 +61,8 @@ define (require) ->
       # Regions do not support a `.$el` unless `.show(view)` has been called so select the alert
       # with jQuery and unhide it.
       @$el.find('.changed-remotely-alert').removeClass('hidden')
+
+      # Add a class to this div to hide the floating toolbar because
+      # the refresh alert is now shown and they would otherwise overlap
+      # TODO: This should probably be handled by editable
+      @regions.contents.$el.addClass('changed-remotely')
