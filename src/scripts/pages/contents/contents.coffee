@@ -9,7 +9,7 @@ define (require) ->
   template = require('hbs!./contents-template')
   require('less!./contents')
 
-  POLLING_REFRESH = 30 * 1000 # milliseconds
+  POLLING_REFRESH = 10 * 1000 # milliseconds
 
   return class ContentsPage extends BaseView
     template: template
@@ -31,7 +31,7 @@ define (require) ->
 
       if @uuid
         @parent.regions.header.show(new HeaderView({page: 'contents'}))
-        view = new MediaView({uuid: @uuid, page: @page})
+        view = new MediaView({uuid: @uuid, page: @page}) # to obtain the Content model
         @regions.contents.append(view)
 
         # Start polling for changes
@@ -45,7 +45,7 @@ define (require) ->
             # Check for updates on the content as well as the current Page (if it exists)
             promises = [view.model.fetch()]
             page = view.model.asPage()
-            promises.push(page.fetch()) if view.model isnt page
+            promises.push(page.fetch()) if view.model isnt page and page.isDraft()
 
             $.when(promises)
             .then () =>
@@ -58,4 +58,6 @@ define (require) ->
         @regions.contents.append(new BrowseContentView())
 
     displayChangedRemotely: () ->
-      alert("This content changed remotely #{@uuid} (or the content in it)")
+      # Regions do not support a `.$el` unless `.show(view)` has been called so select the alert
+      # with jQuery and unhide it.
+      @$el.find('.changed-remotely-alert').removeClass('hidden')
