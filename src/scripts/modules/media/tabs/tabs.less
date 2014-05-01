@@ -4,9 +4,9 @@
 .media-tabs {
   color: @brand-primary;
 
-  &:not(.publishing) { background-color: @gray-lightest; }
+  &:not(.publishing, .draft) { background-color: @gray-lightest; }
 
-  .publishing();
+  .publishing(); .draft();
 
   > ul {
     margin: 0;

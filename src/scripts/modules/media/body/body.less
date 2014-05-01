@@ -22,14 +22,11 @@
 
 .media-body {
   padding: 40px 60px 0 60px;
+  height: auto;
   min-height: 6rem;
   counter-reset: figure;
 
-  &.draft:not(.publishing) {
-    background-color: #ffc;
-  }
-
-  .publishing();
+  .publishing(); .draft();
 
   // Import the content styling from a separate file so it can be included in the editing code
   @import 'content.less';

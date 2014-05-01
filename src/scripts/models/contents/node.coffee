@@ -30,6 +30,10 @@ define (require) ->
       #if @get('title') then delete response.title
       response.title = @get('title') or response.title
 
+      # The only status returned from the server is 'publishing'.
+      # If the content is not `publishing` and it is a draft then set status='draft'
+      response.status ?= 'draft' if @isDraft()
+
       if response.mediaType is 'application/vnd.org.cnx.collection'
         # Only load the contents once
         response.contents = @get('contents') or response.tree.contents or []
@@ -131,6 +135,7 @@ define (require) ->
         delete results.changed
         delete results.active
         delete results.editable
+        delete results.status
 
       if options.derivedOnly
         results = {derivedFrom: results.derivedFrom}

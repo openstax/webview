@@ -1,10 +1,10 @@
-<div class="media-title{{#is status 'publishing'}} publishing{{/is}}">
+<div class="media-title {{status}}">
   {{#if loaded}}
     <div class="title">
       <h1>
-        {{#is status 'publishing'}}
-          <span class="label label-info">publishing</span>
-        {{/is}}
+        {{#if status}}
+          <span class="label {{status}}">{{status}}</span>
+        {{/if}}
         {{title}}
       </h1>
       {{#if parentId}}

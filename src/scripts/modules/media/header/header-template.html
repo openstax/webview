@@ -1,5 +1,5 @@
 {{#if currentPage.loaded}}
-  <div class="media-header{{#is status 'publishing'}} publishing{{/is}}">
+  <div class="media-header {{status}}">
     {{#if authenticated}}
       {{#if underivable}}
         <div class="derive tool">
@@ -10,9 +10,9 @@
 
     <div class="title">
       <h2>
-        {{#is status 'publishing'}}
-          <span class="label label-info">publishing</span>
-        {{/is}}
+        {{#if status}}
+          <span class="label {{status}}">{{status}}</span>
+        {{/if}}
         {{currentPage.title}}
       </h2>
       {{#if currentPage.parentId}}

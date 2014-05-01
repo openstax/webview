@@ -11,7 +11,7 @@
     {{/is}}
   </td>
   <td class="title">
-    <h4><a href="contents/{{id}}">{{title}}</a>{{#is status 'publishing'}} <span class="publishing">publishing...</span>{{/is}}</h4>
+    <h4><a href="contents/{{id}}">{{title}}</a>{{#if status}} <span class="label {{status}}">{{status}}</span>{{/if}}</h4>
   </td>
   <td class="edited">{{date revised}}</td>
 </tr>
