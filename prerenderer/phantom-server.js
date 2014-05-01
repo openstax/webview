@@ -25,7 +25,11 @@ var checkComplete = function () {
     console.log(content);
     phantom.exit();
   }
-}
+};
+
+page.onConsoleMessage = function (msg) {
+  system.stderr.write(JSON.stringify(msg, undefined, 4));
+};
 
 page.onResourceReceived = function (response) {
   if (requestIds.indexOf(response.id) !== -1) {

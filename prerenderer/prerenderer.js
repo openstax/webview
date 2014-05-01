@@ -3,18 +3,22 @@ var path = require('path'),
     express = require('express'),
     app = express();
 
-var getContent = function(url, callback) {
+var getContent = function (url, callback) {
   var phantom, content = '',
       phantomjs = path.normalize(__dirname + '/../node_modules/.bin/phantomjs');
 
   // Spawn a phantom-server.js process
-  phantom = spawn(phantomjs, ['phantom-server.js', url], {cwd: __dirname});
+  phantom = spawn(phantomjs, ['--web-security=false', 'phantom-server.js', url], {cwd: __dirname});
   phantom.stdout.setEncoding('utf8');
 
   // phantom-server.js script is simply logging the output,
   // which can be accessed through stdout
-  phantom.stdout.on('data', function(data) {
+  phantom.stdout.on('data', function (data) {
     content += data.toString();
+  });
+
+  phantom.stderr.on('data', function (data) {
+    console.log(data.toString());
   });
 
   phantom.on('exit', function(code) {
