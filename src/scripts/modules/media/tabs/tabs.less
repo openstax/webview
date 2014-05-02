@@ -4,7 +4,7 @@
 .media-tabs {
   color: @brand-primary;
 
-  &:not(.publishing, .draft) { background-color: @gray-lightest; }
+  &:not(.publishing):not(.draft) { background-color: @gray-lightest; }
 
   .publishing(); .draft();
 

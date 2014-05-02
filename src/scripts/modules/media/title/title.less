@@ -4,7 +4,7 @@
 .media-title {
   padding: 30px 30px 40px 30px;
 
-  &:not(.publishing, .draft) { background-color: @gray-lightest; }
+  &:not(.publishing):not(.draft) { background-color: @gray-lightest; }
 
   .publishing(); .draft();
 
