@@ -31,7 +31,7 @@ define (require) ->
       return {share: share, encodedTitle: encodeURI(title)}
 
     editable:
-      '.media-title > .title > h1':
+      '.media-title > .title > h1 > .ui-title':
         value: 'title'
         type: 'textinput'
 

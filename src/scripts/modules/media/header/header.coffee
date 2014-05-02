@@ -35,7 +35,7 @@ define (require) ->
       }
 
     editable:
-      '.media-header > .title > h2':
+      '.media-header > .title > h2 > .ui-title':
         value: () -> @getModel('title')
         type: 'textinput'
 
