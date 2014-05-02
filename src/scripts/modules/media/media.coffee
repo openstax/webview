@@ -9,9 +9,7 @@ define (require) ->
   MediaTitleView = require('cs!./title/title')
   MediaTabsView = require('cs!./tabs/tabs')
   MediaNavView = require('cs!./nav/nav')
-  MediaHeaderView = require('cs!./header/header')
-  MediaBodyView = require('cs!./body/body')
-  MediaFooterView = require('cs!./footer/footer')
+  MediaPageView = require('cs!./media-page')
   template = require('hbs!./media-template')
   require('less!./media')
 
@@ -21,7 +19,6 @@ define (require) ->
     regions:
       media: '.media'
       book: '.media > .book'
-      page: '.media > .page'
       editbar: '.editbar'
 
     templateHelpers: () ->
@@ -42,7 +39,7 @@ define (require) ->
       @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:editable', @toggleEditor)
-      @listenTo @model, 'change:status change:currentPage.status changePage', (model, value, options) =>
+      @listenTo @model, 'change:status', (model, value, options) =>
         @render()
         @loadEditor() if value is 'draft'
 
@@ -53,10 +50,7 @@ define (require) ->
       @regions.book.append(new MediaTabsView({model: @model}))
       @regions.book.append(new MediaNavView({model: @model}))
 
-      @regions.page.append(new MediaHeaderView({model: @model}))
-      @regions.page.append(new MediaBodyView({model: @model}))
-      @regions.page.append(new MediaFooterView({model: @model}))
-      @regions.page.append(new MediaNavView({model: @model, hideProgress: true}))
+      @regions.media.append(new MediaPageView(@model))
 
     trackAnalytics: () ->
       # Track loading using the media's own analytics ID, if specified

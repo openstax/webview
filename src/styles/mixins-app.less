@@ -45,3 +45,22 @@
     }
   }
 }
+
+.status-changebar-and-label() {
+
+  .x-changebar-helper(@class-name; @color) {
+    &.@{class-name} {
+      border-left: 2em solid @color;
+      .label.@{class-name} { background-color: @color; }
+    }
+  }
+
+  .x-changebar-helper(draft;      @brand-warning);
+  .x-changebar-helper(publishing; @brand-info);
+
+  // Additionally, make publishing content semi-transparent
+  &.publishing {
+    opacity: 0.7;
+  }
+
+}
