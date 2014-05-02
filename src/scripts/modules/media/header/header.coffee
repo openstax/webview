@@ -32,6 +32,8 @@ define (require) ->
           (_.isArray(pageDownloads) and pageDownloads?.length)
         underivable: not currentPage?.isDraft() and @model.isDraft()
         authenticated: session.get('username')
+        # Status is used for the label next to the title
+        status: currentPage?.get('status')
       }
 
     editable:

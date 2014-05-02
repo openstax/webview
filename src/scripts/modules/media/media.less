@@ -1,5 +1,41 @@
 @import "../../../styles/variables.less";
+@import "../../../styles/mixins.less";
+
+
+
+.status-changebar-and-label() {
+
+  .x-changebar-helper(@class-name; @color) {
+    &.@{class-name} {
+      border-left: 2em solid @color;
+      .label.@{class-name} { background-color: @color; }
+    }
+  }
+
+  .x-changebar-helper(draft;      @brand-warning);
+  .x-changebar-helper(publishing; @brand-info);
+
+  // Additionally, make publishing content semi-transparent
+  &.publishing {
+    opacity: 0.7;
+  }
+
+}
+
 
 .media {
+
+  > .book,
+  > .page {
+    .status-changebar-and-label();
+  }
+
+  > .book:not(.draft):not(.publishing) {
+    background-color: @gray-lightest;
+  }
+
+  > .page {
+    padding-left: 30px;
+  }
 
 }

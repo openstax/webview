@@ -20,7 +20,13 @@ define (require) ->
 
     regions:
       media: '.media'
+      book: '.media > .book'
+      page: '.media > .page'
       editbar: '.editbar'
+
+    templateHelpers: () ->
+      bookStatus: @model.get('status')
+      pageStatus: @model.asPage()?.get('status')
 
     initialize: (options) ->
       super()
@@ -36,17 +42,21 @@ define (require) ->
       @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:editable', @toggleEditor)
+      @listenTo @model, 'change:status change:currentPage.status', (model, value, options) =>
+        @render()
+        @loadEditor() if value is 'draft'
 
     onRender: () ->
-      @regions.media.append(new MediaEndorsedView({model: @model}))
-      @regions.media.append(new LatestView({model: @model}))
-      @regions.media.append(new MediaTitleView({model: @model}))
-      @regions.media.append(new MediaTabsView({model: @model}))
-      @regions.media.append(new MediaNavView({model: @model}))
-      @regions.media.append(new MediaHeaderView({model: @model}))
-      @regions.media.append(new MediaBodyView({model: @model}))
-      @regions.media.append(new MediaFooterView({model: @model}))
-      @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
+      @regions.book.append(new MediaEndorsedView({model: @model}))
+      @regions.book.append(new LatestView({model: @model}))
+      @regions.book.append(new MediaTitleView({model: @model}))
+      @regions.book.append(new MediaTabsView({model: @model}))
+      @regions.book.append(new MediaNavView({model: @model}))
+
+      @regions.page.append(new MediaHeaderView({model: @model}))
+      @regions.page.append(new MediaBodyView({model: @model}))
+      @regions.page.append(new MediaFooterView({model: @model}))
+      @regions.page.append(new MediaNavView({model: @model, hideProgress: true}))
 
     trackAnalytics: () ->
       # Track loading using the media's own analytics ID, if specified
@@ -77,7 +87,7 @@ define (require) ->
       error = arguments[1] # @model.get('error')
       router.appView.render('error', {code: error}) if error
 
-    toggleEditor: () -> if @editing then @closeEditor() else @loadEditor()
+    toggleEditor: (model, value, options) -> if value then @loadEditor() else @closeEditor()
 
     loadEditor: () ->
       @editing = true

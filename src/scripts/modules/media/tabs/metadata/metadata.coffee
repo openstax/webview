@@ -33,8 +33,8 @@ define (require) ->
         value: () -> @getModel('keywords')
         type: 'select2'
         select2: () ->
-          @$el.find('.keywords > input').val(@model.get(@getModel('keywords')) or [])
-          _.extend({}, s2Multi, tags: @model.get(@getModel('keywords')) or [])
+          @$el?.find('.keywords > input').val(@model.get(@getModel('keywords')) or [])
+          _.extend({}, s2Multi, tags: @model?.get(@getModel('keywords')) or [])
 
     initialize: () ->
       super()

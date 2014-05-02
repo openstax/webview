@@ -45,20 +45,3 @@
     }
   }
 }
-
-// Give elements that have a "publishing" status a green background color
-.publishing() {
-  &.publishing {
-    opacity: 0.7;
-    border-left: 2em solid @brand-info;
-
-    .label.publishing { background-color: @brand-info; }
-  }
-}
-
-.draft() {
-  &.draft {
-    border-left: 2em solid @brand-warning;
-    .label.draft { background-color: @brand-warning; }
-  }
-}
