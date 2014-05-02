@@ -42,7 +42,7 @@ define (require) ->
       @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:editable', @toggleEditor)
-      @listenTo @model, 'change:status change:currentPage.status', (model, value, options) =>
+      @listenTo @model, 'change:status change:currentPage.status changePage', (model, value, options) =>
         @render()
         @loadEditor() if value is 'draft'
 
