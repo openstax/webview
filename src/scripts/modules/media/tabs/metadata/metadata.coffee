@@ -35,6 +35,21 @@ define (require) ->
         select2: () ->
           @$el.find('.keywords > input').val(@model.get(@getModel('keywords')) or [])
           _.extend({}, s2Multi, tags: @model.get(@getModel('keywords')) or [])
+      '.authors':
+        value: () -> @getModel('authors') or []
+        type: 'select2'
+        select2: () ->
+          _.extend {}, s2Multi,
+            multiple: true
+            formatResult: (item, $container, query) -> $('<div></div>').append(item.full_name)
+            ajax:
+              url: "#{window.location.origin}/users/search"
+              dataType: 'json'
+              data: (term, page) ->
+                q: term # search term
+
+              results: (data, page) -> # parse the results into the format expected by Select2.
+                results: data.users
 
     initialize: () ->
       super()
