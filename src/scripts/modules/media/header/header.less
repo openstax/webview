@@ -2,10 +2,16 @@
 @import "../../../../styles/mixins.less";
 
 .media-header {
-  margin: 0 60px;
+  padding: 0 60px;
   padding-bottom: 30px;
   min-height: 129px;
   border-bottom: 1px solid @gray-lighter;
+
+  .publishing();
+
+  > .derive {
+    margin-top: 35px;
+  }
 
   > .title {
     display: inline-block;
@@ -13,6 +19,12 @@
     margin-right: 7%;
     width: 60%;
     overflow-wrap: break-word;
+
+    // When editing is turned on the Title becomes an input box; make sure it stretches
+    input[type="text"] {
+      width: 550px;
+      text-overflow: ellipsis;
+    }
 
     > span {
       display: block;

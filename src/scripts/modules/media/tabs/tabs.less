@@ -2,8 +2,11 @@
 @import "../../../../styles/mixins.less";
 
 .media-tabs {
-  background-color: @gray-lightest;
   color: @brand-primary;
+
+  &:not(.publishing) { background-color: @gray-lightest; }
+
+  .publishing();
 
   > ul {
     margin: 0;
@@ -25,7 +28,7 @@
       > .tab-title {
         margin-left: 2px;
         vertical-align: middle;
-        
+
         .glyphicon {
           margin-right: 5px;
           font-size: 1.6rem;

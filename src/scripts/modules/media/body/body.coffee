@@ -12,18 +12,18 @@ define (require) ->
       loaded: () ->
         if @model.isBook()
           return @model.get('loaded') and
-            (@model.get('currentPage')?.get('loaded') or @model.get('contents')?.length is 0)
+            (@model.asPage()?.get('loaded') or @model.get('contents')?.length is 0)
 
         return @model.get('loaded')
 
       content: () ->
-        if @model.isBook()
-          return @model.get('currentPage.content')
-
-        return @model.get('content')
+        page = @model.asPage()
+        return page?.get('content')
 
       hasContent: () ->
         return (_.isString(@model.get('content')) or _.isString(@model.get('currentPage.content')))
+
+      editable: () -> @isEditable()
 
     editable:
       '.media-body':
@@ -64,6 +64,12 @@ define (require) ->
         <div class="ui-toggle-wrapper">
           <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
         </div>''')
+
+    isEditable: () ->
+      if @model.isBook()
+        return @model.get('currentPage')?.isEditable()
+
+      return @model.isEditable()
 
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution')

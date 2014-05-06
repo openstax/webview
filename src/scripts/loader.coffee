@@ -21,10 +21,8 @@ define (require) ->
     if model isnt session
       promise.fail (jqXHR) ->
         switch jqXHR.status
-          when 403 # HACK: this should be 401
+          when 401
             window.location.href = '/login'
-          else
-            console.error(arguments)
 
     return promise
 

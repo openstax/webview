@@ -12,6 +12,9 @@ define (require) ->
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
   return class Node extends Backbone.AssociatedModel
+
+    eTag: null
+
     # url: () -> "#{SERVER}/contents/#{@id}"
     url: () ->
       id = @getVersionedId()
@@ -48,7 +51,7 @@ define (require) ->
         response.content = $body.html()
 
       # Mark drafts as being in edit mode by default
-      if @isDraft()
+      if @isDraft() and response.status isnt 'publishing'
         response.editable = true
 
       return response
@@ -56,8 +59,16 @@ define (require) ->
     fetch: (options = {}) ->
       if @isDraft()
         options.xhrFields = _.extend({withCredentials: true}, options.xhrFields)
+        if @eTag
+          options.headers ?= {}
+          options.headers['If-None-Match'] = @eTag
 
       results = super(options)
+      results.then () =>
+        newETag = results.getResponseHeader('ETag')
+        if @eTag and newETag isnt @eTag
+          @set('changed-remotely', true)
+        @eTag = newETag
 
       if @id
         @set('downloads', 'loading')
@@ -130,6 +141,7 @@ define (require) ->
         delete results.page
         delete results.changed
         delete results.active
+        delete results.editable
 
       if options.derivedOnly
         results = {derivedFrom: results.derivedFrom}
@@ -186,3 +198,9 @@ define (require) ->
     isDraft: () -> return @get('version') is 'draft' or /@draft$/.test(@id)
 
     isSaveable: () -> !!@get('mediaType')
+
+    isEditable: () ->
+      if @get('editable') or (@get('book.editable') and @isDraft())
+        return true
+
+      return false

@@ -1,1 +1,15 @@
 @import "../../../styles/variables.less";
+
+
+.changed-remotely-alert {
+  position: fixed;
+  top: 0;
+  z-index: 1031; // needs to be more than the toolbar
+  width: @max-viewport-width;
+}
+
+// Hide the toolbar when the content changed remotely
+// so it does not interfere with the `.changed-remotely-alert`
+#contents.changed-remotely {
+  .navbar-fixed-top { display: none; }
+}

@@ -34,6 +34,6 @@ define (require) ->
 
       page.save()
       .fail(() -> alert('There was a problem deriving. Please try again'))
-      .done () =>
+      .done () ->
         url = linksHelper.getPath('contents', {model: page})
         router.navigate(url, {trigger: true})

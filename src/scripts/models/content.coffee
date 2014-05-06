@@ -41,7 +41,10 @@ define (require) ->
           @set('loaded', true)
         .done () =>
           @set('error', false)
-          @load(options.page)
+          if @isBook()
+            if @get('contents').length
+              @lookupAndSetPage(options.page or 1) # Default to page 1
+
         .fail (model, response, options) =>
           @set('error', response?.status or model?.status or 9000)
 
@@ -58,7 +61,9 @@ define (require) ->
         excludeContents: true
       , options)
 
-      return super(attrs, options).done () => @set('changed', false)
+      return super(attrs, options).done () =>
+        @set('changed', false)
+        @set('childChanged', false)
 
     toJSON: (options = {}) ->
       results = super(arguments...)
@@ -74,38 +79,42 @@ define (require) ->
 
       return results
 
-    load: (page) ->
-      if @isBook()
-        if @get('contents').length
-          @setPage(page or 1) # Default to page 1
 
-    fetchPage: () ->
-      page = @get('currentPage')
-      page.fetch().done () =>
-        page.set('loaded', true)
-
-    setPage: (num) ->
-      pages = @getTotalPages()
-
-      if num < 1 then num = 1
-      if num > pages then num = pages
-
-      page = @getPage(num)
+    _setPage: (page) ->
       @get('currentPage')?.set('active', false)
       @set('currentPage', page)
       page.set('active', true)
       @trigger('changePage')
 
       if not page.get('loaded')
-        @fetchPage()
+        page.fetch().done () ->
+          page.set('loaded', true)
+
+    _lookupPage: (numOrString) ->
+      switch typeof numOrString
+        when 'string'
+          return @get('contents').get(numOrString)
+        when 'number'
+          num = numOrString
+          # Do not skip if the currentPage is the arg being passed in
+          # because otherwise it will not get fetched
+          pages = @getTotalPages()
+          if num < 1 then num = 1
+          if num > pages then num = pages
+          return @getPage(num)
+        else
+          throw new Error('BUG: Invalid arg')
+
+    lookupAndSetPage: (numOrString) ->
+      @_setPage(@_lookupPage(numOrString))
 
     getTotalPages: () ->
       # FIX: cache total pages and recalculate on add/remove events?
       return @getTotalLength()
 
-    getPageNumber: (model = @get('currentPage')) -> super(model)
+    getPageNumber: (model = @asPage()) -> super(model)
 
-    getNextPage: () ->
+    getNextPageNumber: () ->
       if not @get('loaded') then return 0
       pages = @getTotalPages()
 
@@ -113,29 +122,30 @@ define (require) ->
       if page < pages then ++page
       return page
 
-    getPreviousPage: () ->
+    getPreviousPageNumber: () ->
       if not @get('loaded') then return 0
       page = @getPageNumber()
       if page > 1 then --page
       return page
 
-    nextPage: () ->
-      page = @getPageNumber()
-      nextPage = @getNextPage()
+    deriveCurrentPage: (options = {}) ->
+      if @isBook()
+        page = @get('currentPage')
+        title = page.get('title')
+        id = page.id
+        index = @get('contents').indexOf(page)
 
-      # Show the next page if there is one
-      @setPage(nextPage) if page isnt nextPage
+        # Defaults
+        options = _.extend({
+          at: index
+          wait: true
+        }, options)
 
-      return nextPage
-
-    previousPage: () ->
-      page = @getPageNumber()
-      previousPage = @getPreviousPage()
-
-      # Show the previous page if there is one
-      @setPage(previousPage) if page isnt previousPage
-
-      return previousPage
+        @get('contents').remove(page)
+        @create({title: title, derivedFrom: id}, options)
+      else
+        #todo: only update from contents if it is a book, otherwise update the model itself
+        console.log 'update this model'
 
     removeNode: (node) ->
       # FIX: get previous page even if removing a section
@@ -145,8 +155,8 @@ define (require) ->
       node.get('parent').get('contents').remove(node)
 
       # FIX: determine if node was inside a section that got removed too
-      if node is @get('currentPage')
-        @setPage(previousPage)
+      if node is @asPage()
+        @lookupAndSetPage(previousPage)
 
       @set('changed', true)
       @trigger('removeNode')
@@ -188,3 +198,17 @@ define (require) ->
 
       @trigger('moveNode')
       return node
+
+
+    # Content can be a Book or a Page and some views render
+    # parts of the current page.
+    # This will return:
+    # - `null` if this content has not been loaded yet
+    # - the current page (if this is a book)
+    # - this if this is a page
+    asPage: () ->
+      if @isBook()
+        return @get('currentPage')
+      else
+        # TODO: Raise an error if this is called on a subcollection
+        return @
