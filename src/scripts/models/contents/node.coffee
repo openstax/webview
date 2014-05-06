@@ -12,6 +12,9 @@ define (require) ->
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
   return class Node extends Backbone.AssociatedModel
+
+    eTag: null
+
     # url: () -> "#{SERVER}/contents/#{@id}"
     url: () ->
       id = @getVersionedId()
@@ -56,8 +59,16 @@ define (require) ->
     fetch: (options = {}) ->
       if @isDraft()
         options.xhrFields = _.extend({withCredentials: true}, options.xhrFields)
+        if @eTag
+          options.headers ?= {}
+          options.headers['If-None-Match'] = @eTag
 
       results = super(options)
+      results.then () =>
+        newETag = results.getResponseHeader('ETag')
+        if @eTag and newETag isnt @eTag
+          @set('changed-remotely', true)
+        @eTag = newETag
 
       if @id
         @set('downloads', 'loading')

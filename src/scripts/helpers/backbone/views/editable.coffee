@@ -117,6 +117,11 @@ define (require) ->
       # is fired even when `changeCurrentPage.title` changes
       # @listenTo(@model, 'change:currentPage', @_makeUneditable)
 
+      # When remote changes happen then disable editing
+      @listenTo @model, 'change:changed-remotely', (model, val, options) ->
+        if val
+          @_makeUneditable()
+
     onAfterRender: () ->
       # Make editable after rendering if editable flag is already set
       @_makeEditable() if @isEditable()
