@@ -36,10 +36,15 @@ define (require) ->
           @$el.find('.keywords > input').val(@model.get(@getModel('keywords')) or [])
           _.extend({}, s2Multi, tags: @model.get(@getModel('keywords')) or [])
       '.authors > input':
-        value: () -> @getModel('authors') or []
+        value: () -> @getModel('authors')
         type: 'select2'
         select2: () ->
+          authors = _.map @model.get(@getModel('authors')), (item) -> {id:item.id, text:item.fullname}
+          # @$el.find('.authors > input').val(_.map(authors, (item) -> item.id))
           _.extend {}, s2Multi,
+            # data: authors
+            initSelection: (el, cb) ->
+              cb(authors)
             multiple: true
             formatResult: (item, $container, query) -> $('<div></div>').append(item.text)
             ajax:

@@ -83,7 +83,7 @@
             <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
           {{/each}}
         {{~else~}}
-          <input type="hidden" data-placeholder="Add Authors" />
+          <input type="hidden" data-placeholder="Add Authors" value="[{{#each authors}}{id: {{id}}, text:{{fullname}} },{{/each}}]" />
         {{~/unless~}}
       </div>
     </dd>
