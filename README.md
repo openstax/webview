@@ -95,6 +95,21 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
         index index.html;
         try_files $uri $uri/ /index.html;
 
+        # Support page prerendering for web crawlers
+        if ($args ~ "(.*)?&?_escaped_fragment_=(.*)") {
+            set $args $1;
+            set $cleanurl $uri$is_args$1;
+            set $cleanservername $http_host;
+            rewrite ^ /snapshot${cleanurl};
+        }
+        location /snapshot {
+            proxy_set_header X-Rewrite-CleanHOST $cleanservername;
+            proxy_set_header X-Rewrite-CleanURI $cleanurl;
+            proxy_set_header X-Rewrite-URI $request_uri;
+            proxy_pass http://localhost:4000;
+            proxy_connect_timeout 60s;
+        }
+
         location /resources/ {
             proxy_pass http://localhost:6543;
         }
@@ -105,6 +120,15 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
     }
 
   ```
+
+4. Run `node prerenderer/prerenderer.js` in the command line to prerender pages for web crawlers that support 'escaped fragment'. (For deployment, use something like supervisord)
+
+##### Quick Development Setup
+
+1. Install [nginx](http://nginx.org/)
+2. Run `grunt nginx:start` (uses `nginx.development.conf`)
+3. Point your browser to [http://localhost:8000/test](http://localhost:8000/test) for mock data
+4. If you have https://gihub.com/Connexions/cnx-archive installed, you can point your browser to [http://localhost:8000](http://localhost:8000)
 
 #### Test Site
 
