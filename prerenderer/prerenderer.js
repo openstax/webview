@@ -32,7 +32,6 @@ var getContent = function (url, callback) {
 };
 
 var respond = function (req, res) {
-  console.log(req.headers)
   url = 'http://'
   if (req.headers['x-rewrite-cleanhost']) {
     url += req.headers['x-rewrite-cleanhost'];
