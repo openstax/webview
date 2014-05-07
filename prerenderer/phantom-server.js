@@ -10,8 +10,8 @@ var lastReceived = new Date().getTime(),
 var checkComplete = function () {
   var content = '', matches;
 
-  // Return after all requests are finished or after 20 seconds
-  if ((new Date().getTime() - lastReceived > 1500 && requestCount === responseCount) ||
+  // Return after all requests are finished or after 20 seconds - or 10 sec for any one fetch
+  if ((new Date().getTime() - lastReceived > 10000 && requestCount === responseCount) ||
       new Date().getTime() - startTime > 20000) {
     clearInterval(checkCompleteInterval);
 
