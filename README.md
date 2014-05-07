@@ -96,14 +96,15 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
         try_files $uri $uri/ /index.html;
 
         # Support page prerendering for web crawlers
-        if ($args ~ "_escaped_fragment_=(.*)") {
-            set $cleanuri $uri;
+        if ($args ~ "(.*)?&?_escaped_fragment_=(.*)") {
+            set $args $1;
+            set $cleanurl $uri$is_args$1;
             set $cleanservername $http_host;
-            rewrite ^ /snapshot${uri};
+            rewrite ^ /snapshot${cleanurl};
         }
         location /snapshot {
             proxy_set_header X-Rewrite-CleanHOST $cleanservername;
-            proxy_set_header X-Rewrite-CleanURI $cleanuri;
+            proxy_set_header X-Rewrite-CleanURI $cleanurl;
             proxy_set_header X-Rewrite-URI $request_uri;
             proxy_pass http://localhost:4000;
             proxy_connect_timeout 60s;
