@@ -98,12 +98,14 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
         # Support page prerendering for web crawlers
         if ($args ~ "_escaped_fragment_=(.*)") {
             set $cleanuri $uri;
+            set $cleanservername $http_host;
             rewrite ^ /snapshot${uri};
         }
         location /snapshot {
+            proxy_set_header X-Rewrite-CleanHOST $cleanservername;
             proxy_set_header X-Rewrite-CleanURI $cleanuri;
             proxy_set_header X-Rewrite-URI $request_uri;
-            proxy_pass http://localhost:3000;
+            proxy_pass http://localhost:4000;
             proxy_connect_timeout 60s;
         }
 
@@ -118,7 +120,7 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
 
   ```
 
-4. Run `node prerenderer/prerenderer.js` in the command line to prerender pages for web crawlers that support 'escaped fragment'.
+4. Run `node prerenderer/prerenderer.js` in the command line to prerender pages for web crawlers that support 'escaped fragment'. (For deployment, use something like supervisord)
 
 ##### Quick Development Setup
 

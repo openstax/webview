@@ -21,7 +21,7 @@ var getContent = function (url, callback) {
     console.log(data.toString());
   });
 
-  phantom.on('exit', function(code) {
+  phantom.on('exit', function (code) {
     if (code !== 0) {
       console.log('Error');
       console.log(code);
@@ -32,15 +32,30 @@ var getContent = function (url, callback) {
 };
 
 var respond = function (req, res) {
-  url = 'http://localhost';
+  console.log(req.headers)
+  url = 'http://'
+  if (req.headers['x-rewrite-cleanhost']) {
+    url += req.headers['x-rewrite-cleanhost'];
+  } else {
+    url += req.headers['host'];
+  }
   if (req.headers['x-rewrite-cleanuri']) {
     url += req.headers['x-rewrite-cleanuri'];
+  } else {
+    url += req.url;
   }
+  console.log(url)
+
 
   getContent(url, function (content) {
+    //force caching for 30 days - may need to do something diff for diff urls in the future
+    var expdate = new Date();
+    expdate.setDate(expdate.getDate() + 30);
+    res.set('expires',expdate.toUTCString());
+    res.set('cache-control','public, max-age=2592000, s-maxage=2592000'),
     res.send(content);
   });
 }
 
 app.get(/(.*)/, respond);
-app.listen(3000);
+app.listen(4000);
