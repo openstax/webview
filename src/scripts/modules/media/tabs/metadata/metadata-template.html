@@ -77,15 +77,19 @@
     </dd>
   <dt>Authors:</dt>
     <dd>
-      <div>
-        {{#each authors}}
-          <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
-        {{/each}}
+      <div class="authors">
+        {{~#unless editable~}}
+          {{#each authors}}
+            <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
+          {{/each}}
+        {{~else~}}
+          <input type="hidden" data-placeholder="Add Authors" value="{{#each authors}}{{#if @index}},{{/if}}{{id}}{{/each}}" />
+        {{~/unless~}}
       </div>
     </dd>
   <dt>Copyright Holders:</dt>
     <dd>
-      <div>
+      <div class="licensors">
         {{#each licensors}}
           <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
         {{/each}}
