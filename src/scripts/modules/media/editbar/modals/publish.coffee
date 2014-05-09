@@ -36,11 +36,17 @@ define (require) ->
       e.preventDefault()
 
       formData = $(e.originalEvent.target).serializeArray()
-      data = []
+      items = []
 
       _.each formData, (field) ->
         if field.name isnt 'license'
-          data.push(field.name)
+          items.push(field.name)
+
+
+      data =
+        submitlog: 'TEST_SUBMITLOG'
+        items: items
+
 
       $.ajax
         type: 'POST'
