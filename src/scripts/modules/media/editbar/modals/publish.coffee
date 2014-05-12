@@ -35,7 +35,7 @@ define (require) ->
     onSubmit: (e) ->
       e.preventDefault()
 
-      submitlog = @el.find('[name="submitlog"]').val()
+      submitlog = @$el.find('[name="submitlog"]').val()
       formData = $(e.originalEvent.target).serializeArray()
       items = []
 
