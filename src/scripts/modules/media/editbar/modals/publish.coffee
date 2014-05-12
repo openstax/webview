@@ -35,12 +35,16 @@ define (require) ->
     onSubmit: (e) ->
       e.preventDefault()
 
+      submitlog = @$el.find('[name="submitlog"]').val()
       formData = $(e.originalEvent.target).serializeArray()
-      data = []
+      items = []
 
       _.each formData, (field) ->
-        if field.name isnt 'license'
-          data.push(field.name)
+        if field.name not in ['license','submitlog']
+          items.push(field.name)
+
+
+      data = {submitlog, items}
 
       $.ajax
         type: 'POST'
