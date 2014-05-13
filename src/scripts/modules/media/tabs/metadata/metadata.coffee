@@ -76,7 +76,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change change:currentPage', @render)
+      @listenTo(@model, 'change change:currentPage', (model, options) => @render() unless options.doNotRerender)
 
     getModel: (value) ->
       if @media is 'page' and @model.isBook() then return "currentPage.#{value}" else return value
