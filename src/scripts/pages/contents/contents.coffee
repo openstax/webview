@@ -43,9 +43,10 @@ define (require) ->
           # then stop polling for updates
           if view.model
             # Check for updates on the content as well as the current Page (if it exists)
-            promises = [view.model.fetch()]
+            promises = [view.model.fetch({skipDownloads:true, doNotRerender:true})]
             page = view.model.asPage()
-            promises.push(page.fetch()) if view.model isnt page and page.isDraft()
+            if view.model isnt page and page.isDraft()
+              promises.push(page.fetch({skipDownloads:true, doNotRerender:true}))
 
             $.when(promises)
             .then () =>

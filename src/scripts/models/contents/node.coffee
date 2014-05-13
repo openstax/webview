@@ -70,7 +70,7 @@ define (require) ->
           @set('changed-remotely', true)
         @eTag = newETag
 
-      if @id
+      if @id and not options.skipDownloads
         @set('downloads', 'loading')
 
         if @isDraft() or not @get('version') # HACK for Untitled module

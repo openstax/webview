@@ -173,13 +173,13 @@ define (require) ->
           setValue = (value) =>
             return if getValue() is value
 
-            myModel.set(attributeName, value)
-            myModel.set('changed', true)
-            @model.set('childChanged', true) if isCurrentPage
+            myModel.set(attributeName, value, {doNotRerender:true})
+            myModel.set('changed', true, {doNotRerender:true})
+            @model.set('childChanged', true, {doNotRerender:true}) if isCurrentPage
 
             # Changing a module's title also change's a book's ToC
             if isCurrentPage and attributeName is 'title'
-              @model.set('changed', true)
+              @model.set('changed', true, {doNotRerender:true})
 
             options.onEdit.apply(@) if typeof options.onEdit is 'function'
 
