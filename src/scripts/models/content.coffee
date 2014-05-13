@@ -20,10 +20,14 @@ define (require) ->
             return new Collection(attrs)
 
           return new Page(attrs)
-    }, {
-      type: Backbone.Many
-      key: 'authors'
-      collectionType: () -> Backbone.Collection
+    # Having a string array suddenly change into an empty Backbone.Collection
+    # is unexpected.
+    # This is commented unless there is a cleaner way to implement users
+    #
+    # }, {
+    #   type: Backbone.Many
+    #   key: 'authors'
+    #   collectionType: () -> Backbone.Collection
     }, {
       type: Backbone.One
       key: 'currentPage'

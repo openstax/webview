@@ -31,6 +31,8 @@ define (require) ->
       @uuid = options.uuid
       @model = new Content({id: @uuid, page: options.page})
 
+      window.DEBUG_MODEL = @model
+
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title', @updateTitle)
       @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage', @updateLegacyLink)
