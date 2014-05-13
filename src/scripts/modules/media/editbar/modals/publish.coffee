@@ -20,7 +20,8 @@ define (require) ->
 
     events:
       'submit form': 'onSubmit'
-      'change [name="license"]': 'onToggleAcceptLicense'
+      'change [name="license"]': 'validate'
+      'keyup  [name="submitlog"]': 'validate'
       'change .collection-checkbox': 'toggleBook'
       'change .publish-contents input': 'togglePage'
 
@@ -39,14 +40,12 @@ define (require) ->
       items = []
 
       _.each formData, (field) ->
-        if field.name isnt 'license'
+        if field.name not in ['license', 'submitlog']
           items.push(field.name)
 
+      submitlog = @$el.find('[name="submitlog"]').val()
 
-      data =
-        submitlog: 'TEST_SUBMITLOG'
-        items: items
-
+      data = {submitlog, items}
 
       $.ajax
         type: 'POST'
@@ -65,11 +64,12 @@ define (require) ->
       $('#publish-modal').hide() # Close the modal
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
 
-    onToggleAcceptLicense: (e) ->
-      if $(e.currentTarget).is(':checked')
-        @$el.find('.btn-submit').removeClass('disabled')
-      else
-        @$el.find('.btn-submit').addClass('disabled')
+    validate: () ->
+      isValid = @$el.find('[name="license"]').is(':checked') and
+                @$el.find('[name="submitlog"]').val()
+
+      @$el.find('.btn-submit').toggleClass('disabled', !isValid)
+
 
     toggleBook: (e) ->
       if $(e.currentTarget).is(':checked')
