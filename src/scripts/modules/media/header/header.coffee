@@ -30,7 +30,7 @@ define (require) ->
         currentPage: currentPageData
         hasDownloads: (_.isArray(downloads) and downloads?.length) or
           (_.isArray(pageDownloads) and pageDownloads?.length)
-        underivable: not currentPage?.isDraft() and @model.isDraft()
+        derivable: not currentPage?.isDraft() and @model.isDraft()
         authenticated: session.get('username')
       }
 
