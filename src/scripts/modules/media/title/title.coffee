@@ -1,6 +1,8 @@
 define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
+  session = require('cs!session')
+  linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')
   #MailPopoverView = require('cs!./popovers/mail/mail')
@@ -28,14 +30,39 @@ define (require) ->
       _.each share, (value, key, list) ->
         list[key] = encodeURI(value)
 
-      return {share: share, encodedTitle: encodeURI(title)}
+      return {
+        share: share
+        encodedTitle: encodeURI(title)
+        derivable: not @model.isDraft()
+        authenticated: session.get('username')
+      }
 
     editable:
       '.media-title > .title > h1':
         value: 'title'
         type: 'textinput'
 
+    events:
+      'click .derive .btn': 'derive'
+
     initialize: () ->
       super()
       @listenTo(@model, 'change:loaded change:title', @render)
       @listenTo(router, 'navigate', @render)
+
+    derive: () ->
+      ###
+      options =
+        success: (model) =>
+          @model.setPageNumber(@model.get('contents').indexOf(model)+1)
+          # Update the url bar path
+          href = linksHelper.getPath 'contents',
+            model: @model
+            page: @model.getPageNumber()
+          router.navigate(href, {trigger: false, analytics: true})
+
+      @model.deriveCurrentPage(options)
+      ###
+      
+      # Derive a copy of the book and then navigate to it
+      @model.derive(options)
