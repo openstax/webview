@@ -71,7 +71,7 @@ define (require) ->
     derivePage: () ->
       options =
         success: (model) =>
-          @model.setPageNumber(@model.get('contents').indexOf(model)+1)
+          @model.setPage(@model.get('contents').indexOf(model)+1)
           # Update the url bar path
           href = linksHelper.getPath 'contents',
             model: @model

@@ -47,7 +47,7 @@ define (require) ->
           @set('error', false)
           if @isBook()
             if @get('contents').length
-              @lookupAndSetPage(options.page or 1) # Default to page 1
+              @setPage(options.page or 1) # Default to page 1
 
         .fail (model, response, options) =>
           @set('error', response?.status or model?.status or 9000)
@@ -109,7 +109,7 @@ define (require) ->
         else
           throw new Error('BUG: Invalid arg')
 
-    lookupAndSetPage: (numOrString) ->
+    setPage: (numOrString) ->
       @_setPage(@_lookupPage(numOrString))
 
     getTotalPages: () ->
@@ -160,7 +160,7 @@ define (require) ->
 
       # FIX: determine if node was inside a section that got removed too
       if node is @asPage()
-        @lookupAndSetPage(previousPage)
+        @setPage(previousPage)
 
       @set('changed', true)
       @trigger('removeNode')
