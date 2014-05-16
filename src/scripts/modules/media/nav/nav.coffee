@@ -41,13 +41,13 @@ define (require) ->
     nextPage: (e) ->
       nextPage = @model.getNextPageNumber()
       # Show the next page if there is one
-      @model.lookupAndSetPage(nextPage)
+      @model.setPage(nextPage)
       @changePage(e)
 
     previousPage: (e) ->
       previousPage = @model.getPreviousPageNumber()
       # Show the previous page if there is one
-      @model.lookupAndSetPage(previousPage)
+      @model.setPage(previousPage)
       @changePage(e)
 
     changePage: (e) ->

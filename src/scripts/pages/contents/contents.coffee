@@ -45,12 +45,14 @@ define (require) ->
             # Check for updates on the content as well as the current Page (if it exists)
             promises = [view.model.fetch({skipDownloads:true, doNotRerender:true})]
             page = view.model.asPage()
-            if view.model isnt page and page.isDraft()
-              promises.push(page.fetch({skipDownloads:true, doNotRerender:true}))
 
-            $.when(promises)
-            .then () =>
-              @_pollingContentTimer = setTimeout(pollRemoteUpdates, POLLING_REFRESH)
+            if page # If viewing an empty collection, no page exists
+              if view.model isnt page and page.isDraft()
+                promises.push(page.fetch({skipDownloads:true, doNotRerender:true}))
+
+              $.when(promises)
+              .then () =>
+                @_pollingContentTimer = setTimeout(pollRemoteUpdates, POLLING_REFRESH)
 
         @_pollingContentTimer = setTimeout(pollRemoteUpdates, POLLING_REFRESH)
 

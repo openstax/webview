@@ -30,7 +30,7 @@ define (require) ->
         currentPage: currentPageData
         hasDownloads: (_.isArray(downloads) and downloads?.length) or
           (_.isArray(pageDownloads) and pageDownloads?.length)
-        underivable: not currentPage?.isDraft() and @model.isDraft()
+        derivable: not currentPage?.isDraft() and @model.isDraft()
         authenticated: session.get('username')
       }
 
@@ -71,7 +71,7 @@ define (require) ->
     derivePage: () ->
       options =
         success: (model) =>
-          @model.setPageNumber(@model.get('contents').indexOf(model)+1)
+          @model.setPage(@model.get('contents').indexOf(model)+1)
           # Update the url bar path
           href = linksHelper.getPath 'contents',
             model: @model

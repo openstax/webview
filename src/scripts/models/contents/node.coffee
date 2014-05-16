@@ -148,6 +148,16 @@ define (require) ->
 
       return results
 
+    derive: (options = {}) ->
+      $.ajax
+        type: "POST"
+        xhrFields:
+          withCredentials: true
+        url: "#{AUTHORING}/users/contents"
+        data: {derivedFrom: @get('id')}
+      .done (response) ->
+        options.success?(response)
+
     #
     # Utility Methods
     #
