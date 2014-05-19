@@ -52,7 +52,7 @@ define (require) ->
     derive: () ->
       options =
         success: (model) =>
-          router.navigate("/contents/#{model.id}", {trigger: true})
+          router.navigate("/contents/#{model.id}@#{model.version}", {trigger: true})
       
       # Derive a copy of the book and then navigate to it
       @model.derive(options)
