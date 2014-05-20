@@ -94,3 +94,5 @@ define (require) ->
       @regions.editbar.empty()
       $('body').css('padding-top', '0') # Remove added padding
       window.scrollBy(0, -height) # Prevent viewport from jumping
+
+    onBeforeClose: () -> @model.set('editable', false) if @model.get('editable')
