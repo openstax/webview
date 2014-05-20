@@ -149,12 +149,15 @@ define (require) ->
       return results
 
     derive: (options = {}) ->
+      data = JSON.stringify({derivedFrom: @get('id')})
+
       $.ajax
-        type: "POST"
+        type: 'POST'
+        dataType: 'json'
         xhrFields:
           withCredentials: true
         url: "#{AUTHORING}/users/contents"
-        data: {derivedFrom: @get('id')}
+        data: data
       .done (response) ->
         options.success?(response)
 
