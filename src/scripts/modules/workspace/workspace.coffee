@@ -5,6 +5,7 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   WorkspaceResultsView = require('cs!./results/results')
   Content  = require('cs!models/content')
+  Page = require('cs!models/contents/page')
   template = require('hbs!./workspace-template')
   require('bootstrapDropdown')
   require('less!./workspace')
@@ -56,8 +57,7 @@ define (require) ->
     addPage: () ->
       title = prompt('What is the title for the new Page?')
       if title
-        newPage = new Content
-          mediaType: 'application/vnd.org.cnx.module'
+        newPage = new Page
           title: title
           content: '<p>Please change this new Page</p>'
 

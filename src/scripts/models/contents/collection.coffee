@@ -90,9 +90,7 @@ define (require) ->
       promises = _.map @get('contents')?.models, (model) -> model.save()
 
       # Save the collection once all the models have completed saving
-      return $.when(promises...)
-      .then () =>
-
+      return $.when(promises...).then () =>
         # Don't save subcollections
         if @isSaveable()
           xhr = super(args...).then () =>
