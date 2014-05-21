@@ -72,6 +72,10 @@ define (require) ->
     toJSON: (options = {}) ->
       results = super(arguments...)
 
+      # Prevent new books with no id from being labelled a subcollection
+      if results.id is 'subcol'
+        delete results.id
+
       if options.includeTree and @isBook()
         results.tree =
           id: @getVersionedId()
