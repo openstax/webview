@@ -12,6 +12,7 @@
     "backbone": "~1.1.2",
     "backbone-associations": "~0.6.1",
     "bootstrap": "~3.1.1",
+    "font-awesome": "~4.1",
     "requirejs": "~2.1.11",
     "requirejs-text": "~2.0.10",
     "require-cs": "~0.4.4",
