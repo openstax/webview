@@ -1,13 +1,13 @@
 <h3>How to Reuse &amp; Attribute This Content</h3>
 
-{{> ../inherits/tab/toggle-partial }}
+{{> modules/media/footer/inherits/tab/toggle-partial }}
 
 <p>
   <span>© {{date revised}}</span>
-  <span>{{#each model.authors}}<span class="name">{{fullname}}</span>{{/each}}.</span>
+  <span>{{#each authors}}<span class="list-comma">{{fullname}}</span>{{/each}}.</span>
   <span>Textbook content produced by
-    <span>{{#each model.authors}}<span class="name">{{fullname}}</span>{{/each}}</span>
-    is licensed under a <a href="{{model.license.url}}">{{model.license.name}} {{model.license.version}}</a> license.
+    <span>{{#each authors}}<span class="list-comma">{{fullname}}</span>{{/each}}</span>
+    is licensed under a <a href="{{license.url}}">{{license.name}} {{license.version}}</a> license.
   </span>
 </p>
 <p>
@@ -36,12 +36,12 @@
   <li>
     If you redistribute this textbook in a print format,
     then you must include on every physical page the following attribution:<br />
-    "Download for free at http://cnx.org/contents/{{model.id}}@{{model.version}}."
+    "Download for free at http://cnx.org/contents/{{id}}@{{version}}."
   </li>
   <li>
     If you redistribute part of this textbook, then you must retain in every
     digital format page view (including but not limited to EPUB, PDF, and HTML)
     and on every physical printed page the following attribution:<br />
-    "Download for free at http://cnx.org/contents/{{model.id}}@{{model.version}}."
+    "Download for free at http://cnx.org/contents/{{id}}@{{version}}."
   </li>
 </ul>

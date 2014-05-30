@@ -1,7 +1,31 @@
 @import "../../../../../styles/variables.less";
 @import "../../../../../styles/mixins.less";
+@import "/bower_components/bootstrap/less/glyphicons.less"; // Bootstrap HACK: FIND A BETTER WAY TO INTEGRATE
 
 .media-tabs .tools {
+  .tool {
+    .user-select(none);
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    &.edit, &.derive {
+      &:before {
+        &:extend(.glyphicon all);
+        content: "\270f"; // glyphicon-pencil
+      }
+    }
+
+    &.preview {
+      &:before {
+        &:extend(.glyphicon all);
+        content: "\e105"; // glyphicon-eye-open
+      }
+    }
+  }
+
   .columns(290px; 30px; 1px solid @gray-lighter);
   margin-right: -1px; // Hide 3rd column rule
   padding: 15px;

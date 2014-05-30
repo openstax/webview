@@ -2,6 +2,7 @@ define (require) ->
   $ = require('jquery')
   Backbone = require('backbone')
   settings = require('settings')
+  session = require('cs!session')
   analytics = require('cs!helpers/handlers/analytics')
   router = require('cs!router')
   require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
@@ -9,6 +10,22 @@ define (require) ->
 
   # The root URI prefixed on all non-external AJAX and Backbone URIs
   root = settings.root
+
+  # Patch `Backbone.sync` so unauthorized responses are redirected to `/login`
+  Backbone_sync = Backbone.sync
+  Backbone.sync = (method, model, options) ->
+    promise = Backbone_sync.call(@, method, model, options)
+
+    # Do not redirect when trying to determine the login state
+    # But redirect otherwise
+    if model isnt session
+      promise.fail (jqXHR) ->
+        switch jqXHR.status
+          when 401
+            window.location.href = '/login'
+
+    return promise
+
 
   init = (options = {}) ->
     # Append /test to the root if the app is in test mode
@@ -19,7 +36,7 @@ define (require) ->
     resources = new RegExp('\/(resources|exports)\/')
 
     # Catch internal application links and let Backbone handle the routing
-    $(document).on 'click', 'a:not([data-bypass])', (e) ->
+    $(document).on 'click', 'a[href]:not([data-bypass]):not([href^="#"])', (e) ->
       $this = $(this)
       href = $this.attr('href')
 
@@ -53,6 +70,8 @@ define (require) ->
       router.navigate(Backbone.history.fragment, {replace: true})
 
     analytics.send() # Track analytics for the initial page
+
+    session.startChecking() # Begin tracking session status
 
     # Prefix all non-external AJAX requests with the root URI
     $.ajaxPrefilter (options, originalOptions, jqXHR) ->

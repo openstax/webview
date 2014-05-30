@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th class="type">Type</th>
+      <th class="title">Title</th>
+      <th class="title">Status</th>
+      <th class="edited">Edited</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {{#each this}}
+      {{> ./workspace-item-partial}}
+    {{/each}}
+  </tbody>
+</table>

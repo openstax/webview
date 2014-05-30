@@ -1,22 +1,24 @@
 define (require) ->
-  BaseView = require('cs!helpers/backbone/views/base')
+  EditableView = require('cs!helpers/backbone/views/editable')
 
-  return class FooterTabView extends BaseView
+  return class FooterTabView extends EditableView
     templateHelpers: () ->
+      @media ?= 'book'
       if @media is 'page'
-        model = @model.get('currentPage')?.toJSON()
+        model = @model.asPage()
       else
-        @media = 'book'
-        model = @model.toJSON()
+        model = @model
+      model = model?.toJSON() or {}
+      model.type = @model.get('mediaType')
 
-      return {media: @media, model: model}
+      return model or {}
 
     events:
       'click > .book-page-toggle > .btn:not(.active)': 'toggleMedia'
 
     initialize: () ->
       super()
-      @listenTo(@model, 'changePage', @render)
+      @listenTo(@model, 'change:currentPage', @render)
 
     toggleMedia: (e) ->
       @media = $(e.currentTarget).data('media')

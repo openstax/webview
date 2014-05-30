@@ -1,149 +1,219 @@
 define (require) ->
+  _ = require('underscore')
   Backbone = require('backbone')
-  toc = require('cs!collections/toc')
+  settings = require('settings')
   Collection = require('cs!models/contents/collection')
   Page = require('cs!models/contents/page')
-  require('backbone-associations')
-
-  MEDIA_TYPES =
-    'application/vnd.org.cnx.collection' : 'book'
-    'application/vnd.org.cnx.module': 'page'
 
   return class Content extends Collection
     relations: [{
       type: Backbone.Many
       key: 'contents'
       relatedModel: (relation, attributes) ->
-        return (attrs, options) ->
+        return (attrs, options) =>
+          # FIX: Consider putting all added fields under _meta to make removal before saving simple
+          attrs.parent = @
+          attrs.depth = 0
+          attrs.book = @
           if _.isArray(attrs.contents)
+            delete attrs.id # Get rid of the 'subcol' id so the section is unique
             return new Collection(attrs)
 
           return new Page(attrs)
-    }, {
-      type: Backbone.Many
-      key: 'authors'
-      collectionType: () -> Backbone.Collection
+    # Having a string array suddenly change into an empty Backbone.Collection
+    # is unexpected.
+    # This is commented unless there is a cleaner way to implement users
+    #
+    # }, {
+    #   type: Backbone.Many
+    #   key: 'authors'
+    #   collectionType: () -> Backbone.Collection
     }, {
       type: Backbone.One
       key: 'currentPage'
       relatedModel: Page
-    }, {
-      type: Backbone.Many
-      key: 'toc'
-      collectionType: () -> Backbone.Collection
     }]
 
     initialize: (options = {}) ->
-      toc.reset()
-      @set('toc', toc)
-
       @set('loaded', false)
-      @fetch
-        reset: true
-        success: () =>
+
+      # Immediately load content that has an id
+      if @id
+        @fetch
+          reset: true
+        .always () =>
+          @set('loaded', true)
+        .done () =>
           @set('error', false)
-          @load(options.page)
-        error: (model, response, options) =>
-          @set('error', response.status)
-      .always () =>
-        @set('loaded', true)
+          if @isBook()
+            if @get('contents').length
+              @setPage(options.page or 1) # Default to page 1
 
-    parse: (response) ->
-      response = @parseInfo(response)
-      type = response.type = MEDIA_TYPES[response.mediaType]
+        .fail (model, response, options) =>
+          @set('error', response?.status or model?.status or 9000)
 
-      # Only setup a toc for a book
-      if type isnt 'book' then return response
-
-      response.contents = response.tree.contents or []
-
-      depth = 0
-      page = 1
-
-      # Traverse a book's tree and set book, depth, parent, subcollection, and page
-      # information on each node of the tree prior to the tree being processed
-      # by backbone-associations.
-      traverse = (o = {}) =>
-        o.contents or= []
-        for item in o.contents
-          item.book = @
-          item.depth = depth
-          item.parent = o
-
-          # Determine if the item is a subcollection or a page
-          if item.contents
-            item.subcollection = true
-            delete item.id # Get rid of the 'subcol' id so the subcollection is unique
-            depth++
-            traverse(item)
-          else
-            item.page = page++
-
-        depth--
-
-      traverse(response.tree)
-
-      # Total number of pages in the book
-      response.pages = page - 1
-
-      return response
-
-    load: (page) ->
-      if @get('type') is 'book'
-        if @get('contents').length
-          @setPage(page or 1) # Default to page 1
-        else
-          @trigger('changePage') # Don't setup an empty collection
+    save: (key, val, options) ->
+      if not key? or typeof key is 'object'
+        attrs = key
+        options = val
       else
-        @set('currentPage', new Page({id: @id}))
-        @fetchPage()
+        attrs = {}
+        attrs[key] = val
 
-    fetchPage: () ->
-      page = @get('currentPage')
-      page.fetch
-        success: () =>
-          page.set('loaded', true)
-          @trigger('changePage')
+      options = _.extend(
+        includeTree: true
+        excludeContents: true
+      , options)
 
-    setPage: (num) ->
-      if num < 1 then num = 1
-      if num > @pages then num = @pages
+      return super(attrs, options).done () =>
+        @set('changed', false)
+        @set('childChanged', false)
 
-      @set('page', num)
+    toJSON: (options = {}) ->
+      results = super(arguments...)
 
-      page = @get('toc').at(num-1)
+      # Prevent new books with no id from being labelled a subcollection
+      if results.id is 'subcol'
+        delete results.id
+
+      if options.includeTree and @isBook()
+        results.tree =
+          id: @getVersionedId()
+          title: @get('title')
+          contents: @get('contents')?.toJSON?({serialize_keys: ['id', 'title', 'contents']}) or []
+
+      if options.excludeContents
+        delete results.contents
+
+      return results
+
+
+    _setPage: (page) ->
       @get('currentPage')?.set('active', false)
       @set('currentPage', page)
       page.set('active', true)
       @trigger('changePage')
 
       if not page.get('loaded')
-        @fetchPage()
+        page.fetch().done () ->
+          page.set('loaded', true)
 
-    getNextPage: () ->
-      page = @get('page')
-      if page < @get('pages') then ++page
+    _lookupPage: (numOrString) ->
+      switch typeof numOrString
+        when 'string'
+          return @get('contents').get(numOrString)
+        when 'number'
+          num = numOrString
+          # Do not skip if the currentPage is the arg being passed in
+          # because otherwise it will not get fetched
+          pages = @getTotalPages()
+          if num < 1 then num = 1
+          if num > pages then num = pages
+          return @getPage(num)
+        else
+          throw new Error('BUG: Invalid arg')
+
+    setPage: (numOrString) ->
+      @_setPage(@_lookupPage(numOrString))
+
+    getTotalPages: () ->
+      # FIX: cache total pages and recalculate on add/remove events?
+      return @getTotalLength()
+
+    getPageNumber: (model = @asPage()) -> super(model)
+
+    getNextPageNumber: () ->
+      if not @get('loaded') then return 0
+      pages = @getTotalPages()
+
+      page = @getPageNumber()
+      if page < pages then ++page
       return page
 
-    getPreviousPage: () ->
-      page = @get('page')
+    getPreviousPageNumber: () ->
+      if not @get('loaded') then return 0
+      page = @getPageNumber()
       if page > 1 then --page
       return page
 
-    nextPage: () ->
-      page = @get('page')
-      nextPage = @getNextPage()
+    deriveCurrentPage: (options = {}) ->
+      options = _.extend({wait: true}, options)
 
-      # Show the next page if there is one
-      @setPage(nextPage) if page isnt nextPage
+      if @isBook()
+        page = @get('currentPage')
+        title = page.get('title')
+        id = page.id
+        index = @get('contents').indexOf(page)
 
-      return nextPage
+        options = _.extend({at: index}, options)
 
-    previousPage: () ->
-      page = @get('page')
-      previousPage = @getPreviousPage()
+        @get('contents').remove(page)
+        @create({title: title, derivedFrom: id}, options)
+      else
+        @derive(options)
 
-      # Show the previous page if there is one
-      @setPage(previousPage) if page isnt previousPage
+    removeNode: (node) ->
+      # FIX: get previous page even if removing a section
+      #previousPage = @getPageNumber(@getPreviousNode(node))
+      previousPage = @getPageNumber(node) - 1
 
-      return previousPage
+      node.get('parent').get('contents').remove(node)
+
+      # FIX: determine if node was inside a section that got removed too
+      if node is @asPage()
+        @setPage(previousPage)
+
+      @set('changed', true)
+      @trigger('removeNode')
+
+    move: (node, marker, position) ->
+      oldContainer = node.get('parent')
+      container = marker.get('parent')
+
+      # Prevent a node from trying to become its own ancestor (infinite recursion)
+      if marker.hasAncestor(node)
+        return node
+
+      # Remove the node
+      oldContainer.get('contents').remove(node)
+
+      if position is 'insert'
+        index = 0
+        container = marker
+      else
+        index = marker.index()
+        if position is 'after' then index++
+
+      # Mark the node's parent, node's old parent, and book as changed
+      oldContainer.set('changed', true)
+      container.set('changed', true)
+      @set('changed', true)
+
+      # Re-add the node in the correct position
+      container.get('contents').add(node, {at: index})
+
+      # Update the node's parent
+      node.set('parent', container)
+
+      # Update the node's depth
+      if container.has('depth')
+        node.set('depth', 1 + container.get('depth'))
+      else
+        node.set('depth', 0)
+
+      @trigger('moveNode')
+      return node
+
+
+    # Content can be a Book or a Page and some views render
+    # parts of the current page.
+    # This will return:
+    # - `null` if this content has not been loaded yet
+    # - the current page (if this is a book)
+    # - this if this is a page
+    asPage: () ->
+      if @isBook()
+        return @get('currentPage')
+      else
+        # TODO: Raise an error if this is called on a subcollection
+        return @

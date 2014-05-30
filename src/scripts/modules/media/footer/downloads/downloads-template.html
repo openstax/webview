@@ -1,15 +1,15 @@
 <h3>Downloads</h3>
 
-{{> ../inherits/tab/toggle-partial }}
+{{> modules/media/footer/inherits/tab/toggle-partial }}
 
-{{#is model.downloads 'loading'}}
+{{#is downloads 'loading'}}
   <div class="progress progress-striped active">
     <div class="progress-bar secondary" role="progressbar" style="width: 100%">
       <span class="sr-only">Loading</span>
     </div>
   </div>
 {{else}}
-  {{#if model.downloads.length}}
+  {{#if downloads.length}}
     <table class="table">
       <thead>
         <tr>
@@ -20,7 +20,7 @@
       </thead>
 
       <tbody>
-        {{#each model.downloads}}
+        {{#each downloads}}
           <tr>
             <td>{{format}}</td>
             <td>

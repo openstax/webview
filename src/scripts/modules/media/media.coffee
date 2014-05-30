@@ -1,4 +1,5 @@
 define (require) ->
+  $ = require('jquery')
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics')
   Content = require('cs!models/content')
@@ -19,6 +20,7 @@ define (require) ->
 
     regions:
       media: '.media'
+      editbar: '.editbar'
 
     initialize: (options) ->
       super()
@@ -31,8 +33,9 @@ define (require) ->
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title', @updateTitle)
-      @listenTo(@model, 'change:legacy_id change:legacy_version changePage', @updateLegacyLink)
+      @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
+      @listenTo(@model, 'change:editable', @toggleEditor)
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))
@@ -59,11 +62,11 @@ define (require) ->
       id = @model.get('legacy_id')
       version = @model.get('legacy_version')
 
-      if @model.get('type') is 'book'
-        currentPage = @model.get('currentPage')
+      if @model.isBook()
+        currentPage = @model.asPage()
         if currentPage
-          moduleID = currentPage?.get('legacy_id')
-          moduleVersion = currentPage?.get('legacy_version')
+          moduleID = currentPage.get('legacy_id')
+          moduleVersion = currentPage.get('legacy_version')
           if moduleID and moduleVersion
             headerView.setLegacyLink("content/#{moduleID}/#{moduleVersion}/?collection=#{id}/#{version}")
         return
@@ -73,3 +76,23 @@ define (require) ->
     displayError: () ->
       error = arguments[1] # @model.get('error')
       router.appView.render('error', {code: error}) if error
+
+    toggleEditor: () -> if @editing then @closeEditor() else @loadEditor()
+
+    loadEditor: () ->
+      @editing = true
+
+      require ['cs!./editbar/editbar'], (EditbarView) =>
+        @regions.editbar.show(new EditbarView({model: @model}))
+        height = @regions.editbar.$el.find('.navbar').outerHeight()
+        $('body').css('padding-top', height) # Don't cover the page header
+        window.scrollBy(0, height) # Prevent viewport from jumping
+
+    closeEditor: () ->
+      @editing = false
+      height = @regions.editbar.$el.find('.navbar').outerHeight()
+      @regions.editbar.empty()
+      $('body').css('padding-top', '0') # Remove added padding
+      window.scrollBy(0, -height) # Prevent viewport from jumping
+
+    onBeforeClose: () -> @model.set('editable', false) if @model.get('editable')

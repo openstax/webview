@@ -1,0 +1,15 @@
+<tr>
+  <td class="add">
+    <input type="checkbox" name="{{id}}" value="{{title}}" />
+  </td>
+  <td class="title">
+    <h4>{{title}}</h4>
+    <span>{{include summarySnippet}}</span>
+  </td>
+  <td class="authors">
+    {{#each authors}}
+      <span class="author">{{fullname}}</span>
+    {{/each}}
+  </td>
+  <td class="edited">{{date pubDate}}</td>
+</tr>

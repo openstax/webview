@@ -1,13 +1,14 @@
 define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
+  session = require('cs!session')
   router = require('cs!router')
-  BaseView = require('cs!helpers/backbone/views/base')
+  EditableView = require('cs!helpers/backbone/views/editable')
   #MailPopoverView = require('cs!./popovers/mail/mail')
   template = require('hbs!./title-template')
   require('less!./title')
 
-  return class MediaTitleView extends BaseView
+  return class MediaTitleView extends EditableView
     template: template
     templateHelpers: () ->
       title = @model.get('title')
@@ -28,13 +29,30 @@ define (require) ->
       _.each share, (value, key, list) ->
         list[key] = encodeURI(value)
 
-      return {share: share, encodedTitle: encodeURI(title)}
+      return {
+        share: share
+        encodedTitle: encodeURI(title)
+        derivable: not @model.isDraft()
+        authenticated: session.get('id')
+      }
+
+    editable:
+      '.media-title > .title > h1':
+        value: 'title'
+        type: 'textinput'
+
+    events:
+      'click .derive .btn': 'derive'
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:title change:loaded', @render)
+      @listenTo(@model, 'change:loaded change:title', @render)
       @listenTo(router, 'navigate', @render)
 
-    #onRender: () ->
-    #  $share = @$el.find('.share')
-    #  @attachPopover new MailPopoverView({owner: $share.find('.mail'), model: @model})
+    derive: () ->
+      options =
+        success: (model) =>
+          router.navigate("/contents/#{model.id}@#{model.version}", {trigger: true})
+      
+      # Derive a copy of the book and then navigate to it
+      @model.derive(options)

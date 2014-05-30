@@ -1,3 +1,23 @@
-<div class="email">
+<div class="email tool">
   <a href="mailto:{{#each authors}}{{email}},{{/each}}?subject={{encodedTitle}}">E-mail Author(s)</a>
 </div>
+
+{{#if authenticated}}
+  {{#if isDraft}}
+    {{#unless editable}}
+      <div class="edit tool">
+        <span>Edit</span>
+      </div>
+    {{else}}
+      <div class="preview tool">
+        <span>Preview</span>
+      </div>
+    {{/unless}}
+  {{else}}
+    {{#if derivable}}
+      <div class="derive tool">
+        <span>Derive a Copy</span>
+      </div>
+    {{/if}}
+  {{/if}}
+{{/if}}
