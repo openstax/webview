@@ -10,7 +10,7 @@ define (require) ->
     templateHelpers: () -> {
       page: @page
       url: @url
-      username: session.get('username')
+      username: session.get('id')
     }
 
     initialize: (options = {}) ->
