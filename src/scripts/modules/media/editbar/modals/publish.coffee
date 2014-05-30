@@ -54,7 +54,7 @@ define (require) ->
         dataType: 'json'
         xhrFields:
           withCredentials: true
-      .done () ->
+      .done () =>
         # Close editor
         @model.set('editable', false)
 
