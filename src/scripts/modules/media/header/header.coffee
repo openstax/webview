@@ -31,7 +31,7 @@ define (require) ->
         hasDownloads: (_.isArray(downloads) and downloads?.length) or
           (_.isArray(pageDownloads) and pageDownloads?.length)
         derivable: not currentPage?.isDraft() and @model.isDraft()
-        authenticated: session.get('username')
+        authenticated: session.get('id')
       }
 
     editable:

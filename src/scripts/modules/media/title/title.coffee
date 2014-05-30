@@ -33,7 +33,7 @@ define (require) ->
         share: share
         encodedTitle: encodeURI(title)
         derivable: not @model.isDraft()
-        authenticated: session.get('username')
+        authenticated: session.get('id')
       }
 
     editable:

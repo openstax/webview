@@ -10,7 +10,7 @@ define (require) ->
   return class ToolsView extends BaseView
     template: template
     templateHelpers: () -> {
-      authenticated: session.get('username')
+      authenticated: session.get('id')
       encodedTitle: encodeURI(@model.get('title'))
       derivable: not @model.isBook()
       isDraft: @model.isDraft()
