@@ -137,23 +137,20 @@ define (require) ->
       return page
 
     deriveCurrentPage: (options = {}) ->
+      options = _.extend({wait: true}, options)
+
       if @isBook()
         page = @get('currentPage')
         title = page.get('title')
         id = page.id
         index = @get('contents').indexOf(page)
 
-        # Defaults
-        options = _.extend({
-          at: index
-          wait: true
-        }, options)
+        options = _.extend({at: index}, options)
 
         @get('contents').remove(page)
         @create({title: title, derivedFrom: id}, options)
       else
-        #todo: only update from contents if it is a book, otherwise update the model itself
-        console.log 'update this model'
+        @derive(options)
 
     removeNode: (node) ->
       # FIX: get previous page even if removing a section
