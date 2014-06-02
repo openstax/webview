@@ -18,7 +18,7 @@
     "require-cs": "~0.4.4",
     "require-css": "~0.1.1",
     "require-less": "~0.1.1",
-    "require-handlebars-plugin": "~0.8.0",
+    "require-handlebars-plugin": "=0.8.0",
     "aloha-editor": "oerpub/Aloha-Editor#bootstrap3-fixes",
     "select2": "~3.4.5"
   },
