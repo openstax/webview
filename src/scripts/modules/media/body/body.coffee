@@ -39,7 +39,7 @@ define (require) ->
       @listenTo(@model, 'change:editable', @toggleDraftMode)
 
     onRender: () ->
-      MathJax.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
+      MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
 
       # Wrap title and content elements in header and section elements, respectively
       @$el.find('.example, .exercise, .note').each (index, el) ->

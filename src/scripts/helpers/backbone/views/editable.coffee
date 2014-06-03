@@ -81,6 +81,40 @@ define (require) ->
             html += "<p> </p>" # Allow putting cursor after a Blockish. removed if empty.
             $editable.html(html)
             $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
+
+            # Unwrap <section> elements into h# elements
+            # There are 3 cases:
+            # 1. <section><h#>
+            # 2. <section><h?> (wrong heading number)
+            # 3. <section><no-heading>
+            #
+            # For 1-2 the solution is to always replace the <h#> with the correct heading.
+            # For 3, just add a dummy title (or unwrap the section (eep!)
+            $sections = $editable.find('section')
+            $headings = $()
+
+            $sections.each (i, el) ->
+              $section = $(el)
+              $firstChild = $section.children(':first-child')
+              level = $section.parentsUntil($editable, 'section').length + 1
+              $newHeading = $("<h#{level}></h#{level}>")
+              $newHeading.attr('id', $section.attr('id'))
+              $newHeading.attr('class', $section.attr('class'))
+
+              $headings = $headings.add($newHeading)
+
+              if $firstChild.is('h1,h2,h3,h4,h5,h6')
+                $newHeading.append($firstChild.contents() or 'Dummy Title')
+                $firstChild.replaceWith($newHeading)
+              else
+                $section.prepend($newHeading)
+
+            $headings.unwrap()
+
+
+
+
+
             $editable.aloha()
 
             # Grab the editable so we can call `.getContents()`

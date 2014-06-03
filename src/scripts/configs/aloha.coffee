@@ -49,6 +49,7 @@ define ['jquery'], ($) ->
       # All the plugins we use in Aloha
       load: [
         'oer/toolbar'
+        'common/dom-to-xhtml'
         'common/ui'
         'common/format'
         'common/block'
