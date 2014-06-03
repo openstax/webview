@@ -85,9 +85,9 @@ define ['jquery'], ($) ->
             setTimeout(window.GLOBAL_UPLOADER_HACK, 100)
 
             if xhr.status >= 200 and xhr.status < 300 or xhr.status is 304 or xhr.status is 302
-              return xhr.response
+              return {status:xhr.status, url:xhr.response}
 
-            return null
+            return {status:xhr.status}
 
           # Send files using the `file` field when POSTing
           uploadfield: 'file'
