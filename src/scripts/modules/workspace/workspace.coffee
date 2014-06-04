@@ -28,13 +28,13 @@ define (require) ->
     initialize: () ->
       super()
 
-      @model = searchResults.load("?q=authorID:#{session.get('id')}%20sort:pubDate", WORKSPACE_URI)
-
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:results change:loaded', @render) if @model
 
 
     onRender: () ->
+      @model = searchResults.load("?authorID:#{session.get('id')}", WORKSPACE_URI)
+
       @regions.workspace.show(new WorkspaceResultsView({model: @model}))
 
     displayError: () ->
