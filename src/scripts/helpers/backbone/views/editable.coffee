@@ -37,7 +37,7 @@ define (require) ->
 
         $editable.attr('contenteditable', true)
 
-        $editable.each (index) =>
+        $editable.each (index) ->
           if editableView.observers[selector] then editableView.observers[selector].disconnect()
 
           editableView.observers[selector] = new MutationObserver (mutations) ->
@@ -51,7 +51,7 @@ define (require) ->
       stop: ($editable, editableView, getValue) ->
         $editable.off 'change.editable'
       start: ($editable, editableView, options, attributeName, getValue, setValue) ->
-        require ['select2'], (select2) =>
+        require ['select2'], (select2) ->
           if typeof options.select2 is 'function'
             s2 = options.select2.apply(editableView)
           else
