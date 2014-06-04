@@ -10,9 +10,24 @@
         <div class="modal-body">
           <div class="form-group">
             <label class="checkbox">
-              <input type="checkbox" name="license" /> I agree to license all published material under the CC-BY license.
+              <input type="checkbox" name="license" />
+                <span>I license this work under the</span>
+                <a href="https://creativecommons.org/licenses/by/4.0/">
+                  Creative Commons Attribution License (CC-BY).
+                </a>
+                <span>I understand</span>
+                <ul>
+                  <li>I retain the copyright of my work</li>
+                  <li>I warrant that I am the author or have permission to distribute the work in question</li>
+                  <li>I wish to have this distributed under the terms of the CC-BY license
+                    (<strong>including allowing modification of this work and requiring attribution<strong>)</li>
+                  <li>I agree that proper attribution of my work is any attribution that includes the authors' names,
+                    the title of the work and the OpenStax CNX URL to the work</li>
+                </ul>
             </label>
           </div>
+
+          <textarea name="submitlog" class="form-control submitlog" placeholder="Include a description of your changes"></textarea>
 
           <div class="publish-list">
             <div>
@@ -25,8 +40,6 @@
               {{! Add Publish List View}}
             </div>
           </div>
-
-          <textarea name="submitlog" class="form-control" placeholder="Include a description of your changes"></textarea>
 
         </div>
 
