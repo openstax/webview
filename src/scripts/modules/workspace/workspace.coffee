@@ -1,7 +1,7 @@
 define (require) ->
   router = require('cs!router')
   session  = require('cs!session')
-  SearchResults = require('cs!models/search-results')
+  searchResults = require('cs!models/search-results')
   BaseView = require('cs!helpers/backbone/views/base')
   WorkspaceResultsView = require('cs!./results/results')
   Content  = require('cs!models/content')
@@ -28,14 +28,14 @@ define (require) ->
     initialize: () ->
       super()
 
-      @model = new SearchResults
+      @model = searchResults.config
         query: "?authorID:#{session.get('id')}"
         url: WORKSPACE_URI
 
       @listenTo(@model, 'change:error', @displayError)
 
     onRender: () ->
-      @model.fetch()
+      @model.fetch() # Force update
 
       @regions.workspace.show(new WorkspaceResultsView({model: @model}))
 

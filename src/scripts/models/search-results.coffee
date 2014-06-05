@@ -17,7 +17,7 @@ define (require) ->
     "text": "Text"
   }
 
-  return class SearchResults extends Backbone.Model
+  return new class SearchResults extends Backbone.Model
     url: () -> "#{@searchUrl}#{@query}"
 
     defaults:
@@ -31,15 +31,29 @@ define (require) ->
           authors: []
           types: []
 
-    initialize: (options = {}) ->
+    initialize: (options) ->
+      @config(options)
+      @set('loaded', false)
+
+    config: (options = {}) ->
       @query = options.query or ''
       @searchUrl = options.url or SEARCH_URI
+
+      return @
+
+    load: (options) ->
+      if options.query isnt @query or options.url isnt @searchUrl
+        @config(options)
+        @fetch(options)
+
+      return @
+
+    fetch: () ->
+      # Reset search results
+      @clear().set(@defaults)
       @set('loaded', false)
 
-    fetch: (options = {}, query = '', url = SEARCH_URI) ->
-      @set('loaded', false)
-
-      return super(options)
+      return super(arguments...)
       .always () =>
         @set('loaded', true)
       .done () =>
