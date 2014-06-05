@@ -70,7 +70,6 @@ define (require) ->
 
       @$el.find('.btn-submit').toggleClass('disabled', !isValid)
 
-
     toggleBook: (e) ->
       if $(e.currentTarget).is(':checked')
         # Ensure everything else is checked
