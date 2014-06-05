@@ -23,6 +23,34 @@ define (require) ->
       'click .search-pages': 'onSearch'
       'submit form': 'onSubmit'
       'change form': 'onChange'
+      'focus .page-title': 'onFocusSearch'
+      'blur .page-title': 'onUnfocusSearch'
+      'keypress .page-title': 'onEnter'
+
+    # Update the Search/Submit buttons to make the button that will
+    # respond to 'Enter' to be styled as primary
+    onFocusSearch: (e) ->
+      @$el.find('.search-pages').addClass('btn-primary').removeClass('btn-plain')
+      @$el.find('.btn-submit').addClass('btn-plain').removeClass('btn-primary')
+
+    onUnfocusSearch: (e) ->
+      @$el.find('.search-pages').addClass('btn-plain').removeClass('btn-primary')
+      @$el.find('.btn-submit').addClass('btn-primary').removeClass('btn-plain')
+
+    # Intelligently determine if the user intended to search or add pages
+    # when hitting the 'enter' key
+    onEnter: (e) ->
+      if e.keyCode is 13
+        e.preventDefault()
+        e.stopPropagation()
+
+        $modal = @$el.children('#add-page-modal')
+        $input = $modal.find('.page-title')
+
+        if $input.is(':focus')
+          @search($input.val())
+        else
+          $modal.find('form').submit()
 
     onChange: (e) ->
       $target = $(e.target)
