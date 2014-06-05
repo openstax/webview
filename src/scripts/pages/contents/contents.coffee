@@ -27,13 +27,14 @@ define (require) ->
       @parent.regions.footer.show(new FooterView({page: 'contents'}))
       @regions.contents.show(new FindContentView())
 
-      clearTimeout(@_pollingContentTimer)
+      #clearTimeout(@_pollingContentTimer)
 
       if @uuid
         @parent.regions.header.show(new HeaderView({page: 'contents'}))
         view = new MediaView({uuid: @uuid, page: @page}) # to obtain the Content model
         @regions.contents.append(view)
 
+        ###
         # Start polling for changes
         @listenTo(view.model, 'change:changed-remotely', @displayChangedRemotely)
         @listenTo(view.model, 'change:currentPage.changed-remotely', @displayChangedRemotely)
@@ -55,6 +56,7 @@ define (require) ->
                 @_pollingContentTimer = setTimeout(pollRemoteUpdates, POLLING_REFRESH)
 
         @_pollingContentTimer = setTimeout(pollRemoteUpdates, POLLING_REFRESH)
+        ###
 
       else
         @parent.regions.header.show(new HeaderView({page: 'contents', url: 'contents'}))
