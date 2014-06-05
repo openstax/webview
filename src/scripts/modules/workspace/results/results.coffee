@@ -12,6 +12,11 @@ define (require) ->
       header: '.header'
       list: '.list'
 
+    initialize: () ->
+      super()
+
+      @listenTo(@model, 'change', @render)
+
     onRender: () ->
       @regions.header.show(new SearchHeaderView({model: @model}))
       @regions.list.show(new SearchResultsListView({model: @model}))

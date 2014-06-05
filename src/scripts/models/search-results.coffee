@@ -17,7 +17,7 @@ define (require) ->
     "text": "Text"
   }
 
-  return new class SearchResults extends Backbone.Model
+  return class SearchResults extends Backbone.Model
     url: () -> "#{@searchUrl}#{@query}"
 
     defaults:
@@ -34,25 +34,18 @@ define (require) ->
     initialize: (options = {}) ->
       @query = options.query or ''
       @searchUrl = options.url or SEARCH_URI
+      @set('loaded', false)
 
-    load: (query, url) ->
-      if query isnt @query or url isnt @searchUrl
-        # Reset search results
-        @clear().set(@defaults)
-        @set('loaded', false)
+    fetch: (options = {}, query = '', url = SEARCH_URI) ->
+      @set('loaded', false)
 
-        @query = query or ''
-        @searchUrl = url or SEARCH_URI
-        @fetch
-          reset: true
-        .always () =>
-          @set('loaded', true)
-        .done () =>
-          @set('error', false)
-        .fail (model, response, options) =>
-          @set('error', response.status)
-
-      return @
+      return super(options)
+      .always () =>
+        @set('loaded', true)
+      .done () =>
+        @set('error', false)
+      .fail (model, response, options) =>
+        @set('error', response.status)
 
     parse: (response, options) ->
       response = super(arguments...)
@@ -91,7 +84,6 @@ define (require) ->
             value.value = type.name
 
       return response
-
 
     # Used when adding new content from the Workspace
     prependNew: (content) ->

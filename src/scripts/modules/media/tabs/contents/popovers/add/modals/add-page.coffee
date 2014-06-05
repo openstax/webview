@@ -3,7 +3,7 @@ define (require) ->
   _ = require('underscore')
   linksHelper = require('cs!helpers/links')
   router = require('cs!router')
-  searchResults = require('cs!models/search-results')
+  SearchResults = require('cs!models/search-results')
   BaseView = require('cs!helpers/backbone/views/base')
   AddPageSearchResultsView = require('cs!./results/results')
   template = require('hbs!./add-page-template')
@@ -50,7 +50,8 @@ define (require) ->
 
     search: (title) ->
       @_checkedCounter = 0
-      results = searchResults.load("?q=title:#{title}%20type:page")
+      results = new SearchResults({query: "?q=title:#{title}%20type:page"})
+      results.fetch()
       @regions.results.show(new AddPageSearchResultsView({model: results}))
 
     updateUrl: () ->
