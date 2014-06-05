@@ -31,28 +31,35 @@ define (require) ->
           authors: []
           types: []
 
-    initialize: (options = {}) ->
+    initialize: (options) ->
+      @config(options)
+      @set('loaded', false)
+
+    config: (options = {}) ->
       @query = options.query or ''
       @searchUrl = options.url or SEARCH_URI
 
-    load: (query, url) ->
-      if query isnt @query or url isnt @searchUrl
-        # Reset search results
-        @clear().set(@defaults)
-        @set('loaded', false)
+      return @
 
-        @query = query or ''
-        @searchUrl = url or SEARCH_URI
-        @fetch
-          reset: true
-        .always () =>
-          @set('loaded', true)
-        .done () =>
-          @set('error', false)
-        .fail (model, response, options) =>
-          @set('error', response.status)
+    load: (options) ->
+      if options.query isnt @query or options.url isnt @searchUrl
+        @config(options)
+        @fetch(options)
 
       return @
+
+    fetch: () ->
+      # Reset search results
+      @clear().set(@defaults)
+      @set('loaded', false)
+
+      return super(arguments...)
+      .always () =>
+        @set('loaded', true)
+      .done () =>
+        @set('error', false)
+      .fail (model, response, options) =>
+        @set('error', response.status)
 
     parse: (response, options) ->
       response = super(arguments...)
@@ -91,7 +98,6 @@ define (require) ->
             value.value = type.name
 
       return response
-
 
     # Used when adding new content from the Workspace
     prependNew: (content) ->

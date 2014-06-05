@@ -28,19 +28,20 @@ define (require) ->
     initialize: () ->
       super()
 
-      @listenTo(@model, 'change:error', @displayError)
-      @listenTo(@model, 'change:results change:loaded', @render) if @model
+      @model = searchResults.config
+        query: "?authorID:#{session.get('id')}"
+        url: WORKSPACE_URI
 
+      @listenTo(@model, 'change:error', @displayError)
 
     onRender: () ->
-      @model = searchResults.load("?authorID:#{session.get('id')}", WORKSPACE_URI)
+      @model.fetch() # Force update
 
       @regions.workspace.show(new WorkspaceResultsView({model: @model}))
 
     displayError: () ->
       error = arguments[1] # @model.get('error')
       router.appView.render('error', {code: error}) if error
-
 
     addBook: () ->
       title = prompt('What is the title for the new Book?')

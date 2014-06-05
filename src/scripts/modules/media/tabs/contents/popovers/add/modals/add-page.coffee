@@ -50,7 +50,7 @@ define (require) ->
 
     search: (title) ->
       @_checkedCounter = 0
-      results = searchResults.load("?q=title:#{title}%20type:page")
+      results = searchResults.load({query: "?q=title:#{title}%20type:page"})
       @regions.results.show(new AddPageSearchResultsView({model: results}))
 
     updateUrl: () ->
