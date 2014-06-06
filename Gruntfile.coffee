@@ -162,6 +162,14 @@ module.exports = (grunt) ->
 
             done()
 
+      aloha:
+        options:
+          appDir: "bower_components/aloha-editor/src/"
+          baseUrl: 'lib/'
+          dir: 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output'
+          mainConfigFile: 'bower_components/aloha-editor/build/aloha/build-profile-with-oer.js'
+          skipDirOptimize: true
+
     # Target HTML
     targethtml:
       dist:
@@ -258,10 +266,16 @@ module.exports = (grunt) ->
     #'recess' NOTE: Disabled until recess is upgraded to support LESS 1.6+
   ]
 
+  # Install
+  # -----
+  grunt.registerTask 'install', [
+    'requirejs:aloha'
+  ]
+
   # Dist
   # -----
   grunt.registerTask 'dist', [
-    'requirejs'
+    'requirejs:compile'
     'copy:dist'
     'copy:fonts'
     'targethtml:dist'
@@ -274,7 +288,7 @@ module.exports = (grunt) ->
   # Default
   # -----
   grunt.registerTask 'default', [
-    'requirejs'
+    'requirejs:compile'
     'copy:dist'
     'copy:fonts'
     'targethtml:dist'
