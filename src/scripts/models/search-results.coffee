@@ -42,7 +42,10 @@ define (require) ->
       return @
 
     load: (options) ->
-      if options.query isnt @query or options.url isnt @searchUrl
+      query = options.query or @query
+      url = options.url or @searchUrl
+
+      if query isnt @query or url isnt @searchUrl
         @config(options)
         @fetch(options)
 
