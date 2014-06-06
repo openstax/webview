@@ -3,6 +3,16 @@ module.exports = (grunt) ->
   fs = require('fs')
   pkg = require('./package.json')
 
+  alohaBuildConfig = grunt.file.read('bower_components/aloha-editor/build/aloha/build-profile-with-oer.js')
+  alohaBuildConfig = eval(alohaBuildConfig)
+  alohaBuildConfig.appDir = 'bower_components/aloha-editor/src/'
+  alohaBuildConfig.baseUrl = 'lib/'
+  alohaBuildConfig.dir = 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output'
+  alohaBuildConfig.mainConfigFile = 'bower_components/aloha-editor/build/aloha/build-profile-with-oer.js'
+  alohaBuildConfig.wrap =
+    startFile: 'bower_components/aloha-editor/build/aloha/closure-start.frag'
+    endFile: 'bower_components/aloha-editor/build/aloha/closure-end.frag'
+
   # Project configuration.
   grunt.initConfig
     pkg: pkg
@@ -163,12 +173,7 @@ module.exports = (grunt) ->
             done()
 
       aloha:
-        options:
-          appDir: "bower_components/aloha-editor/src/"
-          baseUrl: 'lib/'
-          dir: 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output'
-          mainConfigFile: 'bower_components/aloha-editor/build/aloha/build-profile-with-oer.js'
-          skipDirOptimize: true
+        options: alohaBuildConfig
 
     # Target HTML
     targethtml:
