@@ -11,6 +11,8 @@ define (require) ->
   require('less!./add-page')
   require('bootstrapModal')
 
+  WORKSPACE_URI = "#{location.origin}/users/contents"
+
   return class AddPageModal extends BaseView
     template: template
 
@@ -22,6 +24,7 @@ define (require) ->
     events:
       'click .new-page': 'newPage'
       'click .search-pages': 'onSearch'
+      'change .draft-pages': 'toggleDrafts'
       'submit form': 'onSubmit'
       'change form': 'onChange'
       'keyup .page-title': 'onKeyUpSearch'
@@ -95,6 +98,17 @@ define (require) ->
 
       if @validations.searchTitle.hasError
         @validations.searchTitle.hide()
+
+    toggleDrafts: (e) ->
+      $('.control-label').toggleClass('hidden', e.target.checked)
+      if (e.target.checked)
+        @_checkedCounter = 0
+        results = searchResults.load({
+          url:"#{WORKSPACE_URI}?mediaType=application/vnd.org.cnx.module&state=Draft&containedIn=not:#{@model.id}"
+        })
+        @regions.results.show(new AddPageSearchResultsView({model: results}))
+      else
+        @regions.results.empty()
 
     onSearch: (e) ->
       title = @$el.find('.page-title').val()
