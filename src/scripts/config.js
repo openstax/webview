@@ -21,8 +21,7 @@
       // ## MathJax
       mathjax: 'http://cdn.mathjax.org/mathjax/2.3-latest/MathJax.js?config=MML_HTMLorMML',
 
-      // Use Minified Aloha ( `r.js -o bower_components/aloha-editor/build/aloha/build-profile-with-oer.js` )
-      // because loading files in a different requirejs context is a royal pain
+      // Use Minified Aloha because loading files in a different requirejs context is a royal pain
       aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
       // Override location of jquery-ui and use our own. Because
       // jquery-ui and bootstrap conflict in a few cases (buttons,

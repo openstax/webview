@@ -3,6 +3,16 @@ module.exports = (grunt) ->
   fs = require('fs')
   pkg = require('./package.json')
 
+  alohaBuildConfig = grunt.file.read('bower_components/aloha-editor/build/aloha/build-profile-with-oer.js')
+  alohaBuildConfig = eval(alohaBuildConfig)
+  alohaBuildConfig.appDir = 'bower_components/aloha-editor/src/'
+  alohaBuildConfig.baseUrl = 'lib/'
+  alohaBuildConfig.dir = 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output'
+  alohaBuildConfig.mainConfigFile = 'bower_components/aloha-editor/build/aloha/build-profile-with-oer.js'
+  alohaBuildConfig.wrap =
+    startFile: 'bower_components/aloha-editor/build/aloha/closure-start.frag'
+    endFile: 'bower_components/aloha-editor/build/aloha/closure-end.frag'
+
   # Project configuration.
   grunt.initConfig
     pkg: pkg
@@ -162,6 +172,9 @@ module.exports = (grunt) ->
 
             done()
 
+      aloha:
+        options: alohaBuildConfig
+
     # Target HTML
     targethtml:
       dist:
@@ -258,10 +271,16 @@ module.exports = (grunt) ->
     #'recess' NOTE: Disabled until recess is upgraded to support LESS 1.6+
   ]
 
+  # Install
+  # -----
+  grunt.registerTask 'install', [
+    'requirejs:aloha'
+  ]
+
   # Dist
   # -----
   grunt.registerTask 'dist', [
-    'requirejs'
+    'requirejs:compile'
     'copy:dist'
     'copy:fonts'
     'targethtml:dist'
@@ -274,7 +293,7 @@ module.exports = (grunt) ->
   # Default
   # -----
   grunt.registerTask 'default', [
-    'requirejs'
+    'requirejs:compile'
     'copy:dist'
     'copy:fonts'
     'targethtml:dist'
