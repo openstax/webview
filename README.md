@@ -13,9 +13,9 @@ CNX webview is designed to be run as a frontend for [cnx-archive](https://github
 1. If necessary, install [Node.js](http://nodejs.org) and npm (included with Node.js).
 2. Run `npm install -g grunt-cli bower` in the command line to install [grunt-cli](https://github.com/gruntjs/grunt-cli) and [bower](http://bower.io/).
 3. From the root `webview` directory, run `npm install` in the command line to install test and build dependencies.
-4. until install is fixed (and dist-ified) do this:
-
-   `./node_modules/grunt-contrib-requirejs/node_modules/requirejs/bin/r.js -o bower_components/aloha-editor/build/aloha/build-profile-with-oer.js`
+  * `npm install` runs `bower install` and `grunt install`, both of which can also be run independently
+    * `bower install` downloads front-end dependencies
+    * `grunt install` compiles the Aloha-Editor (which is downloaded by bower)
 
 ##### Testing
 
@@ -26,6 +26,13 @@ From the root `webview` directory, run `npm test`.
 From the root `webview` directory, run `grunt dist`.
 
 The `dist` directory containing the built site will be added to the root `webview` directory.
+
+##### Updating
+
+From the root `webview` directory, run `npm run-script upgrade`, which executes the following commands:
+1. `npm update`
+2. `bower update`
+3. `grunt install --verbose`
 
 #### Hosting
 
