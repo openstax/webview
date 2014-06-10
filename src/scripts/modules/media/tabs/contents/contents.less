@@ -1,0 +1,18 @@
+@import "../../../../../styles/variables.less";
+@import "../../../../../styles/mixins.less";
+
+@left-menu-indent: 20px;
+
+.media-tabs .contents .contents {
+  .columns(290px; 30px; 1px solid @gray-lighter);
+  margin-right: -1px; // Hide 3rd column rule
+  padding: 15px;
+
+  > .add {
+    margin: 5px 0 5px @left-menu-indent;
+  }
+
+  > .dropdown-menu {
+    margin-left: @left-menu-indent;
+  }
+}

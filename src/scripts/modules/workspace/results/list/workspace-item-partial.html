@@ -1,0 +1,20 @@
+<tr>
+  <td class="type">
+    {{#is mediaType 'application/vnd.org.cnx.collection'}}
+      <span class="glyphicon glyphicon-book"></span>
+    {{else}}
+      {{#is mediaType 'application/vnd.org.cnx.module'}}
+        <span class="glyphicon glyphicon-file"></span>
+      {{else}}
+        <span class="glyphicon glyphicon-question-sign"></span>
+      {{/is}}
+    {{/is}}
+  </td>
+  <td class="title">
+    <h4><a href="contents/{{id}}">{{title}}</a></h4>
+  </td>
+  <td class="status">
+    <h4>{{state}}</h4>
+  </td>
+  <td class="edited">{{date revised}}</td>
+</tr>

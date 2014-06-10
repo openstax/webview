@@ -1,6 +1,5 @@
 define (require) ->
-  BaseView = require('cs!helpers/backbone/views/base')
-  MetadataView = require('cs!./metadata/metadata')
+  EditableView = require('cs!helpers/backbone/views/editable')
   DownloadsView = require('cs!./downloads/downloads')
   HistoryView = require('cs!./history/history')
   AttributionView = require('cs!./attribution/attribution')
@@ -8,11 +7,10 @@ define (require) ->
   template = require('hbs!./footer-template')
   require('less!./footer')
 
-  return class MediaFooterView extends BaseView
+  return class MediaFooterView extends EditableView
     template: template
 
     regions:
-      metadata: '.metadata'
       downloads: '.downloads'
       history: '.history'
       attribution: '.attribution'
@@ -21,8 +19,18 @@ define (require) ->
     events:
       'click .tab': 'selectTab'
 
+    editable:
+      '[data-content="downloads"]':
+        start: ($el) -> $el.addClass('disabled')
+        stop: ($el) -> $el.removeClass('disabled')
+      '[data-content="history"]':
+        start: ($el) -> $el.addClass('disabled')
+        stop: ($el) -> $el.removeClass('disabled')
+      '[data-content="attribution"]':
+        start: ($el) -> $el.addClass('disabled')
+        stop: ($el) -> $el.removeClass('disabled')
+
     onRender: () ->
-      @regions.metadata.show(new MetadataView({model: @model}))
       @regions.downloads.show(new DownloadsView({model: @model}))
       @regions.history.show(new HistoryView({model: @model}))
       @regions.attribution.show(new AttributionView({model: @model}))
@@ -33,6 +41,8 @@ define (require) ->
       @switchTab($tab)
 
     switchTab: ($tab) ->
+      if $tab.hasClass('disabled') then return
+
       $allTabs = @$el.find('.tab')
       $allTabs.addClass('inactive')
       $allTabs.removeClass('active')

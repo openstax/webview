@@ -1,5 +1,5 @@
 define (require) ->
-  $ = require('jquery')
+  session  = require('cs!session')
   settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./header-template')
@@ -10,12 +10,15 @@ define (require) ->
     templateHelpers: () -> {
       page: @page
       url: @url
+      username: session.get('id')
     }
 
     initialize: (options = {}) ->
       super()
       @page = options.page
       @url = @createLink(options.url) if options.url
+
+      @listenTo(session, 'change', @render)
 
     setLegacyLink: (url) ->
       if url

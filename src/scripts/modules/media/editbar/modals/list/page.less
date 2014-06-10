@@ -1,0 +1,26 @@
+@import "../../../../../../styles/variables.less";
+@import "../../../../../../styles/mixins.less";
+
+.publish-list ul > li {
+  border-bottom: 1px solid @gray-lightest;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  > div {
+    display: inline-block; // Prevent links from spilling into multiple-columns
+    width: 100%;
+    padding: 5px 0;
+
+    > .name-wrapper {
+      display: inline-block;
+      width: 90%;
+      vertical-align: middle;
+    }
+  }
+
+  > ul {
+    display: block;
+  }
+}

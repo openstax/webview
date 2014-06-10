@@ -3,7 +3,14 @@
 
 .media-title {
   padding: 30px 30px 40px 30px;
-  background-color: @gray-lightest;
+
+  &:not(.publishing) { background-color: @gray-lightest; }
+
+  .publishing();
+  
+  > .derive {
+    margin-bottom: 15px;
+  }
 
   > .title {
     display: inline-block;
@@ -14,6 +21,12 @@
     > span {
       display: block;
       margin-top: 5px;
+    }
+
+    // When editing is turned on the Title becomes an input box; make sure it stretches
+    input[type="text"] {
+      width: 600px;
+      text-overflow: ellipsis;
     }
   }
 

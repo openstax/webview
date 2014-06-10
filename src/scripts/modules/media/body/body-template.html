@@ -1,13 +1,16 @@
-{{#if hasBody}}
+{{#unless loaded}}
   <div class="media-body">
-    {{#if currentPage.content}}
-      {{include currentPage.content}}
-    {{else}}
-      <div class="progress progress-striped active">
-        <div class="progress-bar secondary" role="progressbar" style="width: 100%">
-          <span class="sr-only">Loading</span>
-        </div>
+    <div class="progress progress-striped active">
+      <div class="progress-bar secondary" role="progressbar" style="width: 100%">
+        <span class="sr-only">Loading</span>
       </div>
-    {{/if}}
+    </div>
   </div>
-{{/if}}
+{{else}}
+  {{#if hasContent}}
+    {{! set id because Aloha's semanticblock hardcodes this id }}
+    <div class="media-body {{#if editable}}draft{{/if}} {{#is status 'publishing'}}publishing{{/is}}" id="content">
+      {{include content}}
+    </div>
+  {{/if}}
+{{/unless}}

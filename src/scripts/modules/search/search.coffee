@@ -15,7 +15,7 @@ define (require) ->
       super()
 
       if location.search and location.search isnt '?q='
-        @model = searchResults.load(location.search)
+        @model = searchResults.load({query: location.search})
 
       @listenTo(@model, 'change:error', @displayError) if @model
 
