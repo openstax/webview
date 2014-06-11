@@ -1,17 +1,20 @@
 {{#if results.items.length}}
   {{! Books }}
   {{#if books.length}}
-    {{> ./table-partial books}}
+    {{! {{> ./table-partial books}}
+    {{> modules/search/results/list/table-partial books}}
   {{/if}}
 
   {{! Pages }}
   {{#if pages.length}}
-    {{> ./table-partial pages}}
+    {{! {{> ./table-partial pages}}
+    {{> modules/search/results/list/table-partial pages}}
   {{/if}}
 
   {{! Results of an unknown type }}
   {{#if misc.length}}
-    {{> ./table-partial misc}}
+    {{! {{> ./table-partial misc}}
+    {{> modules/search/results/list/table-partial misc}}
   {{/if}}
 {{else}}
   {{#if loaded}}

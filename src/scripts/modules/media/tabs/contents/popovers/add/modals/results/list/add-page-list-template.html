@@ -1,17 +1,20 @@
 {{#if results.items.length}}
   {{! Books }}
   {{#if books.length}}
-    {{> ./add-page-table-partial books}}
+    {{! {{> ./add-page-table-partial books}}
+    {{> modules/media/tabs/contents/popovers/add/modals/results/list/add-page-table-partial books}}
   {{/if}}
 
   {{! Pages }}
   {{#if pages.length}}
-    {{> ./add-page-table-partial pages}}
+    {{! {{> ./add-page-table-partial pages}}
+    {{> modules/media/tabs/contents/popovers/add/modals/results/list/add-page-table-partial pages}}
   {{/if}}
 
   {{! Results of an unknown type }}
   {{#if misc.length}}
-    {{> ./add-page-table-partial misc}}
+    {{! {{> ./add-page-table-partial misc}}
+    {{> modules/media/tabs/contents/popovers/add/modals/results/list/add-page-table-partial misc}}
   {{/if}}
 {{else}}
   {{#if loaded}}
