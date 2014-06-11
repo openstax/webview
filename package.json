@@ -1,6 +1,6 @@
 {
   "name": "connexions-webview",
-  "version": "0.9.2",
+  "version": "0.10.0",
   "description": "Connexions (cnx.org) web site",
   "scripts": {
     "prepublish": "bower install; grunt install --verbose",
