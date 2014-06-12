@@ -1,6 +1,5 @@
 @import "../../../../../styles/variables.less";
 @import "../../../../../styles/mixins.less";
-@import "/bower_components/bootstrap/less/glyphicons.less"; // Bootstrap HACK: FIND A BETTER WAY TO INTEGRATE
 
 .media-tabs .tools {
   .tool {
@@ -9,20 +8,6 @@
     &:hover {
       text-decoration: underline;
       cursor: pointer;
-    }
-
-    &.edit, &.derive {
-      &:before {
-        &:extend(.glyphicon all);
-        content: "\270f"; // glyphicon-pencil
-      }
-    }
-
-    &.preview {
-      &:before {
-        &:extend(.glyphicon all);
-        content: "\e105"; // glyphicon-eye-open
-      }
     }
   }
 
