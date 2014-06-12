@@ -5,17 +5,17 @@
 {{#if authenticated}}
   {{#if isDraft}}
     {{#unless editable}}
-      <div class="edit tool">
+      <div class="edit tool fa fa-pencil">
         <span>Edit</span>
       </div>
     {{else}}
-      <div class="preview tool">
+      <div class="preview tool fa fa-eye">
         <span>Preview</span>
       </div>
     {{/unless}}
   {{else}}
     {{#if derivable}}
-      <div class="derive tool">
+      <div class="derive tool fa fa-pencil">
         <span>Derive a Copy</span>
       </div>
     {{/if}}
