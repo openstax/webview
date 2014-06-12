@@ -1,0 +1,105 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+
+  <!-- ============= -->
+  <!-- HACK add class aloha-dialog so the editor never blurs -->
+  <!-- See src/lib/aloha.js
+       if (Aloha.activeEditable && !jQuery(".aloha-dialog").is(':visible') && !Aloha.eventHandled) {
+         Aloha.activeEditable.blur();
+       ...
+  -->
+  <!-- ============== -->
+  <div class="container-fluid aloha-dialog">
+    <div class="navbar-header">
+      <button type="button" class="disabled navbar-toggle collapsed" data-toggle="collapse" data-target="#editbar-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <span class="navbar-brand">Edit</span>
+    </div>
+
+    <div class="navbar-collapse collapse toolbar" id="editbar-navbar-collapse" role="toolbar">
+      <div class="btn-group headings">
+        <button class="disabled btn btn-plain navbar-btn current-heading" rel="tooltip" title="Text Heading">Normal Text</button>
+        <button class="btn btn-plain navbar-btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Change Heading">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="action changeHeading" data-tagname="p">Normal Text</a></li>
+          <li><a class="action changeHeading" data-tagname="h1">Heading</a></li>
+          <li><a class="action changeHeading" data-tagname="h2">Subheading</a></li>
+          <li><a class="action changeHeading" data-tagname="h3">SubSubHeading</a></li>
+          <li><a class="action changeHeading" data-tagname="h3">Code</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" title="Bold" class="action strong       btn btn-plain navbar-btn"><strong>B</strong></button>
+        <button type="button" title="Italics" class="action emphasis     btn btn-plain navbar-btn"><em>I</em></button>
+        <button type="button" title="Underline" class="action underline    btn btn-plain navbar-btn"><u>U</u></button>
+        <button type="button" title="Superscript" class="action superscript  btn btn-plain navbar-btn">A<sup>S</sup></button>
+        <button type="button" title="Subscript" class="action subscript    btn btn-plain navbar-btn">A<sub>S</sub></button>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" title="Link" class="action insertLink btn btn-plain navbar-btn"><span class="fa fa-chain"></span></button>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" title="List" class="action unorderedList     btn btn-plain navbar-btn"><span class="fa fa-list"></span></button>
+        <button type="button" title="Ordered List" class="action orderedList     btn btn-plain navbar-btn"><span class="fa fa-list-ol"></span></button>
+        <button type="button" title="Outdent List" class="action outdentList  btn btn-plain navbar-btn"><span class="fa fa-outdent"></span></button>
+        <button type="button" title="Indent List" class="action indentList   btn btn-plain navbar-btn"><span class="fa fa-indent"></span></button>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" title="Image" class="action insertImage-oer  btn btn-plain navbar-btn"><span class="fa fa-file-image-o"></span></button>
+        <button type="button" class="action createTable  btn btn-plain navbar-btn"><span class="fa fa-table"></span></button>
+        <button type="button" title="Math" class="action insertMath   btn btn-plain navbar-btn">x+y<sup>2</sup></button>
+      </div>
+
+
+      <div class="btn-group">
+        <button type="button" title="Paste" class="action paste btn btn-plain navbar-btn" data-content="Content was copied to the clipboard. Click this button to paste the content into the page."><span class="fa fa-paste"></span></button>
+      </div>
+
+      <div class="navbar-right">
+        {{#if changed}}
+          <button type="button" class="revert  btn btn-plain navbar-btn">Revert</button>
+          <button type="button" title="Save" class="save    btn btn-default navbar-btn"><i class="fa fa-save"></i> Save Draft</button>
+        {{else}}
+          <button type="button" class="publish btn btn-primary navbar-btn">Publish...</button>
+        {{/if}}
+      </div>
+    </div><!-- /.navbar-collapse -->
+
+
+    <div class="navbar-collapse collapse toolbar" id="semantic-toolbar" role="toolbar">
+      <span>Drag to add a new...</span>
+
+
+      <span class="semantic-drag-source">
+          <div class="note">
+              <div class="title"></div>
+          </div>
+          <div class="example" data-type="activity">
+              <div class="title"></div>
+          </div>
+
+          <div class="exercise">
+              <div class="problem"></div>
+          </div>
+
+          <blockquote class="quote">
+          </blockquote>
+
+          <div class="equation">
+          </div>
+
+          <dl class="definition"><dt></dt><dd></dd></dl>
+      </span>
+
+
+  </div><!-- /.container-fluid -->
+</nav>

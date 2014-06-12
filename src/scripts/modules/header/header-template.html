@@ -5,9 +5,14 @@
   <div class="links">
     <div class="login">
       <ul>
-        <li><a href="http://cnx.org/join_form">Sign Up</a></li>
-        <li><a href="http://cnx.org/login_form">Login</a></li>
-        <li><a href="{{url}}" title="Switch to the CNX legacy web site">Legacy Site</a></li>
+        {{#if username}}
+          <li><a data-bypass="true" href="/logout">Log Out {{username}}</a></li>
+        {{else}}
+          <li><a data-bypass="true" href="/login">Login</a></li>
+        {{/if}}
+        {{#if url}}
+          <li><a href="{{url}}" title="Switch to the CNX legacy web site">Legacy Site</a></li>
+        {{/if}}
         <li><a href="http://cnx.org/help/">Help</a></li>
         <li><a href="http://cnx.org/aboutus/cnx_donate" class="btn">Donate</a></li>
       </ul>
@@ -16,8 +21,8 @@
       <a href="/" {{#is page 'home'}}class="active"{{/is}}>Home</a>
       <a href="/contents" {{#is page 'contents'}}class="active"{{/is}}>Content</a>
       <a href="http://cnx.org/lenses">Lenses</a>
-      <a href="http://cnx.org/aboutus/">About Us</a>
-      <a href="http://cnx.org/mycnx">My CNX</a>
+      <a href="/about-us" {{#is page 'about-us'}}class="active"{{/is}}>About Us</a>
+      <a href="/workspace" {{#is page 'workspace'}}class="active"{{/is}}>My Workspace</a>
       <a href="http://www.rice.edu">
         <img src="images/rice.png" class="rice" alt="Rice University" width="92" height="40" />
       </a>

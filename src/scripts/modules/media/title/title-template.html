@@ -1,14 +1,39 @@
-<div class="media-title">
+<div class="media-title{{#is status 'publishing'}} publishing{{/is}}">
   {{#if loaded}}
-    <h1>{{title}}</h1>
+    {{#if authenticated}}
+      {{#if derivable}}
+        <div class="derive tool">
+          <a class="btn">Derive an Editable Copy</a>
+        </div>
+      {{/if}}
+    {{/if}}
+
+    <div class="title">
+      <h1>
+        {{#is status 'publishing'}}
+          <span class="label label-info">publishing</span>
+        {{/is}}
+        {{title}}
+      </h1>
+      {{#if parentId}}
+        <span>
+          Derived from <a href="/contents/{{parentId}}@{{parentVersion}}">{{parentTitle}}</a> by
+          <span class="collection-authors">
+            {{~#each parentAuthors~}}
+              <a class="list-comma" href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
+            {{~/each~}}
+          </span>
+        </span>
+      {{/if}}
+    </div>
 
     <div class="info">
       {{#if authors.length}}
-        <span>{{#is type 'book'}}Collection{{else}}Module{{/is}} by:</span>
-        <span class="collection-author">
-          {{#each authors}}
-            <a href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
-          {{/each}}
+        <span>{{#is type 'book'}}Book{{else}}Page{{/is}} by:</span>
+        <span class="collection-authors">
+          {{~#each authors~}}
+            <a class="list-comma" href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
+          {{~/each}}
           <img src="images/icons/mail.png" width="18" height="12" alt="Mail" />
         </span>
       {{/if}}

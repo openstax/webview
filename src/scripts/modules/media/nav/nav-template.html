@@ -1,5 +1,5 @@
-{{#is type 'book'}}
-  <div class="media-nav">
+{{#if book}}
+  <div class="media-nav{{#is status 'publishing'}} publishing{{/is}}">
     <div class="book-nav">
       {{#if back}}
         <a class="nav back" href="{{back}}" data-trigger="false">Back</a>
@@ -24,4 +24,4 @@
       {{/if}}
     </div>
   </div>
-{{/is}}
+{{/if}}

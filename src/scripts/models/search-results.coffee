@@ -8,6 +8,7 @@ define (require) ->
     "author": "Author"
     "authorID": "Author"
     "keyword": "Keyword"
+    "language": "Language"
     "mediaType": "Type"
     "type": "Type"
     "pubYear": "Publication Date"
@@ -17,7 +18,7 @@ define (require) ->
   }
 
   return new class SearchResults extends Backbone.Model
-    url: () -> "#{SEARCH_URI}#{@query}"
+    url: () -> "#{@searchUrl}#{@query}"
 
     defaults:
       query:
@@ -30,21 +31,38 @@ define (require) ->
           authors: []
           types: []
 
-    initialize: (options = {}) ->
+    initialize: (options) ->
+      @config(options)
+      @set('loaded', false)
+
+    config: (options = {}) ->
       @query = options.query or ''
-
-    load: (query) ->
-      if query isnt @query
-        # Reset search results
-        @clear().set(@defaults)
-        @set('loaded', false)
-
-        @query = query or ''
-        @fetch
-          success: () =>
-            @set('loaded', true)
+      @searchUrl = options.url or SEARCH_URI
 
       return @
+
+    load: (options) ->
+      query = options.query or @query
+      url = options.url or @searchUrl
+
+      if query isnt @query or url isnt @searchUrl
+        @config(options)
+        @fetch(options)
+
+      return @
+
+    fetch: () ->
+      # Reset search results
+      @clear().set(@defaults)
+      @set('loaded', false)
+
+      return super(arguments...)
+      .always () =>
+        @set('loaded', true)
+      .done () =>
+        @set('error', false)
+      .fail (model, response, options) =>
+        @set('error', response.status)
 
     parse: (response, options) ->
       response = super(arguments...)
@@ -83,3 +101,9 @@ define (require) ->
             value.value = type.name
 
       return response
+
+    # Used when adding new content from the Workspace
+    prependNew: (content) ->
+      @get('results').items.unshift(content.toJSON())
+      @trigger('change:results')
+      @trigger('change')

@@ -3,6 +3,16 @@ module.exports = (grunt) ->
   fs = require('fs')
   pkg = require('./package.json')
 
+  alohaBuildConfig = grunt.file.read('bower_components/aloha-editor/build/aloha/build-profile-with-oer.js')
+  alohaBuildConfig = eval(alohaBuildConfig)
+  alohaBuildConfig.appDir = 'bower_components/aloha-editor/src/'
+  alohaBuildConfig.baseUrl = 'lib/'
+  alohaBuildConfig.dir = 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output'
+  alohaBuildConfig.mainConfigFile = 'bower_components/aloha-editor/build/aloha/build-profile-with-oer.js'
+  alohaBuildConfig.wrap =
+    startFile: 'bower_components/aloha-editor/build/aloha/closure-start.frag'
+    endFile: 'bower_components/aloha-editor/build/aloha/closure-end.frag'
+
   # Project configuration.
   grunt.initConfig
     pkg: pkg
@@ -96,9 +106,6 @@ module.exports = (grunt) ->
         max_line_length:
           level: 'error'
           value: 120
-        cyclomatic_complexity:
-          level: 'error'
-          value: 14
 
       source: ['src/**/*.coffee']
       grunt: 'Gruntfile.coffee'
@@ -136,10 +143,20 @@ module.exports = (grunt) ->
           modules: [{
             name: 'main'
             include: [
-              'cs!pages/404/404'
+              'cs!pages/error/error'
               'cs!pages/home/home'
               'cs!pages/contents/contents'
               'cs!pages/search/search'
+              'cs!pages/workspace/workspace'
+
+              # FIX: edit modules should be loaded in separate modules
+              'select2'
+              'cs!modules/media/editbar/editbar'
+              'cs!helpers/backbone/views/editable'
+
+              'cs!configs/aloha'
+              'cs!pages/about-us/about-us'
+              'cs!pages/people/people'
             ]
             exclude: ['coffee-script', 'less/normalize']
             excludeShallow: ['settings']
@@ -154,6 +171,9 @@ module.exports = (grunt) ->
               done(new Error('r.js built duplicate modules, please check the excludes option.'))
 
             done()
+
+      aloha:
+        options: alohaBuildConfig
 
     # Target HTML
     targethtml:
@@ -222,6 +242,7 @@ module.exports = (grunt) ->
     imagemin:
       images:
         options:
+          cache: false
           optimizationLevel: 7
         files: [{
           expand: true
@@ -247,13 +268,19 @@ module.exports = (grunt) ->
     'jshint'
     'jsbeautifier'
     'coffeelint'
-    'recess'
+    #'recess' NOTE: Disabled until recess is upgraded to support LESS 1.6+
+  ]
+
+  # Install
+  # -----
+  grunt.registerTask 'install', [
+    'requirejs:aloha'
   ]
 
   # Dist
   # -----
   grunt.registerTask 'dist', [
-    'requirejs'
+    'requirejs:compile'
     'copy:dist'
     'copy:fonts'
     'targethtml:dist'
@@ -266,7 +293,7 @@ module.exports = (grunt) ->
   # Default
   # -----
   grunt.registerTask 'default', [
-    'requirejs'
+    'requirejs:compile'
     'copy:dist'
     'copy:fonts'
     'targethtml:dist'

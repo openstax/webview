@@ -1,4 +1,7 @@
 define (require) ->
+  $ = require('jquery')
+  router = require('cs!router')
+  analytics = require('cs!helpers/handlers/analytics')
   Content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
   MediaEndorsedView = require('cs!./endorsed/endorsed')
@@ -15,6 +18,10 @@ define (require) ->
   return class MediaView extends BaseView
     template: template
 
+    regions:
+      media: '.media'
+      editbar: '.editbar'
+
     initialize: (options) ->
       super()
 
@@ -24,30 +31,11 @@ define (require) ->
       @uuid = options.uuid
       @model = new Content({id: @uuid, page: options.page})
 
+      @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title', @updateTitle)
-      @listenTo(@model, 'change:legacy_id change:legacy_version changePage', @updateLegacyLink)
-
-    regions:
-      media: '.media'
-
-    updateTitle: () ->
-      @pageTitle = @model.get('title')
-      super()
-
-    updateLegacyLink: () ->
-      headerView = @parent.parent.regions.header.views[0]
-      id = @model.get('legacy_id')
-      version = @model.get('legacy_version')
-
-      if @model.get('type') is 'book'
-        currentPage = @model.get('currentPage')
-        if currentPage
-          moduleID = currentPage?.get('legacy_id')
-          moduleVersion = currentPage?.get('legacy_version')
-          headerView.setLegacyLink("content/#{moduleID}/#{moduleVersion}/?collection=#{id}/#{version}")
-          return
-
-      headerView.setLegacyLink("content/#{id}/#{version}")
+      @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage', @updateLegacyLink)
+      @listenTo(@model, 'change:error', @displayError)
+      @listenTo(@model, 'change:editable', @toggleEditor)
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))
@@ -59,3 +47,52 @@ define (require) ->
       @regions.media.append(new MediaBodyView({model: @model}))
       @regions.media.append(new MediaFooterView({model: @model}))
       @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
+
+    trackAnalytics: () ->
+      # Track loading using the media's own analytics ID, if specified
+      analyticsID = @model.get('googleAnalytics')
+      analytics.send(analyticsID) if analyticsID
+
+    updateTitle: () ->
+      @pageTitle = @model.get('title')
+      super()
+
+    updateLegacyLink: () ->
+      headerView = @parent.parent.regions.header.views[0]
+      id = @model.get('legacy_id')
+      version = @model.get('legacy_version')
+
+      if @model.isBook()
+        currentPage = @model.asPage()
+        if currentPage
+          moduleID = currentPage.get('legacy_id')
+          moduleVersion = currentPage.get('legacy_version')
+          if moduleID and moduleVersion
+            headerView.setLegacyLink("content/#{moduleID}/#{moduleVersion}/?collection=#{id}/#{version}")
+        return
+
+      headerView.setLegacyLink("content/#{id}/#{version}") if id and version
+
+    displayError: () ->
+      error = arguments[1] # @model.get('error')
+      router.appView.render('error', {code: error}) if error
+
+    toggleEditor: () -> if @editing then @closeEditor() else @loadEditor()
+
+    loadEditor: () ->
+      @editing = true
+
+      require ['cs!./editbar/editbar'], (EditbarView) =>
+        @regions.editbar.show(new EditbarView({model: @model}))
+        height = @regions.editbar.$el.find('.navbar').outerHeight()
+        $('body').css('padding-top', height) # Don't cover the page header
+        window.scrollBy(0, height) # Prevent viewport from jumping
+
+    closeEditor: () ->
+      @editing = false
+      height = @regions.editbar.$el.find('.navbar').outerHeight()
+      @regions.editbar.empty()
+      $('body').css('padding-top', '0') # Remove added padding
+      window.scrollBy(0, -height) # Prevent viewport from jumping
+
+    onBeforeClose: () -> @model.set('editable', false) if @model.get('editable')

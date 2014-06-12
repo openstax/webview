@@ -8,14 +8,20 @@
       // Directory from which webview is served
       root: '/',
 
-      // Hostname and port for the cnxarchive server
+      // Hostname and port for the cnx-archive server
       cnxarchive: {
+        host: 'archive.cnx.org',
+        port: 80
+      },
+
+      // Hostname and port for the cnx-authoring server
+      cnxauthoring: {
         host: location.hostname,
-        port: 6543
+        port: 8080
       },
 
       // Prefix to prepend to page titles
-      titlePrefix: 'Connexions - ',
+      titlePrefix: 'OpenStax CNX - ',
 
       // Google Analytics tracking ID
       analyticsID: 'UA-7903479-1',
@@ -24,7 +30,7 @@
       languages: languages,
 
       // Legacy URL
-      // URLS are concatenated using the following logic: location.protocol + '//' + legacy + '/' + view.url
+      // URLs are concatenated using the following logic: location.protocol + '//' + legacy + '/' + view.url
       //   Example: 'http:' + '//' + 'cnx.org' + '/' + 'contents'
       // Do not include the protocol or a trailing slash
       legacy: 'cnx.org',
@@ -34,12 +40,12 @@
 
       // Content shortcodes
       shortcodes: {
-        'college_physics': 'e79ffde3-7fb4-4af3-9ec8-df648b391597@7.1',
-        'college_introduction_to_sociology': '30a3ada8-41a4-4ab1-ba79-d4e49b044964@7.119',
-        'biology': 'aa0c81ca-2246-49c2-93ff-03f31569a740@9.123',
-        'concepts_of_biology': '81c53958-672b-4e07-8025-535602180078@8.17',
-        'anatomy_and_physiology': '12b7fdb3-23e3-48d1-adf6-7e3c8b73fa21@6.148',
-        'introductory_statistics': '30189442-6998-4686-ac05-ed152b91b9de@16.2',
+        'college_physics': 'e4c0f2e3-82f0-4701-a485-c1b9b362a49f@7.1',
+        'college_introduction_to_sociology': '451881d9-86f9-458b-83a3-a29de227a6f7@7.1',
+        'biology': '6ba2ac5d-d53d-4df5-ae2f-9362add7a01a@9.1',
+        'concepts_of_biology': '4779de9d-4524-49cb-88a3-3ad9e062fcb2@8.1',
+        'anatomy_and_physiology': 'a7103b93-c07b-419d-8b74-3f429af4c378@6.1',
+        'introductory_statistics': '5886a723-20a7-4410-b204-d70161feb416@6.1',
       }
     };
 

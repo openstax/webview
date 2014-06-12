@@ -1,24 +1,28 @@
 {
   "name": "connexions-webview",
-  "version": "0.8.4",
+  "version": "0.9.2",
   "ignore": [
     "**/.*",
     "dist",
     "node_modules"
   ],
   "dependencies": {
-    "jquery": "~2.0.3",
+    "jquery": "~2.1.0",
     "lodash": "~2.4.1",
-    "backbone": "~1.1.0",
-    "backbone-associations": "~0.5.4",
-    "bootstrap": "3.0.2",
-    "requirejs": "~2.1.9",
+    "backbone": "~1.1.2",
+    "backbone-associations": "~0.6.1",
+    "bootstrap": "~3.1.1",
+    "font-awesome": "~4.1",
+    "requirejs": "2.1.11",
     "requirejs-text": "~2.0.10",
     "require-cs": "~0.4.4",
-    "require-less": "~0.1.0",
-    "require-handlebars-plugin": "a9819e78f54dd5655b18dea976a2507baf660e1c"
+    "require-css": "~0.1.1",
+    "require-less": "~0.1.1",
+    "require-handlebars-plugin": "~0.8.0",
+    "aloha-editor": "oerpub/Aloha-Editor#34e5a13d6ae64878ffc2486611d14ba9dda98d65",
+    "select2": "~3.4.5"
   },
   "devDependencies": {
-    "jquery-mockjax": "~v1.5.2"
+    "jquery-mockjax": "~v1.5.3"
   }
 }

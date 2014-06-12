@@ -1,6 +1,8 @@
 define (require) ->
   $ = require('jquery')
+  router = require('cs!router')
   linksHelper = require('cs!helpers/links')
+  analytics = require('cs!helpers/handlers/analytics')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./nav-template')
   require('less!./nav')
@@ -8,36 +10,60 @@ define (require) ->
   return class MediaNavView extends BaseView
     template: template
     templateHelpers: () ->
-      model = @model.toJSON()
-      nextPage = @model.getNextPage()
-      previousPage = @model.getPreviousPage()
+      page = @model.getPageNumber()
+      nextPage = @model.getNextPageNumber()
+      previousPage = @model.getPreviousPageNumber()
 
-      if model.page isnt nextPage
-        next = linksHelper.getPath('contents', {id: model.id, version: model.version, page: nextPage})
-      if model.page isnt previousPage
-        back = linksHelper.getPath('contents', {id: model.id, version: model.version, page: previousPage})
+      if page isnt nextPage
+        next = linksHelper.getPath('contents', {model: @model, page: nextPage})
+      if page isnt previousPage
+        back = linksHelper.getPath('contents', {model: @model, page: previousPage})
 
-      return {_hideProgress: @hideProgress, next: next, back: back}
+      return {
+        _hideProgress: @hideProgress
+        book: @model.isBook()
+        next: next
+        back: back
+        pages: if @model.get('loaded') then @model.getTotalPages() else 0
+        page: if @model.get('loaded') then @model.getPageNumber() else 0
+      }
 
     initialize: (options) ->
       super()
-      @listenTo(@model, 'change:page change:pages', @render)
       @hideProgress = options.hideProgress
+
+      @listenTo(@model, 'change:currentPage removeNode moveNode add:contents', @render)
 
     events:
       'click .next': 'nextPage'
       'click .back': 'previousPage'
 
-    nextPage: () ->
-      @model.nextPage()
+    nextPage: (e) ->
+      nextPage = @model.getNextPageNumber()
+      # Show the next page if there is one
+      @model.setPage(nextPage)
+      @changePage(e)
+
+    previousPage: (e) ->
+      previousPage = @model.getPreviousPageNumber()
+      # Show the previous page if there is one
+      @model.setPage(previousPage)
+      @changePage(e)
+
+    changePage: (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+      href = $(e.currentTarget).attr('href')
+      router.navigate href, {trigger: false}, () => @trackNav()
       @scrollToTop()
 
-    previousPage: () ->
-      @model.previousPage()
-      @scrollToTop()
+    trackNav: () ->
+      analyticsID = @model.get('googleAnalytics')
+      analytics.send(analyticsID) if analyticsID
 
     scrollToTop: () ->
-      maxY = $('.media-title').offset().top
+      $mediaNav = $('.media-nav').first()
+      maxY = $mediaNav.offset().top + $mediaNav.height()
       y = window.pageYOffset or document.documentElement.scrollTop
 
       window.scrollTo(0, maxY) if y > maxY

@@ -1,4 +1,5 @@
 @import "/bower_components/bootstrap/less/bootstrap.less"; // Bootstrap
+@import "/bower_components/font-awesome/css/font-awesome.css"; // Bootstrap
 @import "./variables.less";
 @import "./mixins-app.less";
 
@@ -11,7 +12,7 @@
 
 // Limit the site to a max width of 960px
 html {
-  max-width: 960px;
+  max-width: @max-viewport-width;
   margin: 0 auto;
 }
 
@@ -53,6 +54,29 @@ h5 {
   font-weight: bold;
 }
 
+[draggable="true"] {
+  cursor: move;
+}
+
+//
+// Description Lists
+//
+
+// Ensure Bootstrap styling applies everywhere, not just on small screens
+.dl-horizontal {
+  dt {
+    float: left;
+    width: (@component-offset-horizontal - 20);
+    clear: left;
+    text-align: right;
+    .text-overflow();
+  }
+  dd {
+    margin-left: @component-offset-horizontal;
+    &:extend(.clearfix all); // Clear the floated `dt` if an empty `dd` is present
+  }
+}
+
 //
 // Background colors
 //
@@ -75,6 +99,7 @@ h5 {
 
 .btn {
   .button-variant(white; @brand-secondary);
+  border: 1px solid transparent;
 }
 
 .btn-plain {
@@ -84,6 +109,7 @@ h5 {
 
 .btn-primary {
   .button-variant(white; @brand-primary);
+  border: 1px solid transparent;
 }
 
 .circle {
@@ -126,4 +152,12 @@ h5 {
 .pinterest {
   .social-button("images/social/pinterest.png");
   background-size: 50%;
+}
+
+//
+// Lists
+//
+
+.list-comma:not(:last-of-type)::after {
+  content: ", ";
 }

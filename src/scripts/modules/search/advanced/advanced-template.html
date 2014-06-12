@@ -54,8 +54,8 @@
         <div class="col-sm-10">
           <select name="type" class="form-control">
             <option value="">Any</option>
-            <option value="collection">Collections</option>
-            <option value="module">Modules</option>
+            <option value="collection">Books</option>
+            <option value="module">Pages</option>
           </select>
         </div>
       </label>
@@ -67,15 +67,15 @@
         <div class="col-sm-10">
           <select name="language" class="form-control">
             <option value="">Any</option>
-            {{#each languages}}
+            {{~#each languages~}}
               <option value="{{@key}}">
-                {{#is native english}}
+                {{~#is native english~}}
                   {{native}}
-                {{else}}
+                {{~else~}}
                   {{native}} ({{english}})
-                {{/is}}
+                {{~/is~}}
               </option>
-            {{/each}}
+            {{~/each~}}
           </select>
         </div>
       </label>
@@ -87,9 +87,9 @@
         <div class="col-sm-10">
           <select name="pubYear" class="form-control">
             <option value="">Any</option>
-            {{#each years}}
+            {{~#each years~}}
               <option>{{this}}</option>
-            {{/each}}
+            {{~/each~}}
           </select>
         </div>
       </label>

@@ -13,6 +13,9 @@ CNX webview is designed to be run as a frontend for [cnx-archive](https://github
 1. If necessary, install [Node.js](http://nodejs.org) and npm (included with Node.js).
 2. Run `npm install -g grunt-cli bower` in the command line to install [grunt-cli](https://github.com/gruntjs/grunt-cli) and [bower](http://bower.io/).
 3. From the root `webview` directory, run `npm install` in the command line to install test and build dependencies.
+4. until install is fixed (and dist-ified) do this:
+
+   `./node_modules/grunt-contrib-requirejs/node_modules/requirejs/bin/r.js -o bower_components/aloha-editor/build/aloha/build-profile-with-oer.js`
 
 ##### Testing
 
@@ -31,7 +34,7 @@ The `dist` directory containing the built site will be added to the root `webvie
 1. Install [nginx](http://nginx.org/)
 2. Run `grunt nginx:start` (uses `nginx.development.conf`)
 3. Point your browser to [http://localhost:8000/test](http://localhost:8000/test) for mock data
-4. If you have https://gihub.com/Connexions/cnx-archive installed, you can point your browser to [http://localhost:8000](http://localhost:8000)
+4. If you have https://github.com/Connexions/cnx-archive installed, you can point your browser to [http://localhost:8000](http://localhost:8000)
 
 ###### Customization Notes
 
@@ -133,7 +136,7 @@ Note: Mock test data is only available for the [College Physics](http://localhos
 * `src/scripts/main.js`         Initial script called by Requirejs
 * `src/scripts/router.coffee`   Backbone Router
 * `src/scripts/session.coffee`  Session state singleton (Backbone Model)
-* `src/scripts/settings.coffee` Global application config settings
+* `src/scripts/settings.js`     Global application config settings (remains in place after build)
 * `src/styles/`                 App-specific LESS variables and mixins
 * `src/test/`                   Test site
 * `src/index.html`              App's HTML Page

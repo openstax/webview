@@ -1,6 +1,6 @@
 <h3>Version History</h3>
 
-{{> modules_media_footer_inherits_tab_toggle-partial }}
+{{> modules/media/footer/inherits/tab/toggle-partial }}
 
 <table class="table">
   <thead>
@@ -13,10 +13,10 @@
   </thead>
 
   <tbody>
-    {{#each model.history}}
+    {{#each history}}
       <tr>
         <td>
-          <a href="/contents/{{../model.id}}@{{this.version}}">{{this.version}}</a>
+          <a href="/contents/{{../id}}@{{this.version}}">{{this.version}}</a>
         </td>
         <td>{{date this.revised}}</td>
         <td>{{this.changes}}</td>

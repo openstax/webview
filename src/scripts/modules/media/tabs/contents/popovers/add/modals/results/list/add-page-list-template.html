@@ -1,0 +1,26 @@
+{{#if results.items.length}}
+  {{! Books }}
+  {{#if books.length}}
+    {{> ./add-page-table-partial books}}
+  {{/if}}
+
+  {{! Pages }}
+  {{#if pages.length}}
+    {{> ./add-page-table-partial pages}}
+  {{/if}}
+
+  {{! Results of an unknown type }}
+  {{#if misc.length}}
+    {{> ./add-page-table-partial misc}}
+  {{/if}}
+{{else}}
+  {{#if loaded}}
+    <p>No results found. Please try expanding your search.</p>
+  {{else}}
+    <div class="progress progress-striped active">
+      <div class="progress-bar secondary" role="progressbar" style="width: 100%">
+        <span class="sr-only">Loading</span>
+      </div>
+    </div>
+  {{/if}}
+{{/if}}
