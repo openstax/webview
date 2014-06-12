@@ -47,7 +47,9 @@ define (require) ->
       @$el.children('[data-type="abstract"]').remove()
 
       # Wrap title and content elements in header and section elements, respectively
-      @$el.find('.example, .exercise, .note, [data-type="example"], [data-type="exercise"], [data-type="note"]').each (index, el) ->
+      @$el.find('.example, .exercise, .note,
+                [data-type="example"], [data-type="exercise"], [data-type="note"]').each (index, el) ->
+
         $el = $(el)
         $contents = $el.contents().filter (i, node) ->
           return !$(node).is('.title, [data-type="title"]')
