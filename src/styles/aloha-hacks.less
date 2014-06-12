@@ -1,18 +1,2 @@
 /* Hide Aloha's floating toolbar */
 .aloha-surface .aloha-ui-toolbar { display: none; }
-
-// HACK to style the blockish edit buttons
-// because the HTML uses old FontAwesome class names
-.media {
-  .semantic-controls {
-    .semantic-delete > .icon-remove::before {
-      font-family: 'FontAwesome';
-      content: "\f00d";
-    }
-
-    .semantic-settings > .icon-cog::before {
-      font-family: 'FontAwesome';
-      content: "\f013";
-    }
-  }
-}
