@@ -31,7 +31,8 @@ define (require) ->
         type: 'aloha'
 
     events:
-      'click .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
+      'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
+      'click .solution              > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
 
     initialize: () ->
       super()
@@ -41,13 +42,20 @@ define (require) ->
     onRender: () ->
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
 
+      # Remove the module title and abstract TODO: check if it is still necessary
+      @$el.children('[data-type="title"]').remove()
+      @$el.children('[data-type="abstract"]').remove()
+
       # Wrap title and content elements in header and section elements, respectively
-      @$el.find('.example, .exercise, .note').each (index, el) ->
+      @$el.find('.example, .exercise, .note,
+                [data-type="example"], [data-type="exercise"], [data-type="note"]').each (index, el) ->
+
         $el = $(el)
         $contents = $el.contents().filter (i, node) ->
-          return !$(node).hasClass('title')
+          return !$(node).is('.title, [data-type="title"]')
         $contents.wrapAll('<section>')
-        $title = $el.children('.title')
+        $title = $el.children('.title, [data-type="title"]')
+        $title.wrap('<header>')
         # Add an attribute for the parents' `data-label`
         # since CSS does not support `parent(attr(data-label))`.
         # When the title exists, this attribute is added before it
@@ -58,7 +66,7 @@ define (require) ->
 
 
       # Wrap solutions in a div so "Show/Hide Solutions" work
-      @$el.find('.solution')
+      @$el.find('.solution, [data-type="solution"]')
       .wrapInner('<section class="ui-body">')
       .prepend('''
         <div class="ui-toggle-wrapper">
@@ -72,7 +80,7 @@ define (require) ->
       return @model.isEditable()
 
     toggleSolution: (e) ->
-      $solution = $(e.currentTarget).closest('.solution')
+      $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')
       $solution.toggleClass('ui-solution-visible')
 
     toggleDraftMode: () ->

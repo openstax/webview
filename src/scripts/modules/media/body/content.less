@@ -113,9 +113,11 @@ figure[data-orient="vertical"] {
 
 
 // A list with a title
+[data-type="list"],
 .list {
   overflow-wrap: break-word;
 
+  > [data-type="title"],
   > .title {
     font-weight: bold;
   }
@@ -412,7 +414,9 @@ span.list[data-list-type='labeled-item'] { #list>.style(inline; labeled-item); }
     // A title exists so style it and put the label in `.title::before`
     // FIXME: Remove the following line.
     // Aloha and webview have slightly different places for the title
-    &.ui-has-child-title > header > .title
+    &.ui-has-child-title > header > [data-type="title"],
+    &.ui-has-child-title > [data-type="title"],
+    &.ui-has-child-title > header > .title,
     &.ui-has-child-title > .title {
       #blockish>.title(@type);
       &::before { .format-label(@type; @label-type; true); }
@@ -434,21 +438,28 @@ span.list[data-list-type='labeled-item'] { #list>.style(inline; labeled-item); }
 }
 
 
+[data-type="note"],
 .note     { .make-block(note); }
+[data-type="example"],
 .example  { .make-block(example); }
+[data-type="exercise"],
 .exercise { .make-block(exercise); }
 
 
-
+[data-type="example"],
+[data-type="exercise"],
 .example,
 .exercise {
 
+  [data-type="problem"],
+  [data-type="solution"],
   .problem,
   .solution {
     padding: 0.5em 1em;
   }
 
   // Exercise Solutions contain a button to toggle showing or hiding the solution
+  [data-type="solution"],
   .solution {
     border-top: 1px solid @gray;
 
@@ -473,11 +484,13 @@ span.list[data-list-type='labeled-item'] { #list>.style(inline; labeled-item); }
     }
   }
 
+  &.check-understanding [data-type="title"]::before,
   &[data-type=check-understanding] .title::before {
     margin-right: 0;
     content: "";
   }
 
+  &.conceptual-questions [data-type="problem"],
   &[data-type=conceptual-questions] .problem {
     border-top: none;
 
@@ -486,7 +499,11 @@ span.list[data-list-type='labeled-item'] { #list>.style(inline; labeled-item); }
     }
   }
 
+  &.problems-exercises,
   &[data-type=problems-exercises] {
+
+    [data-type="problem"]::before,
+    [data-type="solution"]::before,
     .problem::before, .solution::before {
       font-weight: bold;
       color: @gray;
@@ -494,10 +511,12 @@ span.list[data-list-type='labeled-item'] { #list>.style(inline; labeled-item); }
       letter-spacing: 1px;
     }
 
+    [data-type="problem"]::before,
     .problem::before {
       content: "Problem";
     }
 
+    [data-type="solution"]::before
     .solution::before {
       content: "Solution";
     }
