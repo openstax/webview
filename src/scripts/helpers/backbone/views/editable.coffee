@@ -51,7 +51,7 @@ define (require) ->
           if @observers[selector] then @observers[selector].disconnect()
 
           @observers[selector] = new MutationObserver (mutations) =>
-            mutations.forEach (mutation) ->
+            mutations.forEach (mutation) =>
               setValue.call(@, property, $editable.eq(index).html(), options)
 
           @observers[selector].observe($editable.get(index), options.config or observerConfig)
