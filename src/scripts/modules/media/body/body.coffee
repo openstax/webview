@@ -7,6 +7,8 @@ define (require) ->
   require('less!./body')
 
   return class MediaBodyView extends EditableView
+    media: 'page'
+
     template: template
     templateHelpers:
       loaded: () ->
@@ -16,18 +18,13 @@ define (require) ->
 
         return @model.get('loaded')
 
-      content: () ->
-        page = @model.asPage()
-        return page?.get('content')
-
-      hasContent: () ->
-        return (_.isString(@model.get('content')) or _.isString(@model.get('currentPage.content')))
-
+      content: () -> @getProperty('content')
+      hasContent: () -> _.isString(@getProperty('content'))
       editable: () -> @isEditable()
 
     editable:
       '.media-body':
-        value: () -> @getModel('content')
+        value: () -> 'content'
         type: 'aloha'
 
     events:
@@ -37,7 +34,6 @@ define (require) ->
     initialize: () ->
       super()
       @listenTo(@model, 'changePage change:loaded change:currentPage.loaded', @render)
-      @listenTo(@model, 'change:editable', @toggleDraftMode)
 
     onRender: () ->
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
@@ -73,19 +69,12 @@ define (require) ->
           <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
         </div>''')
 
-    isEditable: () ->
-      if @model.isBook()
-        return @model.get('currentPage')?.isEditable()
-
-      return @model.isEditable()
-
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')
       $solution.toggleClass('ui-solution-visible')
 
-    toggleDraftMode: () ->
-      if @model.get('editable')
-        @$el.find('.media-body').addClass('draft')
-      else
-        @$el.find('.media-body').removeClass('draft')
-        @render() # Re-render body view to cleanup aloha issues
+    onEditable: () -> @$el.find('.media-body').addClass('draft')
+
+    onUneditable: () ->
+      @$el.find('.media-body').removeClass('draft')
+      @render() # Re-render body view to cleanup aloha issues

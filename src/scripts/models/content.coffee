@@ -214,6 +214,5 @@ define (require) ->
     asPage: () ->
       if @isBook()
         return @get('currentPage')
-      else
-        # TODO: Raise an error if this is called on a subcollection
-        return @
+
+      return @
