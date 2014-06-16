@@ -10,7 +10,7 @@ define (require) ->
   return class MediaTabsView extends BaseView
     template: template
     templateHelpers:
-      book: () -> @model.isBook()
+      isBook: () -> @model.isBook()
 
     regions:
       contents: '.contents'
