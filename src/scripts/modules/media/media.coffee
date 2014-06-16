@@ -79,6 +79,7 @@ define (require) ->
 
     toggleEditor: () -> if @editing then @closeEditor() else @loadEditor()
 
+    # FIX: How much of loadEditor and closeEditor can be merged into the editbar?
     loadEditor: () ->
       @editing = true
 
@@ -95,4 +96,8 @@ define (require) ->
       $('body').css('padding-top', '0') # Remove added padding
       window.scrollBy(0, -height) # Prevent viewport from jumping
 
-    onBeforeClose: () -> @model.set('editable', false) if @model.get('editable')
+    onBeforeClose: () ->
+      if @model.get('editable')
+        @model.set('editable', false, {silent: true})
+        @closeEditor()
+
