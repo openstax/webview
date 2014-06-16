@@ -23,9 +23,9 @@ define (require) ->
   # Each type of editable has a start and stop for enabling/disabling the editable
   editables =
     'textinput':
-      stop: ($editable, property, options) ->
+      stop: ($editable, selector, property, options) ->
         $editable.text(@getProperty(property))
-      start: ($editable, property, options) ->
+      start: ($editable, selector, property, options) ->
         $input = $('<input type="text" />')
         $input.attr('placeholder', "Enter a #{property}").val(@getProperty(property))
         $editable.html($input)
@@ -33,11 +33,11 @@ define (require) ->
 
 
     'contenteditable':
-      stop: ($editable, property, options) ->
+      stop: ($editable, selector, property, options) ->
         $editable.attr('contenteditable', false)
         @observers[selector].disconnect()
         delete @observers[selector]
-      start: ($editable, property, options) ->
+      start: ($editable, selector, property, options) ->
         observerConfig =
           subtree: true
           childList: true
@@ -58,9 +58,9 @@ define (require) ->
 
 
     'select2':
-      stop: ($editable, property, options) ->
+      stop: ($editable, selector, property, options) ->
         $editable.off 'change.editable'
-      start: ($editable, property, options) ->
+      start: ($editable, selector, property, options) ->
         require ['select2'], (select2) =>
           if typeof options.select2 is 'function'
             s2 = options.select2.apply(@)
@@ -75,9 +75,9 @@ define (require) ->
 
 
     'aloha':
-      stop: ($editable, property, options) ->
+      stop: ($editable, selector, property, options) ->
         $editable.mahalo?()
-      start: ($editable, property, options) ->
+      start: ($editable, selector, property, options) ->
         $editable.mahalo?() # clicking Back/Next does not call mahalo so do it here
         $editable.text('Loading editor...')
         require ['aloha', 'less!../../../../styles/aloha-hacks'], (Aloha) =>
@@ -207,11 +207,11 @@ define (require) ->
 
           if enabled
             options.onBeforeEditable?($editable)
-            config.start.call(@, $editable, property, options)
+            config.start.call(@, $editable, selector, property, options)
             options.onEditable?($editable)
           else
             options.onBeforeUneditable?($editable)
-            config.stop.call(@, $editable, property, options)
+            config.stop.call(@, $editable, selector, property, options)
             options.onUneditable?($editable)
 
       if enabled then @onEditable() else @onUneditable()
