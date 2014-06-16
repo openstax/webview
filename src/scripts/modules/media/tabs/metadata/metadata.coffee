@@ -27,9 +27,11 @@ define (require) ->
         value: 'language'
         type: 'select2'
         select2: s2Defaults
-      '.summary':
-        value: 'abstract'
-        type: 'aloha'
+      # FIX: The summary field is taking focus aggressively, making the body
+      #      lose focus and making it impossible to toggle from Page to Book
+      #'.summary':
+      #  value: 'abstract'
+      #  type: 'aloha'
       '.subjects > select':
         value: 'subjects'
         type: 'select2'
