@@ -24,24 +24,24 @@ define (require) ->
 
     editable:
       '.language > select':
-        value: () -> 'language'
+        value: 'language'
         type: 'select2'
         select2: s2Defaults
       '.summary':
-        value: () -> 'abstract'
+        value: 'abstract'
         type: 'aloha'
       '.subjects > select':
-        value: () -> 'subjects'
+        value: 'subjects'
         type: 'select2'
         select2: s2Defaults
       '.keywords > input':
-        value: () -> 'keywords'
+        value: 'keywords'
         type: 'select2'
         select2: () ->
           @$el.find('.keywords > input').val(@getProperty('keywords') or [])
           _.extend({}, s2Multi, tags: @getProperty('keywords') or [])
       '.authors > input':
-        value: () -> 'authors'
+        value: 'authors'
         type: 'select2'
         select2: () ->
           authors = _.map @getProperty('authors'), (item) ->
