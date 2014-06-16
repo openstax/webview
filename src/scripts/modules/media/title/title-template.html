@@ -29,7 +29,7 @@
 
     <div class="info">
       {{#if authors.length}}
-        <span>{{#is type 'book'}}Book{{else}}Page{{/is}} by:</span>
+        <span>{{#if isBook}}Book{{else}}Page{{/if}} by:</span>
         <span class="collection-authors">
           {{~#each authors~}}
             <a class="list-comma" href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>

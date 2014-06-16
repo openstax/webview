@@ -36,6 +36,7 @@ define (require) ->
         encodedTitle: encodeURI(title)
         derivable: not @model.isDraft()
         authenticated: session.get('id')
+        isBook: @model.isBook()
       }
 
     editable:
