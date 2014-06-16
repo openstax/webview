@@ -187,7 +187,9 @@ define (require) ->
     hasAncestor: (model) ->
       parent = @get('parent')
 
-      if not parent
+      if @ is model
+        return false
+      else if not parent
         return false
       else if parent is model
         return true
@@ -208,16 +210,14 @@ define (require) ->
 
       return pages
 
-    isSection: () -> @get('contents') instanceof Backbone.Collection
+    isSection: () -> not @isBook() and @get('contents') instanceof Backbone.Collection
 
     isBook: () -> @get('mediaType') is 'application/vnd.org.cnx.collection'
 
-    isDraft: () -> return @get('version') is 'draft' or /@draft$/.test(@id)
+    isDraft: () -> @get('version') is 'draft' or /@draft$/.test(@id)
 
     isSaveable: () -> !!@get('mediaType')
 
-    isEditable: () ->
-      if @get('editable') or (@get('book.editable') and @isDraft())
-        return true
+    isEditable: () -> !!@get('editable')
 
-      return false
+    isInBook: () -> !!@get('book')

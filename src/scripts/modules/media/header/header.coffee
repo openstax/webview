@@ -9,9 +9,11 @@ define (require) ->
   require('less!./header')
 
   return class MediaHeaderView extends EditableView
+    media: 'page'
+
     template: template
     templateHelpers: () ->
-      currentPage = @model.asPage()
+      currentPage = @getModel()
 
       if currentPage
         currentPageData = currentPage.toJSON()
@@ -36,7 +38,7 @@ define (require) ->
 
     editable:
       '.media-header > .title > h2':
-        value: () -> @getModel('title')
+        value: () -> 'title'
         type: 'textinput'
 
     regions:

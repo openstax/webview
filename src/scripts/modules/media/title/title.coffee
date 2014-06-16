@@ -9,6 +9,8 @@ define (require) ->
   require('less!./title')
 
   return class MediaTitleView extends EditableView
+    mediaType: 'book'
+
     template: template
     templateHelpers: () ->
       title = @model.get('title')
@@ -53,6 +55,6 @@ define (require) ->
       options =
         success: (model) ->
           router.navigate("/contents/#{model.id}@#{model.version}", {trigger: true})
-      
+
       # Derive a copy of the book and then navigate to it
       @model.derive(options)

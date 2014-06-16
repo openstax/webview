@@ -24,27 +24,27 @@ define (require) ->
 
     editable:
       '.language > select':
-        value: () -> @getModel('language')
+        value: () -> 'language'
         type: 'select2'
         select2: s2Defaults
       '.summary':
-        value: () -> @getModel('abstract')
+        value: () -> 'abstract'
         type: 'aloha'
       '.subjects > select':
-        value: () -> @getModel('subjects')
+        value: () -> 'subjects'
         type: 'select2'
         select2: s2Defaults
       '.keywords > input':
-        value: () -> @getModel('keywords')
+        value: () -> 'keywords'
         type: 'select2'
         select2: () ->
-          @$el.find('.keywords > input').val(@model.get(@getModel('keywords')) or [])
-          _.extend({}, s2Multi, tags: @model.get(@getModel('keywords')) or [])
+          @$el.find('.keywords > input').val(@getProperty('keywords') or [])
+          _.extend({}, s2Multi, tags: @getProperty('keywords') or [])
       '.authors > input':
-        value: () -> @getModel('authors')
+        value: () -> 'authors'
         type: 'select2'
         select2: () ->
-          authors = _.map @model.get(@getModel('authors')), (item) ->
+          authors = _.map @getProperty('authors'), (item) ->
             if not item
               console.log 'item is null KJSDHFSKDJHF'
             if typeof item is 'string'
@@ -76,7 +76,5 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change change:currentPage', (model, options) => @render() unless options.doNotRerender)
-
-    getModel: (value) ->
-      if @media is 'page' and @model.isBook() then return "currentPage.#{value}" else return value
+      @listenTo @model, 'change change:currentPage', (model, options) =>
+        @render() unless options?.doNotRerender
