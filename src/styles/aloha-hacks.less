@@ -6,13 +6,15 @@
 .aloha-editable {
   // This is the little dropdown next to notes, exercises, etc
   .type-container .type-dropdown {
-
+    // Note: could add `:not(:hover)` to type-container to help with discovery.
     // Note/exercise type dropdown should hide the currently-selected option
     // since it is already visible as a pseudo element.
     // Only show the caret.
     .type { display: none; }
+  }
 
-    // Make the dropdown uppercase to match the CSS in webview
+  // For notes make the dropdown uppercase to match the CSS in webview
+  .note > .type-container .type-dropdown {
     & + ul.dropdown-menu {
       text-transform: uppercase;
     }
