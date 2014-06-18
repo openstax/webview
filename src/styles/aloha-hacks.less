@@ -1,2 +1,20 @@
 /* Hide Aloha's floating toolbar */
 .aloha-surface .aloha-ui-toolbar { display: none; }
+
+
+// Custom styling for aloha
+.aloha-editable {
+  // This is the little dropdown next to notes, exercises, etc
+  .type-container .type-dropdown {
+
+    // Note/exercise type dropdown should hide the currently-selected option
+    // since it is already visible as a pseudo element.
+    // Only show the caret.
+    .type { display: none; }
+
+    // Make the dropdown uppercase to match the CSS in webview
+    & + ul.dropdown-menu {
+      text-transform: uppercase;
+    }
+  }
+}
