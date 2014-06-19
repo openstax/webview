@@ -138,6 +138,10 @@ define ['jquery'], ($) ->
               $img.removeClass 'aloha-image-uploading'
               console.log 'Updated Image src as a result of upload'
 
+      semanticblock:
+        # Handle dragging semantic blocks directly in webview
+        semanticDragSelector: '#INVALID-SELECTOR'
+
       note: [
         { label: 'Note',      typeClass: 'note', hasTitle: true }
         { label: 'Aside',     typeClass: 'note', hasTitle: true, dataClass: 'aside' }
