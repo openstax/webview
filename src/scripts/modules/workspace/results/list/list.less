@@ -28,12 +28,32 @@
     text-align: center;
     color: @brand-primary;
   }
-  
+
   .status {
     width: 165px;
   }
 
   .edited {
     width: 115px;
+  }
+
+  .delete {
+    width: 60px;
+  }
+
+  td.delete {
+    text-align: center;
+
+    &:hover {
+      cursor: pointer;
+
+      i {
+        color: @brand-danger;
+      }
+    }
+
+    i {
+      color: @gray-light;
+    }
   }
 }
