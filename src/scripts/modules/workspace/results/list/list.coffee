@@ -22,7 +22,8 @@ define (require) ->
 
     clickDelete: (e) ->
       version = $(e.currentTarget).parent().data('id')
-      @deleteMedia(version)
+      if confirm('Are you sure you want to delete this?')
+        @deleteMedia(version)
 
     deleteMedia: (version) ->
       # maybe make each item its own view and use a delete method on the model?
@@ -34,6 +35,8 @@ define (require) ->
       $.ajax
         url: "#{AUTHORING}/contents/#{version}.json"
         type: 'DELETE'
+        xhrFields:
+          withCredentials: true
       .done (response) =>
         @model.fetch()
       .fail (error) =>
