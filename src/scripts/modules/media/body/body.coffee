@@ -39,7 +39,7 @@ define (require) ->
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
 
       # Converts a TERP link to an OST-hosted iframe
-      @$el.find('a[href*="terp-"]').each () ->
+      @$el.find('a[href*="#terp-"]').each () ->
         terpCode = $(this).attr('href').match(/#terp\-(.*)/)[1]
         $(this).replaceWith("<iframe class='terp'
                                      src='https://stormy-wave-8747.herokuapp.com/terp/#{terpCode}/quiz_start'
