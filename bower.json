@@ -19,7 +19,7 @@
     "require-css": "~0.1.4",
     "require-less": "~0.1.2",
     "require-handlebars-plugin": "~0.8.1",
-    "aloha-editor": "oerpub/Aloha-Editor#9d1c9a68dece1e69034abe841cf57b96cfc64e33",
+    "aloha-editor": "oerpub/Aloha-Editor#7a6408379b91895798ffc4f49bd428d6d10ed091",
     "select2": "~3.4.8"
   },
   "devDependencies": {
