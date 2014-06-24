@@ -150,6 +150,10 @@ define ['jquery'], ($) ->
         { label: 'Important', typeClass: 'note', hasTitle: true, dataClass: 'important' }
         { label: "Teacher's Guide", typeClass: 'note', hasTitle: true, dataClass: 'teachers-guide' }
       ]
+      # Disallow custom Example types
+      example: [
+        # { label: 'Example', typeClass: 'example', hasTitle: true }
+      ]
       block:
         dragdrop: "1"
         rootTags: ['span', 'div', 'figure']

@@ -53,7 +53,7 @@ define (require) ->
 
     fetch: () ->
       # Reset search results
-      @clear().set(@defaults)
+      @clear({silent: true}).set(@defaults)
       @set('loaded', false)
 
       return super(arguments...)
