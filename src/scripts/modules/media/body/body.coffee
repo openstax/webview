@@ -38,6 +38,14 @@ define (require) ->
     onRender: () ->
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
 
+      # Converts a TERP link to an OST-hosted iframe
+      @$el.find('a[href*="#terp-"]').each () ->
+        terpCode = $(this).attr('href').match(/#terp\-(.*)/)[1]
+        $(this).replaceWith("<iframe class='terp'
+                                     src='https://stormy-wave-8747.herokuapp.com/terp/#{terpCode}/quiz_start'
+                                     height='600px' width='800px' frameborder='0' seamless='seamless'>
+                             </iframe>")
+
       # Remove the module title and abstract TODO: check if it is still necessary
       @$el.children('[data-type="title"]').remove()
       @$el.children('[data-type="abstract"]').remove()
