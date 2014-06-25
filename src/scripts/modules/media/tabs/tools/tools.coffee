@@ -22,19 +22,19 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable change:title', @render)
+      #@listenTo(@model, 'change:editable change:title', @render)
       @listenTo(session, 'change', @render)
 
-    toggleEditor: () ->
-      @model.set('currentPage.editable', not @model.get('currentPage.editable'))
-      @model.set('editable', not @model.get('editable'))
+    #toggleEditor: () ->
+    #  @model.set('currentPage.editable', not @model.get('currentPage.editable'))
+    #  @model.set('editable', not @model.get('editable'))
 
-    deriveCopy: () ->
-      page = new Page
-        derivedFrom: @model.getVersionedId()
+    #deriveCopy: () ->
+    #  page = new Page
+    #    derivedFrom: @model.getVersionedId()
 
-      page.save()
-      .fail(() -> alert('There was a problem deriving. Please try again'))
-      .done () ->
-        url = linksHelper.getPath('contents', {model: page})
-        router.navigate(url, {trigger: true})
+    #  page.save()
+    #  .fail(() -> alert('There was a problem deriving. Please try again'))
+    #  .done () ->
+    #    url = linksHelper.getPath('contents', {model: page})
+    #    router.navigate(url, {trigger: true})
