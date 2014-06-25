@@ -40,12 +40,12 @@
 
       // Content shortcodes
       shortcodes: {
-        'college_physics': 'e4c0f2e3-82f0-4701-a485-c1b9b362a49f@7.1',
-        'college_introduction_to_sociology': '451881d9-86f9-458b-83a3-a29de227a6f7@7.1',
-        'biology': '6ba2ac5d-d53d-4df5-ae2f-9362add7a01a@9.1',
-        'concepts_of_biology': '4779de9d-4524-49cb-88a3-3ad9e062fcb2@8.1',
-        'anatomy_and_physiology': 'a7103b93-c07b-419d-8b74-3f429af4c378@6.1',
-        'introductory_statistics': '5886a723-20a7-4410-b204-d70161feb416@6.1',
+        'college_physics': '031da8d3-b525-429c-80cf-6c8ed997733a@8.1',
+        'college_introduction_to_sociology': 'afe4332a-c97f-4fc4-be27-4e4d384a32d8@7.15',
+        'biology': '185cbf87-c72e-48f5-b51e-f14f21b5eabd@9.44',
+        'concepts_of_biology': 'b3c1e1d2-839c-42b0-a314-e119a8aafbdd@8.39',
+        'anatomy_and_physiology': '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@6.19',
+        'introductory_statistics': '30189442-6998-4686-ac05-ed152b91b9de@17.20',
       }
     };
 
