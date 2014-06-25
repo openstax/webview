@@ -12,20 +12,19 @@ define (require) ->
   root = settings.root
 
   # Patch `Backbone.sync` so unauthorized responses are redirected to `/login`
-  Backbone_sync = Backbone.sync
-  Backbone.sync = (method, model, options) ->
-    promise = Backbone_sync.call(@, method, model, options)
+  #Backbone_sync = Backbone.sync
+  #Backbone.sync = (method, model, options) ->
+  #  promise = Backbone_sync.call(@, method, model, options)
 
     # Do not redirect when trying to determine the login state
     # But redirect otherwise
-    if model isnt session
-      promise.fail (jqXHR) ->
-        switch jqXHR.status
-          when 401
-            window.location.href = '/login'
+  #  if model isnt session
+  #    promise.fail (jqXHR) ->
+  #      switch jqXHR.status
+  #        when 401
+  #          window.location.href = '/login'
 
-    return promise
-
+  #  return promise
 
   init = (options = {}) ->
     # Append /test to the root if the app is in test mode

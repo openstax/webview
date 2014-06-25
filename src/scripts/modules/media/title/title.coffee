@@ -34,28 +34,28 @@ define (require) ->
       return {
         share: share
         encodedTitle: encodeURI(title)
-        derivable: not @model.isDraft()
+        #derivable: not @model.isDraft()
         authenticated: session.get('id')
         isBook: @model.isBook()
       }
 
-    editable:
-      '.media-title > .title > h1':
-        value: 'title'
-        type: 'textinput'
+    #editable:
+    #  '.media-title > .title > h1':
+    #    value: 'title'
+    #    type: 'textinput'
 
-    events:
-      'click .derive .btn': 'derive'
+    #events:
+    #  'click .derive .btn': 'derive'
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:loaded change:title', @render)
       @listenTo(router, 'navigate', @render)
 
-    derive: () ->
-      options =
-        success: (model) ->
-          router.navigate("/contents/#{model.id}@#{model.version}", {trigger: true})
+    #derive: () ->
+    #  options =
+    #    success: (model) ->
+    #      router.navigate("/contents/#{model.id}@#{model.version}", {trigger: true})
 
       # Derive a copy of the book and then navigate to it
-      @model.derive(options)
+    #  @model.derive(options)

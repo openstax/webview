@@ -156,12 +156,11 @@ module.exports = (grunt) ->
               'cs!pages/people/people'
 
               # FIX: edit modules should be loaded in separate modules
-              'select2'
-              'bootstrapPopover'
-              'cs!modules/media/editbar/editbar'
+              #'select2'
+              #'bootstrapPopover'
+              #'cs!modules/media/editbar/editbar'
               'cs!helpers/backbone/views/editable'
-
-              'cs!configs/aloha'
+              #'cs!configs/aloha'
             ]
             stubModules: ['cs']
             exclude: ['coffee-script', 'less/normalize']
