@@ -190,7 +190,7 @@ module.exports = (grunt) ->
         expand: true
         filter: 'isFile'
         flatten: true
-        src: ['bower_components/bootstrap/fonts/**']
+        src: ['bower_components/font-awesome/fonts/**']
         dest: 'dist/fonts/'
 
     # Clean
