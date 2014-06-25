@@ -148,15 +148,14 @@ module.exports = (grunt) ->
               'cs!pages/contents/contents'
               'cs!pages/search/search'
               'cs!pages/workspace/workspace'
-
-              # FIX: edit modules should be loaded in separate modules
-              'select2'
-              'cs!modules/media/editbar/editbar'
-              'cs!helpers/backbone/views/editable'
-
-              'cs!configs/aloha'
               'cs!pages/about-us/about-us'
               'cs!pages/people/people'
+
+              # FIX: edit modules should be loaded in separate modules
+              #'select2'
+              #'cs!modules/media/editbar/editbar'
+              'cs!helpers/backbone/views/editable'
+              #'cs!configs/aloha'
             ]
             exclude: ['coffee-script', 'less/normalize']
             excludeShallow: ['settings']

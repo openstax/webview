@@ -32,21 +32,21 @@ define (require) ->
         currentPage: currentPageData
         hasDownloads: (_.isArray(downloads) and downloads?.length) or
           (_.isArray(pageDownloads) and pageDownloads?.length)
-        derivable: not currentPage?.isDraft() and @model.isDraft()
+        #derivable: not currentPage?.isDraft() and @model.isDraft()
         authenticated: session.get('id')
       }
 
-    editable:
-      '.media-header > .title > h2':
-        value: () -> 'title'
-        type: 'textinput'
+    #editable:
+    #  '.media-header > .title > h2':
+    #    value: () -> 'title'
+    #    type: 'textinput'
 
     regions:
       button: '.info .btn'
 
     events:
       'click .summary h5': 'toggleSummary'
-      'click .derive .btn': 'derivePage'
+      #'click .derive .btn': 'derivePage'
 
     initialize: () ->
       super()
@@ -70,14 +70,14 @@ define (require) ->
       $summary.find('h5').toggleClass('active')
       @$el.find('.abstract').toggle()
 
-    derivePage: () ->
-      options =
-        success: (model) =>
-          @model.setPage(@model.get('contents').indexOf(model)+1)
+    #derivePage: () ->
+    #  options =
+    #    success: (model) =>
+    #      @model.setPage(@model.get('contents').indexOf(model)+1)
           # Update the url bar path
-          href = linksHelper.getPath 'contents',
-            model: @model
-            page: @model.getPageNumber()
-          router.navigate(href, {trigger: false, analytics: true})
+    #      href = linksHelper.getPath 'contents',
+    #        model: @model
+    #        page: @model.getPageNumber()
+    #      router.navigate(href, {trigger: false, analytics: true})
 
-      @model.deriveCurrentPage(options)
+    #  @model.deriveCurrentPage(options)

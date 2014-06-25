@@ -13,21 +13,21 @@ define (require) ->
     url: "#{SERVER}/users/profile"
 
     startChecking: () ->
-      @update() # Initially check immediately
-      _timer = setInterval(() =>
-        @update()
-      , INTERVAL)
+      #@update() # Initially check immediately
+      #_timer = setInterval(() =>
+      #  @update()
+      #, INTERVAL)
 
     stopChecking: () ->
-      clearInterval(_timer)
-      _timer = null
+      #clearInterval(_timer)
+      #_timer = null
 
     # Fetches the model, clear it if the server returns an error,
     # and fires a change event any time the session status changes
     update: () ->
-      currentTime = (new Date()).getTime()
+      #currentTime = (new Date()).getTime()
 
       # Don't update faster than every 5 seconds
-      if not _lastUpdate or currentTime - _lastUpdate > MINIMUM_INTERVAL
-        _lastUpdate = currentTime
-        @fetch(xhrFields: withCredentials: true).fail () => @clear()
+      #if not _lastUpdate or currentTime - _lastUpdate > MINIMUM_INTERVAL
+      #  _lastUpdate = currentTime
+      #  @fetch(xhrFields: withCredentials: true).fail () => @clear()
