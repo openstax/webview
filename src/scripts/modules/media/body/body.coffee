@@ -77,6 +77,13 @@ define (require) ->
           <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
         </div>''')
 
+
+      @$el.find('figure:has(> figcaption)').addClass('ui-has-child-figcaption')
+
+      # Move all figure captions below the figure
+      @$el.find('figcaption').each (i, el) ->
+        $(el).parent().append(el)
+
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')
       $solution.toggleClass('ui-solution-visible')

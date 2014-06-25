@@ -52,16 +52,25 @@ section > figure {
 figure {
   color: @gray;
 
+  &.ui-has-child-figcaption > figcaption::before {
+    margin-right: 5px;
+    color: @gray-medium;
+    font-weight: bold;
+    content: "Figure " counter(figure) ".";
+  }
+
+  &:not(.ui-has-child-figcaption)::after {
+    display: table-caption;
+    caption-side: bottom;
+    margin-right: 5px;
+    color: @gray-medium;
+    font-weight: bold;
+    content: "Figure " counter(figure) ".";
+  }
+
   > figcaption {
     padding: 10px;
     font-size: 1.3rem;
-
-    &::before {
-      margin-right: 5px;
-      color: @gray-medium;
-      font-weight: bold;
-      content: "Figure " counter(figure) ".";
-    }
   }
 
   // do not wrap this in a .media so it applies to editing in Aloha
@@ -80,15 +89,18 @@ figure {
     // do not wrap this in a .media so it applies to editing in Aloha
     img { max-width: (@max-viewport-width - 120px) / 2; }
 
-    &::after {
-      display: block;
-      text-align: center;
-      content: counter(figure) counter(subfigure, lower-alpha);
+    &.ui-has-child-figcaption > figcaption::before {
+      font-weight: bold;
+      content: counter(figure) counter(subfigure,lower-alpha) ': ';
     }
 
-    > figcaption::before {
-      content: "Figure " counter(figure)counter(subfigure,lower-alpha)".";
+    &:not(.ui-has-child-figcaption)::after {
+      display: block;
+      text-align: center;
+      font-weight: bold;
+      content: '(' counter(subfigure,lower-alpha) ')';
     }
+
   }
 }
 
@@ -99,6 +111,12 @@ figure:not([data-orient="vertical"]) {
   table-layout: fixed;
   width: 100%;
 
+  > .title {
+    display: table-caption;
+    caption-side: top;
+    font-weight: bold;
+  }
+
   > figcaption {
     display: table-caption;
     caption-side: bottom;
@@ -107,6 +125,8 @@ figure:not([data-orient="vertical"]) {
   // Subfigures
   > figure {
     display: table-cell;
+
+    > figcaption { display: block; }
   }
 }
 
