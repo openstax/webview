@@ -49,7 +49,7 @@ define (require) ->
                 helper.find('.title').text elementLabel
                 helper
 
-              start: (e, ui) =>
+              start: (e, ui) ->
                 $('.aloha-root-editable').addClass 'aloha-block-dropzone'
                 $(ui.helper).addClass 'dragging'
 
