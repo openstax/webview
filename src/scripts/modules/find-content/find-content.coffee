@@ -1,5 +1,6 @@
 define (require) ->
   $ = require('jquery')
+  Backbone = require('backbone')
   router = require('cs!router')
   subjects = require('cs!collections/subjects')
   BaseView = require('cs!helpers/backbone/views/base')
