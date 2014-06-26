@@ -19,6 +19,9 @@ define (require) ->
       super()
       @listenTo(@collection, 'reset', @render)
 
+    onRender: () ->
+      @updateSearchBar()
+
     selectSubject: (e) ->
       e.preventDefault()
 
@@ -30,3 +33,9 @@ define (require) ->
 
     search: (query) ->
       router.navigate("search?q=#{query}", {trigger: true})
+
+    updateSearchBar: () ->
+      url = Backbone.history.fragment.match(/^(search)(?:\?q=)?(.*)/)
+
+      if url and url.length is 3 and url[1] is 'search'
+        @$el.find('.find').val(decodeURIComponent(url[2]))
