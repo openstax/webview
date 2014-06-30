@@ -12,6 +12,11 @@ module.exports = (grunt) ->
   alohaBuildConfig.wrap =
     startFile: 'bower_components/aloha-editor/build/aloha/closure-start.frag'
     endFile: 'bower_components/aloha-editor/build/aloha/closure-end.frag'
+  alohaBuildConfig.skipDirOptimize = true
+  alohaBuildConfig.optimize = "uglify2"
+  alohaBuildConfig.optimizeCss = "standard"
+  alohaBuildConfig.separateCSS = false
+  alohaBuildConfig.preserveLicenseComments = false
 
   # Project configuration.
   grunt.initConfig
@@ -139,7 +144,6 @@ module.exports = (grunt) ->
           preserveLicenseComments: false
           skipDirOptimize: true
           optimize: 'uglify2'
-          stubModules: ['cs']
           modules: [{
             name: 'main'
             include: [
@@ -148,16 +152,18 @@ module.exports = (grunt) ->
               'cs!pages/contents/contents'
               'cs!pages/search/search'
               'cs!pages/workspace/workspace'
+              'cs!pages/about-us/about-us'
+              'cs!pages/people/people'
 
               # FIX: edit modules should be loaded in separate modules
               'select2'
+              'bootstrapPopover'
               'cs!modules/media/editbar/editbar'
               'cs!helpers/backbone/views/editable'
 
               'cs!configs/aloha'
-              'cs!pages/about-us/about-us'
-              'cs!pages/people/people'
             ]
+            stubModules: ['cs']
             exclude: ['coffee-script', 'less/normalize']
             excludeShallow: ['settings']
           }]
@@ -183,9 +189,12 @@ module.exports = (grunt) ->
 
     # Copy
     copy:
-      dist:
+      require:
         src: 'bower_components/requirejs/require.js'
         dest: 'dist/scripts/require.js'
+      aloha:
+        src: 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha.js'
+        dest: 'dist/scripts/aloha.js'
       fonts:
         expand: true
         filter: 'isFile'
@@ -204,6 +213,7 @@ module.exports = (grunt) ->
           '!dist/scripts/main.js'
           '!dist/scripts/require.js'
           '!dist/scripts/settings.js'
+          '!dist/scripts/aloha.js'
         ]
         filter: 'isFile'
       directories:
@@ -271,9 +281,9 @@ module.exports = (grunt) ->
     #'recess' NOTE: Disabled until recess is upgraded to support LESS 1.6+
   ]
 
-  # Install
+  # Aloha
   # -----
-  grunt.registerTask 'install', [
+  grunt.registerTask 'aloha', [
     'requirejs:aloha'
   ]
 
@@ -281,8 +291,7 @@ module.exports = (grunt) ->
   # -----
   grunt.registerTask 'dist', [
     'requirejs:compile'
-    'copy:dist'
-    'copy:fonts'
+    'copy'
     'targethtml:dist'
     'clean'
     'uglify:dist'
@@ -294,8 +303,7 @@ module.exports = (grunt) ->
   # -----
   grunt.registerTask 'default', [
     'requirejs:compile'
-    'copy:dist'
-    'copy:fonts'
+    'copy'
     'targethtml:dist'
     'clean'
     'uglify:dist'
