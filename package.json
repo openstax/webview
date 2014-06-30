@@ -3,8 +3,8 @@
   "version": "0.10.0",
   "description": "Connexions (cnx.org) web site",
   "scripts": {
-    "prepublish": "bower install; grunt install --verbose",
-    "upgrade": "npm update; bower update; grunt install --verbose",
+    "prepublish": "bower install; grunt aloha --verbose",
+    "upgrade": "npm update; bower update; grunt aloha --verbose",
     "test": "grunt test --verbose",
     "dist": "grunt dist --verbose"
   },
