@@ -261,6 +261,17 @@ module.exports = (grunt) ->
           dest: 'dist/images/'
         }]
 
+    # String Replace (HACK to update aloha path)
+    'string-replace':
+      dist:
+        options:
+          replacements: [{
+            pattern: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha'
+            replacement: 'aloha'
+          }]
+        files:
+          'dist/scripts/main.js': ['dist/scripts/main.js']
+
   # Dependencies
   # ============
   for name of pkg.dependencies when name.substring(0, 6) is 'grunt-'
@@ -292,6 +303,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'dist', [
     'requirejs:compile'
     'copy'
+    'string-replace'
     'targethtml:dist'
     'clean'
     'uglify:dist'
