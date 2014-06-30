@@ -8,7 +8,6 @@ define (require) ->
   require('bootstrapCollapse')
   require('bootstrapModal')
 
-
   blockDragHelper = $('''
     <div class="semantic-drag-helper aloha-ephemera">
         <div class="title"></div>
