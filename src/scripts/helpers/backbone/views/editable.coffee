@@ -80,7 +80,7 @@ define (require) ->
       start: ($editable, selector, property, options) ->
         $editable.mahalo?() # clicking Back/Next does not call mahalo so do it here
         $editable.text('Loading editor...')
-        require ['aloha', 'less!../../../../styles/aloha-hacks'], (Aloha) =>
+        require ['aloha'], (Aloha) =>
           # Create a new id for it so back/next do not cause
           # the HTML from another page to get saved accidentally
           $editable.attr('id', GENTICS.Utils.guid())
