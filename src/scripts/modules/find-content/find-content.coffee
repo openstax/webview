@@ -36,7 +36,13 @@ define (require) ->
       router.navigate("search?q=#{query}", {trigger: true})
 
     updateSearchBar: () ->
-      url = Backbone.history.fragment.match(/^(search)(?:\?q=)?(.*)/)
+      query = ''
+      url = Backbone.history.fragment.match(/^(search)(\?q=.*)?/)
 
       if url and url.length is 3 and url[1] is 'search'
-        @$el.find('.find').val(decodeURIComponent(url[2]))
+        query = _.filter decodeURIComponent(url[2]).slice(1).split('&'), (fragment) ->
+          return fragment.substr(0,2) is 'q='
+
+        query = query[0].slice(2) if typeof query[0] is 'string'
+
+      @$el.find('.find').val(query)
