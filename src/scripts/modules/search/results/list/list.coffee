@@ -1,4 +1,5 @@
 define (require) ->
+  Handlebars = require('hbs/handlebars')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./list-template')
   require('less!./list')
@@ -12,7 +13,18 @@ define (require) ->
       pages = _.where(results, {mediaType: 'Module'})
       misc = _.filter(results, (result) -> result.mediaType isnt 'Collection' and result.mediaType isnt 'Module')
 
-      return {books: books, pages: pages, misc: misc}
+      # Determine the url to use for pagination links
+      link = window.location.pathname + '?' +
+        _.filter window.location.search.slice(1).split('&'), (query) ->
+          return query.substr(0,5) isnt 'page='
+        .join('&') + '&page='
+
+      pagination =
+        pageCount: Math.ceil(@model.get('results').total / @model.get('query').per_page)
+        page: @model.get('query').page
+        link: link
+
+      return {books: books, pages: pages, misc: misc, pagination: pagination}
 
     initialize: () ->
       super()
