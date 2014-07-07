@@ -14,7 +14,10 @@ define (require) ->
     initialize: () ->
       super()
 
-      if location.search and location.search.length
+      search = _.filter window.location.search.slice(1).split('&'), (query) ->
+        return query.substr(0,2) is 'q='
+
+      if search[0] and search[0].length > 2
         @model = searchResults.load({query: location.search})
 
       @listenTo(@model, 'change:error', @displayError) if @model
