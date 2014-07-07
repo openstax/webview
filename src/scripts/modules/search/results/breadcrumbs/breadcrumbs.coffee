@@ -23,10 +23,10 @@ define (require) ->
       @search(query)
 
     search: (query) ->
-      url = "#{window.location.pathname}?q=#{query}&" +
-        _.filter window.location.search.slice(1).split('&'), (query) ->
-          return query.substr(0,2) isnt 'q=' and query.substr(0,5) isnt 'page='
-        .join('&')
+      url = "#{window.location.pathname}?q=#{query}&"
+      url += _.filter window.location.search.slice(1).split('&'), (query) ->
+        return query.substr(0,2) isnt 'q=' and query.substr(0,5) isnt 'page='
+      .join('&')
 
       router.navigate(url, {trigger: true})
 

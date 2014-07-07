@@ -14,10 +14,10 @@ define (require) ->
       misc = _.filter(results, (result) -> result.mediaType isnt 'Collection' and result.mediaType isnt 'Module')
 
       # Determine the url to use for pagination links
-      link = window.location.pathname + '?' +
-        _.filter window.location.search.slice(1).split('&'), (query) ->
-          return query.substr(0,5) isnt 'page='
-        .join('&') + '&page='
+      url = window.location.pathname + '?'
+      url += _.filter window.location.search.slice(1).split('&'), (query) ->
+        return query.substr(0,5) isnt 'page='
+      .join('&') + '&page='
 
       pagination =
         pageCount: Math.ceil(@model.get('results').total / @model.get('query').per_page)
