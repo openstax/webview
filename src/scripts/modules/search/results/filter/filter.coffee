@@ -14,6 +14,8 @@ define (require) ->
           if query.substr(0,2) is 'q='
             q = query
             return false
+          else if query.substr(0,5) is 'page='
+            return false # Don't keep the page count
 
           return true
         .join('&') + "&#{q}"
