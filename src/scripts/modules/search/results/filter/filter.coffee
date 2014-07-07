@@ -7,10 +7,23 @@ define (require) ->
   return class SearchResultsFilterView extends BaseView
     template: template
     templateHelpers:
-      url: () -> Backbone.history.fragment
+      url: () ->
+        q = ""
+        url = window.location.pathname + '?'
+        url += _.filter window.location.search.slice(1).split('&'), (query) ->
+          if query.substr(0,2) is 'q='
+            q = query
+            return false
+
+          return true
+        .join('&') + "&#{q}"
+
+        return url
 
     events:
       'click .toggle': 'toggleLimits'
+
+      # TODO: Fix filter links to work with page/per_page query paramters
 
     initialize: () ->
       super()
