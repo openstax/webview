@@ -25,8 +25,6 @@ define (require) ->
     events:
       'click .toggle': 'toggleLimits'
 
-      # TODO: Fix filter links to work with page/per_page query paramters
-
     initialize: () ->
       super()
       @listenTo(@model, 'change:results', @render)
