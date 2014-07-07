@@ -22,7 +22,7 @@ define (require) ->
       pagination =
         pageCount: Math.ceil(@model.get('results').total / @model.get('query').per_page)
         page: @model.get('query').page
-        link: link
+        url: url
 
       return {books: books, pages: pages, misc: misc, pagination: pagination}
 
