@@ -1,5 +1,6 @@
 define (require) ->
   $ = require('jquery')
+  linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./filter-template')
   require('less!./filter')
@@ -8,17 +9,12 @@ define (require) ->
     template: template
     templateHelpers:
       url: () ->
-        q = ""
-        url = window.location.pathname + '?'
-        url += _.filter window.location.search.slice(1).split('&'), (query) ->
-          if query.substr(0,2) is 'q='
-            q = query
-            return false
-          else if query.substr(0,5) is 'page='
-            return false # Don't keep the page count
+        queryString = linksHelper.serializeQuery(window.location.search)
+        q = queryString.q
+        delete queryString.page
+        delete queryString.q
 
-          return true
-        .join('&') + "&#{q}"
+        url = "#{location.pathname}?#{linksHelper.param(queryString)}&q=#{q}"
 
         return url
 
