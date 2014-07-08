@@ -30,15 +30,19 @@
           <textarea name="submitlog" class="form-control submitlog" placeholder="Include a description of your changes (required)" required></textarea>
 
           <div class="publish-list">
-            <div>
-              <span class="name-wrapper">
-                <input type="checkbox" name="{{id}}" checked="checked" class="collection-checkbox" />
-                <span class="title" data-depth="{{depth}}">{{title}}</span>
-              </span>
-            </div>
-            <div class="publish-contents">
-              {{! Add Publish List View}}
-            </div>
+            <fieldset>
+              <legend>Items to Publish</legend>
+
+              <div>
+                <span class="name-wrapper">
+                  <input type="checkbox" name="{{id}}" checked="checked" class="collection-checkbox" />
+                  <span class="title" data-depth="{{depth}}">{{title}}</span>
+                </span>
+              </div>
+              <div class="publish-contents">
+                {{! Add Publish List View}}
+              </div>
+            </fieldset>
           </div>
 
         </div>
