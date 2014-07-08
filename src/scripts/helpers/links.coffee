@@ -23,7 +23,8 @@ define (require) ->
 
       query.split('?').pop().split('&').forEach (prop) ->
         item = prop.split('=')
-        queryString[decodeURIComponent(item.shift())] = decodeURIComponent(item.shift())
+        if item.length is 2
+          queryString[decodeURIComponent(item.shift())] = decodeURIComponent(item.shift())
 
       return queryString
 
