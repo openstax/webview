@@ -17,3 +17,21 @@ define (require) ->
           url += ":#{data.page}" if data.page
 
       return url
+
+    serializeQuery: (query) ->
+      queryString = {}
+
+      query.split('?').pop().split('&').forEach (prop) ->
+        item = prop.split('=')
+        queryString[decodeURIComponent(item.shift())] = decodeURIComponent(item.shift())
+
+      return queryString
+
+    param: (obj) ->
+      str = []
+
+      for p of obj
+        if obj.hasOwnProperty(p)
+          str.push("#{encodeURIComponent(p)}=#{encodeURIComponent(obj[p])}")
+
+      return str.join("&")
