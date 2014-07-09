@@ -28,7 +28,7 @@ define (require) ->
         uuid = settings.shortcodes[uuid] if settings.shortcodes[uuid]
         @appView.render('contents', {uuid: uuid, page: Number(page)})
 
-      @route /^search/, 'search', () ->
+      @route /^(search)(?:\?q=)?(.*)/, 'search', () ->
         @appView.render('search')
 
       @route 'about-us', 'about-us', () ->

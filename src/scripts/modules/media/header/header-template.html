@@ -32,7 +32,7 @@
     <div class="info">
       <div>
         {{#or hasDownloads buyLink}}
-          {{#is type 'book'}}
+          {{#is mediaType 'application/vnd.org.cnx.collection'}}
             <a class="btn">Get This Book!</a>
           {{else}}
             <a class="btn">Get This Page!</a>

@@ -39,5 +39,5 @@ define (require) ->
           withCredentials: true
       .done (response) =>
         @model.fetch()
-      .fail (error) =>
+      .fail (error) ->
         alert("#{error.status}: #{error.statusText}")

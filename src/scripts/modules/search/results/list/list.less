@@ -28,4 +28,31 @@
   .edited {
     width: 115px;
   }
+
+  .pagination {
+    display: table; // used to center the div
+    margin: 20px auto;
+    text-align: center;
+
+    > ul {
+      padding: 0;
+      list-style-type: none;
+
+      > li {
+        display: inline-block;
+        padding: 4px;
+        font-size: 1.5rem;
+
+        &.disabled {
+          display: none; // Hide disabled prev/next buttons
+        }
+
+        &.active a {
+          color: black;
+          font-weight: bold;
+          pointer-events: none; // Disable the active page's button
+        }
+      }
+    }
+  }
 }

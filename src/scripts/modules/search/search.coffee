@@ -1,4 +1,5 @@
 define (require) ->
+  linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   searchResults = require('cs!models/search-results')
   BaseView = require('cs!helpers/backbone/views/base')
@@ -14,7 +15,9 @@ define (require) ->
     initialize: () ->
       super()
 
-      if location.search and location.search isnt '?q='
+      queryString = linksHelper.serializeQuery(location.search)
+
+      if queryString.q
         @model = searchResults.load({query: location.search})
 
       @listenTo(@model, 'change:error', @displayError) if @model

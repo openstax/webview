@@ -11,7 +11,7 @@
     "lodash": "~2.4.1",
     "backbone": "~1.1.2",
     "backbone-associations": "~0.6.1",
-    "bootstrap": "~3.1.1",
+    "bootstrap": "~3.2.0",
     "font-awesome": "~4.1",
     "requirejs": "~2.1.14",
     "requirejs-text": "~2.0.12",
@@ -19,7 +19,7 @@
     "require-css": "~0.1.4",
     "require-less": "~0.1.2",
     "require-handlebars-plugin": "~0.8.1",
-    "aloha-editor": "oerpub/Aloha-Editor#7a6408379b91895798ffc4f49bd428d6d10ed091",
+    "aloha-editor": "oerpub/Aloha-Editor#9d58bc815ad2f3eb73ff29cba0e8506e3d8403bc",
     "select2": "~3.5.0"
   },
   "devDependencies": {

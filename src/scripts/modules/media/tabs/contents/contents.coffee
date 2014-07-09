@@ -10,7 +10,6 @@ define (require) ->
 
     regions:
       toc: '.toc'
-      button: '.add.btn'
 
     events:
       'dragstart .toc [draggable]': 'onDragStart'
@@ -24,7 +23,7 @@ define (require) ->
       @regions.toc.show new TocSectionView
         model: @model
 
-      @regions.button.show new AddPopoverView
+      @regions.self.append new AddPopoverView
         model: @model
         owner: @$el.find('.add.btn')
 

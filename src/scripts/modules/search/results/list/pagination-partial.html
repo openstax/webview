@@ -1,0 +1,15 @@
+{{#gt this.pageCount 1}}
+  <div class="pagination">
+    <ul>
+      {{#paginate this type="previous"}}
+        <li {{#if disabled}}class="disabled"{{/if}}><a href="{{../this.url}}{{n}}" >Prev</a></li>
+      {{/paginate}}
+      {{#paginate this type="middle" limit="7"}}
+        <li {{#if active}}class="active"{{/if}}><a href="{{../this.url}}{{n}}">{{n}}</a></li>
+      {{/paginate}}
+      {{#paginate this type="next"}}
+        <li {{#if disabled}}class="disabled"{{/if}}><a href="{{../this.url}}{{n}}">Next</a></li>
+      {{/paginate}}
+    </ul>
+  </div>
+{{/gt}}

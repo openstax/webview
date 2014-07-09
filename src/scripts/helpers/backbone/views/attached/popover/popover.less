@@ -1,3 +1,5 @@
+@import "../../../../../../styles/variables.less";
+
 .popover {
   border: none;
   border-radius: 0;
@@ -5,6 +7,26 @@
 
   .popover-content {
     padding: 3px 0;
+    color: @gray-dark;
+
+    ul.menu {
+      margin-bottom: 0;
+      padding-left: 0;
+      list-style-type: none;
+
+      > li.menuitem {
+        padding: 3px 20px;
+        font-weight: normal;
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+          color: @dropdown-link-hover-color;
+          background-color: @dropdown-link-hover-bg;
+          cursor: pointer;
+        }
+      }
+    }
   }
 
   &.top > .arrow {

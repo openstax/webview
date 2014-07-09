@@ -1,5 +1,6 @@
 define (require) ->
   $ = require('jquery')
+  linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   subjects = require('cs!collections/subjects')
   BaseView = require('cs!helpers/backbone/views/base')
@@ -19,6 +20,9 @@ define (require) ->
       super()
       @listenTo(@collection, 'reset', @render)
 
+    onRender: () ->
+      @updateSearchBar()
+
     selectSubject: (e) ->
       e.preventDefault()
 
@@ -30,3 +34,7 @@ define (require) ->
 
     search: (query) ->
       router.navigate("search?q=#{query}", {trigger: true})
+
+    updateSearchBar: () ->
+      queryString = linksHelper.serializeQuery(location.search)
+      @$el.find('.find').val(queryString.q)

@@ -1,5 +1,6 @@
 define (require) ->
   $ = require('jquery')
+  linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./breadcrumbs-template')
@@ -23,7 +24,12 @@ define (require) ->
       @search(query)
 
     search: (query) ->
-      router.navigate("search?q=#{query}", {trigger: true})
+      queryString = linksHelper.serializeQuery(location.search)
+      queryString.q = query
+      delete queryString.page
+      url = "#{location.pathname}?#{linksHelper.param(queryString)}"
+
+      router.navigate(url, {trigger: true})
 
     # Transform the query.limits object into the original query string
     formatQuery: (obj) ->
