@@ -20,8 +20,6 @@ define (require) ->
 
     events:
       'submit form': 'onSubmit'
-      'change [name="license"]': 'validate'
-      'keyup  [name="submitlog"]': 'validate'
       'change .collection-checkbox': 'toggleBook'
       'change .publish-contents input': 'togglePage'
 
@@ -63,12 +61,6 @@ define (require) ->
 
       $('#publish-modal').hide() # Close the modal
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
-
-    validate: () ->
-      isValid = @$el.find('[name="license"]').is(':checked') and
-                @$el.find('[name="submitlog"]').val()
-
-      @$el.find('.btn-submit').toggleClass('disabled', !isValid)
 
     toggleBook: (e) ->
       if $(e.currentTarget).is(':checked')
