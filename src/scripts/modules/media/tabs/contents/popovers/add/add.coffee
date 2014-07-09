@@ -17,10 +17,12 @@ define (require) ->
       super()
       @parent?.regions.self.append(new AddPageModal({model: @model}))
 
-    addSection: () ->
+    addSection: (e) ->
+      @hide(e)
       @model.add
         contents: [],
         title: "Untitled"
 
-    addPage: () ->
+    addPage: (e) ->
+      @hide(e)
       $('#add-page-modal').modal()

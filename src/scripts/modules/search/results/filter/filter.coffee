@@ -1,5 +1,6 @@
 define (require) ->
   $ = require('jquery')
+  linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./filter-template')
   require('less!./filter')
@@ -7,7 +8,15 @@ define (require) ->
   return class SearchResultsFilterView extends BaseView
     template: template
     templateHelpers:
-      url: () -> Backbone.history.fragment
+      url: () ->
+        queryString = linksHelper.serializeQuery(window.location.search)
+        q = queryString.q
+        delete queryString.page
+        delete queryString.q
+
+        url = "#{location.pathname}?#{linksHelper.param(queryString)}&q=#{q}"
+
+        return url
 
     events:
       'click .toggle': 'toggleLimits'

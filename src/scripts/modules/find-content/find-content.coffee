@@ -1,6 +1,6 @@
 define (require) ->
   $ = require('jquery')
-  Backbone = require('backbone')
+  linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   subjects = require('cs!collections/subjects')
   BaseView = require('cs!helpers/backbone/views/base')
@@ -36,7 +36,5 @@ define (require) ->
       router.navigate("search?q=#{query}", {trigger: true})
 
     updateSearchBar: () ->
-      url = Backbone.history.fragment.match(/^(search)(?:\?q=)?(.*)/)
-
-      if url and url.length is 3 and url[1] is 'search'
-        @$el.find('.find').val(decodeURIComponent(url[2]))
+      queryString = linksHelper.serializeQuery(location.search)
+      @$el.find('.find').val(queryString.q)
