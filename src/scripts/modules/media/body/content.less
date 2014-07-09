@@ -565,19 +565,37 @@ span.list[data-list-type='labeled-item'] { #list>.style(inline; labeled-item); }
 //
 // Tables
 // --------------------------------------------------
+
 table {
   margin-top: 60px;
   width: 100%;
   max-width: 100%;
   margin-bottom: @line-height-computed;
   background-color: @table-bg;
+  counter-increment: table;
 
   caption {
-    font-size: 1.75rem;
+    margin-top: 5px;
+    font-size: 1.3rem;
+    text-align: left;
+    caption-side: bottom;
 
     sup {
       top: auto;
       line-height: inherit;
+    }
+
+    > .title {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: bold;
+
+      &::before {
+        margin-right: 5px;
+        color: @gray-medium;
+        font-weight: bold;
+        content: "Table " counter(table) ".";
+      }
     }
   }
 
