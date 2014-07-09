@@ -14,7 +14,7 @@ define (require) ->
     if model.isInBook()
       @model.set('childChanged', true, {doNotRerender:true})
 
-      # Changing a module's title also change's a book's ToC
+      # Changing a page's title also change's a book's ToC
       if property is 'title'
         @model.set('changed', true, {doNotRerender:true})
 
