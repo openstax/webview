@@ -33,6 +33,6 @@ define (require) ->
 
       for p of obj
         if obj.hasOwnProperty(p)
-          str.push("#{encodeURIComponent(p)}=#{encodeURIComponent(obj[p])}")
+          str.push("#{encodeURI(p)}=#{encodeURI(obj[p])}")
 
       return str.join("&")

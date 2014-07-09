@@ -14,7 +14,10 @@ define (require) ->
         delete queryString.page
         delete queryString.q
 
-        url = "#{location.pathname}?#{linksHelper.param(queryString)}&q=#{q}"
+        params = linksHelper.param(queryString)
+        params += '&' if params
+
+        url = "#{location.pathname}?#{params}q=#{q}"
 
         return url
 
