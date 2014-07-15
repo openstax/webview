@@ -77,7 +77,7 @@ define (require) ->
       if @id and not options.skipDownloads
         @set('downloads', 'loading')
 
-        if @isDraft() or not @get('version') # HACK for Untitled module
+        if @isDraft() or not @get('version') # HACK for Untitled page
           @set('downloads', [])
           @set('isLatest', true)
         else

@@ -1,10 +1,10 @@
 <table class="table">
   <caption>
-    {{#is this.0.mediaType 'Collection'}}
+    {{#is this.0.mediaType 'application/vnd.org.cnx.collection'}}
       {{! <span class="fa fa-book"></span> }}
       <span>Books</span>
     {{else}}
-      {{#is this.0.mediaType 'Module'}}
+      {{#is this.0.mediaType 'application/vnd.org.cnx.module'}}
         {{! <span class="fa fa-file"></span> }}
         <span>Pages</span>
       {{else}}
