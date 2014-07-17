@@ -5,8 +5,11 @@ define (require) ->
   settings = require('settings')
 
   dispose = (obj) ->
+    delete obj.parent
+    delete obj.el
+    delete obj.$el
+    delete obj.regions
     obj?.__proto__ = Function
-    delete obj[key] for key of obj
 
   class Region
     constructor: (@el, @parent) ->
