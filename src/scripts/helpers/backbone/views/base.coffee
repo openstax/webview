@@ -18,6 +18,15 @@ define (require) ->
     append: (view) ->
       @appendAs('div', view)
 
+    appendOnce: (options) ->
+      if not (_.find @views, (view) -> options.view instanceof view.constructor)
+        if options.as.charAt(0) is '.'
+          @appendAs("div class=\"#{options.as.substr(1)}\"", options.view)
+        else if options.as.charAt(0) is '#'
+          @appendAs("div id=\"#{options.as.substr(1)}\"", options.view)
+        else
+          @appendAs(options.as, options.view)
+
     appendAs: (type, view) ->
       @$el = @parent.$el
       if @el then @$el = @parent.$el.find(@el)
@@ -76,6 +85,7 @@ define (require) ->
       return data
 
     _render: () ->
+      _.each @regions, (region) -> region.empty()
       @updateTitle()
       @renderDom()
 
