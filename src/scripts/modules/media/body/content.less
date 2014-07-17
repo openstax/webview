@@ -75,7 +75,7 @@ figure {
   }
 
   // do not wrap this in a .media so it applies to editing in Aloha
-  img { max-width: @max-viewport-width - 120px; }
+  img { max-width: 100%; }
 
   > [data-type="media"],
   > .media {
@@ -89,7 +89,7 @@ figure {
     counter-increment: subfigure;
 
     // do not wrap this in a .media so it applies to editing in Aloha
-    img { max-width: (@max-viewport-width - 120px) / 2; }
+    img { max-width: 50%; }
 
     &.ui-has-child-figcaption > figcaption::before {
       font-weight: bold;
