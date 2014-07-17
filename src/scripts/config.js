@@ -134,7 +134,7 @@
       bootstrapCarousel: ['jquery'],
       bootstrapCollapse: ['jquery', 'bootstrapTransition'],
       bootstrapDropdown: ['jquery'],
-      bootstrapModal: ['jquery'],
+      bootstrapModal: ['jquery', 'bootstrapTransition'],
       bootstrapPopover: ['jquery', 'bootstrapTooltip'],
       bootstrapScrollspy: ['jquery'],
       bootstrapTab: ['jquery'],
