@@ -8,7 +8,6 @@ define (require) ->
   AddPageSearchResultsView = require('cs!./results/results')
   template = require('hbs!./add-page-template')
   require('less!./add-page')
-  require('bootstrapTransition')
   require('bootstrapModal')
 
   return class AddPageModal extends BaseView
@@ -27,6 +26,10 @@ define (require) ->
       'blur .page-title': 'onUnfocusSearch'
       'keypress .page-title': 'onEnter'
 
+    onRender: () ->
+      @$el.off('shown.bs.modal') # Prevent duplicating event listeners
+      @$el.on 'shown.bs.modal', () => @$el.find('.page-title').focus()
+
     # Update the Search/Submit buttons to make the button that will
     # respond to 'Enter' to be styled as primary
     onFocusSearch: (e) ->
@@ -44,13 +47,12 @@ define (require) ->
         e.preventDefault()
         e.stopPropagation()
 
-        $modal = @$el.children('#add-page-modal')
-        $input = $modal.find('.page-title')
+        $input = @$el.find('.page-title')
 
         if $input.is(':focus')
           @search($input.val())
         else
-          $modal.find('form').submit()
+          @$el.find('form').submit()
 
     onChange: (e) ->
       $target = $(e.target)
@@ -72,8 +74,7 @@ define (require) ->
         @$el.find('.btn-submit').text('Add Selected Pages')
 
     onSearch: (e) ->
-      $modal = @$el.children('#add-page-modal')
-      title = encodeURIComponent($modal.find('.page-title').val())
+      title = encodeURIComponent(@$el.find('.page-title').val())
       @search(title)
 
     search: (title) ->
@@ -102,6 +103,7 @@ define (require) ->
             @model.setPage(input.name)
             @updateUrl()
 
+      @$el.modal('hide')
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
 
     newPage: (title) ->
