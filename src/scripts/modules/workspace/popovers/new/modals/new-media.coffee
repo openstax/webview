@@ -14,7 +14,7 @@ define (require) ->
 
     onRender: () ->
       @$el.off('shown.bs.modal') # Prevent duplicating event listeners
-      @$el.on 'shown.bs.modal', () => @$el.find('.media-title').focus()
+      @$el.on 'shown.bs.modal', () => @$el.find('.new-title').focus()
 
     newContent: (options = {}) ->
       if options.type is 'Book'
@@ -34,7 +34,7 @@ define (require) ->
     onSubmit: (e) ->
       e.preventDefault()
       @newContent
-        title: @$el.find('.media-title').val()
+        title: @$el.find('.new-title').val()
         type: @model.get('type')
 
       @$el.modal('hide')
