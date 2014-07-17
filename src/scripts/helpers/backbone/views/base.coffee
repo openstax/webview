@@ -9,7 +9,6 @@ define (require) ->
     delete obj.el
     delete obj.$el
     delete obj.regions
-    obj?.__proto__ = Function
 
   class Region
     constructor: (@el, @parent) ->
