@@ -94,6 +94,8 @@ define (require) ->
 
       data = $(e.originalEvent.target).serializeArray()
 
+      @$el.modal('hide')
+
       if data.length is 1
         @newPage(data[0].value)
       else
@@ -103,7 +105,6 @@ define (require) ->
             @model.setPage(input.name)
             @updateUrl()
 
-      @$el.modal('hide')
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
 
     newPage: (title) ->
