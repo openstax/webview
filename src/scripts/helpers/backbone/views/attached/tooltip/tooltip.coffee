@@ -27,7 +27,7 @@ define (require) ->
       @$owner = $(options.owner)
 
     onShow: () ->
-      @onBeforeClose() # Remove event handlers in case they were previously added
+      @removeEvents() # Remove event handlers in case they were previously added
 
       # Don't close due to clicks on this element
       @$el.on "click.#{@type}.#{@cid}", (e) -> e.stopPropagation()
@@ -77,8 +77,12 @@ define (require) ->
             'left': 'auto'
             'right': Math.floor($(document).outerWidth(true) - @$owner.offset().left)
 
-    onBeforeClose: () ->
+    removeEvents: () ->
       @$el.off "click.#{@type}.#{@cid}"
       @$owner.off "click.#{@type}.#{@cid}"
       @$owner.off "mouseenter.#{@type}.#{@cid}"
       @$owner.off "mouseleave.#{@type}.#{@cid}"
+
+    onBeforeClose: () ->
+      @removeEvents()
+      delete @$owner
