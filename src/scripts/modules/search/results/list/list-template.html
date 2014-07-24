@@ -3,20 +3,17 @@
 {{#if results.items.length}}
   {{! Books }}
   {{#if books.length}}
-    {{! {{> ./table-partial books}}
-    {{> modules/search/results/list/table-partial books}}
+    {{partial "modules/search/results/list/table-partial" authorList=authorList item=books}}
   {{/if}}
 
   {{! Pages }}
   {{#if pages.length}}
-    {{! {{> ./table-partial pages}}
-    {{> modules/search/results/list/table-partial pages}}
+    {{partial "modules/search/results/list/table-partial" authorList=authorList item=pages}}
   {{/if}}
 
   {{! Results of an unknown type }}
   {{#if misc.length}}
-    {{! {{> ./table-partial misc}}
-    {{> modules/search/results/list/table-partial misc}}
+    {{partial "modules/search/results/list/table-partial" authorList=authorList item=misc}}
   {{/if}}
 {{else}}
   {{#if loaded}}

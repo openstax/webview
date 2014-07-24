@@ -16,7 +16,7 @@
   </td>
   <td class="authors">
     {{#each authors}}
-      <span class="author">{{fullname}}</span>
+      <span class="author">{{author ../authorList index 'fullname'}}</span>
     {{/each}}
   </td>
   <td class="edited">{{date pubDate}}</td>
