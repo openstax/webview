@@ -13,9 +13,11 @@ define (require) ->
     if html is null or html is undefined then return
     return new Handlebars.SafeString(html)
   itemPartial = require('text!./add-page-item-partial.html')
-  Handlebars.registerPartial('modules/media/tabs/contents/popovers/add/modals/results/list/add-page-item-partial', itemPartial)
+  Handlebars.registerPartial('modules/media/tabs/contents/popovers/add/modals/results/list/add-page-item-partial',
+                             itemPartial)
   tablePartial = require('text!./add-page-table-partial.html')
-  Handlebars.registerPartial('modules/media/tabs/contents/popovers/add/modals/results/list/add-page-table-partial', tablePartial)
+  Handlebars.registerPartial('modules/media/tabs/contents/popovers/add/modals/results/list/add-page-table-partial',
+                             tablePartial)
   # /HACK
 
   return class AddPageSearchResultsListView extends BaseView
