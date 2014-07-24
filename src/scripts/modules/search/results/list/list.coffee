@@ -38,8 +38,6 @@ define (require) ->
         page: @model.get('query').page
         url: "#{location.pathname}?#{linksHelper.param(queryString)}&page="
 
-      authorList = @model.get('results').auxiliary.authors
-
       return {
         authorList: @model.get('results').auxiliary.authors
         books: books
