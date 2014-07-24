@@ -76,11 +76,6 @@ define (require) ->
       _.each response.query.limits, (limit) ->
         limit.name = FILTER_NAMES[limit.tag]
 
-        if limit.tag is 'authorID'
-          limit.name = 'Author ID'
-          author = authors[limit.index]
-          limit.displayValue = "#{author.fullname} (#{author.id})"
-
       _.each response.results.limits, (limit) ->
         limit.name = FILTER_NAMES[limit.tag] # Add natural language translation alongside tags
 
