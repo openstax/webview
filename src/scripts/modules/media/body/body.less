@@ -32,9 +32,10 @@
     min-height: 4in;
   }
 
-
   .publishing();
 
   // Import the content styling from a separate file so it can be included in the editing code
-  @import 'content.less';
+  > #content {
+    @import 'content.less';
+  }
 }
