@@ -74,21 +74,22 @@ define (require) ->
         @eTag = newETag
       ###
 
-      if @id and not options.skipDownloads
-        @set('downloads', 'loading')
+      results.then () =>
+        if @id and not options.skipDownloads
+          @set('downloads', 'loading')
 
-        if @isDraft() or not @get('version') # HACK for Untitled page
-          @set('downloads', [])
-          @set('isLatest', true)
-        else
-          $.ajax
-            url: "#{ARCHIVE}/extras/#{@id}"
-            dataType: 'json'
-          .done (response) =>
-            @set('downloads', response.downloads)
-            @set('isLatest', response.isLatest)
-          .fail () =>
+          if @isDraft() or not @get('version') # HACK for Untitled page
             @set('downloads', [])
+            @set('isLatest', true)
+          else
+            $.ajax
+              url: "#{ARCHIVE}/extras/#{@id}"
+              dataType: 'json'
+            .done (response) =>
+              @set('downloads', response.downloads)
+              @set('isLatest', response.isLatest)
+            .fail () =>
+              @set('downloads', [])
 
       return results
 
