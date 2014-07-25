@@ -169,13 +169,21 @@ define (require) ->
     # Utility Methods
     #
 
+    _getIdComponents: () -> @id?.match(/([^:@]+)@?([^:]*):?([0-9]*)/) or []
+
     getVersionedId: () ->
-      components = @id?.match(/([^:@]+)@?([^:]*):?([0-9]*)/) or []
+      components = @_getIdComponents()
       id = components[1] or ''
       version = @get('version') or components[2]
       if version then version = "@#{version}" else version = ''
 
       return "#{id}#{version}"
+
+    getUuid: () ->
+      components = @_getIdComponents()
+      id = components[1] or ''
+
+      return id
 
     index: () -> @get('parent').get('contents').indexOf(@)
 
