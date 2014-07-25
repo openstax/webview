@@ -74,10 +74,10 @@ define (require) ->
         @eTag = newETag
       ###
 
+      @set('downloads', 'loading')
+
       results.then () =>
         if @id and not options.skipDownloads
-          @set('downloads', 'loading')
-
           if @isDraft() or not @get('version') # HACK for Untitled page
             @set('downloads', [])
             @set('isLatest', true)
