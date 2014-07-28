@@ -11,16 +11,7 @@ define (require) ->
 
     template: template
     templateHelpers:
-      loaded: () ->
-        if @model.isBook()
-          return @model.get('loaded') and
-            (@model.asPage()?.get('loaded') or @model.get('contents')?.length is 0)
-
-        return @model.get('loaded')
-
-      content: () -> @getProperty('content')
-      hasContent: () -> _.isString(@getProperty('content'))
-      editable: () -> @isEditable()
+      status: () -> @owner.get('status')
 
     editable:
       '.media-body':
@@ -33,9 +24,24 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'changePage change:loaded change:currentPage.loaded', @render)
+
+      @owner = @model
+      @setupModelListener()
+
+    setupModelListener: () ->
+      @stopListening()
+      @model = @owner.asPage()
+
+      @listenTo(@owner, 'change:currentPage', @updateModelListener)
+      @listenTo(@model, 'change:active change:loaded', @updateModelListener) if @model
+
+    updateModelListener: () ->
+      @setupModelListener()
+      @render()
 
     onRender: () ->
+      if not @model?.get('active') then return
+
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
 
       # Converts a TERP link to an OST-hosted iframe

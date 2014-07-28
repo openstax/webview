@@ -50,10 +50,25 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:downloads change:buyLink change:loaded change:currentPage change:title', @render)
+      @setupModelListener()
+
+    setupModelListener: () ->
+      @stopListening()
+
+      @page = @model.asPage()
+
+      @listenTo(@model, 'change:downloads change:buyLink change:title', @render)
+      @listenTo(@model, 'change:currentPage', @updateModelListener)
       @listenTo(session, 'change', @render)
+      @listenTo(@page, 'change:active change:loaded', @updateModelListener) if @page
+
+    updateModelListener: () ->
+      @setupModelListener()
+      @render()
 
     onRender: () ->
+      if not @page?.get('active') then return
+
       @regions.button.append new BookPopoverView
         model: @model
         owner: @$el.find('.info .btn')
