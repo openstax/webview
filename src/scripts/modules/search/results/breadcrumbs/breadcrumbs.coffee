@@ -8,6 +8,8 @@ define (require) ->
 
   return class SearchResultsBreadcrumbsView extends BaseView
     template: template
+    templateHelpers:
+      authorList: () -> @model.get('results').auxiliary.authors
 
     events:
       'click .remove': 'removeBreadcrumb'

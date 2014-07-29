@@ -18,7 +18,7 @@ define (require) ->
       queryString = linksHelper.serializeQuery(location.search)
 
       if queryString.q
-        @model = searchResults.load({query: location.search})
+        @model = searchResults.config().load({query: location.search})
 
       @listenTo(@model, 'change:error', @displayError) if @model
 

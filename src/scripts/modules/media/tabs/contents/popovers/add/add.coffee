@@ -12,10 +12,16 @@ define (require) ->
     events:
       'click .add-page': 'addPage'
       'click .add-section': 'addSection'
-    
+
+    initialize: () ->
+      super(arguments...)
+      @addPageModal = new AddPageModal({model: @model})
+
     onRender: () ->
       super()
-      @parent?.regions.self.append(new AddPageModal({model: @model}))
+      @regions.self.appendOnce
+        view: @addPageModal
+        as: 'div id="add-page-modal" class="modal fade"'
 
     addSection: (e) ->
       @hide(e)
@@ -25,4 +31,8 @@ define (require) ->
 
     addPage: (e) ->
       @hide(e)
-      $('#add-page-modal').modal()
+      @addPageModal.$el.modal('show')
+
+    onBeforeClose: () ->
+      super()
+      delete @addPageModal

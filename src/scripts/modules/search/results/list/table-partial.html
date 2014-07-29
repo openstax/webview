@@ -1,10 +1,10 @@
 <table class="table">
   <caption>
-    {{#is this.0.mediaType 'application/vnd.org.cnx.collection'}}
+    {{#is item.0.mediaType 'application/vnd.org.cnx.collection'}}
       {{! <span class="fa fa-book"></span> }}
       <span>Books</span>
     {{else}}
-      {{#is this.0.mediaType 'application/vnd.org.cnx.module'}}
+      {{#is item.0.mediaType 'application/vnd.org.cnx.module'}}
         {{! <span class="fa fa-file"></span> }}
         <span>Pages</span>
       {{else}}
@@ -23,9 +23,8 @@
   </thead>
 
   <tbody>
-    {{#each this}}
-      {{! {{> ./item-partial}}
-      {{> modules/search/results/list/item-partial}}
+    {{#each item}}
+      {{partial "modules/search/results/list/item-partial" authorList=../authorList}}
     {{/each}}
   </tbody>
 </table>

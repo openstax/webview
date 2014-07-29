@@ -3,13 +3,13 @@
     <div class="remove">
       <span class="fa fa-times"></span>
     </div>
-    <span class="limit">{{this.name}}</span>
+    <span class="limit">{{name}}</span>
     <span class="value">
-      {{~#if this.displayValue~}}
-        {{this.displayValue}}
+      {{~#is tag "authorID"~}}
+        {{author ../../authorList 0 'fullname'}} ({{author ../../authorList 0 'id'}})
       {{~else~}}
-        {{this.value}}
-      {{~/if~}}
+        {{value}}
+      {{~/is~}}
     </span>
   </span>
 {{/each}}
