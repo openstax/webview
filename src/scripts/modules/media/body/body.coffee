@@ -12,6 +12,10 @@ define (require) ->
     template: template
     templateHelpers:
       status: () -> @owner.get('status')
+      loaded: () ->
+        if @model
+          return @model.get('loaded')
+        @owner.get('loaded')
 
     editable:
       '.media-body':
@@ -59,7 +63,6 @@ define (require) ->
       # Wrap title and content elements in header and section elements, respectively
       @$el.find('.example, .exercise, .note,
                 [data-type="example"], [data-type="exercise"], [data-type="note"]').each (index, el) ->
-
         $el = $(el)
         $contents = $el.contents().filter (i, node) ->
           return !$(node).is('.title, [data-type="title"]')
@@ -74,7 +77,6 @@ define (require) ->
         # NOTE: `.toggleClass()` explicitly requires a `false` (not falsy) 2nd argument
         $el.toggleClass('ui-has-child-title', $title.length > 0)
 
-
       # Wrap solutions in a div so "Show/Hide Solutions" work
       @$el.find('.solution, [data-type="solution"]')
       .wrapInner('<section class="ui-body">')
@@ -82,7 +84,6 @@ define (require) ->
         <div class="ui-toggle-wrapper">
           <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
         </div>''')
-
 
       @$el.find('figure:has(> figcaption)').addClass('ui-has-child-figcaption')
 
