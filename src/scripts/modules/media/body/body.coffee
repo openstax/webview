@@ -1,6 +1,5 @@
 define (require) ->
   $ = require('jquery')
-  _ = require('underscore')
   Mathjax = require('mathjax')
   router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')
@@ -101,7 +100,7 @@ define (require) ->
           if page
             pageNumber = page.getPageNumber()
             $el.attr('href', "/contents/#{@owner.getVersionedId()}:#{pageNumber}")
-            $el.data('page', pageNumber)
+            $el.attr('data-page', pageNumber)
 
       @$el?.html($temp.html())
 
@@ -121,8 +120,8 @@ define (require) ->
 
         @owner.setPage($el.data('page'))
 
-        router.navigate href, {trigger: false}, () => #@trackNav()
-        #@scrollToTop()
+        router.navigate href, {trigger: false}, () => @parent.trackAnalytics()
+        @parent.scrollToTop()
 
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')

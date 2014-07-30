@@ -2,7 +2,6 @@ define (require) ->
   $ = require('jquery')
   router = require('cs!router')
   linksHelper = require('cs!helpers/links')
-  analytics = require('cs!helpers/handlers/analytics')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./nav-template')
   require('less!./nav')
@@ -54,16 +53,5 @@ define (require) ->
       e.preventDefault()
       e.stopPropagation()
       href = $(e.currentTarget).attr('href')
-      router.navigate href, {trigger: false}, () => @trackNav()
-      @scrollToTop()
-
-    trackNav: () ->
-      analyticsID = @model.get('googleAnalytics')
-      analytics.send(analyticsID) if analyticsID
-
-    scrollToTop: () ->
-      $mediaNav = $('.media-nav').first()
-      maxY = $mediaNav.offset().top + $mediaNav.height()
-      y = window.pageYOffset or document.documentElement.scrollTop
-
-      window.scrollTo(0, maxY) if y > maxY
+      router.navigate href, {trigger: false}, () => @parent.trackAnalytics()
+      @parent.scrollToTop()

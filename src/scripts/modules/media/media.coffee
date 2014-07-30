@@ -53,6 +53,13 @@ define (require) ->
       analyticsID = @model.get('googleAnalytics')
       analytics.send(analyticsID) if analyticsID
 
+    scrollToTop: () ->
+      $mediaNav = $('.media-nav').first()
+      maxY = $mediaNav.offset().top + $mediaNav.height()
+      y = window.pageYOffset or document.documentElement.scrollTop
+
+      window.scrollTo(0, maxY) if y > maxY
+
     updateTitle: () ->
       @pageTitle = @model.get('title')
       super()
