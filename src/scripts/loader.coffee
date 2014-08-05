@@ -26,7 +26,6 @@ define (require) ->
 
     return promise
 
-
   init = (options = {}) ->
     # Append /test to the root if the app is in test mode
     if options.test
