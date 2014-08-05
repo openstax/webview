@@ -172,3 +172,34 @@ iframe.terp {
   margin: 20px auto;
   border: 1px solid @gray-lightest;
 }
+
+//
+// Zendesk
+//
+
+div#zenbox_tab.ZenboxTabRight {
+  display: block;
+  height: 100px;
+  width: 30px;
+  line-height: 100px;
+  border: none;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+
+  &::before {
+    display: inline-block;
+    height: 100px;
+    line-height: 120px;
+    color: white;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+    .rotate(90deg);
+    .user-select(none);
+    content: "Ask Us";
+  }
+
+  > img {
+    display: none;
+  }
+}

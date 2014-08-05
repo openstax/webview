@@ -4,6 +4,7 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./header-template')
   require('less!./header')
+  require('zendesk')
 
   return class HeaderView extends BaseView
     template: template
