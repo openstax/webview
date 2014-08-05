@@ -7,7 +7,6 @@
       // ## Requirejs plugins
       text: '../../bower_components/requirejs-text/text',
       hbs: '../../bower_components/require-handlebars-plugin/hbs',
-      cs: '../../bower_components/require-cs/cs',
 
       // ## Core Libraries
       jquery: '../../bower_components/jquery/dist/jquery',
@@ -42,14 +41,19 @@
       bootstrapTransition: '../../bower_components/bootstrap/js/transition',
 
       // # Select2 multiselect widget
-      select2: '../../bower_components/select2/select2',
-
-      // ## CoffeeScript Compiler
-      'coffee-script': '../../bower_components/coffee-script/index'
+      select2: '../../bower_components/select2/select2'
     },
 
     // # Packages
     packages: [{
+      name: 'cs',
+      location: '../../bower_components/require-cs',
+      main: 'cs'
+    }, {
+      name: 'coffee-script',
+      location: '../../bower_components/coffeescript/extras',
+      main: 'coffee-script'
+    }, {
       name: 'css',
       location: '../../bower_components/require-css',
       main: 'css'
