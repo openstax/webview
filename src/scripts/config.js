@@ -18,7 +18,10 @@
       'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
 
       // ## MathJax
-      mathjax: 'http://cdn.mathjax.org/mathjax/2.3-latest/MathJax.js?config=MML_HTMLorMML',
+      mathjax: '//cdn.mathjax.org/mathjax/2.3-latest/MathJax.js?config=MML_HTMLorMML',
+
+      // ## Zendesk
+      zendesk: '//assets.zendesk.com/external/zenbox/v2.6/zenbox',
 
       // Use Minified Aloha because loading files in a different requirejs context is a royal pain
       aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
@@ -127,6 +130,25 @@
           });
 
           return window.MathJax;
+        }
+      },
+
+      zendesk: {
+        deps: ['css!//assets.zendesk.com/external/zenbox/v2.6/zenbox'],
+        exports: 'Zendesk',
+        init: function () {
+          if (typeof Zenbox !== 'undefined') {
+            window.Zenbox.init({
+              dropboxID: '20186520',
+              url: 'https://openstaxcnx.zendesk.com',
+              tabTooltip: 'Ask Us',
+              //tabImageURL: 'https://p2.zdassets.com/external/zenbox/images/tab_ask_us_right.png',
+              tabColor: '#78b04a',
+              tabPosition: 'Right'
+            });
+          }
+
+          return window.Zenbox;
         }
       },
 
