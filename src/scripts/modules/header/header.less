@@ -3,80 +3,115 @@
 @logo-multiplier: 0.20;
 @logo-width: 1004px * @logo-multiplier;
 @logo-height: 202px * @logo-multiplier;
-@header-height: 77px;
 @logo-offset: 15px;
 
 .page-header {
   position: relative;
-  min-height: @header-height;
   padding: 0;
   margin: 0;
   z-index: 2;
+  background-color: rgba(255, 255, 255, 0.9);
 
-  &.navbar-default {
-    background-color: rgba(255, 255, 255, 0.9);
-    border: none;
-  }
+  > .login {
+    padding: 15px 15px 0 0;
+    font-size: 0.9em;
+    font-weight: 300;
+    text-align: right;
 
-  > .container-fluid {
-    padding: 0;
+    > ul {
+      padding: 0;
+      list-style-type: none;
 
-    > .navbar-header {
-      margin-right: @logo-offset;
+      > li {
+        display: inline-block;
 
-      @media (max-width: @grid-float-breakpoint-max) {
-        margin-left: 0;
-      }
+        &::after {
+          padding: 0 5px 0 8px;
+          color: @gray-lighter;
+          content: "|";
+        }
 
-      > .navbar-toggle {
-        margin-top: 20px;
-      }
-
-      > .navbar-brand {
-        margin-top: 15px;
-        margin-left: 15px;
-        width: @logo-width;
-        height: @logo-height;
-        background: url(images/logo.png) center center no-repeat;
-        background-size: contain;
-        text-indent: 100%;
-        white-space: nowrap;
-        overflow: hidden;
+        &:last-child::after {
+          padding: 0;
+          content: "";
+        }
       }
     }
 
-    > .navbar-collapse {
-      padding-right: 0;
+    .btn {
+      padding: 3px 10px;
+    }
+  }
 
-      .nav {
-        > li {
-          padding: 10px 10px;
+  > .navbar {
+    border-radius: 0;
 
-          &:last-child {
-            padding-right: 0;
-          }
+    &.navbar-default {
+      background-color: transparent;
+      border: none;
+    }
 
-          > a {
-            padding: 0;
-            font-size: 1.1em;
-            font-weight: 500;
-            color: @link-color;
-            line-height: @logo-height + (@logo-height/3) + 4px;
-            white-space: nowrap;
+    > .container-fluid {
+      padding: 0;
 
-            &:hover {
-              color: @link-color;
-              text-decoration: underline;
-              background-color: transparent;
+      > .navbar-header {
+        margin-right: @logo-offset;
+        padding-bottom: 7px;
+
+        @media (max-width: @grid-float-breakpoint-max) {
+          margin-left: 0;
+        }
+
+        > .navbar-brand {
+          margin-top: 5px;
+          margin-left: 15px;
+          width: @logo-width;
+          height: @logo-height;
+          background: url(images/logo.png) center center no-repeat;
+          background-size: contain;
+          text-indent: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+      }
+
+      > .navbar-collapse {
+        padding-right: 0;
+
+        &.in {
+          background-color: white;
+        }
+
+        .nav {
+          > li {
+            padding: 0 10px;
+
+            &:last-child {
+              padding-right: 0;
             }
-          }
 
-          &.active > a {
-            color: @link-active-color;
-            background-color: transparent;
+            > a {
+              padding: 0;
+              font-size: 1.1em;
+              font-weight: 500;
+              color: @link-color;
+              line-height: @logo-height + (@logo-height/3) + 4px;
+              white-space: nowrap;
 
-            &:hover {
+              &:hover {
+                color: @link-color;
+                text-decoration: underline;
+                background-color: transparent;
+              }
+            }
+
+            &.active > a {
+              color: @link-active-color;
               background-color: transparent;
+
+              &:hover {
+                background-color: transparent;
+              }
             }
           }
         }

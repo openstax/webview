@@ -1,30 +1,46 @@
-<nav class="page-header navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    {{! Brand and toggle get grouped for better mobile display }}
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#page-nav">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">OpenStax CNX</a>
-    </div>
-
-    {{! Collect the nav links, forms, and other content for toggling }}
-    <div class="collapse navbar-collapse" id="page-nav">
-      <ul class="nav nav-justified">
-        <li {{#is page 'home'}}class="active"{{/is}}><a href="/">Home</a></li>
-        <li {{#is page 'contents'}}class="active"{{/is}}><a href="/contents">Content</a></li>
-        <li><a href="http://cnx.org/lenses">Lenses</a></li>
-        <li {{#is page 'about-us'}}class="active"{{/is}}><a href="/about-us">About Us</a></li>
-        <li {{#is page 'workspace'}}class="active"{{/is}}><a href="/workspace">My Workspace</a></li>
-        <li>
-          <a href="http://www.rice.edu">
-            <img src="images/rice.png" class="rice" alt="Rice University" width="74" height="32" />
-          </a>
-        </li>
-      </ul>
-    </div>
+<div class="page-header">
+  <div class="login">
+    <ul>
+      {{#if username}}
+        <li><a data-bypass="true" href="/logout">Log Out {{username}}</a></li>
+      {{else}}
+        <li><a data-bypass="true" href="/login">Login</a></li>
+      {{/if}}
+      {{#if url}}
+        <li><a href="{{url}}" title="Switch to the CNX legacy web site">Legacy Site</a></li>
+      {{/if}}
+      <li><a href="http://cnx.org/aboutus/cnx_donate" class="btn">Donate</a></li>
+    </ul>
   </div>
-</nav>
+
+  <nav class="page-header navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      {{! Brand and toggle get grouped for better mobile display }}
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#page-nav">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">OpenStax CNX</a>
+      </div>
+
+      {{! Collect the nav links, forms, and other content for toggling }}
+      <div class="collapse navbar-collapse" id="page-nav">
+        <ul class="nav nav-justified">
+          <li {{#is page 'home'}}class="active"{{/is}}><a href="/">Home</a></li>
+          <li {{#is page 'contents'}}class="active"{{/is}}><a href="/contents">Content</a></li>
+          <li><a href="http://cnx.org/lenses">Lenses</a></li>
+          <li {{#is page 'about-us'}}class="active"{{/is}}><a href="/about-us">About Us</a></li>
+          <li {{#is page 'workspace'}}class="active"{{/is}}><a href="/workspace">My Workspace</a></li>
+          <li>
+            <a href="http://www.rice.edu">
+              <img src="images/rice.png" class="rice" alt="Rice University" width="74" height="32" />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
