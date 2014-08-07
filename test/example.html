@@ -1,0 +1,37 @@
+<!DOCTYPE>
+<html>
+<head>
+    <script type="text/javascript" src="../bower_components/sinonjs/sinon.js"></script>
+    <script type="text/javascript" src="../bower_components/chai/chai.js"></script>
+    <script type="text/javascript" src="../bower_components/mocha/mocha.js"></script>
+    <script type="text/javascript" src="../bower_components/requirejs/require.js"></script>
+    <script type="text/javascript">
+    // Set as test mode for proper configuration.
+    window._TEST_MODE = true;
+
+    mocha.setup('bdd');
+    </script>
+    <link rel="stylesheet" href="../bower_components/mocha/mocha.css" />
+
+    <!-- 
+      Directly include config file to avoid nested requires
+      each time a resource is required (1 to get the paths
+      and a second time to actually require the desired file).
+    -->
+    <script type="text/javascript" src="../src/scripts/config.js"></script>
+</head>
+</html>
+<body>
+    <div id="mocha"></div>
+    <!-- Include the actual tests. -->
+    <script type="text/javascript" src="example.test.js"></script>
+
+    <script type="text/javascript">
+    if (!window.PHANTOMJS) {
+        // Don't run if PHANTOMJS.
+        mocha.run();
+    }
+    </script>
+
+</body>
+</html>

@@ -272,12 +272,19 @@ module.exports = (grunt) ->
         files:
           'dist/scripts/main.js': ['dist/scripts/main.js']
 
+    # Mocha for testing
+    mocha:
+      browser: ['test/**/*.html']
+      options:
+        reporter: 'Nyan'
+        run: true
+
   # Dependencies
   # ============
   for name of pkg.dependencies when name.substring(0, 6) is 'grunt-'
     grunt.loadNpmTasks(name)
   for name of pkg.devDependencies when name.substring(0, 6) is 'grunt-'
-    if grunt.file.exists("./node_modules/#{name}")
+    if grunt.file.exists("./node_modules/#{name}") and name isnt 'grunt-cli'
       grunt.loadNpmTasks(name)
 
   # Tasks
@@ -289,6 +296,7 @@ module.exports = (grunt) ->
     'jshint'
     'jsbeautifier'
     'coffeelint'
+    'mocha'
     #'recess' NOTE: Disabled until recess is upgraded to support LESS 1.6+
   ]
 
