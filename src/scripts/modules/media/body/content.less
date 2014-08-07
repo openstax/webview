@@ -255,10 +255,6 @@ figure[data-orient="vertical"] {
 
     // Enter rules for the separator character (mostly for inline lists)
     .item-sep(@display);
-
-    // if mark-prefix or mark-suffix are used then show this is not implemented yet
-    &[data-mark-prefix],
-    &[data-mark-suffix] { &::after { .x-not-implemented('data-mark-prefix/suffix'); } }
   }
   .style(@display; bulleted) {
     // These are always "emulated" for bulleted lists
@@ -283,26 +279,30 @@ figure[data-orient="vertical"] {
     .emulate-bulleted(inline; 'open-circle';  '\25cb'); // white circle
   }
 
-  .style(block; enumerated) {
-    // Use the browser to display the numbering
-    .browser-style(enumerated; 'none';        none);
-    .browser-style(enumerated; 'arabic';      decimal);
-    .browser-style(enumerated; 'upper-alpha'; upper-alpha);
-    .browser-style(enumerated; 'lower-alpha'; lower-alpha);
-    .browser-style(enumerated; 'upper-roman'; upper-roman);
-    .browser-style(enumerated; 'lower-roman'; lower-roman);
-  }
-
-  .style(inline; enumerated) {
+  .style(@display, enumerated) {
     // Since we have to "emulate" the list, reset and increment the `list-item` counter.
     counter-reset: list-item;
-    > .item { counter-increment: list-item; }
+    list-style-type: none;
+
+    > .item {
+      counter-increment: list-item;
+    }
+
+    // Boring list items with nothing special
+    > .item:not([data-mark-prefix]):not([data-mark-suffix])::before {
+      content: counter(list-item, decimal) '.';
+      margin-right: 0.5em;
+    }
+
+    > .item::before {
+      content: attr(data-mark-prefix) counter(list-item, decimal) attr(data-mark-suffix);
+      margin-right: 0.5em;
+    }
 
     // "Emulate" the numbering for inline numbered lists
     .emulate-enumerated(@attr-name; @counter-type) {
       &[data-number-style="@{attr-name}"] > .item::before {
-        content: counter(list-item, @counter-type);
-        margin-right: 0.5em;
+        content: attr(data-mark-prefix) counter(list-item, @counter-type) attr(data-mark-suffix);
       }
     }
     .emulate-enumerated('arabic';      decimal);
