@@ -102,6 +102,18 @@ define (require) ->
             $el.attr('href', "/contents/#{@owner.getVersionedId()}:#{pageNumber}")
             $el.attr('data-page', pageNumber)
 
+        # Copy data-mark-prefix and -suffix from ol to li so they can be used in css
+        $temp.find('ol[data-mark-prefix] > li, ol[data-mark-suffix] > li,
+        .list[data-list-type="enumerated"][data-mark-prefix] > .item,
+        .list[data-list-type="enumerated"][data-mark-suffix] > .item').each (i, el) ->
+          $el = $(el)
+          $parent = $el.parent()
+          $el.attr('data-mark-prefix', $parent.data('mark-prefix'))
+          $el.attr('data-mark-suffix', $parent.data('mark-suffix'))
+        $temp.find('ol[start], .list[data-list-type="enumerated"][start]').each (i, el) ->
+          $el = $(el)
+          $el.css('counter-reset', 'list-item ' + $el.attr('start'))
+
       @$el?.html($temp.html())
 
     onRender: () ->

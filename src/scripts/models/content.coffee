@@ -36,6 +36,8 @@ define (require) ->
           if @isBook()
             if @get('contents').length
               @setPage(options.page or 1) # Default to page 1
+          else
+            @set('active', true)
 
         .fail (model, response, options) =>
           @set('error', response?.status or model?.status or 9000)
