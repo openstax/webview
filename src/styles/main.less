@@ -178,6 +178,10 @@ iframe.terp {
 //
 
 div#zenbox_tab.ZenboxTabRight {
+  @media (max-width: @grid-float-breakpoint-max) {
+    display: none !important; // override ZenDesk styling
+  }
+
   display: block;
   height: 100px;
   width: 30px;

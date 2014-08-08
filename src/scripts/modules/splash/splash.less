@@ -3,7 +3,7 @@
 @banner-height: 480px;
 
 .splash {
-  margin-top: -130px;
+  margin-top: -111px;
 
   > .banner {
     position: relative;
@@ -44,6 +44,10 @@
         margin: 0 0 25px 50px;
         font-size: 1.6rem;
         font-weight: 300;
+
+        @media (max-width: @grid-float-breakpoint-max) {
+          display: none;
+        }
       }
 
       > a {
