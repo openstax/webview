@@ -14,11 +14,14 @@
   }
 
   > .title {
-    display: inline-block;
     margin-top: 35px;
-    margin-right: 7%;
-    width: 60%;
     overflow-wrap: break-word;
+
+    @media (min-width: @screen-sm-min) {
+      display: inline-block;
+      margin-right: 7%;
+      width: 60%;
+    }
 
     // When editing is turned on the Title becomes an input box; make sure it stretches
     input[type="text"] {
@@ -33,12 +36,19 @@
   }
 
   > .info {
-    display: inline-block;
-    margin-top: 35px;
-    width: 32%;
-    text-align: right;
-    vertical-align: top;
     overflow-wrap: break-word;
+
+    @media (min-width: @screen-sm-min) {
+      display: inline-block;
+      margin-top: 35px;
+      width: 32%;
+      text-align: right;
+      vertical-align: top;
+    }
+
+    @media (max-width: @screen-xs-max) {
+      margin-top: 5px;
+    }
 
     // Align authors and mail image
     > span {
@@ -49,8 +59,14 @@
       }
     }
 
-    .btn {
-      margin: 0 0 20px auto;
+    > .downloads {
+      @media (max-width: @screen-xs-max) {
+        display: none;
+      }
+
+      > .btn {
+        margin: 0 0 20px auto;
+      }
     }
   }
 

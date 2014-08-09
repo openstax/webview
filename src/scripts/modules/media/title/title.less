@@ -7,16 +7,19 @@
   &:not(.publishing) { background-color: @gray-lightest; }
 
   .publishing();
-  
+
   > .derive {
     margin-bottom: 15px;
   }
 
   > .title {
-    display: inline-block;
-    margin-right: 7%;
-    width: 60%;
     overflow-wrap: break-word;
+
+    @media (min-width: @screen-sm-min) {
+      display: inline-block;
+      margin-right: 7%;
+      width: 60%;
+    }
 
     > span {
       display: block;
@@ -31,16 +34,27 @@
   }
 
   > .info {
-    display: inline-block;
-    margin-bottom: -60px;
-    width: 32%;
-    text-align: right;
-    vertical-align: top;
     overflow-wrap: break-word;
     .user-select(none);
 
+    @media (min-width: @screen-sm-min) {
+      display: inline-block;
+      margin-bottom: -60px;
+      width: 32%;
+      text-align: right;
+      vertical-align: top;
+    }
+
+    @media (max-width: @screen-xs-max) {
+      margin-top: 5px;
+    }
+
     > .share {
       margin-top: 35px;
+
+      @media (max-width: @screen-xs-max) {
+        display: none;
+      }
 
       > .title {
         margin-right: 5px;
