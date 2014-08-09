@@ -89,7 +89,10 @@
 
     > .abstract {
       display: none; // Hide until the summary is toggled open
-      max-width: 67%;
+
+      @media (min-width: @screen-sm-min) {
+        max-width: 67%;
+      }
 
       > ul, > list {
         display: block;
