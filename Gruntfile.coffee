@@ -278,14 +278,16 @@ module.exports = (grunt) ->
       options:
         reporter: 'Nyan'
         run: true
+        timeout: 15000
 
   # Dependencies
   # ============
   for name of pkg.dependencies when name.substring(0, 6) is 'grunt-'
     grunt.loadNpmTasks(name)
   for name of pkg.devDependencies when name.substring(0, 6) is 'grunt-'
-    if grunt.file.exists("./node_modules/#{name}") and name isnt 'grunt-cli'
-      grunt.loadNpmTasks(name)
+    if grunt.file.exists("./node_modules/#{name}")
+      if name isnt 'grunt-cli' and name isnt 'grunt-lib-phantomjs'
+        grunt.loadNpmTasks(name)
 
   # Tasks
   # =====

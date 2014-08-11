@@ -1,7 +1,6 @@
 (function () {
   'use strict';
-
-  require.config({
+  var Config = {
     // # Paths
     paths: {
       // ## Requirejs plugins
@@ -45,7 +44,9 @@
       select2: '../../bower_components/select2/select2',
 
       // ## CoffeeScript Compiler
-      'coffee-script': '../../bower_components/coffee-script/index'
+      'coffee-script': '../../bower_components/coffee-script/index',
+      'loader': 'loader',
+      'config': 'config'
     },
 
     // # Packages
@@ -57,7 +58,11 @@
       name: 'less',
       location: '../../bower_components/require-less',
       main: 'less'
-    }],
+    }, {
+      name: 'poly',
+      location: '../../poly',
+      main: 'poly'
+	  }],
 
     // # Shims
     shim: {
@@ -156,6 +161,10 @@
         return 'cs!helpers/handlebars/' + name;
       }
     }
-  });
+  };
+  if (typeof _TEST_MODE !== 'undefined' && _TEST_MODE === true) {
+    Config.baseUrl = '../src/scripts';
+  }
+  require.config(Config);
 
 })();
