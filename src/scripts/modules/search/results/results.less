@@ -7,10 +7,18 @@
 
     .filter {
       .make-xs-column(3);
+
+      @media (max-width: @screen-xs-max) {
+        display: none;
+      }
     }
 
     .info {
       .make-xs-column(9);
+
+      @media (max-width: @screen-xs-max) {
+        .make-xs-column(12);
+      }
 
       table {
         table-layout: fixed;
