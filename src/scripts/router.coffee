@@ -16,11 +16,14 @@ define (require) ->
       @route '', 'index', () ->
         @appView.render('home')
 
-      @route 'contents', 'contents', () ->
-        @appView.render('contents')
-
       @route 'workspace', 'workspace', () ->
         @appView.render('workspace')
+
+      @route 'donate', 'donate', () ->
+        @appView.render('donate')
+
+      @route 'contents', 'contents', () ->
+        @appView.render('contents')
 
       # Match and extract uuid and page numbers separated by a colon
       @route /^contents\/([^:]+):?([0-9]*)/, 'media', (uuid, page) ->
