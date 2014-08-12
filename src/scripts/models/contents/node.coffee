@@ -83,7 +83,7 @@ define (require) ->
             @set('isLatest', true)
           else
             $.ajax
-              url: "#{ARCHIVE}/extras/#{@id}"
+              url: "#{ARCHIVE}/extras/#{@getVersionedId()}"
               dataType: 'json'
             .done (response) =>
               @set('downloads', response.downloads)
