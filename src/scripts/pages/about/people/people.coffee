@@ -114,14 +114,6 @@ define (require) ->
       image: 'dani.jpg'
       title: 'Asst Dir Communications'
     }, {
-      name: 'JP Slavinsky'
-      image: 'jp.jpg'
-      title: 'Web Developer'
-    }, {
-      name: 'Charmaine St. Rose'
-      image: 'charmaine.jpg'
-      title: 'Administrative Assistant'
-    }, {
       name: 'Phil Schatz'
       image: 'phil.jpg'
       title: 'Developer'
@@ -133,10 +125,6 @@ define (require) ->
       name: 'Denver Greene'
       image: 'denver.jpg'
       title: 'Digital Media Specialist'
-    }, {
-      name: 'Stacey Yates'
-      image: 'stacey.jpg'
-      title: 'Developer'
     }, {
       name: 'Derek Ford'
       image: 'derek_ford.jpg'
@@ -153,14 +141,6 @@ define (require) ->
       name: 'Karen Chan'
       image: 'karen.jpg'
       title: 'Developer'
-    }, {
-      name: 'Marvin Reimer'
-      image: 'marvin.jpg'
-      title: 'Developer'
-    }, {
-      name: 'Javier Lozano'
-      image: 'javier.jpg'
-      title: 'Communications Asst'
     }, {
       name: 'Kathi Fletcher'
       image: 'kef.jpg'
