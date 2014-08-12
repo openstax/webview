@@ -142,7 +142,7 @@
               dropboxID: '20186520',
               url: 'https://openstaxcnx.zendesk.com',
               tabTooltip: 'Ask Us',
-              //tabImageURL: 'https://p2.zdassets.com/external/zenbox/images/tab_ask_us_right.png',
+              tabImageURL: 'https://p2.zdassets.com/external/zenbox/images/tab_ask_us_right.png',
               tabColor: '#78b04a',
               tabPosition: 'Right'
             });

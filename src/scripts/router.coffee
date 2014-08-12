@@ -31,11 +31,8 @@ define (require) ->
       @route /^(search)(?:\?q=)?(.*)/, 'search', () ->
         @appView.render('search')
 
-      @route 'about-us', 'about-us', () ->
-        @appView.render('about-us')
-
-      @route 'people', 'people', () ->
-        @appView.render('people')
+      @route /^about\/?(.*)/, 'about', (page) ->
+        @appView.render('about', {page: page})
 
     navigate: (fragment, options = {}, cb) ->
       super(arguments...)
