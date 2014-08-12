@@ -3,7 +3,7 @@
 
 #about {
   margin: 40px 20px;
-  
+
   h1, h2 {
     margin-bottom: 30px;
   }
@@ -17,6 +17,10 @@
 
     > .about-nav {
       .make-sm-column(3);
+
+      @media screen and (max-width: @screen-xs-max) {
+        margin-bottom: 30px;
+      }
 
       li {
         background-color: @gray-lighter;
@@ -32,7 +36,7 @@
     }
 
     > .about-content {
-      .make-xs-column(9);
+      .make-sm-column(9);
     }
   }
 }
