@@ -1,0 +1,29 @@
+@import "../../../../styles/variables.less";
+@import "../../../../styles/mixins.less";
+
+#about .people {
+  .avatars {
+    .person {
+      width: 200px;
+      height: 210px;
+      margin: 4px;
+      float: left;
+      background-color: @gray-dark;
+
+      .name {
+        display: block;
+        padding: 5px 0 0 5px;
+        color: #fff;
+        text-transform: uppercase;
+      }
+
+      .title {
+        display: block;
+        padding-left: 10px;
+        color: rgb(255, 160, 0);
+        font-size: smaller;
+        text-transform: lowercase;
+      }
+    }
+  }
+}
