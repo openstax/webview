@@ -1,4 +1,5 @@
 define (require) ->
+  linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./form-template')
   require('less!./form')
@@ -969,6 +970,7 @@ define (require) ->
     templateHelpers:
       countries: countries
       states: states
+      amount: () -> @amount
 
     events:
       'change form input[name="first"]': 'updateName'
@@ -976,6 +978,11 @@ define (require) ->
       'change form input[name="suffix"]': 'updateName'
       'change form input[name="AMT"]': 'updateDonation'
       'change form input[name="BILL_EMAIL_ADDRESS"]': 'updateEmail'
+
+    initialize: () ->
+      super()
+      queryString = linksHelper.serializeQuery(location.search)
+      @amount = queryString.amount or 10
 
     updateName: (e) ->
       $form = @$el.find('form')
