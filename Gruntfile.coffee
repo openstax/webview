@@ -40,6 +40,7 @@ module.exports = (grunt) ->
         globals:
           require: true
           define: true
+          _TEST_MODE: true
 
         # Enforcing options
         camelcase: true
@@ -279,6 +280,9 @@ module.exports = (grunt) ->
         reporter: 'Nyan'
         run: true
         timeout: 15000
+        require: 'coffee-script/register'
+        compilers:
+          coffee: 'coffee-script/register'
 
   # Dependencies
   # ============
@@ -286,8 +290,7 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks(name)
   for name of pkg.devDependencies when name.substring(0, 6) is 'grunt-'
     if grunt.file.exists("./node_modules/#{name}")
-      if name isnt 'grunt-cli' and name isnt 'grunt-lib-phantomjs'
-        grunt.loadNpmTasks(name)
+      grunt.loadNpmTasks(name)
 
   # Tasks
   # =====

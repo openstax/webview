@@ -2,6 +2,7 @@
   'use strict';
 
   require.config({
+    baseUrl: '../src/scripts',
     // # Paths
     paths: {
       // ## Requirejs plugins
@@ -64,6 +65,10 @@
       name: 'less',
       location: '../../bower_components/require-less',
       main: 'less'
+    }, {
+      name: 'poly',
+      location: '../../poly',
+      main: 'poly'
     }],
 
     // # Shims

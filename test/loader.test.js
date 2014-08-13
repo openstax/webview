@@ -1,3 +1,4 @@
+
 /**
  * Clones / deep copies an object.
  *
@@ -21,23 +22,31 @@ function clone(obj) {
 }
 
 describe('loader tests', function(){
+
   var Loader;
   this.timeout(15000);
-
   beforeEach(function(done) {
-    // Load the application after the config
-    require(['poly/function','config'], function(poly, config) {
-      require(['cs!loader'], function (loader) {
-        Loader = clone(loader);
-        done();
-      });
+    require(['poly/function', 'cs!loader'], function (loader) {
+      Loader = clone(loader);
+      done();
     });
   });
-  
-  describe('init', function(){
+
+  describe('init tests', function(){
     it('should return -1 when the value is not present', function(){
       chai.assert.equal(-1, [1,2,3].indexOf(5));
       chai.assert.equal(-1, [1,2,3].indexOf(0));
-    })
-  })
-})
+    });
+  });
+  
+  describe('backbone.sync tests', function() {
+    it ('should manipulate promise', function() {
+      Loader.Backbone_sync = sinon.stub.returns(new Object());
+      promise = Loader.Backbone.sync('method', 'model', 'options');
+      jqXHR = {status: 401};
+      promise.fail(jqXHR);
+      chai.assert.equal('log', '/log');
+      Loader.Backbone_sync.restore();
+	  });
+    });
+  });
