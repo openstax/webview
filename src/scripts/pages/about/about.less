@@ -1,0 +1,42 @@
+@import "../../../styles/variables.less";
+@import "../../../styles/mixins.less";
+
+#about {
+  margin: 40px 20px;
+
+  h1, h2 {
+    margin-bottom: 30px;
+  }
+
+  h3, h4 {
+    margin-bottom: 15px;
+  }
+
+  > .about-wrapper {
+    .make-row();
+
+    > .about-nav {
+      .make-sm-column(3);
+
+      @media screen and (max-width: @screen-xs-max) {
+        margin-bottom: 30px;
+      }
+
+      li {
+        background-color: @gray-lighter;
+
+        &.active {
+          background-color: @gray-lightest;
+        }
+
+        a:hover {
+          background-color: @gray-lightest;
+        }
+      }
+    }
+
+    > .about-content {
+      .make-sm-column(9);
+    }
+  }
+}

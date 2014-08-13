@@ -29,7 +29,7 @@ define (require) ->
 
       return length
 
-    getPage: (num) ->
+    _getPageNum: (num) ->
       page = 0
 
       for node in @get('contents').models
@@ -41,6 +41,22 @@ define (require) ->
           return node
         else
           return node.getPage(num-page)
+
+    _getPageId: (id) ->
+      for node in @get('contents').models
+        if node.get('id') is id or node.getVersionedId() is id
+          return node
+        else if node.isSection()
+          result = node.getPage(id)
+          return result if result
+
+      return
+
+    getPage: (page) ->
+      if typeof page is 'number'
+        return @_getPageNum(page)
+
+      return @_getPageId(page)
 
     toJSON: (options = {}) ->
       results = super(arguments...)
