@@ -973,7 +973,7 @@ define (require) ->
       amount: () -> @amount
       thanks: () ->
         url = "#{location.protocol}//#{location.host}/donate/thankyou"
-        url += "?uuid=#{@uuid}&type=#{@type}" if @uuid and @type
+        url += "/#{@uuid}/#{@type}" if @uuid and @type
         return url
 
     events:
