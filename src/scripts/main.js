@@ -9,9 +9,4 @@
     });
   });
 
-  /* If an error occurs in requirejs then change the loading HTML. */
-  require.onError = function (err) {
-    throw err;
-  };
-
 })();

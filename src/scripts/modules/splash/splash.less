@@ -3,17 +3,21 @@
 @banner-height: 480px;
 
 .splash {
-  margin-top: -130px;
+  margin-top: -111px;
 
   > .banner {
     position: relative;
     width: 100%;
     height: @banner-height;
-    background: transparent url(images/banners/splash.jpg) no-repeat center center;
+    background: transparent url(images/banners/splash.jpg) no-repeat center right;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+
+    @media screen and (max-width: @screen-xs-max) {
+      background-position: center right -50px;
+    }
 
     > .text-overlay {
       position: absolute;
@@ -44,6 +48,10 @@
         margin: 0 0 25px 50px;
         font-size: 1.6rem;
         font-weight: 300;
+
+        @media (max-width: @grid-float-breakpoint-max) {
+          display: none;
+        }
       }
 
       > a {

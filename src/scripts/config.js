@@ -7,7 +7,6 @@
       // ## Requirejs plugins
       text: '../../bower_components/requirejs-text/text',
       hbs: '../../bower_components/require-handlebars-plugin/hbs',
-      cs: '../../bower_components/require-cs/cs',
 
       // ## Core Libraries
       jquery: '../../bower_components/jquery/dist/jquery',
@@ -19,7 +18,10 @@
       'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
 
       // ## MathJax
-      mathjax: 'http://cdn.mathjax.org/mathjax/2.3-latest/MathJax.js?config=MML_HTMLorMML',
+      mathjax: '//cdn.mathjax.org/mathjax/2.3-latest/MathJax.js?config=MML_HTMLorMML',
+
+      // ## Zendesk
+      zendesk: '//assets.zendesk.com/external/zenbox/v2.6/zenbox',
 
       // Use Minified Aloha because loading files in a different requirejs context is a royal pain
       aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
@@ -42,14 +44,19 @@
       bootstrapTransition: '../../bower_components/bootstrap/js/transition',
 
       // # Select2 multiselect widget
-      select2: '../../bower_components/select2/select2',
-
-      // ## CoffeeScript Compiler
-      'coffee-script': '../../bower_components/coffee-script/index'
+      select2: '../../bower_components/select2/select2'
     },
 
     // # Packages
     packages: [{
+      name: 'cs',
+      location: '../../bower_components/require-cs',
+      main: 'cs'
+    }, {
+      name: 'coffee-script',
+      location: '../../bower_components/coffeescript/extras',
+      main: 'coffee-script'
+    }, {
       name: 'css',
       location: '../../bower_components/require-css',
       main: 'css'
@@ -123,6 +130,25 @@
           });
 
           return window.MathJax;
+        }
+      },
+
+      zendesk: {
+        deps: ['css!//assets.zendesk.com/external/zenbox/v2.6/zenbox'],
+        exports: 'Zendesk',
+        init: function () {
+          if (typeof Zenbox !== 'undefined') {
+            window.Zenbox.init({
+              dropboxID: '20186520',
+              url: 'https://openstaxcnx.zendesk.com',
+              tabTooltip: 'Ask Us',
+              tabImageURL: 'https://p2.zdassets.com/external/zenbox/images/tab_ask_us_right.png',
+              tabColor: '#78b04a',
+              tabPosition: 'Right'
+            });
+          }
+
+          return window.Zenbox;
         }
       },
 

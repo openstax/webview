@@ -74,21 +74,22 @@ define (require) ->
         @eTag = newETag
       ###
 
-      if @id and not options.skipDownloads
-        @set('downloads', 'loading')
+      @set('downloads', 'loading')
 
-        if @isDraft() or not @get('version') # HACK for Untitled page
-          @set('downloads', [])
-          @set('isLatest', true)
-        else
-          $.ajax
-            url: "#{ARCHIVE}/extras/#{@id}"
-            dataType: 'json'
-          .done (response) =>
-            @set('downloads', response.downloads)
-            @set('isLatest', response.isLatest)
-          .fail () =>
+      results.then () =>
+        if @id and not options.skipDownloads
+          if @isDraft() or not @get('version') # HACK for Untitled page
             @set('downloads', [])
+            @set('isLatest', true)
+          else
+            $.ajax
+              url: "#{ARCHIVE}/extras/#{@getVersionedId()}"
+              dataType: 'json'
+            .done (response) =>
+              @set('downloads', response.downloads)
+              @set('isLatest', response.isLatest)
+            .fail () =>
+              @set('downloads', [])
 
       return results
 
@@ -169,13 +170,21 @@ define (require) ->
     # Utility Methods
     #
 
+    _getIdComponents: () -> @id?.match(/([^:@]+)@?([^:]*):?([0-9]*)/) or []
+
     getVersionedId: () ->
-      components = @id?.match(/([^:@]+)@?([^:]*):?([0-9]*)/) or []
+      components = @_getIdComponents()
       id = components[1] or ''
       version = @get('version') or components[2]
       if version then version = "@#{version}" else version = ''
 
       return "#{id}#{version}"
+
+    getUuid: () ->
+      components = @_getIdComponents()
+      id = components[1] or ''
+
+      return id
 
     index: () -> @get('parent').get('contents').indexOf(@)
 

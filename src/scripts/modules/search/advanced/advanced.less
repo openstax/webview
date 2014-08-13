@@ -32,9 +32,11 @@
   }
 
   form {
-    padding: 45px 30px;
-    border-radius: 4px;
-    border: 1px solid @gray-lighter;
+    @media (min-width: @screen-sm-min) {
+      padding: 45px 30px;
+      border-radius: 4px;
+      border: 1px solid @gray-lighter;
+    }
 
     label {
       display: block;

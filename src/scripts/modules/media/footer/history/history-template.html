@@ -16,12 +16,12 @@
     {{#each history}}
       <tr>
         <td>
-          <a href="/contents/{{../id}}@{{this.version}}">{{this.version}}</a>
+          <a href="/contents/{{../uuid}}@{{version}}">{{version}}</a>
         </td>
-        <td>{{date this.revised}}</td>
-        <td>{{this.changes}}</td>
+        <td>{{date revised}}</td>
+        <td>{{changes}}</td>
         <td>
-          <a href="mailto:{{this.publisher.email}}">{{this.publisher.fullname}}</a>
+          <a href="mailto:{{publisher.email}}">{{publisher.fullname}}</a>
         </td>
       </tr>
     {{/each}}
