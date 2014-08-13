@@ -27,7 +27,7 @@ define (require) ->
     return promise
 
   # Trick to download a file with JavaScript
-  downloadURL = (url) ->
+  downloadUrl = (url) ->
     hiddenIFrameId = 'hiddenDownloader'
     iframe = document.getElementById(hiddenIFrameId)
     if iframe is null
@@ -73,7 +73,7 @@ define (require) ->
           content = href.match(/exports\/([^\/:]+).(pdf|epub|zip)/)
           router.navigate("/donate/download/#{content[1]}/#{content[2]}", {trigger: true})
         else
-          downloadURL(href)
+          downloadUrl(href)
 
       else if resources.test(href)
         window.open(href, '_blank')

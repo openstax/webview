@@ -6,6 +6,7 @@ define (require) ->
   DefaultView = require('cs!./default/default')
   FormView = require('cs!./form/form')
   DownloadView = require('cs!./download/download')
+  ThankYouView = require('cs!./thankyou/thankyou')
   template = require('hbs!./donate-template')
   require('less!./donate')
 
@@ -36,5 +37,9 @@ define (require) ->
             type: @options.type
         when 'form'
           @regions.content.show(new FormView())
+        when 'thankyou'
+          @regions.content.show new ThankYouView
+            uuid: @options.uuid
+            type: @options.type
         else
           @regions.content.show(new DefaultView())
