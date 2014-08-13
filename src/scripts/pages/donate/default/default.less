@@ -2,5 +2,74 @@
 @import "../../../../styles/mixins.less";
 
 #donate .donate {
+  .make-row();
 
+  > h1 {
+    .make-xs-column(12);
+  }
+
+  > .support {
+    margin-top: 30px;
+    .make-xs-column(10);
+    .make-xs-column-offset(1);
+
+    > p {
+      margin-top: 10px;
+      font-size: 1.8rem;
+    }
+
+    > form {
+      text-align: center;
+
+    	input[type='range']::-moz-range-track {
+    		-moz-appearance: none;
+    		border-radius: 5px;
+    		background-color: @brand-secondary;
+    		height: 10px;
+    	}
+
+      input[type='range'] {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        -webkit-appearance: none;
+        border-radius: 5px;
+        background-color: @brand-secondary;
+        height: 10px;
+    	}
+
+    	input[type='range']::-moz-range-thumb {
+    		-moz-appearance: none;
+    		background-color: @brand-primary;
+    		height: 40px;
+    		width: 20px;
+    	}
+
+    	input[type='range']::-webkit-slider-thumb {
+    		-webkit-appearance: none !important;
+        background-color: @brand-primary;
+    		height: 40px;
+    		width: 20px;
+    	}
+
+      .donation-value {
+        font-size: 8rem;
+        color: @brand-primary;
+      }
+
+      .donation-message {
+        display: block;
+        font-size: 1.5rem;
+        color: @brand-primary;
+      }
+
+      button {
+        margin: 15px;
+      }
+    }
+
+    small {
+      display: block;
+      margin-top: 30px;
+    }
+  }
 }

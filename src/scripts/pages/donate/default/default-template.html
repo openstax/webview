@@ -1,3 +1,21 @@
 <div class="donate">
   <h1>Support OpenStax CNX</h1>
+
+  <div class="support">
+    <h3>Your donation makes a difference</h3>
+    <p>Your donation helps keep Connexions' rapidly growing repository of educational materials vibrant,
+      free, and available to educators and learners all over the world.</p>
+
+    <form role="form">
+      <div class="form-group">
+        <input type="range" aria-label="Donation" class="form-control" name="donation" min="0" max="14" value="{{value}}" />
+        <span class="donation-value">${{donation}}</span>
+        <span class="donation-message">{{message}}</span>
+      </div>
+
+      <button type="submit" class="btn btn-default">Donate Now</button>
+    </form>
+
+    <small>Your donation is securely handled by Rice University and <a href="http://www.touchnet.com/">Touchnet</a>.</small>
+  </div>
 </div>
