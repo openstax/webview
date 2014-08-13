@@ -51,7 +51,6 @@ define (require) ->
       if @owner.get('loaded') and @model?.get('loaded') and @model?.get('active')
         # Converts a TERP link to an OST-hosted iframe
         $temp.find('a[href*="#terp-"]').each () ->
-          debugger; alert 'hi'
           terpCode = $(this).attr('href').match(/#terp\-(.*)/)[1]
           $(this).replaceWith("<iframe class='terp'
                                        src='https://openstaxtutor.org/terp/#{terpCode}/quiz_start'
