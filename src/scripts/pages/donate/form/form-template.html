@@ -9,7 +9,7 @@
 
   <form class="form-horizontal" role="form" method="post" action="https://ebank.rice.edu/C21279_upay/web/index.jsp">
     <input type="hidden" name="BILL_NAME" id="BILL_NAME" value="" />
-    <input type="hidden" name="BILL_NAME" id="Donation_Amount" value="10" />
+    <input type="hidden" name="BILL_NAME" id="Donation_Amount" value="{{amount}}" />
     <input type="hidden" name="Site_URL" value="cnx.org/donate/thankyou" />
     <input type="hidden" name="UPAY_SITE_ID" id="UPAY_SITE_ID" value="8" />
     <input type="hidden" name="Revenue_amount" id="Revenue_amount" value="0" />
@@ -145,7 +145,7 @@
         <div class="col-sm-10">
           <div class="input-group">
             <span class="input-group-addon">$</span>
-            <input type="number" step="5" min="5" name="AMT" class="form-control" />
+            <input type="number" step="5" min="5" value="{{amount}}" name="AMT" class="form-control" />
             <span class="input-group-addon">.00</span>
           </div>
         </div>
