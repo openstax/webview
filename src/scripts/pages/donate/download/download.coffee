@@ -1,4 +1,6 @@
 define (require) ->
+  $ = require('jquery')
+  router = require('cs!router')
   BaseView = require('cs!helpers/backbone/views/base')
   Content = require('cs!models/content')
   template = require('hbs!./download-template')
@@ -34,6 +36,7 @@ define (require) ->
 
     events:
       'change input[type="range"]': 'changeDonation'
+      'submit form': 'onSubmit'
 
     initialize: (options = {}) ->
       super()
@@ -47,3 +50,9 @@ define (require) ->
     changeDonation: (e) ->
       @value = $(e.currentTarget).val()
       @render()
+
+    onSubmit: (e) ->
+      e.preventDefault()
+
+      amount = donation[@$el.find('input[name="donation"]').val()]
+      router.navigate("/donate/form?amount=#{amount}&uuid=#{@uuid}&type=#{@type}", {trigger: true})

@@ -971,6 +971,10 @@ define (require) ->
       countries: countries
       states: states
       amount: () -> @amount
+      thanks: () ->
+        url = "#{location.protocol}//#{location.host}/donate/thankyou"
+        url += "?uuid=#{@uuid}&type=#{@type}" if @uuid and @type
+        return url
 
     events:
       'change form input[name="first"]': 'updateName'
@@ -983,6 +987,8 @@ define (require) ->
       super()
       queryString = linksHelper.serializeQuery(location.search)
       @amount = queryString.amount or 10
+      @uuid = queryString.uuid
+      @type = queryString.type
 
     updateName: (e) ->
       $form = @$el.find('form')
