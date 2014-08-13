@@ -30,7 +30,10 @@ define (require) ->
       @removeEvents() # Remove event handlers in case they were previously added
 
       # Don't close due to clicks on this element
-      @$el.on "click.#{@type}.#{@cid}", (e) -> e.stopPropagation()
+      @$el.on "click.#{@type}.#{@cid}", (e) ->
+        # Allow download links to propagate up and be handled by loader.coffee
+        if $(e.target).data('prop') isnt true
+          e.stopPropagation()
 
       switch @trigger
         when 'click'
@@ -49,7 +52,9 @@ define (require) ->
       @$el.children(".#{@type}").hide().removeClass('in')
 
     toggle: (e) ->
-      e.stopPropagation()
+      # Allow download links to propagate up and be handled by loader.coffee
+      if $(e.target).data('prop') isnt true
+        e.stopPropagation()
       @reposition()
       @$el.children(".#{@type}").toggle().toggleClass('in')
 

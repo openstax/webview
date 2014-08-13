@@ -10,7 +10,7 @@ define (require) ->
 
   return class AboutPage extends BaseView
     template: template
-    pageTitle: 'About OpenStax College'
+    pageTitle: 'About OpenStax CNX'
 
     regions:
       find: '.find'

@@ -153,6 +153,7 @@ module.exports = (grunt) ->
               'cs!pages/search/search'
               'cs!pages/workspace/workspace'
               'cs!pages/about/about'
+              'cs!pages/donate/donate'
 
               # FIX: edit modules should be loaded in separate modules
               #'select2'
