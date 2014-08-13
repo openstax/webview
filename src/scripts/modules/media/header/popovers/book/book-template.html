@@ -10,7 +10,7 @@
       <h5>Download Book:</h5>
       <ul>
         {{#each downloads}}
-          <li><a href="{{path}}" target="_blank">{{format}}</a></li>
+          <li><a href="{{path}}" data-prop="true">{{format}}</a></li>
         {{/each}}
       </ul>
     </div>
@@ -21,7 +21,7 @@
       <h5>Download Page:</h5>
       <ul>
         {{#each currentPage.downloads}}
-          <li><a href="{{path}}" target="_blank">{{format}}</a></li>
+          <li><a href="{{path}}" data-prop="true">{{format}}</a></li>
         {{/each}}
       </ul>
     </div>
