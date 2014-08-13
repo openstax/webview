@@ -19,9 +19,6 @@ define (require) ->
       @route 'workspace', 'workspace', () ->
         @appView.render('workspace')
 
-      @route 'donate', 'donate', () ->
-        @appView.render('donate')
-
       @route 'contents', 'contents', () ->
         @appView.render('contents')
 
@@ -30,6 +27,9 @@ define (require) ->
         uuid = uuid.toLowerCase()
         uuid = settings.shortcodes[uuid] if settings.shortcodes[uuid]
         @appView.render('contents', {uuid: uuid, page: Number(page)})
+
+      @route /^donate\/?([^/;]*)?\/?([^/;]*)?\/?([^/;]*)?/, 'donate', (page, uuid, type) ->
+        @appView.render('donate', {page: page, uuid: uuid, type: type})
 
       @route /^(search)(?:\?q=)?(.*)/, 'search', () ->
         @appView.render('search')
