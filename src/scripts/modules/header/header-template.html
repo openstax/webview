@@ -1,15 +1,15 @@
 <div class="page-header">
   <div class="login">
     <ul>
-        {{!--
-        {{#if username}}
-          <li><a data-bypass="true" href="/logout">Log Out {{username}}</a></li>
-        {{else}}
-          <li><a data-bypass="true" href="/login">Login</a></li>
-        {{/if}}
-        --}}
-        <li><a href="http://cnx.org/join_form">Sign Up</a></li>
-        <li><a href="http://cnx.org/login_form">Login</a></li>
+      {{!--
+      {{#if username}}
+        <li><a data-bypass="true" href="/logout">Log Out {{username}}</a></li>
+      {{else}}
+        <li><a data-bypass="true" href="/login">Login</a></li>
+      {{/if}}
+      --}}
+      <li><a href="http://cnx.org/join_form">Sign Up</a></li>
+      <li><a href="http://cnx.org/login_form">Login</a></li>
       {{#if url}}
         <li><a href="{{url}}" title="Switch to the CNX legacy web site">Legacy Site</a></li>
       {{/if}}
@@ -38,6 +38,7 @@
           <li><a href="http://cnx.org/lenses">Lenses</a></li>
           <li {{#is page 'about'}}class="active"{{/is}}><a href="/about">About Us</a></li>
           {{!--<li {{#is page 'workspace'}}class="active"{{/is}}><a href="/workspace">My Workspace</a></li>--}}
+          <li><a href="http://cnx.org/mycnx">My CNX</a></li>
           <li>
             <a href="http://www.rice.edu">
               <img src="images/rice.png" class="rice" alt="Rice University" width="74" height="32" />

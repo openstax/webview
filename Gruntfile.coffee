@@ -158,7 +158,7 @@ module.exports = (grunt) ->
               #'select2'
               #'bootstrapPopover'
               #'cs!modules/media/editbar/editbar'
-              #'cs!helpers/backbone/views/editable'
+              'cs!helpers/backbone/views/editable'
               #'cs!configs/aloha'
             ]
             stubModules: ['cs']
