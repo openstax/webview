@@ -4,6 +4,7 @@ define (require) ->
   FooterView = require('cs!modules/footer/footer')
   FindContentView = require('cs!modules/find-content/find-content')
   DefaultView = require('cs!./default/default')
+  FormView = require('cs!./form/form')
   DownloadView = require('cs!./download/download')
   template = require('hbs!./donate-template')
   require('less!./donate')
@@ -33,5 +34,7 @@ define (require) ->
           @regions.content.show new DownloadView
             uuid: @options.uuid
             type: @options.type
+        when 'form'
+          @regions.content.show(new FormView())
         else
           @regions.content.show(new DefaultView())
