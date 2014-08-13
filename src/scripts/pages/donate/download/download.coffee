@@ -41,6 +41,10 @@ define (require) ->
     initialize: (options = {}) ->
       super()
 
+      # Allow downloads after they've visited the donation page
+      # Cookie expires after 30 days
+      document.cookie = "donation=requested; max-age=#{60*60*24*30}; path=/;"
+
       @uuid = options.uuid
       @type = options.type or 'pdf'
       @model = options.model or new Content({id: @uuid})
