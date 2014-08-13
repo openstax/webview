@@ -1,0 +1,22 @@
+<div class="download">
+  <h1>Download {{title}}</h1>
+
+  <div class="support">
+    <h2>Support OpenStax CNX</h2>
+    <p>Want to help us continue to give away millions of dollars of resources for free?
+       Help us keep the project going by making a donation!</p>
+    
+    <form role="form">
+      <div class="form-group">
+        <input type="range" aria-label="Donation" class="form-control" name="donation" min="0" max="14" value="{{value}}" />
+        <span class="donation-value">${{donation}}</span>
+        <span class="donation-message">{{message}}</span>
+      </div>
+
+      <button type="submit" class="btn btn-default">Donate Now</button>
+      <button type="submit" class="btn btn-primary {{#unless loaded}}disabled{{/unless}}">Download for Free</button>
+    </form>
+    
+    <small>Your donation is securely handled by Rice University and <a href="http://www.touchnet.com/">Touchnet</a>.</small>
+  </div>
+</div>
