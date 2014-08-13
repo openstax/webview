@@ -52,8 +52,9 @@ define (require) ->
         # Converts a TERP link to an OST-hosted iframe
         $temp.find('a[href*="#terp-"]').each () ->
           terpCode = $(this).attr('href').match(/#terp\-(.*)/)[1]
-          $(this).replaceWith("<iframe class='terp'
-                                       src='https://stormy-wave-8747.herokuapp.com/terp/#{terpCode}/quiz_start'
+          $(this).replaceWith("<a class='terp-anchor' name='terp-#{terpCode}'></a>
+                               <iframe class='terp'
+                                       src='https://openstaxtutor.org/terp/#{terpCode}/quiz_start'
                                        height='600px' width='800px' frameborder='0' seamless='seamless'>
                                </iframe>")
 
