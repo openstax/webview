@@ -31,6 +31,7 @@ define (require) ->
       value: () -> @value
       donation: () -> donation[@value]
       message: () -> message[@value]
+      path: () -> _.find(@model.get('downloads'), (download) -> download.format is 'PDF')?.path
 
     value: 2 # Default donation setting
 
@@ -49,7 +50,7 @@ define (require) ->
       @type = options.type or 'pdf'
       @model = options.model or new Content({id: @uuid})
 
-      @listenTo(@model, 'change:loaded', @render)
+      @listenTo(@model, 'change:downloads', @render)
 
     changeDonation: (e) ->
       @value = $(e.currentTarget).val()
