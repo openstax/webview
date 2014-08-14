@@ -43,7 +43,7 @@ define (require) ->
     if options.test
       root += 'test/'
 
-    legacy = new RegExp('^((f|ht)tps?:)?\/\/(\w*\.?)cnx\.org')
+    legacy = new RegExp('^((f|ht)tps?:)?\/\/(\\w*\\.?)cnx\\.org')
     download = new RegExp('^\/(exports)\/')
     external = new RegExp('^((f|ht)tps?:)?\/\/')
     resources = new RegExp('\/(resources|exports)\/')
