@@ -93,7 +93,7 @@ define (require) ->
           $(el).parent().append(el)
 
         # Convert links to maintain context in a book, if appropriate
-        $temp.find('a').each (i, el) =>
+        $temp.find('a:not([data-type=footnote-number])').each (i, el) =>
           $el = $(el)
           page = @owner.getPage($el.attr('href').substr(10))
 
