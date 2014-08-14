@@ -286,26 +286,30 @@ figure[data-orient="vertical"] {
     counter-reset: list-item;
     list-style-type: none;
 
-    > .item {
+    > .item,
+    > li {
       counter-increment: list-item;
     }
 
-    // Boring list items with nothing special
-    > .item:not([data-mark-prefix]):not([data-mark-suffix])::before {
-      content: counter(list-item, decimal) '.';
-      margin-right: 0.5em;
-    }
-
-    > .item::before {
+    > .item::before,
+    > li::before {
       content: attr(data-mark-prefix) counter(list-item, decimal) attr(data-mark-suffix);
       margin-right: 0.5em;
     }
 
     // "Emulate" the numbering for inline numbered lists
     .emulate-enumerated(@attr-name; @counter-type) {
-      &[data-number-style="@{attr-name}"] > .item::before {
+      &[data-number-style="@{attr-name}"] > .item::before,
+      &[data-number-style="@{attr-name}"] > li::before {
         content: attr(data-mark-prefix) counter(list-item, @counter-type) attr(data-mark-suffix);
       }
+
+      &[data-number-style="@{attr-name}"] > .item:not([data-mark-prefix]):not([data-mark-suffix])::before,
+      &[data-number-style="@{attr-name}"] > li:not([data-mark-prefix]):not([data-mark-suffix])::before {
+        content: counter(list-item, @counter-type) '.';
+        margin-right: 0.5em;
+      }
+
     }
     .emulate-enumerated('arabic';      decimal);
     .emulate-enumerated('upper-alpha'; upper-alpha);
