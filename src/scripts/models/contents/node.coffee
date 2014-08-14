@@ -46,7 +46,7 @@ define (require) ->
         # Use a regex to extract everything in the body and put it into a div instead.
         $body = $('<div>' + response.content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>')
         $body.children('.title').eq(0).remove()
-        $body.children('.abstract').eq(0).remove()
+        $body.children('[data-type=abstract]').eq(0).remove()
 
         response.content = $body.html()
 
