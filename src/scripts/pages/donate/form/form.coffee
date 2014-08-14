@@ -971,9 +971,13 @@ define (require) ->
       countries: countries
       states: states
       amount: () -> @amount
-      thanks: () ->
+      successUrl: () ->
         url = "#{location.protocol}//#{location.host}/donate/thankyou"
         url += "/#{@uuid}/#{@type}" if @uuid and @type
+        return url
+      cancelUrl: () ->
+        url = "#{location.protocol}//#{location.host}/donate"
+        url += "/download/#{@uuid}/#{@type}" if @uuid and @type
         return url
 
     events:
