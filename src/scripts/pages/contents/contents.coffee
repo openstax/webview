@@ -59,7 +59,7 @@ define (require) ->
         ###
 
       else
-        @parent.regions.header.show(new HeaderView({page: 'contents', url: 'contents'}))
+        @parent.regions.header.show(new HeaderView({page: 'contents', url: 'content'}))
         @regions.contents.append(new BrowseContentView())
 
     displayChangedRemotely: () ->
