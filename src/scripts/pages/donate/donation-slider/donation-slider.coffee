@@ -34,17 +34,33 @@ define (require) ->
     value: 2 # Default donation setting
 
     events:
+      'mousedown input[type="range"]': 'onSlideStart'
       'change input[type="range"]': 'changeDonation'
       'submit form': 'onSubmit'
-    
+
     initialize: (options = {}) ->
       super()
       @uuid = options.uuid
       @type = options.type or 'pdf'
 
+    onSlideStart: (e) ->
+      slider = e.currentTarget
+
+      onSlide = (e) => @changeDonation.call(@, e)
+
+      onSlideStop = (e) ->
+        # Remove event listeners when the user stops dragging the slider
+        slider.removeEventListener('mousemove', onSlide, false)
+        document.body.removeEventListener('mouseup', onSlideStop, false)
+
+      # Add event listeners when the user starts dragging the slider
+      slider.addEventListener('mousemove', onSlide, false)
+      document.body.addEventListener('mouseup', onSlideStop, false)
+
     changeDonation: (e) ->
       @value = $(e.currentTarget).val()
-      @render()
+      @$el.find('.donation-value').text("$#{donation[@value]}")
+      @$el.find('.donation-message').text("$#{message[@value]}")
 
     onSubmit: (e) ->
       e.preventDefault()
