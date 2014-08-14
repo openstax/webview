@@ -144,6 +144,7 @@ module.exports = (grunt) ->
           preserveLicenseComments: false
           skipDirOptimize: true
           optimize: 'uglify2'
+          stubModules: ['cs']
           modules: [{
             name: 'main'
             include: [
@@ -163,7 +164,6 @@ module.exports = (grunt) ->
 
               'cs!configs/aloha'
             ]
-            stubModules: ['cs']
             exclude: ['coffee-script', 'less/normalize']
             excludeShallow: ['settings']
           }]
