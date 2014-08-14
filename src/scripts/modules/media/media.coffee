@@ -75,10 +75,10 @@ define (require) ->
           pageId = currentPage.get('legacy_id')
           pageVersion = currentPage.get('legacy_version')
           if pageId and pageVersion
-            headerView.setLegacyLink("content/#{pageId}/#{pageVersion}/?collection=#{id}/#{version}&legacy=true")
+            headerView.setLegacyLink("content/#{pageId}/#{pageVersion}/?collection=#{id}/#{version}")
         return
 
-      headerView.setLegacyLink("content/#{id}/#{version}?legacy=true") if id and version
+      headerView.setLegacyLink("content/#{id}/#{version}") if id and version
 
     displayError: () ->
       error = arguments[1] # @model.get('error')
