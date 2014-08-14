@@ -6,16 +6,13 @@
     <p>Want to help us continue to give away millions of dollars of resources for free?
        Help us keep the project going by making a donation!</p>
 
-    <form role="form">
-      <div class="form-group">
-        <input type="range" aria-label="Donation" class="form-control" name="donation" min="0" max="14" value="{{value}}" />
-        <span class="donation-value">${{donation}}</span>
-        <span class="donation-message">{{message}}</span>
-      </div>
+    <div class="slider">
+      {{! Add Donation Slider View}}
+    </div>
 
-      <button type="submit" class="btn btn-default">Donate Now</button>
+    <div class="centered">
       <a class="btn btn-primary {{#unless path}}disabled{{/unless}}" href="{{path}}">Download for Free</a>
-    </form>
+    </div>
 
     <small>Your donation is securely handled by Rice University and <a href="http://www.touchnet.com/">Touchnet</a>.</small>
   </div>
