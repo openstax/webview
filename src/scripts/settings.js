@@ -33,7 +33,7 @@
       // URLs are concatenated using the following logic: location.protocol + '//' + legacy + '/' + view.url
       //   Example: 'http:' + '//' + 'cnx.org' + '/' + 'contents'
       // Do not include the protocol or a trailing slash
-      legacy: 'cnx.org',
+      legacy: 'legacy.cnx.org',
 
       // Webmaster E-mail address
       webmaster: 'cnx@cnx.org',
