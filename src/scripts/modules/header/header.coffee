@@ -32,4 +32,11 @@ define (require) ->
     removeLegacyLink: (url) ->
       @setLegacyLink()
 
-    createLink: (url) -> "#{location.protocol}//#{settings.legacy}/#{url}"
+    createLink: (url) ->
+      link = "#{location.protocol}//#{settings.legacy}/#{url}"
+      if link.indexOf('?') >= 0
+        link += '&'
+      else
+        link += '?'
+
+      return "#{link}legacy=true"
