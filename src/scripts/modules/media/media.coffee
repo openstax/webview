@@ -33,7 +33,7 @@ define (require) ->
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title', @updateTitle)
-      @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage', @updateLegacyLink)
+      @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage pageLoaded', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:editable', @toggleEditor)
 
@@ -75,10 +75,10 @@ define (require) ->
           pageId = currentPage.get('legacy_id')
           pageVersion = currentPage.get('legacy_version')
           if pageId and pageVersion
-            headerView.setLegacyLink("content/#{pageId}/#{pageVersion}/?collection=#{id}/#{version}")
+            headerView.setLegacyLink("content/#{pageId}/#{pageVersion}/?collection=#{id}/#{version}&legacy=true")
         return
 
-      headerView.setLegacyLink("content/#{id}/#{version}") if id and version
+      headerView.setLegacyLink("content/#{id}/#{version}?legacy=true") if id and version
 
     displayError: () ->
       error = arguments[1] # @model.get('error')

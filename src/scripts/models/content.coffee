@@ -83,8 +83,9 @@ define (require) ->
       page.set('active', true)
 
       if not page.get('loaded')
-        page.fetch().done () ->
+        page.fetch().done () =>
           page.set('loaded', true)
+          @trigger('pageLoaded')
 
     _lookupPage: (page) ->
       if typeof page is 'number'
