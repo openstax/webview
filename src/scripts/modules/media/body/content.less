@@ -35,7 +35,8 @@ p {
 }
 
 > section,
-> figure {
+> figure,
+> [data-type="glossary"] {
   margin-top: 60px;
 }
 
@@ -652,5 +653,15 @@ table {
         background-color: @table-bg-accent;
       }
     }
+  }
+}
+
+//
+// Glossary
+// --------------------------------------------------
+
+[data-type="glossary"] {
+  [data-type="definition"] {
+    margin: 5px 20px;
   }
 }
