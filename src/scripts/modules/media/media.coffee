@@ -33,7 +33,7 @@ define (require) ->
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title', @updateTitle)
-      @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage', @updateLegacyLink)
+      @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage pageLoaded', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       #@listenTo(@model, 'change:editable', @toggleEditor)
 
