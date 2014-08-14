@@ -60,7 +60,12 @@ define (require) ->
     changeDonation: (e) ->
       @value = $(e.currentTarget).val()
       @$el.find('.donation-value').text("$#{donation[@value]}")
-      @$el.find('.donation-message').text("$#{message[@value]}")
+      @$el.find('.donation-message').text("#{message[@value]}")
+
+      if @value is '0'
+        @$el.find('.btn').hide()
+      else
+        @$el.find('.btn').show()
 
     onSubmit: (e) ->
       e.preventDefault()
