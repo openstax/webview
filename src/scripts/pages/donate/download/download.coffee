@@ -9,8 +9,6 @@ define (require) ->
 
   return class DonateDownloadView extends BaseView
     template: template
-    templateHelpers:
-      path: () -> _.find(@model.get('downloads'), (download) -> download.format is 'PDF')?.path
 
     regions:
       slider: '.slider'
@@ -26,9 +24,13 @@ define (require) ->
       @type = options.type or 'pdf'
       @model = options.model or new Content({id: @uuid})
 
-      @listenTo(@model, 'change:downloads', @render)
+      @listenTo(@model, 'change:title', @setTitle)
 
     onRender: () ->
       @regions.slider.show new SliderView
+        model: @model
         uuid: @uuid
         type: @type
+
+    setTitle: () ->
+      @$el.find('h1').text("Download #{@model.get('title')}")

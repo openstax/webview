@@ -27,9 +27,11 @@ define (require) ->
   return class DonateSliderView extends BaseView
     template: template
     templateHelpers:
+      uuid: () -> @uuid
       value: () -> @value
       donation: () -> donation[@value]
       message: () -> message[@value]
+      path: () -> @getPath()
 
     value: 2 # Default donation setting
 
@@ -42,6 +44,29 @@ define (require) ->
       super()
       @uuid = options.uuid
       @type = options.type or 'pdf'
+
+      @listenTo(@model, 'change:downloads', @setDownload) if @model
+
+    getPath: () ->
+      if not @model then return ''
+
+      download = _.find @model.get('downloads'), (download) =>
+        format = download.format?.toUpperCase()
+
+        if format is 'OFFLINE ZIP'
+          format = 'ZIP'
+
+        return format is @type.toUpperCase()
+
+      return download?.path
+
+    setDownload: () ->
+      path = @getPath()
+
+      if path
+        $button = @$el.find('.btn-primary')
+        $button.attr('href', path)
+        $button.removeClass('disabled')
 
     onSlideStart: (e) ->
       slider = e.currentTarget
@@ -70,7 +95,7 @@ define (require) ->
     onSubmit: (e) ->
       e.preventDefault()
 
-      amount = donation[@$el.find('input[name="donation"]').val()]
+      amount = donation[@value]
       url = "/donate/form?amount=#{amount}"
       url += "&uuid=#{@uuid}&type=#{@type}" if @uuid and @type
       router.navigate(url, {trigger: true})

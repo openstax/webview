@@ -6,4 +6,10 @@
   </div>
 
   <button type="submit" class="btn btn-default">Donate Now</button>
+
+  {{#if uuid}}
+    <div class="centered">
+      <a class="btn btn-primary {{#unless path}}disabled{{/unless}}" href="{{path}}">Download for Free</a>
+    </div>
+  {{/if}}
 </form>

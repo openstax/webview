@@ -990,7 +990,7 @@ define (require) ->
     initialize: () ->
       super()
       queryString = linksHelper.serializeQuery(location.search)
-      @amount = queryString.amount or 10
+      @amount = parseFloat(queryString.amount?.replace(',', '')) or 10
       @uuid = queryString.uuid
       @type = queryString.type
 
