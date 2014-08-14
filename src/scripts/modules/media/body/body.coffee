@@ -93,14 +93,15 @@ define (require) ->
           $(el).parent().append(el)
 
         # Convert links to maintain context in a book, if appropriate
-        $temp.find('a:not([data-type=footnote-number])').each (i, el) =>
-          $el = $(el)
-          page = @owner.getPage($el.attr('href').substr(10))
+        if @owner.isBook()
+          $temp.find('a:not([data-type=footnote-number])').each (i, el) =>
+            $el = $(el)
+            page = @owner.getPage($el.attr('href').substr(10))
 
-          if page
-            pageNumber = page.getPageNumber()
-            $el.attr('href', "/contents/#{@owner.getVersionedId()}:#{pageNumber}")
-            $el.attr('data-page', pageNumber)
+            if page
+              pageNumber = page.getPageNumber()
+              $el.attr('href', "/contents/#{@owner.getVersionedId()}:#{pageNumber}")
+              $el.attr('data-page', pageNumber)
 
         # Copy data-mark-prefix and -suffix from ol to li so they can be used in css
         $temp.find('ol[data-mark-prefix] > li, ol[data-mark-suffix] > li,
