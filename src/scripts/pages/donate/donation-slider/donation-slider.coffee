@@ -28,11 +28,13 @@ define (require) ->
     template: template
     templateHelpers:
       uuid: () -> @uuid
+      min: () -> @min
       value: () -> @value
       donation: () -> donation[@value]
       message: () -> message[@value]
       path: () -> @getPath()
 
+    min: 1 # Default minimum donation
     value: 2 # Default donation setting
 
     events:
@@ -42,6 +44,7 @@ define (require) ->
 
     initialize: (options = {}) ->
       super()
+      @min = options.min if typeof options.min is 'number'
       @uuid = options.uuid
       @type = options.type or 'pdf'
 
@@ -88,9 +91,9 @@ define (require) ->
       @$el.find('.donation-message').text("#{message[@value]}")
 
       if @value is '0'
-        @$el.find('.btn').hide()
+        @$el.find('.btn-default').hide()
       else
-        @$el.find('.btn').show()
+        @$el.find('.btn-default').show()
 
     onSubmit: (e) ->
       e.preventDefault()

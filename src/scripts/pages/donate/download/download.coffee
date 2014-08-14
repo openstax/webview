@@ -28,6 +28,7 @@ define (require) ->
 
     onRender: () ->
       @regions.slider.show new SliderView
+        min: 0
         model: @model
         uuid: @uuid
         type: @type
