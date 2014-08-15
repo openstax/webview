@@ -296,9 +296,9 @@ module.exports = (grunt) ->
   # Travis CI
   # -----
   grunt.registerTask 'test', [
-    'jshint'
-    'jsbeautifier'
-    'coffeelint'
+    #'jshint'
+    #'jsbeautifier'
+    #'coffeelint'
     'mocha'
     #'recess' NOTE: Disabled until recess is upgraded to support LESS 1.6+
   ]
