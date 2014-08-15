@@ -44,16 +44,17 @@ function clone(obj) {
     return temp;
 }
 
-describe('loader tests', function(){
+describe('loader tests', function () {
 
   var Loader;
   this.timeout(15000);
   beforeEach(function(done) {
     require(['config'], function() {
-    require(['cs!loader'], function (loader) {
-      Loader = clone(loader);
-      done();
-    });});
+      require(['cs!loader'], function (loader) {
+        Loader = clone(loader);
+        done();
+      });
+    });
   });
 
   describe('init tests', function(){
