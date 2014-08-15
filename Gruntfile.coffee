@@ -275,14 +275,12 @@ module.exports = (grunt) ->
 
     # Mocha for testing
     mocha:
-      browser: ['test/**/*.html']
+      browser: ['test/test.html']
       options:
         reporter: 'Nyan'
-        run: true
+        run: false
+        log: true
         timeout: 15000
-        require: 'coffee-script/register'
-        compilers:
-          coffee: 'coffee-script/register'
 
   # Dependencies
   # ============
