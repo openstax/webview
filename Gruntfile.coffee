@@ -211,8 +211,6 @@ module.exports = (grunt) ->
 
     # Clean
     clean:
-      test:
-        src: ['tests/index.html']
       files:
         src: [
           'dist/**/.*'
@@ -319,7 +317,7 @@ module.exports = (grunt) ->
 
     # write template to tests directory and run tests
     grunt.file.write(options.runner, template)
-    grunt.task.run('jshint', 'jsbeautifier', 'coffeelint', 'mocha', 'clean:test')
+    grunt.task.run('jshint', 'jsbeautifier', 'coffeelint', 'mocha')
 
   # Aloha
   # -----
