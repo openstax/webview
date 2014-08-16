@@ -7,7 +7,7 @@
 
     paths: {
       test: '../test',
-      jquery: '../../bower_components/jquery/jquery',
+      jquery: '../../bower_components/jquery/dist/jquery',
       mockjax: '../../bower_components/jquery-mockjax/jquery.mockjax'
     },
 
