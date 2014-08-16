@@ -275,9 +275,9 @@ module.exports = (grunt) ->
 
     # Mocha for testing
     mocha:
-      browser: ['test/test.html']
+      browser: ['tests/test.html']
       options:
-        reporter: 'Nyan'
+        reporter: 'Spec'
         run: false
         log: true
         timeout: 15000
@@ -296,11 +296,11 @@ module.exports = (grunt) ->
   # Travis CI
   # -----
   grunt.registerTask 'test', [
-    #'jshint'
-    #'jsbeautifier'
-    #'coffeelint'
+    'jshint'
+    'jsbeautifier'
+    'coffeelint'
     'mocha'
-    #'recess' NOTE: Disabled until recess is upgraded to support LESS 1.6+
+    #'recess' NOTE: Disabled until recess is upgraded to support LESS 1.7+
   ]
 
   # Aloha
