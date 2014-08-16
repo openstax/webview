@@ -53,14 +53,6 @@
 
     // # Packages
     packages: [{
-      name: 'cs',
-      location: '../../bower_components/require-cs',
-      main: 'cs'
-    }, {
-      name: 'coffee-script',
-      location: '../../bower_components/coffeescript/extras',
-      main: 'coffee-script'
-    }, {
       name: 'css',
       location: '../../bower_components/require-css',
       main: 'css'
