@@ -12,18 +12,30 @@
 <body>
     <div id="mocha"></div>
 	  <script type="text/javascript">
-      /*window.less = {
-        paths: ['.', 'file:///Users/dak/Sites/caroline/webview']
-      };*/
-
       mocha.setup('bdd');
+
       require.config({
         baseUrl: '../src/scripts',
-        deps: [
-          '../../test/analytics.test',
-          '../../test/loader.test'
-        ],
-        callback: mocha.run
+        callback: function () {
+          require(['config'], function() {
+            require.config({
+              less: {
+                logLevel: 1,
+
+                globalVars: {
+                  dependencyDir: '"../../bower_components"'
+                }
+              },
+
+              deps: [
+                '../../tests/analytics.test',
+                '../../tests/loader.test'
+              ],
+
+              callback: mocha.run
+            });
+          });
+        }
       });
     </script>
 </body>
