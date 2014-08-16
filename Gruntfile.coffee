@@ -281,7 +281,7 @@ module.exports = (grunt) ->
 
     # Mocha for testing
     mocha:
-      browser: ['tests/test.html']
+      browser: ['tests/index.html']
       options:
         reporter: 'Spec'
         run: false
