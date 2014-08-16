@@ -40,7 +40,13 @@ module.exports = (grunt) ->
         globals:
           require: true
           define: true
-          _TEST_MODE: true
+
+          # test globals
+          beforeEach: true
+          describe: true
+          it: true
+          chai: true
+          sinon: true
 
         # Enforcing options
         camelcase: true
@@ -89,11 +95,11 @@ module.exports = (grunt) ->
         browser: true
         devel: false
 
-      source: ['src/**/*.js']
+      source: ['src/**/*.js', 'tests/**/*.js']
 
     # JS Beautifier
     jsbeautifier:
-      files: ['src/**/*.js']
+      files: ['src/**/*.js', 'tests/**/*.js']
       options:
         mode: "VERIFY_ONLY"
         js:
