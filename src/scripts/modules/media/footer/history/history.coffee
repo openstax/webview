@@ -5,5 +5,8 @@ define (require) ->
 
   return class HistoryView extends FooterTabView
     template: template
-    templateHelpers:
-      uuid: () -> @model.getUuid()
+    templateHelpers: () ->
+      model = super()
+      model.uuid = @model.getUuid()
+
+      return model

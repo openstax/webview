@@ -44,7 +44,11 @@
       bootstrapTransition: '../../bower_components/bootstrap/js/transition',
 
       // # Select2 multiselect widget
-      select2: '../../bower_components/select2/select2'
+      select2: '../../bower_components/select2/select2',
+
+      // # CoffeeScript
+      cs: '../../bower_components/require-cs/cs',
+      'coffee-script': '../../bower_components/coffeescript/extras/coffee-script'
     },
 
     // # Packages
@@ -142,7 +146,7 @@
               dropboxID: '20186520',
               url: 'https://openstaxcnx.zendesk.com',
               tabTooltip: 'Ask Us',
-              //tabImageURL: 'https://p2.zdassets.com/external/zenbox/images/tab_ask_us_right.png',
+              tabImageURL: 'https://p2.zdassets.com/external/zenbox/images/tab_ask_us_right.png',
               tabColor: '#78b04a',
               tabPosition: 'Right'
             });

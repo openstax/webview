@@ -1,0 +1,16 @@
+<div class="thankyou">
+  <h1>Thank You!</h1>
+
+  <div class="support">
+    {{#if id}}
+      <h2>Download {{title}}</h2>
+      <p>Your download should start automatically. If it doesn't, click the download button below.</p>
+
+      <a class="btn btn-primary {{#unless path}}disabled{{/unless}}" href="{{path}}">Download</a>
+    {{else}}
+      <h2>Thank you for your generosity</h2>
+      <p>Your donation helps keep OpenStax CNX's rapidly growing repository of educational materials vibrant,
+        free, and available to educators and learners all over the world. Here is the information you provided.</p>
+    {{/if}}
+  </div>
+</div>

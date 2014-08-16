@@ -3,11 +3,18 @@
 .search .header {
   position: relative;
   margin-bottom: 30px;
-  
+
   > .advanced-search {
-    position: absolute;
-    top: 5px;
-    right: 30px;
+    @media (max-width: @screen-xs-max) {
+      display: block;
+      margin-top: 10px;
+    }
+
+    @media (min-width: @screen-sm-min) {
+      position: absolute;
+      top: 5px;
+      right: 30px;
+    }
   }
 
   > .help {

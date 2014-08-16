@@ -33,7 +33,7 @@ define (require) ->
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title', @updateTitle)
-      @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage', @updateLegacyLink)
+      @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage pageLoaded', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:editable', @toggleEditor)
 
@@ -52,6 +52,13 @@ define (require) ->
       # Track loading using the media's own analytics ID, if specified
       analyticsID = @model.get('googleAnalytics')
       analytics.send(analyticsID) if analyticsID
+
+    scrollToTop: () ->
+      $mediaNav = $('.media-nav').first()
+      maxY = $mediaNav.offset().top + $mediaNav.height()
+      y = window.pageYOffset or document.documentElement.scrollTop
+
+      window.scrollTo(0, maxY) if y > maxY
 
     updateTitle: () ->
       @pageTitle = @model.get('title')

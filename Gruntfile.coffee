@@ -145,6 +145,7 @@ module.exports = (grunt) ->
           preserveLicenseComments: false
           skipDirOptimize: true
           optimize: 'uglify2'
+          stubModules: ['cs']
           modules: [{
             name: 'main'
             include: [
@@ -153,8 +154,8 @@ module.exports = (grunt) ->
               'cs!pages/contents/contents'
               'cs!pages/search/search'
               'cs!pages/workspace/workspace'
-              'cs!pages/about-us/about-us'
-              'cs!pages/people/people'
+              'cs!pages/about/about'
+              'cs!pages/donate/donate'
 
               # FIX: edit modules should be loaded in separate modules
               'select2'
@@ -164,7 +165,6 @@ module.exports = (grunt) ->
 
               'cs!configs/aloha'
             ]
-            stubModules: ['cs']
             exclude: ['coffee-script', 'less/normalize']
             excludeShallow: ['settings']
           }]

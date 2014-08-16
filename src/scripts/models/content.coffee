@@ -20,18 +20,6 @@ define (require) ->
             return new Collection(attrs)
 
           return new Page(attrs)
-    # Having a string array suddenly change into an empty Backbone.Collection
-    # is unexpected.
-    # This is commented unless there is a cleaner way to implement users
-    #
-    # }, {
-    #   type: Backbone.Many
-    #   key: 'authors'
-    #   collectionType: () -> Backbone.Collection
-    }, {
-      type: Backbone.One
-      key: 'currentPage'
-      relatedModel: Page
     }]
 
     initialize: (options = {}) ->
@@ -48,6 +36,8 @@ define (require) ->
           if @isBook()
             if @get('contents').length
               @setPage(options.page or 1) # Default to page 1
+          else
+            @set('active', true)
 
         .fail (model, response, options) =>
           @set('error', response?.status or model?.status or 9000)
@@ -87,34 +77,27 @@ define (require) ->
 
       return results
 
-
     _setPage: (page) ->
       @get('currentPage')?.set('active', false)
       @set('currentPage', page)
       page.set('active', true)
-      @trigger('changePage')
 
       if not page.get('loaded')
-        page.fetch().done () ->
+        page.fetch().done () =>
           page.set('loaded', true)
+          @trigger('pageLoaded')
 
-    _lookupPage: (numOrString) ->
-      switch typeof numOrString
-        when 'string'
-          return @get('contents').get(numOrString)
-        when 'number'
-          num = numOrString
-          # Do not skip if the currentPage is the arg being passed in
-          # because otherwise it will not get fetched
-          pages = @getTotalPages()
-          if num < 1 then num = 1
-          if num > pages then num = pages
-          return @getPage(num)
-        else
-          throw new Error('BUG: Invalid arg')
+    _lookupPage: (page) ->
+      if typeof page is 'number'
+        # Do not skip if the currentPage is the arg being passed in
+        # because otherwise it will not get fetched
+        pages = @getTotalPages()
+        if page < 1 then page = 1
+        if page > pages then page = pages
 
-    setPage: (numOrString) ->
-      @_setPage(@_lookupPage(numOrString))
+      return @getPage(page)
+
+    setPage: (page) -> @_setPage(@_lookupPage(page))
 
     getTotalPages: () ->
       # FIX: cache total pages and recalculate on add/remove events?

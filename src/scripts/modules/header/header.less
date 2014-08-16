@@ -1,45 +1,20 @@
 @import "../../../styles/variables.less";
 
-@logo-width: 251px;
-@logo-height: 51px;
-@header-height: 130px;
-@logo-offset: 10px;
+@logo-multiplier: 0.20;
+@logo-width: 1004px * @logo-multiplier;
+@logo-height: 202px * @logo-multiplier;
+@logo-offset: 15px;
 
 .page-header {
   position: relative;
-  height: @header-height;
-  padding-bottom: 0;
+  padding: 0;
   margin: 0;
-  overflow: hidden;
-  border-bottom: none;
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.9);
+  border-bottom: none;
 
-  > a > .logo,
-  > .links {
-    display: inline-block;
-  }
-
-  > a > .logo {
-    position: absolute;
-    bottom: (@header-height - @logo-height)/2; // center the logo vertically
-    left: @logo-offset;
-    width: @logo-width;
-    height: @logo-height;
-    background: url(images/logo.png) center center no-repeat;
-    background-size: contain;
-  }
-
-  > .links {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: @logo-width + @logo-offset;
-  }
-
-  > .links > .login {
-    margin: 25px 25px 0 0;
+  > .login {
+    padding: 15px 15px 0 0;
     font-size: 0.9em;
     font-weight: 300;
     text-align: right;
@@ -69,26 +44,79 @@
     }
   }
 
-  > .links > nav {
-    display: table;
-    width: 100%;
-    margin-top: 20px;
+  > .navbar {
+    border-radius: 0;
 
-    > a {
-      display: table-cell;
-      padding: 5px 10px;
-      font-size: 1.1em;
-      font-weight: 500;
-      color: @link-color;
-      text-align: center;
+    &.navbar-default {
+      background-color: transparent;
+      border: none;
     }
 
-    > .active {
-      color: @link-active-color;
-    }
+    > .container-fluid {
+      padding: 0;
 
-    .rice {
-      margin-bottom: 5px;
+      > .navbar-header {
+        margin-right: @logo-offset;
+        padding-bottom: 7px;
+
+        @media (max-width: @grid-float-breakpoint-max) {
+          margin-left: 0;
+        }
+
+        > .navbar-brand {
+          margin-top: 5px;
+          margin-left: 15px;
+          width: @logo-width;
+          height: @logo-height;
+          background: url(/images/logo.png) center center no-repeat;
+          background-size: contain;
+          text-indent: -9999px;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+      }
+
+      > .navbar-collapse {
+        padding-right: 0;
+
+        &.in {
+          background-color: white;
+        }
+
+        .nav {
+          > li {
+            padding: 0 10px;
+
+            &:last-child {
+              padding-right: 0;
+            }
+
+            > a {
+              padding: 0;
+              font-size: 1.1em;
+              font-weight: 500;
+              color: @link-color;
+              line-height: @logo-height + (@logo-height/3) + 4px;
+              white-space: nowrap;
+
+              &:hover {
+                color: @link-color;
+                text-decoration: underline;
+                background-color: transparent;
+              }
+            }
+
+            &.active > a {
+              color: @link-active-color;
+              background-color: transparent;
+
+              &:hover {
+                background-color: transparent;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

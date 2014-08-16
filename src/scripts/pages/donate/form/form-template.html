@@ -1,0 +1,162 @@
+<div class="donation-form">
+  <h1>Support OpenStax CNX</h1>
+
+  <h3>Your donation makes a difference</h3>
+  <p>Your donation helps keep OpenStax CNX's rapidly growing repository of educational materials vibrant,
+    free, and available to educators and learners all over the world.</p>
+
+  <p>Please enter your donor information and click "Continue" to be taken to the secure payment site.</p>
+
+  <form class="form-horizontal" role="form" method="post" action="https://ebank.rice.edu/C21279_upay/web/index.jsp">
+    <input type="hidden" name="SUCCESS_LINK" value="{{successUrl}}" />
+    <input type="hidden" name="CANCEL_LINK" value="{{cancelUrl}}" />
+    <input type="hidden" name="BILL_NAME" id="BILL_NAME" value="" />
+    <input type="hidden" name="BILL_NAME" id="Donation_Amount" value="{{amount}}" />
+    <input type="hidden" name="UPAY_SITE_ID" id="UPAY_SITE_ID" value="8" />
+    <input type="hidden" name="Revenue_amount" id="Revenue_amount" value="0" />
+    <input type="hidden" name="Donation_To" id="Donation_To" value="OpenStax CNX" />
+    <input type="hidden" name="TNE_Admin_Email" value="cnx@cnx.org" />
+    <input type="hidden" name="Rice_Relate" id="Rice_Relation" value="Friend" />
+    <input type="hidden" name="TNE_Customer_From" value="cnx@cnx.org" />
+    <input type="hidden" name="TNE_Customer_Subject" value="OpenStax CNX Donation Receipt" />
+    <input type="hidden" name="TNE_Customer_Fields" value="Salutation, First_Name, Last_Name, Suffix, Mailing_Address, Mailing_Address2, Mailing_City, Mailing_State, Mailing_Zip, Mailing_Country, acct_addr, acct_addr2, acct_city, acct_state, acct_zip, Phone, Phone_Type, Email, Rice_Relation, Donation_Amount, sys_tracking_id, pmt_amt, pmt_status" />
+    <input type="hidden" name="TNE_Admin_Fields" value="Donation_to, Salutation, First_Name, Last_Name, Suffix, Mailing_Address, Mailing_Address2, Mailing_City, Mailing_State, Mailing_Zip, Mailing_Country, acct_addr, acct_addr2, acct_city, acct_state, acct_zip, Phone, Phone_Type, Email, Rice_Relation, Donation_Amount, sys_tracking_id, pmt_amt, pmt_status" />
+    <input type="hidden" name="TNE_Text" value="Thank you for your generosity. Your donation helps keep OpenStax CNX's rapidly growing repository of educational materials vibrant, free, and available to educators and learners all over the world. Here is the information you provided." />
+    <input type="hidden" value="You can print this email as a record of your donation. Thanks again for your generous donation.
+
+    OpenStax CNX
+    Email: cnx@cnx.org" name="TNE_Text2" />
+
+    <div class="form-group">
+      <label>
+        <span class="control-label col-sm-2">Title</span>
+        <div class="col-sm-10">
+          <select name="title" class="form-control">
+            <option value="">Dr.</option>
+            <option value="pubDate">Mr.</option>
+            <option value="popularity">Mrs.</option>
+            <option value="popularity">Ms.</option>
+          </select>
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <span class="control-label col-sm-2">First Name</span>
+        <div class="col-sm-10">
+          <input type="text" name="first" class="form-control" required />
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <span class="control-label col-sm-2">Last Name</span>
+        <div class="col-sm-10">
+          <input type="text" name="last" class="form-control" required />
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <span class="control-label col-sm-2">Suffix</span>
+        <div class="col-sm-10">
+          <input type="text" name="suffix" class="form-control" />
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <span class="control-label col-sm-2">E-Mail</span>
+        <div class="col-sm-10">
+          <input type="hidden" name="TNE_Customer_Email" />
+          <input type="email" name="BILL_EMAIL_ADDRESS" class="form-control" required />
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <span class="control-label col-sm-2">Address</span>
+        <div class="col-sm-10">
+          <input type="text" name="BILL_STREET1" class="form-control" required />
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <span class="control-label col-sm-2"></span>
+        <div class="col-sm-10">
+          <input type="text" name="BILL_STREET2" class="form-control" />
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <span class="control-label col-sm-2">City</span>
+        <div class="col-sm-10">
+          <input type="text" name="BILL_CITY" class="form-control" required />
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <span class="control-label col-sm-2">State</span>
+        <div class="col-sm-10">
+          <select name="BILL_STATE" class="form-control">
+            {{#each states}}
+              <option value="{{this.code}}">{{this.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <span class="control-label col-sm-2">Zip Code</span>
+        <div class="col-sm-10">
+          <input type="text" name="BILL_POSTAL_CODE" class="form-control" required />
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <span class="control-label col-sm-2">Country</span>
+        <div class="col-sm-10">
+          <select name="BILL_COUNTRY" class="form-control">
+            {{#each countries}}
+              <option value="{{this.code}}">{{this.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <span class="control-label col-sm-2">Donation</span>
+        <div class="col-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="number" step="5" min="5" value="{{amount}}" name="AMT" class="form-control" />
+            <span class="input-group-addon">.00</span>
+          </div>
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn col-sm-3">Continue</button>
+      </div>
+    </div>
+  </form>
+</div>

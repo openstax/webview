@@ -26,12 +26,25 @@ define (require) ->
 
     return promise
 
+  # Trick to download a file with JavaScript
+  downloadUrl = (url) ->
+    hiddenIFrameId = 'hiddenDownloader'
+    iframe = document.getElementById(hiddenIFrameId)
+    if iframe is null
+      iframe = document.createElement('iframe')
+      iframe.id = hiddenIFrameId
+      iframe.style.display = 'none'
+      document.body.appendChild(iframe)
+
+    iframe.src = url
 
   init = (options = {}) ->
     # Append /test to the root if the app is in test mode
     if options.test
       root += 'test/'
 
+    legacy = new RegExp('^((f|ht)tps?:)?\/\/(\\w*\\.?)cnx\\.org')
+    download = new RegExp('^\/(exports)\/')
     external = new RegExp('^((f|ht)tps?:)?\/\/')
     resources = new RegExp('\/(resources|exports)\/')
 
@@ -46,7 +59,7 @@ define (require) ->
       e.preventDefault()
 
       if external.test(href)
-        if /^((f|ht)tps?:)?\/\/(\w*\.?)cnx\.org/.test(href)
+        if legacy.test(href)
           # Going to the legacy site
           if document.cookie.indexOf('legacy') >= 0
             location.href = href
@@ -55,6 +68,13 @@ define (require) ->
             $('#legacy-modal').modal()
         else
           window.open(href, '_blank')
+      else if download.test(href)
+        if document.cookie.indexOf('donation') is -1
+          content = href.match(/exports\/([^\/:]+).(pdf|epub|zip)/)
+          router.navigate("/donate/download/#{content[1]}/#{content[2]}", {trigger: true})
+        else
+          downloadUrl(href)
+
       else if resources.test(href)
         window.open(href, '_blank')
       else

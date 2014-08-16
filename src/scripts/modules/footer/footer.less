@@ -60,6 +60,10 @@
   > .connect, > .share {
     .make-sm-column(2);
 
+    @media (max-width: @screen-xs-max) {
+      display: none;
+    }
+
     h4 {
       margin-top: 15px;
       margin-bottom: 7px;
@@ -79,7 +83,7 @@
   }
 
   > .connect {
-    @media (min-width: @screen-sm) {
+    @media (min-width: @screen-xs-min) {
       border-left: 1px solid @link-active-color;
       border-right: 1px solid @link-active-color;
     }

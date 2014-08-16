@@ -10,6 +10,6 @@ define (require) ->
 
     getModel: () ->
       if @media is 'page'
-        return @model.asPage()
+        return @model?.asPage?()
       
       return @model
