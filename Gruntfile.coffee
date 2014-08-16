@@ -211,6 +211,8 @@ module.exports = (grunt) ->
 
     # Clean
     clean:
+      test:
+        src: ['tests/index.html']
       files:
         src: [
           'dist/**/.*'
@@ -279,6 +281,12 @@ module.exports = (grunt) ->
         files:
           'dist/scripts/main.js': ['dist/scripts/main.js']
 
+    test:
+      options:
+        template: 'tests/index.template.html'
+        runner: 'tests/index.html'
+        files: 'tests/spec/**/*.js'
+
     # Mocha for testing
     mocha:
       browser: ['tests/index.html']
@@ -299,15 +307,19 @@ module.exports = (grunt) ->
   # Tasks
   # =====
 
-  # Travis CI
+  # Test
   # -----
-  grunt.registerTask 'test', [
-    'jshint'
-    'jsbeautifier'
-    'coffeelint'
-    'mocha'
-    #'recess' NOTE: Disabled until recess is upgraded to support LESS 1.7+
-  ]
+  grunt.registerTask 'test', 'Run JS Unit tests', () ->
+    options = @options()
+
+    tests = grunt.file.expand(options.files).map((file) -> "../#{file}")
+
+    # build the template
+    template = grunt.file.read(options.template).replace('{{ tests }}', JSON.stringify(tests))
+
+    # write template to tests directory and run tests
+    grunt.file.write(options.runner, template)
+    grunt.task.run('jshint', 'jsbeautifier', 'coffeelint', 'mocha', 'clean:test')
 
   # Aloha
   # -----
