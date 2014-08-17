@@ -214,7 +214,6 @@ module.exports = (grunt) ->
       directories:
         src: [
           'dist/styles'
-          'dist/test'
           'dist/**/*'
         ]
         filter: (filepath) ->
