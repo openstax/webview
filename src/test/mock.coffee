@@ -9,7 +9,7 @@ define (require) ->
   $.mockjax (settings) ->
     # settings.url === '/contents/<uuid>'
     service = settings.url.match(/\/contents\/(.*)$/)
-    return {proxy: 'data/' + service[1] + '.json'} if service
+    return {proxy: 'data/' + service[1]} if service
 
   $.mockjax (settings) ->
     # settings.url === '/search?q=physics'
