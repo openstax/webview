@@ -25,7 +25,6 @@
     "select2": "~3.5.1"
   },
   "devDependencies": {
-    "jquery-mockjax": "~1.5.3",
     "chai": "~1.8.1",
     "mocha": "~1.15.1",
     "sinonjs": "~1.7.3"

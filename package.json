@@ -21,7 +21,6 @@
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-coffeelint": "~0.0.13",
-    "grunt-recess": "~0.7.0",
     "grunt-jsbeautifier": "~0.2.7",
     "grunt-targethtml": "~0.2.6",
     "grunt-contrib-copy": "~0.5.0",

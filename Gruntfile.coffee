@@ -122,18 +122,6 @@ module.exports = (grunt) ->
       source: ['src/**/*.coffee', 'test/**/*.coffee']
       grunt: 'Gruntfile.coffee'
 
-    # Recess
-    recess:
-      dist:
-        options:
-          strictPropertyOrder: false
-          noOverqualifying: false
-          noIDs: false
-          # Universal selectors should **ONLY** be used for debug messages
-          # (see body.less)
-          noUniversalSelectors: false
-        src: ['src/**/*.less', '!src/styles/main.less'] # Don't lint bootstrap
-
     # Dist
     # ----
 
