@@ -278,7 +278,7 @@ module.exports = (grunt) ->
       options:
         reporter: 'Spec'
         run: false
-        log: true
+        log: false
         timeout: 15000
 
   # Dependencies
