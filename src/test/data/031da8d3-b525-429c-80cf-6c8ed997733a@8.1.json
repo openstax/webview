@@ -1,0 +1,1160 @@
+{
+  "googleAnalytics": null,
+  "version": "8.1",
+  "submitlog": "changed chapter title",
+  "abstract": "<div xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:md=\"http://cnx.rice.edu/mdml\" xmlns:c=\"http://cnx.rice.edu/cnxml\" xmlns:html=\"http://www.w3.org/1999/xhtml\" xmlns:qml=\"http://cnx.rice.edu/qml/1.0\" xmlns:data=\"http://dev.w3.org/html5/spec/#custom\" xmlns:bib=\"http://bibtexml.sf.net/\" xmlns:mod=\"http://cnx.rice.edu/#moduleIds\">This introductory, algebra-based, two-semester college physics book is grounded with real-world examples, illustrations, and explanations to help students grasp key, fundamental physics concepts. This online, fully editable and customizable title includes learning objectives, concept questions, links to labs and simulations, and ample practice opportunities to solve traditional physics application problems.</div>",
+  "revised": "2014-03-07T15:53:45Z",
+  "roles": null,
+  "keywords": ["ac circuits", "atomic physics", "bioelectricity", "biological and medical applications", "circuits", "college physics", "collisions", "dc instruments", "drag", "elasticity", "electric charge and electric field", "electric current", "electric potential", "electrical technologies", "electromagnetic induction", "electromagnetic waves", "energy", "fluid dynamics", "fluid statics", "forces", "friction", "frontiers of physics", "gas laws", "geometric optics", "heat and transfer methods", "kinematics", "kinetic theory", "linear momentum", "magnetism", "medical applications of nuclear physics", "Newton\u2019s Laws of Motion", "Ohm\u2019s Law", "oscillatory motion and waves", "particle physics", "physics", "physics of hearing", "quantum physics", "radioactivity and nuclear physics", "resistance", "rotational motion and angular momentum", "special relativity", "statics and torque", "temperature", "thermodynamics", "uniform circular motion and gravitation", "vision and optical instruments", "wave optics", "work"],
+  "id": "031da8d3-b525-429c-80cf-6c8ed997733a",
+  "title": "College Physics",
+  "mediaType": "application/vnd.org.cnx.collection",
+  "subjects": ["Mathematics and Statistics", "Science and Technology"],
+  "legacy_id": "col11406",
+  "parentId": null,
+  "stateid": 1,
+  "parentTitle": null,
+  "maintainers": [{
+    "website": "http://openstaxcollege.org",
+    "surname": "Physics",
+    "suffix": "",
+    "firstname": "College",
+    "title": "",
+    "othername": "",
+    "email": "info@openstaxcollege.org",
+    "fullname": "OSC Physics Maintainer",
+    "id": "cnxcap"
+  }, {
+    "website": "http://openstaxcollege.org",
+    "surname": "OpenStax College",
+    "suffix": "",
+    "firstname": "",
+    "title": "",
+    "othername": "",
+    "email": "info@openstaxcollege.org",
+    "fullname": "OpenStax College",
+    "id": "OpenStaxCollege"
+  }],
+  "authors": [{
+    "website": "http://openstaxcollege.org",
+    "surname": "OpenStax College",
+    "suffix": "",
+    "firstname": "",
+    "title": "",
+    "othername": "",
+    "email": "info@openstaxcollege.org",
+    "fullname": "OpenStax College",
+    "id": "OpenStaxCollege"
+  }],
+  "parentVersion": "",
+  "legacy_version": "1.8",
+  "licensors": [{
+    "website": "http://rice.edu",
+    "surname": "University",
+    "suffix": "",
+    "firstname": "Rice",
+    "title": "",
+    "othername": "",
+    "email": "daniel@openstaxcollege.org",
+    "fullname": "Rice University",
+    "id": "OSCRiceUniversity"
+  }],
+  "license": {
+    "url": "http://creativecommons.org/licenses/by/4.0/",
+    "code": "by",
+    "version": "4.0",
+    "name": "Creative Commons Attribution License"
+  },
+  "language": "en",
+  "created": "2012-01-23T19:03:30Z",
+  "tree": {
+    "id": "031da8d3-b525-429c-80cf-6c8ed997733a@8.1",
+    "contents": [{
+      "id": "a4579e90-f894-4438-88c3-14772d3da9ff@8",
+      "title": "Preface"
+    }, {
+      "id": "subcol",
+      "contents": [{
+        "id": "1d1fd537-77fb-4eac-8a8a-60bbaa747b6d@3",
+        "title": "Introduction to Science and the Realm of Physics, Physical Quantities, and Units"
+      }, {
+        "id": "39256206-03b0-4396-abb6-75e6ee5e3c7b@4",
+        "title": "Physics: An Introduction"
+      }, {
+        "id": "102e9604-daa7-4a09-9f9e-232251d1a4ee@7",
+        "title": "Physical Quantities and Units"
+      }, {
+        "id": "4bba6a1c-a0e6-45c0-988c-0d5c23425670@7",
+        "title": "Accuracy, Precision, and Significant Figures"
+      }, {
+        "id": "eb75b532-91ca-4c3d-b803-db329981914a@5",
+        "title": "Approximation"
+      }],
+      "title": "Introduction: The Nature of Science and Physics"
+    }, {
+      "id": "subcol",
+      "contents": [{
+        "id": "97233c88-7891-40c2-a908-a0dc22501b8c@2",
+        "title": "Introduction: Further Applications of Newton\u2019s Laws"
+      }, {
+        "id": "7bf5b534-4196-4484-a777-a2f636a4cc11@6",
+        "title": "Friction"
+      }, {
+        "id": "be308439-f9b1-40e7-b0a6-1631cbc7feaa@8",
+        "title": "Drag Forces"
+      }, {
+        "id": "f11ae42f-9666-4f36-93d9-0093f94df061@9",
+        "title": "Elasticity: Stress and Strain"
+      }],
+      "title": "Further Applications of Newton's Laws: Friction, Drag, and Elasticity"
+    }, {
+      "id": "aaf30a54-a356-4c5f-8c0d-2f55e4d20556@3",
+      "title": "Atomic Masses"
+    }, {
+      "id": "666f5335-e742-451e-b7ff-245efeff8bd9@2",
+      "title": "Selected Radioactive Isotopes"
+    }, {
+      "id": "72343285-683e-46d9-a6c2-5de097e36ff9@5",
+      "title": "Useful Information"
+    }, {
+      "id": "f9d7e0fb-7dc8-471a-b4d8-976fce44baa0@4",
+      "title": "Glossary of Key Symbols and Notation"
+    }],
+    "title": "College Physics"
+  },
+  "doctype": "",
+  "buyLink": "http://www.amazon.com/College-Physics-Peter-Urone/dp/1938168003",
+  "submitter": {
+    "website": "http://openstaxcollege.org",
+    "surname": "Physics",
+    "suffix": "",
+    "firstname": "College",
+    "title": "",
+    "othername": "",
+    "email": "info@openstaxcollege.org",
+    "fullname": "OSC Physics Maintainer",
+    "id": "cnxcap"
+  },
+  "parentAuthors": [],
+  "history": [{
+    "changes": "changed chapter title",
+    "version": "8.1",
+    "revised": "2014-03-07T15:53:45Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.61",
+    "revised": "2014-02-24T21:03:34Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.60",
+    "revised": "2014-02-24T20:41:34Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.59",
+    "revised": "2014-02-20T16:58:59Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.58",
+    "revised": "2014-02-20T16:52:32Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.57",
+    "revised": "2014-02-20T15:54:56Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.56",
+    "revised": "2014-02-20T15:35:35Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.55",
+    "revised": "2014-02-20T15:18:52Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.54",
+    "revised": "2014-02-20T15:07:43Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.53",
+    "revised": "2014-02-20T14:44:56Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.52",
+    "revised": "2014-02-19T22:42:20Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.51",
+    "revised": "2014-02-19T22:35:52Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.50",
+    "revised": "2014-02-19T21:37:21Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.49",
+    "revised": "2014-02-19T21:15:04Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.48",
+    "revised": "2014-02-19T19:45:00Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.47",
+    "revised": "2014-02-19T18:59:02Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.46",
+    "revised": "2014-02-19T17:54:21Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.45",
+    "revised": "2014-02-19T17:40:50Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.44",
+    "revised": "2014-02-19T17:36:24Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.43",
+    "revised": "2014-02-19T17:24:45Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.42",
+    "revised": "2014-02-19T16:46:20Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.41",
+    "revised": "2014-02-19T16:37:23Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.40",
+    "revised": "2014-02-19T16:30:27Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.39",
+    "revised": "2014-02-19T15:26:05Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.38",
+    "revised": "2014-02-18T21:18:01Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.37",
+    "revised": "2014-02-18T20:49:38Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.36",
+    "revised": "2014-02-18T20:31:41Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.35",
+    "revised": "2014-02-18T20:26:41Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.34",
+    "revised": "2014-02-18T20:12:24Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.33",
+    "revised": "2014-02-18T18:59:10Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.32",
+    "revised": "2014-02-18T18:23:23Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.31",
+    "revised": "2013-10-21T20:53:09Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.30",
+    "revised": "2013-09-12T21:08:13Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.29",
+    "revised": "2013-09-11T17:05:54Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.28",
+    "revised": "2013-09-09T21:08:52Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.27",
+    "revised": "2013-09-06T21:06:51Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.26",
+    "revised": "2013-08-30T16:39:57Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.25",
+    "revised": "2013-08-28T21:51:58Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.24",
+    "revised": "2013-08-16T21:04:51Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.23",
+    "revised": "2013-08-15T20:49:52Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.22",
+    "revised": "2013-08-14T16:38:12Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.21",
+    "revised": "2013-06-13T15:03:33Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.20",
+    "revised": "2013-05-16T20:28:18Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.19",
+    "revised": "2013-02-12T16:40:31Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.18",
+    "revised": "2012-11-05T16:34:31Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.17",
+    "revised": "2012-10-15T20:34:15Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.16",
+    "revised": "2012-10-08T21:03:56Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.15",
+    "revised": "2012-10-03T21:03:46Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.14",
+    "revised": "2012-09-04T21:24:03Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.13",
+    "revised": "2012-07-31T21:22:29Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.12",
+    "revised": "2012-07-26T19:53:10Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.11",
+    "revised": "2012-07-24T21:31:52Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.10",
+    "revised": "2012-07-23T16:06:06Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.9",
+    "revised": "2012-07-19T20:10:17Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.8",
+    "revised": "2012-07-17T14:41:13Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.7",
+    "revised": "2012-07-11T00:36:26Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.6",
+    "revised": "2012-07-06T02:59:37Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.5",
+    "revised": "2012-06-25T19:52:57Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.4",
+    "revised": "2012-06-21T22:04:10Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.3",
+    "revised": "2012-06-20T21:41:57Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.2",
+    "revised": "2012-06-13T21:27:29Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "structure update",
+    "version": "7.1",
+    "revised": "2012-06-12T21:12:05Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "restructured appendix items",
+    "version": "6.1",
+    "revised": "2012-05-15T05:26:11Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "added preface",
+    "version": "5.1",
+    "revised": "2012-03-30T22:07:10Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "updated metadata and roles",
+    "version": "4.1",
+    "revised": "2012-03-29T15:31:53Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "Added proper module.",
+    "version": "3.1",
+    "revised": "2012-01-26T18:05:27Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "removed module by incorrect author.",
+    "version": "2.1",
+    "revised": "2012-01-26T15:29:18Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }, {
+    "changes": "Initial Publication",
+    "version": "1.1",
+    "revised": "2012-01-26T15:06:36Z",
+    "publisher": {
+      "website": "http://openstaxcollege.org",
+      "surname": "Physics",
+      "suffix": "",
+      "firstname": "College",
+      "title": "",
+      "othername": "",
+      "email": "info@openstaxcollege.org",
+      "fullname": "OSC Physics Maintainer",
+      "id": "cnxcap"
+    }
+  }]
+}
