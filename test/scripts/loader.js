@@ -28,6 +28,8 @@ describe('loader tests', function () {
 
   var loader;
 
+  chai.should();
+
   beforeEach(function (done) {
     require(['cs!loader'], function () {
       loader = arguments[0];
@@ -37,8 +39,7 @@ describe('loader tests', function () {
 
   describe('init tests', function () {
     it('should return -1 when the value is not present', function () {
-      chai.assert.equal(-1, [1, 2, 3].indexOf(5));
-      chai.assert.equal(-1, [1, 2, 3].indexOf(0));
+      [1, 2, 3].indexOf(5).should.equal(-1);
     });
   });
 });

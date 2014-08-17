@@ -3,6 +3,8 @@ describe('analytics tests', function () {
 
   var Backbone, analytics;
 
+  chai.should();
+
   beforeEach(function (done) {
     require(['backbone', 'cs!helpers/handlers/analytics'], function () {
       Backbone = arguments[0];
@@ -18,8 +20,8 @@ describe('analytics tests', function () {
 
       analytics.gaq(accountArg, pageArg);
 
-      chai.assert.strictEqual(window._gaq[window._gaq.length - 1], pageArg);
-      chai.assert.strictEqual(window._gaq[window._gaq.length - 2], accountArg);
+      window._gaq[window._gaq.length - 1].should.equal(pageArg);
+      window._gaq[window._gaq.length - 2].should.equal(accountArg);
       window._gaq.pop();
       window._gaq.pop();
     });
@@ -40,39 +42,29 @@ describe('analytics tests', function () {
   describe('send tests', function () {
     it('should call gaq with given account and path', function () {
       var account = 'my_test_account',
-        fragment = '/fake_path',
-        test = false;
+        fragment = '/fake_path';
 
       analytics.gaq = sinon.stub().withArgs(['_setAccount', account], ['_trackPageview', fragment]).returns(true);
-      test = analytics.send(account, fragment);
-      chai.assert.isTrue(test);
-      //analytics.gaq.restore;
+      analytics.send(account, fragment).should.equal(true);
     });
 
     it('should call gaq with account from settings and backbone path', function () {
       var account = 'UA-7903479-1', // account from settings
-        fragment = '/fake_path',
-        test = false;
+        fragment = '/fake_path';
 
       Backbone.history.fragment = sinon.stub.returns(fragment);
       analytics.gaq = sinon.stub().withArgs(['_setAccount', account], ['_trackPageview', fragment]).returns(
         true);
-      test = analytics.send();
-      chai.assert.isTrue(test);
-      //analytics.gaq.restore;
-      //Backbone.history.fragment.restore;
+      analytics.send().should.equal(true);
     });
 
     it('should fix the path fragment', function () {
       var account = 'my_test_account',
-        fragment = 'fake_path',
-        test = false;
+        fragment = 'fake_path';
 
       analytics.gaq = sinon.stub().withArgs(['_setAccount', account], ['_trackPageview', '/fake_path']).returns(
         true);
-      test = analytics.send(account, fragment);
-      chai.assert.isTrue(test);
-      //analytics.gaq.restore;
+      analytics.send(account, fragment).should.equal(true);
     });
   });
 });
