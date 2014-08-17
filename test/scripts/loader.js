@@ -23,33 +23,6 @@ if (!Function.prototype.bind) {
   };
 }
 
-/**
- * Clones / deep copies an object.
- *
- * @param Object obj
- *   Any object.
- *
- * @return Object
- *   obj--cloned.
- */
-function clone(obj) {
-  'use strict';
-
-  if (obj === null || typeof (obj) !== 'object') {
-    return obj;
-  }
-
-  var temp = {};
-
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      temp[key] = clone(obj[key]);
-    }
-  }
-
-  return temp;
-}
-
 describe('loader tests', function () {
   'use strict';
 
@@ -57,7 +30,7 @@ describe('loader tests', function () {
 
   beforeEach(function (done) {
     require(['cs!loader'], function () {
-      loader = clone(arguments[0]);
+      loader = arguments[0];
       done();
     });
   });
@@ -68,15 +41,4 @@ describe('loader tests', function () {
       chai.assert.equal(-1, [1, 2, 3].indexOf(0));
     });
   });
-
-  /*describe('backbone.sync tests', function () {
-    it ('should manipulate promise', function () {
-      loader.Backbone_sync = sinon.stub.returns(new Object());
-      promise = loader.Backbone.sync('method', 'model', 'options');
-      jqXHR = {status: 401};
-      promise.fail(jqXHR);
-      chai.assert.equal('log', '/log');
-      loader.Backbone_sync.restore();
-	  });
-  });*/
 });
