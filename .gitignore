@@ -2,7 +2,7 @@ bower_components/
 node_modules/
 dist/
 
-tests/index.html
+test/index.html
 
 nginx.error.log
 nginx.pid
