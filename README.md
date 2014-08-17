@@ -145,7 +145,6 @@ Note: Mock test data is only available for the [College Physics](http://localhos
 * `src/scripts/session.coffee`  Session state singleton (Backbone Model)
 * `src/scripts/settings.js`     Global application config settings (remains in place after build)
 * `src/styles/`                 App-specific LESS variables and mixins
-* `src/test/`                   Test site
 * `src/index.html`              App's HTML Page
 * `test/`                       Unit tests
 
