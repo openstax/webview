@@ -95,11 +95,11 @@ module.exports = (grunt) ->
         browser: true
         devel: false
 
-      source: ['src/**/*.js', 'tests/**/*.js']
+      source: ['src/**/*.js', 'test/**/*.js']
 
     # JS Beautifier
     jsbeautifier:
-      files: ['src/**/*.js', 'tests/**/*.js']
+      files: ['src/**/*.js', 'test/**/*.js']
       options:
         mode: "VERIFY_ONLY"
         js:
@@ -119,7 +119,7 @@ module.exports = (grunt) ->
           level: 'error'
           value: 120
 
-      source: ['src/**/*.coffee']
+      source: ['src/**/*.coffee', 'test/**/*.coffee']
       grunt: 'Gruntfile.coffee'
 
     # Recess
