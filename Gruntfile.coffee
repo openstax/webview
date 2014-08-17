@@ -75,7 +75,7 @@ module.exports = (grunt) ->
         debug: false
         eqnull: false
         evil: false
-        expr: false
+        expr: true
         funcscope: false
         globalstrict: false
         iterator: false
