@@ -147,7 +147,7 @@ Note: Mock test data is only available for the [College Physics](http://localhos
 * `src/styles/`                 App-specific LESS variables and mixins
 * `src/test/`                   Test site
 * `src/index.html`              App's HTML Page
-* `tests/`                      Unit tests
+* `test/`                       Unit tests
 
 License
 -------
