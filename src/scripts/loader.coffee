@@ -39,10 +39,6 @@ define (require) ->
     iframe.src = url
 
   init = (options = {}) ->
-    # Append /test to the root if the app is in test mode
-    if options.test
-      root += 'test/'
-
     legacy = new RegExp('^((f|ht)tps?:)?\/\/(\\w*\\.?)cnx\\.org')
     download = new RegExp('^\/(exports)\/')
     external = new RegExp('^((f|ht)tps?:)?\/\/')
