@@ -1,9 +1,8 @@
 describe('analytics tests', function () {
   'use strict';
 
-  var Backbone, analytics;
-
-  chai.should();
+  var Backbone, analytics,
+    should = chai.should();
 
   beforeEach(function (done) {
     require(['backbone', 'cs!helpers/handlers/analytics'], function () {
@@ -22,20 +21,14 @@ describe('analytics tests', function () {
 
       window._gaq[window._gaq.length - 1].should.equal(pageArg);
       window._gaq[window._gaq.length - 2].should.equal(accountArg);
-      window._gaq.pop();
-      window._gaq.pop();
     });
 
     it('should return undefined, not throw an error', function () {
-      var temp = window._gaq,
-        test,
-        accountArg = ['_setAccount', 'my_test_account'],
+      var accountArg = ['_setAccount', 'my_test_account'],
         pageArg = ['_trackPageview', '/fake_path'];
 
       window._gaq = undefined;
-      test = analytics.gaq(accountArg, pageArg);
-      chai.assert.strictEqual(test, undefined);
-      window._gaq = temp;
+      should.not.exist(analytics.gaq(accountArg, pageArg));
     });
   });
 
@@ -45,7 +38,7 @@ describe('analytics tests', function () {
         fragment = '/fake_path';
 
       analytics.gaq = sinon.stub().withArgs(['_setAccount', account], ['_trackPageview', fragment]).returns(true);
-      analytics.send(account, fragment).should.equal(true);
+      analytics.send(account, fragment).should.be.true;
     });
 
     it('should call gaq with account from settings and backbone path', function () {
@@ -55,7 +48,7 @@ describe('analytics tests', function () {
       Backbone.history.fragment = sinon.stub.returns(fragment);
       analytics.gaq = sinon.stub().withArgs(['_setAccount', account], ['_trackPageview', fragment]).returns(
         true);
-      analytics.send().should.equal(true);
+      analytics.send().should.be.true;
     });
 
     it('should fix the path fragment', function () {
@@ -64,7 +57,7 @@ describe('analytics tests', function () {
 
       analytics.gaq = sinon.stub().withArgs(['_setAccount', account], ['_trackPageview', '/fake_path']).returns(
         true);
-      analytics.send(account, fragment).should.equal(true);
+      analytics.send(account, fragment).should.be.true;
     });
   });
 });
