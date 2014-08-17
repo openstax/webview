@@ -283,7 +283,7 @@ module.exports = (grunt) ->
       options:
         template: 'test/index.template.html'
         runner: 'test/index.html'
-        files: 'test/spec/**/*.js'
+        files: 'test/**/*.js'
 
     # Mocha for testing
     mocha:
