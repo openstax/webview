@@ -53,6 +53,7 @@ define (require) ->
         $temp.find('a[href*="#terp-"]').each () ->
           terpCode = $(this).attr('href').match(/#terp\-(.*)/)[1]
           $(this).replaceWith("<iframe class='terp'
+                                       id='terp-#{terpCode}'
                                        src='https://openstaxtutor.org/terp/#{terpCode}/quiz_start'
                                        height='600px' width='800px' frameborder='0' seamless='seamless'>
                                </iframe>")
