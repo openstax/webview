@@ -1,4 +1,5 @@
 define (require) ->
+  settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
   HeaderView = require('cs!modules/header/header')
   FooterView = require('cs!modules/footer/footer')
@@ -10,6 +11,8 @@ define (require) ->
 
   return class AboutPage extends BaseView
     template: template
+    templateHelpers:
+      legacy: settings.legacy
     pageTitle: 'About OpenStax CNX'
 
     regions:
