@@ -8,6 +8,8 @@ define (require) ->
   require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
   require('less!../styles/main')
 
+  RegExp.escape = (str) -> str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+
   # The root URI prefixed on all non-external AJAX and Backbone URIs
   root = settings.root
 
@@ -43,7 +45,7 @@ define (require) ->
     if options.test
       root += 'test/'
 
-    legacy = /^((f|ht)tps?:)?\/\/(\w*\.?)cnx\.org/
+    legacy = new RegExp("^((f|ht)tps?:)?\/\/#{RegExp.escape(settings.legacy)}")
     download = /^\/(exports)\//
     external = /^((f|ht)tps?:)?\/\//
     resources = /\/(resources|exports)\//
