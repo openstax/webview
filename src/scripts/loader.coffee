@@ -8,6 +8,8 @@ define (require) ->
   require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
   require('less!../styles/main')
 
+  RegExp.escape = (str) -> str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+
   # The root URI prefixed on all non-external AJAX and Backbone URIs
   root = settings.root
 
@@ -39,10 +41,10 @@ define (require) ->
     iframe.src = url
 
   init = (options = {}) ->
-    legacy = new RegExp('^((f|ht)tps?:)?\/\/(\\w*\\.?)cnx\\.org')
-    download = new RegExp('^\/(exports)\/')
-    external = new RegExp('^((f|ht)tps?:)?\/\/')
-    resources = new RegExp('\/(resources|exports)\/')
+    legacy = new RegExp("^((f|ht)tps?:)?\/\/#{RegExp.escape(settings.legacy)}")
+    download = /^\/(exports)\//
+    external = /^((f|ht)tps?:)?\/\//
+    resources = /\/(resources|exports)\//
 
     # Catch internal application links and let Backbone handle the routing
     $(document).on 'click', 'a[href]:not([data-bypass]):not([href^="#"])', (e) ->

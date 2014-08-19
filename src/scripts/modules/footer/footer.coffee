@@ -12,6 +12,7 @@ define (require) ->
       location.origin = location.origin or "#{location.protocol}//#{location.hostname}#{port}"
 
       return {
+        legacy: settings.legacy
         url: location.origin + settings.root
         webmaster: settings.webmaster
       }
