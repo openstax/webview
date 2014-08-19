@@ -31,6 +31,8 @@ describe('loader tests', function () {
   chai.should();
 
   beforeEach(function (done) {
+    this.timeout(10000);
+
     require(['cs!loader'], function () {
       loader = arguments[0];
       done();
