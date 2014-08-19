@@ -43,10 +43,10 @@ define (require) ->
     if options.test
       root += 'test/'
 
-    legacy = new RegExp('^((f|ht)tps?:)?\/\/(\\w*\\.?)cnx\\.org')
-    download = new RegExp('^\/(exports)\/')
-    external = new RegExp('^((f|ht)tps?:)?\/\/')
-    resources = new RegExp('\/(resources|exports)\/')
+    legacy = /^((f|ht)tps?:)?\/\/(\w*\.?)cnx\.org/
+    download = /^\/(exports)\//
+    external = /^((f|ht)tps?:)?\/\//
+    resources = /\/(resources|exports)\//
 
     # Catch internal application links and let Backbone handle the routing
     $(document).on 'click', 'a[href]:not([data-bypass]):not([href^="#"])', (e) ->
