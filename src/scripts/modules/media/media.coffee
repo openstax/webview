@@ -58,7 +58,7 @@ define (require) ->
       maxY = $mediaNav.offset().top + $mediaNav.height()
       y = window.pageYOffset or document.documentElement.scrollTop
 
-      window.scrollTo(0, maxY) if y > maxY
+      $('body').animate({scrollTop: $mediaNav.offset().top}, '500', 'swing') if y > maxY
 
     updateTitle: () ->
       @pageTitle = @model.get('title')
