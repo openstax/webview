@@ -18,4 +18,4 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:isLatest', @render)
+      @listenTo(@model, 'change:isLatest change:currentPage', @render)
