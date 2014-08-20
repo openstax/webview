@@ -93,6 +93,16 @@ define (require) ->
         $temp.find('figcaption').each (i, el) ->
           $(el).parent().append(el)
 
+        # Convert figure and table links to show the proper name
+        $temp.find('a:not([data-type=footnote-number])').each (i, el) =>
+          $el = $(el)
+          href = $el.attr('href')
+
+          if href.substr(0, 1) is '#' and $el.data('type') isnt 'footnote-ref'
+            $target = $temp.find(href)
+            tag = $target?.prop('tagName')?.toLowerCase()
+            $el.text("[#{tag}]") if tag isnt 'undefined'
+
         # Convert links to maintain context in a book, if appropriate
         if @owner.isBook()
           $temp.find('a:not([data-type=footnote-number])').each (i, el) =>
