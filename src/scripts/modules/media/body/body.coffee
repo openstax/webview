@@ -97,12 +97,15 @@ define (require) ->
         if @owner.isBook()
           $temp.find('a:not([data-type=footnote-number])').each (i, el) =>
             $el = $(el)
-            page = @owner.getPage($el.attr('href').substr(10))
+            href = $el.attr('href')
 
-            if page
-              pageNumber = page.getPageNumber()
-              $el.attr('href', "/contents/#{@owner.getVersionedId()}:#{pageNumber}")
-              $el.attr('data-page', pageNumber)
+            if href.substr(0, 1) isnt '#'
+              page = @owner.getPage(href.substr(10))
+
+              if page
+                pageNumber = page.getPageNumber()
+                $el.attr('href', "/contents/#{@owner.getVersionedId()}:#{pageNumber}")
+                $el.attr('data-page', pageNumber)
 
         # Copy data-mark-prefix and -suffix from ol to li so they can be used in css
         $temp.find('ol[data-mark-prefix] > li, ol[data-mark-suffix] > li,
