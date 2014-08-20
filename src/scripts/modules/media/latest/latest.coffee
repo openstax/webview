@@ -8,8 +8,13 @@ define (require) ->
     template: template
     templateHelpers:
       url: () ->
-        id = @model.get('id').split('@', 1)[0] # Remove the version from the id
-        return "#{settings.root}contents/#{id}"
+        page = ''
+        id = @model.getUuid()
+
+        if @model.isBook()
+          page = ":#{@model.getPageNumber()}"
+
+        return "#{settings.root}contents/#{id}#{page}"
 
     initialize: () ->
       super()
