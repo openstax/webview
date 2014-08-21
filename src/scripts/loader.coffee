@@ -8,6 +8,8 @@ define (require) ->
   require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
   require('less!../styles/main')
 
+  RegExp.escape = (str) -> str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+
   # The root URI prefixed on all non-external AJAX and Backbone URIs
   root = settings.root
 
@@ -43,10 +45,12 @@ define (require) ->
     if options.test
       root += 'test/'
 
-    legacy = new RegExp('^((f|ht)tps?:)?\/\/(\\w*\\.?)cnx\\.org')
-    download = new RegExp('^\/(exports)\/')
-    external = new RegExp('^((f|ht)tps?:)?\/\/')
-    resources = new RegExp('\/(resources|exports)\/')
+    legacy = new RegExp("^((f|ht)tps?:)?\/\/#{RegExp.escape(settings.legacy)}")
+    download = /^\/(exports)\//
+    external = /^((f|ht)tps?:)?\/\//
+    resources = /\/(resources|exports)\//
+    mailto = /^mailto:(.+)/
+    exports = /exports\/([^\/:]+).(pdf|epub|zip)/
 
     # Catch internal application links and let Backbone handle the routing
     $(document).on 'click', 'a[href]:not([data-bypass]):not([href^="#"])', (e) ->
@@ -54,7 +58,7 @@ define (require) ->
       href = $this.attr('href')
 
       # Only handle links intended to be processed by Backbone
-      if e.isDefaultPrevented() or href.charAt(0) is '#' or /^mailto:.+/.test(href) then return
+      if e.isDefaultPrevented() or href.charAt(0) is '#' or mailto.test(href) then return
 
       e.preventDefault()
 
@@ -70,7 +74,7 @@ define (require) ->
           window.open(href, '_blank')
       else if download.test(href)
         if document.cookie.indexOf('donation') is -1
-          content = href.match(/exports\/([^\/:]+).(pdf|epub|zip)/)
+          content = href.match(exports)
           router.navigate("/donate/download/#{content[1]}/#{content[2]}", {trigger: true})
         else
           downloadUrl(href)
