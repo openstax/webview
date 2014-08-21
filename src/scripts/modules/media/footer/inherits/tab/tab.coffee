@@ -18,7 +18,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:currentPage', @render)
+      @listenTo(@model, 'change:currentPage change:loaded', @render)
 
     toggleMedia: (e) ->
       @media = $(e.currentTarget).data('media')
