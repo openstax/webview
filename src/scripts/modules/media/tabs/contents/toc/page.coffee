@@ -41,7 +41,7 @@ define (require) ->
       minY = $mediaNav.offset().top + $mediaNav.height() + 200
       y = (window.pageYOffset or document.documentElement.scrollTop) + $(window).height()
 
-      $('body').animate({scrollTop: $mediaNav.offset().top}, '500', 'swing') if minY > y
+      $('html, body').animate({scrollTop: $mediaNav.offset().top}, '500', 'swing') if minY > y
 
     changePage: (e) ->
       e.preventDefault()
