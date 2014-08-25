@@ -1,4 +1,4 @@
-# Connexions [![Build Status](https://travis-ci.org/Connexions/webview.png)](https://travis-ci.org/Connexions/webview) [![dependency Status](https://david-dm.org/Connexions/webview.png)](https://david-dm.org/Connexions/webview#info=dependencies) [![devDependency Status](https://david-dm.org/Connexions/webview/dev-status.png)](https://david-dm.org/Connexions/webview#info=devDependencies)
+# Connexions [![Build Status](https://travis-ci.org/Connexions/webview.svg?branch=master)](https://travis-ci.org/Connexions/webview) [![dependency Status](https://david-dm.org/Connexions/webview.svg)](https://david-dm.org/Connexions/webview#info=dependencies) [![devDependency Status](https://david-dm.org/Connexions/webview/dev-status.svg)](https://david-dm.org/Connexions/webview#info=devDependencies)
 
 ## Development and Building
 
@@ -145,9 +145,8 @@ Note: Mock test data is only available for the [College Physics](http://localhos
 * `src/scripts/session.coffee`  Session state singleton (Backbone Model)
 * `src/scripts/settings.js`     Global application config settings (remains in place after build)
 * `src/styles/`                 App-specific LESS variables and mixins
-* `src/test/`                   Test site
 * `src/index.html`              App's HTML Page
-* `tests/`                      Unit tests
+* `test/`                       Unit tests
 
 License
 -------

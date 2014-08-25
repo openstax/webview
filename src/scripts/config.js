@@ -170,6 +170,14 @@
       }
     },
 
+    less: {
+      logLevel: 1,
+
+      globalVars: {
+        dependencyDir: '"/bower_components"'
+      }
+    },
+
     // Handlebars Requirejs Plugin Configuration
     // Used when loading templates `'hbs!...'`.
     hbs: {

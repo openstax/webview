@@ -41,6 +41,13 @@ module.exports = (grunt) ->
           require: true
           define: true
 
+          # test globals
+          beforeEach: true
+          describe: true
+          it: true
+          chai: true
+          sinon: true
+
         # Enforcing options
         camelcase: true
         curly: true
@@ -68,7 +75,7 @@ module.exports = (grunt) ->
         debug: false
         eqnull: false
         evil: false
-        expr: false
+        expr: true
         funcscope: false
         globalstrict: false
         iterator: false
@@ -88,11 +95,11 @@ module.exports = (grunt) ->
         browser: true
         devel: false
 
-      source: ['src/**/*.js']
+      source: ['src/**/*.js', 'test/**/*.js']
 
     # JS Beautifier
     jsbeautifier:
-      files: ['src/**/*.js']
+      files: ['src/**/*.js', 'test/**/*.js']
       options:
         mode: "VERIFY_ONLY"
         js:
@@ -112,20 +119,8 @@ module.exports = (grunt) ->
           level: 'error'
           value: 120
 
-      source: ['src/**/*.coffee']
+      source: ['src/**/*.coffee', 'test/**/*.coffee']
       grunt: 'Gruntfile.coffee'
-
-    # Recess
-    recess:
-      dist:
-        options:
-          strictPropertyOrder: false
-          noOverqualifying: false
-          noIDs: false
-          # Universal selectors should **ONLY** be used for debug messages
-          # (see body.less)
-          noUniversalSelectors: false
-        src: ['src/**/*.less', '!src/styles/main.less'] # Don't lint bootstrap
 
     # Dist
     # ----
@@ -219,7 +214,6 @@ module.exports = (grunt) ->
       directories:
         src: [
           'dist/styles'
-          'dist/test'
           'dist/**/*'
         ]
         filter: (filepath) ->
@@ -272,6 +266,21 @@ module.exports = (grunt) ->
         files:
           'dist/scripts/main.js': ['dist/scripts/main.js']
 
+    test:
+      options:
+        template: 'test/index.template.html'
+        runner: 'test/index.html'
+        files: 'test/**/*.js'
+
+    # Mocha for testing
+    mocha:
+      browser: ['test/index.html']
+      options:
+        reporter: 'Spec'
+        run: false
+        log: false
+        timeout: 15000
+
   # Dependencies
   # ============
   for name of pkg.dependencies when name.substring(0, 6) is 'grunt-'
@@ -283,14 +292,19 @@ module.exports = (grunt) ->
   # Tasks
   # =====
 
-  # Travis CI
+  # Test
   # -----
-  grunt.registerTask 'test', [
-    'jshint'
-    'jsbeautifier'
-    'coffeelint'
-    #'recess' NOTE: Disabled until recess is upgraded to support LESS 1.6+
-  ]
+  grunt.registerTask 'test', 'Run JS Unit tests', () ->
+    options = @options()
+
+    tests = grunt.file.expand(options.files).map((file) -> "../#{file}")
+
+    # build the template
+    template = grunt.file.read(options.template).replace('{{ tests }}', JSON.stringify(tests))
+
+    # write template to tests directory and run tests
+    grunt.file.write(options.runner, template)
+    grunt.task.run('jshint', 'jsbeautifier', 'coffeelint', 'mocha')
 
   # Aloha
   # -----
