@@ -345,11 +345,17 @@ define (require) ->
         return url
 
     events:
-      'change form input[name="first"]': 'updateName'
-      'change form input[name="last"]': 'updateName'
-      'change form input[name="suffix"]': 'updateName'
+      'change form input[name="First_Name"]': 'updateName'
+      'change form input[name="Last_Name"]': 'updateName'
+      'change form input[name="Suffix"]': 'updateName'
       'change form input[name="AMT"]': 'updateDonation'
       'change form input[name="BILL_EMAIL_ADDRESS"]': 'updateEmail'
+      'change form input[name="BILL_STREET1"]': 'updateAddress1'
+      'change form input[name="BILL_STREET2"]': 'updateAddress2'
+      'change form input[name="BILL_CITY"]': 'updateCity'
+      'change form input[name="BILL_STATE"]': 'updateState'
+      'change form input[name="BILL_ZIP"]': 'updateZip'
+      'change form input[name="BILL_COUNTRY"]': 'updateCountry'
 
     initialize: () ->
       super()
@@ -360,9 +366,9 @@ define (require) ->
 
     updateName: (e) ->
       $form = @$el.find('form')
-      first = $form.find('input[name="first"]').val()
-      last = $form.find('input[name="last"]').val()
-      suffix = $form.find('input[name="suffix"]').val()
+      first = $form.find('input[name="First_Name"]').val()
+      last = $form.find('input[name="Last_Name"]').val()
+      suffix = $form.find('input[name="Suffix"]').val()
 
       name = first if first
       name += " #{last}" if last
@@ -381,3 +387,40 @@ define (require) ->
       email = $form.find('input[name="BILL_EMAIL_ADDRESS"]').val()
 
       $form.find('input[name="TNE_Customer_Email"]').val(email)
+      $form.find('input[name="Email"]').val(email)
+
+    updateAddress1: (e) ->
+      $form = @$el.find('form')
+      address1 = $form.find('input[name="BILL_STREET1"]').val()
+
+      $form.find('input[name="Mailing_Address"]').val(address1)
+
+    updateAddress2: (e) ->
+      $form = @$el.find('form')
+      address2 = $form.find('input[name="BILL_STREET2"]').val()
+
+      $form.find('input[name="Mailing_Address2"]').val(address2)
+
+    updateCity: (e) ->
+      $form = @$el.find('form')
+      city = $form.find('input[name="BILL_CITY"]').val()
+
+      $form.find('input[name="Mailing_City"]').val(city)
+
+    updateState: (e) ->
+      $form = @$el.find('form')
+      state = $form.find('input[name="BILL_STATE"]').val()
+
+      $form.find('input[name="Mailing_State"]').val(state)
+
+    updateZip: (e) ->
+      $form = @$el.find('form')
+      zip = $form.find('input[name="BILL_ZIP"]').val()
+
+      $form.find('input[name="Mailing_Zip"]').val(zip)
+
+    updateCountry: (e) ->
+      $form = @$el.find('form')
+      country = $form.find('input[name="BILL_COUNTRY"]').val()
+
+      $form.find('input[name="Mailing_Country"]').val(country)
