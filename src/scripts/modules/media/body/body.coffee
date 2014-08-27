@@ -139,6 +139,14 @@ define (require) ->
       # MathJax rendering must be done after the HTML has been added to the DOM
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
 
+      # Update the hash fragment after the content has loaded
+      # to force the browser window to find the intended content
+      if not @fragmentReloaded and window.location.hash
+        @fragmentReloaded = true
+        hash = window.location.hash
+        window.location.hash = ''
+        window.location.hash = hash
+
     changePage: (e) ->
       $el = $(e.currentTarget)
       href = $el.attr('href')
