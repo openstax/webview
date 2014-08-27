@@ -345,11 +345,48 @@ define (require) ->
         return url
 
     events:
-      'change form input[name="first"]': 'updateName'
-      'change form input[name="last"]': 'updateName'
-      'change form input[name="suffix"]': 'updateName'
-      'change form input[name="AMT"]': 'updateDonation'
-      'change form input[name="BILL_EMAIL_ADDRESS"]': 'updateEmail'
+      'submit form': 'onSubmit'
+
+    formConversions: [{
+      name: 'BILL_NAME'
+      value: ($form) ->
+        first = $form.find('input[name="First_Name"]').val()
+        last = $form.find('input[name="Last_Name"]').val()
+        suffix = $form.find('input[name="Suffix"]').val()
+
+        name = first if first
+        name += " #{last}" if last
+        name += " #{suffix}" if suffix
+
+        return name
+    }, {
+      name: 'Donation_Amount'
+      value: 'AMT'
+    }, {
+      name: 'TNE_Customer_Email'
+      value: 'BILL_EMAIL_ADDRESS'
+    }, {
+      name: 'Email'
+      value: 'BILL_EMAIL_ADDRESS'
+    }, {
+      name: 'Mailing_Address'
+      value: 'BILL_STREET1'
+    }, {
+      name: 'Mailing_Address2'
+      value: 'BILL_STREET2'
+    }, {
+      name: 'Mailing_City'
+      value: 'BILL_CITY'
+    }, {
+      name: 'Mailing_State'
+      value: 'BILL_STATE'
+    }, {
+      name: 'Mailing_Zip'
+      value: 'BILL_POSTAL_CODE'
+    }, {
+      name: 'Mailing_Country'
+      value: 'BILL_COUNTRY'
+    }]
 
     initialize: () ->
       super()
@@ -358,26 +395,11 @@ define (require) ->
       @uuid = queryString.uuid
       @type = queryString.type
 
-    updateName: (e) ->
+    onSubmit: (e) ->
       $form = @$el.find('form')
-      first = $form.find('input[name="first"]').val()
-      last = $form.find('input[name="last"]').val()
-      suffix = $form.find('input[name="suffix"]').val()
 
-      name = first if first
-      name += " #{last}" if last
-      name += " #{suffix}" if suffix
+      _.each @formConversions, (conversion) ->
+        value = conversion.value?($form) or
+          $form.find("input[name=\"#{conversion.value}\"], select[name=\"#{conversion.value}\"]").val()
 
-      $form.find('input[name="BILL_NAME"]').val(name)
-
-    updateDonation: (e) ->
-      $form = @$el.find('form')
-      donation = $form.find('input[name="AMT"]').val()
-
-      $form.find('input[name="Donation_Amount"]').val(donation)
-
-    updateEmail: (e) ->
-      $form = @$el.find('form')
-      email = $form.find('input[name="BILL_EMAIL_ADDRESS"]').val()
-
-      $form.find('input[name="TNE_Customer_Email"]').val(email)
+        $form.find("input[name=\"#{conversion.name}\"]").val(value)

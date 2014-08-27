@@ -4,7 +4,9 @@
   "ignore": [
     "**/.*",
     "dist",
-    "node_modules"
+    "node_modules",
+    "bower_components",
+    "tests"
   ],
   "dependencies": {
     "jquery": "~2.1.1",
@@ -17,12 +19,14 @@
     "requirejs-text": "~2.0.12",
     "require-cs": "~0.5.0",
     "require-css": "~0.1.5",
-    "require-less": "~0.1.2",
+    "require-less": "12a65100729f12880f67bd7048e32045c55acb88",
     "require-handlebars-plugin": "~0.8.1",
     "aloha-editor": "oerpub/Aloha-Editor#9d58bc815ad2f3eb73ff29cba0e8506e3d8403bc",
     "select2": "~3.5.1"
   },
   "devDependencies": {
-    "jquery-mockjax": "~1.5.3"
+    "chai": "~1.9.1",
+    "mocha": "~1.21.4",
+    "sinonjs": "~1.10.2"
   }
 }
