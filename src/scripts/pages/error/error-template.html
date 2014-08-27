@@ -4,20 +4,24 @@
   </div>
 
   <div class="message">
-    <h1>{{error.code}}</h1>
+    <h1>
+      {{~#is error.code 9000~}}
+        Oops!
+      {{~else~}}
+        {{error.code}}
+      {{~/is~}}
+    </h1>
     <p class="reason">{{error.reason}}</p>
-    {{#is error.code 404}}
+    {{~#is error.code 404~}}
       <p>Oh, No!<br />
         We're sorry, but the page you requested could not be found.<br />
         Please try a <a href="/search">search</a> to find what you are looking for.
       </p>
-    {{else}}
-      {{#is error.code 500}}
-        <p>Something's Not Right!<br />
-          We're sorry, but we have experienced a technical error.<br />
-          To continue, please try again in a few minutes or try a <a href="/search">search</a>.
-        </p>
-      {{/is}}
-    {{/is}}
+    {{~else~}}
+      <p>Something's Not Right!<br />
+        We're sorry, but we have experienced a technical error.<br />
+        To continue, please try again in a few minutes or try a <a href="/search">search</a>.
+      </p>
+    {{~/is~}}
   </div>
 </div>
