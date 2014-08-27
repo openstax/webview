@@ -140,6 +140,9 @@ define (require) ->
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
 
     changePage: (e) ->
+      # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab
+      return if e.metaKey or e.which isnt 1
+
       $el = $(e.currentTarget)
       href = $el.attr('href')
 

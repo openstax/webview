@@ -44,6 +44,9 @@ define (require) ->
       $('html, body').animate({scrollTop: $mediaNav.offset().top}, '500', 'swing') if minY > y
 
     changePage: (e) ->
+      # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab
+      return if e.metaKey or e.which isnt 1
+
       e.preventDefault()
       e.stopPropagation()
 
