@@ -141,7 +141,7 @@ define (require) ->
 
       # Update the hash fragment after the content has loaded
       # to force the browser window to find the intended content
-      if not @fragmentReloaded and window.location.hash
+      if @model.get('loaded') and not @fragmentReloaded and window.location.hash
         @fragmentReloaded = true
         hash = window.location.hash
         window.location.hash = ''
