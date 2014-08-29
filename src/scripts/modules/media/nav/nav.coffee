@@ -50,6 +50,9 @@ define (require) ->
       @changePage(e)
 
     changePage: (e) ->
+      # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab
+      return if e.metaKey or e.which isnt 1
+
       e.preventDefault()
       e.stopPropagation()
       href = $(e.currentTarget).attr('href')
