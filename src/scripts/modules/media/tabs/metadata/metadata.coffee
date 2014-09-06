@@ -11,7 +11,7 @@ define (require) ->
 
   # Lookup because select2 only allows string values
   # but we need to keep the name and the id for each user
-  allUsers = {}
+  users = {}
 
   return class MetadataView extends FooterTabView
     template: template
@@ -47,34 +47,33 @@ define (require) ->
         type: 'select2'
         select2: () ->
           authors = _.map @getProperty('authors'), (item) ->
-            if not item
-              console.log 'item is null KJSDHFSKDJHF'
             if typeof item is 'string'
-              return allUsers[item]
+              return users[item]
             else
-              idText = {id:item.id, text:item.fullname}
-              allUsers["#{idText.id}"] = idText
-              return idText
+              user = {id: item.id, text: item.fullname or item.id}
+              users["#{user.id}"] = user
+              return user
 
-          # @$el.find('.authors > input').val(_.map(authors, (item) -> item.id))
           _.extend {}, s2Multi,
             id: (item) -> item.id
             # data: authors
-            initSelection: (el, cb) ->
-              cb(authors)
+            initSelection: (el, cb) -> cb(authors)
             multiple: true
             formatResult: (item, $container, query) -> $('<div></div>').append(item.text)
             ajax:
-              url: "#{window.location.origin}/users/search"
+              url: "//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}/users/search"
               dataType: 'json'
+              params:
+                xhrFields:
+                  withCredentials: true
               data: (term, page) ->
                 q: term # search term
 
               results: (data, page) -> # parse the results into the format expected by Select2.
                 results: _.map data.users, (item) ->
-                  idText = {id:item.id, text:item.full_name or item.username}
-                  allUsers["#{idText.id}"] = idText
-                  return idText
+                  user = {id: item.id, text: item.fullname or item.id}
+                  users["#{user.id}"] = user
+                  return user
 
     initialize: () ->
       super()
