@@ -141,11 +141,18 @@ define (require) ->
 
       # Update the hash fragment after the content has loaded
       # to force the browser window to find the intended content
-      if @model.get('loaded') and not @fragmentReloaded and window.location.hash
-        @fragmentReloaded = true
-        hash = window.location.hash
-        window.location.hash = ''
-        window.location.hash = hash
+      jumpToHash = () =>
+        if @model.get('loaded') and not @fragmentReloaded and window.location.hash
+          @fragmentReloaded = true
+          hash = window.location.hash
+          window.location.hash = ''
+          window.location.hash = hash
+
+      $target = $(window.location.hash)
+      if $target.prop('tagName').toLowerCase() is 'iframe'
+        $target.on('load', jumpToHash)
+      else
+        jumpToHash()
 
     changePage: (e) ->
       $el = $(e.currentTarget)
