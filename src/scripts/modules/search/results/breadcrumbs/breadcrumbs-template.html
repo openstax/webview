@@ -6,7 +6,7 @@
     <span class="limit">{{name}}</span>
     <span class="value">
       {{~#is tag "authorID"~}}
-        {{author ../../authorList 0 'fullname'}} ({{author ../../authorList 0 'id'}})
+        {{author ../../authorList index 'fullname'}} ({{author ../../authorList index 'id'}})
       {{~else~}}
         {{value}}
       {{~/is~}}

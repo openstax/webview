@@ -50,6 +50,9 @@ define (require) ->
 
     # Catch internal application links and let Backbone handle the routing
     $(document).on 'click', 'a[href]:not([data-bypass]):not([href^="#"])', (e) ->
+      # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab
+      return if e.metaKey or e.which isnt 1
+
       $this = $(this)
       href = $this.attr('href')
 
