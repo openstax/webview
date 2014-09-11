@@ -149,7 +149,7 @@ define (require) ->
           window.location.hash = hash
 
       $target = $(window.location.hash)
-      if $target.prop('tagName').toLowerCase() is 'iframe'
+      if $target.prop('tagName')?.toLowerCase() is 'iframe'
         $target.on('load', jumpToHash)
       else
         jumpToHash()
