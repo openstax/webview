@@ -17,6 +17,8 @@ define (require) ->
   Handlebars.registerPartial('modules/search/results/list/item-partial', itemPartial)
   tablePartial = require('text!./table-partial.html')
   Handlebars.registerPartial('modules/search/results/list/table-partial', tablePartial)
+  Handlebars.registerHelper 'pageTitleForUrl', (title) ->
+    return @splitAndLimitPageTitleForUrl(title)
   # /HACK
 
   return class SearchResultsListView extends BaseView

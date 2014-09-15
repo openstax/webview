@@ -170,15 +170,24 @@ define (require) ->
     # Utility Methods
     #
 
-    _getIdComponents: () -> @id?.match(/([^:@]+)@?([^:]*):?([0-9]*)/) or []
+    splitAndLimitPageTitleForUrl: (title) ->
+      return title.substring(0,30).split(' ').join('_')
+
+    _getIdComponents: () -> @id?.match(/([^:@]+)@?([^:]*)@?([^:]*):?([0-9]*)/) or []
+
+    getBookTitle: () ->
+      title = @get('title')
+      return title
 
     getVersionedId: () ->
       components = @_getIdComponents()
       id = components[1] or ''
       version = @get('version') or components[2]
+      title = @getBookTitle() or components[3]
+      pageTitle= @splitAndLimitPageTitleForUrl(title)
       if version then version = "@#{version}" else version = ''
 
-      return "#{id}#{version}"
+      return "#{id}#{version}/#{pageTitle}"
 
     getUuid: () ->
       components = @_getIdComponents()
