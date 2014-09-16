@@ -24,7 +24,6 @@ define (require) ->
 
       # Match and extract uuid and page numbers separated by a colon
       @route /^contents\/([^:]+):?([0-9]*)/, 'media', (uuid, page) ->
-        uuid = uuid.toLowerCase()
         uuid = settings.shortcodes[uuid] if settings.shortcodes[uuid]
         @appView.render('contents', {uuid: uuid, page: Number(page)})
 

@@ -13,7 +13,8 @@ define (require) ->
         when 'contents'
           uuid = data.model.getVersionedId()
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
-          url += "contents/#{uuid}"
+          title = data.model.getBookTitle()
+          url += "contents/#{uuid}/#{title}"
           url += ":#{data.page}" if data.page
 
       return url
