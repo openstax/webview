@@ -172,6 +172,8 @@ define (require) ->
 
     _getIdComponents: () -> @id?.match(/([^:@]+)@?([^:]*):?([0-9]*)/) or []
 
+    getBookTitle: ()-> title = @get('title')
+
     getVersionedId: () ->
       components = @_getIdComponents()
       id = components[1] or ''
