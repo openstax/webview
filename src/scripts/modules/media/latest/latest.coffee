@@ -10,11 +10,12 @@ define (require) ->
       url: () ->
         page = ''
         id = @model.getUuid()
+        title= @model.getBookTitle()
 
         if @model.isBook()
           page = ":#{@model.getPageNumber()}"
 
-        return "#{settings.root}contents/#{id}#{page}"
+        return "#{settings.root}contents/#{id}/#{title}#{page}"
 
     initialize: () ->
       super()

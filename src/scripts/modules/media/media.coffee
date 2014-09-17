@@ -17,7 +17,6 @@ define (require) ->
 
   return class MediaView extends BaseView
     template: template
-
     regions:
       media: '.media'
       editbar: '.editbar'

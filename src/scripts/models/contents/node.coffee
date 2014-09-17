@@ -170,9 +170,13 @@ define (require) ->
     # Utility Methods
     #
 
-    _getIdComponents: () -> @id?.match(/([^:@]+)@?([^:]*):?([0-9]*)/) or []
 
-    getBookTitle: ()-> title = @get('title')
+    _getIdComponents: () -> @id?.match(/([^:@]+)@?([^:]*)@?([^:]*):?([0-9]*)/) or []
+
+    getBookTitle: ()->
+      components = @_getIdComponents()
+      title = @get('title') or components[3]
+      return "#{title}"
 
     getVersionedId: () ->
       components = @_getIdComponents()
@@ -187,6 +191,8 @@ define (require) ->
       id = components[1] or ''
 
       return id
+
+    getId: () -> @get('id')
 
     index: () -> @get('parent').get('contents').indexOf(@)
 

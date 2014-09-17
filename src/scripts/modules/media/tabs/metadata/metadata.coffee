@@ -1,5 +1,6 @@
 define (require) ->
   _ = require('underscore')
+  linksHelper = require('cs!helpers/links')
   Backbone = require('backbone')
   settings = require('settings')
   subjects = require('cs!collections/subjects')
