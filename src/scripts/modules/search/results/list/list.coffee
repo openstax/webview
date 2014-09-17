@@ -40,6 +40,7 @@ define (require) ->
         url: "#{location.pathname}?#{linksHelper.param(queryString)}&page="
 
 
+
       return {
         authorList: @model.get('results').auxiliary.authors
         books: books
@@ -51,3 +52,4 @@ define (require) ->
     initialize: () ->
       super()
       @listenTo(@model, 'change', @render)
+
