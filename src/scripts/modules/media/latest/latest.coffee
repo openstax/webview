@@ -17,7 +17,7 @@ define (require) ->
         if @model.isBook()
           page = ":#{@model.getPageNumber()}"
 
-        return "#{settings.root}contents/#{id}/#{title}#{page}"
+        return "#{settings.root}contents/#{id}#{page}/#{title}"
 
     initialize: () ->
       super()
