@@ -13,9 +13,10 @@ describe('handlebar date helper tests', function () {
   });
 
   it('should create date html from date object', function () {
-    var setDate = new Date(Date.UTC(2012, 11, 12, 3, 0, 0));
-    var dateStr = Handlebars.helpers.date(setDate);
-    dateStr.toString().should.equal('12/11/2012');
+    var dateItems = Handlebars.helpers.date(myDate).toString().split('/');
+    parseInt(dateItems[0], 10).should.equal(myDate.getMonth() + 1);
+    parseInt(dateItems[1], 10).should.equal(myDate.getDate());
+    dateItems[2].should.equal(myDate.getFullYear().toString());
   });
 
   it('should create date html with just the year', function () {
