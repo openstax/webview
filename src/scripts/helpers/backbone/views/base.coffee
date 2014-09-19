@@ -62,12 +62,17 @@ define (require) ->
     initialize: () ->
       @regions = new Regions(@regions, @)
 
+
     renderDom: () ->
       @$el?.html(@getTemplate())
 
     # Update page title
     updateTitle: () ->
-      document.title = settings.titlePrefix + @pageTitle if @pageTitle
+      #document.title = settings.titlePrefix + @pageTitle if @pageTitle
+      if @pageTitle
+       document.title = settings.titlePrefix + @pageTitle
+       @addCanonicalMetaDataToDerivedCopies()
+
 
     getTemplate: () -> @template?(@getTemplateData()) or @template
 
@@ -86,10 +91,20 @@ define (require) ->
 
       return data
 
+    addCanonicalMetaDataToDerivedCopies: () ->
+      data = @getTemplateData().parentId
+      if data?
+       headTag = document.getElementsByTagName(settings.strings.head)[0]
+       canonicalLink = document.createElement(settings.strings.link)
+       canonicalLink.rel = settings.strings.canonical
+       canonicalLink.href = settings.cnxUrl + '/contents/' + data
+       headTag.appendChild canonicalLink
+
     _render: () ->
       _.each @regions, (region) -> region.empty()
       @updateTitle()
       @renderDom()
+
 
     render: () ->
       @onBeforeRender()
@@ -97,7 +112,6 @@ define (require) ->
       @onRender()
       if @_rendered then @onDomRefresh() else @_rendered = true
       @onAfterRender()
-
       return @
 
     onShow: () -> # noop

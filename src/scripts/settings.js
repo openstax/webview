@@ -45,8 +45,17 @@
         'biology': '185cbf87-c72e-48f5-b51e-f14f21b5eabd@9.44',
         'concepts_of_biology': 'b3c1e1d2-839c-42b0-a314-e119a8aafbdd@8.39',
         'anatomy_and_physiology': '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@6.19',
-        'introductory_statistics': '30189442-6998-4686-ac05-ed152b91b9de@17.20',
-      }
+        'introductory_statistics': '30189442-6998-4686-ac05-ed152b91b9de@17.20'
+      },
+
+       strings: {
+           'canonical' : 'canonical',
+           'href': 'href',
+           'link': 'link',
+           'head': 'head'
+       },
+
+       cnxUrl: 'http://www.cnx.org'
     };
 
   });
