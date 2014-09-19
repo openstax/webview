@@ -11,7 +11,7 @@ define (require) ->
     template: template
     templateHelpers:
       page: () -> @content.getPageNumber(@model)
-      url: () -> linksHelper.getPath('contents', {model: @content, page: @model.getPageNumber()})
+      url: () -> linksHelper.getPath('contents', {model: @content})
       editable: () -> @editable
 
     tagName: 'li'
@@ -26,7 +26,6 @@ define (require) ->
 
       @content = @model.get('book')
       @editable = @content.get('editable')
-      @bookTitle = @content.get('title').substring(0,30)
 
       # If this is the active page, update the URL bar to the correct page number
       if @model.get('active')
