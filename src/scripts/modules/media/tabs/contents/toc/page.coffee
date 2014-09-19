@@ -26,7 +26,7 @@ define (require) ->
 
       @content = @model.get('book')
       @editable = @content.get('editable')
-      @pageNumber = @content.getPageNumber()
+      @pageNumber = @content.getPageNumber(@model)
 
       # If this is the active page, update the URL bar to the correct page number
       if @model.get('active')
