@@ -24,17 +24,20 @@ define (require) ->
     initialize: (options) ->
       super()
 
+
       if not options or not options.uuid
         throw new Error('A media view must be instantiated with the uuid of the media to display')
 
       @uuid = options.uuid
       @model = new Content({id: @uuid, page: options.page})
 
+
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title', @updateTitle)
       @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage pageLoaded', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:editable', @toggleEditor)
+      @listenTo(@model, 'change:title change:currentPage pageLoaded', @updateUrl)
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))
@@ -46,6 +49,15 @@ define (require) ->
       @regions.media.append(new MediaBodyView({model: @model}))
       @regions.media.append(new MediaFooterView({model: @model}))
       @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
+
+    updateUrl: () ->
+       url = window.location.pathname.split('/')
+       pathArray = url[3]
+       collectionTitle = @model.get('title')
+       if collectionTitle? and not pathArray?
+         newUrl = window.location.pathname + '/' + collectionTitle.replace(/\ /g,'_').substring(0,30)
+         history.pushState '', '', newUrl
+
 
     trackAnalytics: () ->
       # Track loading using the media's own analytics ID, if specified
