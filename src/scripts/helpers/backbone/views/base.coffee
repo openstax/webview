@@ -68,11 +68,9 @@ define (require) ->
 
     # Update page title
     updateTitle: () ->
-      #document.title = settings.titlePrefix + @pageTitle if @pageTitle
       if @pageTitle
-       document.title = settings.titlePrefix + @pageTitle
        @addCanonicalMetaDataToDerivedCopies()
-
+       document.title = settings.titlePrefix + @pageTitle
 
     getTemplate: () -> @template?(@getTemplateData()) or @template
 
@@ -92,13 +90,21 @@ define (require) ->
       return data
 
     addCanonicalMetaDataToDerivedCopies: () ->
-      data = @getTemplateData().parentId
-      if data?
-       headTag = document.getElementsByTagName(settings.strings.head)[0]
-       canonicalLink = document.createElement(settings.strings.link)
-       canonicalLink.rel = settings.strings.canonical
-       canonicalLink.href = settings.cnxUrl + '/contents/' + data
+      parentId = @getTemplateData().parentId
+      headTag = document.getElementsByTagName('head')[0]
+      links = headTag.querySelectorAll('link')
+      if links?
+       i = 0
+      while i < links.length
+       el = links[i]
+       el.parentElement.removeChild el  if el.getAttribute('rel') is 'canonical'
+       i++
+      if parentId?
+       canonicalLink = document.createElement('link')
+       canonicalLink.rel = 'canonical'
+       canonicalLink.href = settings.cnxUrl + '/' + parentId
        headTag.appendChild canonicalLink
+
 
     _render: () ->
       _.each @regions, (region) -> region.empty()

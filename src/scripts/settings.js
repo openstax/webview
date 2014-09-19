@@ -48,13 +48,6 @@
         'introductory_statistics': '30189442-6998-4686-ac05-ed152b91b9de@17.20'
       },
 
-       strings: {
-           'canonical' : 'canonical',
-           'href': 'href',
-           'link': 'link',
-           'head': 'head'
-       },
-
        cnxUrl: 'http://www.cnx.org'
     };
 
