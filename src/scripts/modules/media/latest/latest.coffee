@@ -12,7 +12,7 @@ define (require) ->
         page = ''
         id = @model.getUuid()
         version = @model.get('version')
-        title= @model.getBookTitle().substring(0,30).split(' ').join('_')
+        title= @model.getBookTitle().replace(/\ /g,'_').substring(0,30)
 
         if @model.isBook()
           page = ":#{@model.getPageNumber()}"

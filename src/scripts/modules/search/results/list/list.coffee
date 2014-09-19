@@ -17,7 +17,7 @@ define (require) ->
   Handlebars.registerPartial('modules/search/results/list/item-partial', itemPartial)
   tablePartial = require('text!./table-partial.html')
   Handlebars.registerPartial('modules/search/results/list/table-partial', tablePartial)
-  Handlebars.registerHelper 'titleForUrl', (title) -> title.substring(0,30).split(' ').join('_')
+  Handlebars.registerHelper 'titleForUrl', (title) -> title.replace(/\ /g,'_').substring(0,30)
   # /HACK
 
   return class SearchResultsListView extends BaseView

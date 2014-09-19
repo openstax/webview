@@ -14,9 +14,10 @@ define (require) ->
           uuid = data.model.getVersionedId()
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
           title = data.model.getBookTitle()
+          bookTitle = title.replace(/\ /g,"_").substring(0,30)
           url += "contents/#{uuid}"
           url += ":#{data.page}" if data.page
-          url += "/#{title.split(' ').join('_')}"
+          url += "/#{bookTitle}"
 
       return url
 
