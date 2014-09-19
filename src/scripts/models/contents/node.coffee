@@ -171,11 +171,11 @@ define (require) ->
     #
 
 
-    _getIdComponents: () -> @id?.match(/([^:@]+)@?([^:]*)@?([^:]*):?([0-9]*)/) or []
+    _getIdComponents: () -> @id?.match(/([^:@]+)@?([^:]*):?([0-9]*)/) or []
 
     getBookTitle: () ->
       components = @_getIdComponents()
-      title = @get('title') or components[3]
+      title = @get('title')
       return "#{title}"
 
     getVersionedId: () ->
