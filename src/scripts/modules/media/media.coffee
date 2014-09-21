@@ -57,7 +57,7 @@ define (require) ->
        collectionTitle = @model.get('title')
        if collectionTitle? and not pathArray?
          newUrl = path + '/' + collectionTitle.replace(/\ /g,'_').substring(0,30)
-         history.pushState '', '', newUrl
+         history.pushState {}, '', newUrl
 
 
     trackAnalytics: () ->
