@@ -97,8 +97,8 @@ define (require) ->
       if numberOfLinks
         i = 0
         while i < numberOfLinks
-         el = links[i]
-         el.parentElement.removeChild el  if el.getAttribute('rel') is 'canonical'
+          el = links[i]
+          el.parentElement.removeChild el  if el.getAttribute('rel') is 'canonical'
         i++
       if parentId?
         canonicalLink = document.createElement('link')
