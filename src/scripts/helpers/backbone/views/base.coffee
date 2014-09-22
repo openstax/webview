@@ -90,20 +90,20 @@ define (require) ->
       return data
 
     addCanonicalMetaDataToDerivedCopies: () ->
-      parentId = @getTemplateData().parentId
-      headTag = document.getElementsByTagName('head')[0]
-      links = headTag.querySelectorAll('link')
-      if links?
-       i = 0
-      while i < links.length
-       el = links[i]
-       el.parentElement.removeChild el  if el.getAttribute('rel') is 'canonical'
-       i++
-      if parentId?
-       canonicalLink = document.createElement('link')
-       canonicalLink.rel = 'canonical'
-       canonicalLink.href = settings.cnxUrl + '/' + parentId
-       headTag.appendChild canonicalLink
+       parentId = @getTemplateData().parentId
+       headTag = document.getElementsByTagName('head')[0]
+       links = headTag.querySelectorAll('link')
+       if links.length
+        i = 0
+       while i < links.length
+        el = links[i]
+        el.parentElement.removeChild el  if el.getAttribute('rel') is 'canonical'
+        i++
+       if parentId?
+        canonicalLink = document.createElement('link')
+        canonicalLink.rel = 'canonical'
+        canonicalLink.href = location.href + '/' + parentId
+        headTag.appendChild canonicalLink
 
 
     _render: () ->
