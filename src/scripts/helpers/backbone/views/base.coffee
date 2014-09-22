@@ -89,23 +89,14 @@ define (require) ->
 
       return data
 
+
     addCanonicalMetaDataToDerivedCopies: () ->
       parentId = @getTemplateData().parentId
-      headTag = document.getElementsByTagName('head')[0]
-      links = headTag.querySelectorAll('link')
-      numberOfLinks = links.length
-      if numberOfLinks
-        i = 0
-        while i < numberOfLinks
-          el = links[i]
-          el.parentElement.removeChild el  if el.getAttribute('rel') is 'canonical'
-        i++
-      if parentId?
-        canonicalLink = document.createElement('link')
-        canonicalLink.rel = 'canonical'
-        canonicalLink.href = location.hostname + '/' + parentId
-        headTag.appendChild canonicalLink
-
+      headTag = $('head')
+      canonical = $('link[rel^="canonical"]')
+      canonical.remove()
+      headTag.append '<link rel=\"canonical\"' + 'href=' + "//#{location.hostname}/contents/#{parentId}" + '/>'  if parentId?
+      return
 
     _render: () ->
       _.each @regions, (region) -> region.empty()
