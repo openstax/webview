@@ -51,13 +51,13 @@ define (require) ->
       @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
 
     updateUrl: () ->
-      path = window.location.pathname
-      url = path.split('/')
-      pathArray = url[3]
-      collectionTitle = @model.get('title')
-      if collectionTitle? and not pathArray?
-         newUrl = path + '/' + collectionTitle.replace(/\ /g,'_').substring(0,30)
-         history.pushState {}, '', newUrl
+     path = window.location.pathname
+     url = path.split('/')
+     pathArray = url[3]
+     collectionTitle = @model.get('title')
+     if collectionTitle? and not pathArray?
+      newUrl = path + '/' + collectionTitle.replace(/\ /g,'_').substring(0,30)
+      history.pushState {}, '', newUrl
 
 
     trackAnalytics: () ->
