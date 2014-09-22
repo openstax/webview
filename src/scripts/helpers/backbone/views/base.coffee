@@ -93,7 +93,7 @@ define (require) ->
     addCanonicalMetaDataToDerivedCopies: () ->
       parentId = @getTemplateData().parentId
       relCanonical = "canonical"
-      canonicalUrl = "<link rel= #{relCanonical} href=//#{location.hostname}/contents/#{parentId}/>"
+      canonicalUrl = "<link rel= #{relCanonical} href=\"//#{location.hostname}/contents/#{parentId}/\">"
       headTag = $('head')
       canonical = $("link[rel^= #{relCanonical}]")
       canonical.remove()
