@@ -89,22 +89,23 @@ define (require) ->
 
       return data
 
-
     addCanonicalMetaDataToDerivedCopies: () ->
+      # Remove canonical links to content
+      # FIX: This will trigger for every view. If the last view to load on the page does not have
+      #      a reference to the proper model, then the link will be removed even if it should be there.
+      #      This code should probably be changed to test if a specific setting is on a view and then
+      #      and only then add or remove the link as appropriate.
+      $("link[rel^=\"canonical\"]").remove()
+
       parentId = @getTemplateData().parentId
-      relCanonical = "canonical"
-      canonicalUrl = "<link rel= #{relCanonical} href=\"//#{location.hostname}/contents/#{parentId}/\">"
-      headTag = $('head')
-      canonical = $("link[rel^= #{relCanonical}]")
-      canonical.remove()
-      headTag.append canonicalUrl if parentId?
-      return
+      if parentId
+        canonicalUrl = "<link rel=\"canonical\" href=\"//#{location.hostname}/contents/#{parentId}/\" />"
+        $('head').append(canonicalUrl)
 
     _render: () ->
       _.each @regions, (region) -> region.empty()
       @updateTitle()
       @renderDom()
-
 
     render: () ->
       @onBeforeRender()
