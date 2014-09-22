@@ -93,16 +93,17 @@ define (require) ->
        parentId = @getTemplateData().parentId
        headTag = document.getElementsByTagName('head')[0]
        links = headTag.querySelectorAll('link')
-       if links.length
+       numberOfLinks = links.length
+       if numberOfLinks
         i = 0
-       while i < links.length
+       while i < numberOfLinks
         el = links[i]
         el.parentElement.removeChild el  if el.getAttribute('rel') is 'canonical'
         i++
        if parentId?
         canonicalLink = document.createElement('link')
         canonicalLink.rel = 'canonical'
-        canonicalLink.href = location.href + '/' + parentId
+        canonicalLink.href = location.hostname + '/' + parentId
         headTag.appendChild canonicalLink
 
 
