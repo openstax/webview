@@ -21,6 +21,13 @@ define (require) ->
 
       return url
 
+    metaDataUrl: (model) ->
+      title = "#{model.title}"
+      id = model.id
+      version = model.version
+      metaDataTitle = title.replace(/\ /g,"_").substring(0,30)
+      url = "/contents/#{id}/#{metaDataTitle}"
+
     serializeQuery: (query) ->
       queryString = {}
 
