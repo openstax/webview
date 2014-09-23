@@ -177,6 +177,7 @@ define (require) ->
       title = @get('title')
       return "#{title}"
 
+
     getVersionedId: () ->
       components = @_getIdComponents()
       id = components[1] or ''
