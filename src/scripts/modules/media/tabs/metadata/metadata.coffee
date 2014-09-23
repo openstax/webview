@@ -1,5 +1,6 @@
 define (require) ->
   _ = require('underscore')
+  linksHelper = require('cs!helpers/links')
   Backbone = require('backbone')
   settings = require('settings')
   subjects = require('cs!collections/subjects')
@@ -26,6 +27,7 @@ define (require) ->
       model.languages = settings.languages
       model.languageName = settings.languages[model.language]
       model.subjectsList = subjects.list
+      model.url = linksHelper.metaDataUrl(model)
       return model
 
     editable:

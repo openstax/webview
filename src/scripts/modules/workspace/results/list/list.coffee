@@ -2,7 +2,9 @@ define (require) ->
   settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./list-template')
+  Handlebars = require('hbs/handlebars')
   require('less!./list')
+  Handlebars.registerHelper 'titleForUrl', (title) -> title.substring(0,30).split(' ').join('_')
 
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 

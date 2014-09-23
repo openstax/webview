@@ -17,13 +17,14 @@ define (require) ->
   Handlebars.registerPartial('modules/search/results/list/item-partial', itemPartial)
   tablePartial = require('text!./table-partial.html')
   Handlebars.registerPartial('modules/search/results/list/table-partial', tablePartial)
+  Handlebars.registerHelper 'titleForUrl', (title) -> title.replace(/\ /g,'_').substring(0,30)
   # /HACK
 
   return class SearchResultsListView extends BaseView
     template: template
+
     templateHelpers: () ->
       results = @model.get('results').items
-
       books = _.where(results, {mediaType: 'application/vnd.org.cnx.collection'})
       pages = _.where(results, {mediaType: 'application/vnd.org.cnx.module'})
       misc = _.filter results, (result) ->
@@ -38,6 +39,8 @@ define (require) ->
         page: @model.get('query').page
         url: "#{location.pathname}?#{linksHelper.param(queryString)}&page="
 
+
+
       return {
         authorList: @model.get('results').auxiliary.authors
         books: books
@@ -49,3 +52,4 @@ define (require) ->
     initialize: () ->
       super()
       @listenTo(@model, 'change', @render)
+
