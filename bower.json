@@ -14,14 +14,14 @@
     "backbone": "~1.1.2",
     "backbone-associations": "~0.6.1",
     "bootstrap": "~3.2.0",
-    "font-awesome": "~4.1",
+    "font-awesome": "~4.2",
     "requirejs": "~2.1.14",
     "requirejs-text": "~2.0.12",
     "require-cs": "~0.5.0",
     "require-css": "~0.1.5",
-    "require-less": "12a65100729f12880f67bd7048e32045c55acb88",
+    "require-less": "~0.1.3",
     "require-handlebars-plugin": "~0.8.1",
-    "aloha-editor": "oerpub/Aloha-Editor#9d58bc815ad2f3eb73ff29cba0e8506e3d8403bc",
+    "aloha-editor": "oerpub/Aloha-Editor#67b16593f7816c7bd1aa9db8e70992877181afbc",
     "select2": "~3.5.1"
   },
   "devDependencies": {
