@@ -24,39 +24,48 @@ describe('links helper tests', function () {
       };
       links.getPath(page, data).should.equal('/');
     });
-    it('should append fake uuid to url', function () {
+    it('should append fake uuid and book title to url', function () {
       var page = 'contents';
       var data = {
         model: {
           getVersionedId: function () {
             return 'not real';
+          },
+          getBookTitle: function () {
+            return 'book title';
           }
         }
       };
-      links.getPath(page, data).should.equal('/contents/not real');
+      links.getPath(page, data).should.equal('/contents/not real/book_title');
     });
-    it('should append uuid from settings to url', function () {
+    it('should append uuid and book title from settings to url', function () {
       var page = 'contents';
       var data = {
         model: {
           getVersionedId: function () {
             return '031da8d3-b525-429c-80cf-6c8ed997733a@8.1';
+          },
+          getBookTitle: function () {
+            return 'College Physics';
           }
         }
       };
-      links.getPath(page, data).should.equal('/contents/college_physics');
+      links.getPath(page, data).should.equal('/contents/college_physics/College_Physics');
     });
-    it('should append uuid and page info to url', function () {
+    it('should append uuid, page info and book title to url', function () {
       var page = 'contents';
       var data = {
         model: {
           getVersionedId: function () {
             return '031da8d3-b525-429c-80cf-6c8ed997733a@8.1';
+          },
+          getBookTitle: function () {
+            return 'College Physics';
           }
         },
         page: 'page'
       };
-      links.getPath(page, data).should.equal('/contents/college_physics:page');
+      links.getPath(page, data).should.equal('/contents/college_physics:page/College_Physics');
     });
   });
   describe('serialize query tests', function () {
@@ -104,7 +113,7 @@ describe('links helper tests', function () {
         keyword: 'x = 8'
       };
       links.param(queryObj);
-      //.should.equal('author="Dr.%20Gray%3F"&title=%22Statics%20%26%20Dynamics%22&keyword=x%3D8');                        
+      //.should.equal('author="Dr.%20Gray%3F"&title=%22Statics%20%26%20Dynamics%22&keyword=x%3D8');
     });
   });
 
