@@ -1,4 +1,5 @@
 define (require) ->
+  linksHelper = require('cs!helpers/links')
   settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./latest-template')
@@ -10,11 +11,13 @@ define (require) ->
       url: () ->
         page = ''
         id = @model.getUuid()
+        version = @model.get('version')
+        title= @model.getBookTitle().replace(/\ /g,'_').substring(0,30)
 
         if @model.isBook()
           page = ":#{@model.getPageNumber()}"
 
-        return "#{settings.root}contents/#{id}#{page}"
+        return "#{settings.root}contents/#{id}#{page}/#{title}"
 
     initialize: () ->
       super()

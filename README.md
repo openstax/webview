@@ -17,6 +17,8 @@ CNX webview is designed to be run as a frontend for [cnx-archive](https://github
     * `bower install` downloads front-end dependencies
     * `grunt install` compiles the Aloha-Editor (which is downloaded by bower)
 
+By default, webview will use [cnx-archive](https://github.com/Connexions/cnx-archive) and [cnx-authoring](https://github.com/Connexions/cnx-authoring) hosted on cnx.org.
+
 ##### Testing
 
 From the root `webview` directory, run `npm test`.
@@ -32,20 +34,20 @@ The `dist` directory containing the built site will be added to the root `webvie
 From the root `webview` directory, run `npm run-script upgrade`, which executes the following commands:
 1. `npm update`
 2. `bower update`
-3. `grunt install --verbose`
+3. `grunt aloha --verbose`
 
 #### Hosting
 
-##### For Development
+##### Quick Development Setup
 
 1. Install [nginx](http://nginx.org/)
 2. Run `grunt nginx:start` (uses `nginx.development.conf`)
-3. Point your browser to [http://localhost:8000/test](http://localhost:8000/test) for mock data
-4. If you have https://github.com/Connexions/cnx-archive installed, you can point your browser to [http://localhost:8000](http://localhost:8000)
+3. (optional) Install https://github.com/prerender/prerender
+4. Point your browser to [http://localhost:8000](http://localhost:8000)
 
-###### Customization Notes
+##### Customization Notes
 
-1. Update settings in `src/scripts/settings.coffee` if necessary to, for example, include
+1. Update settings in `src/scripts/settings.js` if necessary to, for example, include
 the correct Google Analytics ID, and to point to wherever `cnxarchive` is being hosted.
 
 2. Ensure resources are being served with the correct MIME type, including fonts.
@@ -62,67 +64,73 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
 
 3. Configure your server to point at `dist/index.html` (or `src/index.html` for development)
   * Unresolveable URIs should load `dist/index.html` or `src/index.html`
-  * If not hosting the site from the domain root, update `root` in `src/scripts/settings.coffee`
+  * If not hosting the site from the domain root, update `root` in `src/scripts/settings.js`
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
-  * Example nginx development config:
+  * Example nginx config:
 
   ```nginx
     server {
-        listen 80;
-        server_name $hostname;
-        root /path/to/webview/src/;
-        index index.html;
-        try_files $uri $uri/ /index.html;
+        listen 8000; # dev
+        listen [::]:8000; # dev ipv6
+        listen 8001; # production
+        listen [::]:8001; # production ipv6
+        server_name  _;
 
-        location /resources/ {
-            proxy_pass http://localhost:6543;
+        # Support both production and dev
+        set $ROOT "src";
+        if ($server_port ~ "8001") {
+            set $ROOT "dist";
         }
 
+        root /path/to/webview/$ROOT/;
+
+        index index.html;
+        try_files $uri @prerender;
+
+        # Proxy resources and exports to cnx.org
+        # since they are not part of the locally hosted package
+        location /resources/ {
+            proxy_pass http://cnx.org;
+        }
+        location /exports/ {
+            proxy_pass http://cnx.org;
+        }
+
+        # For development only
         location ~ ^.*/bower_components/(.*)$ {
             alias /path/to/webview/bower_components/$1;
         }
 
-        location ~ ^.*/(data|scripts|styles|images)/(.*) {
-            try_files $uri $uri/ /$1/$2 /test/$1/$2;
-        }
-
-        location ~ ^.*/test/(.*)/(.*) {
-            try_files $uri $uri/ /test/$1 /test/$2 /test/index.html;
-        }
-
-        location ~ ^.*/test/(.*) {
-            try_files $uri $uri/ /test/$1 /test/index.html;
-        }
-    }
-  ```
-  * Example nginx production config:
-
-  ```nginx
-    server {
-        listen 80;
-        server_name $hostname;
-        root /path/to/webview/dist/;
-        index index.html;
-        try_files $uri $uri/ /index.html;
-
-        location /resources/ {
-            proxy_pass http://localhost:6543;
-        }
-
         location ~ ^.*/(data|scripts|styles|images|fonts)/(.*) {
-            try_files $uri $uri/ /$1/$2;
+            try_files $uri /$1/$2;
+        }
+
+        # Prerender for SEO
+        location @prerender {
+            # Support page prerendering for web crawlers
+            set $prerender 0;
+            if ($http_user_agent ~* "baiduspider|twitterbot|facebookexternalhit|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest") {
+                set $prerender 1;
+            }
+            if ($args ~ "_escaped_fragment_") {
+                set $prerender 1;
+            }
+            if ($http_user_agent ~ "Prerender") {
+                set $prerender 0;
+            }
+            if ($uri ~ "\.(js|css|xml|less|png|jpg|jpeg|gif|pdf|doc|txt|ico|rss|zip|mp3|rar|exe|wmv|doc|avi|ppt|mpg|mpeg|tif|wav|mov|psd|ai|xls|mp4|m4a|swf|dat|dmg|iso|flv|m4v|torrent)") {
+                set $prerender 0;
+            }
+            if ($prerender = 1) {
+                rewrite .* /$scheme://$http_host$request_uri? break;
+                proxy_pass http://localhost:3000;
+            }
+            if ($prerender = 0) {
+                rewrite .* /index.html break;
+            }
         }
     }
-
   ```
-
-#### Test Site
-
-When running the development version of the site with its corresponding config, you can
-access a test version of the site that simulates AJAX requests by appending `/test` to the root URI
-(for example: `http://localhost/test`).
-
-Note: Mock test data is only available for the [College Physics](http://localhost/test/contents/college_physics) book.
 
 ### Directory Layout
 
