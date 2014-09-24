@@ -3,10 +3,11 @@ define (require) ->
   _ = require('underscore')
   MediaComponentView = require('cs!helpers/backbone/views/media-component')
 
-  setValue = (property, value, options) ->
+  setValue = (property, value, options = {}) ->
     if @getProperty(property) is value then return
 
     model = @getModel()
+    value = options.setValue?(property, value, options) or value
 
     model.set(property, value, {doNotRerender:true})
     model.set('changed', true, {doNotRerender:true})
@@ -201,7 +202,7 @@ define (require) ->
           property = @_getProperty(options.value)
 
           if options.type
-            config = editables[options.type] or throw new Error('BUG: Unsupported editable type')
+            config = editables[options.type] or throw new Error('ERROR: Unsupported editable type')
           else
             config = options
 

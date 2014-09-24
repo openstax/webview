@@ -138,7 +138,7 @@ module.exports = (grunt) ->
           keepBuildDir: false
           preserveLicenseComments: false
           skipDirOptimize: true
-          optimize: 'uglify2'
+          optimize: 'none'
           stubModules: ['cs']
           modules: [{
             name: 'main'
@@ -230,6 +230,7 @@ module.exports = (grunt) ->
       dist:
         files:
           'dist/scripts/require.js': ['dist/scripts/require.js']
+          'dist/scripts/main.js': ['dist/scripts/main.js']
 
     # HTML min
     htmlmin:
