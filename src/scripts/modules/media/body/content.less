@@ -67,13 +67,15 @@ figure {
   }
 
   &:not(.ui-has-child-figcaption)::after {
-    display: table-caption;
-    caption-side: bottom;
+    position:absolute;
+    bottom:0;
+    left:0;
     margin-right: 5px;
     color: @gray-medium;
     font-weight: bold;
     content: "Figure " counter(figure) ".";
   }
+
 
   > figcaption {
     padding: 10px;
@@ -107,6 +109,7 @@ figure {
       text-align: center;
       font-weight: bold;
       content: '(' counter(subfigure,lower-alpha) ')';
+      position:relative;
     }
 
   }
@@ -118,17 +121,18 @@ figure:not([data-orient="vertical"]) {
   display: table;
   table-layout: fixed;
   width: 100%;
+  position:relative;
+  top:0;
 
   > [data-type="title"],
   > .title {
-    display: table-caption;
-    caption-side: top;
     font-weight: bold;
   }
 
   > figcaption {
     display: table-caption;
     caption-side: bottom;
+    margin-bottom:15px;
   }
 
   // Subfigures
