@@ -14,7 +14,7 @@ define (require) ->
           uuid = data.model.getVersionedId()
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
           title = data.model.getBookTitle()
-          bookTitle = title.replace(/\ /g,"_").substring(0,30)
+          bookTitle = title.replace(/\s/g,"_").substring(0,30)
           url += "contents/#{uuid}"
           url += ":#{data.page}" if data.page
           url += "/#{bookTitle}"
@@ -24,7 +24,7 @@ define (require) ->
     metaDataUrl: (model) ->
       title = "#{model.title}"
       id = model.id
-      metaDataTitle = title.replace(/\ /g,"_").substring(0,30)
+      metaDataTitle = title.replace(/\s/g,"_").substring(0,30)
       url = "/contents/#{id}/#{metaDataTitle}"
 
     serializeQuery: (query) ->

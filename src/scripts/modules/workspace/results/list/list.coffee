@@ -8,9 +8,11 @@ define (require) ->
   # Also replace all `{{partial ` helpers with `{{> ` and remove the quotes around partial names
   # Remove the partial.coffee helper
   Handlebars = require('hbs/handlebars')
+  itemPartial = require('text!./workspace-item-partial.html')
+  Handlebars.registerPartial('modules/workspace/results/list/item-partial', itemPartial)
   tablePartial = require('text!./workspace-table-partial.html')
   Handlebars.registerPartial('modules/workspace/results/list/workspace-table-partial', tablePartial)
-  Handlebars.registerHelper 'titleForUrl', (title) -> title.replace(/\ /g,'_').substring(0,30)
+  Handlebars.registerHelper 'titleForUrl', (title) -> title.replace(/\s/g,'_').substring(0,30)
   # /HACK
 
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
