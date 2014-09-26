@@ -37,7 +37,7 @@ define (require) ->
       @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage pageLoaded', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:editable', @toggleEditor)
-      @listenTo(@model, 'change:title change:currentPage pageLoaded', @updateUrl)
+      #@listenTo(@model, 'change:title change:currentPage pageLoaded', @updateUrl)
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))
@@ -56,8 +56,13 @@ define (require) ->
       pathArray = url[3]
       collectionTitle = @model.get('title')
       if collectionTitle? and not pathArray?
+<<<<<<< Updated upstream
         newUrl = path + '/' + collectionTitle.replace(/\s/g,'_').substring(0,30)
       history.pushState {}, '', newUrl
+=======
+        newUrl = path + '/' + collectionTitle.replace(/\ /g,'_').substring(0,30)
+      history.pushState {}, "Openstax CNX - #{collectionTitle}", newUrl
+>>>>>>> Stashed changes
 
 
     trackAnalytics: () ->
