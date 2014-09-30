@@ -13,6 +13,7 @@ define (require) ->
   MediaBodyView = require('cs!./body/body')
   MediaFooterView = require('cs!./footer/footer')
   template = require('hbs!./media-template')
+  settings = require('settings')
   require('less!./media')
 
   return class MediaView extends BaseView
@@ -57,8 +58,7 @@ define (require) ->
       collectionTitle = @model.get('title')
       if collectionTitle? and not pathArray?
         newUrl = path + '/' + collectionTitle.replace(/\ /g,'_').substring(0,30)
-      history.pushState {}, '', newUrl
-
+        history.pushState {}, settings.titlePrefix + "#{collectionTitle}", newUrl
 
     trackAnalytics: () ->
       # Track loading using the media's own analytics ID, if specified
