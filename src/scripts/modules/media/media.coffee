@@ -1,5 +1,6 @@
 define (require) ->
   $ = require('jquery')
+  linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics')
   Content = require('cs!models/content')
@@ -24,13 +25,11 @@ define (require) ->
     initialize: (options) ->
       super()
 
-
       if not options or not options.uuid
         throw new Error('A media view must be instantiated with the uuid of the media to display')
 
       @uuid = options.uuid
-      @model = new Content({id: @uuid, page: options.page})
-
+      @model = new Content({id: @uuid, version: options.version, page: options.page})
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title', @updateTitle)
@@ -51,14 +50,11 @@ define (require) ->
       @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
 
     updateUrl: () ->
-      path = window.location.pathname
-      url = path.split('/')
-      pathArray = url[3]
-      collectionTitle = @model.get('title')
-      if collectionTitle? and not pathArray?
-        newUrl = path + '/' + collectionTitle.replace(/\ /g,'_').substring(0,30)
-      history.pushState {}, '', newUrl
+      components = linksHelper.getCurrentPathComponents()
+      title = linksHelper.cleanUrl(@model.get('title'))
 
+      if title and not components.title
+        router.navigate("#{components.path}/#{title}", {replace: true})
 
     trackAnalytics: () ->
       # Track loading using the media's own analytics ID, if specified

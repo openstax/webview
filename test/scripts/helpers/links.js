@@ -31,7 +31,7 @@ describe('links helper tests', function () {
           getVersionedId: function () {
             return 'not real';
           },
-          getBookTitle: function () {
+          get: function () {
             return 'book title';
           }
         }
@@ -45,12 +45,12 @@ describe('links helper tests', function () {
           getVersionedId: function () {
             return '031da8d3-b525-429c-80cf-6c8ed997733a@8.1';
           },
-          getBookTitle: function () {
-            return 'College Physics';
+          get: function () {
+            return 'book title';
           }
         }
       };
-      links.getPath(page, data).should.equal('/contents/college_physics/College_Physics');
+      links.getPath(page, data).should.equal('/contents/college_physics/book_title');
     });
     it('should append uuid, page info and book title to url', function () {
       var page = 'contents';
@@ -59,13 +59,13 @@ describe('links helper tests', function () {
           getVersionedId: function () {
             return '031da8d3-b525-429c-80cf-6c8ed997733a@8.1';
           },
-          getBookTitle: function () {
-            return 'College Physics';
+          get: function () {
+            return 'book title';
           }
         },
         page: 'page'
       };
-      links.getPath(page, data).should.equal('/contents/college_physics:page/College_Physics');
+      links.getPath(page, data).should.equal('/contents/college_physics:page/book_title');
     });
   });
   describe('serialize query tests', function () {

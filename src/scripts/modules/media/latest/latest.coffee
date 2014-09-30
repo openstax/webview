@@ -8,16 +8,7 @@ define (require) ->
   return class LatestView extends BaseView
     template: template
     templateHelpers:
-      url: () ->
-        page = ''
-        id = @model.getUuid()
-        version = @model.get('version')
-        title= @model.getBookTitle().replace(/\ /g,'_').substring(0,30)
-
-        if @model.isBook()
-          page = ":#{@model.getPageNumber()}"
-
-        return "#{settings.root}contents/#{id}#{page}/#{title}"
+      url: () -> linksHelper.getModelPath(@model)
 
     initialize: () ->
       super()
