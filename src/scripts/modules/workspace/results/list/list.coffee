@@ -2,11 +2,20 @@ define (require) ->
   settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./list-template')
-  Handlebars = require('hbs/handlebars')
   require('less!./list')
-  Handlebars.registerHelper 'titleForUrl', (title) -> title.substring(0,30).split(' ').join('_')
 
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
+
+  # HACK - FIX: Remove after upgrading to Handlebars 2.0
+  # Also replace all `{{partial ` helpers with `{{> ` and remove the quotes around partial names
+  # Remove the partial.coffee helper
+  Handlebars = require('hbs/handlebars')
+  Handlebars.registerHelper 'trim', (str) -> str.replace(/\s/g, '_').substring(0, 30)
+  itemPartial = require('text!./workspace-item-partial.html')
+  Handlebars.registerPartial('modules/workspace/results/list/workspace-item-partial', itemPartial)
+  tablePartial = require('text!./workspace-table-partial.html')
+  Handlebars.registerPartial('modules/workspace/results/list/workspace-table-partial', tablePartial)
+  # /HACK
 
   return class SearchResultsListView extends BaseView
     template: template
@@ -19,7 +28,11 @@ define (require) ->
         result.mediaType isnt 'application/vnd.org.cnx.collection' and
         result.mediaType isnt 'application/vnd.org.cnx.module'
 
-      return {books: books, pages: pages, misc: misc}
+      return {
+        books: books
+        pages: pages
+        misc: misc
+      }
 
     events:
       'click td.delete': 'clickDelete'

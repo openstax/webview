@@ -17,7 +17,6 @@ define (require) ->
   Handlebars.registerPartial('modules/search/results/list/item-partial', itemPartial)
   tablePartial = require('text!./table-partial.html')
   Handlebars.registerPartial('modules/search/results/list/table-partial', tablePartial)
-  Handlebars.registerHelper 'titleForUrl', (title) -> title.replace(/\ /g,'_').substring(0,30)
   # /HACK
 
   return class SearchResultsListView extends BaseView
@@ -38,8 +37,6 @@ define (require) ->
         pageCount: Math.ceil(@model.get('results').total / @model.get('query').per_page)
         page: @model.get('query').page
         url: "#{location.pathname}?#{linksHelper.param(queryString)}&page="
-
-
 
       return {
         authorList: @model.get('results').auxiliary.authors

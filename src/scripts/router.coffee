@@ -1,6 +1,7 @@
 define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
+  linksHelper = require('cs!helpers/links')
   session = require('cs!session')
   analytics = require('cs!helpers/handlers/analytics')
   AppView = require('cs!pages/app/app')
@@ -23,10 +24,10 @@ define (require) ->
         @appView.render('contents')
 
       # Match and extract uuid and page numbers separated by a colon
-      @route /^contents\/([^:]+):?([^:]*)/, 'media', (uuid, page) ->
+      @route linksHelper.componentRegEx, 'media', (uuid, version, page) ->
         uuid = uuid.toLowerCase()
         uuid = settings.shortcodes[uuid] if settings.shortcodes[uuid]
-        @appView.render('contents', {uuid: uuid, page: Number(page)})
+        @appView.render('contents', {uuid: uuid, version: version, page: Number(page)})
 
       @route /^donate\/?([^/\?;]*)?\/?([^/\?;]*)?\/?([^/\?;]*)?(?:\?)?.*/, 'donate', (page, uuid, type) ->
         @appView.render('donate', {page: page, uuid: uuid, type: type})
