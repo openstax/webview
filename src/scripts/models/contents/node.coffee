@@ -186,8 +186,6 @@ define (require) ->
 
       return id
 
-    getId: () -> @get('id')
-
     index: () -> @get('parent').get('contents').indexOf(@)
 
     getTotalLength: () -> 1
