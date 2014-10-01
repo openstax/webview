@@ -115,7 +115,7 @@ define (require) ->
         appId: 940451435969487
         # Encode all of the shared values for a URI
       _.each share, (value, key, list) ->
-      list[key] = encodeURI(value)
+        list[key] = encodeURI(value)
 
 
     locationOriginPolyFillForIe: () ->
