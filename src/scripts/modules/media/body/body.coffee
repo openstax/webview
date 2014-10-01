@@ -131,10 +131,6 @@ define (require) ->
           $temp.find('ol[start], .list[data-list-type="enumerated"][start]').each (i, el) ->
             $el = $(el)
             $el.css('counter-reset', 'list-item ' + $el.attr('start'))
-
-          #Add rel="no-follow" to oustide links
-          @addRelNoFollowToOutsideLinks()
-          
       catch error
         # FIX: Log the error
         console.log error
@@ -142,6 +138,7 @@ define (require) ->
       @$el?.html($temp.html())
 
     onRender: () ->
+      @addRelNoFollowToOutsideLinks()
       if not @model?.get('active') then return
 
       # MathJax rendering must be done after the HTML has been added to the DOM
@@ -189,14 +186,7 @@ define (require) ->
       @render() # Re-render body view to cleanup aloha issues
 
     addRelNoFollowToOutsideLinks: () ->
-      #Setting all outside links to have 'rel="nofollow"' attribute
-      links = document.getElementsByTagName("a")
-      reg = /^((f|ht)tps?:)?\/\//
-      j = 0
-      len = links.length
-
-      while j < len
-        anchors = links[j]
-        attr = anchors.getAttribute("href")
-        anchors.setAttribute "rel", "nofollow"  if attr.match(reg)
-        j++
+      regex = /^((f|ht)tps?:)?\/\//
+      $("a").each ->
+        $(this).attr "rel", "no-follow"  if $(this).attr("href").match(regex)
+        return
