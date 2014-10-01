@@ -1,18 +1,18 @@
 define (require) ->
   _ = require('underscore')
-  linksHelper = require('cs!helpers/links')
   settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./footer-template')
+  socialMedia = require('cs!helpers/socialmedia')
   require('less!./footer')
 
   return class FooterView extends BaseView
     template: template
     templateHelpers: () ->
-      location.origin = @locationOriginPolyFillForIe()
+      location.origin = socialMedia.locationOriginPolyFillForIe()
 
       return {
-        share: @socialMediaInfo()
+        share: socialMedia.socialMediaInfo()
         legacy: settings.legacy
         url: location.origin + settings.root
         webmaster: settings.webmaster

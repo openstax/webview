@@ -7,6 +7,7 @@ define (require) ->
   #MailPopoverView = require('cs!./popovers/mail/mail')
   template = require('hbs!./title-template')
   settings = require('settings')
+  socialMedia = require('cs!helpers/socialmedia.coffee')
   require('less!./title')
 
   return class MediaTitleView extends EditableView
@@ -15,10 +16,10 @@ define (require) ->
     template: template
     templateHelpers: () ->
       title = @model.get('title')
-      location.origin = @locationOriginPolyFillForIe()
+      location.origin = socialMedia.locationOriginPolyFillForIe()
 
       return {
-        share: @socialMediaInfo()
+        share: socialMedia.socialMediaInfo()
         encodedTitle: encodeURI(title)
         derivable: not @model.isDraft()
         authenticated: session.get('id')
