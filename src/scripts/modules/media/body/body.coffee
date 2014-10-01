@@ -6,6 +6,8 @@ define (require) ->
   template = require('hbs!./body-template')
   require('less!./body')
 
+  regex = /^((f|ht)tps?:)?\/\//
+
   return class MediaBodyView extends EditableView
     media: 'page'
 
@@ -120,6 +122,8 @@ define (require) ->
                   $el.attr('href', "/contents/#{@owner.getVersionedId()}:#{pageNumber}")
                   $el.attr('data-page', pageNumber)
 
+            @addRelNoFollowToOutsideLinks($temp)
+
           # Copy data-mark-prefix and -suffix from ol to li so they can be used in css
           $temp.find('ol[data-mark-prefix] > li, ol[data-mark-suffix] > li,
           .list[data-list-type="enumerated"][data-mark-prefix] > .item,
@@ -138,7 +142,6 @@ define (require) ->
       @$el?.html($temp.html())
 
     onRender: () ->
-      @addRelNoFollowToOutsideLinks()
       if not @model?.get('active') then return
 
       # MathJax rendering must be done after the HTML has been added to the DOM
@@ -185,8 +188,7 @@ define (require) ->
       @$el.find('.media-body').removeClass('draft')
       @render() # Re-render body view to cleanup aloha issues
 
-    addRelNoFollowToOutsideLinks: () ->
-      regex = /^((f|ht)tps?:)?\/\//
-      $("a").each ->
-        $(this).attr "rel", "no-follow"  if $(this).attr("href").match(regex)
-        return
+    addRelNoFollowToOutsideLinks: (temp) ->
+      temp.find('a').each (i,el) =>
+        $el = $(el)
+        $(el).attr 'rel', 'no-follow'  if $(el).attr('href').match(regex)
