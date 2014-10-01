@@ -170,16 +170,10 @@ define (require) ->
     # Utility Methods
     #
 
-
-    _getIdComponents: () -> @id?.match(/([^:@]+)@?([^:]*):?([0-9]*)/) or []
-
-    getBookTitle: () ->
-      title = @get('title')
-      return "#{title}"
-
+    _getIdComponents: () -> @id?.match(/([^:@\/]+)@?([^:\/]*):?([0-9]*)\/?(.*)/)
 
     getVersionedId: () ->
-      components = @_getIdComponents()
+      components = @_getIdComponents() or []
       id = components[1] or ''
       version = @get('version') or components[2]
       if version then version = "@#{version}" else version = ''
@@ -191,8 +185,6 @@ define (require) ->
       id = components[1] or ''
 
       return id
-
-    getId: () -> @get('id')
 
     index: () -> @get('parent').get('contents').indexOf(@)
 

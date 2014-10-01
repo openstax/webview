@@ -27,7 +27,7 @@ define (require) ->
       model.languages = settings.languages
       model.languageName = settings.languages[model.language]
       model.subjectsList = subjects.list
-      model.url = linksHelper.metaDataUrl(model)
+      model.url = linksHelper.getModelPath(model)
       return model
 
     editable:
