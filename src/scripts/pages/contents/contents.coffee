@@ -15,10 +15,11 @@ define (require) ->
     template: template
     pageTitle: 'Content Library'
 
-    initialize: (options) ->
+    initialize: (options = {}) ->
       super()
-      @uuid = options?.uuid
-      @page = options?.page
+      @uuid = options.uuid
+      @version = options.version
+      @page = options.page
 
     regions:
       contents: '#contents'
@@ -31,7 +32,7 @@ define (require) ->
 
       if @uuid
         @parent.regions.header.show(new HeaderView({page: 'contents'}))
-        view = new MediaView({uuid: @uuid, page: @page}) # to obtain the Content model
+        view = new MediaView({uuid: @uuid, version: @version, page: @page})
         @regions.contents.append(view)
 
         ###

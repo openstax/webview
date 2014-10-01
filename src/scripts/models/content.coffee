@@ -27,6 +27,7 @@ define (require) ->
 
       # Immediately load content that has an id
       if @id
+        @set('version', options.version) if options.version
         @fetch
           reset: true
         .always () =>
