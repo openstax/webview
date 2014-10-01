@@ -122,7 +122,7 @@ define (require) ->
                   $el.attr('href', "/contents/#{@owner.getVersionedId()}:#{pageNumber}")
                   $el.attr('data-page', pageNumber)
 
-            @addRelNoFollowToOutsideLinks($temp)
+          @addRelNoFollowToOutsideLinks($temp)
 
           # Copy data-mark-prefix and -suffix from ol to li so they can be used in css
           $temp.find('ol[data-mark-prefix] > li, ol[data-mark-suffix] > li,
