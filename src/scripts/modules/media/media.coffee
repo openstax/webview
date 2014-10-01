@@ -49,6 +49,7 @@ define (require) ->
       @regions.media.append(new MediaFooterView({model: @model}))
       @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
 
+
     updateUrl: () ->
       components = linksHelper.getCurrentPathComponents()
       title = linksHelper.cleanUrl(@model.get('title'))

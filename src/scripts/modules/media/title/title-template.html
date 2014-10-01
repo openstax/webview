@@ -40,11 +40,10 @@
 
       <div class="share">
         <ul>
-          <li><a href="https://facebook.com/sharer.php?u={{share.url}}" class="btn-primary facebook circle">Facebook</a></li>
-          <li><a href="https://twitter.com/intent/tweet?url={{share.url}}&amp;text={{share.title}}&amp;via=cnxorg" class="btn-primary twitter circle">Twitter</a></li>
+          <li><a href="https://facebook.com/dialog/feed?app_id={{share.appId}}&amp;link={{share.url}}&amp;picture={{share.image}}&amp;name={{share.title}}&amp;description={{share.summary}}&amp;redirect_uri=http://facebook.com/"><span class="btn-primary facebook circle">Facebook</span></a></li>
+          <li><a href="https://twitter.com/share?url={{share.url}}&amp;text={{share.title}}&amp;via={{share.via}}"><span class="btn-primary twitter circle">Twitter</span></a></li>
           <li><a href="https://plus.google.com/share?url={{share.url}}" class="btn-primary google circle">Google+</a></li>
-          <li><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{share.url}}&amp;title={{share.title}}&amp;summary={{share.summary}}&amp;source={{share.source}}" class="btn-primary linkedin circle">LinkedIn</a></li>
-          <li><a href="https://pinterest.com/pin/create/button/?url={{share.url}}&amp;media={{share.image}}&amp;description={{share.summary}}" class="btn-primary pinterest circle">Pinterest</a></li>
+          <li><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{share.url}}&amp;title={{share.title}}&amp;summary={{share.summary}}&amp;source={{share.source}}"><span class="btn-primary linkedin circle">LinkedIn</span></a></li>
           {{! <li><button class="btn-primary mail circle">E-mail</button></li> }}
         </ul>
       </div>

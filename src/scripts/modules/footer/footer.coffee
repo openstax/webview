@@ -1,4 +1,6 @@
 define (require) ->
+  _ = require('underscore')
+  linksHelper = require('cs!helpers/links')
   settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./footer-template')
@@ -7,11 +9,10 @@ define (require) ->
   return class FooterView extends BaseView
     template: template
     templateHelpers: () ->
-      # Polyfill for location.origin since IE doesn't support it
-      port = if location.port then ":#{location.port}" else ''
-      location.origin = location.origin or "#{location.protocol}//#{location.hostname}#{port}"
+      location.origin = @locationOriginPolyFillForIe()
 
       return {
+        share: @socialMediaInfo()
         legacy: settings.legacy
         url: location.origin + settings.root
         webmaster: settings.webmaster
