@@ -189,6 +189,6 @@ define (require) ->
       @render() # Re-render body view to cleanup aloha issues
 
     addRelNoFollowToOutsideLinks: (temp) ->
-      temp.find('a').each (i,el) =>
+      temp.find('a').each (i,el) ->
         $el = $(el)
-        $(el).attr 'rel', 'no-follow'  if $(el).attr('href').match(regex)
+        $el.attr 'rel', 'nofollow'  if $el.attr('href').match(regex)
