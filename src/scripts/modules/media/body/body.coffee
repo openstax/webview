@@ -6,8 +6,6 @@ define (require) ->
   template = require('hbs!./body-template')
   require('less!./body')
 
-  regex = /^((f|ht)tps?:)?\/\//
-
   return class MediaBodyView extends EditableView
     media: 'page'
 
@@ -122,7 +120,8 @@ define (require) ->
                   $el.attr('href', "/contents/#{@owner.getVersionedId()}:#{pageNumber}")
                   $el.attr('data-page', pageNumber)
 
-          @addRelNoFollowToOutsideLinks($temp)
+          # Add nofollow to external user-generated links
+          $temp.find('a[href^="http:"], a[href^="https:"], a[href^="//"]').attr('rel', 'nofollow')
 
           # Copy data-mark-prefix and -suffix from ol to li so they can be used in css
           $temp.find('ol[data-mark-prefix] > li, ol[data-mark-suffix] > li,
@@ -187,8 +186,3 @@ define (require) ->
     onUneditable: () ->
       @$el.find('.media-body').removeClass('draft')
       @render() # Re-render body view to cleanup aloha issues
-
-    addRelNoFollowToOutsideLinks: (temp) ->
-      temp.find('a').each (i,el) ->
-        $el = $(el)
-        $el.attr 'rel', 'nofollow'  if $el.attr('href').match(regex)
