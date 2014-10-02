@@ -120,6 +120,9 @@ define (require) ->
                   $el.attr('href', "/contents/#{@owner.getVersionedId()}:#{pageNumber}")
                   $el.attr('data-page', pageNumber)
 
+          # Add nofollow to external user-generated links
+          $temp.find('a[href^="http:"], a[href^="https:"], a[href^="//"]').attr('rel', 'nofollow')
+
           # Copy data-mark-prefix and -suffix from ol to li so they can be used in css
           $temp.find('ol[data-mark-prefix] > li, ol[data-mark-suffix] > li,
           .list[data-list-type="enumerated"][data-mark-prefix] > .item,
