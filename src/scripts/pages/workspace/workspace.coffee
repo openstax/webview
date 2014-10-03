@@ -9,6 +9,7 @@ define (require) ->
   return class WorkspacePage extends BaseView
     template: template
     pageTitle: 'My Workspace'
+    canonical: null
 
     regions:
       workspace: '#workspace'

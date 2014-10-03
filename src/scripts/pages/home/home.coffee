@@ -11,6 +11,7 @@ define (require) ->
   return class HomePage extends BaseView
     template: template
     pageTitle: 'Sharing Knowledge and Building Communities'
+    canonical: null
 
     regions:
       splash: '#splash'

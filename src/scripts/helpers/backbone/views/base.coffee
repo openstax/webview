@@ -62,15 +62,17 @@ define (require) ->
     initialize: () ->
       @regions = new Regions(@regions, @)
 
-
     renderDom: () ->
       @$el?.html(@getTemplate())
 
-    # Update page title
-    updateTitle: () ->
-      if @pageTitle
-        @addCanonicalMetaDataToDerivedCopies()
-        document.title = settings.titlePrefix + @pageTitle
+    # Update page title and canonical link
+    updatePageInfo: () ->
+      document.title = settings.titlePrefix + @pageTitle if @pageTitle
+
+      canonical = @canonical?() or @canonical
+      if canonical isnt undefined
+        $('link[rel="canonical"]').remove()
+        $('head').append("<link rel=\"canonical\" href=\"#{canonical}\" />") if canonical
 
     getTemplate: () -> @template?(@getTemplateData()) or @template
 
@@ -89,22 +91,9 @@ define (require) ->
 
       return data
 
-    addCanonicalMetaDataToDerivedCopies: () ->
-      # Remove canonical links to content
-      # FIX: This will trigger for every view. If the last view to load on the page does not have
-      #      a reference to the proper model, then the link will be removed even if it should be there.
-      #      This code should probably be changed to test if a specific setting is on a view and then
-      #      and only then add or remove the link as appropriate.
-      $("link[rel^=\"canonical\"]").remove()
-
-      parentId = @getTemplateData().parentId
-      if parentId
-        canonicalUrl = "<link rel=\"canonical\" href=\"//#{location.hostname}/contents/#{parentId}/\" />"
-        $('head').append(canonicalUrl)
-
     _render: () ->
       _.each @regions, (region) -> region.empty()
-      @updateTitle()
+      @updatePageInfo()
       @renderDom()
 
     render: () ->
