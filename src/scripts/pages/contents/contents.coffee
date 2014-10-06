@@ -14,6 +14,7 @@ define (require) ->
   return class ContentsPage extends BaseView
     template: template
     pageTitle: 'Content Library'
+    canonical: () -> null if not @uuid
 
     initialize: (options = {}) ->
       super()

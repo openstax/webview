@@ -14,6 +14,7 @@ define (require) ->
     templateHelpers:
       legacy: settings.legacy
     pageTitle: 'About OpenStax CNX'
+    canonical: null
 
     regions:
       find: '.find'
