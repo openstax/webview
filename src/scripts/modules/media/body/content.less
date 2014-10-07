@@ -200,10 +200,10 @@ figure[data-orient="vertical"] {
     // The default item separator for block items is nothing
   }
   .item-sep(inline) {
-    &:not([data-item-sep]) > .item:not(:last-child)::after {
+    &:not([data-item-sep]) > [data-type="item"]:not(:last-child)::after {
       content: @default-inline-list-item-sep;
     }
-    &[data-item-sep] > .item:not(:last-child)::after {
+    &[data-item-sep] > [data-type="item"]:not(:last-child)::after {
       // FIXME: Use the default separator character for now
       content: @default-inline-list-item-sep;
       .x-not-implemented('data-item-sep=CUSTOM');
@@ -225,6 +225,7 @@ figure[data-orient="vertical"] {
   .emulate-bulleted(block; @attr-value; @char) {
     &[data-bullet-style="@{attr-value}"] {
       list-style-type: none;
+      > [data-type="item"]::before,
       > li::before {
         content: @char;
         margin-right: 0.5em;
@@ -240,7 +241,7 @@ figure[data-orient="vertical"] {
   .emulate-bulleted(inline; @attr-value; @char) {
     &[data-bullet-style="@{attr-value}"] {
       // Note: since this is inline, the `li` is actually a `span.item`
-      > .item::before {
+      > [data-type="item"]::before {
         content: @char;
         margin-right: 0.5em;
       }
@@ -287,6 +288,13 @@ figure[data-orient="vertical"] {
     // "emulate" all the bullets because inline lists are spans
     .emulate-bulleted(inline; 'bullet';       '\25cf'); // black circle
     .emulate-bulleted(inline; 'open-circle';  '\25cb'); // white circle
+
+    list-style-type: none;
+    > [data-type="item"]::before {
+      content: '\25cf';
+      margin-right: 0.5em;
+    }
+
   }
 
   .style(@display, enumerated) {
@@ -294,12 +302,12 @@ figure[data-orient="vertical"] {
     counter-reset: list-item;
     list-style-type: none;
 
-    > .item,
+    > [data-type="item"],
     > li {
       counter-increment: list-item;
     }
 
-    > .item::before,
+    > [data-type="item"]::before,
     > li::before {
       content: attr(data-mark-prefix) counter(list-item, decimal) attr(data-mark-suffix);
       margin-right: 0.5em;
@@ -307,12 +315,12 @@ figure[data-orient="vertical"] {
 
     // "Emulate" the numbering for inline numbered lists
     .emulate-enumerated(@attr-name; @counter-type) {
-      &[data-number-style="@{attr-name}"] > .item::before,
+      &[data-number-style="@{attr-name}"] > [data-type="item"]::before,
       &[data-number-style="@{attr-name}"] > li::before {
         content: attr(data-mark-prefix) counter(list-item, @counter-type) attr(data-mark-suffix);
       }
 
-      &[data-number-style="@{attr-name}"] > .item:not([data-mark-prefix]):not([data-mark-suffix])::before,
+      &[data-number-style="@{attr-name}"] > [data-type="item"]:not([data-mark-prefix]):not([data-mark-suffix])::before,
       &[data-number-style="@{attr-name}"] > li:not([data-mark-prefix]):not([data-mark-suffix])::before {
         content: counter(list-item, @counter-type) '.';
         margin-right: 0.5em;
@@ -342,10 +350,12 @@ ul[data-display='inline']                { #list>.style(inline; bulleted); }
 ol[data-display='inline']                { #list>.style(inline; enumerated); }
 ul[data-labeled-item]                    { #list>.style(inline; labeled-item); }
 
-// Inline lists (in a div or para)
-span.list[data-list-type='bulleted']     { #list>.style(inline; bulleted); }
-span.list[data-list-type='enumerated']   { #list>.style(inline; enumerated); }
-span.list[data-list-type='labeled-item'] { #list>.style(inline; labeled-item); }
+// Lists inside a paragraph
+[data-type='list']:not([data-list-type])          { #list>.style(inline; bulleted); }
+[data-type='list'][data-list-type='bulleted']     { #list>.style(inline; bulleted); }
+[data-type='list'][data-list-type='enumerated']   { #list>.style(inline; enumerated); }
+[data-type='list'][data-list-type='labeled-item'] { #list>.style(inline; labeled-item); }
+div[data-type='list'][data-list-type]             { padding-left: 25px; margin-bottom: 10px; }
 
 
 .footnote {
