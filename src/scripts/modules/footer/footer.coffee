@@ -22,3 +22,4 @@ define (require) ->
       height = @$el.find('.copyright').height()
       @$el.find('.connect').height(height)
       @$el.find('.share').height(height)
+      socialMedia.addOpenGraphMetaTags()

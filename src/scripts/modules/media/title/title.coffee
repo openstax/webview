@@ -39,6 +39,7 @@ define (require) ->
       super()
       @listenTo(@model, 'change:loaded change:title', @render)
       @listenTo(router, 'navigate', @render)
+      socialMedia.addOpenGraphMetaTags()
 
     derive: () ->
       options =
