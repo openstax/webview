@@ -95,8 +95,6 @@ define (require) ->
 
       if eventName.slice(0, 7) is 'change:'
         @trigger("change:currentPage.#{eventName.slice(7)}", page, value)
-      else
-        @trigger("#{eventName}:currentPage", arguments[1], arguments[2], arguments[3])
 
     _setPage: (page) ->
       currentPage = @get('currentPage')
