@@ -11,10 +11,12 @@ define (require) ->
     template: template
     templateHelpers:
       status: () -> @model.get('status')
-      editable: () -> @model.asPage()?.isEditable()
-      loaded: () -> @model.asPage()?.get('loaded')
+      editable: () -> @model.get('currentPage')?.isEditable()
       content: () -> @model.asPage()?.get('content')
       hasContent: () -> typeof @model.asPage()?.get('content') is 'string'
+      loaded: () ->
+        page = @model.asPage()
+        if page then page.get('loaded') else @model.get('loaded')
 
     editable:
       '.media-body':
@@ -29,6 +31,7 @@ define (require) ->
     initialize: () ->
       super()
 
+      @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
 
     # Perform mutations to the HTML before loading it on to the page for better performance
