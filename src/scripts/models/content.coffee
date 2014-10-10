@@ -46,10 +46,9 @@ define (require) ->
     parse: (response, options = {}) ->
       super(arguments...)
 
-      if response.mediaType is 'application/vnd.org.cnx.collection'
-        # Mark drafts as being in edit mode by default
-        if @isDraft() and response.status isnt 'publishing'
-          response.editable = true
+      # Mark drafts as being in edit mode by default
+      if @isDraft() and response.status isnt 'publishing'
+        response.editable = true
 
       return response
 
