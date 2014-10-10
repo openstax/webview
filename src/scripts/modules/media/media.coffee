@@ -17,6 +17,13 @@ define (require) ->
   require('less!./media')
 
   return class MediaView extends BaseView
+    canonical: () ->
+      uuid = @model.getUuid()
+      if uuid
+        return "//#{location.host}/contents/#{uuid}/"
+      else
+        return null
+
     template: template
     regions:
       media: '.media'
@@ -32,7 +39,7 @@ define (require) ->
       @model = new Content({id: @uuid, version: options.version, page: options.page})
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
-      @listenTo(@model, 'change:title', @updateTitle)
+      @listenTo(@model, 'change:title change:parentId', @updatePageInfo)
       @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage pageLoaded', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:editable', @toggleEditor)
@@ -69,7 +76,7 @@ define (require) ->
 
       $('html, body').animate({scrollTop: $mediaNav.offset().top}, '500', 'swing') if y > maxY
 
-    updateTitle: () ->
+    updatePageInfo: () ->
       @pageTitle = @model.get('title')
       super()
 
