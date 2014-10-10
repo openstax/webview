@@ -62,12 +62,6 @@ define (require) ->
         model: @model
         owner: @$el.find('.info .btn')
 
-    isEditable: () ->
-      if @model.isBook()
-        return @model.get('currentPage')?.isEditable()
-
-      return @model.isEditable()
-
     toggleSummary: (e) ->
       $summary = @$el.find('.summary')
 
