@@ -222,6 +222,7 @@ define (require) ->
 
     isSaveable: () -> !!@get('mediaType')
 
-    isEditable: () -> !!@get('editable') or ((@isDraft() or @isSection()) and @get('parent')?.isEditable())
+    isEditable: () -> (!!@get('editable') or ((@isDraft() or @isSection()) and @get('parent')?.isEditable())) and
+      @get('loaded')
 
     isInBook: () -> !!@get('book')
