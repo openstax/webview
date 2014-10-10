@@ -51,12 +51,12 @@ define (require) ->
     initialize: () ->
       super()
 
-      @listenTo(@model, 'change:downloads change:buyLink change:title', @render)
+      @listenTo(@model, 'change:downloads change:buyLink change:title change:active', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(session, 'change', @render)
 
     onRender: () ->
-      if not @page?.get('active') then return
+      if not @model.asPage()?.get('active') then return
 
       @regions.button.append new BookPopoverView
         model: @model
