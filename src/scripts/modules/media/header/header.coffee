@@ -50,21 +50,10 @@ define (require) ->
 
     initialize: () ->
       super()
-      @setupModelListener()
-
-    setupModelListener: () ->
-      @stopListening()
-
-      @page = @model.asPage()
 
       @listenTo(@model, 'change:downloads change:buyLink change:title', @render)
-      @listenTo(@model, 'change:currentPage', @updateModelListener)
+      @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(session, 'change', @render)
-      @listenTo(@page, 'change:active change:loaded', @updateModelListener) if @page
-
-    updateModelListener: () ->
-      @setupModelListener()
-      @render()
 
     onRender: () ->
       if not @page?.get('active') then return

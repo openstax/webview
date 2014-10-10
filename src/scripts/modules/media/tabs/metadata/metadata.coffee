@@ -51,7 +51,7 @@ define (require) ->
         value: 'keywords'
         type: 'select2'
         select2: () ->
-          @$el.find('.keywords > input').val(@getProperty('keywords') or [])
+          @$el?.find('.keywords > input').val(@getProperty('keywords') or [])
           _.extend({}, s2Multi, tags: @getProperty('keywords') or [])
 
       '.authors > input':

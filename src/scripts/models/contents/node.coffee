@@ -12,7 +12,6 @@ define (require) ->
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
   return class Node extends Backbone.AssociatedModel
-
     eTag: null
 
     # url: () -> "#{SERVER}/contents/#{@id}"
@@ -49,10 +48,6 @@ define (require) ->
         $body.children('[data-type=abstract]').eq(0).remove()
 
         response.content = $body.html()
-
-      # Mark drafts as being in edit mode by default
-      if @isDraft() and response.status isnt 'publishing'
-        response.editable = true
 
       return response
 
@@ -227,6 +222,6 @@ define (require) ->
 
     isSaveable: () -> !!@get('mediaType')
 
-    isEditable: () -> !!@get('editable')
+    isEditable: () -> !!@get('editable') or ((@isDraft() or @isSection()) and @get('parent')?.isEditable())
 
     isInBook: () -> !!@get('book')

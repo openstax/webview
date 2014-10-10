@@ -40,10 +40,11 @@ define (require) ->
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title change:parentId', @updatePageInfo)
-      @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage pageLoaded', @updateLegacyLink)
+      @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage
+        change:currentPage.loaded', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:editable', @toggleEditor)
-      @listenTo(@model, 'change:title change:currentPage pageLoaded', @updateUrl)
+      @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updateUrl)
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))

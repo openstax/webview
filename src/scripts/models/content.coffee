@@ -43,6 +43,16 @@ define (require) ->
         .fail (model, response, options) =>
           @set('error', response?.status or model?.status or 9000)
 
+    parse: (response, options = {}) ->
+      super(arguments...)
+
+      if response.mediaType is 'application/vnd.org.cnx.collection'
+        # Mark drafts as being in edit mode by default
+        if @isDraft() and response.status isnt 'publishing'
+          response.editable = true
+
+      return response
+
     save: (key, val, options) ->
       if not key? or typeof key is 'object'
         attrs = key
@@ -78,15 +88,32 @@ define (require) ->
 
       return results
 
-    _setPage: (page) ->
-      @get('currentPage')?.set('active', false)
-      @set('currentPage', page)
-      page.set('active', true)
+    # Proxy page events on this object
+    _proxyChange: (eventName, page, value) ->
+      if eventName.indexOf(':currentPage') > -1
+        return
 
-      if not page.get('loaded')
-        page.fetch().done () =>
-          page.set('loaded', true)
-          @trigger('pageLoaded')
+      if eventName.slice(0, 7) is 'change:'
+        @trigger("change:currentPage.#{eventName.slice(7)}", page, value)
+      else
+        @trigger("#{eventName}:currentPage", arguments[1], arguments[2], arguments[3])
+
+    _setPage: (page) ->
+      currentPage = @get('currentPage')
+
+      if currentPage
+        currentPage.off(null, null, content._proxyChange)
+        currentPage.set('active', false)
+
+      @set('currentPage', page)
+
+      if page
+        page.on('all', (() => @_proxyChange.apply(@, arguments)))
+        page.set('active', true)
+
+        if not page.get('loaded')
+          page.fetch().done () =>
+            page.set('loaded', true)
 
     _lookupPage: (page) ->
       if typeof page is 'number'
