@@ -114,6 +114,8 @@ define (require) ->
         if not page.get('loaded')
           page.fetch().done () =>
             page.set('loaded', true)
+      else
+        @trigger('change:currentPage.loaded')
 
     _lookupPage: (page) ->
       if typeof page is 'number'
