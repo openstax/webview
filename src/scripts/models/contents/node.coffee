@@ -231,13 +231,11 @@ define (require) ->
 
     isInBook: () -> !!@get('book')
 
-    getAbstract: () ->
-      abstract = @get('abstract')
-      return "#{abstract}"
+    getAbstract: () -> @get('abstract')
 
     getAbstractForOpenGraph: () ->
       abstract = @getAbstract()
-      if abstract isnt null and abstract isnt undefined
+      if abstract
         return abstract.replace(/(<([^>]+)>)/ig,'')
       else
         return 'An OpenStax College book'
