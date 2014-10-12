@@ -65,7 +65,7 @@ define (require) ->
     renderDom: () ->
       @$el?.html(@getTemplate())
 
-    # Update page title and canonical link
+    # Update page title, canonical link and Open Graph tags
     updatePageInfo: () ->
       document.title = settings.titlePrefix + @pageTitle if @pageTitle
 
@@ -73,6 +73,9 @@ define (require) ->
       if canonical isnt undefined
         $('link[rel="canonical"]').remove()
         $('head').append("<link rel=\"canonical\" href=\"#{canonical}\" />") if canonical
+
+      #Open graph tags
+      @addOpenGraphMetaTags()
 
     getTemplate: () -> @template?(@getTemplateData()) or @template
 
@@ -93,23 +96,25 @@ define (require) ->
 
     addOpenGraphMetaTags: () ->
       url = window.location.href
-      description = $('.summary').text() or 'An OpenStax College book.'
       title = document.title
+      summary = @summary?() or @summary
       image = location.origin + '/images/social/logo.png'
       head = $('head')
+
       $('meta[property="og:url"]').remove()
-      $('meta[property="og:title"]').remove()
-      $('meta[property="og:description"]').remove()
-      $('meta[property="og:image"]').remove()
       head.append("<meta property=\"og:url\" content=\"#{url}\">")
+      $('meta[property="og:title"]').remove()
       head.append("<meta property=\"og:title\" content=\"#{title}\">")
-      head.append("<meta property=\"og:description\" content=\"#{description}\">")
+      if summary isnt undefined
+        $('meta[property="og:description"]').remove()
+        head.append("<meta property=\"og:description\" content=\"#{summary}\">") if summary
+      $('meta[property="og:image"]').remove()
       head.append("<meta property=\"og:image\" content=\"#{image}\">")
 
     _render: () ->
       _.each @regions, (region) -> region.empty()
       @updatePageInfo()
-      @addOpenGraphMetaTags()
+      #@addOpenGraphMetaTags()
       @renderDom()
 
     render: () ->

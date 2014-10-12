@@ -12,7 +12,7 @@ define (require) ->
       location.origin = socialMedia.locationOriginPolyFillForIe()
 
       return {
-        share: socialMedia.socialMediaInfo()
+        share: socialMedia.socialMediaInfo('','An OpenStax College book')
         legacy: settings.legacy
         url: location.origin + settings.root
         webmaster: settings.webmaster

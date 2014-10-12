@@ -9,10 +9,8 @@ define (require) ->
       location.origin = location.origin or "#{location.protocol}//#{location.hostname}#{port}"
 
 
-    socialMediaInfo: () ->
+    socialMediaInfo: (description,title) ->
       url = window.location.href
-      description = $('.summary').text() or 'An OpenStax College book.'
-      title = document.title
       image = location.origin + "/images/logo.png"
       share =
         url: url

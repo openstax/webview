@@ -29,6 +29,8 @@ define (require) ->
       media: '.media'
       editbar: '.editbar'
 
+    summary:() -> @model.getAbstractForOpenGraph()
+
     initialize: (options) ->
       super()
 

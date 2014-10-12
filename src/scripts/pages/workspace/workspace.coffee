@@ -10,6 +10,7 @@ define (require) ->
     template: template
     pageTitle: 'My Workspace'
     canonical: null
+    summary: null
 
     regions:
       workspace: '#workspace'

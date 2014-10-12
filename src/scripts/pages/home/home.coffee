@@ -12,6 +12,7 @@ define (require) ->
     template: template
     pageTitle: 'Sharing Knowledge and Building Communities'
     canonical: null
+    summary: null
 
     regions:
       splash: '#splash'

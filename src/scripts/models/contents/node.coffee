@@ -230,3 +230,14 @@ define (require) ->
     isEditable: () -> !!@get('editable')
 
     isInBook: () -> !!@get('book')
+
+    getAbstract: () ->
+      abstract = @get('abstract')
+      return "#{abstract}"
+
+    getAbstractForOpenGraph: () ->
+      abstract = @getAbstract()
+      if abstract isnt null and abstract isnt undefined
+       return abstract.replace(/(<([^>]+)>)/ig,'')
+      else
+       return 'An OpenStax College book'

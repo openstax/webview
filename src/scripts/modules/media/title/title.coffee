@@ -14,12 +14,15 @@ define (require) ->
     mediaType: 'book'
 
     template: template
+    summary: () -> @model.getAbstractForOpenGraph()
+    title:() -> @model.get('title')
+
     templateHelpers: () ->
-      title = @model.get('title')
+      title = @title()
       location.origin = socialMedia.locationOriginPolyFillForIe()
 
       return {
-        share: socialMedia.socialMediaInfo()
+        share: socialMedia.socialMediaInfo(@summary(), @title())
         encodedTitle: encodeURI(title)
         derivable: not @model.isDraft()
         authenticated: session.get('id')
