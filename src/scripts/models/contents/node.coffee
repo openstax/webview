@@ -238,6 +238,6 @@ define (require) ->
     getAbstractForOpenGraph: () ->
       abstract = @getAbstract()
       if abstract isnt null and abstract isnt undefined
-       return abstract.replace(/(<([^>]+)>)/ig,'')
+        return abstract.replace(/(<([^>]+)>)/ig,'')
       else
-       return 'An OpenStax College book'
+        return 'An OpenStax College book'
