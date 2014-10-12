@@ -114,7 +114,6 @@ define (require) ->
     _render: () ->
       _.each @regions, (region) -> region.empty()
       @updatePageInfo()
-      #@addOpenGraphMetaTags()
       @renderDom()
 
     render: () ->
