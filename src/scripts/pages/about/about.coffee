@@ -15,7 +15,7 @@ define (require) ->
       legacy: settings.legacy
     pageTitle: 'About OpenStax CNX'
     canonical: null
-    summary: null
+    summary: 'About OpenStax CNX'
 
     regions:
       find: '.find'

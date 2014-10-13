@@ -12,7 +12,7 @@ define (require) ->
     template: template
     pageTitle: 'Sharing Knowledge and Building Communities'
     canonical: null
-    summary: null
+    summary: 'OpenStax CNX'
 
     regions:
       splash: '#splash'

@@ -14,7 +14,7 @@ define (require) ->
     template: template
     pageTitle: 'Support OpenStax CNX'
     canonical: null
-    summary: null
+    summary: 'Donate to OpenStax CNX'
 
     regions:
       find: '.find'
