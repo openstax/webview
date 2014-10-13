@@ -85,7 +85,7 @@ define (require) ->
             $(el).parent().append(el)
 
           # Convert figure and table links to show the proper name
-          $temp.find('a:not([data-type=footnote-number])').each (i, el) =>
+          $temp.find('a:not([data-type=footnote-number])').each (i, el) ->
             $el = $(el)
             href = $el.attr('href')
 

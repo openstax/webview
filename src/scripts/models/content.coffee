@@ -109,7 +109,7 @@ define (require) ->
         page.set('active', true)
 
         if not page.get('loaded')
-          page.fetch().done () =>
+          page.fetch().done () ->
             page.set('loaded', true)
       else
         @trigger('change:currentPage.loaded')
