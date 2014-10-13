@@ -59,10 +59,11 @@ define (require) ->
 
     updateUrl: () ->
       components = linksHelper.getCurrentPathComponents()
+      components.version = "@#{components.version}" if components.version
       title = linksHelper.cleanUrl(@model.get('title'))
 
       if title isnt components.title
-        router.navigate("contents/#{components.uuid}@#{components.version}/#{title}", {replace: true})
+        router.navigate("contents/#{components.uuid}#{components.version}/#{title}", {replace: true})
 
     trackAnalytics: () ->
       # Track loading using the media's own analytics ID, if specified
