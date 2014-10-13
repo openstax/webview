@@ -8,14 +8,15 @@ define (require) ->
 
   return class MediaBodyView extends EditableView
     media: 'page'
-
     template: template
     templateHelpers:
-      status: () -> @owner.get('status')
+      status: () -> @model.get('status')
+      editable: () -> @model.get('currentPage')?.isEditable()
+      content: () -> @model.asPage()?.get('content')
+      hasContent: () -> typeof @model.asPage()?.get('content') is 'string'
       loaded: () ->
-        if @model
-          return @model.get('loaded')
-        @owner.get('loaded')
+        page = @model.asPage()
+        if page then page.get('loaded') else @model.get('loaded')
 
     editable:
       '.media-body':
@@ -30,26 +31,15 @@ define (require) ->
     initialize: () ->
       super()
 
-      @owner = @model
-      @setupModelListener()
-
-    setupModelListener: () ->
-      @stopListening()
-      @model = @owner.asPage()
-
-      @listenTo(@owner, 'change:currentPage', @updateModelListener)
-      @listenTo(@model, 'change:active change:loaded', @updateModelListener) if @model
-
-    updateModelListener: () ->
-      @setupModelListener()
-      @render()
+      @listenTo(@model, 'change:loaded', @render)
+      @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
 
     # Perform mutations to the HTML before loading it on to the page for better performance
     renderDom: () ->
       $temp = $('<div>').html(@getTemplate())
 
       try
-        if @owner.get('loaded') and @model?.get('loaded') and @model?.get('active')
+        if @model.get('loaded') and @model.asPage()?.get('loaded') and page?.get('active')
           # Converts a TERP link to an OST-hosted iframe
           $temp.find('a[href*="#terp-"]').each () ->
             terpCode = $(this).attr('href').match(/#terp\-(.*)/)[1]
@@ -95,7 +85,7 @@ define (require) ->
             $(el).parent().append(el)
 
           # Convert figure and table links to show the proper name
-          $temp.find('a:not([data-type=footnote-number])').each (i, el) =>
+          $temp.find('a:not([data-type=footnote-number])').each (i, el) ->
             $el = $(el)
             href = $el.attr('href')
 
@@ -107,17 +97,17 @@ define (require) ->
                 $el.text("#{tag}") if tag isnt 'undefined'
 
           # Convert links to maintain context in a book, if appropriate
-          if @owner.isBook()
+          if @model.isBook()
             $temp.find('a:not([data-type=footnote-number])').each (i, el) =>
               $el = $(el)
               href = $el.attr('href')
 
               if href.substr(0, 1) isnt '#'
-                page = @owner.getPage(href.substr(10))
+                page = @model.getPage(href.substr(10))
 
                 if page
                   pageNumber = page.getPageNumber()
-                  $el.attr('href', "/contents/#{@owner.getVersionedId()}:#{pageNumber}")
+                  $el.attr('href', "/contents/#{@model.getVersionedId()}:#{pageNumber}")
                   $el.attr('data-page', pageNumber)
 
           # Add nofollow to external user-generated links
@@ -141,7 +131,7 @@ define (require) ->
       @$el?.html($temp.html())
 
     onRender: () ->
-      if not @model?.get('active') then return
+      if not @model.asPage()?.get('active') then return
 
       # MathJax rendering must be done after the HTML has been added to the DOM
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
@@ -149,7 +139,7 @@ define (require) ->
       # Update the hash fragment after the content has loaded
       # to force the browser window to find the intended content
       jumpToHash = () =>
-        if @model.get('loaded') and not @fragmentReloaded and window.location.hash
+        if @model.asPage().get('loaded') and not @fragmentReloaded and window.location.hash
           @fragmentReloaded = true
           hash = window.location.hash
           window.location.hash = ''
@@ -168,11 +158,11 @@ define (require) ->
       $el = $(e.currentTarget)
       href = $el.attr('href')
 
-      if href.indexOf("/contents/#{@owner.getVersionedId()}:") is 0
+      if href.indexOf("/contents/#{@model.getVersionedId()}:") is 0
         e.preventDefault()
         e.stopPropagation()
 
-        @owner.setPage($el.data('page'))
+        @model.setPage($el.data('page'))
 
         router.navigate href, {trigger: false}, () => @parent.trackAnalytics()
         @parent.scrollToTop()

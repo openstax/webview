@@ -31,7 +31,7 @@ define (require) ->
       super()
       @hideProgress = options.hideProgress
 
-      @listenTo(@model, 'change:currentPage removeNode moveNode add:contents', @render)
+      @listenTo(@model, 'change:loaded change:currentPage removeNode moveNode add:contents', @render)
 
     events:
       'click .next': 'nextPage'
