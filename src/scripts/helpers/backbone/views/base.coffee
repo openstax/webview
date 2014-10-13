@@ -95,22 +95,21 @@ define (require) ->
       return data
 
     addOpenGraphMetaTags: () ->
-      url = window.location.href
-      title = @pageTitle
       summary = @summary?() or @summary
-      image = location.origin + '/images/social/logo.png'
-      head = $('head')
 
-      $('meta[property="og:url"]').remove()
-      head.append("<meta property=\"og:url\" content=\"#{url}\">")
-      if title isnt undefined
+      if summary isnt undefined
+        url = window.location.href
+        title = document.title
+        image = location.origin + '/images/social/logo.png'
+        head = $('head')
+        $('meta[property="og:url"]').remove()
+        head.append("<meta property=\"og:url\" content=\"#{url}\">")
         $('meta[property="og:title"]').remove()
         head.append("<meta property=\"og:title\" content=\"#{title}\">")
-      if summary isnt undefined
         $('meta[property="og:description"]').remove()
         head.append("<meta property=\"og:description\" content=\"#{summary}\">")
-      $('meta[property="og:image"]').remove()
-      head.append("<meta property=\"og:image\" content=\"#{image}\">")
+        $('meta[property="og:image"]').remove()
+        head.append("<meta property=\"og:image\" content=\"#{image}\">")
 
     _render: () ->
       _.each @regions, (region) -> region.empty()
