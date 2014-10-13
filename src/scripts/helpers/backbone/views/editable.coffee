@@ -168,7 +168,10 @@ define (require) ->
       #    @_makeUneditable()
 
     onAfterRender: () ->
-      editable = if @model.isBook() then @model.get('currentPage')?.isEditable() else @model.isEditable()
+      if @media is 'page'
+        editable = if @model.isBook() then @model.get('currentPage')?.isEditable() else @model.isEditable()
+      else
+        editable = @model.isEditable()
 
       # Make editable after rendering if editable flag is already set
       @_makeEditable(true) if editable
