@@ -104,8 +104,8 @@ define (require) ->
       $('meta[property="og:url"]').remove()
       head.append("<meta property=\"og:url\" content=\"#{url}\">")
       if title isnt undefined
-       $('meta[property="og:title"]').remove()
-       head.append("<meta property=\"og:title\" content=\"#{title}\">")
+        $('meta[property="og:title"]').remove()
+        head.append("<meta property=\"og:title\" content=\"#{title}\">")
       if summary isnt undefined
         $('meta[property="og:description"]').remove()
         head.append("<meta property=\"og:description\" content=\"#{summary}\">")
