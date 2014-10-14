@@ -12,7 +12,7 @@ define (require) ->
       relatedModel: (relation, attributes) ->
         return (attrs, options) =>
           # FIX: Consider putting all added fields under _meta to make removal before saving simple
-          attrs.parent = @
+          attrs._parent = @
           attrs.depth = 0
           attrs.book = @
           if _.isArray(attrs.contents)
@@ -167,7 +167,7 @@ define (require) ->
       #previousPage = @getPageNumber(@getPreviousNode(node))
       previousPage = @getPageNumber(node) - 1
 
-      node.get('parent').get('contents').remove(node)
+      node.get('_parent').get('contents').remove(node)
 
       # FIX: determine if node was inside a section that got removed too
       if node is @asPage()
@@ -177,8 +177,8 @@ define (require) ->
       @trigger('removeNode')
 
     move: (node, marker, position) ->
-      oldContainer = node.get('parent')
-      container = marker.get('parent')
+      oldContainer = node.get('_parent')
+      container = marker.get('_parent')
 
       # Prevent a node from trying to become its own ancestor (infinite recursion)
       if marker.hasAncestor(node)
@@ -203,7 +203,7 @@ define (require) ->
       container.get('contents').add(node, {at: index})
 
       # Update the node's parent
-      node.set('parent', container)
+      node.set('_parent', container)
 
       # Update the node's depth
       if container.has('depth')
