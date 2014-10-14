@@ -17,11 +17,11 @@
         {{/is}}
         {{currentPage.title}}
       </h2>
-      {{#if currentPage.parentId}}
+      {{#if currentPage.parent.id}}
         <span>
-          Derived from <a href="/contents/{{currentPage.parentId}}@{{currentPage.parentVersion}}">{{currentPage.parentTitle}}</a> by
+          Derived from <a href="/contents/{{currentPage.parent.id}}@{{currentPage.parent.version}}">{{currentPage.parent.title}}</a> by
           <span class="book-authors">
-            {{#each currentPage.parentAuthors}}
+            {{#each currentPage.parent.authors}}
               <a class="list-comma" href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
             {{/each}}
           </span>

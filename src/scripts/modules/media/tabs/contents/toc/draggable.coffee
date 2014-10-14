@@ -10,14 +10,14 @@ define (require) ->
       y = e.pageY - pOffset.top
 
       if @model.isSection()
-        if pHeight/3 > y
+        if pHeight / 3 > y
           position = 'before'
-        else if pHeight*2/3 > y
+        else if pHeight*2 / 3 > y
           position = 'insert'
         else
           position = 'after'
       else
-        if pHeight/2 > y
+        if pHeight / 2 > y
           position = 'before'
         else
           position = 'after'
