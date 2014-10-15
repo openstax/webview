@@ -1,5 +1,4 @@
 define (require) ->
-  _ = require('underscore')
   settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./footer-template')
@@ -9,7 +8,7 @@ define (require) ->
   return class FooterView extends BaseView
     template: template
     templateHelpers: () ->
-      location.origin = socialMedia.locationOriginPolyFillForIe()
+      location.origin = socialMedia.locationOrigin()
 
       return {
         share: socialMedia.socialMediaInfo('','An OpenStax College book')
