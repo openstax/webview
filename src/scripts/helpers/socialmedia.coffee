@@ -3,9 +3,9 @@ define (require) ->
 
   return new class SocialMedia
 
-    socialMediaInfo: (description,title) ->
+    socialMediaInfo: (description,title,locationOrigin) ->
       url = window.location.href
-      image = location.origin + '/images/logo.png'
+      image = locationOrigin + '/images/logo.png'
       share =
         url: url
         source: 'OpenStax CNX'

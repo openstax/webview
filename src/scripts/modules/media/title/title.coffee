@@ -13,16 +13,14 @@ define (require) ->
 
   return class MediaTitleView extends EditableView
     mediaType: 'book'
-
     template: template
-    title:() -> @model.get('title')
 
     templateHelpers: () ->
-      title = @title()
-      location.origin = linksHelper.locationOrigin()
+      title = @model.get('title')
+      locationOrigin = linksHelper.locationOrigin()
 
       return {
-        share: socialMedia.socialMediaInfo(@parent.summary(), @title())
+        share: socialMedia.socialMediaInfo(@parent.summary(),title,locationOrigin)
         encodedTitle: encodeURI(title)
         derivable: not @model.isDraft()
         authenticated: session.get('id')

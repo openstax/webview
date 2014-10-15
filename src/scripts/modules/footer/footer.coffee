@@ -9,12 +9,12 @@ define (require) ->
   return class FooterView extends BaseView
     template: template
     templateHelpers: () ->
-      location.origin = linksHelper.locationOrigin()
+      locationOrigin = linksHelper.locationOrigin()
 
       return {
-        share: socialMedia.socialMediaInfo('','An OpenStax College book')
+        share: socialMedia.socialMediaInfo('','An OpenStax CNX book',locationOrigin)
         legacy: settings.legacy
-        url: location.origin + settings.root
+        url: locationOrigin + settings.root
         webmaster: settings.webmaster
       }
 
