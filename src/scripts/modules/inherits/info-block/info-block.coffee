@@ -35,6 +35,8 @@ define (require) ->
     clickMore: (e) ->
       e.preventDefault()
 
+      @toggleDivs()
+
       if @_expanded
         @_expanded = false
         @$el.find('.link-title').text(@linkTitle)
@@ -45,3 +47,8 @@ define (require) ->
         @$el.find('.link-title').text(@linkExpandedTitle)
         @$el.find('.arrow').text('▾')
         @more?()
+
+    toggleDivs: () ->
+      $('#carousel').toggle()
+      $('#openstax').toggle()
+      $('#cnx').toggle()

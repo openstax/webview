@@ -25,7 +25,7 @@ define (require) ->
       'mouseenter .books': 'stopCarousel'
       'mouseleave .books': 'startCarousel'
 
-    onRender: () -> @startCarousel()
+    onRender: () -> #@startCarousel() AMW
 
     # Called when the 'More' link is clicked
     more: () ->
@@ -35,7 +35,7 @@ define (require) ->
 
     # Called when the 'Less' link is clicked
     less: () ->
-      @startCarousel()
+      #@startCarousel() AMW
       @$el.find('.book').removeAttr('style')
       @_expanded = false
 
