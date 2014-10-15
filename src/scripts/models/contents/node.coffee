@@ -234,6 +234,6 @@ define (require) ->
     getAbstractForOpenGraph: () ->
       abstract = @get('abstract')
       if abstract
-        return abstract.replace(/(<([^>]+)>)/ig,'')
+        return $(abstract).text()
       else
         return 'An OpenStax College book'
