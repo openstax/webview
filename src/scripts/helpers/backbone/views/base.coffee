@@ -3,6 +3,7 @@ define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
   settings = require('settings')
+  socialMedia = require('cs!helpers/socialmedia.coffee') 
 
   dispose = (obj) ->
     delete obj.parent
@@ -96,6 +97,7 @@ define (require) ->
 
     addOpenGraphMetaTags: () ->
       summary = @summary?() or @summary
+      location.origin = socialMedia.locationOrigin()
 
       if summary isnt undefined
         url = window.location.href
