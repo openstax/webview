@@ -19,7 +19,7 @@ define (require) ->
 
     templateHelpers: () ->
       title = @title()
-      location.origin = socialMedia.locationOriginPolyFillForIe()
+      location.origin = socialMedia.locationOrigin()
 
       return {
         share: socialMedia.socialMediaInfo(@summary(), @title())
