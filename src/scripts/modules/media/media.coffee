@@ -29,12 +29,7 @@ define (require) ->
       media: '.media'
       editbar: '.editbar'
 
-    summary:() ->
-      abstract = @model.get('abstract')
-      if abstract
-        return $(abstract).text()
-      else
-        return 'An OpenStax College book'
+    summary:() -> @updateSummary()
 
     initialize: (options) ->
       super()
@@ -51,6 +46,7 @@ define (require) ->
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:editable', @toggleEditor)
       @listenTo(@model, 'change:title change:currentPage pageLoaded', @updateUrl)
+      @listenTo(@model, 'change:abstract', @updateSummary)
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))
@@ -62,6 +58,13 @@ define (require) ->
       @regions.media.append(new MediaBodyView({model: @model}))
       @regions.media.append(new MediaFooterView({model: @model}))
       @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
+
+    updateSummary: () ->
+      abstract = @model.get('abstract')
+      if abstract
+        return $(abstract).text()
+      else
+        return 'An OpenStax College book'
 
 
     updateUrl: () ->
