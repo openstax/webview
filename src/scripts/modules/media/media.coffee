@@ -64,7 +64,7 @@ define (require) ->
       if abstract
         return $(abstract).text()
       else
-        return 'An OpenStax College book'
+        return 'An OpenStax CNX book'
 
 
     updateUrl: () ->
