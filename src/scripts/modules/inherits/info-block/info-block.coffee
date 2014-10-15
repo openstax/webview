@@ -49,6 +49,6 @@ define (require) ->
         @more?()
 
     toggleDivs: () ->
-      $('#carousel').toggle()
-      $('#openstax').toggle()
-      $('#cnx').toggle()
+      $('.carousel').toggle()
+      $('.openstax').toggle()
+      $('.cnx').toggle()
