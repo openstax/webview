@@ -2,7 +2,7 @@
 <div class="featured-books" id="carousel">
   <div class="books">
     {{#each this}}
-      {{partial "modules/featured-books/featured-books-partial"}}
+      {{> modules/featured-books/featured-books-partial}}
     {{/each}}
   </div>
 </div>
@@ -11,9 +11,9 @@
   <h2>OpenStax College</h2>
   <div class="books">
   {{#each this}}
-    {{#equal type 'OpenStax Featured'}}
-      {{partial "modules/featured-books/featured-books-partial"}}
-    {{/equal}}
+    {{#is type 'OpenStax Featured'}}
+      {{> modules/featured-books/featured-books-partial}}
+    {{/is}}
   {{/each}}
   </div>
 </div>
@@ -22,9 +22,9 @@
   <h2>OpenStax CNX</h2>
   <div class="books">
   {{#each this}}
-    {{#equal type 'CNX Featured'}}
-      {{partial "modules/featured-books/featured-books-partial"}}
-    {{/equal}}
+    {{#is type 'CNX Featured'}}
+      {{> modules/featured-books/featured-books-partial}}
+    {{/is}}
   {{/each}}
   </div>
 </div>
