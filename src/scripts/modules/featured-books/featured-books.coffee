@@ -5,6 +5,14 @@ define (require) ->
   template = require('hbs!./featured-books-template')
   require('less!./featured-books')
 
+  # HACK - FIX: Remove after upgrading to Handlebars 2.0
+  # Also replace all `{{partial ` helpers with `{{> ` and remove the quotes around partial names
+  # Remove the partial.coffee helper
+  Handlebars = require('hbs/handlebars')
+  featuredBooksPartial = require('text!./featured-books-partial.html')
+  Handlebars.registerPartial('modules/featured-books/featured-books-partial', featuredBooksPartial)
+  # /HACK
+
   CAROUSEL_SPEED = 7000 # The rate at which a new book will be shown (in ms).
 
   return class FeaturedBooksView extends InfoBlockView
@@ -50,7 +58,8 @@ define (require) ->
 
       # Animate the carousel to show the next featured book
       nextFeatured = () =>
-        $container = @$el.find('.books')
+        #$container = @$el.find('.books')
+        $container = $('#carousel').find('.books')
         $books = $container.find('.book')
         $first = $books.first()
         $second = $books.eq(1)
