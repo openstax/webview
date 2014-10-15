@@ -50,7 +50,7 @@ define (require) ->
 
       # Animate the carousel to show the next featured book
       nextFeatured = () =>
-        $container = $('#carousel').find('.books')
+        $container = @$el.find('.carousel').children('.books')
         $books = $container.find('.book')
         $first = $books.first()
         $second = $books.eq(1)
