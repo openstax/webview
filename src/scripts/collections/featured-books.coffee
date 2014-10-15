@@ -5,7 +5,7 @@ define (require) ->
   settings = require('settings')
 
   return new class FeaturedBooks extends Backbone.Collection
-    url: settings.devArchive + '/extras'
+    url: settings.cnxarchive + '/extras' # Change this in settings.js for development purposes - devarchive.cnx.org
     model: FeaturedBook
 
     parse: (response) ->
