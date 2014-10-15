@@ -39,7 +39,7 @@ define (require) ->
       @model = new Content({id: @uuid, version: options.version, page: options.page})
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
-      @listenTo(@model, 'change:title change:parentId', @updatePageInfo)
+      @listenTo(@model, 'change:title change:parent.id', @updatePageInfo)
       @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage
         change:currentPage.loaded', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
