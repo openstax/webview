@@ -12,7 +12,6 @@ define (require) ->
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
   return class Node extends Backbone.AssociatedModel
-
     eTag: null
 
     # url: () -> "#{SERVER}/contents/#{@id}"
@@ -49,10 +48,6 @@ define (require) ->
         $body.children('[data-type=abstract]').eq(0).remove()
 
         response.content = $body.html()
-
-      # Mark drafts as being in edit mode by default
-      if @isDraft() and response.status isnt 'publishing'
-        response.editable = true
 
       return response
 
@@ -121,11 +116,11 @@ define (require) ->
       if response is undefined
         switch attr
           when 'depth'
-            response = @attributes['parent']?.get('depth')
+            response = @attributes['_parent']?.get('depth')
             if response isnt undefined then response++
             @set('depth', response)
           when 'book'
-            response = @attributes['parent']?.get('book')
+            response = @attributes['_parent']?.get('book')
             @set('book', response)
 
       return response
@@ -139,7 +134,7 @@ define (require) ->
       if options.excludeTransient
         delete results.loaded
         delete results.currentPage
-        delete results.parent
+        delete results._parent
         delete results.book
         delete results.type
         delete results.depth
@@ -186,7 +181,7 @@ define (require) ->
 
       return id
 
-    index: () -> @get('parent').get('contents').indexOf(@)
+    index: () -> @get('_parent').get('contents').indexOf(@)
 
     getTotalLength: () -> 1
 
@@ -194,7 +189,7 @@ define (require) ->
 
     # Determine if a model is an ancestor of this node
     hasAncestor: (model) ->
-      parent = @get('parent')
+      parent = @get('_parent')
 
       if @ is model
         return false
@@ -206,7 +201,7 @@ define (require) ->
         return parent.hasAncestor(model)
 
     previousPageCount: () ->
-      parent = @get('parent')
+      parent = @get('_parent')
 
       if not parent then return 0
 
@@ -227,6 +222,16 @@ define (require) ->
 
     isSaveable: () -> !!@get('mediaType')
 
-    isEditable: () -> !!@get('editable')
+    isEditable: () ->
+      if not @get('loaded')
+        editable = false
+      else if @get('editable')
+        editable = true
+      else if (@isDraft() or @isSection()) and @get('_parent')?.isEditable()
+        editable = true
+      else
+        editable = false
+
+      return editable
 
     isInBook: () -> !!@get('book')

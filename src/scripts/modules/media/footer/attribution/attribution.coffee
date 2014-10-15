@@ -5,5 +5,7 @@ define (require) ->
 
   return class AttributionView extends FooterTabView
     template: template
-    templateHelpers:
-      id: () -> @model.getVersionedId() # Ensure the id has the version attached
+    templateHelpers: () ->
+      model = super()
+      model.id = @model.getVersionedId() # Ensure the id has the version attached
+      return model

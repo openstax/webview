@@ -88,6 +88,7 @@ define (require) ->
             data[key] = value.apply(@)
           else
             data[key] = value
+          return # Do not allow implicit returns, which could terminate the loop early
 
       return data
 

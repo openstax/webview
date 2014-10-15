@@ -28,6 +28,14 @@ define (require) ->
       model.languageName = settings.languages[model.language]
       model.subjectsList = subjects.list
       model.url = linksHelper.getModelPath(model)
+
+      if @media is 'page'
+        editable = if @model.isBook() then @model.get('currentPage')?.isEditable() else @model.isEditable()
+      else
+        editable = @model.isEditable()
+
+      model.editable = editable
+
       return model
 
     editable:
@@ -101,5 +109,6 @@ define (require) ->
 
     initialize: () ->
       super()
+
       @listenTo @model, 'change change:currentPage', (model, options) =>
         @render() unless options?.doNotRerender

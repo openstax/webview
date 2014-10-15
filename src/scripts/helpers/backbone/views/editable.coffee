@@ -7,6 +7,9 @@ define (require) ->
     if @getProperty(property) is value then return
 
     model = @getModel()
+
+    if not model then return
+
     value = options.setValue?(property, value, options) or value
 
     model.set(property, value, {doNotRerender:true})
@@ -165,20 +168,21 @@ define (require) ->
       #    @_makeUneditable()
 
     onAfterRender: () ->
+      if @media is 'page'
+        editable = if @model.isBook() then @model.get('currentPage')?.isEditable() else @model.isEditable()
+      else
+        editable = @model.isEditable()
+
       # Make editable after rendering if editable flag is already set
-      @_makeEditable(true) if @isEditable()
+      @_makeEditable(true) if editable
 
     onBeforeEditable: () -> # noop
     onBeforeUneditable: () -> # noop
     onEditable: () -> # noop
     onUneditable: () -> # noop
 
-    # Override this method to change the logic for determining
-    # whether or not the inherited view should be in edit mode.
-    isEditable: () -> @getModel()?.isEditable()
-
     _toggleEditable: () ->
-      editable = @isEditable()
+      editable = @model.isEditable()
 
       # Only toggle the editable state if it really changed
       if editable is @_editable then return
