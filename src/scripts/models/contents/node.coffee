@@ -231,10 +231,8 @@ define (require) ->
 
     isInBook: () -> !!@get('book')
 
-    getAbstract: () -> @get('abstract')
-
     getAbstractForOpenGraph: () ->
-      abstract = @getAbstract()
+      abstract = @get('abstract')
       if abstract
         return abstract.replace(/(<([^>]+)>)/ig,'')
       else
