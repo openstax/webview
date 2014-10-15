@@ -14,7 +14,6 @@ define (require) ->
     mediaType: 'book'
 
     template: template
-    summary: () -> @model.getAbstractForOpenGraph()
     title:() -> @model.get('title')
 
     templateHelpers: () ->
@@ -22,7 +21,7 @@ define (require) ->
       location.origin = socialMedia.locationOrigin()
 
       return {
-        share: socialMedia.socialMediaInfo(@summary(), @title())
+        share: socialMedia.socialMediaInfo(@parent.summary(), @title())
         encodedTitle: encodeURI(title)
         derivable: not @model.isDraft()
         authenticated: session.get('id')

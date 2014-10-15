@@ -29,7 +29,12 @@ define (require) ->
       media: '.media'
       editbar: '.editbar'
 
-    summary:() -> @model.getAbstractForOpenGraph()
+    summary:() ->
+      abstract = @model.get('abstract')
+      if abstract
+        return $(abstract).text()
+      else
+        return 'An OpenStax College book'
 
     initialize: (options) ->
       super()

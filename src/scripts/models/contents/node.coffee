@@ -230,10 +230,3 @@ define (require) ->
     isEditable: () -> !!@get('editable')
 
     isInBook: () -> !!@get('book')
-
-    getAbstractForOpenGraph: () ->
-      abstract = @get('abstract')
-      if abstract
-        return $(abstract).text()
-      else
-        return 'An OpenStax College book'
