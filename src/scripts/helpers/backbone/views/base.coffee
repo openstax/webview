@@ -3,7 +3,7 @@ define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
   settings = require('settings')
-  socialMedia = require('cs!helpers/socialmedia.coffee') 
+  socialMedia = require('cs!helpers/socialmedia.coffee')
 
   dispose = (obj) ->
     delete obj.parent
