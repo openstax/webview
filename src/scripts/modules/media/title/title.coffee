@@ -8,6 +8,7 @@ define (require) ->
   template = require('hbs!./title-template')
   settings = require('settings')
   socialMedia = require('cs!helpers/socialmedia.coffee')
+  linksHelper = require('cs!helpers/links.coffee')
   require('less!./title')
 
   return class MediaTitleView extends EditableView
@@ -18,7 +19,7 @@ define (require) ->
 
     templateHelpers: () ->
       title = @title()
-      location.origin = socialMedia.locationOrigin()
+      location.origin = linksHelper.locationOrigin()
 
       return {
         share: socialMedia.socialMediaInfo(@parent.summary(), @title())
