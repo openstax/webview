@@ -20,6 +20,8 @@
         port: 8080
       },
 
+      devArchive: 'http://devarchive.cnx.org',
+
       // Prefix to prepend to page titles
       titlePrefix: 'OpenStax CNX - ',
 

@@ -1,10 +1,12 @@
+
 <div class="featured-books" id="carousel">
   <div class="books">
-    {{#each openStax}}
+    {{#each this}}
       <div class="book">
         <a href="{{link}}"><img src="{{cover}}" width="125" height="162" alt="{{title}}" /></a>
         <h4><a href="{{link}}">{{title}}</a></h4>
         <p>{{description}}</p>
+        <div class="read-more"><a href="{{link}}">Read More</a></div>
       </div>
     {{/each}}
   </div>
@@ -13,12 +15,15 @@
 <div class="featured-books" id="openstax" style="display:none">
   <h2>OpenStax College</h2>
   <div class="books">
-    {{#each openStaxBooks}}
+    {{#each this}}
+    {{#equal type 'OpenStax Featured'}}
       <div class="book">
         <a href="{{link}}"><img src="{{cover}}" width="125" height="162" alt="{{title}}" /></a>
         <h4><a href="{{link}}">{{title}}</a></h4>
         <p>{{description}}</p>
+        <div class="read-more"><a href="{{link}}">Read More</a></div>
       </div>
+    {{/equal}}
     {{/each}}
   </div>
 </div>
@@ -26,12 +31,15 @@
 <div class="featured-books" id="cnx" style="display:none">
   <h2>OpenStax CNX</h2>
   <div class="books">
-    {{#each cnx}}
+    {{#each this}}
+    {{#equal type 'CNX Featured'}}
       <div class="book">
         <a href="{{link}}"><img src="{{cover}}" width="125" height="162" alt="{{title}}" /></a>
         <h4><a href="{{link}}">{{title}}</a></h4>
         <p>{{description}}</p>
+        <div class="read-more"><a href="{{link}}">Read More</a></div>
       </div>
+      {{/equal}}
     {{/each}}
   </div>
 </div>

@@ -2,37 +2,27 @@ define (require) ->
   Backbone = require('backbone')
   FeaturedBook = require('cs!models/featured-book')
   $ = require('jquery')
+  settings = require('settings')
 
   return new class FeaturedBooks extends Backbone.Collection
-    url: 'http://devarchive.cnx.org/extras'
+    url: settings.devArchive + '/extras'
     model: FeaturedBook
 
     parse: (response) ->
-      featuredLinks = response.featuredLinks
-      books = featuredLinks
-      #_.shuffle(featuredLinks) <-- not working ??
-      @featuredBooks(books)
-      return books
+      books = response.featuredLinks
 
-      #openStaxBooks = _.where(featuredLinks,{type: 'OpenStax Featured'})
-      #@featuredBooks(openStaxBooks)
-      #return openStaxBooks
-
-      #cnxBooks = _.where(featuredLinks,{type:'CNX Featured'})
-      #@featuredBooks(cnxBooks)
-      #return cnxBooks
-
-
-    initialize: () ->
-      @fetch({reset: true})
-
-
-    featuredBooks: (list) ->
-      _.each list, (book) ->
+      _.each books, (book) ->
         book.title = book.title
         book.description = () ->
           abstract = book.abstract
           truncatedText = $(abstract).text().substring(0,175) + '...'
           return truncatedText
-        book.cover = book.resourcePath
-        book.link = '/contents/' + book.id
+        book.cover = settings.devArchive + book.resourcePath
+        book.link =  '/contents/' + book.id
+
+      featuredLinks = _.shuffle(books)
+      return featuredLinks
+
+
+    initialize: () ->
+      @fetch({reset: true})
