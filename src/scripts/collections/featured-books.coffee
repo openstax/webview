@@ -4,8 +4,10 @@ define (require) ->
   $ = require('jquery')
   settings = require('settings')
 
+  archive = "#{location.protocol}//#{settings.cnxarchive.host}" #Change this in settings.js for development purposes - devarchive.cnx.org
+
   return new class FeaturedBooks extends Backbone.Collection
-    url: settings.cnxarchive + '/extras' # Change this in settings.js for development purposes - devarchive.cnx.org
+    url: "#{archive}/extras"
     model: FeaturedBook
 
     parse: (response) ->
@@ -15,10 +17,13 @@ define (require) ->
         book.title = book.title
         book.description = () ->
           abstract = book.abstract
-          truncatedText = $(abstract).text().substring(0,175) + '...'
-          return truncatedText
-        book.cover = settings.devArchive + book.resourcePath
-        book.link =  '/contents/' + book.id
+          abstractText = $(abstract).text()
+          if abstract isnt null
+           return abstractText.substring(0,175) + '...'
+          else
+           return ''
+        book.cover = "#{archive}#{book.resourcePath}"
+        book.link = "contents/#{book.id}"
 
       featuredLinks = _.shuffle(books)
       return featuredLinks
