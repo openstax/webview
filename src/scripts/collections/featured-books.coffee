@@ -4,7 +4,7 @@ define (require) ->
   $ = require('jquery')
   settings = require('settings')
 
-  archive = "#{location.protocol}//#{settings.cnxarchive.host}" #Change this in settings.js for development purposes - devarchive.cnx.org
+  archive = "#{location.protocol}//#{settings.cnxarchive.host}"
 
   return new class FeaturedBooks extends Backbone.Collection
     url: "#{archive}/extras"
@@ -19,9 +19,9 @@ define (require) ->
           abstract = book.abstract
           abstractText = $(abstract).text().substring(0,175)+'...'
           if abstract isnt null
-           return "#{abstractText}"
+            return "#{abstractText}"
           else
-           return ''
+            return ''
         book.cover = "#{archive}#{book.resourcePath}"
         book.link = "contents/#{book.id}"
 
