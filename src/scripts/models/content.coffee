@@ -88,7 +88,7 @@ define (require) ->
       return results
 
     # Proxy page events on this object
-    _proxyChange: (eventName, page, value) ->
+    @_proxyChange: (eventName, page, value) ->
       if eventName.indexOf(':currentPage') > -1
         return
 
@@ -99,13 +99,13 @@ define (require) ->
       currentPage = @get('currentPage')
 
       if currentPage
-        currentPage.off(null, null, content._proxyChange)
+        currentPage.off(null, null, Content._proxyChange)
         currentPage.set('active', false)
 
       @set('currentPage', page)
 
       if page
-        page.on('all', (() => @_proxyChange.apply(@, arguments)))
+        page.on('all', (() => Content._proxyChange.apply(@, arguments)))
         page.set('active', true)
 
         if not page.get('loaded')
