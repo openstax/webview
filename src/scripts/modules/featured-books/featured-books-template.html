@@ -1,11 +1,30 @@
-<div class="featured-books">
+
+<div class="featured-books carousel">
   <div class="books">
     {{#each this}}
-      <div class="book">
-        <a href="{{link}}"><img src="{{cover}}" width="125" height="162" alt="{{title}}" /></a>
-        <h4><a href="{{link}}">{{title}}</a></h4>
-        <p>{{description}}</p>
-      </div>
+      {{> modules/featured-books/featured-books-partial}}
     {{/each}}
+  </div>
+</div>
+
+<div class="featured-books openstax" style="display:none">
+  <h2>OpenStax College</h2>
+  <div class="books">
+  {{#each this}}
+    {{#is type 'OpenStax Featured'}}
+      {{> modules/featured-books/featured-books-partial}}
+    {{/is}}
+  {{/each}}
+  </div>
+</div>
+
+<div class="featured-books cnx" style="display:none">
+  <h2>OpenStax CNX</h2>
+  <div class="books">
+  {{#each this}}
+    {{#is type 'CNX Featured'}}
+      {{> modules/featured-books/featured-books-partial}}
+    {{/is}}
+  {{/each}}
   </div>
 </div>

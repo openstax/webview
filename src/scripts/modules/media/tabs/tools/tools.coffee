@@ -26,7 +26,6 @@ define (require) ->
       @listenTo(session, 'change', @render)
 
     toggleEditor: () ->
-      @model.set('currentPage.editable', not @model.get('currentPage.editable'))
       @model.set('editable', not @model.get('editable'))
 
     deriveCopy: () ->

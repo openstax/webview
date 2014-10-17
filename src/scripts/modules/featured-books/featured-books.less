@@ -6,6 +6,10 @@
   margin: 0 !important; // Override bootstrap css
   overflow: hidden;
 
+  > h2 {
+    padding-bottom:20px;
+  }
+
   > .books {
     position: relative;
     width: 100%;
@@ -14,7 +18,7 @@
     > .book {
       .make-sm-column(6);
       display: none;
-      margin-bottom: 15px; // Add spacing between books when they're aligned vertically
+      margin-bottom: 30px; // Add spacing between books when they're aligned vertically
 
       &::after {
       	display: block;
@@ -56,6 +60,17 @@
           color: @link-color;
         }
       }
+
+     .read-more {
+       position:absolute;
+       bottom:10px;
+       right:20px;
+
+       > :after {
+         content: '▸';
+         margin-left:5px;
+       }
+     }
 
       p {
         font-weight: 300;

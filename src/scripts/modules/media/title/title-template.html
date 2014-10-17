@@ -15,11 +15,11 @@
         {{/is}}
         {{title}}
       </h1>
-      {{#if parentId}}
+      {{#if parent.id}}
         <span>
-          Derived from <a href="/contents/{{parentId}}@{{parentVersion}}">{{parentTitle}}</a> by
+          Derived from <a href="/contents/{{parent.id}}@{{parent.version}}">{{parent.title}}</a> by
           <span class="collection-authors">
-            {{~#each parentAuthors~}}
+            {{~#each parent.authors~}}
               <a class="list-comma" href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
             {{~/each~}}
           </span>

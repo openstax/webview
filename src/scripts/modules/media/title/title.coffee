@@ -12,7 +12,6 @@ define (require) ->
   require('less!./title')
 
   return class MediaTitleView extends EditableView
-    mediaType: 'book'
     template: template
 
     templateHelpers: () ->

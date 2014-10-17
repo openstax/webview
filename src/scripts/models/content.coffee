@@ -12,7 +12,7 @@ define (require) ->
       relatedModel: (relation, attributes) ->
         return (attrs, options) =>
           # FIX: Consider putting all added fields under _meta to make removal before saving simple
-          attrs.parent = @
+          attrs._parent = @
           attrs.depth = 0
           attrs.book = @
           if _.isArray(attrs.contents)
@@ -42,6 +42,15 @@ define (require) ->
 
         .fail (model, response, options) =>
           @set('error', response?.status or model?.status or 9000)
+
+    parse: (response, options = {}) ->
+      super(arguments...)
+
+      # Mark drafts as being in edit mode by default
+      if @isDraft() and response.status isnt 'publishing'
+        response.editable = true
+
+      return response
 
     save: (key, val, options) ->
       if not key? or typeof key is 'object'
@@ -78,15 +87,32 @@ define (require) ->
 
       return results
 
-    _setPage: (page) ->
-      @get('currentPage')?.set('active', false)
-      @set('currentPage', page)
-      page.set('active', true)
+    # Proxy page events on this object
+    @_proxyChange: (eventName, page, value) ->
+      if eventName.indexOf(':currentPage') > -1
+        return
 
-      if not page.get('loaded')
-        page.fetch().done () =>
-          page.set('loaded', true)
-          @trigger('pageLoaded')
+      if eventName.slice(0, 7) is 'change:'
+        @trigger("change:currentPage.#{eventName.slice(7)}", page, value)
+
+    _setPage: (page) ->
+      currentPage = @get('currentPage')
+
+      if currentPage
+        currentPage.off(null, null, Content._proxyChange)
+        currentPage.set('active', false)
+
+      @set('currentPage', page)
+
+      if page
+        page.on('all', (() => Content._proxyChange.apply(@, arguments)))
+        page.set('active', true)
+
+        if not page.get('loaded')
+          page.fetch().done () ->
+            page.set('loaded', true)
+      else
+        @trigger('change:currentPage.loaded')
 
     _lookupPage: (page) ->
       if typeof page is 'number'
@@ -141,7 +167,7 @@ define (require) ->
       #previousPage = @getPageNumber(@getPreviousNode(node))
       previousPage = @getPageNumber(node) - 1
 
-      node.get('parent').get('contents').remove(node)
+      node.get('_parent').get('contents').remove(node)
 
       # FIX: determine if node was inside a section that got removed too
       if node is @asPage()
@@ -151,8 +177,8 @@ define (require) ->
       @trigger('removeNode')
 
     move: (node, marker, position) ->
-      oldContainer = node.get('parent')
-      container = marker.get('parent')
+      oldContainer = node.get('_parent')
+      container = marker.get('_parent')
 
       # Prevent a node from trying to become its own ancestor (infinite recursion)
       if marker.hasAncestor(node)
@@ -177,7 +203,7 @@ define (require) ->
       container.get('contents').add(node, {at: index})
 
       # Update the node's parent
-      node.set('parent', container)
+      node.set('_parent', container)
 
       # Update the node's depth
       if container.has('depth')

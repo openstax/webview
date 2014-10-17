@@ -12,7 +12,7 @@ define (require) ->
       key: 'contents'
       relatedModel: (relation, attributes) ->
         return (attrs, options) =>
-          attrs.parent = @
+          attrs._parent = @
           if _.isArray(attrs.contents)
             delete attrs.id # Get rid of the 'subcol' id so the section is unique
             return new Collection(attrs)
