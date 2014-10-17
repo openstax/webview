@@ -223,7 +223,7 @@ define (require) ->
     isSaveable: () -> !!@get('mediaType')
 
     isEditable: () ->
-      if not @get('loaded')
+      if not @get('loaded') and not @isSection()
         editable = false
       else if @get('editable')
         editable = true
