@@ -57,8 +57,8 @@ section > figure {
 }
 
 figure {
+  position: relative;
   color: @gray;
-  position:relative;
 
   &.ui-has-child-figcaption > figcaption::before {
     margin-right: 5px;
@@ -68,9 +68,9 @@ figure {
   }
 
   &:not(.ui-has-child-figcaption)::after {
-    position:absolute;
-    bottom:0;
-    left:0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     margin-right: 5px;
     color: @gray-medium;
     font-weight: bold;
@@ -106,11 +106,11 @@ figure {
     }
 
     &:not(.ui-has-child-figcaption)::after {
+      position: relative;
       display: block;
       text-align: center;
       font-weight: bold;
       content: '(' counter(subfigure,lower-alpha) ')';
-      position:relative;
     }
 
   }
@@ -119,11 +119,11 @@ figure {
 // By default, figures are laid out horizontally
 // unless they have the data-orient="vertical" attribute.
 figure:not([data-orient="vertical"]) {
+  position: relative;
   display: table;
-  table-layout: fixed;
   width: 100%;
-  position:relative;
-  top:0;
+  top: 0;
+  table-layout: fixed;
 
   > [data-type="title"],
   > .title {
@@ -133,7 +133,7 @@ figure:not([data-orient="vertical"]) {
   > figcaption {
     display: table-caption;
     caption-side: bottom;
-    margin-bottom:15px;
+    margin-bottom: 15px;
   }
 
   // Subfigures
