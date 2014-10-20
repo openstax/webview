@@ -75,8 +75,8 @@ define (require) ->
         $('link[rel="canonical"]').remove()
         $('head').append("<link rel=\"canonical\" href=\"#{canonical}\" />") if canonical
 
-      #Open graph tags
-      @addOpenGraphMetaTags()
+      #Open graph tags for social media and description tags for SEO
+      @addMetaTags()
 
     getTemplate: () -> @template?(@getTemplateData()) or @template
 
@@ -96,15 +96,16 @@ define (require) ->
 
       return data
 
-    addOpenGraphMetaTags: () ->
+    addMetaTags: () ->
       summary = @summary?() or @summary
+      description = @description?() or @description
       location.origin = linksHelper.locationOrigin()
+      head = $('head')
 
       if summary isnt undefined
         url = window.location.href
         title = document.title
         image = location.origin + '/images/social/logo.png'
-        head = $('head')
         $('meta[property="og:url"]').remove()
         head.append("<meta property=\"og:url\" content=\"#{url}\">")
         $('meta[property="og:title"]').remove()
@@ -113,6 +114,10 @@ define (require) ->
         head.append("<meta property=\"og:description\" content=\"#{summary}\">")
         $('meta[property="og:image"]').remove()
         head.append("<meta property=\"og:image\" content=\"#{image}\">")
+
+      if description isnt undefined
+        $('meta[name="description"]').remove()
+        head.append("<meta name=\"description\" content=\"#{description}\">")
 
     _render: () ->
       _.each @regions, (region) -> region.empty()

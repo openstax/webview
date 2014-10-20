@@ -16,6 +16,7 @@ define (require) ->
     pageTitle: 'About OpenStax CNX'
     canonical: null
     summary: 'About OpenStax CNX'
+    description: 'OpenStax CNX is a non-profit organization providing thousands of free online textbooks.'
 
     regions:
       find: '.find'

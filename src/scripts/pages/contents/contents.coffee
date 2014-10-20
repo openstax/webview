@@ -16,6 +16,7 @@ define (require) ->
     pageTitle: 'Content Library'
     canonical: () -> null if not @uuid
     summary: 'OpenStax Content Library'
+    description: 'Search for free, online textbooks.'
 
     initialize: (options = {}) ->
       super()

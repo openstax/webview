@@ -11,6 +11,7 @@ define (require) ->
     template: template
     canonical: null
     summary: 'Search for textbooks'
+    description: 'Search from thousands of free, online textbooks.'
 
     initialize: () ->
       super()
