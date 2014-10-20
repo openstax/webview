@@ -39,7 +39,7 @@ define (require) ->
       $temp = $('<div>').html(@getTemplate())
 
       try
-        if @model.get('loaded') and @model.asPage()?.get('loaded') and page?.get('active')
+        if @model.get('loaded') and @model.asPage()?.get('loaded') and @model.asPage()?.get('active')
           # Converts a TERP link to an OST-hosted iframe
           $temp.find('a[href*="#terp-"]').each () ->
             terpCode = $(this).attr('href').match(/#terp\-(.*)/)[1]
