@@ -15,6 +15,7 @@ define (require) ->
     pageTitle: 'Support OpenStax CNX'
     canonical: null
     summary: 'Donate to OpenStax CNX'
+    description: 'Donate to OpenStax CNX'
 
     regions:
       find: '.find'

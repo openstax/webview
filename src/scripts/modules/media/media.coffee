@@ -30,6 +30,7 @@ define (require) ->
       editbar: '.editbar'
 
     summary:() -> @updateSummary()
+    description: () -> @updateSummary()
 
     initialize: (options) ->
       super()
