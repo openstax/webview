@@ -10,6 +10,7 @@ define (require) ->
     template: template
     pageTitle: 'My Workspace'
     canonical: null
+    summary: 'Add new content or find content and derive a copy for editing.'
 
     regions:
       workspace: '#workspace'

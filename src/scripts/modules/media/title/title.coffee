@@ -6,36 +6,26 @@ define (require) ->
   EditableView = require('cs!helpers/backbone/views/editable')
   #MailPopoverView = require('cs!./popovers/mail/mail')
   template = require('hbs!./title-template')
+  settings = require('settings')
+  socialMedia = require('cs!helpers/socialmedia.coffee')
+  linksHelper = require('cs!helpers/links.coffee')
   require('less!./title')
 
   return class MediaTitleView extends EditableView
     template: template
+
     templateHelpers: () ->
       title = @model.get('title')
-
-      # Polyfill for location.origin since IE doesn't support it
-      port = if location.port then ":#{location.port}" else ''
-      location.origin = location.origin or "#{location.protocol}//#{location.hostname}#{port}"
-
-      # Set information used for social media links
-      share =
-        url: window.location.href
-        source: 'OpenStax CNX'
-        summary: @model.get('abstract') or 'An OpenStax College book.'
-        title: title or 'Untitled'
-        image: @model.get('image') or "#{location.origin}/images/logo.png"
-
-      # Encode all of the shared values for a URI
-      _.each share, (value, key, list) ->
-        list[key] = encodeURI(value)
+      locationOrigin = linksHelper.locationOrigin()
 
       return {
-        share: share
+        share: socialMedia.socialMediaInfo(@parent.summary(),title,locationOrigin)
         encodedTitle: encodeURI(title)
         derivable: not @model.isDraft()
         authenticated: session.get('id')
         isBook: @model.isBook()
       }
+
 
     editable:
       '.media-title > .title > h1':

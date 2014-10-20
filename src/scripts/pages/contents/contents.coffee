@@ -15,6 +15,7 @@ define (require) ->
     template: template
     pageTitle: 'Content Library'
     canonical: () -> null if not @uuid
+    summary: 'OpenStax Content Library'
 
     initialize: (options = {}) ->
       super()

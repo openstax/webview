@@ -12,6 +12,7 @@ define (require) ->
     template: template
     pageTitle: 'Sharing Knowledge and Building Communities'
     canonical: null
+    summary: 'View and share free educational material as courses, books,reports or other academic assignments.'
 
     regions:
       splash: '#splash'

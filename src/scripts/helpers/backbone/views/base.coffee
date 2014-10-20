@@ -3,6 +3,7 @@ define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
   settings = require('settings')
+  linksHelper = require('cs!helpers/links.coffee')
 
   dispose = (obj) ->
     delete obj.parent
@@ -65,7 +66,7 @@ define (require) ->
     renderDom: () ->
       @$el?.html(@getTemplate())
 
-    # Update page title and canonical link
+    # Update page title, canonical link and Open Graph tags
     updatePageInfo: () ->
       document.title = settings.titlePrefix + @pageTitle if @pageTitle
 
@@ -73,6 +74,9 @@ define (require) ->
       if canonical isnt undefined
         $('link[rel="canonical"]').remove()
         $('head').append("<link rel=\"canonical\" href=\"#{canonical}\" />") if canonical
+
+      #Open graph tags
+      @addOpenGraphMetaTags()
 
     getTemplate: () -> @template?(@getTemplateData()) or @template
 
@@ -92,6 +96,24 @@ define (require) ->
 
       return data
 
+    addOpenGraphMetaTags: () ->
+      summary = @summary?() or @summary
+      location.origin = linksHelper.locationOrigin()
+
+      if summary isnt undefined
+        url = window.location.href
+        title = document.title
+        image = location.origin + '/images/social/logo.png'
+        head = $('head')
+        $('meta[property="og:url"]').remove()
+        head.append("<meta property=\"og:url\" content=\"#{url}\">")
+        $('meta[property="og:title"]').remove()
+        head.append("<meta property=\"og:title\" content=\"#{title}\">")
+        $('meta[property="og:description"]').remove()
+        head.append("<meta property=\"og:description\" content=\"#{summary}\">")
+        $('meta[property="og:image"]').remove()
+        head.append("<meta property=\"og:image\" content=\"#{image}\">")
+
     _render: () ->
       _.each @regions, (region) -> region.empty()
       @updatePageInfo()
@@ -103,6 +125,7 @@ define (require) ->
       @onRender()
       if @_rendered then @onDomRefresh() else @_rendered = true
       @onAfterRender()
+
       return @
 
     onShow: () -> # noop
