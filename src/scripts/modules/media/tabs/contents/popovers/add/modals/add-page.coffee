@@ -110,7 +110,7 @@ define (require) ->
     newPage: (title) ->
       options =
         success: (model) =>
-          @model.setPage(@model.get('contents').indexOf(model)+1)
+          @model.setPage(model)
           @updateUrl()
 
       @model.create({title: title}, options)

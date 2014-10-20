@@ -153,7 +153,7 @@ define (require) ->
         page = @get('currentPage')
         title = page.get('title')
         id = page.id
-        index = @get('contents').indexOf(page)
+        index = @getPageNumber(page)
 
         options = _.extend({at: index}, options)
 
