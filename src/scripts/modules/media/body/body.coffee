@@ -91,7 +91,7 @@ define (require) ->
 
             if href.substr(0, 1) is '#' and href.length > 1 and $el.data('type') isnt 'footnote-ref'
               $target = $temp.find(href)
-              tag = $target?.prop('tagName')?.toLowerCase()
+              tag = $target?.attr('data-type')?.toLowerCase()
               if $el.text() is '[link]' and tag
                 tag = tag.charAt(0).toUpperCase() + tag.substring(1)
                 $el.text("#{tag}") if tag isnt 'undefined'
