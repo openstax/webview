@@ -2,7 +2,6 @@ define (require) ->
   $ = require('jquery')
   linksHelper = require('cs!helpers/links')
   router = require('cs!router')
-  analytics = require('cs!helpers/handlers/analytics')
   Content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
   MediaEndorsedView = require('cs!./endorsed/endorsed')
@@ -41,7 +40,6 @@ define (require) ->
       @uuid = options.uuid
       @model = new Content({id: @uuid, version: options.version, page: options.page})
 
-      @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title change:parent.id', @updatePageInfo)
       @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage
         change:currentPage.loaded', @updateLegacyLink)
@@ -76,11 +74,6 @@ define (require) ->
 
       if title isnt components.title
         router.navigate("contents/#{components.uuid}#{components.version}/#{title}", {replace: true})
-
-    trackAnalytics: () ->
-      # Track loading using the media's own analytics ID, if specified
-      analyticsID = @model.get('googleAnalytics')
-      analytics.send(analyticsID) if analyticsID
 
     scrollToTop: () ->
       $mediaNav = $('.media-nav').first()
