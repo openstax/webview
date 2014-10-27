@@ -151,14 +151,15 @@ define (require) ->
 
       if @isBook()
         page = @get('currentPage')
+        parent = page.get('_parent')
         title = page.get('title')
         id = page.id
-        index = @getPageNumber(page)
+        index = parent.get('contents').indexOf(page)
 
         options = _.extend({at: index}, options)
 
         @get('contents').remove(page)
-        @create({title: title, derivedFrom: id}, options)
+        parent.create({title: title, derivedFrom: id}, options)
       else
         @derive(options)
 
