@@ -158,7 +158,7 @@ define (require) ->
 
         options = _.extend({at: index}, options)
 
-        @get('contents').remove(page)
+        parent.get('contents').remove(page)
         parent.create({title: title, derivedFrom: id}, options)
       else
         @derive(options)

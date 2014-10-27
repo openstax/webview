@@ -23,7 +23,8 @@ define (require) ->
         container: @itemViewContainer
 
       super()
-      @listenTo(@model, 'change:unit change:title change:expanded', @render)
+
+      @listenTo(@model, 'change:unit change:title change:expanded sync:contents', @render)
 
     onRender: () ->
       super()
