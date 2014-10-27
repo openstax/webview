@@ -90,17 +90,25 @@
   <dt>Copyright Holders:</dt>
     <dd>
       <div class="licensors">
+      {{~#unless editable~}}
         {{#each licensors}}
           <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
         {{/each}}
+        {{~else~}}
+          <input type="hidden" data-placeholder="Add Copyright Holders" value="{{#each licensors}}{{#if @index}},{{/if}}{{id}}{{/each}}" />
+        {{~/unless~}}
       </div>
     </dd>
   <dt>Maintainers:</dt>
     <dd>
-      <div>
+      <div class="maintainers">
+        {{~#unless editable~}}
         {{#each maintainers}}
           <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
         {{/each}}
+        {{~else~}}
+          <input type="hidden" data-placeholder="Add Maintainers" value="{{#each maintainers}}{{#if @index}},{{/if}}{{id}}{{/each}}" />
+        {{~/unless~}}
       </div>
     </dd>
   <dt>Latest Version:</dt>

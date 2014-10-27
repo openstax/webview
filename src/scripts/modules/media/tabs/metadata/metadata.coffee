@@ -15,10 +15,12 @@ define (require) ->
   # but we need to keep the name and the id for each user
   users = {}
 
-  # Store authors in a Backbone Collection since Select2 does not
+  # Store authors, licensors and maintainers in Backbone Collections since Select2 does not
   # allow storing more than an id on a tag, but we need to send
-  # the full author object on save
+  # the full objects on save
   authorsCollection = new Backbone.Collection()
+  licensorsCollection = new Backbone.Collection()
+  maintainersCollection = new Backbone.Collection()
 
   return class MetadataView extends FooterTabView
     template: template
@@ -65,47 +67,69 @@ define (require) ->
       '.authors > input':
         value: 'authors'
         type: 'select2'
-        select2: () ->
-          authorsCollection.add(@getProperty('authors'))
-          authors = _.map @getProperty('authors'), (item) ->
-            if typeof item is 'string'
-              return users[item]
-            else
-              user = {id: item.id, text: item.fullname or item.id}
-              users["#{user.id}"] = user
-              return user
-
-          _.extend {}, s2Multi,
-            id: (item) -> item.id
-            # data: authors
-            initSelection: (el, cb) -> cb(authors)
-            multiple: true
-            formatResult: (item, $container, query) -> $('<div></div>').append(item.text)
-            ajax:
-              url: "//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}/users/search"
-              dataType: 'json'
-              params:
-                xhrFields:
-                  withCredentials: true
-              data: (term, page) ->
-                q: term # search term
-
-              results: (data, page) -> # parse the results into the format expected by Select2.
-                authorsCollection.add(data.users)
-                return {
-                  results: _.map data.users, (item) ->
-                    user = {id: item.id, text: item.fullname or item.id}
-                    users["#{user.id}"] = user
-                    return user
-                }
-
+        select2: () -> @getUsers(authorsCollection, 'authors')
         setValue: (property, value, options) ->
           authors = []
-
           _.each value, (author) ->
             authors.push(authorsCollection.get(author).toJSON())
-
           return authors
+
+
+      '.licensors > input':
+        value: 'licensors'
+        type: 'select2'
+        select2: () -> @getUsers(licensorsCollection, 'licensors')
+        setValue: (property, value, options) ->
+          licensors = []
+          _.each value, (licensor) ->
+            licensors.push(licensorsCollection.get(licensor).toJSON())
+          return licensors
+
+
+      '.maintainers > input':
+        value: 'maintainers'
+        type: 'select2'
+        select2: () -> @getUsers(maintainersCollection, 'maintainers')
+        setValue: (property, value, options) ->
+          maintainers = []
+          _.each value, (maintainer) ->
+            maintainers.push(maintainersCollection.get(maintainer).toJSON())
+          return maintainers
+
+
+    getUsers: (collection,role) ->
+      collection.add(@getProperty(role))
+      userRoles = _.map @getProperty(role), (item) ->
+        if typeof item is 'string'
+          return users[item]
+        else
+          user = {id: item.id, text: item.fullname or item.id}
+          users["#{user.id}"] = user
+          return user
+
+      _.extend {}, s2Multi,
+        id: (item) -> item.id
+        initSelection: (el, cb) -> cb(userRoles)
+        multiple: true
+        formatResult: (item, $container, query) -> $('<div></div>').append(item.text)
+        ajax:
+          url: "//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}/users/search"
+          dataType: 'json'
+          params:
+            xhrFields:
+              withCredentials: true
+          data: (term, page) ->
+            q: term # search term
+
+          results: (data, page) -> # parse the results into the format expected by Select2.
+            collection.add(data.users)
+            return {
+              results: _.map data.users, (item) ->
+                user = {id: item.id, text: item.fullname or item.id}
+                users["#{user.id}"] = user
+                return user
+            }
+
 
     initialize: () ->
       super()
