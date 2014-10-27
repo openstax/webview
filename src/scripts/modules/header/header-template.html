@@ -2,6 +2,7 @@
   <div class="login">
     <ul>
       {{#if username}}
+        <li><a data-bypass="true" href="{{accountProfile}}">Account Profile</a></li>
         <li><a data-bypass="true" href="/logout">Log Out {{username}}</a></li>
       {{else}}
         <li><a data-bypass="true" href="/login">Login</a></li>

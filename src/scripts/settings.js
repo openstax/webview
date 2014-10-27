@@ -46,7 +46,9 @@
         'concepts_of_biology': 'b3c1e1d2-839c-42b0-a314-e119a8aafbdd@8.39',
         'anatomy_and_physiology': '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@6.19',
         'introductory_statistics': '30189442-6998-4686-ac05-ed152b91b9de@17.20'
-      }
+      },
+
+      accountProfile: 'https://accounts.cnx.org/profile'
     };
 
   });
