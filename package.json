@@ -1,6 +1,6 @@
 {
   "name": "connexions-webview",
-  "version": "0.10.3",
+  "version": "0.10.4-dev",
   "description": "Connexions (cnx.org) web site",
   "scripts": {
     "prepublish": "bower install; grunt aloha --verbose",
