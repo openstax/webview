@@ -102,13 +102,13 @@
   <dt>Maintainers:</dt>
     <dd>
       <div class="maintainers">
-        {{~#unless editable~}}
-        {{#each maintainers}}
-          <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
-        {{/each}}
-        {{~else~}}
-          <input type="hidden" data-placeholder="Add Maintainers" value="{{#each maintainers}}{{#if @index}},{{/if}}{{id}}{{/each}}" />
-        {{~/unless~}}
+    {{~#unless editable~}}
+      {{#each publishers}}
+        <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
+      {{/each}}
+      {{~else~}}
+        <input type="hidden" data-placeholder="Add Maintainers" value="{{#each publishers}}{{#if @index}},{{/if}}{{id}}{{/each}}" />
+      {{~/unless~}}
       </div>
     </dd>
   <dt>Latest Version:</dt>

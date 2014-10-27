@@ -15,12 +15,12 @@ define (require) ->
   # but we need to keep the name and the id for each user
   users = {}
 
-  # Store authors, licensors and maintainers in Backbone Collections since Select2 does not
+  # Store authors, licensors and publishers in Backbone Collections since Select2 does not
   # allow storing more than an id on a tag, but we need to send
   # the full objects on save
   authorsCollection = new Backbone.Collection()
   licensorsCollection = new Backbone.Collection()
-  maintainersCollection = new Backbone.Collection()
+  publishersCollection = new Backbone.Collection()
 
   return class MetadataView extends FooterTabView
     template: template
@@ -74,7 +74,6 @@ define (require) ->
             authors.push(authorsCollection.get(author).toJSON())
           return authors
 
-
       '.licensors > input':
         value: 'licensors'
         type: 'select2'
@@ -85,17 +84,15 @@ define (require) ->
             licensors.push(licensorsCollection.get(licensor).toJSON())
           return licensors
 
-
       '.maintainers > input':
-        value: 'maintainers'
+        value: 'publishers'
         type: 'select2'
-        select2: () -> @getUsers(maintainersCollection, 'maintainers')
+        select2: () -> @getUsers(publishersCollection, 'publishers')
         setValue: (property, value, options) ->
-          maintainers = []
-          _.each value, (maintainer) ->
-            maintainers.push(maintainersCollection.get(maintainer).toJSON())
-          return maintainers
-
+          publishers = []
+          _.each value, (publisher) ->
+            publishers.push(publishersCollection.get(publisher).toJSON())
+          return publishers
 
     getUsers: (collection,role) ->
       collection.add(@getProperty(role))
