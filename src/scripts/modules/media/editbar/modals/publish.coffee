@@ -22,11 +22,13 @@ define (require) ->
       'submit form': 'onSubmit'
       'change .collection-checkbox': 'toggleBook'
       'change .publish-contents input': 'togglePage'
+      'change .required' : 'validate'
 
     initialize: () ->
       super()
 
       @listenTo(@model, 'removeNode moveNode add:contents', @render)
+
 
     onRender: () ->
       @regions.contents.show(new PublishedListSectionView({model: @model}))
@@ -71,3 +73,15 @@ define (require) ->
       if not $(e.currentTarget).is(':checked')
         # Uncheck the book
         @$el.find('.collection-checkbox').prop('checked', false)
+        $(e.currentTarget).addClass('required')
+
+    validate: () ->
+      requiredTextBox = @$el.find('textarea.required').val()
+      submitBtn = @$el.find('.btn-submit')
+      requiredCheckboxes = @$el.find('input[type="checkbox"].required')
+      requiredCheckboxesThatAreChecked = @$el.find('.required:checked')
+
+      if requiredCheckboxes.length == requiredCheckboxesThatAreChecked.length and requiredTextBox.length > 0
+        submitBtn.removeAttr('disabled')
+      else
+        submitBtn.prop('disabled',true)
