@@ -1,4 +1,4 @@
-describe('backbone views editable helper tests', function () {
+describe('backbone base view helper tests', function () {
   'use strict';
   var Backbone, BaseView, $,
     should = chai.should();
@@ -141,10 +141,11 @@ describe('backbone views editable helper tests', function () {
       myBase.summary = 'summary';
       myBase.addMetaTags();
       document.querySelector('meta[property=\'og:url\']').getAttribute('content').should.equal(loc);
-      document.querySelector('meta[property=\'og:title\']').getAttribute('content').should.equal('Meta tag tests');
+      document.querySelector('meta[property=\'og:title\']').getAttribute('content').should.equal('Meta tag ' +
+        'tests');
       document.querySelector('meta[property=\'og:description\']').getAttribute('content').should.equal('summary');
-      document.querySelector('meta[property=\'og:image\']').getAttribute('content').should.equal(
-        'file:///images/social/logo.png');
+      document.querySelector('meta[property=\'og:image\']').getAttribute('content').should.equal('file:///' +
+        'images/social/logo.png');
     });
     it('should set description meta data', function () {
       var myBase = new BaseView();
@@ -164,14 +165,17 @@ describe('backbone views editable helper tests', function () {
       myBase.addMetaTags();
       document.querySelector('meta[property=\'og:url\']').getAttribute('content').should.equal(loc);
       document.querySelectorAll('meta[property=\'og:url\']').length.should.equal(1);
-      document.querySelector('meta[property=\'og:title\']').getAttribute('content').should.equal('Meta tag tests');
+      document.querySelector('meta[property=\'og:title\']').getAttribute('content').should.equal('Meta tag ' +
+        'tests');
       document.querySelectorAll('meta[property=\'og:title\']').length.should.equal(1);
-      document.querySelector('meta[property=\'og:description\']').getAttribute('content').should.equal('second summary');
+      document.querySelector('meta[property=\'og:description\']').getAttribute('content').should.equal('second' +
+        ' summary');
       document.querySelectorAll('meta[property=\'og:description\']').length.should.equal(1);
-      document.querySelector('meta[property=\'og:image\']').getAttribute('content').should.equal(
-        'file:///images/social/logo.png');
+      document.querySelector('meta[property=\'og:image\']').getAttribute('content').should.equal('file:///' +
+        'images/social/logo.png');
       document.querySelectorAll('meta[property=\'og:image\']').length.should.equal(1);
-      document.querySelector('meta[name=\'description\']').getAttribute('content').should.equal('second description');
+      document.querySelector('meta[name=\'description\']').getAttribute('content').should.equal('second ' +
+        'description');
       document.querySelectorAll('meta[name=\'description\']').length.should.equal(1);
     });
   });
