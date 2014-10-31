@@ -18,23 +18,6 @@ describe('backbone history helper tests', function () {
       history.getFragment('#weird route      ', null).should.equal('weird route');
       history.getFragment('should_not_be_changed', null).should.equal('should_not_be_changed');
     });
-    it('should create fragment', function () {
-      // root is not at the beginning of pathname
-      var myPath = history.location.pathname;
-      var mySearch = history.location.search;
-      var myRoot = history.root;
-      history.root = 'myRoot';
-      var newFragment = myPath + mySearch;
-      newFragment = newFragment.replace(/^[#\/]|\s+$/g, '');
-      history.getFragment(null, null).should.equal(newFragment);
-
-      // root is at the beginning of pathname, should be sliced off
-      history.root = myPath.slice(0, 5);
-      history.getFragment(null, null).should.equal(newFragment.slice(5));
-
-      // reset root to its original state
-      history.root = myRoot;
-    });
   });
   describe('navigate tests', function () {
     it('should not do anything', function () {
