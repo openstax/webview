@@ -95,7 +95,6 @@ define (require) ->
             html += "<p> </p>" # Allow putting cursor after a Blockish. removed if empty.
             $editable.html(html)
             $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
-
             # Unwrap <section> elements into h# elements
             # There are 3 cases:
             # 1. <section><h#>
@@ -139,16 +138,15 @@ define (require) ->
 
             # Update the model if an event for this editable was triggered
             Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
-              isItThisEditable = d.editable.obj.is($editable)
-              isItThisEditable = isItThisEditable or $.contains($editable[0], d.editable.obj[0])
 
-              # If you're having blur problems I feel bad for you son: d.triggerType != 'blur'
-              if isItThisEditable
+              if d.triggerType isnt 'blur'
                 # Update the model by retrieving the XHTML contents
                 editableBody = alohaEditable.getContents()
                 editableBody = editableBody.trim() # Trim for idempotence
                 # Change the contents but do not update the Aloha editable area
                 setValue.call(@, property, editableBody, options)
+
+
 
 
   return class EditableView extends MediaComponentView
