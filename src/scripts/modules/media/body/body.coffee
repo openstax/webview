@@ -27,6 +27,10 @@ define (require) ->
       'click a': 'changePage'
       'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
       'click .solution              > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
+      'keydown .media-body' : 'removeDataTextAttribute'
+
+    removeDataTextAttribute: () ->
+      $('.media-body').removeAttr('data-text')
 
     initialize: () ->
       super()
