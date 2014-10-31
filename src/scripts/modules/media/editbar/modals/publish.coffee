@@ -22,7 +22,8 @@ define (require) ->
       'submit form': 'onSubmit'
       'change .collection-checkbox': 'toggleBook'
       'change .publish-contents input': 'togglePage'
-      'change .required' : 'validate'
+      'keyup textarea.required' : 'validate'
+      'change input[type="checkbox"].required' : 'validate'
 
     initialize: () ->
       super()
