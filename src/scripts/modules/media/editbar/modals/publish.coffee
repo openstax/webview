@@ -81,7 +81,7 @@ define (require) ->
       requiredCheckboxes = @$el.find('input[type="checkbox"].required')
       requiredCheckboxesThatAreChecked = @$el.find('.required:checked')
 
-      if requiredCheckboxes.length == requiredCheckboxesThatAreChecked.length and requiredTextBox.length > 0
+      if requiredCheckboxes.length is requiredCheckboxesThatAreChecked.length and requiredTextBox.length > 0
         submitBtn.removeAttr('disabled')
       else
         submitBtn.prop('disabled',true)
