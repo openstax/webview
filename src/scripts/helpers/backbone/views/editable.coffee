@@ -91,9 +91,10 @@ define (require) ->
           $editable.text('Starting up Aloha...')
           # Wait for Aloha to start up
           Aloha.ready () =>
+            placeholder = 'Enter content here. Format content, and drag and drop elements from the tool bar.'
             html = @getProperty(property) or ''
             html += "<p> </p>" # Allow putting cursor after a Blockish. removed if empty.
-            $editable.attr('data-text','Enter content here. Format content, and drag and drop elements from the tool bar.')
+            $editable.attr('data-text', placeholder)
             $editable.html(html)
             $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
             # Unwrap <section> elements into h# elements
