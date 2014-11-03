@@ -18,6 +18,7 @@ define (require) ->
         page = @model.asPage()
         if page then page.get('loaded') else @model.get('loaded')
 
+
     editable:
       '.media-body':
         value: () -> 'content'
@@ -26,7 +27,7 @@ define (require) ->
     events:
       'click a': 'changePage'
       'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
-      'click .solution              > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
+      'click .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
 
     initialize: () ->
       super()

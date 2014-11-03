@@ -1,7 +1,10 @@
 @import "../../../../styles/variables.less";
 
-.editbar .navbar > .container-fluid {
-  max-width: @max-viewport-width;
+.editbar .navbar {
+  background: #ffc;
+
+  > .container-fluid {
+   max-width: @max-viewport-width;
 
   > .navbar-collapse {
     height: 1px;
@@ -14,7 +17,9 @@
       width: 12.3rem;
       text-align: left;
     }
+
   }
+}
 
   // These are the draggable HTML templates that are styled to look like buttons
   .semantic-drag-source {
@@ -32,4 +37,3 @@
   }
 
 }
-

@@ -25,7 +25,7 @@ define (require) ->
       else
         content = new Page
           title: options.title
-          content: '<p>Please change this new Page</p>'
+          content: ' '
 
       content.save()
       .fail(() -> alert('There was a problem saving. Please try again'))
