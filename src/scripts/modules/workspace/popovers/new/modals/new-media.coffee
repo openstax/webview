@@ -25,7 +25,7 @@ define (require) ->
       else
         content = new Page
           title: options.title
-          #content: '<p>Enter some content here. Format content, and drag and drop elements from the toolbar.</p>'
+          content: '<p>Enter some content here. Format content, and drag and drop elements from the toolbar.</p>'
 
       content.save()
       .fail(() -> alert('There was a problem saving. Please try again'))
