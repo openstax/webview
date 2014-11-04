@@ -67,7 +67,7 @@ define (require) ->
       '.authors > input':
         value: 'authors'
         type: 'select2'
-        select2: () -> @getUsers(authorsCollection, 'authors')
+        select2: () -> @getUsers({collection: authorsCollection, role: 'authors', critical: true})
         setValue: (property, value, options) ->
           authors = []
           _.each value, (author) ->
@@ -77,7 +77,7 @@ define (require) ->
       '.licensors > input':
         value: 'licensors'
         type: 'select2'
-        select2: () -> @getUsers(licensorsCollection, 'licensors')
+        select2: () -> @getUsers({collection: licensorsCollection, role: 'licensors', critical: true})
         setValue: (property, value, options) ->
           licensors = []
           _.each value, (licensor) ->
@@ -87,22 +87,29 @@ define (require) ->
       '.maintainers > input':
         value: 'publishers'
         type: 'select2'
-        select2: () -> @getUsers(publishersCollection, 'publishers')
+        select2: () -> @getUsers({collection: publishersCollection, role: 'publishers'})
         setValue: (property, value, options) ->
           publishers = []
           _.each value, (publisher) ->
             publishers.push(publishersCollection.get(publisher).toJSON())
           return publishers
 
-    getUsers: (collection,role) ->
-      collection.add(@getProperty(role))
-      userRoles = _.map @getProperty(role), (item) ->
+    getUsers: (options = {}) ->
+      collection = options.collection
+
+      roles = @getProperty(options.role)
+      collection.add(roles)
+
+      userRoles = _.map roles, (item) ->
         if typeof item is 'string'
           return users[item]
         else
           user = {id: item.id, text: item.fullname or item.id}
           users["#{user.id}"] = user
           return user
+
+      if options.critical and userRoles.length is 1
+        userRoles[0].locked = true
 
       _.extend {}, s2Multi,
         id: (item) -> item.id
