@@ -222,15 +222,22 @@ define (require) ->
 
     isSaveable: () -> !!@get('mediaType')
 
+    isPageDerivedCopy: () -> @get('currentPage')
+
+
     isEditable: () ->
       if not @get('loaded') and not @isSection()
         editable = false
-      else if @get('editable')
+      else if @get('editable') and @isPageDerivedCopy() is undefined
+        editable = true
+      else if @get('editable') and @isPageDerivedCopy() is null
         editable = true
       else if (@isDraft() or @isSection()) and @get('_parent')?.isEditable()
         editable = true
       else
         editable = false
+
+      console.log @isPageDerivedCopy()
 
       return editable
 
