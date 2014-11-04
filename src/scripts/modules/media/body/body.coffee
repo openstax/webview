@@ -7,6 +7,7 @@ define (require) ->
   require('less!./body')
 
   return class MediaBodyView extends EditableView
+
     media: 'page'
     template: template
     templateHelpers:
@@ -31,7 +32,6 @@ define (require) ->
 
     initialize: () ->
       super()
-
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
 
