@@ -1,10 +1,16 @@
 <div class="media-title{{#is status 'publishing'}} publishing{{/is}}">
   {{#if loaded}}
     {{#if authenticated}}
-      {{#if derivable}}
-        <div class="derive tool">
-          <a class="btn">Derive an Editable Copy</a>
+      {{#if editable}}
+        <div class="edit tool">
+          <a class="btn">Edit</a>
         </div>
+      {{else}}
+        {{#if derivable}}
+          <div class="derive tool">
+            <a class="btn">Derive an Editable Copy</a>
+          </div>
+        {{/if}}
       {{/if}}
     {{/if}}
 

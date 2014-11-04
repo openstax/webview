@@ -9,9 +9,13 @@ define (require) ->
   settings = require('settings')
   socialMedia = require('cs!helpers/socialmedia.coffee')
   linksHelper = require('cs!helpers/links.coffee')
+  $ = require('jquery')
   require('less!./title')
 
+  session = session.get('id')
+
   return class MediaTitleView extends EditableView
+
     template: template
 
     templateHelpers: () ->
@@ -22,9 +26,30 @@ define (require) ->
         share: socialMedia.socialMediaInfo(@parent.summary(),title,locationOrigin)
         encodedTitle: encodeURI(title)
         derivable: not @model.isDraft()
-        authenticated: session.get('id')
+        authenticated: session
         isBook: @model.isBook()
+        editable: @canEdit(@model)
+
       }
+
+    canEdit: (model) ->
+      if not model.isDraft()
+        url = "#{location.protocol}//#{settings.cnxarchive.host}/extras/#{model.getVersionedId()}"
+        canPublish = []
+
+        $.ajax
+          type: 'GET'
+          dataType: 'json'
+          url: url
+          async: false
+          success: (data) ->
+            canPublish.push(data.canPublish[0])
+
+         i = 0
+         while i < canPublish.length
+           if canPublish[i] is session
+             return true
+           i++
 
 
     editable:
@@ -34,6 +59,11 @@ define (require) ->
 
     events:
       'click .derive .btn': 'derive'
+      'click .edit .btn' : 'edit'
+
+    edit: () ->
+      @model.set({'editable': true })
+      @model.get('currentPage')?.set({'editable' : true })
 
     initialize: () ->
       super()
