@@ -9,6 +9,7 @@
     "tests"
   ],
   "dependencies": {
+    "coffeescript": "~1.8.0",
     "jquery": "~2.1.1",
     "lodash": "~2.4.1",
     "backbone": "~1.1.2",
@@ -28,5 +29,8 @@
     "chai": "~1.9.1",
     "mocha": "~2.0.1",
     "sinonjs": "~1.10.2"
+  },
+  "resolutions": {
+    "coffeescript": "~1.8.0"
   }
 }
