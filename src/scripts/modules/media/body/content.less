@@ -201,7 +201,7 @@ figure[data-orient="vertical"] {
     // The default item separator for block items is nothing
   }
   .item-sep(inline) {
-    &:not([data-item-sep]) > [data-type="item"]:not(:last-child)::after {
+    &:not([data-item-sep]) > span[data-type="item"]:not(:last-child)::after {
       content: @default-inline-list-item-sep;
     }
     &[data-item-sep] > [data-type="item"]:not(:last-child)::after {
