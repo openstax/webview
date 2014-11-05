@@ -7,7 +7,6 @@ define (require) ->
   require('less!./body')
 
   return class MediaBodyView extends EditableView
-
     media: 'page'
     template: template
     templateHelpers:

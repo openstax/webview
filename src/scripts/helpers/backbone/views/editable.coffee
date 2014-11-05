@@ -180,8 +180,6 @@ define (require) ->
     onUneditable: () -> # noop
 
     _toggleEditable: () ->
-
-
       editable = @model.isEditable()
 
       # Only toggle the editable state if it really changed
