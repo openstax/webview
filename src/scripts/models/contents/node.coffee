@@ -108,6 +108,7 @@ define (require) ->
       else
         xhr = $.Deferred().resolve().promise()
 
+      console.log xhr
       return xhr
 
     get: (attr) ->
@@ -174,6 +175,7 @@ define (require) ->
       if version then version = "@#{version}" else version = ''
 
       return "#{id}#{version}"
+      #return "#{id}"
 
     getUuid: () ->
       components = @_getIdComponents()

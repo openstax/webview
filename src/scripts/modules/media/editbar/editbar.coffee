@@ -56,7 +56,7 @@ define (require) ->
 
 
     save: () ->
-      @model.save()
+      @model.save() #AMW
 
     revert: () ->
       model = @model # `@model` is cleared when editable is set to false

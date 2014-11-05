@@ -62,8 +62,8 @@ define (require) ->
       'click .edit .btn' : 'edit'
 
     edit: () ->
-      @model.set({'editable': true })
-      @model.get('currentPage')?.set({'editable' : true })
+      @model.set({ 'editable': true })
+      @model.get('currentPage')?.set({ 'editable' : true })
 
     initialize: () ->
       super()
