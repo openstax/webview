@@ -108,7 +108,6 @@ define (require) ->
       else
         xhr = $.Deferred().resolve().promise()
 
-      console.log xhr
       return xhr
 
     get: (attr) ->
@@ -162,6 +161,19 @@ define (require) ->
       .done (response) ->
         options.success?(response)
 
+     editPublishedContent: (options = {}) ->
+       data = JSON.stringify({id: @get('id')})
+
+       $.ajax
+         type: 'POST'
+         dataType: 'json'
+         xhrFields:
+           withCredentials: true
+         url: "#{AUTHORING}/users/contents"
+         data: data
+       .done (response) ->
+         options.success?(response)
+
     #
     # Utility Methods
     #
@@ -175,7 +187,6 @@ define (require) ->
       if version then version = "@#{version}" else version = ''
 
       return "#{id}#{version}"
-      #return "#{id}"
 
     getUuid: () ->
       components = @_getIdComponents()

@@ -27,7 +27,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:changed change:childChanged', @render)
+      @listenTo(@model, 'change:changed change:childChanged change:editable', @render)
 
     onRender: () ->
       super()
@@ -56,7 +56,7 @@ define (require) ->
 
 
     save: () ->
-      @model.save() #AMW
+      @model.save()
 
     revert: () ->
       model = @model # `@model` is cleared when editable is set to false

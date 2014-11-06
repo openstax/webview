@@ -103,7 +103,7 @@ define (require) ->
       # save args for call to `super()`
       args = arguments
       # First, save all the models in the collection
-      promises = _.map @get('contents')?.models, (model) -> model.save() #AMW
+      promises = _.map @get('contents')?.models, (model) -> model.save()
 
       # Save the collection once all the models have completed saving
       return $.when(promises...).then () =>

@@ -62,13 +62,21 @@ define (require) ->
       'click .edit .btn' : 'edit'
 
     edit: () ->
-      @model.set({ 'editable': true })
-      @model.get('currentPage')?.set({ 'editable' : true })
+      @model.set('editable', true)
+      @editPublishedContent()
+      @model.fetch() #Don't think this should be used here... AMW
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:loaded change:title', @render)
       @listenTo(router, 'navigate', @render)
+
+    editPublishedContent: () ->
+      options =
+        success: (model) ->
+          router.navigate("/contents/#{model.id}@draft", {trigger: true})
+
+      @model.editPublishedContent(options)
 
     derive: () ->
       options =
