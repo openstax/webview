@@ -222,8 +222,6 @@ define (require) ->
 
     isSaveable: () -> !!@get('mediaType')
 
-    isPageDraft: () -> @get('currentPage')?.get('state')
-
 
     isEditable: () ->
       if not @get('loaded') and not @isSection()
