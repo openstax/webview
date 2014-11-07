@@ -27,7 +27,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:changed change:childChanged change:editable', @render)
+      @listenTo(@model, 'change:changed change:childChanged', @render)
 
     onRender: () ->
       super()
