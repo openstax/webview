@@ -148,22 +148,7 @@ define (require) ->
 
       return results
 
-    derive: (options = {}) ->
-      data = JSON.stringify({derivedFrom: @get('id')})
-
-      $.ajax
-        type: 'POST'
-        dataType: 'json'
-        xhrFields:
-          withCredentials: true
-        url: "#{AUTHORING}/users/contents"
-        data: data
-      .done (response) ->
-        options.success?(response)
-
-     editPublishedContent: (options = {}) ->
-       data = JSON.stringify({id: @get('id')})
-
+     editOrDeriveContent: (options = {}, data) ->
        $.ajax
          type: 'POST'
          dataType: 'json'
@@ -173,7 +158,6 @@ define (require) ->
          data: data
        .done (response) ->
          options.success?(response)
-
     #
     # Utility Methods
     #

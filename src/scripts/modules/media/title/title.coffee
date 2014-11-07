@@ -60,27 +60,24 @@ define (require) ->
       'click .derive .btn': 'derive'
       'click .edit .btn' : 'edit'
 
-    edit: () ->
-      @model.set('editable', true)
-      @editPublishedContent()
-      @model.fetch() #Don't think this should be used here... AMW
-
     initialize: () ->
       super()
       @listenTo(@model, 'change:loaded change:title', @render)
       @listenTo(router, 'navigate', @render)
 
-    editPublishedContent: () ->
+    edit: () ->
+      data = JSON.stringify({id: @model.get('id')})
       options =
         success: (model) ->
           router.navigate("/contents/#{model.id}@draft", {trigger: true})
 
-      @model.editPublishedContent(options)
+      @model.editOrDeriveContent(options, data)
 
     derive: () ->
+      data = JSON.stringify({derivedFrom: @get('id')})
       options =
         success: (model) ->
           router.navigate("/contents/#{model.id}@#{model.version}", {trigger: true})
 
       # Derive a copy of the book and then navigate to it
-      @model.derive(options)
+      @model.editOrDeriveContent(options, data)

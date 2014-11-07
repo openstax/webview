@@ -154,7 +154,7 @@ define (require) ->
 
     initialize: () ->
       super()
-
+      
       @listenTo(@model, 'change:editable', @_toggleEditable)
       # Cannot makeUneditable `change:currentPage` because this event
       # is fired even when `changeCurrentPage.title` changes
