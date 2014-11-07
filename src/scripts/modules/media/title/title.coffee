@@ -43,13 +43,12 @@ define (require) ->
           url: url
           async: false
           success: (data) ->
-            canPublish.push(data.canPublish[0])
+            canPublish.push(data.canPublish)
 
-         i = 0
-         while i < canPublish.length
-           if canPublish[i] is session
-             return true
-           i++
+        users = canPublish.toString()
+
+        if users.indexOf(session) >= 0
+          return true
 
 
     editable:
