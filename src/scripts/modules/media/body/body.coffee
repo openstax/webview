@@ -31,7 +31,6 @@ define (require) ->
 
     initialize: () ->
       super()
-
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
 
