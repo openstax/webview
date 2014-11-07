@@ -148,17 +148,17 @@ define (require) ->
 
       return results
 
-     editOrDeriveContent: (options = {}, data) ->
-       $.ajax
-         type: 'POST'
-         dataType: 'json'
-         xhrFields:
-           withCredentials: true
-         url: "#{AUTHORING}/users/contents"
-         data: data
-       .done (response) ->
-         options.success?(response)
-         
+    editOrDeriveContent: (options = {}, data) ->
+      $.ajax
+        type: 'POST'
+        dataType: 'json'
+        xhrFields:
+          withCredentials: true
+        url: "#{AUTHORING}/users/contents"
+        data: data
+      .done (response) ->
+        options.success?(response)
+
     #
     # Utility Methods
     #
