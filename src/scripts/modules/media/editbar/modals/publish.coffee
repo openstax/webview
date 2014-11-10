@@ -23,7 +23,7 @@ define (require) ->
       'change .collection-checkbox': 'toggleBook'
       'change .publish-contents input': 'togglePage'
       'keyup textarea.required' : 'validate'
-      'change input[type="checkbox"].required' : 'validate'
+      'change input[type="checkbox"].required, input[type="checkbox"].collection-checkbox, input[type="checkbox"].page-checkbox' : 'validate'
 
     initialize: () ->
       super()
@@ -74,15 +74,15 @@ define (require) ->
       if not $(e.currentTarget).is(':checked')
         # Uncheck the book
         @$el.find('.collection-checkbox').prop('checked', false)
-        $(e.currentTarget).addClass('required')
 
     validate: () ->
       requiredTextBox = @$el.find('textarea.required').val()
       submitBtn = @$el.find('.btn-submit')
-      requiredCheckboxes = @$el.find('input[type="checkbox"].required')
-      requiredCheckboxesThatAreChecked = @$el.find('.required:checked')
+      requiredCheckboxes = @$el.find('.required:checked')
+      pageCheckbox = @$el.find('.page-checkbox:checked')
+      collectionCheckbox = @$el.find('.collection-checkbox:checked')
 
-      if requiredCheckboxes.length is requiredCheckboxesThatAreChecked.length and requiredTextBox.length > 0
+      if (requiredCheckboxes.length > 0 and requiredTextBox.length > 0) and pageCheckbox.length > 0 or collectionCheckbox.length > 0
         submitBtn.removeAttr('disabled')
       else
         submitBtn.prop('disabled',true)
