@@ -22,8 +22,8 @@ define (require) ->
       'submit form': 'onSubmit'
       'change .collection-checkbox': 'toggleBook'
       'change .publish-contents input': 'togglePage'
-      'keyup textarea.required' : 'validate'
-      'change input[type="checkbox"].required, input[type="checkbox"].collection-checkbox, input[type="checkbox"].page-checkbox' : 'validate'
+      'keyup textarea' : 'validate'
+      'change input[type="checkbox"]' : 'validate'
 
     initialize: () ->
       super()
@@ -76,13 +76,12 @@ define (require) ->
         @$el.find('.collection-checkbox').prop('checked', false)
 
     validate: () ->
-      requiredTextBox = @$el.find('textarea.required').val()
+      textArea = @$el.find('textarea').val()
       submitBtn = @$el.find('.btn-submit')
-      requiredCheckboxes = @$el.find('.required:checked')
-      pageCheckbox = @$el.find('.page-checkbox:checked')
-      collectionCheckbox = @$el.find('.collection-checkbox:checked')
+      license = @$el.find('input[name="license"]:checked')
+      collection = @$el.find('.name-wrapper').children('input[type="checkbox"]:checked')
 
-      if (requiredCheckboxes.length > 0 and requiredTextBox.length > 0) and pageCheckbox.length > 0 or collectionCheckbox.length > 0
+      if license.length > 0 and textArea.length > 0 and collection.length > 0
         submitBtn.removeAttr('disabled')
       else
         submitBtn.prop('disabled',true)
