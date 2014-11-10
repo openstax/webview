@@ -180,7 +180,12 @@ define (require) ->
     onUneditable: () -> # noop
 
     _toggleEditable: () ->
-      editable = @model.isEditable()
+
+      if @model.get('loaded')
+        if @model.asPage().get('version') isnt 'draft'
+          editable = false
+        else
+          editable = @model.isEditable()
 
       # Only toggle the editable state if it really changed
       if editable is @_editable then return
