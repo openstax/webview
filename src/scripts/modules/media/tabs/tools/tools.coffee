@@ -12,7 +12,7 @@ define (require) ->
     templateHelpers: () -> {
       authenticated: session.get('id')
       encodedTitle: encodeURI(@model.get('title'))
-      derivable: not @model.isBook()
+      derivable: not @model.get('currentPage') is undefined
       isDraft: @model.isDraft()
     }
 

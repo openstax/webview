@@ -30,7 +30,6 @@ define (require) ->
 
       @listenTo(@model, 'removeNode moveNode add:contents', @render)
 
-
     onRender: () ->
       @regions.contents.show(new PublishedListSectionView({model: @model}))
 

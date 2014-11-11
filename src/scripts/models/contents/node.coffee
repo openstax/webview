@@ -148,9 +148,7 @@ define (require) ->
 
       return results
 
-    derive: (options = {}) ->
-      data = JSON.stringify({derivedFrom: @get('id')})
-
+    editOrDeriveContent: (options = {}, data) ->
       $.ajax
         type: 'POST'
         dataType: 'json'
