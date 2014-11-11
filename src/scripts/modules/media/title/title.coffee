@@ -74,7 +74,7 @@ define (require) ->
       @model.editOrDeriveContent(options, data)
 
     derive: () ->
-      data = JSON.stringify({derivedFrom: @get('id')})
+      data = JSON.stringify({derivedFrom: @model.get('id')})
       options =
         success: (model) ->
           router.navigate("/contents/#{model.id}@#{model.version}", {trigger: true})
