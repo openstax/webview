@@ -9,9 +9,12 @@ define (require) ->
   settings = require('settings')
   socialMedia = require('cs!helpers/socialmedia.coffee')
   linksHelper = require('cs!helpers/links.coffee')
+  $ = require('jquery')
   require('less!./title')
+  user = session.get('id')
 
   return class MediaTitleView extends EditableView
+
     template: template
 
     templateHelpers: () ->
@@ -22,10 +25,10 @@ define (require) ->
         share: socialMedia.socialMediaInfo(@parent.summary(),title,locationOrigin)
         encodedTitle: encodeURI(title)
         derivable: not @model.isDraft()
-        authenticated: session.get('id')
+        authenticated: user
         isBook: @model.isBook()
+        editable: @model.canEdit(user)
       }
-
 
     editable:
       '.media-title > .title > h1':
@@ -34,16 +37,26 @@ define (require) ->
 
     events:
       'click .derive .btn': 'derive'
+      'click .edit .btn' : 'edit'
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:loaded change:title', @render)
       @listenTo(router, 'navigate', @render)
 
+    edit: () ->
+      data = JSON.stringify({id: @model.get('id')})
+      options =
+        success: (model) ->
+          router.navigate("/contents/#{model.id}@draft", {trigger: true})
+
+      @model.editOrDeriveContent(options, data)
+
     derive: () ->
+      data = JSON.stringify({derivedFrom: @model.get('id')})
       options =
         success: (model) ->
           router.navigate("/contents/#{model.id}@#{model.version}", {trigger: true})
 
       # Derive a copy of the book and then navigate to it
-      @model.derive(options)
+      @model.editOrDeriveContent(options, data)

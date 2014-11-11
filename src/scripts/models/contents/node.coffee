@@ -148,9 +148,7 @@ define (require) ->
 
       return results
 
-    derive: (options = {}) ->
-      data = JSON.stringify({derivedFrom: @get('id')})
-
+    editOrDeriveContent: (options = {}, data) ->
       $.ajax
         type: 'POST'
         dataType: 'json'
@@ -222,6 +220,7 @@ define (require) ->
 
     isSaveable: () -> !!@get('mediaType')
 
+
     isEditable: () ->
       if not @get('loaded') and not @isSection()
         editable = false
@@ -235,3 +234,21 @@ define (require) ->
       return editable
 
     isInBook: () -> !!@get('book')
+
+
+    canEdit: (user) ->
+      if not @isDraft()
+        url = "#{location.protocol}//#{settings.cnxarchive.host}/extras/#{@getVersionedId()}"
+        canPublish = []
+        $.ajax
+          type: 'GET'
+          dataType: 'json'
+          url: url
+          async: false
+          success: (data) ->
+            canPublish.push(data.canPublish)
+
+        users = canPublish.toString()
+
+        if users.indexOf(user) >= 0
+          return true
