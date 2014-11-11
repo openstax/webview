@@ -10,7 +10,7 @@
         <div class="modal-body">
           <div class="form-group">
             <label class="checkbox">
-              <input type="checkbox" name="license" class="required"/>
+              <input type="checkbox" name="license"/>
                 <span>I license this work under the</span>
                 <a href="{{license.url}}">
                   Creative Commons Attribution License (CC-BY).
@@ -27,7 +27,7 @@
             </label>
           </div>
 
-          <textarea name="submitlog" class="form-control submitlog required" placeholder="Include a description of your changes (required)"></textarea>
+          <textarea name="submitlog" class="form-control submitlog" placeholder="Include a description of your changes (required)"></textarea>
 
           <div class="publish-list">
             <fieldset>
@@ -35,7 +35,7 @@
 
               <div>
                 <span class="name-wrapper">
-                  <input type="checkbox" name="{{id}}" checked="checked" class="collection-checkbox required"/>
+                  <input type="checkbox" name="{{id}}" checked="checked" class="collection-checkbox"/>
                   <span class="title" data-depth="{{depth}}">{{title}}</span>
                 </span>
               </div>
