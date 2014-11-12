@@ -6,14 +6,13 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./tools-template')
   require('less!./tools')
-  user = session.get('id')
 
   return class ToolsView extends BaseView
     template: template
     templateHelpers: () -> {
-      authenticated: user
+      authenticated: session.get('id')
       encodedTitle: encodeURI(@model.get('title'))
-      derivable: @model.canEdit(user)
+      derivable: @model.canEdit(session.get('id'))
       isDraft: @model.isDraft()
     }
 

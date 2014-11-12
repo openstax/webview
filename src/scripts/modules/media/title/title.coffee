@@ -11,15 +11,13 @@ define (require) ->
   linksHelper = require('cs!helpers/links.coffee')
   $ = require('jquery')
   require('less!./title')
-  user = session.get('id')
 
   return class MediaTitleView extends EditableView
-
     template: template
-
     templateHelpers: () ->
       title = @model.get('title')
       locationOrigin = linksHelper.locationOrigin()
+      user = session.get('id')
 
       return {
         share: socialMedia.socialMediaInfo(@parent.summary(),title,locationOrigin)

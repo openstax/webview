@@ -80,9 +80,11 @@ define (require) ->
             $.ajax
               url: "#{ARCHIVE}/extras/#{@getVersionedId()}"
               dataType: 'json'
+              async: false
             .done (response) =>
               @set('downloads', response.downloads)
               @set('isLatest', response.isLatest)
+              @set('canPublish', response.canPublish)
             .fail () =>
               @set('downloads', [])
 
@@ -237,18 +239,7 @@ define (require) ->
 
 
     canEdit: (user) ->
-      if not @isDraft()
-        url = "#{location.protocol}//#{settings.cnxarchive.host}/extras/#{@getVersionedId()}"
-        canPublish = []
-        $.ajax
-          type: 'GET'
-          dataType: 'json'
-          url: url
-          async: false
-          success: (data) ->
-            canPublish.push(data.canPublish)
-
-        users = canPublish.toString()
-
-        if users.indexOf(user) >= 0
+      if not @isDraft() and @get('loaded')
+        canPublish = @get('canPublish').toString()
+        if canPublish.indexOf(user) >= 0
           return true
