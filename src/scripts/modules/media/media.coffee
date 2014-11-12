@@ -64,7 +64,7 @@ define (require) ->
     updateSummary: () ->
       abstract = @model.get('abstract')
       if abstract
-        return $(abstract).text()
+        return $("<div>#{abstract}</div>").text()
       else
         return 'An OpenStax CNX book'
 
