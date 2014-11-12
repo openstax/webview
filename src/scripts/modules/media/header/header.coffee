@@ -53,6 +53,7 @@ define (require) ->
 
       @listenTo(@model, 'change:downloads change:buyLink change:title change:active', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
+      @listenTo(@model, 'change:abstract change:currentPage.abstract', @render)
       @listenTo(session, 'change', @render)
 
     onRender: () ->
