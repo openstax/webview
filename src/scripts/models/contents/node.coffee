@@ -80,7 +80,6 @@ define (require) ->
             $.ajax
               url: "#{ARCHIVE}/extras/#{@getVersionedId()}"
               dataType: 'json'
-              #async: false
             .done (response) =>
               @set('downloads', response.downloads)
               @set('isLatest', response.isLatest)
