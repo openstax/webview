@@ -22,7 +22,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable change:title', @render)
+      @listenTo(@model, 'change:editable change:title change:canPublish', @render)
       @listenTo(session, 'change', @render)
 
     toggleEditor: () ->

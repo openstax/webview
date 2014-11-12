@@ -39,7 +39,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:loaded change:title', @render)
+      @listenTo(@model, 'change:loaded change:title change:canPublish', @render)
       @listenTo(router, 'navigate', @render)
 
     edit: () ->

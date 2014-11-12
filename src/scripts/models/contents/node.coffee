@@ -80,7 +80,7 @@ define (require) ->
             $.ajax
               url: "#{ARCHIVE}/extras/#{@getVersionedId()}"
               dataType: 'json'
-              async: false
+              #async: false
             .done (response) =>
               @set('downloads', response.downloads)
               @set('isLatest', response.isLatest)
@@ -239,7 +239,8 @@ define (require) ->
 
 
     canEdit: (user) ->
-      if not @isDraft() and @get('loaded')
+
+      if @get('loaded') and not @isDraft() and @get('canPublish') isnt undefined
         canPublish = @get('canPublish').toString()
         if canPublish.indexOf(user) >= 0
           return true
