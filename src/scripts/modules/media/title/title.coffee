@@ -23,7 +23,7 @@ define (require) ->
         derivable: not @model.isDraft()
         authenticated: session.get('id')
         isBook: @model.isBook()
-        editable: @model.canEdit(session.get('id'))
+        editable: @model.canEdit()
       }
 
     editable:

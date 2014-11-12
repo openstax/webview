@@ -12,7 +12,7 @@ define (require) ->
     templateHelpers: () -> {
       authenticated: session.get('id')
       encodedTitle: encodeURI(@model.get('title'))
-      derivable: @model.canEdit(session.get('id'))
+      derivable: @model.canEdit()
       isDraft: @model.isDraft()
     }
 

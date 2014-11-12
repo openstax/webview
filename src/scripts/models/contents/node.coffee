@@ -7,6 +7,7 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
   require('backbone-associations')
+  session = require('session')
 
   ARCHIVE = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
@@ -237,9 +238,8 @@ define (require) ->
     isInBook: () -> !!@get('book')
 
 
-    canEdit: (user) ->
-
+    canEdit: () ->
       if @get('loaded') and not @isDraft() and @get('canPublish') isnt undefined
         canPublish = @get('canPublish').toString()
-        if canPublish.indexOf(user) >= 0
+        if canPublish.indexOf(session.get('id')) >= 0
           return true
