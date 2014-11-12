@@ -135,6 +135,5 @@ define (require) ->
 
     initialize: () ->
       super()
-
       @listenTo @model, 'change change:currentPage', (model, options) =>
         @render() unless options?.doNotRerender

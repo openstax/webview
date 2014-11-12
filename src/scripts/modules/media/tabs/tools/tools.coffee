@@ -12,7 +12,7 @@ define (require) ->
     templateHelpers: () -> {
       authenticated: session.get('id')
       encodedTitle: encodeURI(@model.get('title'))
-      derivable: not @model.isBook()
+      derivable: @model.canEdit()
       isDraft: @model.isDraft()
     }
 
@@ -22,7 +22,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable change:title', @render)
+      @listenTo(@model, 'change:editable change:title change:canPublish', @render)
       @listenTo(session, 'change', @render)
 
     toggleEditor: () ->

@@ -13,7 +13,6 @@ define (require) ->
 
   return class MediaTitleView extends EditableView
     template: template
-
     templateHelpers: () ->
       title = @model.get('title')
       locationOrigin = linksHelper.locationOrigin()
@@ -24,8 +23,8 @@ define (require) ->
         derivable: not @model.isDraft()
         authenticated: session.get('id')
         isBook: @model.isBook()
+        editable: @model.canEdit()
       }
-
 
     editable:
       '.media-title > .title > h1':
@@ -34,16 +33,26 @@ define (require) ->
 
     events:
       'click .derive .btn': 'derive'
+      'click .edit .btn' : 'edit'
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:loaded change:title', @render)
+      @listenTo(@model, 'change:loaded change:title change:canPublish', @render)
       @listenTo(router, 'navigate', @render)
 
+    edit: () ->
+      data = JSON.stringify({id: @model.get('id')})
+      options =
+        success: (model) ->
+          router.navigate("/contents/#{model.id}@draft", {trigger: true})
+
+      @model.editOrDeriveContent(options, data)
+
     derive: () ->
+      data = JSON.stringify({derivedFrom: @model.get('id')})
       options =
         success: (model) ->
           router.navigate("/contents/#{model.id}@#{model.version}", {trigger: true})
 
       # Derive a copy of the book and then navigate to it
-      @model.derive(options)
+      @model.editOrDeriveContent(options, data)

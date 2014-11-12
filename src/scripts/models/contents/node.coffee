@@ -7,6 +7,7 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
   require('backbone-associations')
+  session = require('session')
 
   ARCHIVE = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
@@ -83,6 +84,7 @@ define (require) ->
             .done (response) =>
               @set('downloads', response.downloads)
               @set('isLatest', response.isLatest)
+              @set('canPublish', response.canPublish)
             .fail () =>
               @set('downloads', [])
 
@@ -148,9 +150,7 @@ define (require) ->
 
       return results
 
-    derive: (options = {}) ->
-      data = JSON.stringify({derivedFrom: @get('id')})
-
+    editOrDeriveContent: (options = {}, data) ->
       $.ajax
         type: 'POST'
         dataType: 'json'
@@ -222,6 +222,7 @@ define (require) ->
 
     isSaveable: () -> !!@get('mediaType')
 
+
     isEditable: () ->
       if not @get('loaded') and not @isSection()
         editable = false
@@ -235,3 +236,10 @@ define (require) ->
       return editable
 
     isInBook: () -> !!@get('book')
+
+
+    canEdit: () ->
+      if @get('loaded') and not @isDraft() and @get('canPublish') isnt undefined
+        canPublish = @get('canPublish').toString()
+        if canPublish.indexOf(session.get('id')) >= 0
+          return true
