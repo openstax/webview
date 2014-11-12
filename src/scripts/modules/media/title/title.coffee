@@ -9,7 +9,6 @@ define (require) ->
   settings = require('settings')
   socialMedia = require('cs!helpers/socialmedia.coffee')
   linksHelper = require('cs!helpers/links.coffee')
-  $ = require('jquery')
   require('less!./title')
 
   return class MediaTitleView extends EditableView
@@ -17,15 +16,14 @@ define (require) ->
     templateHelpers: () ->
       title = @model.get('title')
       locationOrigin = linksHelper.locationOrigin()
-      user = session.get('id')
 
       return {
         share: socialMedia.socialMediaInfo(@parent.summary(),title,locationOrigin)
         encodedTitle: encodeURI(title)
         derivable: not @model.isDraft()
-        authenticated: user
+        authenticated: session.get('id')
         isBook: @model.isBook()
-        editable: @model.canEdit(user)
+        editable: @model.canEdit(session.get('id'))
       }
 
     editable:
