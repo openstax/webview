@@ -19,7 +19,7 @@ define (require) ->
 
   return class SearchResultsListView extends BaseView
     template: template
-    templateHelpers: (e) ->
+    templateHelpers: () ->
       results = @model.get('results').items
 
       books = _.where(results, {mediaType: 'application/vnd.org.cnx.collection'})
