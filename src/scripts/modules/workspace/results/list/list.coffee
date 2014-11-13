@@ -19,7 +19,7 @@ define (require) ->
 
   return class SearchResultsListView extends BaseView
     template: template
-    templateHelpers: () ->
+    templateHelpers: (e) ->
       results = @model.get('results').items
 
       books = _.where(results, {mediaType: 'application/vnd.org.cnx.collection'})
@@ -36,19 +36,23 @@ define (require) ->
 
     events:
       'click td.delete': 'clickDelete'
+      'click .ok' : 'deleteMedia'
 
     clickDelete: (e) ->
       version = $(e.currentTarget).parent().data('id')
-      if confirm('Are you sure you want to delete this?')
-        @deleteMedia(version)
+      title = $(e.currentTarget).parent().find('td.title').text()
+      $('#delete').modal()
+      $('input[type="hidden"]').val(version)
+      $('.modal-body').html("<p>Are you sure you want to delete #{title}?</p>")
 
-    deleteMedia: (version) ->
+    deleteMedia: () ->
       # maybe make each item its own view and use a delete method on the model?
       # FIX: Remove `.json` from URL
       # FIX: Look into making each list item its own view, remove data-id
       #      from template, and make its model the individual item.
       #       Probably dependent on search-results being made into a collection
       # FIX: Move delete function into node.coffee (@model.destroy())
+      version = $('#version').val()
       $.ajax
         url: "#{AUTHORING}/contents/#{version}.json"
         type: 'DELETE'
