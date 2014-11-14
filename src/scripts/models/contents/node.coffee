@@ -7,7 +7,7 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
   require('backbone-associations')
-  session = require('session')
+  session = require('cs!session')
 
   ARCHIVE = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
