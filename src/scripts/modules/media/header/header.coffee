@@ -39,9 +39,7 @@ define (require) ->
 
     isEditable: () ->
       if @model.asPage()?.get('loaded') and @model.isDraft()
-        console.log @model.asPage().get('canPublish')
         edit = @model.asPage()?.get('canPublish')
-        console.log edit
         if edit isnt undefined and edit.toString().indexOf(session.get('id')) >= 0 and not @model.asPage()?.isDraft()
           return true
 
