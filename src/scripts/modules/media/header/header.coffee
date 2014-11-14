@@ -32,9 +32,23 @@ define (require) ->
         currentPage: currentPageData
         hasDownloads: (_.isArray(downloads) and downloads?.length) or
           (_.isArray(pageDownloads) and pageDownloads?.length)
-        derivable: not currentPage?.isDraft() and @model.isDraft()
+        derivable: @isDerivable()
         authenticated: session.get('id')
+        editable: @isEditable()
       }
+
+    isEditable: () ->
+      if @model.asPage()?.get('loaded') and @model.isDraft()
+        edit = @model.asPage()?.get('canPublish')
+        if edit isnt undefined and edit.toString().indexOf(session.get('id')) >= 0 and not @model.asPage()?.isDraft()
+          return true
+
+    isDerivable: () ->
+      if @model.asPage()?.get('loaded') and @model.isDraft()
+        canEdit = @model.asPage()?.get('canPublish')
+        if canEdit isnt undefined and canEdit.toString().indexOf(session.get('id')) < 0
+          return true
+
 
     editable:
       '.media-header > .title > h2':
@@ -47,6 +61,7 @@ define (require) ->
     events:
       'click .summary h5': 'toggleSummary'
       'click .derive .btn': 'derivePage'
+      'click .edit .btn' : 'editPage'
 
     initialize: () ->
       super()
@@ -54,6 +69,7 @@ define (require) ->
       @listenTo(@model, 'change:downloads change:buyLink change:title change:active', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(session, 'change', @render)
+      @listenTo(@model, 'change:currentPage.editable change:canPublish', @render)
 
     onRender: () ->
       if not @model.asPage()?.get('active') then return
@@ -67,6 +83,20 @@ define (require) ->
 
       $summary.find('h5').toggleClass('active')
       @$el.find('.abstract').toggle()
+
+    editPage: () ->
+      data = JSON.stringify({id: @model.asPage().get('id')})
+      options =
+        success: (model) =>
+          @model.asPage()?.set('version', 'draft')
+          @model.asPage()?.set('editable',true)
+          href = linksHelper.getPath 'contents',
+            model: @model
+            page: @model.getPageNumber()
+          router.navigate(href, {trigger: false, analytics: true})
+
+      @model.editOrDeriveContent(options, data)
+
 
     derivePage: () ->
       options =

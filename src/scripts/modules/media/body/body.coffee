@@ -33,7 +33,7 @@ define (require) ->
       super()
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
-
+      @listenTo(@model, 'change:currentPage.editable', @render)
     # Perform mutations to the HTML before loading it on to the page for better performance
     renderDom: () ->
       $temp = $('<div>').html(@getTemplate())
