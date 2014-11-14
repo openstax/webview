@@ -39,7 +39,9 @@ define (require) ->
 
     isEditable: () ->
       if @model.asPage()?.get('loaded') and @model.isDraft()
+        console.log @model.asPage().get('canPublish')
         edit = @model.asPage()?.get('canPublish')
+        console.log edit
         if edit isnt undefined and edit.toString().indexOf(session.get('id')) >= 0 and not @model.asPage()?.isDraft()
           return true
 
@@ -69,7 +71,7 @@ define (require) ->
       @listenTo(@model, 'change:downloads change:buyLink change:title change:active', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(session, 'change', @render)
-      @listenTo(@model, 'change:currentPage.editable change:canPublish', @render)
+      @listenTo(@model, 'change:currentPage.editable change:currentPage.canPublish', @render)
 
     onRender: () ->
       if not @model.asPage()?.get('active') then return
