@@ -88,10 +88,10 @@ define (require) ->
       data = JSON.stringify({id: @model.asPage().get('id')})
       options =
         success: (model) =>
-         pageNumber = @model.getPageNumber()
-         options =
-           success: (model) =>
-             router.navigate("/contents/#{model.id}@draft:#{pageNumber}", {trigger: false})
+          pageNumber = @model.getPageNumber()
+          options =
+            success: (model) ->
+              router.navigate("/contents/#{model.id}@draft:#{pageNumber}", {trigger: false})
 
       @model.editOrDeriveContent(options, data)
       @model.asPage()?.set('version', 'draft')
