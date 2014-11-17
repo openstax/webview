@@ -70,7 +70,7 @@ define (require) ->
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:abstract change:currentPage.abstract', @render)
       @listenTo(session, 'change', @render)
-      @listenTo(@model, 'change:currentPage.editable change:canPublish', @render)
+      @listenTo(@model, 'change:currentPage.editable change:currentPage.canPublish', @render)
 
     onRender: () ->
       if not @model.asPage()?.get('active') then return
