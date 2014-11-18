@@ -90,7 +90,7 @@ define (require) ->
       options =
         success: (model) =>
           @model.asPage()?.set('version', 'draft')
-          @model.asPage()?.set('editable',true)
+          @model.asPage()?.set('editable', true)
           href = linksHelper.getPath 'contents',
             model: @model
             page: @model.getPageNumber()
