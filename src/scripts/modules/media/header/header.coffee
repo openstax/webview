@@ -88,14 +88,14 @@ define (require) ->
       data = JSON.stringify({id: @model.asPage().get('id')})
       options =
         success: (model) =>
-          pageNumber = @model.getPageNumber()
-          options =
-            success: (model) ->
-              router.navigate("/contents/#{model.id}@draft:#{pageNumber}", {trigger: false})
+          @model.asPage()?.set('version', 'draft')
+          @model.asPage()?.set('editable', true)
+          href = linksHelper.getPath 'contents',
+            model: @model
+            page: @model.getPageNumber()
+          router.navigate(href, {trigger: false})
 
       @model.editOrDeriveContent(options, data)
-      @model.asPage()?.set('version', 'draft')
-      @model.asPage()?.set('editable',true)
 
 
     derivePage: () ->
