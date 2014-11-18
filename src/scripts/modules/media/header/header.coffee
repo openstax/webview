@@ -93,7 +93,7 @@ define (require) ->
           href = linksHelper.getPath 'contents',
             model: @model
             page: @model.getPageNumber()
-          router.navigate(href, {trigger: false})
+          router.navigate(href, {trigger: false, analytics: true})
 
       @model.editOrDeriveContent(options, data)
 
