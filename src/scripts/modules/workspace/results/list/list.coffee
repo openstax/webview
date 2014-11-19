@@ -44,13 +44,12 @@ define (require) ->
 
     deleteMedia: (version) ->
       # maybe make each item its own view and use a delete method on the model?
-      # FIX: Remove `.json` from URL
       # FIX: Look into making each list item its own view, remove data-id
       #      from template, and make its model the individual item.
-      #       Probably dependent on search-results being made into a collection
+      #      Probably dependent on search-results being made into a collection
       # FIX: Move delete function into node.coffee (@model.destroy())
       $.ajax
-        url: "#{AUTHORING}/contents/#{version}.json"
+        url: "#{AUTHORING}/contents/#{version}/users/me"
         type: 'DELETE'
         xhrFields:
           withCredentials: true
