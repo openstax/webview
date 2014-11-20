@@ -1,0 +1,35 @@
+<form>
+  <table class="table">
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Content</th>
+      <th>Role</th>
+      <th>Requester</th>
+      <th>Assignment Date</th>
+      <th>License</th>
+      <th>&nbsp;</th>
+    </tr>
+  <thead>
+  <tbody>
+{{#this}}
+   {{#roles}}
+    <tr data-has-accepted="{{hasAccepted}}">
+      <td><input type="checkbox" class="checkbox" data-role-acceptance="{{role}}"/></td>
+      <td>
+        <a href="{{url}}">{{../title}}</a><br/>
+        </td>
+      <td>{{trim role}}</td>
+      <td>{{requester}}</td>
+      <td>{{date assignmentDate}}</td>
+      <td>{{../license.name}}</td>
+      <td>
+        <input type="button" value="Accept" class="btn accept"/>
+        <input type="button" value="Reject" class="btn reject"/>
+       </td>
+    </tr>
+    {{/roles}}
+{{/this}}
+  </tbody>
+</table>
+</form>
