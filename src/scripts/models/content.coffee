@@ -160,6 +160,7 @@ define (require) ->
 
         parent.get('contents').remove(page)
         parent.create({title: title, derivedFrom: id}, options)
+        @set('changed', true)
       else
         @derive(options)
 
