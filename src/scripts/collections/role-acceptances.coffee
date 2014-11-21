@@ -12,3 +12,12 @@ define (require) ->
 
     initialize: () ->
       @fetch({reset: true})
+
+    acceptOrReject: (data) ->
+      $.ajax
+        type: 'POST'
+        data: JSON.stringify(data)
+        url: "#{AUTHORING}/contents#{id}@draft/acceptance"
+        dataType:'json'
+
+      @at(0).set('loaded', true)

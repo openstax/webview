@@ -23,7 +23,7 @@ define (require) ->
       @route 'contents', 'contents', () ->
         @appView.render('contents')
 
-      @route /^users\/role-acceptance\/(.*)/, 'role-acceptance', () ->
+      @route /^users\/role-acceptance\/(.+)/, 'role-acceptance', () ->
         @appView.render('role-acceptance')
 
       # Match and extract uuid and page numbers separated by a colon

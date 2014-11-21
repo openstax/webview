@@ -5,6 +5,7 @@ define (require) ->
   $ = require('jquery')
   settings = require('settings')
   require('less!./role-acceptance')
+  _ = require('underscore')
 
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
@@ -18,41 +19,34 @@ define (require) ->
     initialize: () ->
       @listenTo(@collection, 'reset', @render)
       @listenTo(@collection, 'change:hasAccepted change:hasAcceptedLicense', @render)
+      @listenTo(@collection, 'change:loaded', @setClass)
 
     onRender: () ->
+      @setClass
+
+    setClass: () ->
       isPending = $('*[data-has-accepted=""]')
       hasRejected = $('*[data-has-accepted="false"]')
       isPending.addClass('pending')
       hasRejected.addClass('hasRejected')
 
+
     acceptOrRejectRoleAndLicense: (e) ->
       e.preventDefault()
       target = $(e.currentTarget)
       checked = target.closest('tr').find('input[type="checkbox"]')
-      role = checked.attr('data-role-acceptance')
-
       model = @collection.at(0)
       model.set('hasAccepted', false)
       model.set('hasAcceptedLicense', false)
 
       if target.hasClass('accept')
-        model.set('hasAccepted',true)
-        model.set('hasAcceptedLicense',true)
-
-      hasAccepted = model.get('hasAccepted')
-      license = model.get('hasAcceptedLicense')
+        model.set('hasAccepted', true)
+        model.set('hasAcceptedLicense', true)
 
       if checked.is(':checked')
+        hasAccepted = model.get('hasAccepted')
+        license = model.get('hasAcceptedLicense')
+        role = checked.attr('data-role-acceptance')
         data = {"license": license, "roles": [{"role": role, "hasAccepted": hasAccepted}]}
-        json = JSON.stringify(data)
-        id = window.location.pathname.match(/\/[^\/]+$/)
 
-        $.ajax
-          type: 'POST'
-          data: json
-          url: "#{AUTHORING}/contents#{id}@draft/acceptance"
-          dataType:'json'
-          xhrFields:
-            withCredentials: true
-        .done () ->
-          console.log 'done'
+        @collection.acceptOrReject(data)
