@@ -19,13 +19,29 @@ define (require) ->
 
     initialize: () ->
       @listenTo(@collection, 'reset', @render)
-      @listenTo(@collection, 'change:hasAccepted change:hasAcceptedLicense', @render)
+      @listenTo(@collection, 'change:hasAcceptedLicense', @render)
+      @listenTo(@collection, 'change:checked', @render)
+
 
     onRender: () ->
+      #@setColor()
+
+
+    setColor: () ->
       isPending = $('*[data-has-accepted=""]')
-      hasRejected = $('*[data-has-accepted="false"]')
-      isPending.addClass('pending')
-      hasRejected.addClass('hasRejected')
+      isRejected = $('*[data-has-accepted="false"]')
+      isAccepted = $('*[data-has-accepted="true"]')
+      isPending.addClass('isPending')
+      isRejected.addClass('isRejected')
+      isAccepted.addClass('isAccepted')
+
+
+    roles: (e) ->
+      model = @collection.at(0)
+      if $(e.currentTarget).is(':checked')
+        model.set('checked',true)
+      else
+        model.set('checked',false)
 
 
     acceptLicense: (e) ->
@@ -39,18 +55,19 @@ define (require) ->
     acceptOrRejectRoles: () ->
       model = @collection.at(0)
       rolesCheckbox = $('.rolesCheckbox')
-      licenseCheckbox = $('.licenseCheckbox')
       roleRequests= []
       data = {"license": model.get('hasAcceptedLicense'), "roles": roleRequests}
 
-      rolesCheckbox.each () ->
-        requestedRole = rolesCheckbox.attr('data-requested-role')
-        hasAccepted = false
-        if rolesCheckbox.is(':checked') and licenseCheckbox.is(':checked')
+      _.each rolesCheckbox, (roles) ->
+        requestedRole = $(roles).attr('data-requested-role')
+        if rolesCheckbox.is(':checked') and model.get('hasAcceptedLicense')
           model.set('hasAccepted', true)
+        else if rolesCheckbox.is(':checked') and !!model.get('hasAcceptedLicense')
+          model.set('hasAccepted', false)
         else
           model.set('hasAccepted', false)
+
         roles = {"role": requestedRole, "hasAccepted": model.get('hasAccepted')}
         roleRequests.push(roles)
 
-      @collection.acceptOrReject(data)
+       @collection.acceptOrReject(data)
