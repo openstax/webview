@@ -1,0 +1,35 @@
+{{#this}}
+  <h4><a href="{{url}}">{{title}}</a></h4>
+  <p>License: <a href="{{license.url}}">{{license.name}} - {{license.url}}</a></p>
+  <input type="checkbox"  class="licenseCheckbox"/> I agree to the license
+{{/this}}
+<form>
+  <table class="table">
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Role</th>
+      <th>Requester</th>
+      <th>Assignment Date</th>
+    </tr>
+
+  <thead>
+  <tbody>
+{{#this}}
+   {{#roles}}
+    <tr data-has-accepted="{{hasAccepted}}">
+      <td><input type="checkbox" class="rolesCheckbox" data-requested-role="{{role}}"/></td>
+      <td>{{format role}}</td>
+      <td>{{requester}}</td>
+      <td>{{date assignmentDate}}</td>
+    </tr>
+    {{/roles}}
+{{/this}}
+<tr>
+  <td><input type="button" value="Submit" class="btn submit"/><td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+  </tbody>
+</table>
+</form>
