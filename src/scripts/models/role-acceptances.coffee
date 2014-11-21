@@ -3,5 +3,5 @@ define (require) ->
 
   return class RoleAcceptance extends Backbone.Model
     defaults:
-      hasAcceptedLicense: 'false'
       loaded: 'false'
+      hasAcceptedLicense: 'false'
