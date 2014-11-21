@@ -9,7 +9,7 @@ define (require) ->
   require('less!./metadata')
 
   s2Defaults = width: 300
-  s2Multi = _.extend {}, s2Defaults, minimumInputLength: 2
+  s2Multi = _.extend {}, s2Defaults, {minimumInputLength: 2, ajax: quietMillis: 500}
 
   # Lookup because select2 only allows string values
   # but we need to keep the name and the id for each user
