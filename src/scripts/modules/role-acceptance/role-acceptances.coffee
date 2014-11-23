@@ -15,33 +15,33 @@ define (require) ->
 
     events:
       'click .submit': 'acceptOrRejectRoles'
-      'change .licenseCheckbox' : 'acceptLicense'
+      'change .licenseCheckbox': 'acceptLicense'
+
 
     initialize: () ->
       @listenTo(@collection, 'reset', @render)
-      @listenTo(@collection, 'change:hasAcceptedLicense', @render)
-      @listenTo(@collection, 'change:checked', @render)
+      @listenTo(@collection, 'change:hasAcceptedLicense change:hasAccepted', @render)
 
 
     onRender: () ->
-      #@setColor()
+      @setColor()
 
 
     setColor: () ->
-      isPending = $('*[data-has-accepted=""]')
-      isRejected = $('*[data-has-accepted="false"]')
-      isAccepted = $('*[data-has-accepted="true"]')
-      isPending.addClass('isPending')
-      isRejected.addClass('isRejected')
-      isAccepted.addClass('isAccepted')
-
-
-    roles: (e) ->
       model = @collection.at(0)
-      if $(e.currentTarget).is(':checked')
-        model.set('checked',true)
-      else
-        model.set('checked',false)
+      rolesCheckbox = $('.rolesCheckbox')
+      roles = _.map model?.get('roles'), (role) -> role
+
+      _.each rolesCheckbox, (check) ->
+        requestedRole = $(check).attr('data-requested-role')
+        hasAccepted = _.where(roles, {'role' : requestedRole})
+        row = $(check).closest('tr')
+        if hasAccepted[0].role is requestedRole
+          if hasAccepted[0].hasAccepted
+            row.addClass('isAccepted')
+          else if hasAccepted[0].hasAccepted is false
+            row.addClass('isRejected')
+          else row.addClass('isPending')
 
 
     acceptLicense: (e) ->
@@ -52,22 +52,22 @@ define (require) ->
         model.set('hasAcceptedLicense', false)
 
 
+
     acceptOrRejectRoles: () ->
       model = @collection.at(0)
       rolesCheckbox = $('.rolesCheckbox')
       roleRequests= []
       data = {"license": model.get('hasAcceptedLicense'), "roles": roleRequests}
 
-      _.each rolesCheckbox, (roles) ->
-        requestedRole = $(roles).attr('data-requested-role')
-        if rolesCheckbox.is(':checked') and model.get('hasAcceptedLicense')
+
+      _.each rolesCheckbox, (role) ->
+        requestedRole = $(role).attr('data-requested-role')
+        if $(role).is(':checked') and model.get('hasAcceptedLicense')
           model.set('hasAccepted', true)
-        else if rolesCheckbox.is(':checked') and !!model.get('hasAcceptedLicense')
-          model.set('hasAccepted', false)
         else
           model.set('hasAccepted', false)
 
         roles = {"role": requestedRole, "hasAccepted": model.get('hasAccepted')}
         roleRequests.push(roles)
 
-       @collection.acceptOrReject(data)
+      @collection.acceptOrReject(data)

@@ -1,7 +1,10 @@
 {{#this}}
-  <h4><a href="{{url}}">{{title}}</a></h4>
-  <p>License: <a href="{{license.url}}">{{license.name}} - {{license.url}}</a></p>
+  <h3>{{title}}</h3>
+<div class="licenseInfo">
+  <div class="license"><a href="{{license.url}}">{{license.name}} - {{license.url}}</a></div>
   <input type="checkbox"  class="licenseCheckbox"/> I agree to the license
+</div>
+
 {{/this}}
 <form>
   <table class="table">
@@ -12,12 +15,11 @@
       <th>Requester</th>
       <th>Assignment Date</th>
     </tr>
-
   <thead>
   <tbody>
 {{#this}}
    {{#roles}}
-    <tr data-has-accepted="{{hasAccepted}}">
+    <tr>
       <td><input type="checkbox" class="rolesCheckbox" data-requested-role="{{role}}"/></td>
       <td>{{format role}}</td>
       <td>{{requester}}</td>
