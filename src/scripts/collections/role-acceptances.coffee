@@ -2,6 +2,7 @@ define (require) ->
   Backbone = require('backbone')
   RoleAcceptances = require('cs!models/role-acceptances')
   settings = require('settings')
+  session  = require('cs!session')
 
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
@@ -10,13 +11,16 @@ define (require) ->
     url: "#{AUTHORING}/contents#{id}@draft/acceptance"
     model: RoleAcceptances
 
+
     initialize: () ->
-      @fetch({reset: true})
+      @fetch({reset: true, xhrFields: withCredentials: true})
 
     acceptOrReject: (data) ->
       $.ajax
         type: 'POST'
         data: JSON.stringify(data)
         url: "#{AUTHORING}/contents#{id}@draft/acceptance"
+        xhrFields:
+          withCredentials: true
       .done () =>
         @fetch({reset: true})

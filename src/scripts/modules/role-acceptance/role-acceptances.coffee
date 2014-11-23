@@ -21,7 +21,7 @@ define (require) ->
     initialize: () ->
       @listenTo(@collection, 'reset', @render)
       @listenTo(@collection, 'change:hasAcceptedLicense change:hasAccepted', @render)
-
+      
 
     onRender: () ->
       @setColor()
