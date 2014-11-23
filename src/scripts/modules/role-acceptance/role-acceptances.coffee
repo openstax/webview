@@ -15,13 +15,12 @@ define (require) ->
 
     events:
       'click .submit': 'acceptOrRejectRoles'
-      'change .licenseCheckbox': 'acceptLicense'
 
 
     initialize: () ->
       @listenTo(@collection, 'reset', @render)
       @listenTo(@collection, 'change:hasAcceptedLicense change:hasAccepted', @render)
-      
+
 
     onRender: () ->
       @setColor()
@@ -31,7 +30,6 @@ define (require) ->
       model = @collection.at(0)
       rolesCheckbox = $('.rolesCheckbox')
       roles = _.map model?.get('roles'), (role) -> role
-
       _.each rolesCheckbox, (check) ->
         requestedRole = $(check).attr('data-requested-role')
         hasAccepted = _.where(roles, {'role' : requestedRole})
@@ -44,22 +42,19 @@ define (require) ->
           else row.addClass('isPending')
 
 
-    acceptLicense: (e) ->
-      model = @collection.at(0)
-      if $(e.currentTarget).is(':checked')
+    acceptLicense: (model) ->
+      if $('.licenseCheckbox').is(':checked')
         model.set('hasAcceptedLicense', true)
       else
         model.set('hasAcceptedLicense', false)
-
 
 
     acceptOrRejectRoles: () ->
       model = @collection.at(0)
       rolesCheckbox = $('.rolesCheckbox')
       roleRequests= []
+      @acceptLicense(model)
       data = {"license": model.get('hasAcceptedLicense'), "roles": roleRequests}
-
-
       _.each rolesCheckbox, (role) ->
         requestedRole = $(role).attr('data-requested-role')
         if $(role).is(':checked') and model.get('hasAcceptedLicense')

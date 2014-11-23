@@ -22,4 +22,4 @@ define (require) ->
         xhrFields:
           withCredentials: true
       .done () =>
-        @fetch({reset: true})
+        return @model()
