@@ -20,4 +20,3 @@ define (require) ->
         url: "#{AUTHORING}/contents#{id}@draft/acceptance"
       .done () =>
         @fetch({reset: true})
-        console.log JSON.stringify(data)
