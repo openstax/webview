@@ -2,7 +2,6 @@ define (require) ->
   Backbone = require('backbone')
   RoleAcceptances = require('cs!models/role-acceptances')
   settings = require('settings')
-  session  = require('cs!session')
 
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
