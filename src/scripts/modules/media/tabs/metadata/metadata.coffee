@@ -60,7 +60,7 @@ define (require) ->
         type: 'select2'
         select2: () ->
           @$el.find('.keywords > input').val(@getProperty('keywords') or [])
-          _.extend({}, s2Multi, tags: @getProperty('keywords') or [])
+          _.extend({}, s2Defaults, tags: @getProperty('keywords') or [])
 
       '.authors > input':
         value: 'authors'
@@ -81,6 +81,7 @@ define (require) ->
           _.each value, (licensor) ->
             licensors.push(licensorsCollection.get(licensor).toJSON())
           return licensors
+          
 
       '.maintainers > input':
         value: 'publishers'
