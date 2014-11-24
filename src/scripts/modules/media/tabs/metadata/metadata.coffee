@@ -103,7 +103,7 @@ define (require) ->
         if typeof item is 'string'
           return users[item]
         else
-          user = {id: item.id, text: item.fullname or item.id}
+          user = {id: item.id, text: "#{item.fullname} (#{item.id})" or item.id}
           users["#{user.id}"] = user
           return user
 
@@ -128,7 +128,7 @@ define (require) ->
             collection.add(data.users)
             return {
               results: _.map data.users, (item) ->
-                user = {id: item.id, text: item.fullname or item.id}
+                user = {id: item.id, text: "#{item.fullname} (#{item.id})" or item.id}
                 users["#{user.id}"] = user
                 return user
             }
