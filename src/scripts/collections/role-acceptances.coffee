@@ -10,14 +10,16 @@ define (require) ->
     url: "#{AUTHORING}/contents#{id}@draft/acceptance"
     model: RoleAcceptances
 
+
     initialize: () ->
-      @fetch({reset: true})
+      @fetch({reset: true, xhrFields: withCredentials: true})
 
     acceptOrReject: (data) ->
       $.ajax
         type: 'POST'
         data: JSON.stringify(data)
         url: "#{AUTHORING}/contents#{id}@draft/acceptance"
-        dataType:'json'
-
-      @at(0).set('loaded', true)
+        xhrFields:
+          withCredentials: true
+      .done () =>
+        return @model()
