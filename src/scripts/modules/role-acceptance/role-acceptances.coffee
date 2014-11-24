@@ -56,7 +56,6 @@ define (require) ->
         model.set('hasAcceptedLicense', false)
 
 
-
     acceptOrRejectRoles: () ->
       model = @collection.at(0)
       rolesCheckbox = $('.rolesCheckbox')
