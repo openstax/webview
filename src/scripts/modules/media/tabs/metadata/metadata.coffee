@@ -81,7 +81,7 @@ define (require) ->
           _.each value, (licensor) ->
             licensors.push(licensorsCollection.get(licensor).toJSON())
           return licensors
-          
+
 
       '.maintainers > input':
         value: 'publishers'
@@ -99,11 +99,11 @@ define (require) ->
       roles = @getProperty(options.role)
       collection.add(roles)
 
-      userRoles = _.map roles, (item) ->
+      userRoles = _.map roles, (item) =>
         if typeof item is 'string'
           return users[item]
         else
-          user = {id: item.id, text: item.fullname or item.id}
+          user = {id: item.id, text: @displayName(item.fullname, item.id)}
           users["#{user.id}"] = user
           return user
 
@@ -124,14 +124,22 @@ define (require) ->
           data: (term, page) ->
             q: term # search term
 
-          results: (data, page) -> # parse the results into the format expected by Select2.
+          results: (data, page) => # parse the results into the format expected by Select2.
             collection.add(data.users)
             return {
-              results: _.map data.users, (item) ->
-                user = {id: item.id, text: item.fullname or item.id}
+              results: _.map data.users, (item) =>
+                user = {id: item.id, text: @displayName(item.fullname, item.id)}
                 users["#{user.id}"] = user
                 return user
             }
+
+
+    displayName: (fullname, id) ->
+      if fullname isnt null
+        return "#{fullname} (#{id})"
+      else
+        return id
+
 
 
     initialize: () ->
