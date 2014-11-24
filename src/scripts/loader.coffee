@@ -5,7 +5,6 @@ define (require) ->
   session = require('cs!session')
   analytics = require('cs!helpers/handlers/analytics')
   router = require('cs!router')
-  roleAcceptance = require('cs!modules/role-acceptance/role-acceptances')
   require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
   require('less!../styles/main')
 
@@ -21,7 +20,7 @@ define (require) ->
 
     # Do not redirect when trying to determine the login state
     # But redirect otherwise
-    if model isnt session and model isnt roleAcceptance
+    if model isnt session
       promise.fail (jqXHR) ->
         switch jqXHR.status
           when 401
