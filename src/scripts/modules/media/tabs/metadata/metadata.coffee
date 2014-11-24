@@ -81,7 +81,6 @@ define (require) ->
           _.each value, (licensor) ->
             licensors.push(licensorsCollection.get(licensor).toJSON())
           return licensors
-          
 
 
       '.maintainers > input':
