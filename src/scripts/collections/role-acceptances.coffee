@@ -10,9 +10,16 @@ define (require) ->
     url: "#{AUTHORING}/contents#{id}@draft/acceptance"
     model: RoleAcceptances
 
+    initialize: () =>
+      @fetch({
+        reset: true,
+        xhrFields: withCredentials: true
+        })
+      .fail (response) =>
+        if response.status is 403
+          @error = 'There are no roles pending for this content.'
+          @class = 'hide'
 
-    initialize: () ->
-      @fetch({reset: true, xhrFields: withCredentials: true})
 
     acceptOrReject: (data) ->
       $.ajax

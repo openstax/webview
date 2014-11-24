@@ -2,8 +2,8 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./role-acceptance-template')
   RoleAcceptances = require('cs!collections/role-acceptances')
-  $ = require('jquery')
   settings = require('settings')
+  $ = require('jquery')
   _ = require('underscore')
   require('less!./role-acceptance')
 
@@ -12,6 +12,13 @@ define (require) ->
   return  class RoleAcceptanceView extends BaseView
     template: template
     collection: RoleAcceptances
+    pageTitle: 'Role Acceptance'
+
+    templateHelpers: () ->
+      return {
+        error: @collection.error
+        class: @collection.class
+      }
 
     events:
       'click .submit': 'acceptOrRejectRoles'
