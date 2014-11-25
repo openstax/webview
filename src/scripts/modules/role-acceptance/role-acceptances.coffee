@@ -105,10 +105,10 @@ define (require) ->
         roles.push(@formatRoles(role.role))
 
       if acceptedBool is false
-        message = "You have rejected the following role(s): #{roles}."
+        message = "The following Roles were rejected: #{roles}."
       else
-        message = "You have accepted the following role(s): #{roles}.
-                   The content has been added to your Workspace. <a href=\"#{url}\">Click here to view content</a>"
+        message = "The following Roles were accepted: #{roles}.
+                   <a href=\"#{url}\">You can view the content</a> or access it from your Workspace."
 
       if roles.length > 0
         model.set(messageModel, message)
@@ -120,4 +120,4 @@ define (require) ->
     formatRoles: (str) ->
       cap = str.charAt(0).toUpperCase()
       format = str.substring(1).replace('_',' ')
-      return "#{cap}#{format}"
+      return " #{cap}#{format}"
