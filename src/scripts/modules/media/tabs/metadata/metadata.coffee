@@ -83,7 +83,7 @@ define (require) ->
           return licensors
 
 
-      '.maintainers > input':
+      '.publishers > input':
         value: 'publishers'
         type: 'select2'
         select2: () -> @getUsers({collection: publishersCollection, role: 'publishers'})

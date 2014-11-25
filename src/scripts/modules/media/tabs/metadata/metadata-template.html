@@ -99,15 +99,15 @@
         {{~/unless~}}
       </div>
     </dd>
-  <dt>Maintainers:</dt>
+  <dt>Publishers:</dt>
     <dd>
-      <div class="maintainers">
+      <div class="publishers">
     {{~#unless editable~}}
       {{#each publishers}}
         <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
       {{/each}}
       {{~else~}}
-        <input type="hidden" data-placeholder="Add Maintainers" value="{{#each publishers}}{{#if @index}},{{/if}}{{id}}{{/each}}" />
+        <input type="hidden" data-placeholder="Add Publishers" value="{{#each publishers}}{{#if @index}},{{/if}}{{id}}{{/each}}" />
       {{~/unless~}}
       </div>
     </dd>
