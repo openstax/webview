@@ -9,15 +9,14 @@ define (require) ->
 
   return class RoleAcceptance extends BaseView
     template: template
+    
 
     templateHelpers: () ->
       pageTitle: 'Role Acceptance'
-      sectionText: 'Some text should go here...'
-      sectionTitle: 'Requests Awaiting Your Approval'
+
 
     regions:
       roleAcceptances: '#role-acceptances'
-
 
 
     onRender: () ->

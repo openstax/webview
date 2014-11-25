@@ -46,9 +46,10 @@ define (require) ->
     parse: (response, options = {}) ->
       super(arguments...)
 
-      # Mark drafts as being in edit mode by default
+      # Mark drafts as being in edit mode by default if user has edit permission
       if @isDraft() and response.status isnt 'publishing'
-        response.editable = true
+        if 'edit' in response.permissions
+          response.editable = true
 
       return response
 
