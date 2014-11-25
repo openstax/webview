@@ -1,21 +1,26 @@
 <tr data-id="{{id}}">
-  <td class="type">
-    {{#is mediaType 'application/vnd.org.cnx.collection'}}
-      <span class="fa fa-book"></span>
-    {{else}}
-      {{#is mediaType 'application/vnd.org.cnx.module'}}
-        <span class="fa fa-file"></span>
-      {{else}}
-        <span class="fa fa-question-circle"></span>
-      {{/is}}
-    {{/is}}
-  </td>
+ <td class="type">
+  {{#is mediaType 'application/vnd.org.cnx.collection'}}
+    <span class="fa fa-book"></span>
+  {{else}}
+  {{#is mediaType 'application/vnd.org.cnx.module'}}
+    <span class="fa fa-file"></span>
+  {{else}}
+    <span class="fa fa-question-circle"></span>
+  {{/is}}
+  {{/is}}
+</td>
   <td class="title">
+  {{#is rolesToAccept.length 0}}
     <h4><a href="/contents/{{id}}/{{trim title}}">{{title}}</a></h4>
+  {{/is}}
+  {{#if rolesToAccept}}
+   <h4><a href="/users/role-acceptance/{{noVersion id}}">{{title}}</a></h4>
+  {{/if}}
   </td>
-  <td class="status">
+<td class="status">
     <h4>{{state}}</h4>
-  </td>
-  <td class="edited">{{date revised}}</td>
-  <td class="delete"><i class="fa fa-times"></i></td>
+</td>
+<td class="edited">{{date revised}}</td>
+<td class="delete"><i class="fa fa-times"></i></td>
 </tr>

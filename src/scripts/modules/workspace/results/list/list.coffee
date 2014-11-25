@@ -11,6 +11,7 @@ define (require) ->
   # Remove the partial.coffee helper
   Handlebars = require('hbs/handlebars')
   Handlebars.registerHelper 'trim', (str) -> str.replace(/\s/g, '_').substring(0, 30)
+  Handlebars.registerHelper 'noVersion', (id) -> return id.split('@')[0]
   itemPartial = require('text!./workspace-item-partial.html')
   Handlebars.registerPartial('modules/workspace/results/list/workspace-item-partial', itemPartial)
   tablePartial = require('text!./workspace-table-partial.html')
