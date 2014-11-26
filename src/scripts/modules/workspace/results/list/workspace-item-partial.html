@@ -11,11 +11,10 @@
   {{/is}}
 </td>
   <td class="title">
-  {{#is rolesToAccept.length 0}}
-    <h4><a href="/contents/{{id}}/{{trim title}}">{{title}}</a></h4>
-  {{/is}}
   {{#if rolesToAccept}}
    <h4><a href="/users/role-acceptance/{{noVersion id}}">{{title}}</a></h4>
+  {{else}}
+   <h4><a href="/contents/{{id}}/{{trim title}}">{{title}}</a></h4>
   {{/if}}
   </td>
 <td class="status">
