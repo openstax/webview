@@ -2,7 +2,7 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./list-template')
   DeleteModal = require('cs!../../popovers/delete/modals/delete')
-  require('less!./list')
+  require('less!./list') 
 
   # HACK - FIX: Remove after upgrading to Handlebars 2.0
   # Also replace all `{{partial ` helpers with `{{> ` and remove the quotes around partial names
