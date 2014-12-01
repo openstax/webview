@@ -51,7 +51,7 @@ define (require) ->
     clickDelete: (e) ->
       @setVersionAndTitle(e)
       @deleteModal.show()
-      
+
 
     setVersionAndTitle: (e) ->
       version = $(e.currentTarget).parent().data('id')
