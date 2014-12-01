@@ -1,10 +1,8 @@
 define (require) ->
-  settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./list-template')
+  DeleteModal = require('cs!../../popovers/delete/modals/delete')
   require('less!./list')
-
-  AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
   # HACK - FIX: Remove after upgrading to Handlebars 2.0
   # Also replace all `{{partial ` helpers with `{{> ` and remove the quotes around partial names
@@ -35,26 +33,28 @@ define (require) ->
         misc: misc
       }
 
+
+    initialize: () ->
+      @deleteModal = new DeleteModal({model: @model})
+
+
+    onRender: () ->
+      @parent.regions.self.appendOnce
+        view: @deleteModal
+        as: 'div id="delete" class="modal fade"'
+
+
     events:
-      'click td.delete': 'clickDelete'
+      'click .delete': 'clickDelete'
+
 
     clickDelete: (e) ->
-      version = $(e.currentTarget).parent().data('id')
-      if confirm('Are you sure you want to delete this?')
-        @deleteMedia(version)
+      @setVersionAndTitle(e)
+      @deleteModal.show()
+      
 
-    deleteMedia: (version) ->
-      # maybe make each item its own view and use a delete method on the model?
-      # FIX: Look into making each list item its own view, remove data-id
-      #      from template, and make its model the individual item.
-      #      Probably dependent on search-results being made into a collection
-      # FIX: Move delete function into node.coffee (@model.destroy())
-      $.ajax
-        url: "#{AUTHORING}/contents/#{version}/users/me"
-        type: 'DELETE'
-        xhrFields:
-          withCredentials: true
-      .done (response) =>
-        @model.fetch()
-      .fail (error) ->
-        alert("#{error.status}: #{error.statusText}")
+    setVersionAndTitle: (e) ->
+      version = $(e.currentTarget).parent().data('id')
+      title = $(e.currentTarget).parent().find('td.title').text()
+      @model.set('version', version)
+      @model.set('title', title)
