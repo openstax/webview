@@ -1,17 +1,17 @@
 {{#if results.items.length}}
   {{! Books }}
   {{#if books.length}}
-    {{partial "modules/workspace/results/list/workspace-table-partial" item=books}}
+    {{> modules/workspace/results/list/workspace-table-partial item=books}}
   {{/if}}
 
   {{! Pages }}
   {{#if pages.length}}
-    {{partial "modules/workspace/results/list/workspace-table-partial" item=pages}}
+    {{> modules/workspace/results/list/workspace-table-partial item=pages}}
   {{/if}}
 
   {{! Results of an unknown type }}
   {{#if misc.length}}
-    {{partial "modules/workspace/results/list/workspace-table-partial" item=misc}}
+    {{> modules/workspace/results/list/workspace-table-partial item=misc}}
   {{/if}}
 {{else}}
   {{#if loaded}}

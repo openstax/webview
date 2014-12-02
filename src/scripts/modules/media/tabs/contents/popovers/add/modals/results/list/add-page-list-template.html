@@ -1,7 +1,7 @@
 {{#if results.items.length}}
   {{! Pages }}
   {{#if pages.length}}
-    {{partial "modules/media/tabs/contents/popovers/add/modals/results/list/add-page-table-partial" authorList=authorList item=pages}}
+    {{> modules/media/tabs/contents/popovers/add/modals/results/list/add-page-table-partial authorList=authorList item=pages}}
   {{/if}}
 {{else}}
   {{#if loaded}}

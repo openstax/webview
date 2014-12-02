@@ -222,7 +222,6 @@ define (require) ->
 
     isSaveable: () -> !!@get('mediaType')
 
-
     isEditable: () ->
       if not @get('loaded') and not @isSection()
         editable = false
@@ -236,7 +235,6 @@ define (require) ->
       return editable
 
     isInBook: () -> !!@get('book')
-
 
     canEdit: () ->
       if @get('loaded') and not @isDraft() and @get('canPublish') isnt undefined
