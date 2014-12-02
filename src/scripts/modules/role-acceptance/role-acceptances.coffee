@@ -14,6 +14,7 @@ define (require) ->
     collection: RoleAcceptances
     pageTitle: 'Role Acceptance'
 
+
     templateHelpers: () ->
       accepted = @accepted()
       rejected = @rejected()
@@ -73,17 +74,23 @@ define (require) ->
       roleRequests= []
       @acceptLicense(model)
       data = {"license": model.get('hasAcceptedLicense'), "roles": roleRequests}
+      isRoleSelected = false
 
       _.each rolesCheckbox, (role) ->
         requestedRole = $(role).attr('data-requested-role')
-        if $(role).is(':checked') and model.get('hasAcceptedLicense')
-          model.set('hasAccepted', true)
+        if $(role).is(':checked')
+          isRoleSelected = true
+          if model.get('hasAcceptedLicense')
+            model.set('hasAccepted', true)
         else
           model.set('hasAccepted', false)
         roles = {"role": requestedRole, "hasAccepted": model.get('hasAccepted')}
         roleRequests.push(roles)
 
-      @collection.acceptOrReject(data)
+      if isRoleSelected
+        @collection.acceptOrReject(data)
+      else
+        alert 'You must select at least one role.'
 
 
     accepted: () ->

@@ -3,10 +3,21 @@
 <div class="message"><p>{{rejected}}</p></div>
 <div class="{{class}}">
 {{#this}}
-  <h3>{{title}}</h3>
+  <h3><a href="{{linkToContent}}">{{title}}</a></h3>
 <div class="licenseInfo">
-  <div class="license"><a href="{{license.url}}">Creative Commons {{license.name}} License {{license.version}}</a></div>
-  <input type="checkbox"  class="licenseCheckbox"/> I agree to the license
+  <input type="checkbox" class="licenseCheckbox"/>
+  <span>I license this work under the</span>
+  <a href="{{license.url}}">
+    Creative Commons Attribution License (CC-BY).
+  </a>
+  <span>I understand</span>
+  <ul>
+    <li>I retain the copyright of my work</li>
+    <li>I warrant that I am the author or have permission to distribute the work in question</li>
+    <li>I wish to have this distributed under the terms of the CC-BY license
+      (<strong>including allowing modification of this work and requiring attribution<strong>)</li>
+    <li>I agree that proper attribution of my work is any attribution that includes the authors' names, the title of the work and the OpenStax CNX URL to the work</li>
+  </ul>
 </div>
 {{/this}}
 <form>
