@@ -40,25 +40,30 @@ define (require) ->
       @showAcceptedAndRejected()
 
 
+
     showAcceptedAndRejected: () ->
       model = @collection.at(0)
-      rolesCheckbox = $('.rolesCheckbox')
       roles = _.map model?.get('roles'), (role) -> role
+      rows = $('table').find('tr.roles')
+      accept = $(':radio[value=accept]')
+      reject = $(':radio[value=reject]')
 
-      _.each rolesCheckbox, (check) ->
-        requestedRole = $(check).attr('data-requested-role')
+      _.each rows, (row) ->
+        requestedRole = $(row).attr('data-requested-role')
         hasAccepted = _.where(roles, {'role' : requestedRole})
-        row = $(check).closest('tr')
         if hasAccepted[0].role is requestedRole
-          if hasAccepted[0].hasAccepted
-            $(check).prop({'checked': true, 'disabled': 'disabled'})
-            row.addClass('gray')
+          if hasAccepted[0].hasAccepted is null
+            accept.attr('checked', 'checked')
+          else if hasAccepted[0].hasAccepted is true
+            accept.prop({'checked': true, 'disabled': 'disabled'})
+            reject.prop('disabled','disabled')
+            $(row).addClass('gray')
             $('.btn').prop('disabled', true)
           else if hasAccepted[0].hasAccepted is false
-            $(check).prop('disabled', 'disabled')
-            row.addClass('gray')
-          else if hasAccepted[0].hasAccepted is null
-            $('.btn').prop('disabled', false)
+            reject.prop({'checked': true, 'disabled': 'disabled'})
+            accept.prop('disabled','disabled')
+            $(row).addClass('gray')
+
 
 
     acceptLicense: (model) ->
@@ -68,29 +73,35 @@ define (require) ->
         model.set('hasAcceptedLicense', false)
 
 
+
     acceptOrRejectRoles: () ->
       model = @collection.at(0)
-      rolesCheckbox = $('.rolesCheckbox')
       roleRequests= []
       @acceptLicense(model)
       data = {"license": model.get('hasAcceptedLicense'), "roles": roleRequests}
-      isRoleSelected = false
+      rows = $('table').find('tr.roles')
+      isAccepted = false
 
-      _.each rolesCheckbox, (role) ->
-        requestedRole = $(role).attr('data-requested-role')
-        if $(role).is(':checked')
-          isRoleSelected = true
-          if model.get('hasAcceptedLicense')
-            model.set('hasAccepted', true)
-        else
+      _.each rows, (row) ->
+        acceptOrReject = $('input[type="radio"]:checked').val()
+        requestedRole = $(row).attr('data-requested-role')
+        if acceptOrReject is 'accept' and model.get('hasAcceptedLicense')
+          isAccepted = true
+          model.set('hasAccepted', true)
+        else if acceptOrReject is 'accept' and not model.get('hasAcceptedLicense')
+          isAccepted = false
+        else if acceptOrReject is 'reject'
+          isAccepted = true
           model.set('hasAccepted', false)
-        roles = {"role": requestedRole, "hasAccepted": model.get('hasAccepted')}
+
+        roles = {"role": requestedRole, "hasAccepted": model.get('hasAcceptedLicense')}
         roleRequests.push(roles)
 
-      if isRoleSelected
+      if isAccepted
         @collection.acceptOrReject(data)
       else
-        alert 'You must select at least one role.'
+        alert 'You must accept the license'
+
 
 
     accepted: () ->

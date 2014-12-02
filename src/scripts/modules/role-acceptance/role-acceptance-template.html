@@ -24,7 +24,7 @@
   <table class="table">
   <thead>
     <tr>
-      <th>&nbsp;</th>
+      <th>Accept/Reject</th>
       <th>Role</th>
       <th>Requester</th>
       <th>Assignment Date</th>
@@ -33,8 +33,8 @@
   <tbody>
 {{#this}}
    {{#roles}}
-    <tr>
-      <td><input type="checkbox" class="rolesCheckbox" data-requested-role="{{role}}"/></td>
+    <tr class="roles" data-requested-role="{{role}}">
+      <td><input type="radio" name="{{role}}" data-accept-reject="accept" value="accept"> Accept <input type="radio" name="{{role}}" data-accept-reject="reject" value="reject"> Reject</td>
       <td>{{format role}}</td>
       <td>{{requester}}</td>
       <td>{{date assignmentDate}}</td>
