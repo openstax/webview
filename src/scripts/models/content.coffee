@@ -47,9 +47,8 @@ define (require) ->
       super(arguments...)
 
       # Mark drafts as being in edit mode by default if user has edit permission
-      if @isDraft() and response.status isnt 'publishing'
-        if 'edit' in response.permissions
-          response.editable = true
+      if @isDraft() and response.status isnt 'publishing' and _.indexOf(response.permissions, 'edit')
+        response.editable = true
 
       return response
 
@@ -216,7 +215,6 @@ define (require) ->
 
       @trigger('moveNode')
       return node
-
 
     # Content can be a Book or a Page and some views render
     # parts of the current page.

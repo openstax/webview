@@ -6,18 +6,6 @@ define (require) ->
 
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
-  # HACK - FIX: Remove after upgrading to Handlebars 2.0
-  # Also replace all `{{partial ` helpers with `{{> ` and remove the quotes around partial names
-  # Remove the partial.coffee helper
-  Handlebars = require('hbs/handlebars')
-  Handlebars.registerHelper 'trim', (str) -> str.replace(/\s/g, '_').substring(0, 30)
-  Handlebars.registerHelper 'noVersion', (id) -> return id.split('@')[0]
-  itemPartial = require('text!./workspace-item-partial.html')
-  Handlebars.registerPartial('modules/workspace/results/list/workspace-item-partial', itemPartial)
-  tablePartial = require('text!./workspace-table-partial.html')
-  Handlebars.registerPartial('modules/workspace/results/list/workspace-table-partial', tablePartial)
-  # /HACK
-
   return class SearchResultsListView extends BaseView
     template: template
     templateHelpers: () ->

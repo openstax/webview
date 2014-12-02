@@ -77,7 +77,6 @@ define (require) ->
 
       return results
 
-
     create: (models, options = {}) ->
       options = _.extend({
         xhrFields:
