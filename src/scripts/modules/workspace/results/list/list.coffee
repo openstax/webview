@@ -2,7 +2,7 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./list-template')
   DeleteModal = require('cs!../../popovers/delete/modals/delete')
-  require('less!./list') 
+  require('less!./list')
 
   return class SearchResultsListView extends BaseView
     template: template
