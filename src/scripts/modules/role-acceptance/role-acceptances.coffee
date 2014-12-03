@@ -29,7 +29,7 @@ define (require) ->
 
     events:
       'click .submit': 'acceptOrRejectRoles'
-      'click input[type="radio"]': 'acceptedOrRejectedValue'
+      'click input[type="radio"]': 'onClickSetHasAcceptedForRole'
 
 
     initialize: () ->
@@ -41,7 +41,7 @@ define (require) ->
       @showAcceptedAndRejected()
 
 
-    acceptedOrRejectedValue: (e) ->
+    onClickSetHasAcceptedForRole: (e) ->
       model = @collection.at(0)
       current = $(e.currentTarget)
       roles = model?.get('roles')
@@ -57,24 +57,24 @@ define (require) ->
 
       _.each rows, (row) ->
         requestedRole = $(row).attr('data-requested-role')
-        hasAccepted = _.find roles, (role) -> role.role is requestedRole
+        userPermissions = _.find roles, (role) -> role.role is requestedRole
         selectedRow = $(row).closest('tr')
 
-        if hasAccepted.role is requestedRole
-          if hasAccepted.hasAccepted is null
+        if userPermissions.role is requestedRole
+          if userPermissions.hasAccepted is null
             selectedRow.find(':radio[value=true]').attr('checked', 'checked')
-          else if hasAccepted.hasAccepted is true
+          else if userPermissions.hasAccepted is true
             selectedRow.find(':radio[value=true]').prop({'checked': 'checked'})
             selectedRow.find(':radio').prop({'disabled': 'disabled'})
             $(row).addClass('gray')
             $('.btn').prop('disabled', true)
-          else if hasAccepted.hasAccepted is false
+          else if userPermissions.hasAccepted is false
             selectedRow.find(':radio[value=false]').prop({'checked': 'checked'})
             selectedRow.find(':radio').prop({'disabled': 'disabled'})
             $(row).addClass('gray')
             $('.btn').prop('disabled', true)
 
-            
+
     acceptLicense: (model) ->
       if $('.licenseCheckbox').is(':checked')
         model.set('hasAcceptedLicense', true)
