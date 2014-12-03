@@ -10,6 +10,7 @@ define (require) ->
     url: "#{AUTHORING}/contents#{id}@draft/acceptance"
     model: RoleAcceptances
 
+
     initialize: () =>
       @fetch({
         reset: true,

@@ -34,7 +34,7 @@
 {{#this}}
    {{#roles}}
     <tr class="roles" data-requested-role="{{role}}">
-      <td><input type="radio" name="{{role}}" data-accept-reject="accept" value="accept"> Accept <input type="radio" name="{{role}}" data-accept-reject="reject" value="reject"> Reject</td>
+      <td><input type="radio" name="{{role}}" value="true"> Accept <input type="radio" name="{{role}}" value="false"> Reject</td>
       <td>{{format role}}</td>
       <td>{{requester}}</td>
       <td>{{date assignmentDate}}</td>
