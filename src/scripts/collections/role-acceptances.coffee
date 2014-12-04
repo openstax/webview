@@ -2,6 +2,7 @@ define (require) ->
   Backbone = require('backbone')
   RoleAcceptances = require('cs!models/role-acceptances')
   settings = require('settings')
+  router = require('router')
 
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
@@ -17,9 +18,7 @@ define (require) ->
         xhrFields: withCredentials: true
         })
       .fail (response) =>
-        if response.status is 403
-          @error = 'There are no roles pending for this content.'
-          @class = 'hide'
+        router.appView.render('error', {code: response.status})
 
 
     acceptOrReject: (data) ->

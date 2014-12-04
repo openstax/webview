@@ -5,3 +5,4 @@ define (require) ->
     id = window.location.pathname.match(/\/[^\/]+$/)
     defaults:
       linkToContent: "#{location.protocol}//#{location.host}/contents#{id}@draft"
+      hasAcceptedLicense: false

@@ -39,6 +39,7 @@ define (require) ->
 
     onRender: () ->
       @showAcceptedAndRejected()
+      @disableLicenseCheckboxIfRolesRejected()
 
 
     onClickSetHasAcceptedForRole: (e) ->
@@ -48,6 +49,22 @@ define (require) ->
       requestedRole = current.closest('tr').attr('data-requested-role')
       selectedRole = _.find roles, (role) -> role.role is requestedRole
       selectedRole.hasAccepted = current.val()
+      @disableLicenseCheckboxIfRolesRejected()
+
+
+    disableLicenseCheckboxIfRolesRejected: () ->
+      model = @collection.at(0)
+      roles = model?.get('roles')
+      row = $('tr.roles')
+      isRejected = []
+      _.each roles, (role) ->
+        if role.hasAccepted is false or role.hasAccepted is 'false'
+          isRejected.push(role.role)
+
+      if row.length is isRejected.length
+        $('.licenseCheckbox').attr({'checked': false, 'disabled': true})
+      else
+        $('.licenseCheckbox').attr('disabled', false)
 
 
     showAcceptedAndRejected: () ->
@@ -62,17 +79,14 @@ define (require) ->
 
         if userPermissions.role is requestedRole
           if userPermissions.hasAccepted is null
+            userPermissions.hasAccepted = true
             selectedRow.find(':radio[value=true]').attr('checked', 'checked')
           else if userPermissions.hasAccepted is true
             selectedRow.find(':radio[value=true]').prop({'checked': 'checked'})
-            selectedRow.find(':radio').prop({'disabled': 'disabled'})
             $(row).addClass('gray')
-            $('.btn').prop('disabled', true)
           else if userPermissions.hasAccepted is false
             selectedRow.find(':radio[value=false]').prop({'checked': 'checked'})
-            selectedRow.find(':radio').prop({'disabled': 'disabled'})
             $(row).addClass('gray')
-            $('.btn').prop('disabled', true)
 
 
     acceptLicense: (model) ->
@@ -87,19 +101,16 @@ define (require) ->
       roleRequests= []
       @acceptLicense(model)
       rolesList = model?.get('roles')
-      isAccepted = false
       data = {'license': model.get('hasAcceptedLicense'), 'roles': roleRequests}
-      isAccepted = _.find rolesList, (role) ->
-        role.hasAccepted is 'true' or role.hasAccepted is null
+      isAccepted = []
 
       _.each rolesList, (role) ->
+        if role.hasAccepted is 'true' or role.hasAccepted is true
+          isAccepted.push(role)
         roles = {'role': role.role, 'hasAccepted': role.hasAccepted}
-        if role.hasAccepted is null
-          role.hasAccepted = true
         roleRequests.push(roles)
 
-
-      if isAccepted isnt undefined and model.get('hasAcceptedLicense') is false
+      if isAccepted.length > 0  and model.get('hasAcceptedLicense') is false
         alert 'You must accept the license.'
       else
         @collection.acceptOrReject(data)
