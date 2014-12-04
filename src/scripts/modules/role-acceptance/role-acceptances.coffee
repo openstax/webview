@@ -111,7 +111,7 @@ define (require) ->
         roleRequests.push(roles)
 
       if isAccepted.length > 0  and model.get('hasAcceptedLicense') is false
-          alert 'You must accept the license.'
+        alert 'You must accept the license.'
       else
         @collection.acceptOrReject(data)
 
