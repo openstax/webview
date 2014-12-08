@@ -103,7 +103,9 @@ define (require) ->
         if typeof item is 'string'
           return users[item]
         else
-          user = {id: item.id, text: @displayName(item.fullname, item.id)}
+          user = {id: item.id, text: @displayName(item.fullname, item.id), state: 'pending'}
+          if item.hasAccepted isnt null
+            user.state = if item.hasAccepted then 'accepted' else 'rejected'
           users["#{user.id}"] = user
           return user
 
@@ -114,7 +116,8 @@ define (require) ->
         id: (item) -> item.id
         initSelection: (el, cb) -> cb(userRoles)
         multiple: true
-        formatResult: (item, $container, query) -> $('<div></div>').append(item.text)
+        formatSelection: (user) -> "<div class='#{user.state}'>#{user.text}</div>"
+        formatResult: (item, $container, query) -> $("<div></div>").append(item.text)
         ajax:
           url: "//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}/users/search"
           dataType: 'json'
@@ -132,7 +135,6 @@ define (require) ->
                 users["#{user.id}"] = user
                 return user
             }
-
 
     displayName: (fullname, id) ->
       if fullname isnt null
