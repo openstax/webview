@@ -104,11 +104,10 @@ define (require) ->
           return users[item]
         else
           user = {id: item.id, text: @displayName(item.fullname, item.id), state: 'pending'}
-          if item.hasAccepted isnt undefined
-            if item.hasAccepted is true
-              user.state = 'accepted'
-            else if item.hasAccepted is false
-              user.state = 'rejected'
+          if item.hasAccepted is true
+            user.state = 'accepted'
+          else if item.hasAccepted is false
+            user.state = 'rejected'
           users["#{user.id}"] = user
 
           return user
@@ -120,8 +119,7 @@ define (require) ->
         id: (item) -> item.id
         initSelection: (el, cb) -> cb(userRoles)
         multiple: true
-        formatSelection: (user) -> "<div class='#{user.state}'>#{user.text}</div>"
-        formatResult: (item, $container, query) -> $("<div></div>").append(item.text)
+        formatSelectionCssClass: (user, container) -> user.state or 'pending'
         ajax:
           url: "//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}/users/search"
           dataType: 'json'
