@@ -104,9 +104,13 @@ define (require) ->
           return users[item]
         else
           user = {id: item.id, text: @displayName(item.fullname, item.id), state: 'pending'}
-          if item.hasAccepted isnt null
-            user.state = if item.hasAccepted then 'accepted' else 'rejected'
+          if item.hasAccepted isnt undefined
+            if item.hasAccepted is true
+              user.state = 'accepted'
+            else if item.hasAccepted is false
+              user.state = 'rejected'
           users["#{user.id}"] = user
+
           return user
 
       if options.critical and userRoles.length is 1
