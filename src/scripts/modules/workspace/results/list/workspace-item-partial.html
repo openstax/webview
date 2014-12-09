@@ -1,25 +1,25 @@
 <tr data-id="{{id}}">
- <td class="type">
-  {{#is mediaType 'application/vnd.org.cnx.collection'}}
-    <span class="fa fa-book"></span>
-  {{else}}
-  {{#is mediaType 'application/vnd.org.cnx.module'}}
-    <span class="fa fa-file"></span>
-  {{else}}
-    <span class="fa fa-question-circle"></span>
-  {{/is}}
-  {{/is}}
-</td>
-  <td class="title">
-  {{#if rolesToAccept}}
-   <h4><a href="/users/role-acceptance/{{noVersion id}}">{{title}}</a></h4>
-  {{else}}
-   <h4><a href="/contents/{{id}}/{{trim title}}">{{title}}</a></h4>
-  {{/if}}
+  <td class="type">
+    {{#is mediaType 'application/vnd.org.cnx.collection'}}
+      <span class="fa fa-book"></span>
+    {{else}}
+      {{#is mediaType 'application/vnd.org.cnx.module'}}
+        <span class="fa fa-file"></span>
+      {{else}}
+        <span class="fa fa-question-circle"></span>
+      {{/is}}
+    {{/is}}
   </td>
-<td class="status">
-    <h4>{{state}}</h4>
-</td>
-<td class="edited">{{date revised}}</td>
-<td class="delete"><i class="fa fa-times"></i></td>
+  <td class="title">
+    <h4><a href="/contents/{{id}}/{{trim title}}">{{title}}</a></h4>
+  </td>
+  <td class="status">
+    {{#is state 'Draft'}}
+      <h4><a href="/contents/{{id}}/{{trim title}}">{{state}}</a></h4>
+    {{else}}
+      <h4><a href="/users/role-acceptance/{{noVersion id}}">{{state}}</a></h4>
+    {{/is}}
+  </td>
+  <td class="edited">{{date revised}}</td>
+  <td class="delete"><i class="fa fa-times"></i></td>
 </tr>

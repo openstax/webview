@@ -1,4 +1,4 @@
 define (require) ->
   Handlebars = require('hbs/handlebars')
 
-  Handlebars.registerHelper 'noVersion', (id) -> return id.split('@')[0]
+  Handlebars.registerHelper 'noVersion', (id) -> id.split('@')[0]

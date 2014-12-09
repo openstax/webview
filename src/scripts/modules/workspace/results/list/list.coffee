@@ -21,25 +21,20 @@ define (require) ->
         misc: misc
       }
 
-
     initialize: () ->
       @deleteModal = new DeleteModal({model: @model})
-
 
     onRender: () ->
       @parent.regions.self.appendOnce
         view: @deleteModal
         as: 'div id="delete" class="modal fade"'
 
-
     events:
       'click .delete': 'clickDelete'
-
 
     clickDelete: (e) ->
       @setVersionAndTitle(e)
       @deleteModal.show()
-
 
     setVersionAndTitle: (e) ->
       version = $(e.currentTarget).parent().data('id')
