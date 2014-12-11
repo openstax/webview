@@ -10,7 +10,7 @@ define (require) ->
 
     if not model then return
 
-    value = options.setValue?(property, value, options) or value
+    value = options.setValue?.call(@, property, value, options) or value
 
     model.set(property, value, {doNotRerender:true})
     model.set('changed', true, {doNotRerender:true})

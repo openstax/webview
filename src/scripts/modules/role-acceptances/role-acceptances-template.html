@@ -1,0 +1,49 @@
+<div class="role-acceptances">
+  <h3>Title: <a href="{{linkToContent}}">{{title}}</a></h3>
+  <form>
+    <div class="license-info{{#unless licenseRequired}} disabled{{/unless}}">
+      <input type="checkbox" {{#if licenseRequired}}class="license-accept" required{{else}}class="license-accept disabled"{{/if}} />
+      <span>I license this work under the</span>
+      <a href="{{license.url}}">
+        Creative Commons Attribution License (CC-BY).
+      </a>
+      <span>I understand</span>
+      <ul>
+        <li>I retain the copyright of my work</li>
+        <li>I warrant that I am the author or have permission to distribute the work in question</li>
+        <li>I wish to have this distributed under the terms of the CC-BY license
+          (<strong>including allowing modification of this work and requiring attribution</strong>)</li>
+        <li>I agree that proper attribution of my work is any attribution that includes the authors' names, the title of the work and the OpenStax CNX URL to the work</li>
+      </ul>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Role</th>
+          <th>Requester</th>
+          <th>Assignment Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each roles}}
+          <tr class="roles" data-requested-role="{{role}}">
+            <td>
+              <i class="fa fa-check accept{{#is hasAccepted true}} selected{{/is}}" data-role="{{@index}}"></i>
+              <i class="fa fa-remove reject{{#is hasAccepted false}} selected{{/is}}" data-role="{{@index}}"></i>
+            </td>
+            <td>{{cap role}}</td>
+            <td>{{requester}}</td>
+            <td>{{date assignmentDate}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <div class="alert hidden" role="alert">
+      <strong>Success.</strong> Your new role settings have been saved.
+    </div>
+
+    <input type="submit" value="Update" class="btn submit" />
+  </form>
+</div>
