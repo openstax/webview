@@ -23,9 +23,7 @@ define (require) ->
 
     initialize: () ->
       @model = new RoleAcceptances()
-
-      @listenTo(@model, 'reset', @render)
-      @listenTo(@model, 'change:hasAcceptedLicense change:hasAccepted change:roles', @render)
+      @listenTo(@model, 'change:roles', @render)
 
     acceptRole: (e) ->
       role = @model.get('roles')[$(e.currentTarget).data('role')]
@@ -38,19 +36,4 @@ define (require) ->
       @render()
 
     onSubmit: () ->
-      roleRequests= []
-      @acceptLicense(@model)
-      rolesList = @model?.get('roles')
-      data = {'license': @model.get('hasAcceptedLicense'), 'roles': roleRequests}
-      isAccepted = []
-
-      _.each rolesList, (role) ->
-        if role.hasAccepted is 'true' or role.hasAccepted is true
-          isAccepted.push(role)
-        roles = {'role': role.role, 'hasAccepted': role.hasAccepted}
-        roleRequests.push(roles)
-
-      if isAccepted.length > 0  and model.get('hasAcceptedLicense') is false
-        alert 'You must accept the license.'
-      else
-        @model.acceptOrReject(data)
+      @model.save()
