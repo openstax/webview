@@ -13,7 +13,7 @@ define (require) ->
       authenticated: session.get('id')
       encodedTitle: encodeURI(@model.get('title'))
       derivable: @model.canEdit()
-      isDraft: @model.isDraft()
+      isEditable: @model.isEditable()
     }
 
     events:
