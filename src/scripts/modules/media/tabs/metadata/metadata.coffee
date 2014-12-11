@@ -82,7 +82,6 @@ define (require) ->
             licensors.push(licensorsCollection.get(licensor).toJSON())
           return licensors
 
-
       '.publishers > input':
         value: 'publishers'
         type: 'select2'
@@ -143,8 +142,6 @@ define (require) ->
         return "#{fullname} (#{id})"
       else
         return id
-
-
 
     initialize: () ->
       super()
