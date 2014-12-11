@@ -14,10 +14,10 @@ define (require) ->
     pageTitle: 'Role Acceptance'
 
     templateHelpers:
-      licenseRequired: () -> !!_.findWhere(@model.get('roles'), {hasAccepted: true})
+      licenseRequired: () -> @licenseRequired()
 
     events:
-      'click .submit': 'onSubmit'
+      'submit form': 'onSubmit'
       'click .accept': 'acceptRole'
       'click .reject': 'rejectRole'
 
@@ -35,6 +35,15 @@ define (require) ->
       if role.hasAccepted is false then role.hasAccepted = null else role.hasAccepted = false
       @render()
 
-    onSubmit: () ->
-      @model.set('license', @$el.find('.license-accept').is(':checked'))
-      @model.save()
+    onSubmit: (e) ->
+      e.preventDefault()
+
+      licenseAccepted = @$el.find('.license-accept').is(':checked')
+      @model.set('license', licenseAccepted)
+
+      if licenseAccepted or not @licenseRequired()
+        @model.save()
+      else
+        alert('You must accept the license')
+
+    licenseRequired: () -> !!_.findWhere(@model.get('roles'), {hasAccepted: true})
