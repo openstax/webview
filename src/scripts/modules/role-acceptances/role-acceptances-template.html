@@ -1,11 +1,8 @@
 <div class="role-acceptances">
-  <h3>{{error}}</h3>
-  <div class="message"><p>{{{accepted}}}</p></div>
-  <div class="message"><p>{{rejected}}</p></div>
-  <div class="{{class}}">
-    <h3>Title: <a href="{{linkToContent}}">{{title}}</a></h3>
-    <div class="license-info">
-      <input type="checkbox" class="licenseCheckbox"/>
+  <h3>Title: <a href="{{linkToContent}}">{{title}}</a></h3>
+  <form>
+    <div class="license-info{{#unless licenseRequired}} disabled{{/unless}}">
+      <input type="checkbox" {{#unless licenseRequired}}class="disabled" required{{/unless}} />
       <span>I license this work under the</span>
       <a href="{{license.url}}">
         Creative Commons Attribution License (CC-BY).
@@ -19,35 +16,33 @@
         <li>I agree that proper attribution of my work is any attribution that includes the authors' names, the title of the work and the OpenStax CNX URL to the work</li>
       </ul>
     </div>
-    <form>
-      <table class="table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Role</th>
-            <th>Requester</th>
-            <th>Assignment Date</th>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Role</th>
+          <th>Requester</th>
+          <th>Assignment Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each roles}}
+          <tr class="roles" data-requested-role="{{role}}">
+            <td>
+              <i class="fa fa-check accept{{#is hasAccepted true}} selected{{/is}}" data-role="{{@index}}"></i>
+              <i class="fa fa-remove reject{{#is hasAccepted false}} selected{{/is}}" data-role="{{@index}}"></i>
+            </td>
+            <td>{{cap role}}</td>
+            <td>{{requester}}</td>
+            <td>{{date assignmentDate}}</td>
           </tr>
-        </thead>
-        <tbody>
-          {{#each roles}}
-            <tr class="roles" data-requested-role="{{role}}">
-              <td>
-                <i class="fa fa-check"></i>
-                <i class="fa fa-remove"></i>
-              </td>
-              <td>{{cap role}}</td>
-              <td>{{requester}}</td>
-              <td>{{date assignmentDate}}</td>
-            </tr>
-          {{/each}}
-          <tr>
-            <td><input type="button" value="Update" class="btn submit"/><td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
-  </div>
+        {{/each}}
+        <tr>
+          <td><input type="button" value="Update" class="btn submit"/><td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
 </div>
