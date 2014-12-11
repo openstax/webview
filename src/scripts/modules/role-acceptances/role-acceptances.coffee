@@ -38,11 +38,22 @@ define (require) ->
     onSubmit: (e) ->
       e.preventDefault()
 
+      $alert = @$el.find('.alert')
       licenseAccepted = @$el.find('.license-accept').is(':checked')
+
       @model.set('license', licenseAccepted)
+
+      $alert.get(0).className = 'alert hidden'
 
       if licenseAccepted or not @licenseRequired()
         @model.save()
+        .error () ->
+          $alert.addClass('alert-danger')
+          .html('<strong>Error.</strong> Your changes have not been saved.').removeClass('hidden')
+        .success () ->
+          $alert.addClass('alert-success')
+          .html('<strong>Success.</strong> Your new role settings have been saved.').removeClass('hidden')
+
       else
         alert('You must accept the license')
 
