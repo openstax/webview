@@ -1,60 +1,50 @@
 define (require) ->
-  BaseView = require('cs!helpers/backbone/views/base')
-  template = require('hbs!./role-acceptance-template')
-  RoleAcceptances = require('cs!collections/role-acceptances')
-  settings = require('settings')
   $ = require('jquery')
   _ = require('underscore')
-  require('less!./role-acceptance')
+  settings = require('settings')
+  BaseView = require('cs!helpers/backbone/views/base')
+  RoleAcceptances = require('cs!models/role-acceptances')
+  template = require('hbs!./role-acceptances-template')
+  require('less!./role-acceptances')
 
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
   return  class RoleAcceptanceView extends BaseView
     template: template
-    collection: RoleAcceptances
     pageTitle: 'Role Acceptance'
 
-
     templateHelpers: () ->
-      accepted = @accepted()
-      rejected = @rejected()
-
       return {
-        accepted: accepted
-        rejected: rejected
-        error: @collection.error
-        class: @collection.class
+        accepted: @accepted()
+        rejected: @rejected()
+        error: @model.error
+        class: @model.class
       }
-
 
     events:
       'click .submit': 'acceptOrRejectRoles'
       'click input[type="radio"]': 'onClickSetHasAcceptedForRole'
 
-
     initialize: () ->
-      @listenTo(@collection, 'reset', @render)
-      @listenTo(@collection, 'change:hasAcceptedLicense change:hasAccepted', @render)
+      @model = new RoleAcceptances()
 
+      @listenTo(@model, 'reset', @render)
+      @listenTo(@model, 'change:hasAcceptedLicense change:hasAccepted change:roles', @render)
 
     onRender: () ->
       @showAcceptedAndRejected()
       @disableLicenseCheckboxIfRolesRejected()
 
-
     onClickSetHasAcceptedForRole: (e) ->
-      model = @collection.at(0)
       current = $(e.currentTarget)
-      roles = model?.get('roles')
+      roles = @model?.get('roles')
       requestedRole = current.closest('tr').attr('data-requested-role')
       selectedRole = _.find roles, (role) -> role.role is requestedRole
       selectedRole.hasAccepted = current.val()
       @disableLicenseCheckboxIfRolesRejected()
 
-
     disableLicenseCheckboxIfRolesRejected: () ->
-      model = @collection.at(0)
-      roles = model?.get('roles')
+      roles = @model?.get('roles')
       row = $('tr.roles')
       isRejected = []
       _.each roles, (role) ->
@@ -66,10 +56,8 @@ define (require) ->
       else
         $('.licenseCheckbox').attr('disabled', false)
 
-
     showAcceptedAndRejected: () ->
-      model = @collection.at(0)
-      roles = model?.get('roles')
+      roles = @model?.get('roles')
       rows = $('table').find('tr.roles')
 
       _.each rows, (row) ->
@@ -88,20 +76,17 @@ define (require) ->
             selectedRow.find(':radio[value=false]').prop({'checked': 'checked'})
             $(row).addClass('gray')
 
-
     acceptLicense: (model) ->
       if $('.licenseCheckbox').is(':checked')
         model.set('hasAcceptedLicense', true)
       else
         model.set('hasAcceptedLicense', false)
 
-
     acceptOrRejectRoles: () ->
-      model = @collection.at(0)
       roleRequests= []
-      @acceptLicense(model)
-      rolesList = model?.get('roles')
-      data = {'license': model.get('hasAcceptedLicense'), 'roles': roleRequests}
+      @acceptLicense(@model)
+      rolesList = @model?.get('roles')
+      data = {'license': @model.get('hasAcceptedLicense'), 'roles': roleRequests}
       isAccepted = []
 
       _.each rolesList, (role) ->
@@ -113,20 +98,16 @@ define (require) ->
       if isAccepted.length > 0  and model.get('hasAcceptedLicense') is false
         alert 'You must accept the license.'
       else
-        @collection.acceptOrReject(data)
-
+        @model.acceptOrReject(data)
 
     accepted: () ->
       @message(true, 'accepted')
 
-
     rejected: () ->
       @message(false, 'rejected')
 
-
     message: (acceptedBool, messageModel) ->
-      model = @collection?.at(0)
-      role = _.map model?.get('roles'), (role) -> role
+      role = _.map @model?.get('roles'), (role) -> role
       accepted = _.where(role, {'hasAccepted': acceptedBool})
       roles = []
       url = "#{location.protocol}//#{location.host}/contents/#{model?.id}@draft"
@@ -145,7 +126,6 @@ define (require) ->
         return model.get(messageModel)
       else
         return ''
-
 
     formatRoles: (str) ->
       cap = str.charAt(0).toUpperCase()
