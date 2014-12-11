@@ -36,4 +36,5 @@ define (require) ->
       @render()
 
     onSubmit: () ->
+      @model.set('license', @$el.find('.license-accept').is(':checked'))
       @model.save()
