@@ -4,7 +4,7 @@ define (require) ->
   $ = require('jquery')
   settings = require('settings')
 
-  archive = "#{location.protocol}//#{settings.cnxarchive.host}"
+  archive = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
 
   return new class FeaturedBooks extends Backbone.Collection
     url: "#{archive}/extras"
