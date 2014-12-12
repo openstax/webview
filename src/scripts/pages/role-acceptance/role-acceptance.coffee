@@ -5,7 +5,6 @@ define (require) ->
   FindContentView = require('cs!modules/find-content/find-content')
   template = require('hbs!./role-acceptance-template')
   RoleAcceptancesView = require('cs!modules/role-acceptances/role-acceptances')
-
   require('less!./role-acceptance')
 
   return class RoleAcceptance extends BaseView
