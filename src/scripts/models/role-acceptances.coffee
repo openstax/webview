@@ -15,3 +15,19 @@ define (require) ->
         xhrFields: withCredentials: true
       .fail (response) =>
         router.appView.render('error', {code: response.status})
+
+    save: (key, val, options) ->
+      if not key? or typeof key is 'object'
+        attrs = key
+        options = val
+      else
+        attrs = {}
+        attrs[key] = val
+
+      options = _.extend(
+        dataType: 'xml'
+        xhrFields:
+          withCredentials: true
+      , options)
+
+      return super(attrs, options)
