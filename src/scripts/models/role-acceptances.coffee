@@ -6,10 +6,10 @@ define (require) ->
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
   return class RoleAcceptance extends Backbone.Model
-    id = window.location.pathname.match(/\/[^\/]+$/)
-    url: "#{AUTHORING}/contents#{id}@draft/acceptance"
+    url: () -> "#{AUTHORING}/contents/#{@contentId}@draft/acceptance"
 
-    initialize: () =>
+    initialize: (options) =>
+      @contentId = options.id
       @fetch
         reset: true,
         xhrFields: withCredentials: true

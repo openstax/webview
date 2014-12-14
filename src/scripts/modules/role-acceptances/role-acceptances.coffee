@@ -22,7 +22,8 @@ define (require) ->
       'click .reject': 'rejectRole'
 
     initialize: () ->
-      @model = new RoleAcceptances()
+      id = location.pathname.replace('/users/role-acceptance/', '')
+      @model = new RoleAcceptances({id: id})
       @listenTo(@model, 'change:roles', @render)
 
     acceptRole: (e) ->
