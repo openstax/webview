@@ -15,6 +15,7 @@ define (require) ->
 
     templateHelpers:
       licenseRequired: () -> @licenseRequired()
+      id: () -> @model.contentId
 
     events:
       'submit form': 'onSubmit'
