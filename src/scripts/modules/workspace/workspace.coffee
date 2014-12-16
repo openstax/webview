@@ -12,12 +12,14 @@ define (require) ->
 
   return class WorkspaceView extends BaseView
     template: template
+    templateHelpers: () ->
+      return {userId: session.get('id')}
 
     regions:
       workspace: '.workspace'
 
-    templateHelpers: () ->
-      return {userId: session.get('id')}
+    events:
+      'click .reload.btn': 'reload'
 
     initialize: () ->
       super()
@@ -40,3 +42,5 @@ define (require) ->
     displayError: () ->
       error = arguments[1] # @model.get('error')
       router.appView.render('error', {code: error}) if error
+
+    reload: () -> @model.fetch()
