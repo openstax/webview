@@ -6,6 +6,7 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./tools-template')
   require('less!./tools')
+  _ = require('underscore')
 
   return class ToolsView extends BaseView
     template: template
@@ -13,7 +14,7 @@ define (require) ->
       authenticated: session.get('id')
       encodedTitle: encodeURI(@model.get('title'))
       derivable: @model.canEdit()
-      isEditable: @model.isEditable()
+      isEditable: @isEditable
     }
 
     events:
@@ -37,3 +38,7 @@ define (require) ->
       .done () ->
         url = linksHelper.getPath('contents', {model: page})
         router.navigate(url, {trigger: true})
+
+    isEditable: () =>
+      if _.indexOf(@model.get('permissions'), 'edit') >= 0
+        return true
