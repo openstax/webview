@@ -30,8 +30,6 @@ define (require) ->
         @set('version', options.version) if options.version
         @fetch
           reset: true
-        .always () =>
-          @set('loaded', true)
         .done () =>
           @set('error', false)
           if @isBook()
@@ -39,6 +37,8 @@ define (require) ->
               @setPage(options.page or 1) # Default to page 1
           else
             @set('active', true)
+        .always () =>
+          @set('loaded', true)
 
         .fail (model, response, options) =>
           @set('error', response?.status or model?.status or 9000)
