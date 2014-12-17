@@ -27,7 +27,7 @@
 
     {{#if licenseRequired}}
       <div class="license-info">
-        <input type="checkbox" class="license-accept" required />
+        <input type="checkbox" class="license-accept" required{{#is license true}} checked{{/is}} />
         <span>I license this work under the</span>
         <a href="{{license.url}}">
           Creative Commons Attribution License (CC-BY).

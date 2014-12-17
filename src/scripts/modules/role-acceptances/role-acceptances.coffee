@@ -21,6 +21,7 @@ define (require) ->
       'submit form': 'onSubmit'
       'click .accept': 'acceptRole'
       'click .reject': 'rejectRole'
+      'change .license-accept': 'toggleLicense'
 
     initialize: () ->
       id = location.pathname.replace('/users/role-acceptance/', '')
@@ -36,6 +37,10 @@ define (require) ->
       role = @model.get('roles')[$(e.currentTarget).data('role')]
       if role.hasAccepted is false then role.hasAccepted = null else role.hasAccepted = false
       @render()
+
+    toggleLicense: (e) ->
+      licenseAccepted = @$el.find('.license-accept').is(':checked')
+      @model.set('license', licenseAccepted)
 
     onSubmit: (e) ->
       e.preventDefault()
