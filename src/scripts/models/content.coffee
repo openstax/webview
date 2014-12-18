@@ -227,3 +227,11 @@ define (require) ->
         return @get('currentPage')
 
       return @
+
+    isPublishable: () ->
+      book = @isBook()
+
+      if book and @get('areContainedPublishable') or not book and @get('isPublishable')
+        return true
+      else
+        return false
