@@ -19,6 +19,7 @@ define (require) ->
     template: template
     templateHelpers:
       changed: () -> @model.get('changed') or @model.get('childChanged')
+      publishable: () -> @publishable()
 
     events:
       'click .save':    'save'
@@ -65,3 +66,11 @@ define (require) ->
 
     publish: () ->
       $('#publish-modal').modal()
+
+    publishable: () ->
+      book = @model.isBook()
+
+      if book and @model.get('areContainedPublishable') or not book and @model.get('isPublishable')
+        return true
+      else
+        return false

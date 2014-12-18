@@ -60,7 +60,7 @@
           <button type="button" class="revert  btn btn-plain navbar-btn">Revert</button>
           <button type="button" title="Save" class="save    btn btn-default navbar-btn"><i class="fa fa-save"></i> Save Draft</button>
         {{else}}
-          <button type="button" class="publish btn btn-primary navbar-btn">Publish...</button>
+          <button type="button" class="publish btn btn-primary navbar-btn" {{#unless publishable}}disabled="disabled"{{/unless}}>Publish...</button>
         {{/if}}
       </div>
     </div><!-- /.navbar-collapse -->
