@@ -2,6 +2,7 @@ define (require) ->
   $ = require('jquery')
   BaseView = require('cs!helpers/backbone/views/base')
   PublishModal = require('cs!./modals/publish')
+  BlockPublishModal = require('cs!./block-publish/modals/block-publish')
   template = require('hbs!./editbar-template')
   require('less!./editbar')
   require('bootstrapButton')
@@ -19,7 +20,6 @@ define (require) ->
     template: template
     templateHelpers:
       changed: () -> @model.get('changed') or @model.get('childChanged')
-      publishable: () -> @model.isPublishable()
 
     events:
       'click .save':    'save'
@@ -33,6 +33,7 @@ define (require) ->
     onRender: () ->
       super()
       @parent?.regions.self.append(new PublishModal({model: @model}))
+      @parent?.regions.self.append(new BlockPublishModal({model: @model}))
 
       require ['aloha'], (Aloha) =>
         Aloha.ready () =>
@@ -65,4 +66,4 @@ define (require) ->
       model.fetch()
 
     publish: () ->
-      $('#publish-modal').modal()
+      @model.isPublishable()

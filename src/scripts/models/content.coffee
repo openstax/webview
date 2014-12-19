@@ -4,6 +4,7 @@ define (require) ->
   settings = require('settings')
   Collection = require('cs!models/contents/collection')
   Page = require('cs!models/contents/page')
+  $ = require('jquery')
 
   return class Content extends Collection
     relations: [{
@@ -232,6 +233,6 @@ define (require) ->
       book = @isBook()
 
       if book and @get('areContainedPublishable') or not book and @get('isPublishable')
-        return true
+        $('#publish-modal').modal()
       else
-        return false
+        $('#reject-publish-modal').modal()
