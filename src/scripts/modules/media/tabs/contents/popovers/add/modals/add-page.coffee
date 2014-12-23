@@ -20,7 +20,7 @@ define (require) ->
     events:
       'click .new-page': 'newPage'
       'click .search-pages': 'onSearch'
-      'submit form': 'onSubmit'
+      'submit form': 'validate'
       'change form': 'onChange'
       'focus .page-title': 'onFocusSearch'
       'blur .page-title': 'onUnfocusSearch'
@@ -90,8 +90,6 @@ define (require) ->
       router.navigate(href, {trigger: false, analytics: true})
 
     onSubmit: (e) ->
-      e.preventDefault()
-
       data = $(e.originalEvent.target).serializeArray()
 
       @$el.modal('hide')
@@ -114,3 +112,14 @@ define (require) ->
           @updateUrl()
 
       @model.create({title: title}, options)
+
+    validate: (e) ->
+      e.preventDefault()
+      $input = @$el.find('.page-title')
+      alert = $('.modal-body').find('.alert')
+
+      if $input.val() is ''
+        alert.html('Title is required').removeClass('hidden')
+      else
+        alert.addClass('hidden')
+        @onSubmit(e)
