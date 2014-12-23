@@ -31,7 +31,7 @@ define (require) ->
 
     addPage: (e) ->
       @hide(e)
-      @addPageModal.$el.modal('show')
+      @addPageModal.$el.modal('show').find('.alert').addClass('hidden')
 
     onBeforeClose: () ->
       super()
