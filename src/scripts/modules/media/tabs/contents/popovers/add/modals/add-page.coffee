@@ -7,6 +7,7 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   AddPageSearchResultsView = require('cs!./results/results')
   template = require('hbs!./add-page-template')
+  validation = require('cs!helpers/validation.coffee')
   require('less!./add-page')
   require('bootstrapModal')
 
@@ -92,8 +93,6 @@ define (require) ->
     onSubmit: (e) ->
       data = $(e.originalEvent.target).serializeArray()
 
-      @$el.modal('hide')
-
       if data.length is 1
         @newPage(data[0].value)
       else
@@ -115,11 +114,8 @@ define (require) ->
 
     validate: (e) ->
       e.preventDefault()
-      $input = @$el.find('.page-title')
-      alert = $('.modal-body').find('.alert')
+      el = @$el
+      $input = el.find('.page-title')
+      alert = el.find('.alert')
 
-      if $input.val() is ''
-        alert.html('Title is required').removeClass('hidden')
-      else
-        alert.addClass('hidden')
-        @onSubmit(e)
+      validation.validateModalTitle(e, $input, alert, @onSubmit(e), el)

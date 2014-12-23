@@ -3,6 +3,7 @@ define (require) ->
   Content  = require('cs!models/content')
   Page = require('cs!models/contents/page')
   template = require('hbs!./new-media-template')
+  validation = require('cs!helpers/validation.coffee')
   require('less!./new-media')
   require('bootstrapModal')
 
@@ -10,7 +11,7 @@ define (require) ->
     template: template
 
     events:
-      'submit form': 'onSubmit'
+      'submit form': 'validate'
 
     onRender: () ->
       @$el.off('shown.bs.modal') # Prevent duplicating event listeners
@@ -27,17 +28,21 @@ define (require) ->
           title: options.title
 
       content.save()
-      .fail(() -> alert('There was a problem saving. Please try again'))
       .done () => @model.get('searchResults').prependNew(content)
 
-    onSubmit: (e) ->
+    validate: (e) ->
       e.preventDefault()
+      el = @$el
+      input = el.find('input[type="text"]')
+      alert = el.find('.alert')
+
+      validation.validateModalTitle(e, input, alert, @onSubmit(), el)
+
+    onSubmit: () ->
       @newContent
         title: @$el.find('.new-title').val()
         type: @model.get('type')
 
-      @$el.modal('hide')
-
     show: () ->
       @render()
-      @$el.modal('show')
+      @$el.modal('show').find('.alert').addClass('hidden')
