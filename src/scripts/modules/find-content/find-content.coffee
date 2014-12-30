@@ -14,7 +14,7 @@ define (require) ->
 
     events:
       'click .dropdown-menu > li': 'selectSubject'
-      'keyup input': 'triggerSearch'
+      'keyup input, click .find': 'triggerSearch'
 
     initialize: () ->
       super()
@@ -30,7 +30,7 @@ define (require) ->
 
     triggerSearch: (e) ->
       if e.keyCode is 13
-        @search($(e.currentTarget).val())
+        @search(encodeURIComponent($(e.currentTarget).val()))
 
     search: (query) ->
       router.navigate("search?q=#{query}", {trigger: true})
