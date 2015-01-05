@@ -1,8 +1,8 @@
 define (require) ->
+  $ = require('jquery')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./delete-template')
   settings = require('settings')
-  $ = require('jquery')
   require('less!./delete')
 
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"

@@ -1,6 +1,6 @@
 define (require) ->
-  _ = require('underscore')
   $ = require('jquery')
+  _ = require('underscore')
   Backbone = require('backbone')
   Node = require('cs!./node')
   Page = require('cs!./page')
