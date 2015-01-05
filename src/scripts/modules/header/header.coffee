@@ -3,7 +3,6 @@ define (require) ->
   settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./header-template')
-  settings = require('settings')
   require('less!./header')
   require('bootstrapCollapse')
   require('zendesk')
