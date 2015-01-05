@@ -1,8 +1,8 @@
 define (require) ->
-  Backbone = require('backbone')
-  FeaturedBook = require('cs!models/featured-book')
   $ = require('jquery')
+  Backbone = require('backbone')
   settings = require('settings')
+  FeaturedBook = require('cs!models/featured-book')
 
   archive = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
 
