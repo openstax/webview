@@ -1,10 +1,10 @@
 define (require) ->
+  $ = require('jquery')
   _ = require('underscore')
   Backbone = require('backbone')
   settings = require('settings')
   Collection = require('cs!models/contents/collection')
   Page = require('cs!models/contents/page')
-  $ = require('jquery')
 
   return class Content extends Collection
     relations: [{
