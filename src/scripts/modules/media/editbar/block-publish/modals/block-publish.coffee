@@ -18,4 +18,4 @@ define (require) ->
         formatBlockers = blockers.replace('_', ' ')
         formatted.push(formatBlockers)
 
-      return formatted.join(', ')
+      return formatted
