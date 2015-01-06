@@ -16,10 +16,10 @@ define (require) ->
       currentPage = @getModel()
 
       if currentPage
-        currentPageData = currentPage.toJSON()
-        currentPageData.encodedTitle = encodeURI(currentPage.title)
+        currentPage = currentPage.toJSON()
+        currentPage.encodedTitle = encodeURI(currentPage.title)
       else
-        currentPageData = {
+        currentPage = {
           title: 'Untitled'
           encodedTitle: 'Untitled'
           authors: []
@@ -29,7 +29,7 @@ define (require) ->
       pageDownloads = currentPage?.get?('downloads')
 
       return {
-        currentPage: currentPageData
+        currentPage: currentPage
         hasDownloads: (_.isArray(downloads) and downloads?.length) or
           (_.isArray(pageDownloads) and pageDownloads?.length)
         derivable: @isDerivable()
