@@ -1,4 +1,5 @@
 define (require) ->
+  $ = require('jquery')
   _ = require('underscore')
   Backbone = require('backbone')
   settings = require('settings')
@@ -227,3 +228,11 @@ define (require) ->
         return @get('currentPage')
 
       return @
+
+    isPublishable: () ->
+      book = @isBook()
+
+      if book and @get('areContainedPublishable') or not book and @get('isPublishable')
+        $('#publish-modal').modal()
+      else
+        $('#reject-publish-modal').modal()
