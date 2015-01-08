@@ -8,10 +8,10 @@ define (require) ->
     template: template
 
     templateHelpers: () ->
-      publishBlockers: @publishBlockers
+      publishBlockers: @publishBlockers(@model)
 
-    publishBlockers: () ->
-      publishBlockers = @model.get('publishBlockers')
+    publishBlockers: (model) ->
+      publishBlockers = model.get('publishBlockers')
       formatted = []
 
       _.each publishBlockers, (blockers) ->
