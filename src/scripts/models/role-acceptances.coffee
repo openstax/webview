@@ -1,7 +1,6 @@
 define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
-  router = require('router')
 
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
 
@@ -14,7 +13,7 @@ define (require) ->
         reset: true,
         xhrFields: withCredentials: true
       .fail (response) =>
-        router.appView.render('error', {code: response.status})
+        @set('error', response?.status or 9000)
 
     save: (key, val, options) ->
       if not key? or typeof key is 'object'
