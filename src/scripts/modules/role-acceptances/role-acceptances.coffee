@@ -72,7 +72,7 @@ define (require) ->
     disableOrEnableSubmit: () ->
       submit = @$el.find('.submit')
       roles = @model.get('roles')
-      role = _.pluck(roles, 'hasAccepted');
+      role = _.pluck(roles, 'hasAccepted')
       if _.contains(role, null)
         submit.prop('disabled', true)
       else
