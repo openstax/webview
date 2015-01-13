@@ -27,16 +27,19 @@ define (require) ->
       id = location.pathname.replace('/users/role-acceptance/', '')
       @model = new RoleAcceptances({id: id})
       @listenTo(@model, 'change:roles', @render)
+      @listenTo(@model, 'change:roles', @disableOrEnableSubmit)
 
     acceptRole: (e) ->
       role = @model.get('roles')[$(e.currentTarget).data('role')]
       if role.hasAccepted is true then role.hasAccepted = null else role.hasAccepted = true
       @render()
+      @disableOrEnableSubmit()
 
     rejectRole: (e) ->
       role = @model.get('roles')[$(e.currentTarget).data('role')]
       if role.hasAccepted is false then role.hasAccepted = null else role.hasAccepted = false
       @render()
+      @disableOrEnableSubmit()
 
     toggleLicense: (e) ->
       licenseAccepted = @$el.find('.license-accept').is(':checked')
@@ -65,3 +68,12 @@ define (require) ->
         alert('You must accept the license')
 
     licenseRequired: () -> !!_.findWhere(@model.get('roles'), {hasAccepted: true})
+
+    disableOrEnableSubmit: () ->
+      submit = @$el.find('.submit')
+      roles = @model.get('roles')
+      role = _.pluck(roles, 'hasAccepted');
+      if _.contains(role, null)
+        submit.prop('disabled', true)
+      else
+        submit.prop('disabled', false)
