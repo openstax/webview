@@ -16,6 +16,7 @@ define (require) ->
     templateHelpers:
       licenseRequired: () -> @licenseRequired()
       id: () -> @model.contentId
+      disabled: () -> @disabled()
 
     events:
       'submit form': 'onSubmit'
@@ -65,3 +66,10 @@ define (require) ->
         alert('You must accept the license')
 
     licenseRequired: () -> !!_.findWhere(@model.get('roles'), {hasAccepted: true})
+
+    disabled: () ->
+      submit = @$el.find('.submit')
+      roles = @model.get('roles')
+      role = _.pluck(roles, 'hasAccepted')
+      if _.contains(role, null)
+        return true
