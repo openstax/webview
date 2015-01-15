@@ -232,7 +232,19 @@ define (require) ->
     isPublishable: () ->
       book = @isBook()
 
-      if book and @get('areContainedPublishable') or not book and @get('isPublishable')
+      if book and @get('isPublishable') and @areContainedPublishable() or not book and @get('isPublishable')
         $('#publish-modal').modal()
       else
         $('#reject-publish-modal').modal()
+
+    areContainedPublishable: () ->
+      contents = @get('contents')?.models
+      notPublishable = []
+
+      _.each contents, (content) ->
+        isPublishable = content.get('isPublishable')
+        if isPublishable is false
+          notPublishable.push(isPublishable)
+
+      if notPublishable.length is 0
+        return true
