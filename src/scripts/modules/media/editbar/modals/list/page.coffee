@@ -7,7 +7,7 @@ define (require) ->
   return class PublishListPageView extends BaseView
     template: template
     templateHelpers:
-      isPagePublishable: () -> if @model.isDraft() and @model.isPublishable() then true
+      isPagePublishable: () -> if @model.get('isPublishable') and @model.isDraft() then true
 
     tagName: 'li'
     itemViewContainer: '.section'

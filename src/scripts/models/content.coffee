@@ -230,7 +230,7 @@ define (require) ->
       return @
 
     isPublishable: () ->
-      if @get('isPublishable') and @get('areContainedPublishable')
+      if @get('isPublishable')
         $('#publish-modal').modal()
       else
         $('#reject-publish-modal').modal()
