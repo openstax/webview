@@ -11,14 +11,16 @@ define (require) ->
       publishBlockers: @publishBlockers(@model)
 
     initialize: () ->
+      @listenTo(@model, 'change', @render)
       @listenTo(@model, 'change:publishBlockers', @render)
+      @listenTo(@model, 'change:currentPage.publishBlockers', @render)
 
     publishBlockers: (model) ->
       book = model.isBook()
       title = model.get('title')
       isPublishable = model.get('isPublishable')
       containedPublishable = model.get('areContainedPublishable')
-      contents = model.get('contents')?.models
+      contents = model.get('contents').models
       publishBlockers = model.get('publishBlockers')
       formatted = []
 
@@ -30,7 +32,7 @@ define (require) ->
       if book and containedPublishable is false
         _.each contents, (content) ->
           title = content.get('title')
-          publishBlockers = content?.get('publishBlockers')
+          publishBlockers = content.get('publishBlockers')
           if publishBlockers isnt undefined and publishBlockers isnt null
             formatBlockers = publishBlockers[0].replace('_', ' ')
             formatted.push("#{formatBlockers} in #{title}")
