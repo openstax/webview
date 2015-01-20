@@ -262,7 +262,7 @@ define (require) ->
     publishablePageValidation: () ->
       numUnpublishableContent = @unpublishableContentNum()
 
-      if numUnpublishableContent <= 0
+      if numUnpublishableContent is 0
         $('#publish-modal').modal()
       else
         $('#reject-publish-modal').modal()
