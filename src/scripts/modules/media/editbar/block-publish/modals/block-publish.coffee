@@ -19,7 +19,6 @@ define (require) ->
       book = model.isBook()
       title = model.get('title')
       isPublishable = model.get('isPublishable')
-      containedPublishable = model.get('areContainedPublishable')
       contents = model.get('contents')?.models
       publishBlockers = model.get('publishBlockers')
       formatted = []
