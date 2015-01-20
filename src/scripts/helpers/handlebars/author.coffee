@@ -6,4 +6,5 @@ define (require) ->
   Handlebars = require('hbs/handlebars')
 
   Handlebars.registerHelper 'author', (list, index, property) ->
-    return new Handlebars.SafeString(list[index][property])
+    if index isnt undefined
+      return new Handlebars.SafeString(list[index][property])
