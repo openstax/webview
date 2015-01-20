@@ -20,7 +20,7 @@ define (require) ->
       title = model.get('title')
       isPublishable = model.get('isPublishable')
       containedPublishable = model.get('areContainedPublishable')
-      contents = model.get('contents').models
+      contents = model.get('contents')?.models
       publishBlockers = model.get('publishBlockers')
       formatted = []
 
@@ -29,7 +29,7 @@ define (require) ->
           formatBlockers = blockers.replace('_', ' ')
           formatted.push("#{formatBlockers} in #{title}")
 
-      if book and containedPublishable is false
+      if book and isPublishable
         _.each contents, (content) ->
           title = content.get('title')
           publishBlockers = content.get('publishBlockers')

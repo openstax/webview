@@ -236,9 +236,7 @@ define (require) ->
 
       #Book and Pages Contained in Book
       if book
-        if publishable and containedPublishable
-          $('#publish-modal').modal()
-        else if publishable and containedPublishable is false
+        if publishable
           @publishablePageValidation()
         else
           $('#reject-publish-modal').modal()
