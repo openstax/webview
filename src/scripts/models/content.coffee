@@ -231,20 +231,38 @@ define (require) ->
 
     isPublishable: () ->
       book = @isBook()
+      publishable = @get('isPublishable')
+      containedPublishable = @get('areContainedPublishable')
 
-      if book and @get('isPublishable') and @areContainedPublishable() or not book and @get('isPublishable')
-        $('#publish-modal').modal()
-      else
-        $('#reject-publish-modal').modal()
+      #Book and Pages Contained in Book
+      if book
+        if publishable
+          @publishablePageValidation()
+        else
+          $('#reject-publish-modal').modal()
 
-    areContainedPublishable: () ->
-      contents = @get('contents')?.models
-      notPublishable = []
+      #Individual pages
+      if not book
+        if publishable
+          $('#publish-modal').modal()
+        else
+          $('#reject-publish-modal').modal()
+
+    unpublishableContentNum: () ->
+      contents = @get('contents').models
+      unPublishableNum = 0
 
       _.each contents, (content) ->
         isPublishable = content.get('isPublishable')
         if isPublishable is false
-          notPublishable.push(isPublishable)
+          unPublishableNum++
 
-      if notPublishable.length is 0
-        return true
+      return unPublishableNum
+
+    publishablePageValidation: () ->
+      numUnpublishableContent = @unpublishableContentNum()
+
+      if numUnpublishableContent is 0
+        $('#publish-modal').modal()
+      else
+        $('#reject-publish-modal').modal()
