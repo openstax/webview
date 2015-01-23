@@ -5,6 +5,7 @@ define (require) ->
   template = require('hbs!./new-media-template')
   require('less!./new-media')
   require('bootstrapModal')
+  router = require('cs!router')
 
   return class NewMediaModal extends BaseView
     template: template
@@ -28,7 +29,8 @@ define (require) ->
 
       content.save()
       .fail(() -> alert('There was a problem saving. Please try again'))
-      .done () => @model.get('searchResults').prependNew(content)
+      .done () =>
+        router.navigate("/contents/#{content.id}@draft", {trigger: true})
 
     onSubmit: (e) ->
       e.preventDefault()
