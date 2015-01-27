@@ -30,7 +30,7 @@ define (require) ->
       content.save()
       .fail(() -> alert('There was a problem saving. Please try again.'))
       .done () =>
-        router.navigate("/contents/#{content.id}@draft/#{options.title}?tab=contents", {trigger: true})
+        router.navigate("/contents/#{content.id}@draft/#{content.get('title')}?tab=contents", {trigger: true})
 
     onSubmit: (e) ->
       e.preventDefault()
