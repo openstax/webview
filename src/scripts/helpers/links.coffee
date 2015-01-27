@@ -8,7 +8,7 @@ define (require) ->
   inverseShortcodes = _.invert(shortcodes)
 
   return new class LinksHelper
-    componentRegEx: /^contents\/([^:@\/]+)@?([^:\/]*):?([0-9]*)\/?([^\?]*)(\??.*)/
+    componentRegEx: /^contents\/([^:@/]+)@?([^:/?]*):?([0-9]*)\/?([^?]*)(\?.*)?/
 
     cleanUrl: trim
 
@@ -56,7 +56,7 @@ define (require) ->
     serializeQuery: (query) ->
       queryString = {}
 
-      query.split('?').pop().split('&').forEach (prop) ->
+      query?.split('?').pop().split('&').forEach (prop) ->
         item = prop.split('=')
         if item.length is 2
           queryString[decodeURIComponent(item.shift())] = decodeURIComponent(item.shift())
