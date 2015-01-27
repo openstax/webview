@@ -23,6 +23,7 @@ define (require) ->
       @uuid = options.uuid
       @version = options.version
       @page = options.page
+      @title = options.title
 
     regions:
       contents: '#contents'
@@ -35,7 +36,7 @@ define (require) ->
 
       if @uuid
         @parent.regions.header.show(new HeaderView({page: 'contents'}))
-        view = new MediaView({uuid: @uuid, version: @version, page: @page})
+        view = new MediaView({uuid: @uuid, version: @version, page: @page, title: @title})
         @regions.contents.append(view)
 
         ###

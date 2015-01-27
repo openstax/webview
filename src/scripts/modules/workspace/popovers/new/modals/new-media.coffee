@@ -2,10 +2,10 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   Content  = require('cs!models/content')
   Page = require('cs!models/contents/page')
+  router = require('cs!router')
   template = require('hbs!./new-media-template')
   require('less!./new-media')
   require('bootstrapModal')
-  router = require('cs!router')
 
   return class NewMediaModal extends BaseView
     template: template
@@ -28,9 +28,9 @@ define (require) ->
           title: options.title
 
       content.save()
-      .fail(() -> alert('There was a problem saving. Please try again'))
+      .fail(() -> alert('There was a problem saving. Please try again.'))
       .done () =>
-        router.navigate("/contents/#{content.id}@draft", {trigger: true})
+        router.navigate("/contents/#{content.id}@draft/#{options.title}?tab=contents", {trigger: true})
 
     onSubmit: (e) ->
       e.preventDefault()
