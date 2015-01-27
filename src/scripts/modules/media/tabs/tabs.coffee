@@ -32,8 +32,8 @@ define (require) ->
 
       components = linksHelper.getCurrentPathComponents()
 
-      if components.query?.toc is 'open'
-        @switchTab(@$el.find('.contents-tab'))
+      if components.query?.tab
+        @switchTab(@$el.find(".#{components.query.tab}-tab"))
 
     selectTab: (e) ->
       $tab = $(e.currentTarget)

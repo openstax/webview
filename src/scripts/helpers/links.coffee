@@ -50,13 +50,14 @@ define (require) ->
         version: components[2]
         page: components[3]
         title: components[4]
-        query: @serializeQuery(components[5])
+        rawquery: components[5]
+        query: @serializeQuery(components[5] or '')
       }
 
     serializeQuery: (query) ->
       queryString = {}
 
-      query?.split('?').pop().split('&').forEach (prop) ->
+      query.split('?').pop().split('&').forEach (prop) ->
         item = prop.split('=')
         if item.length is 2
           queryString[decodeURIComponent(item.shift())] = decodeURIComponent(item.shift())

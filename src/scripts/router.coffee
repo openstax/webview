@@ -27,10 +27,10 @@ define (require) ->
         @appView.render('role-acceptance')
 
       # Match and extract uuid and page numbers separated by a colon
-      @route linksHelper.componentRegEx, 'media', (uuid, version, page) ->
+      @route linksHelper.componentRegEx, 'media', (uuid, version, page, title, qs) ->
         uuid = uuid.toLowerCase()
         uuid = settings.shortcodes[uuid] if settings.shortcodes[uuid]
-        @appView.render('contents', {uuid: uuid, version: version, page: Number(page)})
+        @appView.render('contents', {uuid: uuid, version: version, page: Number(page), title: title, qs: qs})
 
       @route /^donate\/?([^/\?;]*)?\/?([^/\?;]*)?\/?([^/\?;]*)?(?:\?)?.*/, 'donate', (page, uuid, type) ->
         @appView.render('donate', {page: page, uuid: uuid, type: type})

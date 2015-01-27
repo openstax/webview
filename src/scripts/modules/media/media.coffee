@@ -39,7 +39,7 @@ define (require) ->
         throw new Error('A media view must be instantiated with the uuid of the media to display')
 
       @uuid = options.uuid
-      @model = new Content({id: @uuid, version: options.version, page: options.page})
+      @model = new Content({id: @uuid, version: options.version, page: options.page, title: options.title})
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title change:parent.id', @updatePageInfo)
