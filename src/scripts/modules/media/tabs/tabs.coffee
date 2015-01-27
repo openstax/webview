@@ -1,5 +1,6 @@
 define (require) ->
   $ = require('jquery')
+  linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
   ContentsView = require('cs!./contents/contents')
   MetadataView = require('cs!./metadata/metadata')
@@ -28,6 +29,11 @@ define (require) ->
       @regions.contents.show(new ContentsView({model: @model}))
       @regions.metadata.show(new MetadataView({model: @model}))
       @regions.tools.show(new ToolsView({model: @model}))
+
+      components = linksHelper.getCurrentPathComponents()
+
+      if components.query?.toc is 'open'
+        @switchTab(@$el.find('.contents-tab'))
 
     selectTab: (e) ->
       $tab = $(e.currentTarget)

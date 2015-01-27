@@ -8,7 +8,7 @@ define (require) ->
   inverseShortcodes = _.invert(shortcodes)
 
   return new class LinksHelper
-    componentRegEx: /^contents\/([^:@\/]+)@?([^:\/]*):?([0-9]*)\/?(.*)/
+    componentRegEx: /^contents\/([^:@\/]+)@?([^:\/]*):?([0-9]*)\/?([^\?]*)(\??.*)/
 
     cleanUrl: trim
 
@@ -50,6 +50,7 @@ define (require) ->
         version: components[2]
         page: components[3]
         title: components[4]
+        query: @serializeQuery(components[5])
       }
 
     serializeQuery: (query) ->
