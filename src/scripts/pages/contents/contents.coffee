@@ -17,7 +17,6 @@ define (require) ->
     canonical: () -> null if not @uuid
     summary: 'OpenStax Content Library'
     description: 'Search for free, online textbooks.'
-    mediaTitle: (title) -> title.replace('_', ' ')
 
     initialize: (options = {}) ->
       super()
@@ -37,7 +36,7 @@ define (require) ->
 
       if @uuid
         @parent.regions.header.show(new HeaderView({page: 'contents'}))
-        view = new MediaView({uuid: @uuid, version: @version, page: @page, title: @mediaTitle(@title)})
+        view = new MediaView({uuid: @uuid, version: @version, page: @page, title: @title?.replace('_', ' ')})
         @regions.contents.append(view)
 
         ###
