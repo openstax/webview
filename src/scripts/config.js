@@ -130,9 +130,9 @@
       },
 
       zendesk: {
-        deps: ['css!//assets.zendesk.com/external/zenbox/v2.6/zenbox'],
+        deps: ['jquery', 'css!//assets.zendesk.com/external/zenbox/v2.6/zenbox'],
         exports: 'Zendesk',
-        init: function () {
+        init: function ($) {
           if (typeof Zenbox !== 'undefined') {
             window.Zenbox.init({
               dropboxID: '20186520',
@@ -142,6 +142,22 @@
               tabColor: '#78b04a',
               tabPosition: 'Right'
             });
+
+            // UGLY HACK: Remove Zenbox iframe so it doesn't cause issues in Aloha
+            var $tab = $('#zenbox_tab'),
+              $overlay = $('#zenbox_overlay'),
+              $close = $('#zenbox_close');
+
+            $overlay.remove();
+
+            $tab.click(function (e) {
+              $overlay.insertAfter($tab);
+            });
+
+            $close.click(function (e) {
+              $overlay.remove();
+            });
+            // END HACK
           }
 
           return window.Zenbox;
