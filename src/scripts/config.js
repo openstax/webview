@@ -150,11 +150,11 @@
 
             $overlay.remove();
 
-            $tab.click(function (e) {
+            $tab.click(function () {
               $overlay.insertAfter($tab);
             });
 
-            $close.click(function (e) {
+            $close.click(function () {
               $overlay.remove();
             });
             // END HACK
