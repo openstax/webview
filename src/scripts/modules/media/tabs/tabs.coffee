@@ -33,23 +33,34 @@ define (require) ->
       components = linksHelper.getCurrentPathComponents()
 
       if components.query?.tab
-        @switchTab(@$el.find(".#{components.query.tab}-tab"))
+        @resetTabs()
+        @showTab(@$el.find(".#{components.query.tab}-tab"))
 
     selectTab: (e) ->
       $tab = $(e.currentTarget)
       @switchTab($tab)
 
-    switchTab: ($tab) ->
+    resetTabs: () ->
       $allTabs = @$el.find('.tab')
       $allTabs.addClass('inactive')
       $allTabs.removeClass('active')
       @$el.find('.tab-content').hide()
 
+    showTab: ($tab) ->
+      $tab.removeClass('inactive')
+      $tab.addClass('active')
+      @currentTab = $tab.data('content')
+      @$el.find(".#{@currentTab}").show()
+
+    closeTabs: () ->
+      $allTabs = @$el.find('.tab')
+      @currentTab = null
+      $allTabs.removeClass('inactive')
+
+    switchTab: ($tab) ->
+      @resetTabs()
+
       if $tab.data('content') isnt @currentTab
-        $tab.removeClass('inactive')
-        $tab.addClass('active')
-        @currentTab = $tab.data('content')
-        @$el.find(".#{@currentTab}").show()
+        @showTab($tab)
       else
-        @currentTab = null
-        $allTabs.removeClass('inactive')
+        @closeTabs()
