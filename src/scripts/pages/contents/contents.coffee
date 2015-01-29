@@ -33,10 +33,9 @@ define (require) ->
       @regions.contents.show(new FindContentView())
 
       #clearTimeout(@_pollingContentTimer)
-
       if @uuid
         @parent.regions.header.show(new HeaderView({page: 'contents'}))
-        view = new MediaView({uuid: @uuid, version: @version, page: @page, title: @title})
+        view = new MediaView({uuid: @uuid, version: @version, page: @page})
         @regions.contents.append(view)
 
         ###
