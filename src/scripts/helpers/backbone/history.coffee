@@ -5,6 +5,7 @@ define (require) ->
   hashStripper = /[#].*$/
   routeStripper = /^[#\/]|\s+$/g
   trailingSlash = /\/$/
+  contents = /^contents\/([^:@/]+)@([^:/?]*):([1])\/([^]*)(\.*)$/
 
   return _.extend Backbone.history, {
     getFragment: (fragment, forcePushState) ->
@@ -28,7 +29,10 @@ define (require) ->
 
       if fragment is '' and url isnt '/' then url = url.slice(0, -1)
 
-      @history[if options.replace then 'replaceState' else 'pushState']({}, document.title, url)
+      if options.replace or @fragment.match(contents)
+        @history.replaceState({}, document.title, url)
+      else
+        @history.pushState({}, document.title, url)
 
       if options.trigger then return @loadUrl(fragment)
   }
