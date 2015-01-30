@@ -36,7 +36,7 @@ define (require) ->
         href = linksHelper.getPath 'contents',
           model: @content
           page: @model.getPageNumber()
-        router.navigate(href, {trigger: false, analytics: false})
+        router.navigate(href, {trigger: false, analytics: false, replace: true})
 
       @listenTo(@model, 'change:active change:page change:changed change:title', @render)
 
