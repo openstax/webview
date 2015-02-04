@@ -138,15 +138,12 @@ define (require) ->
 
             # Update the model if an event for this editable was triggered
             Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
-
               if d.triggerType isnt 'blur'
                 # Update the model by retrieving the XHTML contents
                 editableBody = alohaEditable.getContents()
                 editableBody = editableBody.trim() # Trim for idempotence
                 # Change the contents but do not update the Aloha editable area
                 setValue.call(@, property, editableBody, options)
-
-
 
 
   return class EditableView extends MediaComponentView

@@ -10,23 +10,23 @@
   ],
   "dependencies": {
     "jquery": "~2.1.1",
-    "lodash": "~2.4.1",
+    "lodash": "~3.1.0",
     "backbone": "~1.1.2",
     "backbone-associations": "~0.6.1",
     "bootstrap": "~3.3.1",
-    "font-awesome": "~4.2",
+    "font-awesome": "~4.3.0",
     "requirejs": "~2.1.14",
     "requirejs-text": "~2.0.12",
     "require-cs": "~0.5.0",
     "require-css": "~0.1.8",
     "require-less": "~0.1.5",
     "require-handlebars-plugin": "~0.11.2",
-    "aloha-editor": "oerpub/Aloha-Editor#2dc8164d45f3f773672481c5895f90ba33555214",
+    "aloha-editor": "oerpub/Aloha-Editor#eeab9ea2c401637b3e1e3922818faf422bcd442e",
     "select2": "~3.5.1"
   },
   "devDependencies": {
     "chai": "~1.10.0",
-    "mocha": "~2.0.1",
+    "mocha": "~2.1.0",
     "sinonjs": "~1.10.2"
   }
 }
