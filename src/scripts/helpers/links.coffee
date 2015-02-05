@@ -50,7 +50,7 @@ define (require) ->
         version: components[2]
         page: components[3]
         title: components[4]
-        rawquery: components[5]
+        rawquery: components[5] or ''
         query: @serializeQuery(components[5] or '')
       }
 
