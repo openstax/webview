@@ -75,7 +75,7 @@ define (require) ->
 
           $editable.off 'change.editable'
           $editable.on 'change.editable', (e) =>
-            setValue.call(@, property, $editable.select2('val'), options)
+            setValue.call(@, property, $editable.val())
 
 
     'aloha':

@@ -65,7 +65,11 @@
             <span class="list-comma">{{this}}</span>
           {{~/each~}}
         {{~else~}}
-          <input type="hidden" data-placeholder="Add Keywords" />
+          <select name="keywords" multiple="multiple" data-placeholder="Add Keywords">
+            {{#each keywords}}
+              <option value="{{this}}" selected="selected">{{this}}</option>
+            {{/each}}
+          </select>
         {{~/unless~}}
       </div>
     </dd>
@@ -85,7 +89,11 @@
             <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
           {{/each}}
         {{~else~}}
-          <input type="hidden" data-placeholder="Add Authors" value="{{#each authors}}{{#if @index}},{{/if}}{{id}}{{/each}}" />
+          <select name="authors" multiple="multiple" data-placeholder="Add Authors">
+            {{#each authors}}
+              <option value="{{id}}" selected="selected">{{id}}</option>
+            {{/each}}
+          </select>
         {{~/unless~}}
       </div>
     </dd>
@@ -97,7 +105,11 @@
           <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
         {{/each}}
         {{~else~}}
-          <input type="hidden" data-placeholder="Add Copyright Holders" value="{{#each licensors}}{{#if @index}},{{/if}}{{id}}{{/each}}" />
+          <select name="licensors" multiple="multiple" data-placeholder="Add Copyright Holders">
+            {{#each licensors}}
+              <option value="{{id}}" selected="selected">{{id}}</option>
+            {{/each}}
+          </select>
         {{~/unless~}}
       </div>
     </dd>
@@ -109,7 +121,11 @@
         <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
       {{/each}}
       {{~else~}}
-        <input type="hidden" data-placeholder="Add Publishers" value="{{#each publishers}}{{#if @index}},{{/if}}{{id}}{{/each}}" />
+        <select name="publishers" multiple="multiple" data-placeholder="Add Publishers">
+          {{#each publishers}}
+            <option value="{{id}}" selected="selected">{{id}}</option>
+          {{/each}}
+        </select>
       {{~/unless~}}
       </div>
     </dd>
