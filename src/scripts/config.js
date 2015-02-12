@@ -18,7 +18,7 @@
       'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
 
       // ## MathJax
-      mathjax: '//cdn.mathjax.org/mathjax/2.3-latest/MathJax.js?config=MML_HTMLorMML',
+      mathjax: '//cdn.mathjax.org/mathjax/2.5-latest/MathJax.js?config=MML_HTMLorMML',
 
       // ## Zendesk
       zendesk: '//assets.zendesk.com/external/zenbox/v2.6/zenbox',
