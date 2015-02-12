@@ -2,7 +2,7 @@
 @import "../../../../styles/mixins.less";
 
 .media-title {
-  padding: 10px 30px 10px 30px;
+  padding: 15px 30px;
 
   &:not(.publishing) { background-color: @gray-lightest; }
 
@@ -20,8 +20,8 @@
       margin-right: 7%;
       width: 60%;
 
-      > h1 {
-        font-size:28px;
+      > h2 {
+        font-weight: 400;
       }
 
     }
@@ -34,8 +34,8 @@
     // When editing is turned on the Title becomes an input box; make sure it stretches
     input[type="text"] {
       width: 600px;
+      height: 45px;
       text-overflow: ellipsis;
-      height:45px;
     }
   }
 
@@ -45,11 +45,10 @@
 
     @media (min-width: @screen-sm-min) {
       display: inline-block;
-      margin-bottom: -60px;
+      margin-bottom: -39px;
       width: 32%;
       text-align: right;
       vertical-align: top;
-      padding-top:10px;
     }
 
     @media (max-width: @screen-xs-max) {

@@ -1,17 +1,18 @@
 @import "../../../../styles/variables.less";
 @import "../../../../styles/mixins.less";
 
-@nav-height: 45px;
+@nav-height: 49px;
 @progress-height: 9px;
 
 .media-nav {
-  &:not(.publishing) { background-color: @gray-lightest; height: 45px; }
+  &:not(.publishing) {
+    background-color: @gray-lightest;
+  }
 
   > .book-nav {
     .flexbox();
     .flex-flow(row; nowrap);
     .justify-content(center);
-    height: @nav-height;
     .user-select(none);
 
     > .progress, > .back-to-top {
