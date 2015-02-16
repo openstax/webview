@@ -82,7 +82,7 @@
       <div class="authors">
         {{~#unless editable~}}
           {{#each authors}}
-            <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
+            <span class="list-comma">{{fullname}}</span>
           {{/each}}
         {{~else~}}
           <input type="hidden" data-placeholder="Add Authors" value="{{#each authors}}{{#if @index}},{{/if}}{{id}}{{/each}}" />
@@ -94,7 +94,7 @@
       <div class="licensors">
       {{~#unless editable~}}
         {{#each licensors}}
-          <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
+          <span class="list-comma">{{fullname}}</span>
         {{/each}}
         {{~else~}}
           <input type="hidden" data-placeholder="Add Copyright Holders" value="{{#each licensors}}{{#if @index}},{{/if}}{{id}}{{/each}}" />
@@ -106,7 +106,7 @@
       <div class="publishers">
     {{~#unless editable~}}
       {{#each publishers}}
-        <a class="list-comma" href="mailto:{{email}}">{{fullname}}</a>
+        <span class="list-comma">{{fullname}}</span>
       {{/each}}
       {{~else~}}
         <input type="hidden" data-placeholder="Add Publishers" value="{{#each publishers}}{{#if @index}},{{/if}}{{id}}{{/each}}" />

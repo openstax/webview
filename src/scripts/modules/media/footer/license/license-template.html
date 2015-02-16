@@ -5,7 +5,7 @@
       {{~#if licensors.length~}}
         <span> by </span>
         {{~#each licensors~}}
-          <span class="name"><a href="mailto:{{email}}">{{fullname}}</a></span>
+          <span class="name">{{fullname}}</span>
         {{~/each~}}
       {{/if}}
       {{~#if license.name~}}
@@ -17,7 +17,7 @@
   <div class="last-edit">
     <span>Last edited</span>
     {{~#if submitter.fullname~}}
-      <span> by <span class="name"><a href="mailto:{{submitter.email}}">{{submitter.fullname}}</a></span></span>
+      <span> by <span class="name">{{submitter.fullname}}</span></span>
     {{~/if}}
     {{~#if revised~}}
       <span> on {{date revised}}.</span>

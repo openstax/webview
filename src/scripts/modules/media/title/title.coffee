@@ -4,7 +4,6 @@ define (require) ->
   session = require('cs!session')
   router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')
-  #MailPopoverView = require('cs!./popovers/mail/mail')
   template = require('hbs!./title-template')
   settings = require('settings')
   socialMedia = require('cs!helpers/socialmedia.coffee')

@@ -15,18 +15,18 @@
     {{/if}}
 
     <div class="title">
-      <h1>
+      <h2>
         {{#is status 'publishing'}}
           <span class="label label-info">publishing</span>
         {{/is}}
         {{title}}
-      </h1>
+      </h2>
       {{#if parent.id}}
         <span>
           Derived from <a href="/contents/{{parent.id}}@{{parent.version}}">{{parent.title}}</a> by
           <span class="collection-authors">
             {{~#each parent.authors}}
-              <a class="list-comma" href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
+              <span class="list-comma">{{fullname}}</span>
             {{/each~}}
           </span>
         </span>
@@ -38,9 +38,8 @@
         <span>{{#if isBook}}Book{{else}}Page{{/if}} by:</span>
         <span class="collection-authors">
           {{~#each authors}}
-            <a class="list-comma" href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
+            <span class="list-comma">{{fullname}}</span>
           {{/each~}}
-          <img src="/images/icons/mail.png" width="18" height="12" alt="Mail" />
         </span>
       {{/if}}
 
