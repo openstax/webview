@@ -44,14 +44,12 @@ define (require) ->
         type: 'select2'
         select2: s2Defaults
 
-      '.keywords > input':
+      '.keywords > select':
         value: 'keywords'
         type: 'select2'
-        select2: () ->
-          @$el.find('.keywords > input').val(@getProperty('keywords') or [])
-          _.extend({}, s2Defaults, tags: @getProperty('keywords') or [])
+        select2: () -> _.extend({}, s2Defaults, tags: @getProperty('keywords') or [])
 
-      '.authors > input':
+      '.authors > select':
         value: 'authors'
         type: 'select2'
         select2: () -> @getUsers({collection: @authorsCollection, role: 'authors', critical: true})
@@ -61,7 +59,7 @@ define (require) ->
             authors.push(@authorsCollection.get(author).toJSON())
           return authors
 
-      '.licensors > input':
+      '.licensors > select':
         value: 'licensors'
         type: 'select2'
         select2: () -> @getUsers({collection: @licensorsCollection, role: 'licensors', critical: true})
@@ -71,7 +69,7 @@ define (require) ->
             licensors.push(@licensorsCollection.get(licensor).toJSON())
           return licensors
 
-      '.publishers > input':
+      '.publishers > select':
         value: 'publishers'
         type: 'select2'
         select2: () -> @getUsers({collection: @publishersCollection, role: 'publishers'})
@@ -122,7 +120,7 @@ define (require) ->
 
       _.extend {}, s2Multi,
         id: (item) -> item.id
-        initSelection: (el, cb) -> cb(userRoles)
+        current: (el, cb) -> cb(userRoles)
         multiple: true
         formatSelectionCssClass: (user, container) -> user.state or 'pending'
         ajax:
