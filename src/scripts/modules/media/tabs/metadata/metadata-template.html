@@ -69,6 +69,22 @@
         {{~/unless~}}
       </div>
     </dd>
+  <dt>Print Style:</dt>
+    <dd>
+      <div class="printStyle">
+        {{~#unless editable~}}
+          {{printStyle}}
+        {{else~}}
+          <select name="printStyle">
+            {{~#each printStyles~}}
+              <option value="{{this}}" {{#is this ../printStyle}}selected{{/is}}>
+                {{this}}
+              </option>
+            {{~/each~}}
+          </select>
+        {{~/unless~}}
+      </div>
+    </dd>
   <dt>License:</dt>
     <dd>
       <div>

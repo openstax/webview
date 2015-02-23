@@ -19,6 +19,19 @@ define (require) ->
       model.languageName = settings.languages[model.language]
       model.subjectsList = subjects.list
       model.url = linksHelper.getModelPath(model)
+      model.printStyles = [
+        'Latex'
+        'CCAP Physics'
+        'CCAP Sociology'
+        'CCAP Biology'
+        'CCAP Anatomy'
+        'CCAP Statistics'
+        'CCAP Precalculus'
+        'CCAP Psychology'
+        'CCAP Economics'
+        'CCAP History'
+        'CCAP Chemistry'
+      ]
 
       if @media is 'page'
         editable = if @model.isBook() then @model.get('currentPage')?.isEditable() else @model.isEditable()
@@ -50,6 +63,11 @@ define (require) ->
         select2: () ->
           @$el.find('.keywords > input').val(@getProperty('keywords') or [])
           _.extend({}, s2Defaults, tags: @getProperty('keywords') or [])
+
+      '.printStyle > select':
+        value: 'printStyle'
+        type: 'select2'
+        select2: s2Defaults
 
       '.authors > input':
         value: 'authors'
