@@ -18,9 +18,10 @@ describe('test page model', function () {
   describe('results returned', function () {
     it('should show default text if page is loaded and content is empty', function () {
       var page = new Page();
-      var results = page.toJSON();
-      results.content = '';
-      results.loaded = true;
+      var results = {
+        content: '',
+        loaded: true
+      };
       if (results.loaded && results.content === '') {
         page.set('content', 'Some Content');
       }
