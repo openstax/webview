@@ -158,7 +158,7 @@ define (require) ->
       $el = $(e.currentTarget)
       href = $el.attr('href')
 
-      if href.indexOf("/contents/#{@model.getVersionedId()}:") is 0
+      if href?.indexOf("/contents/#{@model.getVersionedId()}:") is 0
         e.preventDefault()
         e.stopPropagation()
 
