@@ -10,13 +10,14 @@ define (require) ->
     media: 'page'
     template: template
     templateHelpers:
-      status: () -> @model.get('status')
       editable: () -> @model.get('currentPage')?.isEditable()
       content: () -> @model.asPage()?.get('content')
       hasContent: () -> typeof @model.asPage()?.get('content') is 'string'
       loaded: () ->
-        page = @model.asPage()
-        if page then page.get('loaded') else @model.get('loaded')
+        if @model.isBook() and @model.getTotalLength()
+          return @model.asPage()?.get('loaded')
+
+        return @model.get('loaded')
 
     editable:
       '.media-body':
