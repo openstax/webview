@@ -17,3 +17,15 @@
     {{/if}}
   {{/if}}
 {{/if}}
+
+{{#if hasTeachersEdition}}
+  {{#unless teacher}}
+    <div class="teacher-show tool fa fa-thumb-tack">
+      <span>Teacher's Edition</span>
+    </div>
+  {{else}}
+    <div class="teacher-hide tool fa fa-university">
+      <span>Standard Edition</span>
+    </div>
+  {{/unless}}
+{{/if}}
