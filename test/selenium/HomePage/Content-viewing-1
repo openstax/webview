@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://dev.cnx.org/" />
+<title>Content-viewing-1</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Content-viewing-1</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/contents/e6d635b9-4a55-4a25-9383-7ed5df49ac33@1.22:24/A_Parent%27s_Guide_to_Band</td>
+	<td></td>
+</tr>
+<!--click  TOC-->
+<tr>
+	<td>waitForText</td>
+	<td>css=span.tab-title</td>
+	<td>Contents</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.tab-title</td>
+	<td></td>
+</tr>
+<!--Click The Instruments-->
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='content']/div[4]/div/div/div/div/div/div/ul/li[3]/div/span/span</td>
+	<td>The Instruments</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='content']/div[4]/div/div/div/div/div/div/ul/li[3]/div/span/span</td>
+	<td></td>
+</tr>
+<!--Click on Percussion-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='content']/div[4]/div/div/div/div/div/div/ul/li[3]/ul/li[4]/div/span/span</td>
+	<td></td>
+</tr>
+<!--Click on Drums-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='content']/div[4]/div/div/div/div/div/div/ul/li[3]/ul/li[4]/ul/li/div/span/a/span</td>
+	<td></td>
+</tr>
+<!--Click on History-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='content']/div[8]/div/ul/li[2]/span</td>
+	<td></td>
+</tr>
+<!--Click on Page button-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='content']/div[8]/div/ul/li[2]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='content']/div[8]/div/div[2]/div/div/span[2]</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

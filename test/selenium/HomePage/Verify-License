@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://dev.cnx.org/" />
+<title>Verify-License</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Verify-License</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/contents/e6d635b9-4a55-4a25-9383-7ed5df49ac33@1.22:1/A_Parent%27s_Guide_to_Band</td>
+	<td></td>
+</tr>
+<!--Click on metadata tab-->
+<tr>
+	<td>waitForText</td>
+	<td>css=li.tab.metadata-tab &gt; span.tab-title</td>
+	<td>Metadata</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.tab.metadata-tab &gt; span.tab-title</td>
+	<td></td>
+</tr>
+<!--verify license text-->
+<tr>
+	<td>waitForText</td>
+	<td>link=Creative Commons Attribution License (by 2.0)</td>
+	<td>Creative Commons Attribution License (by 2.0)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Creative Commons Attribution License (by 2.0)</td>
+	<td>Creative Commons Attribution License*</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
