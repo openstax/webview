@@ -28,7 +28,7 @@ define (require) ->
     initialize: () ->
       super()
 
-      @listenTo(@model, 'removeNode moveNode add:contents', @render)
+      @listenTo(@model, 'removeNode moveNode add:contents change:title', @render)
 
 
     onRender: () ->
