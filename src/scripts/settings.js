@@ -48,7 +48,9 @@
         'introductory_statistics': '30189442-6998-4686-ac05-ed152b91b9de@17.20'
       },
 
-      accountProfile: 'https://accounts.cnx.org/profile'
+      accountProfile: 'https://accounts.cnx.org/profile',
+
+      exercisesAPIBase: 'data/exercises.json'
     };
 
   });

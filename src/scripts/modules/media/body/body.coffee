@@ -1,10 +1,22 @@
 define (require) ->
   $ = require('jquery')
+  settings = require('settings')
   Mathjax = require('mathjax')
   router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')
   template = require('hbs!./body-template')
   require('less!./body')
+
+  # exercisesTemplate = require('hbs!./exercises/exercises-template')
+  # exercises
+  # require('less!./exercises/exercises')
+
+  fakeExerciseTemplates = [
+    require('hbs!./exercises/fakes/ex034')
+    require('hbs!./exercises/fakes/ex099')
+    require('hbs!./exercises/fakes/ex044')
+    require('hbs!./exercises/fakes/ex054')
+  ]
 
   return class MediaBodyView extends EditableView
     media: 'page'
@@ -125,11 +137,57 @@ define (require) ->
           $temp.find('ol[start], [data-type="list"][data-list-type="enumerated"][start]').each (i, el) ->
             $el = $(el)
             $el.css('counter-reset', 'list-item ' + $el.attr('start'))
+
+        @fakeExercises($temp);
+
+
       catch error
         # FIX: Log the error
         console.log error
 
       @$el?.html($temp.html())
+      @renderExercises(@$el)
+
+
+    renderExercises: ($parent)->
+
+      exercises = @findExerciseDOMS($parent)
+      _.each(exercises, @renderExercise, @)
+
+
+    renderExercise: (exercise, iter)->
+      $exercise = $(exercise)
+      exerciseLink = $exercise.attr('href')
+
+      _render = (questions)->
+        _.each(questions, (question)->
+          $exercise.replaceWith(question.stem_html)
+        )
+
+      @setExerciseHTML(exerciseLink).then(_render)
+
+    setExerciseHTML: (exerciseLink)->
+      exerciseUID = _.last(exerciseLink.split('/'))
+
+      parseForExerciseHTML = (data)->
+        exerciseData = _(data.items).findWhere({uid: exerciseUID})
+        exerciseQuestions = exerciseData.questions
+        return exerciseQuestions
+
+      request = $.get(settings.exercisesAPIBase)
+      request.pipe(parseForExerciseHTML)
+
+    findExerciseDOMS: ($parent)->
+      exercisesToRender = $parent.find('[data-type="exercise"]').find('.os-embed')
+
+    fakeExercises: ($parent)->
+      sections = $parent.find('section[data-depth="1"]')
+
+      appendFakeExercise = (section, iter)->
+        $(section).append(fakeExerciseTemplates[iter % fakeExerciseTemplates.length])
+
+      _.each(sections, appendFakeExercise)
+
 
     onRender: () ->
       if not @model.asPage()?.get('active') then return

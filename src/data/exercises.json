@@ -1,0 +1,455 @@
+{
+    "total_count": 10,
+    "items": [
+        {
+            "uid": "k12phys-ch04-ex034",
+            "number": 1,
+            "version": 1,
+            "license": {
+                "name": "cc_by_4_0",
+                "title": "Creative Commons Attribution 4.0 International",
+                "url": "http://creativecommons.org/licenses/by/4.0/",
+                "is_attribution_required": true,
+                "is_share_alike_required": false,
+                "is_derivation_allowed": true,
+                "is_commercial_use_allowed": true
+            },
+            "editors": [],
+            "authors": [],
+            "copyright_holders": [],
+            "derived_from": [],
+            "attachments": [],
+            "stimulus_html": "",
+            "questions": [
+                {
+                    "stimulus_html": "",
+                    "stem_html": "<p>A spherical conductor has a net positive charge. Describe how the charge is distributed around the sphere's surface.</p>",
+                    "answers": [
+                        {
+                            "content_html": "<p>All positive charge is on the sphere surface, and all negative charge is at the center.</p>"
+                        },
+                        {
+                            "content_html": "<p>Positive and negative charge is spread equally around the sphere's surface.</p>"
+                        },
+                        {
+                            "content_html": "<p>The net positive charge is spread evenly throughout the sphere's volume.</p>"
+                        },
+                        {
+                            "content_html": "<p>The net positive charge is spread evenly around the sphere's surface.</p>"
+                        }
+                    ],
+                    "hints": [],
+                    "formats": [
+                        "multiple-choice"
+                    ],
+                    "combo_choices": []
+                }
+            ]
+        },
+        {
+            "uid": "k12phys-ch12-ex099",
+            "number": 2,
+            "version": 1,
+            "license": {
+                "name": "cc_by_4_0",
+                "title": "Creative Commons Attribution 4.0 International",
+                "url": "http://creativecommons.org/licenses/by/4.0/",
+                "is_attribution_required": true,
+                "is_share_alike_required": false,
+                "is_derivation_allowed": true,
+                "is_commercial_use_allowed": true
+            },
+            "editors": [],
+            "authors": [],
+            "copyright_holders": [],
+            "derived_from": [],
+            "attachments": [],
+            "stimulus_html": "",
+            "questions": [
+                {
+                    "stimulus_html": "",
+                    "stem_html": "<p>Which of the following is not a property of a conductor in electrostatic equilibrium?</p>",
+                    "answers": [
+                        {
+                            "content_html": "<p>The force on a charge near the conductor is zero.</p>"
+                        },
+                        {
+                            "content_html": "<p>Electric field lines just outside the conductor are perpendicular to the surface.</p>"
+                        },
+                        {
+                            "content_html": "<p>All net charge in the conductor is on the surface.</p>"
+                        },
+                        {
+                            "content_html": "<p>The electric field inside the conductor is zero.</p>"
+                        }
+                    ],
+                    "hints": [],
+                    "formats": [
+                        "multiple-choice"
+                    ],
+                    "combo_choices": []
+                }
+            ]
+        },
+        {
+            "uid": "k12phys-ch04-ex054",
+            "number": 3,
+            "version": 1,
+            "license": {
+                "name": "cc_by_4_0",
+                "title": "Creative Commons Attribution 4.0 International",
+                "url": "http://creativecommons.org/licenses/by/4.0/",
+                "is_attribution_required": true,
+                "is_share_alike_required": false,
+                "is_derivation_allowed": true,
+                "is_commercial_use_allowed": true
+            },
+            "editors": [],
+            "authors": [],
+            "copyright_holders": [],
+            "derived_from": [],
+            "attachments": [],
+            "stimulus_html": "",
+            "questions": [
+                {
+                    "stimulus_html": "",
+                    "stem_html": "<p>Why do we describe a water molecule as polar?</p>",
+                    "answers": [
+                        {
+                            "content_html": "<p>The molecule has a cylindrical shape, like a pole.</p>"
+                        },
+                        {
+                            "content_html": "<p>The molecule acts like a magnet, with a north and south pole.</p>"
+                        },
+                        {
+                            "content_html": "<p>The positive and negative charges in the molecule cancel each other out.</p>"
+                        },
+                        {
+                            "content_html": "<p>The positive and negative charges in the molecule are spread unevenly.</p>"
+                        }
+                    ],
+                    "hints": [],
+                    "formats": [
+                        "multiple-choice"
+                    ],
+                    "combo_choices": []
+                }
+            ]
+        },
+        {
+            "uid": "k12phys-ch04-ex044",
+            "number": 4,
+            "version": 1,
+            "license": {
+                "name": "cc_by_4_0",
+                "title": "Creative Commons Attribution 4.0 International",
+                "url": "http://creativecommons.org/licenses/by/4.0/",
+                "is_attribution_required": true,
+                "is_share_alike_required": false,
+                "is_derivation_allowed": true,
+                "is_commercial_use_allowed": true
+            },
+            "editors": [],
+            "authors": [],
+            "copyright_holders": [],
+            "derived_from": [],
+            "attachments": [],
+            "stimulus_html": "",
+            "questions": [
+                {
+                    "stimulus_html": "",
+                    "stem_html": "<p>DNA is a highly charged molecule, but our bodies do not appear to have a charge and electrostatic forces in cells are not as large as one might expect. Which of the following are valid reasons for this?</p><ol>\n<li>The DNA molecule's total electric field is zero</li>\n<li>DNA molecules with positive and negative charges cancel each other</li>\n<li>Other molecules, such as water, screen the charged DNA</li>\n<li>DNA molecules lose their charge as the body ages</li>\n<li>Other ions are present in cells that maintainoverall neutrality</li>\n</ol>",
+                    "answers": [
+                        {
+                            "content_html": "<p>1 and 3</p>"
+                        },
+                        {
+                            "content_html": "<p>2 and 4</p>"
+                        },
+                        {
+                            "content_html": "<p>3 and 5</p>"
+                        },
+                        {
+                            "content_html": "<p>all except 4</p>"
+                        }
+                    ],
+                    "hints": [],
+                    "formats": [
+                        "multiple-choice"
+                    ],
+                    "combo_choices": []
+                }
+            ]
+        },
+        {
+            "uid": "5@1",
+            "number": 5,
+            "version": 1,
+            "license": {
+                "name": "cc_by_4_0",
+                "title": "Creative Commons Attribution 4.0 International",
+                "url": "http://creativecommons.org/licenses/by/4.0/",
+                "is_attribution_required": true,
+                "is_share_alike_required": false,
+                "is_derivation_allowed": true,
+                "is_commercial_use_allowed": true
+            },
+            "editors": [],
+            "authors": [],
+            "copyright_holders": [],
+            "derived_from": [],
+            "attachments": [],
+            "stimulus_html": "",
+            "questions": [
+                {
+                    "stimulus_html": "",
+                    "stem_html": "<p>If several negative charges surround a large positive charge, the total force on a far away charge is reduced. What is this effect called?</p>",
+                    "answers": [
+                        {
+                            "content_html": "<p>Polarization</p>"
+                        },
+                        {
+                            "content_html": "<p>Interference</p>"
+                        },
+                        {
+                            "content_html": "<p>Xerography</p>"
+                        },
+                        {
+                            "content_html": "<p>Screening</p>"
+                        }
+                    ],
+                    "hints": [],
+                    "formats": [
+                        "multiple-choice"
+                    ],
+                    "combo_choices": []
+                }
+            ]
+        },
+        {
+            "uid": "6@1",
+            "number": 6,
+            "version": 1,
+            "license": {
+                "name": "cc_by_4_0",
+                "title": "Creative Commons Attribution 4.0 International",
+                "url": "http://creativecommons.org/licenses/by/4.0/",
+                "is_attribution_required": true,
+                "is_share_alike_required": false,
+                "is_derivation_allowed": true,
+                "is_commercial_use_allowed": true
+            },
+            "editors": [],
+            "authors": [],
+            "copyright_holders": [],
+            "derived_from": [],
+            "attachments": [],
+            "stimulus_html": "",
+            "questions": [
+                {
+                    "stimulus_html": "",
+                    "stem_html": "<p>A positive charge is placed midway between two equal negative charges. What is the direction of the total force on the positive charge?</p>",
+                    "answers": [
+                        {
+                            "content_html": "<p>The total force has no direction, because it is zero.</p>"
+                        },
+                        {
+                            "content_html": "<p>The total force points perpendicular to the line connecting the negative charges.</p>"
+                        },
+                        {
+                            "content_html": "<p>The total force points towards the negative charge nearest to the point from which the positive charge was moved.</p>"
+                        },
+                        {
+                            "content_html": "<p>The total force points away from the negative charge nearest to the point from which the positive charge was moved.</p>"
+                        }
+                    ],
+                    "hints": [],
+                    "formats": [
+                        "multiple-choice"
+                    ],
+                    "combo_choices": []
+                }
+            ]
+        },
+        {
+            "uid": "7@1",
+            "number": 7,
+            "version": 1,
+            "license": {
+                "name": "cc_by_4_0",
+                "title": "Creative Commons Attribution 4.0 International",
+                "url": "http://creativecommons.org/licenses/by/4.0/",
+                "is_attribution_required": true,
+                "is_share_alike_required": false,
+                "is_derivation_allowed": true,
+                "is_commercial_use_allowed": true
+            },
+            "editors": [],
+            "authors": [],
+            "copyright_holders": [],
+            "derived_from": [],
+            "attachments": [],
+            "stimulus_html": "",
+            "questions": [
+                {
+                    "stimulus_html": "",
+                    "stem_html": "<p>A test charge is placed near two other charges. How does the total force on the first charge relate to the individual forces from the two other charges?</p>",
+                    "answers": [
+                        {
+                            "content_html": "<p>Total force is the vector sum of the individual forces.</p>"
+                        },
+                        {
+                            "content_html": "<p>Total force is the vector product of the individual forces.</p>"
+                        },
+                        {
+                            "content_html": "<p>Total force is the average of the individual forces.</p>"
+                        },
+                        {
+                            "content_html": "<p>Total force is the vector difference of the individual forces.</p>"
+                        }
+                    ],
+                    "hints": [],
+                    "formats": [
+                        "multiple-choice"
+                    ],
+                    "combo_choices": []
+                }
+            ]
+        },
+        {
+            "uid": "8@1",
+            "number": 8,
+            "version": 1,
+            "license": {
+                "name": "cc_by_4_0",
+                "title": "Creative Commons Attribution 4.0 International",
+                "url": "http://creativecommons.org/licenses/by/4.0/",
+                "is_attribution_required": true,
+                "is_share_alike_required": false,
+                "is_derivation_allowed": true,
+                "is_commercial_use_allowed": true
+            },
+            "editors": [],
+            "authors": [],
+            "copyright_holders": [],
+            "derived_from": [],
+            "attachments": [],
+            "stimulus_html": "",
+            "questions": [
+                {
+                    "stimulus_html": "",
+                    "stem_html": "<p>How does the number of field lines leaving a positive charge change in a field diagram if the charge is quadrupled?</p>",
+                    "answers": [
+                        {
+                            "content_html": "<p>The number of lines remains the same.</p>"
+                        },
+                        {
+                            "content_html": "<p>The number of lines increases by a factor of 2.</p>"
+                        },
+                        {
+                            "content_html": "<p>The number of lines increases by a factor of 4.</p>"
+                        },
+                        {
+                            "content_html": "<p>The number of lines increases by a factor of 8.</p>"
+                        }
+                    ],
+                    "hints": [],
+                    "formats": [
+                        "multiple-choice"
+                    ],
+                    "combo_choices": []
+                }
+            ]
+        },
+        {
+            "uid": "9@1",
+            "number": 9,
+            "version": 1,
+            "license": {
+                "name": "cc_by_4_0",
+                "title": "Creative Commons Attribution 4.0 International",
+                "url": "http://creativecommons.org/licenses/by/4.0/",
+                "is_attribution_required": true,
+                "is_share_alike_required": false,
+                "is_derivation_allowed": true,
+                "is_commercial_use_allowed": true
+            },
+            "editors": [],
+            "authors": [],
+            "copyright_holders": [],
+            "derived_from": [],
+            "attachments": [],
+            "stimulus_html": "",
+            "questions": [
+                {
+                    "stimulus_html": "",
+                    "stem_html": "<p>Two point charges are separated by a certain distance. How does the strength of the electric field produced by the first charge, at the position of the second charge, change if the second charge is doubled?</p>",
+                    "answers": [
+                        {
+                            "content_html": "<p>The field does not change.</p>"
+                        },
+                        {
+                            "content_html": "<p>The field strength decreasesby half.</p>"
+                        },
+                        {
+                            "content_html": "<p>The field strength doubles.</p>"
+                        },
+                        {
+                            "content_html": "<p>The field strength quadruples.</p>"
+                        }
+                    ],
+                    "hints": [],
+                    "formats": [
+                        "multiple-choice"
+                    ],
+                    "combo_choices": []
+                }
+            ]
+        },
+        {
+            "uid": "10@1",
+            "number": 10,
+            "version": 1,
+            "license": {
+                "name": "cc_by_4_0",
+                "title": "Creative Commons Attribution 4.0 International",
+                "url": "http://creativecommons.org/licenses/by/4.0/",
+                "is_attribution_required": true,
+                "is_share_alike_required": false,
+                "is_derivation_allowed": true,
+                "is_commercial_use_allowed": true
+            },
+            "editors": [],
+            "authors": [],
+            "copyright_holders": [],
+            "derived_from": [],
+            "attachments": [],
+            "stimulus_html": "",
+            "questions": [
+                {
+                    "stimulus_html": "",
+                    "stem_html": "<p>How can the direction of the electric field, created by an electron, be correctly described?</p>",
+                    "answers": [
+                        {
+                            "content_html": "<p>The field points away from the electron.</p>"
+                        },
+                        {
+                            "content_html": "<p>The field points towards the electron.</p>"
+                        },
+                        {
+                            "content_html": "<p>The field points away and towards the electron.</p>"
+                        },
+                        {
+                            "content_html": "<p>The field circulates around the electron, in a plane perpendicular to the electron’s spin.</p>"
+                        }
+                    ],
+                    "hints": [],
+                    "formats": [
+                        "multiple-choice"
+                    ],
+                    "combo_choices": []
+                }
+            ]
+        }
+    ]
+}
