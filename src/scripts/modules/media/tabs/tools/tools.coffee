@@ -16,8 +16,8 @@ define (require) ->
       encodedTitle: encodeURI(@model.get('title'))
       derivable: @model.canEdit()
       isEditable: @isEditable
-      # FIX: Detect if an element actually has the class `os-teachers-edition`
-      hasTeachersEdition: () => @model.get('content')?.indexOf('os-teachers-edition') >= 0
+      # FIX: Detect if an element actually has the class `os-teacher`
+      hasTeachersEdition: () => @model.get('content')?.indexOf('os-teacher') >= 0
       isTeacher: @model.get('teacher')
     }
 
@@ -34,7 +34,7 @@ define (require) ->
     toggleEditor: () -> @model.set('editable', not @model.get('editable'))
 
     toggleTeacher: () ->
-      $els = $('.media-body > #content').find('.os-teachers-edition')
+      $els = $('.media-body > #content').find('.os-teacher')
       @model.set('teacher', not @model.get('teacher'))
 
       if @model.get('teacher')
