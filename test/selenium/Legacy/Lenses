@@ -16,6 +16,7 @@
 	<td>/</td>
 	<td></td>
 </tr>
+<!--Click on Lenses link, wait for page to load and verify text-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>link=Lenses</td>
@@ -33,6 +34,11 @@
 </tr>
 <tr>
 	<td>waitForText</td>
+	<td>css=#region-content &gt; div &gt; h1</td>
+	<td>Public Lenses</td>
+</tr>
+<tr>
+	<td>verifyText</td>
 	<td>css=#region-content &gt; div &gt; h1</td>
 	<td>Public Lenses</td>
 </tr>

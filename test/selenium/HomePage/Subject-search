@@ -16,6 +16,7 @@
 	<td>/</td>
 	<td></td>
 </tr>
+<!--Click on the Subject drop down-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>link=Choose a Subject</td>
@@ -26,11 +27,13 @@
 	<td>link=Choose a Subject</td>
 	<td></td>
 </tr>
+<!--Select "Aerts" from the list-->
 <tr>
 	<td>click</td>
 	<td>link=Arts</td>
 	<td></td>
 </tr>
+<!--After search results load, select "2013" from Filters list-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>link=2013</td>
@@ -41,6 +44,7 @@
 	<td>link=2013</td>
 	<td></td>
 </tr>
+<!--After page loads, select "A Parent's Guide to Band"-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>link=A Parent's Guide to Band</td>

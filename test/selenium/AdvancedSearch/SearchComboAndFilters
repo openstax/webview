@@ -16,6 +16,7 @@
 	<td>/search</td>
 	<td></td>
 </tr>
+<!--Search for author, keyword, publication date and sort by publication date-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>name=author</td>
@@ -46,6 +47,7 @@
 	<td>css=button.btn.col-sm-3</td>
 	<td></td>
 </tr>
+<!--Page through the search results-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>link=Next</td>
@@ -66,6 +68,7 @@
 	<td>link=Next</td>
 	<td></td>
 </tr>
+<!--Remove the 2013 filter and verify text-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//div[@id='search']/div[2]/div/div/div/div/section/div/div/span[3]/div/span</td>
@@ -86,7 +89,6 @@
 	<td>link=Douglas L. Jones</td>
 	<td>Douglas L. Jones</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

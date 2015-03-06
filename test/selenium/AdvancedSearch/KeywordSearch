@@ -16,6 +16,7 @@
 	<td>/search</td>
 	<td></td>
 </tr>
+<!--Search for "physics music" in the keyword field, Click on "Music, Waves, Physics in the search results and verify text-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>name=keywords</td>
@@ -41,7 +42,6 @@
 	<td>link=Music, Waves, Physics</td>
 	<td>Music, Waves, Physics</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

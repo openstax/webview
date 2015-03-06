@@ -16,6 +16,7 @@
 	<td>/search</td>
 	<td></td>
 </tr>
+<!--Search for "Ed Woodward" in Author field, Click on "Image Test" in search results and verify text-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>name=author</td>
@@ -41,7 +42,6 @@
 	<td>link=Image Test</td>
 	<td>Image Test</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

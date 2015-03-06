@@ -16,6 +16,7 @@
 	<td>/</td>
 	<td></td>
 </tr>
+<!--Click on the Rice logo and the Rice homepage should load. -->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=img.rice</td>
@@ -26,7 +27,6 @@
 	<td>css=img.rice</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

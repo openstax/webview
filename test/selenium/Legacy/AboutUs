@@ -16,6 +16,7 @@
 	<td>/</td>
 	<td></td>
 </tr>
+<!--Click on the About Us link, click on People, Click on Contact Us, wait for Legacy to load and verify text-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>link=About Us</td>
@@ -51,7 +52,11 @@
 	<td>css=h1.documentFirstHeading</td>
 	<td>Contact Us</td>
 </tr>
-
+<tr>
+	<td>verifyText</td>
+	<td>css=h1.documentFirstHeading</td>
+	<td>Contact Us</td>
+</tr>
 </tbody></table>
 </body>
 </html>

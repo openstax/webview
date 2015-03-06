@@ -16,6 +16,7 @@
 	<td>/</td>
 	<td></td>
 </tr>
+<!--Click on the Terms of Use link and verify text-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>link=Terms of Use</td>
@@ -36,7 +37,6 @@
 	<td>css=h1.documentFirstHeading</td>
 	<td>Connexions Service and Repository User Agreement</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

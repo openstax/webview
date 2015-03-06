@@ -16,6 +16,7 @@
 	<td>/search</td>
 	<td></td>
 </tr>
+<!--Search for author, Books and 2013 as Publication date. Perform search, then return to search page and select 2015 as publication date, verify text-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>name=author</td>
@@ -81,7 +82,6 @@
 	<td>css=aside.filter &gt; div &gt; h3</td>
 	<td>Filters</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

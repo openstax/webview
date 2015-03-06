@@ -16,6 +16,7 @@
 	<td>/search</td>
 	<td></td>
 </tr>
+<!--Search for an author, limit to Book type and select Danish. Search should fail to find anything.-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>name=author</td>

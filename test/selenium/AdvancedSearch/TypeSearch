@@ -21,6 +21,7 @@
 	<td>name=author</td>
 	<td></td>
 </tr>
+<!--Search for an author and limit type to Books, select one of the books and verify text-->
 <tr>
 	<td>type</td>
 	<td>name=author</td>
@@ -46,7 +47,6 @@
 	<td>link=Understanding Your French Horn</td>
 	<td>Understanding Your French Horn</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

@@ -16,6 +16,7 @@
 	<td>/</td>
 	<td></td>
 </tr>
+<!--Click on Licensing link and verify text-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>link=Licensing</td>
@@ -36,7 +37,6 @@
 	<td>css=h1.documentFirstHeading</td>
 	<td>Legal</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

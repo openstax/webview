@@ -16,6 +16,7 @@
 	<td>/</td>
 	<td></td>
 </tr>
+<!--Click on the Dev Blog link. Blog should open-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>link=Dev Blog</td>
@@ -31,7 +32,6 @@
 	<td>_blank</td>
 	<td>30000</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

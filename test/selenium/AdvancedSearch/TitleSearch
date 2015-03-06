@@ -16,6 +16,7 @@
 	<td>/search</td>
 	<td></td>
 </tr>
+<!--Search for "circle of fifths" in the Title search field, click on the link in search results and verify text-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>name=title</td>
@@ -51,7 +52,6 @@
 	<td>css=h1</td>
 	<td>Related Keys</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

@@ -11,7 +11,7 @@
 <thead>
 <tr><td rowspan="1" colspan="3">ZendeskSuite</td></tr>
 </thead><tbody>
-<!--This test is currently failing because of a bug in Webview-->
+<!--This test is currently failing because of a bug in Zendesk Feedback tab-->
 <tr>
 	<td>open</td>
 	<td>/</td>

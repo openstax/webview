@@ -16,6 +16,7 @@
 	<td>/</td>
 	<td></td>
 </tr>
+<!--Click on the Android App link. Google Play should open-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>link=Android App</td>
@@ -31,7 +32,6 @@
 	<td>_blank</td>
 	<td>30000</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
