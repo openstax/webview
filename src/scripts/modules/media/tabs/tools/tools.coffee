@@ -17,7 +17,7 @@ define (require) ->
       derivable: @model.canEdit()
       isEditable: @isEditable
       # FIX: Detect if an element actually has the class `os-teacher`
-      hasTeachersEdition: () => @model.get('content')?.indexOf('os-teacher') >= 0
+      hasTeachersEdition: () => @model.asPage()?.get('content')?.indexOf('os-teacher') >= 0
       isTeacher: @model.get('teacher')
     }
 
