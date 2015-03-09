@@ -11,7 +11,6 @@
 <thead>
 <tr><td rowspan="1" colspan="3">ZendeskSuite</td></tr>
 </thead><tbody>
-<!--This test is currently failing because of a bug in Zendesk Feedback tab-->
 <tr>
 	<td>open</td>
 	<td>/</td>
@@ -29,23 +28,28 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=knowledge_base_search_input</td>
+	<td>id=suggestions_query</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=knowledge_base_search_input</td>
-	<td>add page to a book</td>
+	<td>id=suggestions_query</td>
+	<td>add a page to a book</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=suggestions_submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=exact:How Do I Add Pages to a Book?</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>link=exact:How Do I Add Pages to a Book?</td>
 	<td></td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>css=h1</td>
-	<td>How Do I Add Pages to a Book?</td>
 </tr>
 </tbody></table>
 </body>
