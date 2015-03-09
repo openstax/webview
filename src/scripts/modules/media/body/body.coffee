@@ -138,33 +138,48 @@ define (require) ->
             $el = $(el)
             $el.css('counter-reset', 'list-item ' + $el.attr('start'))
 
-        @fakeExercises($temp);
-
+        @fakeExercises($temp)
+        @embeddablesPromise = @getExercises($temp)
 
       catch error
         # FIX: Log the error
         console.log error
 
       @$el?.html($temp.html())
-      @renderExercises(@$el)
+      @embeddablesPromise?.then(@postRenderEmbeddables)
 
+    getExercises: ($parent)->
 
-    renderExercises: ($parent)->
+      defer = $.Deferred()
+      @postRenderQueue = []
 
       exercises = @findExerciseDOMS($parent)
-      _.each(exercises, @renderExercise, @)
+      exercisePromises = _.map(exercises, @getExercise, @)
+
+      $.when.apply(@, exercisePromises).then(()=>
+        @postRenderQueue
+      )
 
 
-    renderExercise: (exercise, iter)->
+    getExercise: (exercise, iter)->
       $exercise = $(exercise)
       exerciseLink = $exercise.attr('href')
 
-      _render = (questions)->
-        _.each(questions, (question)->
-          $exercise.replaceWith(question.stem_html)
-        )
+      _addToRenderQueue = (questions)=>
+        _.each(questions, (question)=>
+          @postRenderQueue.push({
+            selector : '.' + $exercise.attr('class') + '[href="' + $exercise.attr('href') + '"]',
+            html : question.stem_html
+          })
 
-      @setExerciseHTML(exerciseLink).then(_render)
+        , @)
+
+      @setExerciseHTML(exerciseLink).then(_addToRenderQueue)
+
+    postRenderEmbeddables: (postRenderQueue)=>
+      _.each(postRenderQueue, (toRender)=>
+        @$el.find(toRender.selector).replaceWith(toRender.html)
+      , @)
 
     setExerciseHTML: (exerciseLink)->
       exerciseUID = _.last(exerciseLink.split('/'))
@@ -172,10 +187,9 @@ define (require) ->
       parseForExerciseHTML = (data)->
         exerciseData = _(data.items).findWhere({uid: exerciseUID})
         exerciseQuestions = exerciseData.questions
-        return exerciseQuestions
 
       request = $.get(settings.exercisesAPIBase)
-      request.pipe(parseForExerciseHTML)
+      request.then(parseForExerciseHTML)
 
     findExerciseDOMS: ($parent)->
       exercisesToRender = $parent.find('[data-type="exercise"]').find('.os-embed')
