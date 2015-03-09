@@ -15,10 +15,9 @@
 }
 
 // Mark unimplemented custom labels
-*[data-label]:not([data-label=""])::before {
+*div[data-label]:not(div[data-label=""])::before {
   content: attr(data-label) ': ';
 }
-
 
 .media-body {
   padding: 40px 60px 0 60px;
