@@ -5,7 +5,9 @@ define (require) ->
       exercise : (itemCode)->
         # stub.
         'http://localhost:8000/data/exercises.json';
-        # actual
+
+        # actual API url. code works with this. server is down at the moment...
+        # also i think CORS header isn't set yet. 
         # 'https://exercises-dev1.openstax.org/api/exercises?q=tag:' + itemCode;
 
       simulation : (itemCode)->

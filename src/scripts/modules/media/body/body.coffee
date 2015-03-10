@@ -131,7 +131,7 @@ define (require) ->
             $el = $(el)
             $el.css('counter-reset', 'list-item ' + $el.attr('start'))
 
-          @fakeExercises($temp)
+          # @fakeExercises($temp)
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
@@ -219,23 +219,26 @@ define (require) ->
       # map to track result from adding each embeddable to the queue
       promises = _.map($embeddables, (embeddableElement)->
 
+        # clone embeddable for each embeddableItem to avoid bugs from referenced embeddable from embeddableTypes config
+        embeddableItem = _.clone(embeddable)
+
         # build the necessary information
         $embeddableElement = $(embeddableElement)
-        embeddable.itemCode = $embeddableElement.attr( embeddable.matchAttribute ).match(new RegExp(embeddable.match + '(.*)'))[1]
-        embeddable.itemAPIUrl = embeddablesConfig.embeddableAPIs[embeddable.embeddableType](embeddable.itemCode)
+        embeddableItem.itemCode = $embeddableElement.attr( embeddableItem.matchAttribute ).match(new RegExp(embeddableItem.match + '(.*)'))[1]
+        embeddableItem.itemAPIUrl = embeddablesConfig.embeddableAPIs[embeddableItem.embeddableType](embeddableItem.itemCode)
 
         # if the embeddable is async, it needs to do an external call
         # to get information to feed to the template for the embeddableType
-        if embeddable.async
-          embeddable.template = embeddableTemplates[embeddable.embeddableType]
+        if embeddableItem.async
+          embeddableItem.template = embeddableTemplates[embeddableItem.embeddableType]
           # returns promise for AJAX call and adds to render queue
           # with data from AJAX call
-          return @setHTMLFromAPI(embeddable, $embeddableElement).then(@_addToRenderQueue)
+          return @setHTMLFromAPI(embeddableItem, $embeddableElement).then(@_addToRenderQueue)
 
         # default to iframe template for sync embeddables
-        embeddable.template = embeddableTemplates['iframe']
+        embeddableItem.template = embeddableTemplates['iframe']
 
-        @_addToRenderQueue(embeddable, $embeddableElement)
+        @_addToRenderQueue(embeddableItem, $embeddableElement)
         # return null if sync!
         return
 
@@ -245,18 +248,18 @@ define (require) ->
       _.compact(promises)
 
     # builds and gets information needed for the render queue
-    # returns promise with necessary embeddable data for template rendering
+    # returns promise with necessary embeddableItem data for template rendering
     # and embedding -- ready for adding to queue
-    setHTMLFromAPI : (embeddable, $embeddableElement)->
+    setHTMLFromAPI : (embeddableItem, $embeddableElement)->
 
       selector = @_getEmbeddableSelector($embeddableElement)
 
       _addAPIDataToData = (data)->
-        embeddable.selector = selector
-        embeddable.data = data
-        embeddable
+        embeddableItem.selector = selector
+        embeddableItem.data = data
+        embeddableItem
 
-      request = $.get(embeddable.itemAPIUrl)
+      request = $.get(embeddableItem.itemAPIUrl)
       request.then(_addAPIDataToData)
 
 
@@ -272,18 +275,18 @@ define (require) ->
       '.' + $element[0].className + '[' + matchAttribute + '="' + $element.attr(matchAttribute) + '"]'
 
 
-    # Renders html through template and then adds embeddables to the queue for rendering
-    _addToRenderQueue : (embeddable, $element)=>
+    # Renders html through template and then adds embeddableItem to the queue for rendering
+    _addToRenderQueue : (embeddableItem, $element)=>
 
       if $element
         toRender = {
           $el : $element,
-          html : embeddable.template(embeddable)
+          html : embeddableItem.template(embeddableItem)
         }
       else
         toRender = {
-          selector : embeddable.selector,
-          html : embeddable.template(embeddable)
+          selector : embeddableItem.selector,
+          html : embeddableItem.template(embeddableItem)
         }
 
       @renderEmbeddableQueue.push(toRender)
