@@ -10,7 +10,7 @@
 
       // Hostname and port for the cnx-archive server
       cnxarchive: {
-        host: 'devarchive.cnx.org',
+        host: 'archive.cnx.org',
         port: 80
       },
 
@@ -48,20 +48,7 @@
         'introductory_statistics': '30189442-6998-4686-ac05-ed152b91b9de@17.20'
       },
 
-      accountProfile: 'https://accounts.cnx.org/profile',
-
-      embeddableAPIs : {
-        exercise : function(itemCode){
-          return 'http://localhost:8000/data/exercises.json';
-          // return 'https://exercises-dev1.openstax.org/api/exercises?q=tag:' + itemCode;
-        },
-        simulation : function(itemCode){
-          return 'http://connexions.github.io/simulations/' + itemCode;
-        },
-        terp : function(itemCode){
-          return 'https://openstaxtutor.org/terp/' + itemCode + '/quiz_start';
-        }
-      }
+      accountProfile: 'https://accounts.cnx.org/profile'
     };
 
   });
