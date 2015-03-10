@@ -19,6 +19,7 @@ define (require) ->
       super()
       @listenTo(@model, 'change:unit', @render)
       @listenTo(@model.get('contents'), 'change:title', @render)
+      @listenTo(@model.get('contents'), 'add:contents', @render)
 
     onRender: () ->
       super()
