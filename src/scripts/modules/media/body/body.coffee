@@ -7,15 +7,15 @@ define (require) ->
   template = require('hbs!./body-template')
   require('less!./body')
 
-  # exercisesTemplate = require('hbs!./exercises/exercises-template')
+  embeddableIframeTemplate = require('hbs!./embeddables/iframe-template')
   # exercises
   # require('less!./exercises/exercises')
 
   fakeExerciseTemplates = [
-    require('hbs!./exercises/fakes/ex034')
-    require('hbs!./exercises/fakes/ex099')
-    require('hbs!./exercises/fakes/ex044')
-    require('hbs!./exercises/fakes/ex054')
+    require('hbs!./embeddables/fake-exercises/ex001')
+    require('hbs!./embeddables/fake-exercises/ex002')
+    require('hbs!./embeddables/fake-exercises/ex003')
+    require('hbs!./embeddables/fake-exercises/ex004')
   ]
 
   return class MediaBodyView extends EditableView
@@ -54,13 +54,13 @@ define (require) ->
       try
         if @model.get('loaded') and @model.asPage()?.get('loaded') and @model.asPage()?.get('active')
           # Converts a TERP link to an OST-hosted iframe
-          $temp.find('a[href*="#terp-"]').each () ->
-            terpCode = $(this).attr('href').match(/#terp\-(.*)/)[1]
-            $(this).replaceWith("<iframe class='terp'
-                                         id='terp-#{terpCode}'
-                                         src='https://openstaxtutor.org/terp/#{terpCode}/quiz_start'
-                                         height='600px' width='800px' frameborder='0' seamless='seamless'>
-                                 </iframe>")
+          # $temp.find('a[href*="#terp-"]').each () ->
+          #   terpCode = $(this).attr('href').match(/#terp\-(.*)/)[1]
+          #   $(this).replaceWith("<iframe class='terp'
+          #                                id='terp-#{terpCode}'
+          #                                src='" + settings.embeddableAPIs.terps(terpCode) + "'
+          #                                height='600px' width='800px' frameborder='0' seamless='seamless'>
+          #                        </iframe>")
 
           # Remove the module title and abstract TODO: check if it is still necessary
           $temp.children('[data-type="title"]').remove()
@@ -138,26 +138,87 @@ define (require) ->
             $el = $(el)
             $el.css('counter-reset', 'list-item ' + $el.attr('start'))
 
-        @fakeExercises($temp)
-        @embeddablesPromise = @getExercises($temp)
+          @fakeExercises($temp)
+
+          @initializeEmbeddableQueues()
+          @findEmbeddables($temp)
+
+          @embeddablesPromise = @getExercises($temp)
 
       catch error
         # FIX: Log the error
         console.log error
 
       @$el?.html($temp.html())
-      @embeddablesPromise?.then(@postRenderEmbeddables)
+
+
+    initializeEmbeddableQueues: ()->
+      @renderEmbeddableQueue = []
+
+      _.extend(@renderEmbeddableQueue, Backbone.Events)
+
+      @renderEmbeddableQueue?.on('add', @renderEmbeddable.bind(@))
+
+
+    findEmbeddables: ($parent)->
+
+      $anchorsToFilter = $parent.find('a')
+      $iframesToFilter = $parent.find('iframe')
+
+      anchorEmbeddables = [{
+        match : '#terp-',
+        template : embeddableIframeTemplate,
+        embeddableType : 'terp'
+      },{
+        match : '#ost\/api\/ex\/',
+        embeddableType : 'exercise'
+      }]
+
+      iframeEmbeddables = [{
+        match : '#sims-',
+        template : embeddableIframeTemplate,
+        embeddableType : 'simulation'
+      }]
+
+      _.each(anchorEmbeddables, (embeddable)->
+        $embeddables = $anchorsToFilter.filter('[href*="' + embeddable.match + '"]')
+
+        _.each($embeddables, (embeddableElement)->
+
+          $embeddableElement = $(embeddableElement)
+          embeddable.itemCode = $embeddableElement.attr('href').match(new RegExp(embeddable.match + '(.*)'))[1]
+          embeddable.itemAPIUrl = settings.embeddableAPIs[embeddable.embeddableType](embeddable.itemCode)
+
+          unless embeddable.template
+
+            return
+
+          toRender = {
+            $el : $embeddableElement,
+            html : embeddable.template(embeddable)
+          }
+
+          @renderEmbeddableQueue.push(toRender)
+          @renderEmbeddableQueue.trigger('add', toRender)
+
+        , @)
+
+        $anchorsToFilter = $anchorsToFilter.not($embeddables)
+
+      , @)
+
+
+    renderEmbeddable : (embeddable)->
+      embeddable.$el = @$el.find(embeddable.selector) if embeddable.selector
+      embeddable.$el.replaceWith(embeddable.html)
 
     getExercises: ($parent)->
-
-      defer = $.Deferred()
-      @postRenderQueue = []
 
       exercises = @findExerciseDOMS($parent)
       exercisePromises = _.map(exercises, @getExercise, @)
 
       $.when.apply(@, exercisePromises).then(()=>
-        @postRenderQueue
+        @renderEmbeddableQueue
       )
 
 
@@ -166,33 +227,34 @@ define (require) ->
       exerciseLink = $exercise.attr('href')
 
       _addToRenderQueue = (questions)=>
-        _.each(questions, (question)=>
-          @postRenderQueue.push({
+        _.each(questions, (question)->
+
+          toRender = {
             selector : '.' + $exercise.attr('class') + '[href="' + $exercise.attr('href') + '"]',
             html : question.stem_html
-          })
+          }
+
+          @renderEmbeddableQueue.push(toRender)
+          @renderEmbeddableQueue.trigger('add', toRender)
 
         , @)
 
       @setExerciseHTML(exerciseLink).then(_addToRenderQueue)
 
-    postRenderEmbeddables: (postRenderQueue)=>
-      _.each(postRenderQueue, (toRender)=>
-        @$el.find(toRender.selector).replaceWith(toRender.html)
-      , @)
 
     setExerciseHTML: (exerciseLink)->
-      exerciseUID = _.last(exerciseLink.split('/'))
+      itemCode = exerciseLink.match(/#ost\/api\/ex\/(.*)/)[1]
+      apiUrl = settings.embeddableAPIs.exercise(itemCode)
 
       parseForExerciseHTML = (data)->
-        exerciseData = _(data.items).findWhere({uid: exerciseUID})
+        exerciseData = data.items[0]
         exerciseQuestions = exerciseData.questions
 
-      request = $.get(settings.exercisesAPIBase)
+      request = $.get(apiUrl)
       request.then(parseForExerciseHTML)
 
     findExerciseDOMS: ($parent)->
-      exercisesToRender = $parent.find('[data-type="exercise"]').find('.os-embed')
+      exercisesToRender = $parent.find('a').filter('[href*="#ost\/api\/ex\/"]')
 
     fakeExercises: ($parent)->
       sections = $parent.find('section[data-depth="1"]')

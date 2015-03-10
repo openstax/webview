@@ -50,7 +50,18 @@
 
       accountProfile: 'https://accounts.cnx.org/profile',
 
-      exercisesAPIBase: 'data/exercises.json'
+      embeddableAPIs : {
+        exercise : function(itemCode){
+          return 'http://localhost:8000/data/exercises.json';
+          // return 'https://exercises-dev1.openstax.org/api/exercises?q=tag:' + itemCode;
+        },
+        simulation : function(itemCode){
+          return 'http://connexions.github.io/simulations/' + itemCode;
+        },
+        terp : function(itemCode){
+          return 'https://openstaxtutor.org/terp/' + itemCode + '/quiz_start';
+        }
+      }
     };
 
   });
