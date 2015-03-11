@@ -289,7 +289,12 @@ define (require) ->
       # in the future, it would be nice to un-queue/elements that have matching selectors,
       # to prevent duplicate API calls
       matchAttr = if $element.attr('href') then 'href' else 'src'
-      '.' + $element[0].className + '[' + matchAttr + '="' + $element.attr(matchAttr) + '"]'
+
+      classString = if $element[0].className then '.' + $element[0].className else ''
+      elementNameString  = $element[0].tagName.toLowerCase()
+      matchAttrString = '[' + matchAttr + '="' + $element.attr(matchAttr) + '"]'
+
+      elementNameString + classString + matchAttrString
 
 
     # Renders html through template and then adds embeddableItem to the queue for rendering
