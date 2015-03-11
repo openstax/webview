@@ -96,6 +96,10 @@ define (require) ->
             href = $el.attr('href')
 
             if href.substr(0, 1) is '#' and href.length > 1 and $el.data('type') isnt 'footnote-ref'
+              # trying to find elements with '/' in ids was causing errors.
+              # Will move things to test links elsewhere once I find out where I should put them
+              if href.search(/\//) > -1
+                return
               $target = $temp.find(href)
               tag = $target?.attr('data-type')?.toLowerCase()
               if $el.text() is '[link]' and tag
