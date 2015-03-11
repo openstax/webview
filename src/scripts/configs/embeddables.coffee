@@ -29,11 +29,5 @@ define (require) ->
       #   , @)
 
       async : true
-    },{
-      match : '#sims-'
-      matchType : 'iframe'
-      embeddableType : 'simulation'
-      apiUrl : () ->
-        'http://connexions.github.io/simulations/' + @.itemCode;
     }]
   }
