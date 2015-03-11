@@ -131,6 +131,7 @@ define (require) ->
             $el = $(el)
             $el.css('counter-reset', 'list-item ' + $el.attr('start'))
 
+          # # uncomment to embed fake exercises and see embeddable exercises in action
           # @fakeExercises($temp)
 
           @initializeEmbeddableQueues()
@@ -152,18 +153,18 @@ define (require) ->
     # A queue for rendering embeddables means
     # we can share rendering functions regardless
     # of whether the embeddable is sync or async
-    initializeEmbeddableQueues: ()->
+    initializeEmbeddableQueues: () ->
       @renderEmbeddableQueue = []
 
       _.extend(@renderEmbeddableQueue, Backbone.Events)
 
       @renderEmbeddableQueue?.on('add', @renderEmbeddable)
       # Uncomment to add action for messages
-      # 
+      #
       # There's only one right now for when all the asyncs are done
-      # @renderEmbeddableQueue?.on('message', (message)->)
+      # @renderEmbeddableQueue?.on('message', (message) ->)
 
-    renderEmbeddable : (embeddable)=>
+    renderEmbeddable : (embeddable) =>
       # finds fresh element in @$el if a selector is provided
       # instead of the element itself.
       embeddable.$el = @$el.find(embeddable.selector) if embeddable.selector
@@ -171,10 +172,10 @@ define (require) ->
 
     # handles all embeddables -- finds and processes them
     # to be handled by render queue
-    # 
+    #
     # both for where embedded html is an iframe sourced to the api link ("sync", loosely used)
     # or rendered html after an async api call ("async", loosely used)
-    findEmbeddables: ($parent)->
+    findEmbeddables: ($parent) ->
 
       # container for promises from async embeddables
       # holds all promises and when all promises come back,
@@ -191,11 +192,13 @@ define (require) ->
       embeddableTypes = embeddablesConfig.embeddableTypes
 
       # process each embeddable type
-      _.each(embeddableTypes, (embeddable)->
+      _.each(embeddableTypes, (embeddable) ->
 
-        embeddable.matchAttribute = if embeddable.matchType is 'a' then 'href' else 'src'
+        embeddable.matchAttr = if embeddable.matchType is 'a' then 'href' else 'src'
+        matchAttrString = '[' + embeddable.matchAttr + '*="' + embeddable.match + '"]'
+
         # filter for embeddables matching the type!
-        $matchedEmbeddables = $elementsToFilter[embeddable.matchType].filter('[' + embeddable.matchAttribute + '*="' + embeddable.match + '"]')
+        $matchedEmbeddables = $elementsToFilter[embeddable.matchType].filter(matchAttrString)
 
         promises = @addEmbeddablesToRenderQueue(embeddable, $matchedEmbeddables)
 
@@ -209,23 +212,18 @@ define (require) ->
 
       embeddablePromises = _.flatten(embeddablePromises)
       # tell the queue when async embeddables have been all been added!
-      $.when.apply(@, embeddablePromises).then(()=>
+      $.when.apply(@, embeddablePromises).then(() =>
         @renderEmbeddableQueue.trigger('message', 'async embeddables added to queue')
       )
 
     # where the magic happens
-    addEmbeddablesToRenderQueue: (embeddable, $embeddables)=>
+    addEmbeddablesToRenderQueue: (embeddable, $embeddables) =>
 
       # map to track result from adding each embeddable to the queue
-      promises = _.map($embeddables, (embeddableElement)->
+      promises = _.map($embeddables, (embeddableElement) ->
 
-        # clone embeddable for each embeddableItem to avoid bugs from referenced embeddable from embeddableTypes config
-        embeddableItem = _.clone(embeddable)
-
-        # build the necessary information
         $embeddableElement = $(embeddableElement)
-        embeddableItem.itemCode = $embeddableElement.attr( embeddableItem.matchAttribute ).match(new RegExp(embeddableItem.match + '(.*)'))[1]
-        embeddableItem.itemAPIUrl = embeddablesConfig.embeddableAPIs[embeddableItem.embeddableType](embeddableItem.itemCode)
+        embeddableItem = @getEmbeddableItem(embeddable, $embeddableElement)
 
         # if the embeddable is async, it needs to do an external call
         # to get information to feed to the template for the embeddableType
@@ -247,15 +245,31 @@ define (require) ->
       # exclude empty sync values from promises being returned out
       _.compact(promises)
 
+
+    getEmbeddableItem: (embeddable, $embeddableElement) ->
+      # clone embeddable for each embeddableItem to avoid bugs from referenced embeddable object embeddableTypes
+      embeddableItem = _.clone(embeddable)
+
+      linkPrefixedByMatchRegex = new RegExp(embeddableItem.match + '(.*)')
+      embeddableItem.itemCode = $embeddableElement.attr(embeddableItem.matchAttr).match(linkPrefixedByMatchRegex)[1]
+      embeddableItem.itemAPIUrl = embeddableItem.apiUrl()
+
+      embeddableItem
+
+
     # builds and gets information needed for the render queue
     # returns promise with necessary embeddableItem data for template rendering
     # and embedding -- ready for adding to queue
-    setHTMLFromAPI : (embeddableItem, $embeddableElement)->
+    setHTMLFromAPI : (embeddableItem, $embeddableElement) ->
 
       selector = @_getEmbeddableSelector($embeddableElement)
 
-      _addAPIDataToData = (data)->
+      _addAPIDataToData = (data) ->
         embeddableItem.selector = selector
+
+        if _.isFunction(embeddableItem.filterDataCallback)
+          embeddableItem.filterDataCallback(data)
+
         embeddableItem.data = data
         embeddableItem
 
@@ -266,17 +280,16 @@ define (require) ->
     # Gets a selector for render to find on @$el
     # Cannot use old $element from $temp because by the time the async HTML
     # gets rendered, $temp is irrelevant and it's html has been added to @$el
-    _getEmbeddableSelector : ($element)->
+    _getEmbeddableSelector : ($element) ->
       # TODO: possible optimization
-      # 
       # in the future, it would be nice to un-queue/elements that have matching selectors,
       # to prevent duplicate API calls
-      matchAttribute = if $element.attr('href') then 'href' else 'src'
-      '.' + $element[0].className + '[' + matchAttribute + '="' + $element.attr(matchAttribute) + '"]'
+      matchAttr = if $element.attr('href') then 'href' else 'src'
+      '.' + $element[0].className + '[' + matchAttr + '="' + $element.attr(matchAttr) + '"]'
 
 
     # Renders html through template and then adds embeddableItem to the queue for rendering
-    _addToRenderQueue : (embeddableItem, $element)=>
+    _addToRenderQueue : (embeddableItem, $element) =>
 
       if $element
         toRender = {
@@ -296,10 +309,10 @@ define (require) ->
     # End embeddables logic
     ###
 
-    fakeExercises: ($parent)->
+    fakeExercises: ($parent) ->
       sections = $parent.find('section[data-depth="1"]')
 
-      appendFakeExercise = (section, iter)->
+      appendFakeExercise = (section, iter) ->
         $(section).append(fakeExerciseTemplates[iter % fakeExerciseTemplates.length])
 
       _.each(sections, appendFakeExercise)
