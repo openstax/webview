@@ -35,6 +35,19 @@ define (require) ->
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
 
+    updateTeacher: ($temp = @$el) ->
+      $els = $temp.find('.os-teacher')
+
+      if @model.get('teacher')
+        $els.show()
+      else
+        $els.hide()
+
+    # Toggle the visibility of teacher's edition elements
+    toggleTeacher: () ->
+      @model.set('teacher', not @model.get('teacher'))
+      @updateTeacher()
+
     # Perform mutations to the HTML before loading it on to the page for better performance
     renderDom: () ->
       $temp = $('<div>').html(@getTemplate())
@@ -91,11 +104,13 @@ define (require) ->
             href = $el.attr('href')
 
             if href.substr(0, 1) is '#' and href.length > 1 and $el.data('type') isnt 'footnote-ref'
-              $target = $temp.find(href)
-              tag = $target?.attr('data-type')?.toLowerCase()
-              if $el.text() is '[link]' and tag
-                tag = tag.charAt(0).toUpperCase() + tag.substring(1)
-                $el.text("#{tag}") if tag isnt 'undefined'
+              try
+                $target = $temp.find(href)
+                tag = $target?.attr('data-type')?.toLowerCase()
+                if $el.text() is '[link]' and tag
+                  tag = tag.charAt(0).toUpperCase() + tag.substring(1)
+                  $el.text("#{tag}") if tag isnt 'undefined'
+              catch
 
           # Convert links to maintain context in a book, if appropriate
           if @model.isBook()
@@ -125,6 +140,9 @@ define (require) ->
           $temp.find('ol[start], [data-type="list"][data-list-type="enumerated"][start]').each (i, el) ->
             $el = $(el)
             $el.css('counter-reset', 'list-item ' + $el.attr('start'))
+
+          # Show Teacher's Edition content if appropriate
+          @updateTeacher($temp)
       catch error
         # FIX: Log the error
         console.log error

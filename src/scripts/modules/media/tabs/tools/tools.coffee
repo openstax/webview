@@ -34,13 +34,8 @@ define (require) ->
     toggleEditor: () -> @model.set('editable', not @model.get('editable'))
 
     toggleTeacher: () ->
-      $els = $('.media-body > #content').find('.os-teacher')
-      @model.set('teacher', not @model.get('teacher'))
-
-      if @model.get('teacher')
-        $els.show()
-      else
-        $els.hide()
+      # BodyView
+      @parent.parent.regions.media.views[6].toggleTeacher()
 
     deriveCopy: () ->
       page = new Page
