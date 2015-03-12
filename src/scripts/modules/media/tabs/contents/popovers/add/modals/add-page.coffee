@@ -22,6 +22,7 @@ define (require) ->
       'click .search-pages': 'onSearch'
       'submit form': 'onSubmit'
       'change form': 'onChange'
+      'keydown .page-title': 'onFocusSearch'
       'focus .page-title': 'onFocusSearch'
       'blur .page-title': 'onUnfocusSearch'
       'keypress .page-title': 'onEnter'
@@ -33,12 +34,25 @@ define (require) ->
     # Update the Search/Submit buttons to make the button that will
     # respond to 'Enter' to be styled as primary
     onFocusSearch: (e) ->
+
+      @onTitleUnerror(e)
+
       @$el.find('.search-pages').addClass('btn-primary').removeClass('btn-plain')
       @$el.find('.btn-submit').addClass('btn-plain').removeClass('btn-primary')
 
     onUnfocusSearch: (e) ->
       @$el.find('.search-pages').addClass('btn-plain').removeClass('btn-primary')
       @$el.find('.btn-submit').addClass('btn-primary').removeClass('btn-plain')
+
+    onTitleError: (e)->
+      @$el.find('.page-title').parents('.form-group').addClass('has-warning')
+      @$el.find('.search-pages').attr('disabled', true).addClass('btn-warning').removeClass('btn-primary').removeClass('btn-plain')
+      @$el.find('.btn-submit').attr('disabled', true).addClass('btn-warning').removeClass('btn-primary').removeClass('btn-plain')
+
+    onTitleUnerror: (e)->
+      @$el.find('.page-title').parents('.form-group').removeClass('has-warning')
+      @$el.find('.search-pages').attr('disabled', false).removeClass('btn-warning')
+      @$el.find('.btn-submit').attr('disabled', false).removeClass('btn-warning')
 
     # Intelligently determine if the user intended to search or add pages
     # when hitting the 'enter' key
@@ -49,10 +63,13 @@ define (require) ->
 
         $input = @$el.find('.page-title')
 
-        if $input.is(':focus')
-          @search($input.val())
+        if @isTitleValid($input.val())
+          if $input.is(':focus')
+            @search($input.val())
+          else
+            @$el.find('form').submit()
         else
-          @$el.find('form').submit()
+          @onTitleError(e)
 
     onChange: (e) ->
       $target = $(e.target)
@@ -75,12 +92,19 @@ define (require) ->
 
     onSearch: (e) ->
       title = encodeURIComponent(@$el.find('.page-title').val())
-      @search(title)
+
+      if @isTitleValid(title)
+        @search(title)
+      else
+        @onTitleError(e)
 
     search: (title) ->
       @_checkedCounter = 0
       results = searchResults.config().load({query: "?q=title:%22#{title}%22%20type:page"})
       @regions.results.show(new AddPageSearchResultsView({model: results}))
+
+    isTitleValid: (title)->
+      title.length > 0
 
     updateUrl: () ->
       # Update the url bar path
@@ -93,6 +117,9 @@ define (require) ->
       e.preventDefault()
 
       data = $(e.originalEvent.target).serializeArray()
+
+      if not @isTitleValid(_.find(data, {name: 'title'}).value)
+        return @onTitleError(e)
 
       @$el.modal('hide')
 
