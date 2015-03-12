@@ -1,6 +1,6 @@
 define (require) ->
 
-  _ = require('underscore')
+  settings = require('settings')
 
   return {
     embeddableTypes : [{
@@ -8,17 +8,13 @@ define (require) ->
       matchType : 'a'
       embeddableType : 'terp'
       apiUrl : () ->
-        'https://openstaxtutor.org/terp/' + @.itemCode + '/quiz_start';
+        settings.terpUrl(@.itemCode)
     },{
       match : '#ost\/api\/ex\/'
       matchType : 'a'
       embeddableType : 'exercise'
       apiUrl : () ->
-        # # stub.  Comment out to use local exercises stub.
-        # # Copied from https://exercises-dev1.openstax.org/api/exercises?q=tag:k12phys-ch04-s01-lo01
-        # 'http://localhost:8000/data/exercises.json';
-
-        'https://exercises-dev1.openstax.org/api/exercises?q=tag:' + @.itemCode;
+        settings.exerciseUrl(@.itemCode)
 
       # # Adds flexibility for if data needs transformation post API call
       # # For now, not needed for when using actual API.  Comment in if using local stub.
@@ -31,10 +27,17 @@ define (require) ->
       onRender : ($parent) ->
         # For the maths.  you know. it do what it do.
         $mathElements = $parent.find('[data-math]')
-        $mathElements.each((iter, element) ->
-          mathTex = '[TEX_START]' + $(element).data('math') + '[TEX_END]'
-          $(element).text(mathTex)
-        )
+        $mathElements.each (iter, element) ->
+
+          $element = $(element)
+          formula = $element.data('math')
+
+          mathTex = "[TEX_START]#{formula}[TEX_END]"
+          $element.text(mathTex)
+
+          # Moved adding to MathJax queue here. Means the queue gets pushed onto more (once per math element),
+          # but what it trys to parse for matching math is WAY less than the whole page.
+          MathJax?.Hub.Queue(['Typeset', MathJax.Hub], $element[0])
 
       async : true
     }]

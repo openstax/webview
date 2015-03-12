@@ -7,10 +7,9 @@ define (require) ->
   template = require('hbs!./body-template')
   require('less!./body')
 
-  embeddableTemplates = {
-    'exercise' : require('hbs!./embeddables/exercise-template'),
+  embeddableTemplates =
+    'exercise' : require('hbs!./embeddables/exercise-template')
     'iframe' : require('hbs!./embeddables/iframe-template')
-  }
 
   fakeExerciseTemplates = [
     require('hbs!./embeddables/fake-exercises/ex001')
@@ -47,6 +46,19 @@ define (require) ->
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
+
+    updateTeacher: ($temp = @$el) ->
+      $els = $temp.find('.os-teacher')
+
+      if @model.get('teacher')
+        $els.show()
+      else
+        $els.hide()
+
+    # Toggle the visibility of teacher's edition elements
+    toggleTeacher: () ->
+      @model.set('teacher', not @model.get('teacher'))
+      @updateTeacher()
 
     # Perform mutations to the HTML before loading it on to the page for better performance
     renderDom: () ->
@@ -96,15 +108,13 @@ define (require) ->
             href = $el.attr('href')
 
             if href.substr(0, 1) is '#' and href.length > 1 and $el.data('type') isnt 'footnote-ref'
-              # trying to find elements with '/' in ids was causing errors.
-              # Will move things to test links elsewhere once I find out where I should put them
-              if href.search(/\//) > -1
-                return
-              $target = $temp.find(href)
-              tag = $target?.attr('data-type')?.toLowerCase()
-              if $el.text() is '[link]' and tag
-                tag = tag.charAt(0).toUpperCase() + tag.substring(1)
-                $el.text("#{tag}") if tag isnt 'undefined'
+              try
+                $target = $temp.find(href)
+                tag = $target?.attr('data-type')?.toLowerCase()
+                if $el.text() is '[link]' and tag
+                  tag = tag.charAt(0).toUpperCase() + tag.substring(1)
+                  $el.text("#{tag}") if tag isnt 'undefined'
+              catch
 
           # Convert links to maintain context in a book, if appropriate
           if @model.isBook()
@@ -141,6 +151,9 @@ define (require) ->
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
 
+          # Show Teacher's Edition content if appropriate
+          @updateTeacher($temp)
+
       catch error
         # FIX: Log the error
         console.log error
@@ -168,8 +181,9 @@ define (require) ->
       # There's only one right now for when all the asyncs are done
       # @renderEmbeddableQueue?.on('message', (message)->)
       #
-      # Post render again when all promises have returned
-      @renderEmbeddableQueue?.on('done', @onRender.bind(@))
+      # # Not needed at the moment.
+      # # Post render again when all promises have returned
+      # @renderEmbeddableQueue?.on('done', @onRender.bind(@))
 
     renderEmbeddable : (embeddableItem) =>
       # finds fresh element in @$el if a selector is provided
@@ -180,8 +194,7 @@ define (require) ->
       $parent = embeddableItem.$el.parent()
       embeddableItem.$el.replaceWith(embeddableItem.html)
 
-      if _.isFunction(embeddableItem.onRender)
-        embeddableItem.onRender($parent)
+      embeddableItem.onRender?($parent)
 
 
     # handles all embeddables -- finds and processes them
@@ -197,16 +210,15 @@ define (require) ->
       embeddablePromises = []
 
       # caches all elements that need to be checked for whether it's an embeddable
-      $elementsToFilter = {
+      $elementsToFilter =
         a : $parent.find('a'),
         iframe : $parent.find('iframe')
-      }
 
       # Add embeddable types as needed in embeddablesConfig
       embeddableTypes = embeddablesConfig.embeddableTypes
 
       # process each embeddable type
-      _.each(embeddableTypes, (embeddable) ->
+      _.each embeddableTypes, (embeddable) ->
 
         embeddable.matchAttr = if embeddable.matchType is 'a' then 'href' else 'src'
         matchAttrString = '[' + embeddable.matchAttr + '*="' + embeddable.match + '"]'
@@ -222,7 +234,7 @@ define (require) ->
         # The next embeddable type loop through will then completely exclude those elements
         $elementsToFilter[embeddable.matchType] = $elementsToFilter[embeddable.matchType].not($matchedEmbeddables)
 
-      , @)
+      , @
 
       embeddablePromises = _.flatten(embeddablePromises)
       # tell the queue when async embeddables have been all been added!
@@ -235,7 +247,7 @@ define (require) ->
     addEmbeddablesToRenderQueue: (embeddable, $embeddables) =>
 
       # map to track result from adding each embeddable to the queue
-      promises = _.map($embeddables, (embeddableElement) ->
+      promises = _.map $embeddables, (embeddableElement) ->
 
         $embeddableElement = $(embeddableElement)
         embeddableItem = @getEmbeddableItem(embeddable, $embeddableElement)
@@ -255,7 +267,7 @@ define (require) ->
         # return null if sync!
         return
 
-      , @)
+      , @
 
       # exclude empty sync values from promises being returned out
       _.compact(promises)
@@ -282,8 +294,7 @@ define (require) ->
       delete embeddableItem.$el
 
       _addAPIDataToData = (data) ->
-        if _.isFunction(embeddableItem.filterDataCallback)
-          embeddableItem.filterDataCallback(data)
+        embeddableItem.filterDataCallback?(data)
 
         embeddableItem.data = data
         embeddableItem
