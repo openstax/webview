@@ -28,6 +28,14 @@ define (require) ->
       #     _.indexOf(item.tags, @itemCode) > -1
       #   , @)
 
+      onRender : ($parent) ->
+        # For the maths.  you know. it do what it do.
+        $mathElements = $parent.find('[data-math]')
+        $mathElements.each((iter, element) ->
+          mathTex = '[TEX_START]' + $(element).data('math') + '[TEX_END]'
+          $(element).text(mathTex)
+        )
+
       async : true
     }]
   }

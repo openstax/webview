@@ -166,13 +166,23 @@ define (require) ->
       # Uncomment to add action for messages
       #
       # There's only one right now for when all the asyncs are done
-      # @renderEmbeddableQueue?.on('message', (message) ->)
+      # @renderEmbeddableQueue?.on('message', (message)->)
+      #
+      # Post render again when all promises have returned
+      @renderEmbeddableQueue?.on('done', @onRender.bind(@))
 
-    renderEmbeddable : (embeddable) =>
+    renderEmbeddable : (embeddableItem) =>
       # finds fresh element in @$el if a selector is provided
       # instead of the element itself.
-      embeddable.$el = @$el.find(embeddable.selector) if embeddable.selector
-      embeddable.$el.replaceWith(embeddable.html)
+
+      embeddableItem.$el = @$el.find(embeddableItem.selector) if embeddableItem.selector
+
+      $parent = embeddableItem.$el.parent()
+      embeddableItem.$el.replaceWith(embeddableItem.html)
+
+      if _.isFunction(embeddableItem.onRender)
+        embeddableItem.onRender($parent)
+
 
     # handles all embeddables -- finds and processes them
     # to be handled by render queue
@@ -218,6 +228,7 @@ define (require) ->
       # tell the queue when async embeddables have been all been added!
       $.when.apply(@, embeddablePromises).then(() =>
         @renderEmbeddableQueue.trigger('message', 'async embeddables added to queue')
+        @renderEmbeddableQueue.trigger('done')
       )
 
     # where the magic happens
@@ -235,12 +246,12 @@ define (require) ->
           embeddableItem.template = embeddableTemplates[embeddableItem.embeddableType]
           # returns promise for AJAX call and adds to render queue
           # with data from AJAX call
-          return @setHTMLFromAPI(embeddableItem, $embeddableElement).then(@_addToRenderQueue)
+          return @setHTMLFromAPI(embeddableItem).then(@_addToRenderQueue)
 
         # default to iframe template for sync embeddables
         embeddableItem.template = embeddableTemplates['iframe']
 
-        @_addToRenderQueue(embeddableItem, $embeddableElement)
+        @_addToRenderQueue(embeddableItem)
         # return null if sync!
         return
 
@@ -257,6 +268,7 @@ define (require) ->
       linkPrefixedByMatchRegex = new RegExp(embeddableItem.match + '(.*)')
       embeddableItem.itemCode = $embeddableElement.attr(embeddableItem.matchAttr).match(linkPrefixedByMatchRegex)[1]
       embeddableItem.itemAPIUrl = embeddableItem.apiUrl()
+      embeddableItem.$el = $embeddableElement
 
       embeddableItem
 
@@ -264,13 +276,12 @@ define (require) ->
     # builds and gets information needed for the render queue
     # returns promise with necessary embeddableItem data for template rendering
     # and embedding -- ready for adding to queue
-    setHTMLFromAPI : (embeddableItem, $embeddableElement) ->
+    setHTMLFromAPI : (embeddableItem) ->
 
-      selector = @_getEmbeddableSelector($embeddableElement)
+      embeddableItem.selector = @_getEmbeddableSelector(embeddableItem.$el)
+      delete embeddableItem.$el
 
       _addAPIDataToData = (data) ->
-        embeddableItem.selector = selector
-
         if _.isFunction(embeddableItem.filterDataCallback)
           embeddableItem.filterDataCallback(data)
 
@@ -298,21 +309,12 @@ define (require) ->
 
 
     # Renders html through template and then adds embeddableItem to the queue for rendering
-    _addToRenderQueue : (embeddableItem, $element) =>
+    _addToRenderQueue : (embeddableItem) =>
 
-      if $element
-        toRender = {
-          $el : $element,
-          html : embeddableItem.template(embeddableItem)
-        }
-      else
-        toRender = {
-          selector : embeddableItem.selector,
-          html : embeddableItem.template(embeddableItem)
-        }
+      embeddableItem.html = embeddableItem.template(embeddableItem)
 
-      @renderEmbeddableQueue.push(toRender)
-      @renderEmbeddableQueue.trigger('add', toRender)
+      @renderEmbeddableQueue.push(embeddableItem)
+      @renderEmbeddableQueue.trigger('add', embeddableItem)
 
     ###
     # End embeddables logic
