@@ -3,10 +3,12 @@ define (require) ->
   Mathjax = require('mathjax')
   router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')
+  ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   template = require('hbs!./body-template')
   require('less!./body')
 
   return class MediaBodyView extends EditableView
+    key = []
     media: 'page'
     template: template
     templateHelpers:
@@ -34,6 +36,7 @@ define (require) ->
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
+      $(document).on('keypress', @checkKeySequence)
 
     # Perform mutations to the HTML before loading it on to the page for better performance
     renderDom: () ->
@@ -132,6 +135,8 @@ define (require) ->
       @$el?.html($temp.html())
 
     onRender: () ->
+      @parent?.regions.self.append(new ProcessingInstructionsModal({model: @model}))
+
       if not @model.asPage()?.get('active') then return
 
       # MathJax rendering must be done after the HTML has been added to the DOM
@@ -177,3 +182,25 @@ define (require) ->
     onUneditable: () ->
       @$el.find('.media-body').removeClass('draft')
       @render() # Re-render body view to cleanup aloha issues
+
+    checkKeySequence: () ->
+      @addEventListener 'keydown', ((e) ->
+        key[e.keyCode] = true
+        return
+        ), false
+
+      @addEventListener 'keyup', ((e) ->
+        key[e.keyCode] = false
+        return
+        ), false
+
+      #ctrl+alt+shift+p+i
+      if key[16] and key[17] and key[18] and key[73] and key[80]
+        instructionTags = []
+        processingInstructions = $('.media-body').find('cnx-pi')
+
+        _.each processingInstructions, (instruction) ->
+          instructionTags.push(instruction.outerHTML)
+
+        $('#pi').val(instructionTags.join('\n'))
+        $('#processing-instructions-modal').modal('show')
