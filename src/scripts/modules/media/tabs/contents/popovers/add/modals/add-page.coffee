@@ -29,6 +29,7 @@ define (require) ->
     onRender: () ->
       @$el.off('shown.bs.modal') # Prevent duplicating event listeners
       @$el.on 'shown.bs.modal', () => @$el.find('.page-title').focus()
+      @$el.on 'hide.bs.modal', () => @cancelSearch()
 
     # Update the Search/Submit buttons to make the button that will
     # respond to 'Enter' to be styled as primary
@@ -79,8 +80,13 @@ define (require) ->
 
     search: (title) ->
       @_checkedCounter = 0
-      results = searchResults.config().load({query: "?q=title:%22#{title}%22%20type:page"})
-      @regions.results.show(new AddPageSearchResultsView({model: results}))
+      @results = searchResults.config().load({query: "?q=title:%22#{title}%22%20type:page"})
+      @regions.results.show(new AddPageSearchResultsView({model: @results}))
+
+    cancelSearch: () ->
+      if @results?.get('promise')
+        @results.get('promise').abort()
+        @regions.results.empty()
 
     updateUrl: () ->
       # Update the url bar path
