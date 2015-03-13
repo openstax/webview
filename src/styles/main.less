@@ -237,3 +237,20 @@ div#zenbox_tab.ZenboxTabRight {
 .modal-open {
   padding-right: 0 !important;
 }
+
+// helper
+.form-group.help-block-stick{
+  position: relative;
+  .control-label{
+    position: relative;
+    .help-block{
+      position: absolute;
+    }
+  }
+}
+
+.form-horizontal .form-group.help-block-stick{
+  .help-block{
+    right: 0;
+  }
+}

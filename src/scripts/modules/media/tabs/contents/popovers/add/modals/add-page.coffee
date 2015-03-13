@@ -12,8 +12,7 @@ define (require) ->
 
   return class AddPageModal extends BaseView
     template: template
-    _hasSearchTitleError : false
-    _hasAddPageError : false
+
     _checkedCounter: 0
 
     regions:
@@ -29,6 +28,10 @@ define (require) ->
       'blur .page-title': 'onUnfocusSearch'
       'keypress .page-title': 'onEnter'
 
+    initialize: () ->
+      super()
+      @validate = @initializeValidations()
+
     onRender: () ->
       @$el.off('shown.bs.modal') # Prevent duplicating event listeners
       @$el.on 'shown.bs.modal', () => @$el.find('.page-title').focus()
@@ -43,34 +46,8 @@ define (require) ->
       @$el.find('.search-pages').addClass('btn-plain').removeClass('btn-primary')
       @$el.find('.btn-submit').addClass('btn-primary').removeClass('btn-plain')
 
-    onKeyUpSearch: ()->
+    onKeyUpSearch: () ->
       @validate()
-
-    onSearchTitleError: ()->
-      @_hasSearchTitleError = true
-
-      @$el.find('.page-title').parents('.form-group').addClass('has-warning')
-      @$el.find('.search-pages').attr('disabled', true).addClass('btn-warning')
-
-      @$el.find('.help-block').removeClass('hide')
-
-    onSearchTitleUnerror: ()->
-      @_hasSearchTitleError = false
-
-      @$el.find('.page-title').parents('.form-group').removeClass('has-warning')
-      @$el.find('.search-pages').attr('disabled', false).removeClass('btn-warning')
-
-      @$el.find('.help-block').addClass('hide')
-
-    onAddPageUnerror: ()->
-      @_hasAddPageError = false
-
-      @$el.find('.btn-submit').attr('disabled', false).removeClass('btn-warning')
-
-    onAddPageError: ()->
-      @_hasAddPageError = true
-
-      @$el.find('.btn-submit').attr('disabled', true).addClass('btn-warning')
 
     # Intelligently determine if the user intended to search or add pages
     # when hitting the 'enter' key
@@ -107,51 +84,78 @@ define (require) ->
 
       @validate()
 
-      if not @_hasAddPageError
-        @onSearchTitleUnerror()
+      if not @validations.addPage.hasError
+        @validations.searchTitle.hide()
 
     onSearch: (e) ->
       title = @$el.find('.page-title').val()
       @search(title)
 
     search: (title) ->
-      if @validateSearch(title)
+      if @validations.searchTitle.validate(title)
         @_checkedCounter = 0
         title = encodeURIComponent(title)
         results = searchResults.config().load({query: "?q=title:%22#{title}%22%20type:page"})
         @regions.results.show(new AddPageSearchResultsView({model: results}))
 
-    validate: (title)->
-      @validateSearch(title)
-      @validateAddPage()
+    initializeValidations: () ->
+      @validations =
+        addPage:
+          hasError: false
+          check: @_canAddPage
+          show: @_showAddPageError
+          hide: @_hideAddPageError
+        searchTitle:
+          hasError: false
+          check: @_isSearchTitleValid
+          show: @_showSearchTitleError
+          hide: @_hideSearchTitleError
 
-      not (@_hasSearchTitleError and @_hasAddPageError)
+      validate = (title...) ->
+        if @check.apply(arguments)
+          if @hasError
+            @hide()
+        else if not @hasError
+          @show()
 
-    validateSearch: (title)->
-      if @isSearchTitleValid(title)
-        if @_hasSearchTitleError
-          @onSearchTitleUnerror()
-      else if not @_hasSearchTitleError
-        @onSearchTitleError()
+        not @hasError
 
-      not @_hasSearchTitleError
+      @validations.addPage.validate = validate
+      @validations.searchTitle.validate = validate
 
-    validateAddPage: ()->
-      if @canAddNewPage()
-        if @_hasAddPageError
-          @onAddPageUnerror()
-      else if not @_hasAddPageError
-        @onAddPageError()
+      # Returns validate function that validates both search title and add page
+      (title...) ->
+        @validations.searchTitle.validate(title)
+        @validations.addPage.validate()
 
-      not @_hasAddPageError
+        not (@validations.searchTitle.hasError and @validations.addPage.hasError)
 
-    isSearchTitleValid: (title)->
-
+    _isSearchTitleValid: (title) =>
       title = if title then title else @$el.find('.page-title').val()
       title.trim().length > 0
 
-    canAddNewPage: ()->
-      (@_checkedCounter > 0) or @isSearchTitleValid()
+    _canAddPage: () =>
+      (@_checkedCounter > 0) or @validations.searchTitle.check()
+
+    _showSearchTitleError: () =>
+      @validations.searchTitle.hasError = true
+      @$el.find('.page-title').parents('.form-group').addClass('has-warning')
+      @$el.find('.search-pages').attr('disabled', true).addClass('btn-warning')
+      @$el.find('.help-block').removeClass('hide')
+
+    _hideSearchTitleError: () =>
+      @validations.searchTitle.hasError = false
+      @$el.find('.page-title').parents('.form-group').removeClass('has-warning')
+      @$el.find('.search-pages').attr('disabled', false).removeClass('btn-warning')
+      @$el.find('.help-block').addClass('hide')
+
+    _hideAddPageError: () =>
+      @validations.addPage.hasError = false
+      @$el.find('.btn-submit').attr('disabled', false).removeClass('btn-warning')
+
+    _showAddPageError: () =>
+      @validations.addPage.hasError = true
+      @$el.find('.btn-submit').attr('disabled', true).addClass('btn-warning')
 
     updateUrl: () ->
       # Update the url bar path
