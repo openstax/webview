@@ -47,7 +47,8 @@ define (require) ->
 
       if query isnt @query or url isnt @searchUrl
         @config(options)
-        @fetch(options)
+        promise = @fetch(options)
+        @set('promise', promise, {silent: true})
 
       return @
 
@@ -59,6 +60,7 @@ define (require) ->
       return super(arguments...)
       .always () =>
         @set('loaded', true)
+        @unset('promise', {silent: true})
       .done () =>
         @set('error', false)
       .fail (model, response, options) =>
