@@ -138,7 +138,9 @@ define (require) ->
 
             # Update the model if an event for this editable was triggered
             Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
-              if d.triggerType isnt 'blur'
+              # HACK - d is undefined because processing instructions
+              # needs to trigger aloha-smart-content-change event
+              if d is undefined or d.triggerType isnt 'blur'
                 # Update the model by retrieving the XHTML contents
                 editableBody = alohaEditable.getContents()
                 editableBody = editableBody.trim() # Trim for idempotence
