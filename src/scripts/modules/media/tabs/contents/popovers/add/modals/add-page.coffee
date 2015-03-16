@@ -158,11 +158,13 @@ define (require) ->
     _hideAddPageError: () =>
       @validations.addPage.hasError = false
       @$el.find('.btn-submit').attr('disabled', false).removeClass('btn-danger')
+      @$el.find('.page-title').parents('.form-group').removeClass('has-error')
       @$el.find('.modal-footer').removeClass('has-error').find('.help-block').addClass('hide')
 
     _showAddPageError: () =>
       @validations.addPage.hasError = true
       @$el.find('.btn-submit').attr('disabled', true).addClass('btn-danger')
+      @$el.find('.page-title').parents('.form-group').addClass('has-error')
       @$el.find('.modal-footer').addClass('has-error').find('.help-block').removeClass('hide')
 
     updateUrl: () ->
@@ -177,9 +179,10 @@ define (require) ->
 
       data = $(e.originalEvent.target).serializeArray()
 
+      if @validations.searchTitle.hasError
+        @validations.searchTitle.hide()
+
       if not @validations.addPage.validate()
-        if @validations.searchTitle.hasError
-          @validations.searchTitle.hide()
         return
 
       @$el.modal('hide')
