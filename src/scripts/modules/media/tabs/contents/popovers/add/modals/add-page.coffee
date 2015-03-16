@@ -46,8 +46,13 @@ define (require) ->
       @$el.find('.search-pages').addClass('btn-plain').removeClass('btn-primary')
       @$el.find('.btn-submit').addClass('btn-primary').removeClass('btn-plain')
 
-    onKeyUpSearch: () ->
-      @validate()
+    onKeyUpSearch: (e) ->
+      if @validations.searchTitle.hasError
+        @validations.searchTitle.validate()
+
+      if @validations.addPage.hasError
+        @validations.addPage.validate()
+
 
     # Intelligently determine if the user intended to search or add pages
     # when hitting the 'enter' key
@@ -82,9 +87,10 @@ define (require) ->
       else
         @$el.find('.btn-submit').text('Add Selected Pages')
 
-      @validate()
+      if @validations.addPage.hasError
+        @validations.addPage.validate()
 
-      if not @validations.addPage.hasError
+      if @validations.searchTitle.hasError
         @validations.searchTitle.hide()
 
     onSearch: (e) ->
@@ -141,21 +147,23 @@ define (require) ->
       @validations.searchTitle.hasError = true
       @$el.find('.page-title').parents('.form-group').addClass('has-error')
       @$el.find('.search-pages').attr('disabled', true).addClass('btn-danger')
-      @$el.find('.help-block').removeClass('hide')
+      @$el.find('.page-title').parents('.form-group').find('.help-block').removeClass('hide')
 
     _hideSearchTitleError: () =>
       @validations.searchTitle.hasError = false
       @$el.find('.page-title').parents('.form-group').removeClass('has-error')
       @$el.find('.search-pages').attr('disabled', false).removeClass('btn-danger')
-      @$el.find('.help-block').addClass('hide')
+      @$el.find('.page-title').parents('.form-group').find('.help-block').addClass('hide')
 
     _hideAddPageError: () =>
       @validations.addPage.hasError = false
       @$el.find('.btn-submit').attr('disabled', false).removeClass('btn-danger')
+      @$el.find('.modal-footer').removeClass('has-error').find('.help-block').addClass('hide')
 
     _showAddPageError: () =>
       @validations.addPage.hasError = true
       @$el.find('.btn-submit').attr('disabled', true).addClass('btn-danger')
+      @$el.find('.modal-footer').addClass('has-error').find('.help-block').removeClass('hide')
 
     updateUrl: () ->
       # Update the url bar path
@@ -169,7 +177,9 @@ define (require) ->
 
       data = $(e.originalEvent.target).serializeArray()
 
-      if not @validate(_.find(data, {name: 'title'}).value)
+      if not @validations.addPage.validate()
+        if @validations.searchTitle.hasError
+          @validations.searchTitle.hide()
         return
 
       @$el.modal('hide')
