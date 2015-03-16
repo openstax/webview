@@ -9,8 +9,8 @@ define (require) ->
   require('less!./body')
 
   embeddableTemplates =
-    'exercise' : require('hbs!./embeddables/exercise-template')
-    'iframe' : require('hbs!./embeddables/iframe-template')
+    'exercise': require('hbs!./embeddables/exercise-template')
+    'iframe': require('hbs!./embeddables/iframe-template')
 
   fakeExerciseTemplates = [
     require('hbs!./embeddables/fake-exercises/ex001')
@@ -189,7 +189,7 @@ define (require) ->
       # # Post render again when all promises have returned
       # @renderEmbeddableQueue?.on('done', @onRender.bind(@))
 
-    renderEmbeddable : (embeddableItem) =>
+    renderEmbeddable: (embeddableItem) =>
       # finds fresh element in @$el if a selector is provided
       # instead of the element itself.
 
@@ -215,8 +215,8 @@ define (require) ->
 
       # caches all elements that need to be checked for whether it's an embeddable
       $elementsToFilter =
-        a : $parent.find('a'),
-        iframe : $parent.find('iframe')
+        a: $parent.find('a'),
+        iframe: $parent.find('iframe')
 
       # Add embeddable types as needed in embeddablesConfig
       embeddableTypes = embeddablesConfig.embeddableTypes
@@ -292,7 +292,7 @@ define (require) ->
     # builds and gets information needed for the render queue
     # returns promise with necessary embeddableItem data for template rendering
     # and embedding -- ready for adding to queue
-    setHTMLFromAPI : (embeddableItem) ->
+    setHTMLFromAPI: (embeddableItem) ->
 
       embeddableItem.selector = @_getEmbeddableSelector(embeddableItem.$el)
       delete embeddableItem.$el
@@ -310,7 +310,7 @@ define (require) ->
     # Gets a selector for render to find on @$el
     # Cannot use old $element from $temp because by the time the async HTML
     # gets rendered, $temp is irrelevant and it's html has been added to @$el
-    _getEmbeddableSelector : ($element) ->
+    _getEmbeddableSelector: ($element) ->
       # TODO: possible optimization
       # in the future, it would be nice to un-queue/elements that have matching selectors,
       # to prevent duplicate API calls
@@ -324,7 +324,7 @@ define (require) ->
 
 
     # Renders html through template and then adds embeddableItem to the queue for rendering
-    _addToRenderQueue : (embeddableItem) =>
+    _addToRenderQueue: (embeddableItem) =>
 
       embeddableItem.html = embeddableItem.template(embeddableItem)
 
