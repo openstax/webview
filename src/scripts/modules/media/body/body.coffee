@@ -4,6 +4,7 @@ define (require) ->
   Mathjax = require('mathjax')
   router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')
+  ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   template = require('hbs!./body-template')
   require('less!./body')
 
@@ -19,6 +20,7 @@ define (require) ->
   ]
 
   return class MediaBodyView extends EditableView
+    key = []
     media: 'page'
     template: template
     templateHelpers:
@@ -40,6 +42,8 @@ define (require) ->
       'click a': 'changePage'
       'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
       'click .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
+      'keydown .media-body': 'checkKeySequence'
+      'keyup .media-body': 'resetKeySequence'
 
     initialize: () ->
       super()
@@ -341,6 +345,8 @@ define (require) ->
 
 
     onRender: () ->
+      @parent?.regions.self.append(new ProcessingInstructionsModal({model: @model}))
+
       if not @model.asPage()?.get('active') then return
 
       # MathJax rendering must be done after the HTML has been added to the DOM
@@ -386,3 +392,20 @@ define (require) ->
     onUneditable: () ->
       @$el.find('.media-body').removeClass('draft')
       @render() # Re-render body view to cleanup aloha issues
+
+    checkKeySequence: (e) ->
+      key[e.keyCode] = true
+      if @model.isDraft()
+        #ctrl+alt+shift+p+i
+        if key[16] and key[17] and key[18] and key[73] and key[80]
+          instructionTags = []
+          processingInstructions = @$el.find('.media-body').find('cnx-pi')
+
+          _.each processingInstructions, (instruction) ->
+            instructionTags.push(instruction.outerHTML)
+
+          $('#pi').val(instructionTags.join('\n'))
+          $('#processing-instructions-modal').modal('show')
+
+    resetKeySequence: (e) ->
+      key[e.keyCode] = false
