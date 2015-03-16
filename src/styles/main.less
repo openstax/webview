@@ -122,6 +122,11 @@ h5 {
   border: 1px solid @brand-warning;
 }
 
+.btn-danger, .btn-primary.btn-danger, .btn-plain.btn-danger {
+  .button-variant(@gray-dark; white);
+  border: 1px solid @brand-danger;
+}
+
 .btn-primary {
   .button-variant(white; @brand-primary);
   border: 1px solid transparent;
@@ -236,21 +241,4 @@ div#zenbox_tab.ZenboxTabRight {
 
 .modal-open {
   padding-right: 0 !important;
-}
-
-// helper
-.form-group.help-block-stick{
-  position: relative;
-  .control-label{
-    position: relative;
-    .help-block{
-      position: absolute;
-    }
-  }
-}
-
-.form-horizontal .form-group.help-block-stick{
-  .help-block{
-    right: 0;
-  }
 }

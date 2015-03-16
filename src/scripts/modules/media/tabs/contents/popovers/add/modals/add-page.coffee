@@ -139,23 +139,23 @@ define (require) ->
 
     _showSearchTitleError: () =>
       @validations.searchTitle.hasError = true
-      @$el.find('.page-title').parents('.form-group').addClass('has-warning')
-      @$el.find('.search-pages').attr('disabled', true).addClass('btn-warning')
+      @$el.find('.page-title').parents('.form-group').addClass('has-error')
+      @$el.find('.search-pages').attr('disabled', true).addClass('btn-danger')
       @$el.find('.help-block').removeClass('hide')
 
     _hideSearchTitleError: () =>
       @validations.searchTitle.hasError = false
-      @$el.find('.page-title').parents('.form-group').removeClass('has-warning')
-      @$el.find('.search-pages').attr('disabled', false).removeClass('btn-warning')
+      @$el.find('.page-title').parents('.form-group').removeClass('has-error')
+      @$el.find('.search-pages').attr('disabled', false).removeClass('btn-danger')
       @$el.find('.help-block').addClass('hide')
 
     _hideAddPageError: () =>
       @validations.addPage.hasError = false
-      @$el.find('.btn-submit').attr('disabled', false).removeClass('btn-warning')
+      @$el.find('.btn-submit').attr('disabled', false).removeClass('btn-danger')
 
     _showAddPageError: () =>
       @validations.addPage.hasError = true
-      @$el.find('.btn-submit').attr('disabled', true).addClass('btn-warning')
+      @$el.find('.btn-submit').attr('disabled', true).addClass('btn-danger')
 
     updateUrl: () ->
       # Update the url bar path
