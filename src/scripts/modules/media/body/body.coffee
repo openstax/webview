@@ -30,13 +30,14 @@ define (require) ->
       'click a': 'changePage'
       'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
       'click .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
+      'keydown .media-body': 'checkKeySequence'
+      'keyup .media-body': 'resetKeySequence'
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
-      $(document).on('keypress', @checkKeySequence)
 
     # Perform mutations to the HTML before loading it on to the page for better performance
     renderDom: () ->
@@ -183,24 +184,19 @@ define (require) ->
       @$el.find('.media-body').removeClass('draft')
       @render() # Re-render body view to cleanup aloha issues
 
-    checkKeySequence: () ->
-      @addEventListener 'keydown', ((e) ->
-        key[e.keyCode] = true
-        return
-        ), false
+    checkKeySequence: (e) ->
+      key[e.keyCode] = true
+      if @model.isDraft()
+        #ctrl+alt+shift+p+i
+        if key[16] and key[17] and key[18] and key[73] and key[80]
+          instructionTags = []
+          processingInstructions = @$el.find('.media-body').find('cnx-pi')
 
-      @addEventListener 'keyup', ((e) ->
-        key[e.keyCode] = false
-        return
-        ), false
+          _.each processingInstructions, (instruction) ->
+            instructionTags.push(instruction.outerHTML)
 
-      #ctrl+alt+shift+p+i
-      if key[16] and key[17] and key[18] and key[73] and key[80]
-        instructionTags = []
-        processingInstructions = $('.media-body').find('cnx-pi')
+          $('#pi').val(instructionTags.join('\n'))
+          $('#processing-instructions-modal').modal('show')
 
-        _.each processingInstructions, (instruction) ->
-          instructionTags.push(instruction.outerHTML)
-
-        $('#pi').val(instructionTags.join('\n'))
-        $('#processing-instructions-modal').modal('show')
+    resetKeySequence: (e) ->
+      key[e.keyCode] = false
