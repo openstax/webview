@@ -86,7 +86,12 @@ define (require) ->
     cancelSearch: () ->
       if @results?.get('promise')
         @results.get('promise').abort()
-        @regions.results.empty()
+
+      @clearSearch()
+
+    clearSearch: () ->
+      @regions.results.empty()
+      @$el.find('.page-title').val('')
 
     updateUrl: () ->
       # Update the url bar path
