@@ -9,8 +9,6 @@ define (require) ->
     events:
       'submit form': 'prependProcessingInstructions'
 
-    initialize: () ->
-
     prependProcessingInstructions: (e) ->
       e.preventDefault()
       mediaBody = $('.media-body')
@@ -20,5 +18,5 @@ define (require) ->
         processingInstructions.remove()
 
       mediaBody.prepend($('#pi').val())
-      @model.set('changed', true)
+      Aloha.trigger('aloha-smart-content-changed')
       $('#processing-instructions-modal').modal('hide')

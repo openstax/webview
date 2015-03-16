@@ -186,7 +186,6 @@ define (require) ->
 
     checkKeySequence: (e) ->
       key[e.keyCode] = true
-      
       if @model.isDraft()
         #ctrl+alt+shift+p+i
         if key[16] and key[17] and key[18] and key[73] and key[80]
