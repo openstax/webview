@@ -1,0 +1,858 @@
+{
+  "total_count": 16,
+  "items": [{
+    "uid": "1@1",
+    "number": 1,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:17.810Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex001",
+      "practice-concepts",
+      "inbook-yes",
+      "dok1",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 79,
+      "stimulus_html": "",
+      "stem_html": "What is kinematics?",
+      "answers": [{
+        "id": 286,
+        "content_html": "Kinematics is the study of atomic structure",
+        "correctness": "0.0",
+        "feedback_html": "Are you sure that the study of atomic structures is a part of kinematics?"
+      }, {
+        "id": 285,
+        "content_html": "Kinematics is the study of dimensions",
+        "correctness": "0.0",
+        "feedback_html": "Is it correct to say that dimensional analysis is done in kinematics?"
+      }, {
+        "id": 284,
+        "content_html": "Kinematics is the study of cause of motion",
+        "correctness": "0.0",
+        "feedback_html": "Do you think cause of motion is studied under kinematics? What about the study of force and its effect on a body. Is that kinematics?"
+      }, {
+        "id": 283,
+        "content_html": "Kinematics is the study of motion",
+        "correctness": "1.0",
+        "feedback_html": "Correct! Motion of a body is studied under kinematics"
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "2@1",
+    "number": 2,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:17.840Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex002",
+      "practice-concepts",
+      "inbook-yes",
+      "dok2",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 80,
+      "stimulus_html": "",
+      "stem_html": "Do two bodies have to be in contact to exert force on one another? Explain with examples.",
+      "answers": [{
+        "id": 290,
+        "content_html": "Yes, gravitational force is a contact force and requires physical contact to exert force.",
+        "correctness": "0.0",
+        "feedback_html": "Are you sure that gravitational force is a contact force? Can you differentiate between field and contact forces?"
+      }, {
+        "id": 289,
+        "content_html": "Yes, gravitational force is a field force and requires physical contact to exert force.",
+        "correctness": "0.0",
+        "feedback_html": "It is correct that the gravitational force is a field force but do you think field forces require physical contact to exert force?"
+      }, {
+        "id": 288,
+        "content_html": "No, gravitational force is a contact force and does not require physical contact to exert force.",
+        "correctness": "0.0",
+        "feedback_html": "Do you think gravitational force is a contact force? Also, can the contact force act without physical contact?"
+      }, {
+        "id": 287,
+        "content_html": "No, gravitational force is a field force and does not requires physical contact to exert force.",
+        "correctness": "1.0",
+        "feedback_html": "Correct! Gravitational force can exist between two objects as it is a field force and does not require physical contact."
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "3@1",
+    "number": 3,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:17.856Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex003",
+      "practice-concepts",
+      "inbook-yes",
+      "dok1",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 81,
+      "stimulus_html": "",
+      "stem_html": "What kind of a physical quantity is force?",
+      "answers": [{
+        "id": 294,
+        "content_html": "Force is neither scalar nor vector",
+        "correctness": "0.0",
+        "feedback_html": "Are you sure that there is any physical quantity which can neither be scalar nor vector?"
+      }, {
+        "id": 293,
+        "content_html": "Force is both vector and scalar",
+        "correctness": "0.0",
+        "feedback_html": "Can a physical quantity be vector as well as scalar? Can you differentiate between the two quantities?"
+      }, {
+        "id": 292,
+        "content_html": "Force is a vector quantity",
+        "correctness": "1.0",
+        "feedback_html": "Correct! Force is a vector quantity as it has magnitude as well as direction."
+      }, {
+        "id": 291,
+        "content_html": "Force is a scalar quantity",
+        "correctness": "0.0",
+        "feedback_html": "Do you think force is quantity which has magnitude only?"
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "4@1",
+    "number": 4,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:17.871Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex004",
+      "practice-concepts",
+      "tutor-only",
+      "dok1",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 82,
+      "stimulus_html": "",
+      "stem_html": "What physical quantity causes motion?",
+      "answers": [{
+        "id": 298,
+        "content_html": "Force",
+        "correctness": "1.0",
+        "feedback_html": "Correct! Force is a physical quantity which brings change in motion."
+      }, {
+        "id": 297,
+        "content_html": "Momentum",
+        "correctness": "0.0",
+        "feedback_html": "Momentum is a quantity which is a product of mass and velocity. Do you think any of the quantities defining momentum represents a cause?"
+      }, {
+        "id": 296,
+        "content_html": "Acceleration",
+        "correctness": "0.0",
+        "feedback_html": "It is correct that acceleration brings change in motion but is it a cause?"
+      }, {
+        "id": 295,
+        "content_html": "Velocity",
+        "correctness": "0.0",
+        "feedback_html": "Are you sure that velocity causes the motion? Is it a cause or an effect?"
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "5@1",
+    "number": 5,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:17.886Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex005",
+      "practice-concepts",
+      "tutor-only",
+      "dok1",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 83,
+      "stimulus_html": "",
+      "stem_html": "The total combined force acting on an object is called net external force.",
+      "answers": [{
+        "id": 300,
+        "content_html": "0",
+        "correctness": "0.0",
+        "feedback_html": "Do you think the net external force acting on an object is other than the total combined force acting on the object? Can you recall the definition of net external force?"
+      }, {
+        "id": 299,
+        "content_html": "1",
+        "correctness": "1.0",
+        "feedback_html": "Correct! Net external force is the total combined force acting on an object. This does not include internal forces acting inside the object."
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "6@1",
+    "number": 6,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:17.901Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex006",
+      "practice-concepts",
+      "tutor-only",
+      "dok2",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 84,
+      "stimulus_html": "",
+      "stem_html": "What does it mean when force is said to be a vector quantity?",
+      "answers": [{
+        "id": 304,
+        "content_html": "Force has neither magnitude nor direction",
+        "correctness": "0.0",
+        "feedback_html": "Is it correct to say that a physical quantity can neither have magnitude nor direction?"
+      }, {
+        "id": 303,
+        "content_html": "Force has magnitude as well as direction",
+        "correctness": "1.0",
+        "feedback_html": "Correct! Force is a physical quantity which has magnitude as well as direction, that is, a vector quantity"
+      }, {
+        "id": 302,
+        "content_html": "Force has direction only",
+        "correctness": "0.0",
+        "feedback_html": "Are you sure that force has direction only? Try and recall definition of vector quantities."
+      }, {
+        "id": 301,
+        "content_html": "Force has magnitude only",
+        "correctness": "0.0",
+        "feedback_html": "Do you think vector quantities have magnitude only? Can you recall definition of vector and scalar quantities?"
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "7@1",
+    "number": 7,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:17.917Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex007",
+      "practice-concepts",
+      "tutor-only",
+      "dok2",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 85,
+      "stimulus_html": "",
+      "stem_html": "A cannon shooting a cannonball is an example of weak force while a feather falling on floor is an example of strong force.",
+      "answers": [{
+        "id": 306,
+        "content_html": "0",
+        "correctness": "1.0",
+        "feedback_html": "Correct! A cannon applies a strong force (impulsive force) to shoot a cannonball and a feather falling on the floor applies a weak force on the floor."
+      }, {
+        "id": 305,
+        "content_html": "1",
+        "correctness": "0.0",
+        "feedback_html": "Do you think a cannon applies a weak force to shoot a cannonball? Will you get a long trajectory if a cannon shoots a cannonball? Also, what about a falling feather?"
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "8@1",
+    "number": 8,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:17.932Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex008",
+      "chapter-review-problem",
+      "inbook-yes",
+      "dok2",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 86,
+      "stimulus_html": "",
+      "stem_html": "Dynamics is branch of mechanics which describes the motion of bodies without consideration of the cause of motion.",
+      "answers": [{
+        "id": 308,
+        "content_html": "0",
+        "correctness": "1.0",
+        "feedback_html": "Correct! Dynamics is the branch of mechanics concerned with motion of bodies under the action of force. Forces are the primary cause for bringing change in motion or they have tendency to bring about change in motion of an object."
+      }, {
+        "id": 307,
+        "content_html": "1",
+        "correctness": "0.0",
+        "feedback_html": "Do you think in dynamics you will only consider motion of bodies and not the cause? Can you differentiate between kinematics and dynamics?"
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "9@1",
+    "number": 9,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:17.947Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex009",
+      "chapter-review-problem",
+      "tutor-only",
+      "dok2",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 87,
+      "stimulus_html": "",
+      "stem_html": "Newton’s laws describes motion and how forces affect motion of a system",
+      "answers": [{
+        "id": 310,
+        "content_html": "0",
+        "correctness": "0.0",
+        "feedback_html": "Do you think Newton’s laws do not describe motion of a body and forces affecting its motion? Can you recall all the Newton’s laws of motion?"
+      }, {
+        "id": 309,
+        "content_html": "1",
+        "correctness": "1.0",
+        "feedback_html": "Correct! Newton’s laws describe motion of a system or an object and how forces acting on them affect their motion."
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "10@1",
+    "number": 10,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:17.963Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex010",
+      "chapter-review-problem",
+      "tutor-only",
+      "dok2",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 88,
+      "stimulus_html": "",
+      "stem_html": "Where can Newton’s Laws be applied to?",
+      "answers": [{
+        "id": 314,
+        "content_html": "Newton’s laws are not universal and can be applied to all the objects in the universe",
+        "correctness": "0.0",
+        "feedback_html": "It is correct that Newton’s laws are applicable to all the objects in the universe but do you think being applicableeverywhere in the universe it is not “universal”?"
+      }, {
+        "id": 313,
+        "content_html": "Newton’s laws are not universal and are not applicable to all the objects in the universe",
+        "correctness": "0.0",
+        "feedback_html": "Are you sure that Newton’s laws are not universal and applicable only to some portions of the universe?"
+      }, {
+        "id": 312,
+        "content_html": "Newton’s laws are universal and can be applied to all the objects in the universe",
+        "correctness": "1.0",
+        "feedback_html": "Correct! Newton’s laws are universal and can be applied to all the objects in the universe"
+      }, {
+        "id": 311,
+        "content_html": "Newton’s laws are universal and are not applicable to all the objects in the universe",
+        "correctness": "0.0",
+        "feedback_html": "It is correct that Newton’s laws are universal but do you think universal laws are not applicable to all the objects in the universe? Can you recall definition of universal laws?"
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "11@1",
+    "number": 11,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:17.978Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex011",
+      "chapter-review-concept",
+      "inbook-yes",
+      "dok3",
+      "time-medium",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 89,
+      "stimulus_html": "",
+      "stem_html": "Force A is acting to the left on an object. Force B is acting to the right on the same object. If these are the only two forces acting on the body and if Force B is greater than Force A, in which direction will the object move?",
+      "answers": [{
+        "id": 318,
+        "content_html": "Stands still",
+        "correctness": "0.0",
+        "feedback_html": "Is it correct to say that when two unequal forces are acting on an object the object will not demonstrate motion?"
+      }, {
+        "id": 317,
+        "content_html": "Moves up",
+        "correctness": "0.0",
+        "feedback_html": "Are you sure that the net force is in the upward direction? Also, have you considered line of action of the two given forces?"
+      }, {
+        "id": 316,
+        "content_html": "Move to the left",
+        "correctness": "0.0",
+        "feedback_html": "Do you think the net force is in the left direction?"
+      }, {
+        "id": 315,
+        "content_html": "Move to the right",
+        "correctness": "1.0",
+        "feedback_html": "Correct! The object will move to the right as the force B is greater than force A. The net force is in the right direction."
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "12@1",
+    "number": 12,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:17.994Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex012",
+      "chapter-review-concept",
+      "tutor-only",
+      "dok3",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 90,
+      "stimulus_html": "",
+      "stem_html": "An object is at rest, and two forces X and Y are acting on it. Force X has magnitude x and acts downward. What could be the magnitude and direction of Y?",
+      "answers": [{
+        "id": 322,
+        "content_html": "In downward direction with magnitude 2x",
+        "correctness": "0.0",
+        "feedback_html": "Have you considered the fact that the object is at rest under the action of two opposite forces?"
+      }, {
+        "id": 321,
+        "content_html": "In downward direction with magnitude x",
+        "correctness": "0.0",
+        "feedback_html": "Are you sure that force Y will act in the downward direction? Can you think what will happen to the net force on the object when both force vectors act in the same direction?"
+      }, {
+        "id": 320,
+        "content_html": "In upward direction with magnitude 2x",
+        "correctness": "0.0",
+        "feedback_html": "Do you think the object is moving in the upward direction? Can you think of the net force acting?"
+      }, {
+        "id": 319,
+        "content_html": "In upward direction with magnitude x",
+        "correctness": "1.0",
+        "feedback_html": "Correct! It is given that object is at rest under the action of two opposite forces; therefore, the two forces must balance each other out. Thus force Y must act in the upward direction with a magnitude x"
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "13@1",
+    "number": 13,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:18.009Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex013",
+      "chapter-review-concept",
+      "tutor-only",
+      "dok4",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 91,
+      "stimulus_html": "",
+      "stem_html": "Forces A, B, and C with magnitudes a, b, and c, respectively, act on the same object. Force A acts to the right, force B acts to the left, and force C acts perpendicularly downward. What is a necessary condition for the body to move perpendicularly downward?",
+      "answers": [{
+        "id": 326,
+        "content_html": "Force A must be equal to force C",
+        "correctness": "0.0",
+        "feedback_html": "Have you considered force C in your calculation?"
+      }, {
+        "id": 325,
+        "content_html": "Force A must be greater than force C",
+        "correctness": "0.0",
+        "feedback_html": "Are you sure that this is the sufficient condition? What about force B?"
+      }, {
+        "id": 324,
+        "content_html": "Force A must be equal to force B",
+        "correctness": "1.0",
+        "feedback_html": "Correct! When forces A and B are equal, the net force acting on the object is in the downward direction and is perpendicular to the line of action of forces A and B."
+      }, {
+        "id": 323,
+        "content_html": "Force A must be greater than force B",
+        "correctness": "0.0",
+        "feedback_html": "Do you think if force A is greater than force B, the object will move downwards, perpendicularly? Can you find the direction of the net force acting on the object?"
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "14@1",
+    "number": 14,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:18.025Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex014",
+      "test-prep-multiple-choice",
+      "inbook-yes",
+      "dok1",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 92,
+      "stimulus_html": "",
+      "stem_html": "Which of these is a physical quantity that is described by dynamics but not by kinematics?",
+      "answers": [{
+        "id": 329,
+        "content_html": "force",
+        "correctness": "1.0"
+      }, {
+        "id": 328,
+        "content_html": "acceleration",
+        "correctness": "0.0"
+      }, {
+        "id": 327,
+        "content_html": "velocity",
+        "correctness": "0.0"
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "15@1",
+    "number": 15,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:18.041Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex015",
+      "test-prep-short-answer",
+      "inbook-yes",
+      "dok2",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 93,
+      "stimulus_html": "",
+      "stem_html": "External force is defined as a force that acts on the object of interest rather than being acted on by the object",
+      "answers": [{
+        "id": 331,
+        "content_html": "0",
+        "correctness": "0.0",
+        "feedback_html": "Do you think external forces include those forces also which are originating from inside the system? Can you differentiate between external and internal forces?"
+      }, {
+        "id": 330,
+        "content_html": "1",
+        "correctness": "1.0",
+        "feedback_html": "Correct! External force is a force that acts on the object of interest rather than being acted on by the object. The external forces do not include forces originatingf rom inside the system."
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }, {
+    "uid": "16@1",
+    "number": 16,
+    "version": 1,
+    "published_at": "2015-03-10T19:49:18.057Z",
+    "editors": [],
+    "authors": [{
+      "user_id": 1
+    }],
+    "copyright_holders": [{
+      "user_id": 2
+    }],
+    "derived_from": [],
+    "attachments": [],
+    "tags": [
+      "k12phys-ch04-s01-lo01",
+      "k12phys-ch04-ex016",
+      "test-prep-short-answer",
+      "inbook-yes",
+      "dok2",
+      "time-short",
+      "display-free-response",
+      "display-rec-sensitive"
+    ],
+    "stimulus_html": "",
+    "questions": [{
+      "id": 94,
+      "stimulus_html": "",
+      "stem_html": "By convention, which sign is assigned to an object moving downward?",
+      "answers": [{
+        "id": 335,
+        "content_html": "No sign is assigned",
+        "correctness": "0.0",
+        "feedback_html": "Can a vector quantity have no sign for its direction?"
+      }, {
+        "id": 334,
+        "content_html": "Can be either positive or negative",
+        "correctness": "0.0",
+        "feedback_html": "Do you think it is true as per the convention?"
+      }, {
+        "id": 333,
+        "content_html": "Negative sign",
+        "correctness": "1.0",
+        "feedback_html": "Correct! Negative sign is assigned to an object moving downward."
+      }, {
+        "id": 332,
+        "content_html": "Positive sign",
+        "correctness": "0.0",
+        "feedback_html": "Are you sure that positive sign is assigned to an object moving downward? Try and think if this is true as per the convention."
+      }],
+      "hints": [],
+      "formats": [
+        "multiple-choice",
+        "free-response"
+      ],
+      "combo_choices": []
+    }]
+  }]
+}

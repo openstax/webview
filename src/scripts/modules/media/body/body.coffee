@@ -1,11 +1,23 @@
 define (require) ->
   $ = require('jquery')
+  embeddablesConfig = require('cs!configs/embeddables')
   Mathjax = require('mathjax')
   router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   template = require('hbs!./body-template')
   require('less!./body')
+
+  embeddableTemplates =
+    'exercise': require('hbs!./embeddables/exercise-template')
+    'iframe': require('hbs!./embeddables/iframe-template')
+
+  fakeExerciseTemplates = [
+    require('hbs!./embeddables/fake-exercises/ex001')
+    require('hbs!./embeddables/fake-exercises/ex002')
+    require('hbs!./embeddables/fake-exercises/ex003')
+    require('hbs!./embeddables/fake-exercises/ex004')
+  ]
 
   return class MediaBodyView extends EditableView
     key = []
@@ -58,14 +70,6 @@ define (require) ->
 
       try
         if @model.get('loaded') and @model.asPage()?.get('loaded') and @model.asPage()?.get('active')
-          # Converts a TERP link to an OST-hosted iframe
-          $temp.find('a[href*="#terp-"]').each () ->
-            terpCode = $(this).attr('href').match(/#terp\-(.*)/)[1]
-            $(this).replaceWith("<iframe class='terp'
-                                         id='terp-#{terpCode}'
-                                         src='https://openstaxtutor.org/terp/#{terpCode}/quiz_start'
-                                         height='600px' width='800px' frameborder='0' seamless='seamless'>
-                                 </iframe>")
 
           # Remove the module title and abstract TODO: check if it is still necessary
           $temp.children('[data-type="title"]').remove()
@@ -145,13 +149,200 @@ define (require) ->
             $el = $(el)
             $el.css('counter-reset', 'list-item ' + $el.attr('start'))
 
+          # # uncomment to embed fake exercises and see embeddable exercises in action
+          # @fakeExercises($temp)
+
+          @initializeEmbeddableQueues()
+          @findEmbeddables($temp.find('#content'))
+
           # Show Teacher's Edition content if appropriate
           @updateTeacher($temp)
+
       catch error
         # FIX: Log the error
         console.log error
 
       @$el?.html($temp.html())
+
+
+
+    ###
+    # For handling embeddables (exercises from Tutor, concept coaches, simulations, etc).
+    # Could abstract a little more and pull out to another file if needed.
+    ###
+
+    # A queue for rendering embeddables means
+    # we can share rendering functions regardless
+    # of whether the embeddable is sync or async
+    initializeEmbeddableQueues: () ->
+      @renderEmbeddableQueue = []
+
+      _.extend(@renderEmbeddableQueue, Backbone.Events)
+
+      @renderEmbeddableQueue?.on('add', @renderEmbeddable)
+      # Uncomment to add action for messages
+      #
+      # There's only one right now for when all the asyncs are done
+      # @renderEmbeddableQueue?.on('message', (message)->)
+      #
+      # # Not needed at the moment.
+      # # Post render again when all promises have returned
+      # @renderEmbeddableQueue?.on('done', @onRender.bind(@))
+
+    renderEmbeddable: (embeddableItem) =>
+      # finds fresh element in @$el if a selector is provided
+      # instead of the element itself.
+
+      embeddableItem.$el = @$el.find(embeddableItem.selector) if embeddableItem.selector
+
+      $parent = embeddableItem.$el.parent()
+      embeddableItem.$el.replaceWith(embeddableItem.html)
+
+      embeddableItem.onRender?($parent)
+
+
+    # handles all embeddables -- finds and processes them
+    # to be handled by render queue
+    #
+    # both for where embedded html is an iframe sourced to the api link ("sync", loosely used)
+    # or rendered html after an async api call ("async", loosely used)
+    findEmbeddables: ($parent) ->
+
+      # container for promises from async embeddables
+      # holds all promises and when all promises come back,
+      # render queue is sent a message
+      embeddablePromises = []
+
+      # caches all elements that need to be checked for whether it's an embeddable
+      $elementsToFilter =
+        a: $parent.find('a'),
+        iframe: $parent.find('iframe')
+
+      # Add embeddable types as needed in embeddablesConfig
+      embeddableTypes = embeddablesConfig.embeddableTypes
+
+      # process each embeddable type
+      _.each embeddableTypes, (embeddable) ->
+
+        embeddable.matchAttr = if embeddable.matchType is 'a' then 'href' else 'src'
+        matchAttrString = '[' + embeddable.matchAttr + '*="' + embeddable.match + '"]'
+
+        # filter for embeddables matching the type!
+        $matchedEmbeddables = $elementsToFilter[embeddable.matchType].filter(matchAttrString)
+
+        promises = @addEmbeddablesToRenderQueue(embeddable, $matchedEmbeddables)
+
+        # store promises for all async added to queue message
+        embeddablePromises.push(promises)
+        # Exclude embeddables from cache that are already being processed
+        # The next embeddable type loop through will then completely exclude those elements
+        $elementsToFilter[embeddable.matchType] = $elementsToFilter[embeddable.matchType].not($matchedEmbeddables)
+
+      , @
+
+      embeddablePromises = _.flatten(embeddablePromises)
+      # tell the queue when async embeddables have been all been added!
+      $.when.apply(@, embeddablePromises).then(() =>
+        @renderEmbeddableQueue.trigger('message', 'async embeddables added to queue')
+        @renderEmbeddableQueue.trigger('done')
+      )
+
+    # where the magic happens
+    addEmbeddablesToRenderQueue: (embeddable, $embeddables) =>
+
+      # map to track result from adding each embeddable to the queue
+      promises = _.map $embeddables, (embeddableElement) ->
+
+        $embeddableElement = $(embeddableElement)
+        embeddableItem = @getEmbeddableItem(embeddable, $embeddableElement)
+
+        # if the embeddable is async, it needs to do an external call
+        # to get information to feed to the template for the embeddableType
+        if embeddableItem.async
+          embeddableItem.template = embeddableTemplates[embeddableItem.embeddableType]
+          # returns promise for AJAX call and adds to render queue
+          # with data from AJAX call
+          return @setHTMLFromAPI(embeddableItem).then(@_addToRenderQueue)
+
+        # default to iframe template for sync embeddables
+        embeddableItem.template = embeddableTemplates['iframe']
+
+        @_addToRenderQueue(embeddableItem)
+        # return null if sync!
+        return
+
+      , @
+
+      # exclude empty sync values from promises being returned out
+      _.compact(promises)
+
+
+    getEmbeddableItem: (embeddable, $embeddableElement) ->
+      # clone embeddable for each embeddableItem to avoid bugs from referenced embeddable object embeddableTypes
+      embeddableItem = _.clone(embeddable)
+
+      linkPrefixedByMatchRegex = new RegExp(embeddableItem.match + '(.*)')
+      embeddableItem.itemCode = $embeddableElement.attr(embeddableItem.matchAttr).match(linkPrefixedByMatchRegex)[1]
+      embeddableItem.itemAPIUrl = embeddableItem.apiUrl()
+      embeddableItem.$el = $embeddableElement
+
+      embeddableItem
+
+
+    # builds and gets information needed for the render queue
+    # returns promise with necessary embeddableItem data for template rendering
+    # and embedding -- ready for adding to queue
+    setHTMLFromAPI: (embeddableItem) ->
+
+      embeddableItem.selector = @_getEmbeddableSelector(embeddableItem.$el)
+      delete embeddableItem.$el
+
+      _addAPIDataToData = (data) ->
+        embeddableItem.filterDataCallback?(data)
+
+        embeddableItem.data = data
+        embeddableItem
+
+      request = $.get(embeddableItem.itemAPIUrl)
+      request.then(_addAPIDataToData)
+
+
+    # Gets a selector for render to find on @$el
+    # Cannot use old $element from $temp because by the time the async HTML
+    # gets rendered, $temp is irrelevant and it's html has been added to @$el
+    _getEmbeddableSelector: ($element) ->
+      # TODO: possible optimization
+      # in the future, it would be nice to un-queue/elements that have matching selectors,
+      # to prevent duplicate API calls
+      matchAttr = if $element.attr('href') then 'href' else 'src'
+
+      classString = if $element[0].className then '.' + $element[0].className else ''
+      elementNameString  = $element[0].tagName.toLowerCase()
+      matchAttrString = '[' + matchAttr + '="' + $element.attr(matchAttr) + '"]'
+
+      elementNameString + classString + matchAttrString
+
+
+    # Renders html through template and then adds embeddableItem to the queue for rendering
+    _addToRenderQueue: (embeddableItem) =>
+
+      embeddableItem.html = embeddableItem.template(embeddableItem)
+
+      @renderEmbeddableQueue.push(embeddableItem)
+      @renderEmbeddableQueue.trigger('add', embeddableItem)
+
+    ###
+    # End embeddables logic
+    ###
+
+    fakeExercises: ($parent) ->
+      sections = $parent.find('section[data-depth="1"]')
+
+      appendFakeExercise = (section, iter) ->
+        $(section).append(fakeExerciseTemplates[iter % fakeExerciseTemplates.length])
+
+      _.each(sections, appendFakeExercise)
+
 
     onRender: () ->
       @parent?.regions.self.append(new ProcessingInstructionsModal({model: @model}))
