@@ -56,6 +56,7 @@ define ['jquery'], ($) ->
         'oer/figure'
         'oer/overlay'
         'oer/math'
+        'oer/simulation'
         'oer/assorted'
         #'ghbook/image'
         # 'common/image' # Need to monkeypatch jQuery.live
