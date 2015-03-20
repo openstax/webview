@@ -138,6 +138,8 @@ define (require) ->
 
             # Update the model if an event for this editable was triggered
             Aloha.bind 'aloha-smart-content-changed.updatemodel', (evt, d) =>
+              # Ensures that all unwrapped text is wrapped in p tags
+              $('.media-body').contents().filter(-> @nodeType is 3).wrap '<p></p>'
               # HACK - d is undefined because processing instructions
               # needs to trigger aloha-smart-content-change event
               if d is undefined or d.triggerType isnt 'blur'
