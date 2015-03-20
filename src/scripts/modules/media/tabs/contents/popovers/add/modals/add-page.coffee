@@ -12,6 +12,7 @@ define (require) ->
 
   return class AddPageModal extends BaseView
     template: template
+
     _checkedCounter: 0
 
     regions:
@@ -22,14 +23,21 @@ define (require) ->
       'click .search-pages': 'onSearch'
       'submit form': 'onSubmit'
       'change form': 'onChange'
+      'keyup .page-title': 'onKeyUpSearch'
       'focus .page-title': 'onFocusSearch'
       'blur .page-title': 'onUnfocusSearch'
       'keypress .page-title': 'onEnter'
+
+    initialize: () ->
+      super()
+      @renderValidations = @initializeValidations()
 
     onRender: () ->
       @$el.off('shown.bs.modal') # Prevent duplicating event listeners
       @$el.on 'shown.bs.modal', () => @$el.find('.page-title').focus()
       @$el.on 'hide.bs.modal', () => @cancelSearch()
+
+      @renderValidations()
 
     # Update the Search/Submit buttons to make the button that will
     # respond to 'Enter' to be styled as primary
@@ -40,6 +48,13 @@ define (require) ->
     onUnfocusSearch: (e) ->
       @$el.find('.search-pages').addClass('btn-plain').removeClass('btn-primary')
       @$el.find('.btn-submit').addClass('btn-primary').removeClass('btn-plain')
+
+    onKeyUpSearch: (e) ->
+      if @validations.searchTitle.hasError
+        @validations.searchTitle.validate()
+
+      if @validations.addPage.hasError
+        @validations.addPage.validate()
 
     # Intelligently determine if the user intended to search or add pages
     # when hitting the 'enter' key
@@ -74,14 +89,22 @@ define (require) ->
       else
         @$el.find('.btn-submit').text('Add Selected Pages')
 
+      if @validations.addPage.hasError
+        @validations.addPage.validate()
+
+      if @validations.searchTitle.hasError
+        @validations.searchTitle.hide()
+
     onSearch: (e) ->
-      title = encodeURIComponent(@$el.find('.page-title').val())
+      title = @$el.find('.page-title').val()
       @search(title)
 
     search: (title) ->
-      @_checkedCounter = 0
-      @results = searchResults.config().load({query: "?q=title:%22#{title}%22%20type:page"})
-      @regions.results.show(new AddPageSearchResultsView({model: @results}))
+      if @validations.searchTitle.validate(title)
+        title = encodeURIComponent(title)
+        @_checkedCounter = 0
+        @results = searchResults.config().load({query: "?q=title:%22#{title}%22%20type:page"})
+        @regions.results.show(new AddPageSearchResultsView({model: @results}))
 
     cancelSearch: () ->
       if @results?.get('promise')
@@ -92,6 +115,75 @@ define (require) ->
     clearSearch: () ->
       @regions.results.empty()
       @$el.find('.page-title').val('')
+
+      @validations.addPage.hide()
+      @validations.searchTitle.hide()
+
+    initializeValidations: () ->
+      @validations =
+        addPage:
+          hasError: false
+          check: @_canAddPage
+          message: () =>
+            message = 'Please '
+            message += 'choose an existing page from the results to add or ' if @results?.get('results')?.items?.length
+            message +='enter a title to add a new page.'
+            message
+        searchTitle:
+          hasError: false
+          check: @_isSearchTitleValid
+          message: () =>
+            'Please enter a title to search for existing pages to add to this book.'
+
+      # common validation methods
+      hide = () ->
+        @hasError = false
+        @$formGroupEl.removeClass('has-error')
+        @$buttonEl.attr('disabled', false)
+        @$alertEl.addClass('hidden')
+
+      show = () ->
+        @hasError = true
+        @$formGroupEl.addClass('has-error')
+        @$buttonEl.attr('disabled', true)
+        @$alertEl.removeClass('hidden').children('.message').text(@message())
+
+      validate = (title...) ->
+        if @check.apply(arguments)
+          if @hasError
+            @hide()
+        else if not @hasError
+          @show()
+
+        not @hasError
+
+      @validations.searchTitle.hide = hide
+      @validations.addPage.hide = hide
+
+      @validations.searchTitle.show = show
+      @validations.addPage.show = show
+
+      @validations.searchTitle.validate = validate
+      @validations.addPage.validate = validate
+
+      # Returns function for rendering validations.
+      # Finds elements that will be manipulated during validations
+      () ->
+        @validations.searchTitle.$formGroupEl = @$el.find('.page-title').parents('.form-group')
+        @validations.addPage.$formGroupEl = @validations.searchTitle.$formGroupEl
+
+        @validations.searchTitle.$alertEl = @$el.find('.alert')
+        @validations.addPage.$alertEl = @validations.searchTitle.$alertEl
+
+        @validations.searchTitle.$buttonEl = @validations.searchTitle.$formGroupEl.find('.search-pages')
+        @validations.addPage.$buttonEl = @$el.find('.modal-footer').find('.btn-submit')
+
+    _isSearchTitleValid: (title) =>
+      title = if title then title else @$el.find('.page-title').val()
+      title.trim().length > 0
+
+    _canAddPage: () =>
+      (@_checkedCounter > 0) or @validations.searchTitle.check()
 
     updateUrl: () ->
       # Update the url bar path
@@ -104,6 +196,12 @@ define (require) ->
       e.preventDefault()
 
       data = $(e.originalEvent.target).serializeArray()
+
+      if @validations.searchTitle.hasError
+        @validations.searchTitle.hide()
+
+      if not @validations.addPage.validate()
+        return
 
       @$el.modal('hide')
 

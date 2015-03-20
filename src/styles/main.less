@@ -117,6 +117,16 @@ h5 {
   border: 1px solid @gray-dark;
 }
 
+.btn-warning, .btn-primary.btn-warning, .btn-plain.btn-warning {
+  .button-variant(@gray-dark; white);
+  border: 1px solid @brand-warning;
+}
+
+.btn-danger, .btn-primary.btn-danger, .btn-plain.btn-danger {
+  .button-variant(@gray-dark; white);
+  border: 1px solid @brand-danger;
+}
+
 .btn-primary {
   .button-variant(white; @brand-primary);
   border: 1px solid transparent;
