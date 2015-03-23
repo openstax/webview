@@ -34,6 +34,8 @@ define (require) ->
       .fail (error) ->
         alert("#{error.status}: #{error.statusText}")
 
+      $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
+
 
     show: () ->
       @render()
