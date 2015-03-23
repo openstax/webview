@@ -6,3 +6,7 @@ test/index.html
 
 nginx.error.log
 nginx.pid
+
+test/selenium/python/.idea/
+test/selenium/python/properties.ini
+
