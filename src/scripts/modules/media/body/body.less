@@ -15,10 +15,9 @@
 }
 
 // Mark unimplemented custom labels
-*[data-label]:not([data-label=""])::before {
+*[data-label]:not([data-label=""]):not(.ui-has-child-title)::before {
   content: attr(data-label) ': ';
 }
-
 
 .media-body {
   display: block;
