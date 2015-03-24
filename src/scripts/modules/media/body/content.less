@@ -318,15 +318,16 @@ figure[data-orient="vertical"] {
 
     > [data-type="item"]::before,
     > li::before {
-      content: attr(data-mark-prefix) counter(list-item, decimal) attr(data-mark-suffix);
-      margin-right: 0.5em;
+      content: attr(data-mark-prefix) counter(list-item, decimal) attr(data-mark-suffix) '. ';
+      margin-right: 0.2em;
+      margin-left: -1.2em;
     }
 
     // "Emulate" the numbering for inline numbered lists
     .emulate-enumerated(@attr-name; @counter-type) {
       &[data-number-style="@{attr-name}"] > [data-type="item"]::before,
       &[data-number-style="@{attr-name}"] > li::before {
-        content: attr(data-mark-prefix) counter(list-item, @counter-type) attr(data-mark-suffix);
+        content: attr(data-mark-prefix) counter(list-item, @counter-type) attr(data-mark-suffix) '. ';
       }
 
       &[data-number-style="@{attr-name}"] > [data-type="item"]:not([data-mark-prefix]):not([data-mark-suffix])::before,
