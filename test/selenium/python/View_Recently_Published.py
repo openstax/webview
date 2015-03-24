@@ -1,7 +1,7 @@
 import unittest
 from selenium import webdriver
 
-class CreateBook(unittest.TestCase):
+class ViewRecentlyPublished(unittest.TestCase):
     '''
     This test logs in a user and creates a Book in the user's workspace
     '''
@@ -18,7 +18,7 @@ class CreateBook(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
-    def test_book_creation(self):
+    def test_recently_published(self):
         self.driver.get(self.url)
         self.driver.implicitly_wait(300)
         #login
@@ -29,18 +29,15 @@ class CreateBook(unittest.TestCase):
         signin = self.driver.find_element_by_css_selector('button.standard')
         signin.click()
         self.driver.implicitly_wait(300)
-        #add page
-        addbutton = self.driver.find_element_by_xpath("(//button[@type='button'])[3]")
-        addbutton.click()
-        listItem = self.driver.find_element_by_css_selector('li.menuitem.new-book')
-        listItem.click()
-        #add title to modal
-        modal = self.driver.find_element_by_id('new-media-modal')
-        titlefield = modal.find_element_by_name('title')
-        titlefield.send_keys('Selenium Test Book')
-        createbutton = self.driver.find_element_by_xpath("//button[@type='submit']")
-        createbutton.click()
+        #click on Recently published button
+        recentbutton = self.driver.find_element_by_link_text('Recently published')
+        recentbutton.click()
+        #find link to click
+        link = self.driver.find_element_by_link_text('Image Test')
+        link.click()
+        #verify text
+        heading = self.driver.find_element_by_css_selector('div.media-header > div.title > h2')
+        self.assertEquals(heading.text,'Image Test')
 
 if __name__ == "__main__":
     unittest.main()
-

@@ -1,10 +1,16 @@
 import unittest
 from selenium import webdriver
 
-class DeleteBook(unittest.TestCase):
+class DeletePage(unittest.TestCase):
     '''
-    This test creates a book, clicks the back button, deletes the book and verifies the deletion
+    This test will create a Page and delete it.
+    It makes one assumption in order for the test to work:
+      * Assumes the new Page is the first item in the Workspace Page list
     '''
+
+    authkey = ""
+    pw = ""
+    url = ""
 
 
     def setUp(self):
@@ -18,7 +24,7 @@ class DeleteBook(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
-    def test_book_deletion(self):
+    def test_page_deletion(self):
         self.driver.get(self.url)
         self.driver.implicitly_wait(300)
         #login
@@ -40,11 +46,18 @@ class DeleteBook(unittest.TestCase):
         titlefield.send_keys('Selenium Test Book')
         createbutton = self.driver.find_element_by_xpath("//button[@type='submit']")
         createbutton.click()
+        self.driver.set_page_load_timeout(10)
         #click back button
-
-        #delete Book
-
-        #verify deletion
+        self.driver.find_element_by_css_selector('span.tab-title')
+        #Webdriver does something funny with the history, so have to call back() multiple times
+        self.driver.back()
+        self.driver.back()
+        self.driver.back()
+        #delete page
+        delete = self.driver.find_element_by_xpath('//table[1]/tbody/tr[1]/td[5]')
+        delete.click()
+        okbutton = self.driver.find_element_by_xpath("(//button[@type='button'])[6]")
+        okbutton.click()
 
 if __name__ == "__main__":
     unittest.main()

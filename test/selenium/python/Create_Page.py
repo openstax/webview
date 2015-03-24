@@ -2,6 +2,9 @@ import unittest
 from selenium import webdriver
 
 class CreatePage(unittest.TestCase):
+    '''
+    This test logs in a user and creates a Page in the user's workspace
+    '''
 
     authkey = ""
     pw = ""
