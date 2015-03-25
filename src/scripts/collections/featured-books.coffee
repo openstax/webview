@@ -4,7 +4,7 @@ define (require) ->
   settings = require('settings')
   FeaturedBook = require('cs!models/featured-book')
 
-  archive = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
+  archive = "#{location.protocol}//#{settings.cnxarchive.host}"+[":#{settings.cnxarchive.port}" if settings.cnxarchive.port]
 
   return new class FeaturedBooks extends Backbone.Collection
     url: "#{archive}/extras"

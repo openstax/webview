@@ -144,7 +144,7 @@ define (require) ->
         multiple: true
         formatSelectionCssClass: (user, container) -> user.state or 'pending'
         ajax:
-          url: "//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}/users/search"
+          url: "//#{settings.cnxauthoring.host}"+[":#{settings.cnxauthoring.port}"if settings.cnxauthoring.port]+"/users/search"
           dataType: 'json'
           params:
             xhrFields:

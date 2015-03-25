@@ -2,7 +2,7 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
 
-  SEARCH_URI = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}/search"
+  SEARCH_URI = "#{location.protocol}//#{settings.cnxarchive.host}"+[":#{settings.cnxarchive.port}" if settings.cnxarchive.port]+"/search"
 
   FILTER_NAMES = {
     "author": "Author"

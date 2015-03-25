@@ -10,7 +10,7 @@ define (require) ->
   require('bootstrapTransition')
   require('bootstrapModal')
 
-  PUBLISHING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}/publish"
+  PUBLISHING = "#{location.protocol}//#{settings.cnxauthoring.host}"+[":#{settings.cnxauthoring.port} if settings.cnxauthoring.port]+"/publish"
 
   return class PublishModal extends BaseView
     template: template
