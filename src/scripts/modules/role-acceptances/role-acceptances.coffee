@@ -7,7 +7,8 @@ define (require) ->
   template = require('hbs!./role-acceptances-template')
   require('less!./role-acceptances')
 
-  AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
+  authoringport = if settings.cnxauthoring.port then ":#{settings.cnxauthoring.port}" else ''
+  AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}#{authoringport}"
 
   return  class RoleAcceptanceView extends BaseView
     template: template

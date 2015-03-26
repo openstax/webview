@@ -9,8 +9,10 @@ define (require) ->
   require('backbone-associations')
   session = require('cs!session')
 
-  ARCHIVE = "#{location.protocol}//#{settings.cnxarchive.host}:#{settings.cnxarchive.port}"
-  AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}:#{settings.cnxauthoring.port}"
+  archiveport = if settings.cnxarchive.port then ":#{settings.cnxarchive.port}" else ''
+  ARCHIVE = "#{location.protocol}//#{settings.cnxarchive.host}#{archiveport}"
+  authoringport = if settings.cnxauthoring.port then ":#{settings.cnxauthoring.port}" else ''
+  AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}#{authoringport}"
 
   return class Node extends Backbone.AssociatedModel
     eTag: null
