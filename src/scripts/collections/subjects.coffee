@@ -3,7 +3,8 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
 
-  SERVER = "#{location.protocol}//#{settings.cnxarchive.host}"+[":#{settings.cnxarchive.port}" if settings.cnxarchive.port]
+  archiveport = if settings.cnxarchive.port then ":#{settings.cnxarchive.port}" else ''
+  SERVER = "#{location.protocol}//#{settings.cnxarchive.host}#{archiveport}"
 
   return new class Subjects extends Backbone.Collection
     url: () -> "#{SERVER}/extras"

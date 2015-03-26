@@ -2,7 +2,8 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
 
-  AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}"+[":#{settings.cnxauthoring.port}" if settings.cnxauthoring.port]
+  authoringport = if settings.cnxauthoring.port then ":#{settings.cnxauthoring.port}" else ''
+  AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}#{authoringport}"
 
   return class RoleAcceptance extends Backbone.Model
     url: () -> "#{AUTHORING}/contents/#{@contentId}@draft/acceptance"

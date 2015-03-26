@@ -5,7 +5,8 @@ define (require) ->
   settings = require('settings')
   require('less!./delete')
 
-  AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}"+[":#{settings.cnxauthoring.port}" if settings.cnxauthoring.port]
+  authoringport = if settings.cnxauthoring.port then ":#{settings.cnxauthoring.port}" else ''
+  AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}#{authoringport}"
 
   return class DeleteModal extends BaseView
     template: template

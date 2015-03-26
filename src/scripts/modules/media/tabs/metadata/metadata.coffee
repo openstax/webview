@@ -8,6 +8,9 @@ define (require) ->
   template = require('hbs!./metadata-template')
   require('less!./metadata')
 
+  authoringport = if settings.cnxauthoring.port then ":#{settings.cnxauthoring.port}" else ''
+  AUTHORING="//#{settings.cnxauthoring.host}#{authoringport}"
+
   s2Defaults = width: 300
   s2Multi = _.extend {}, s2Defaults, {minimumInputLength: 2, ajax: quietMillis: 500}
 
@@ -144,7 +147,7 @@ define (require) ->
         multiple: true
         formatSelectionCssClass: (user, container) -> user.state or 'pending'
         ajax:
-          url: "//#{settings.cnxauthoring.host}"+[":#{settings.cnxauthoring.port}"if settings.cnxauthoring.port]+"/users/search"
+          url: "#{AUTHORING}/users/search"
           dataType: 'json'
           params:
             xhrFields:
