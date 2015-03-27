@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://dev.cnx.org/" />
+<title>TypeSearch</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TypeSearch</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/search</td>
+	<td></td>
+</tr>
+<!--Search for an author, limit to Book type and select Danish. Search should fail to find anything.-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=author</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=author</td>
+	<td>Catherine Schmidt-Jones</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=type</td>
+	<td>label=Books</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=language</td>
+	<td>label=Dansk (Danish)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.col-sm-3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=p</td>
+	<td>No results found. Please try expanding your search.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=p</td>
+	<td>No results found. Please try expanding your search.</td>
+</tr>
+</tbody></table>
+</body>
+</html>
