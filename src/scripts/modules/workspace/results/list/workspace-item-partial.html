@@ -14,10 +14,10 @@
     <h4><a href="/contents/{{id}}/{{trim title}}">{{title}}</a></h4>
   </td>
   <td class="status">
-    {{#is state 'Draft'}}
-      <h4><a href="/contents/{{id}}/{{trim title}}">{{state}}</a></h4>
-    {{else}}
+    {{#is state 'Awaiting acceptance'}}
       <h4><a href="/users/role-acceptance/{{noVersion id}}">{{state}}</a></h4>
+    {{else}}
+      <h4><a href="/contents/{{id}}/{{trim title}}">{{state}}</a></h4>
     {{/is}}
   </td>
   <td class="edited">{{date revised}}</td>
