@@ -1,6 +1,7 @@
 define (require) ->
   Backbone = require('backbone')
   FeaturedBook = require('cs!models/featured-book')
+  settings =require('settings')
 
   archiveport = if settings.cnxarchive.port then ":#{settings.cnxarchive.port}" else ''
   archive = "#{location.protocol}//#{settings.cnxarchive.host}#{archiveport}"
