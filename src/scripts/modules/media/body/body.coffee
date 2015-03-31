@@ -384,7 +384,7 @@ define (require) ->
         @parent.scrollToTop()
 
     toggleSolution: (e) ->
-      $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')
+      $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]').eq(0)
       $solution.toggleClass('ui-solution-visible')
 
     onEditable: () -> @$el.find('.media-body').addClass('draft')
