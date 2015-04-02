@@ -28,8 +28,8 @@ define (require) ->
 
     events:
       'click a': 'changePage'
-      'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
-      'click .solution              > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
+      'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle,
+        .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
 
     initialize: () ->
       super()
