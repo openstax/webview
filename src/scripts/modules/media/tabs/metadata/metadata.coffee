@@ -22,19 +22,41 @@ define (require) ->
       model.languageName = settings.languages[model.language]
       model.subjectsList = subjects.list
       model.url = linksHelper.getModelPath(model)
-      model.printStyles = [
-        'Latex'
-        'CCAP Physics'
-        'CCAP Sociology'
-        'CCAP Biology'
-        'CCAP Anatomy'
-        'CCAP Statistics'
-        'CCAP Precalculus'
-        'CCAP Psychology'
-        'CCAP Economics'
-        'CCAP History'
-        'CCAP Chemistry'
-      ]
+      model.printStyles =
+        [{
+          'name' : 'Latex',
+          'value' : 'latex'
+        }, {
+          'name' : 'CCAP Physics',
+          'value' : 'ccap-physics'
+        }, {
+          'name' : 'CCAP Sociology',
+          'value' : 'ccap-sociology'
+        }, {
+          'name' : 'CCAP Biology',
+          'value' : 'ccap-biology'
+        }, {
+          'name' : 'CCAP Anatomy',
+          'value' : 'ccap-anatomy'
+        }, {
+          'name' : 'CCAP Statistics',
+          'value' : 'ccap-statistics'
+        }, {
+          'name' : 'CCAP Precalculus',
+          'value' : 'ccap-precalculus'
+        }, {
+          'name' : 'CCAP Psychology',
+          'value' : 'ccap-psychology'
+        }, {
+          'name' : 'CCAP Economics',
+          'value' : 'ccap-economics'
+        }, {
+          'name' : 'CCAP History',
+          'value' : 'ccap-history'
+        }, {
+          'name' : 'CCAP Chemistry',
+          'value' : 'ccap-chemistry'
+        }]
 
       if @media is 'page'
         editable = if @model.isBook() then @model.get('currentPage')?.isEditable() else @model.isEditable()

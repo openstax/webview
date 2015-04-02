@@ -77,8 +77,8 @@
         {{else~}}
           <select name="printStyle">
             {{~#each printStyles~}}
-              <option value="{{this}}" {{#is this ../printStyle}}selected{{/is}}>
-                {{this}}
+              <option value="{{this.value}}" {{#is this.value ../printStyle}}selected{{/is}}>
+                {{this.name}}
               </option>
             {{~/each~}}
           </select>
