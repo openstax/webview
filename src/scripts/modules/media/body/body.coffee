@@ -40,8 +40,8 @@ define (require) ->
 
     events:
       'click a': 'changePage'
-      'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
-      'click .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
+      'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle,
+        .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
       'keydown .media-body': 'checkKeySequence'
       'keyup .media-body': 'resetKeySequence'
 
@@ -384,7 +384,7 @@ define (require) ->
         @parent.scrollToTop()
 
     toggleSolution: (e) ->
-      $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]').eq(0)
+      $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')
       $solution.toggleClass('ui-solution-visible')
 
     onEditable: () -> @$el.find('.media-body').addClass('draft')
