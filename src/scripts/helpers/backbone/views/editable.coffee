@@ -91,7 +91,10 @@ define (require) ->
           $editable.text('Starting up Aloha...')
           # Wait for Aloha to start up
           Aloha.ready () =>
-            html = @getProperty(property) or '<p> </p>' # Allow putting cursor after a Blockish. removed if empty.
+            html = @getProperty(property) or ''
+
+            if $editable.hasClass('draft') and $editable.last() isnt $('<p></p>')
+              html += '<p></p>' # Allow putting cursor after a Blockish. removed if empty.
 
             $editable.html(html)
             $editable.addClass('aloha-root-editable') # the semanticblockplugin needs this for some reason
