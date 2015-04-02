@@ -73,12 +73,12 @@
     <dd>
       <div class="printStyle">
         {{~#unless editable~}}
-          {{printStyle}}
+          {{printStyleName}}
         {{else~}}
           <select name="printStyle">
             {{~#each printStyles~}}
-              <option value="{{this.value}}" {{#is this.value ../printStyle}}selected{{/is}}>
-                {{this.name}}
+              <option value="{{@key}}" {{#is @key ../printStyle}}selected{{/is}}>
+                {{this}}
               </option>
             {{~/each~}}
           </select>
