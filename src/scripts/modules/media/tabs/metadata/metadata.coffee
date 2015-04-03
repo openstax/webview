@@ -23,40 +23,20 @@ define (require) ->
       model.subjectsList = subjects.list
       model.url = linksHelper.getModelPath(model)
       model.printStyles =
-        [{
-          'name' : 'Latex',
-          'value' : 'latex'
-        }, {
-          'name' : 'CCAP Physics',
-          'value' : 'ccap-physics'
-        }, {
-          'name' : 'CCAP Sociology',
-          'value' : 'ccap-sociology'
-        }, {
-          'name' : 'CCAP Biology',
-          'value' : 'ccap-biology'
-        }, {
-          'name' : 'CCAP Anatomy',
-          'value' : 'ccap-anatomy'
-        }, {
-          'name' : 'CCAP Statistics',
-          'value' : 'ccap-statistics'
-        }, {
-          'name' : 'CCAP Precalculus',
-          'value' : 'ccap-precalculus'
-        }, {
-          'name' : 'CCAP Psychology',
-          'value' : 'ccap-psychology'
-        }, {
-          'name' : 'CCAP Economics',
-          'value' : 'ccap-economics'
-        }, {
-          'name' : 'CCAP History',
-          'value' : 'ccap-history'
-        }, {
-          'name' : 'CCAP Chemistry',
-          'value' : 'ccap-chemistry'
-        }]
+        {
+          null: 'Default' ,
+          'ccap-physics' : 'CCAP Physics',
+          'ccap-sociology' : 'CCAP Sociology',
+          'ccap-biology' : 'CCAP Biology',
+          'ccap-anatomy' : 'CCAP Anatomy',
+          'ccap-statistics' : 'CCAP Statistics',
+          'ccap-precalculus' : 'CCAP Precalculus',
+          'ccap-psychology' : 'CCAP Psychology',
+          'ccap-economics' : 'CCAP Economics',
+          'ccap-history' : 'CCAP History',
+          'ccap-chemistry' : 'CCAP Chemistry'
+        }
+      model.printStyleName = model.printStyles[model.printStyle]
 
       if @media is 'page'
         editable = if @model.isBook() then @model.get('currentPage')?.isEditable() else @model.isEditable()
