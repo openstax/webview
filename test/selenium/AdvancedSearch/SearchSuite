@@ -11,7 +11,8 @@
 <tr><td><a href="AuthorSearch">AuthorSearch</a></td></tr>
 <tr><td><a href="TitleSearch">TitleSearch</a></td></tr>
 <tr><td><a href="KeywordSearch">KeywordSearch</a></td></tr>
-<tr><td><a href="TypeSearch">TypeSearch</a></td></tr>
+<tr><td><a href="BookTypeSearch">BookTypeSearch</a></td></tr>
+<tr><td><a href="PageTypeSearch">PageTypeSearch</a></td></tr>
 <tr><td><a href="LanguageSearch">LanguageSearch</a></td></tr>
 <tr><td><a href="PubDateAndSortSearch">PubDateAndSortSearch</a></td></tr>
 <tr><td><a href="SearchComboAndFilters">SearchComboAndFilters</a></td></tr>

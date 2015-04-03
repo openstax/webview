@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://dev.cnx.org/" />
+<title>Page-viewing</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Page-viewing</td></tr>
+</thead><tbody>
+<!--Open Galileo Telescope and click on the metadata tab-->
+<tr>
+	<td>open</td>
+	<td>/contents/09bc44f0-379d-4df4-a609-49aa2f10b893@4/Galileo%27s_Telescope</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=span.tab-title</td>
+	<td>Metadata</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.tab-title</td>
+	<td></td>
+</tr>
+<!--Open Chicken Coop Contruction and click on the Get This Book button-->
+<tr>
+	<td>open</td>
+	<td>/contents/cc840bb8-c77a-4844-a659-1ee79e8b8413@1/Chicken_Coop_Construction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.downloads &gt; a.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.downloads &gt; a.btn</td>
+	<td></td>
+</tr>
+<!--open Pig Farm Accounting and click on the Attribution tab-->
+<tr>
+	<td>open</td>
+	<td>/contents/6ed8c170-485f-480c-b03b-e7cc4142d179@1/Pig_Farm_Accounting</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='content']/div[8]/div/ul/li[3]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='content']/div[8]/div/ul/li[3]/span</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

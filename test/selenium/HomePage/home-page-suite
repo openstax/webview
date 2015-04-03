@@ -10,8 +10,10 @@
 <tr><td><b>Test Suite</b></td></tr>
 <tr><td><a href="Featured-books">Featured-books</a></td></tr>
 <tr><td><a href="Subject-search">Subject-search</a></td></tr>
-<tr><td><a href="Content-viewing-1">Content-viewing-1</a></td></tr>
 <tr><td><a href="Verify-License">Verify-License</a></td></tr>
+<tr><td><a href="Page-viewing">Page-viewing</a></td></tr>
+<tr><td><a href="Book-viewing-1">Book-viewing-1</a></td></tr>
+<tr><td><a href="Book-viewing-2">Book-viewing-2</a></td></tr>
 </tbody></table>
 </body>
 </html>
