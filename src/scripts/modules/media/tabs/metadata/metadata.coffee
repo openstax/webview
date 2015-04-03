@@ -24,7 +24,7 @@ define (require) ->
       model.url = linksHelper.getModelPath(model)
       model.printStyles =
         {
-          null: 'Default' ,
+          'default' : 'Default',
           'ccap-physics' : 'CCAP Physics',
           'ccap-sociology' : 'CCAP Sociology',
           'ccap-biology' : 'CCAP Biology',
