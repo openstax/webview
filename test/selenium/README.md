@@ -8,7 +8,7 @@ These are automated functional tests for Webview. The tests are organized in sui
 
 The Selenium IDE is a Firefox Add-on.
 
-1. [Download][http://docs.seleniumhq.org/download/] the IDE. Scroll down to the IDE section to get the latest version
+1. [Download](http://docs.seleniumhq.org/download/) the IDE. Scroll down to the IDE section to get the latest version
 2. Install the XPI file into Firefox.
   * Select Tools..Add-ons from the Firefox menu
   * Click the Wrench icon and select "Install Add-on from File..."
