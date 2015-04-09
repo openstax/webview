@@ -46,6 +46,17 @@
         'concepts_of_biology': 'b3c1e1d2-839c-42b0-a314-e119a8aafbdd@8.39',
         'anatomy_and_physiology': '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@6.19',
         'introductory_statistics': '30189442-6998-4686-ac05-ed152b91b9de@17.20'
+      },
+
+      terpUrl: function (itemCode) {
+        return 'https://openstaxtutor.org/terp/' + itemCode + '/quiz_start';
+      },
+
+      exerciseUrl: function (itemCode) {
+        // // stub.  Comment out to use local exercises stub.
+        // // Copied from https://exercises-dev1.openstax.org/api/exercises?q=tag:k12phys-ch04-s01-lo01
+        // return 'http://localhost:8000/data/exercises.json';
+        return 'https://exercises-dev1.openstax.org/api/exercises?q=tag:' + itemCode;
       }
     };
 
