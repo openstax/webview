@@ -69,6 +69,7 @@ define ['jquery'], ($) ->
         'oer/multipart'
         'oer/copy'
         'oer/cleanup'
+        'oer/media-embed'
       ]
 
 
@@ -164,7 +165,7 @@ define ['jquery'], ($) ->
       idle: 2000
 
     contentHandler:
-      insertHtml: [ 'cleanup' ]
+      insertHtml: [ 'cleanup', 'oembed' ]
       initEditable: []
       getContents: []
 
