@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 
-class EditPage(unittest.TestCase):
+class ExerciseEquation(unittest.TestCase):
     '''
     This test...
       * Opens an existing Page called "Selenium Test Page"
@@ -27,7 +27,7 @@ class EditPage(unittest.TestCase):
         self.driver.save_screenshot('exercise-equation-test.png')
         self.driver.quit()
 
-    def test_page_editing(self):
+    def test_exercise_equation_editing(self):
         self.driver.get(self.url)
         self.driver.implicitly_wait(300)
         # login
