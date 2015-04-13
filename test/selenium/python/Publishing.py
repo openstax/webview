@@ -28,7 +28,7 @@ class Publishing(unittest.TestCase):
 
     def tearDown(self):
         self.driver.save_screenshot('publishing-test.png')
-        #self.driver.quit()
+        self.driver.quit()
 
     def test_publishing(self):
         self.driver.get(self.url)
