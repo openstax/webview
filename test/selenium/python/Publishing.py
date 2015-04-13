@@ -27,8 +27,8 @@ class Publishing(unittest.TestCase):
         self.url = items[2]
 
     def tearDown(self):
-        #self.driver.save_screenshot('publishing-test.png')
-        self.driver.quit()
+        self.driver.save_screenshot('publishing-test.png')
+        #self.driver.quit()
 
     def test_publishing(self):
         self.driver.get(self.url)
@@ -71,7 +71,7 @@ class Publishing(unittest.TestCase):
         dest_element.click()
         dest_element.click()
         # save Page
-        savebutton = self.driver.find_element_by_xpath('(//button[@type="button"])[22]')
+        savebutton = self.driver.find_element_by_xpath('(//button[@type="button"])[23]')
         savebutton.click()
         self.driver.implicitly_wait(2000)
         # click publish button
