@@ -147,7 +147,7 @@ define ['jquery'], ($) ->
       ]
       # Disallow custom Example types
       example: [
-        # { label: 'Example', typeClass: 'example', hasTitle: true }
+         { label: 'Example', typeClass: 'example', enableTypes: false }
       ]
       block:
         dragdrop: "1"
