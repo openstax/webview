@@ -15,7 +15,7 @@
 }
 
 // Mark unimplemented custom labels
-*[data-label]:not([data-label=""]):not(.ui-has-child-title)::before {
+*[data-label]:not([data-label=""]):not(.ui-has-child-title):not(.btn-link)::before {
   content: attr(data-label) ': ';
 }
 
