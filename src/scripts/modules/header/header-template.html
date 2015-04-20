@@ -1,4 +1,13 @@
 <div class="page-header">
+  <div class="site-status col-md-7">
+    {{#each messages}}
+      {{#range this.starts this.ends ../dateTime}}
+        <div class="alert {{this.priority}}">
+         {{{this.message}}}
+        </div>
+      {{/range}}
+    {{/each}}
+  </div>
   <div class="login">
     <ul>
       {{#if username}}
