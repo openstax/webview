@@ -1,6 +1,5 @@
 define (require) ->
   _ = require('underscore')
-  $ = require('jquery')
   Backbone = require('backbone')
   settings = require('settings')
 
@@ -8,8 +7,7 @@ define (require) ->
   archive = "#{location.protocol}//#{settings.cnxarchive.host}#{archiveport}"
 
   return new class SiteStatus extends Backbone.Model
-    #urlRoot: "#{archive}/extras"
-    urlRoot: 'data/messages.json'
+    urlRoot: "#{archive}/extras"
 
     initialize: () ->
       @fetch()
