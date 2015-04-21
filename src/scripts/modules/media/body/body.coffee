@@ -5,6 +5,7 @@ define (require) ->
   router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
+  SimModal = require('cs!./embeddables/modals/sims/sims')
   template = require('hbs!./body-template')
   require('less!./body')
 
@@ -44,6 +45,7 @@ define (require) ->
         .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
       'keydown .media-body': 'checkKeySequence'
       'keyup .media-body': 'resetKeySequence'
+      'click .ost-iframe-embeddable': 'simLink'
 
     initialize: () ->
       super()
@@ -70,6 +72,9 @@ define (require) ->
 
       try
         if @model.get('loaded') and @model.asPage()?.get('loaded') and @model.asPage()?.get('active')
+
+          if $temp.find('.ost-iframe-embeddable')
+            @model.set('sims', true)
 
           # Remove the module title and abstract TODO: check if it is still necessary
           $temp.children('[data-type="title"]').remove()
@@ -349,6 +354,9 @@ define (require) ->
 
       if not @model.asPage()?.get('active') then return
 
+      if @model.get('sims') is true
+        @parent?.regions.self.append(new SimModal({model: @model}))
+
       # MathJax rendering must be done after the HTML has been added to the DOM
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
 
@@ -409,3 +417,8 @@ define (require) ->
 
     resetKeySequence: (e) ->
       key[e.keyCode] = false
+
+    simLink: (evt) ->
+      evt.preventDefault()
+      @model.set('simUrl', $(evt.currentTarget).attr('href'))
+      $('#sims-modal').modal('show')
