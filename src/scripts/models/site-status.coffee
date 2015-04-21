@@ -15,11 +15,11 @@ define (require) ->
 
     parse: (response) ->
       _.each response.messages, (message) ->
-        if message.priority is '1'
+        if message.priority is 1
           message.priority = 'alert-danger'
-        else if message.priority is '2'
+        else if message.priority is 2
           message.priority = 'alert-warning'
-        else if message.priority is '3'
+        else if message.priority is 3
           message.priority = 'alert-success'
 
       return response
