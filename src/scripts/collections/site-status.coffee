@@ -1,4 +1,4 @@
-define (require)->
+define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
   SiteStatusModel = require('cs!models/site-status')
