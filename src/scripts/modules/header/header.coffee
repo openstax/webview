@@ -1,7 +1,7 @@
 define (require) ->
   session  = require('cs!session')
   settings = require('settings')
-  siteStatus = require('cs!models/site-status')
+  SiteStatusView = require('cs!./site-status/site-status')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./header-template')
   require('less!./header')
@@ -16,8 +16,6 @@ define (require) ->
       url: @url
       username: session.get('id')
       accountProfile: settings.accountProfile
-      messages: siteStatus.get('messages')
-      dateTime: siteStatus.get('dateTime')
     }
 
     initialize: (options = {}) ->
@@ -26,6 +24,12 @@ define (require) ->
       @url = @createLink(options.url) if options.url
 
       @listenTo(session, 'change', @render)
+
+    regions:
+      siteStatus: '.site-status'
+
+    onRender: () ->
+      @regions.siteStatus.show(new SiteStatusView())
 
     setLegacyLink: (url) ->
       if url
