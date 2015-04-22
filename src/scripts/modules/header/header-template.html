@@ -1,12 +1,6 @@
 <div class="page-header">
   <div class="site-status">
-    {{#each messages}}
-      {{#range this.starts this.ends ../dateTime}}
-        <div class="alert {{this.priority}}">
-         {{{this.message}}}
-        </div>
-      {{/range}}
-    {{/each}}
+    {{! Site Status View }}
   </div>
   <div class="login">
     <ul>
