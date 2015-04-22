@@ -58,9 +58,12 @@
       > .navbar-header {
         margin-right: @logo-offset;
         padding-bottom: 7px;
+        float: left;
+        clear: left;
 
         @media (max-width: @grid-float-breakpoint-max) {
           margin-left: 0;
+          width: 100%;
         }
 
         > .navbar-brand {
