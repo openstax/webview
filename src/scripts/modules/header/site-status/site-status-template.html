@@ -1,0 +1,11 @@
+{{#each this}}
+  {{#range this.starts this.ends ../dateTime}}
+    {{#if show}}
+    <div class="alert {{this.priority}} alert-dismissible" name="{{this.name}}">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+     {{{this.message}}}
+    </div>
+    {{/if}}
+  {{/range}}
+{{/each}}
