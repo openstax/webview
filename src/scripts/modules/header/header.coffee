@@ -15,6 +15,9 @@ define (require) ->
       page: @page
       url: @url
       username: session.get('id')
+      accountProfile: settings.accountProfile
+      messages: siteStatus.get('messages')
+      dateTime: siteStatus.get('dateTime')
     }
 
     initialize: (options = {}) ->
