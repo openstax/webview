@@ -345,7 +345,8 @@ define (require) ->
 
 
     onRender: () ->
-      @parent?.regions.self.append(new ProcessingInstructionsModal({model: @model}))
+      if @model.asPage().get('loaded') and @model.isDraft()
+        @parent?.regions.self.append(new ProcessingInstructionsModal({model: @model}))
 
       if not @model.asPage()?.get('active') then return
 
