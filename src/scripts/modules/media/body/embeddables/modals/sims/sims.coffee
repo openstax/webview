@@ -7,4 +7,4 @@ define (require) ->
     template: template
 
     initialize: () ->
-      @listenTo(@model, 'change:simUrl', @render)
+      @listenTo(@model, 'change:simUrl change:simTitle', @render)

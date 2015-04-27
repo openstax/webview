@@ -420,5 +420,7 @@ define (require) ->
 
     simLink: (evt) ->
       evt.preventDefault()
-      @model.set('simUrl', $(evt.currentTarget).attr('href'))
+      link = $(evt.currentTarget)
+      @model.set('simUrl', link.attr('href'))
+      @model.set('simTitle', link.parents('figure').find('[data-type="title"]').text())
       $('#sims-modal').modal('show')
