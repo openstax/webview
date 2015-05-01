@@ -15,6 +15,7 @@ define (require) ->
   s2Multi = _.extend {}, s2Defaults, {minimumInputLength: 2, ajax: quietMillis: 500}
 
   return class MetadataView extends FooterTabView
+    key = []
     template: template
     templateHelpers: () ->
       model = super()

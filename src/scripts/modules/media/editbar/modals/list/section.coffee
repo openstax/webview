@@ -17,7 +17,7 @@ define (require) ->
         container: @itemViewContainer
 
       super()
-      @listenTo(@model, 'change:unit change:changed', @render)
+      @listenTo(@model, 'change:unit change:childChanged', @render)
 
     onRender: () ->
       super()

@@ -4,10 +4,21 @@
       <form class="form-horizontal">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Change License</h4>
+          <h4 class="modal-title">Change License for {{title}}</h4>
         </div>
         <div class="modal-body">
-
+          {{#if isBook}}
+            <p><em><strong>NOTE</strong></em> - This license change affects the book and all currently unpublished pages within the book.</p>
+          {{/if}}
+          {{#each this}}
+            {{#if this.isValidForPublication}}
+             <label>
+              <input type="radio" value="{{this.code}}" name="licenses" {{#is this.code ../../license.code}}checked{{/is}}/>
+              <a href="{{this.url}}">{{this.name}}</a>
+             </label>
+            {{/if}}
+          {{/each}}
+          <label>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn" data-dismiss="modal">Cancel</button>

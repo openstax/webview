@@ -14,9 +14,7 @@ define (require) ->
   PUBLISHING = "#{location.protocol}//#{settings.cnxauthoring.host}#{authoringport}/publish"
 
   return class PublishModal extends BaseView
-    key = []
     template: template
-
     regions:
       contents: '.publish-contents'
 
@@ -26,14 +24,10 @@ define (require) ->
       'change .publish-contents input': 'togglePage'
       'keyup textarea' : 'validate'
       'change input[type="checkbox"]' : 'validate'
-      'keydown #publish-modal': 'checkKeySequence'
-      'keyup #publish-modal': 'resetKeySequence'
 
     initialize: () ->
       super()
-
-      @listenTo(@model, 'removeNode moveNode add:contents change:title', @render)
-
+      @listenTo(@model, 'removeNode moveNode add:contents change:title change:changed', @render)
 
     onRender: () ->
       @regions.contents.show(new PublishedListSectionView({model: @model}))
@@ -89,12 +83,3 @@ define (require) ->
         submitBtn.removeAttr('disabled')
       else
         submitBtn.prop('disabled',true)
-
-    checkKeySequence: (e) ->
-      key[e.keyCode] = true
-      #ctrl+alt+shift+l+i
-      if key[16] and key[17] and key[18] and key[73] and key[76]
-        $('#license-modal').modal('show')
-
-    resetKeySequence: (e) ->
-      key[e.keyCode] = false

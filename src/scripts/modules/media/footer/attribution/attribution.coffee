@@ -5,3 +5,7 @@ define (require) ->
 
   return class AttributionView extends FooterTabView
     template: template
+
+    initialize: () ->
+      super()
+      @listenTo(@model, 'change:currentPage.license', @render)

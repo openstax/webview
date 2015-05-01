@@ -35,7 +35,7 @@ define (require) ->
       super()
       @parent?.regions.self.append(new PublishModal({model: @model}))
       @parent?.regions.self.append(new BlockPublishModal({model: @model}))
-      @parent?.regions.self.append(new LicenseModal({model: @model}))
+      @parent?.regions.self.append(new LicenseModal({parent: @}))
 
       require ['aloha'], (Aloha) =>
         Aloha.ready () =>

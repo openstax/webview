@@ -17,6 +17,7 @@ define (require) ->
   require('less!./media')
 
   return class MediaView extends BaseView
+    key = []
     canonical: () ->
       uuid = @model.getUuid()
       if uuid
@@ -31,6 +32,11 @@ define (require) ->
 
     summary:() -> @updateSummary()
     description: () -> @updateSummary()
+
+    events: {
+      'keydown .media-title > .title input': 'checkKeySequence'
+      'keyup .media-title > .title input': 'resetKeySequence'
+    }
 
     initialize: (options) ->
       super()
@@ -137,3 +143,13 @@ define (require) ->
       if @model.get('editable')
         @model.set('editable', false, {silent: true})
         @closeEditor()
+
+    checkKeySequence: (e) ->
+      key[e.keyCode] = true
+      #ctrl+alt+shift+l+i
+      if key[16] and key[17] and key[18] and key[73] and key[76]
+        if @model.get('canChangeLicense')
+          $('#license-modal').modal('show')
+
+    resetKeySequence: (e) ->
+      key[e.keyCode] = false
