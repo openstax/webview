@@ -11,14 +11,18 @@
     {{/is}}
   </td>
   <td class="title">
+    {{#is state 'Waiting for moderation'}}
+      <h4>{{title}}</h4>
+    {{else}}
     <h4><a href="/contents/{{id}}/{{trim title}}">{{title}}</a></h4>
+    {{/is}}
   </td>
   <td class="status">
     {{#is state 'Awaiting acceptance'}}
       <h4><a href="/users/role-acceptance/{{noVersion id}}">{{state}}</a></h4>
     {{else}}
       {{#is state 'Waiting for moderation'}}
-        <h4><a href="/contents/{{noVersion id}}@draft/{{trim title}}">{{state}}</a></h4>
+        <h4>{{state}}</h4>
     {{else}}
     <h4><a href="/contents/{{id}}/{{trim title}}">{{state}}</a></h4>
       {{/is}}
