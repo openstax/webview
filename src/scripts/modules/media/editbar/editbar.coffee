@@ -23,7 +23,6 @@ define (require) ->
 
     events:
       'click .save':    'save'
-      'click .revert':  'revert'
       'click .publish': 'publish'
 
     initialize: () ->
@@ -56,14 +55,8 @@ define (require) ->
 
               refreshPositions: true
 
-
     save: () ->
       @model.save()
-
-    revert: () ->
-      model = @model # `@model` is cleared when editable is set to false
-      model.set('editable', false)
-      model.fetch()
 
     publish: () ->
       @model.isPublishable()
