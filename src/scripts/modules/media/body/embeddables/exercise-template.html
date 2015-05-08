@@ -1,5 +1,5 @@
-{{#each data.items}}
-    {{#each this.questions}}
+{{#if data.items.[0].questions}}
+    {{#each data.items.0.questions}}
         {{{this.stem_html}}}
     {{/each}}
-{{/each}}
+{{/if}}
