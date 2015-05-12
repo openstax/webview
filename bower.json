@@ -27,6 +27,6 @@
   "devDependencies": {
     "chai": "~2.3.0",
     "mocha": "~2.2.4",
-    "sinonjs": "~1.14.1"
+    "sinonjs": "~1.10.2"
   }
 }
