@@ -22,7 +22,7 @@
           Derived from <a href="/contents/{{currentPage.parent.id}}@{{currentPage.parent.version}}">{{currentPage.parent.title}}</a> by
           <span class="book-authors">
             {{#each currentPage.parent.authors}}
-              <a class="list-comma" href="mailto:{{email}}?subject={{../encodedTitle}}">{{fullname}}</a>
+              <span class="list-comma">{{fullname}}</span>
             {{/each}}
           </span>
         </span>
@@ -43,9 +43,8 @@
         <span>Page by:</span>
         <span class="page-authors">
           {{~#each currentPage.authors~}}
-            <a class="list-comma" href="mailto:{{email}}?subject={{../currentPage.encodedTitle}}">{{fullname}}</a>
+            <span class="list-comma">{{fullname}}</span>
           {{~/each}}
-          <img src="/images/icons/mail.png" width="18" height="12" alt="Mail" />
         </span>
       {{/if}}
     </div>
