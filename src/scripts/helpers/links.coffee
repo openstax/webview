@@ -8,7 +8,7 @@ define (require) ->
   inverseShortcodes = _.invert(shortcodes)
 
   return new class LinksHelper
-    componentRegEx: /^contents\/([^:@/]+)@?([^:/?]*):?([0-9]*)\/?([^?]*)(\?.*)?/
+    componentRegEx: /^contents\/([^:@/]+)@?([^:/?]*):?([^/]*)\/?([^?]*)(\?.*)?/
 
     cleanUrl: trim
 
@@ -17,11 +17,18 @@ define (require) ->
 
       switch page
         when 'contents'
+          currentPage = data.model.get('currentPage')
+          pageuuid = currentPage?.get('id')
+          pageVersion = currentPage?.get('version')
+
+          if pageVersion
+            pageuuid = "#{pageuuid}@#{pageVersion}"
+
           uuid = data.model.getVersionedId()
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
           title = data.model.get('title')
           url += "contents/#{uuid}"
-          url += ":#{data.page}" if data.page
+          url += ":#{pageuuid}"
           url += "/#{trim(title)}" if title
 
       return url
@@ -34,7 +41,7 @@ define (require) ->
       title = trim(model.get?('title') or model.title)
 
       if model.isBook?()
-        page = ":#{model.getPageNumber()}"
+        page = ":#{model.get('page')}"
 
       return "#{settings.root}contents/#{id}#{page}/#{title}"
 

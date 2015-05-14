@@ -10,7 +10,7 @@ define (require) ->
   return class TocPageView extends TocDraggableView
     template: template
     templateHelpers: () ->
-      pageNumber = @content.getPageNumber(@model)
+      pageNumber = @model.getPageNumber()
 
       return {
         page: pageNumber
