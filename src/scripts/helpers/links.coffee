@@ -18,17 +18,14 @@ define (require) ->
       switch page
         when 'contents'
           currentPage = data.model.get('currentPage')
-          pageuuid = currentPage?.get('id')
-          pageVersion = currentPage?.get('version')
-
-          if pageVersion
-            pageuuid = "#{pageuuid}@#{pageVersion}"
-
           uuid = data.model.getVersionedId()
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
           title = data.model.get('title')
+          pageuuid = currentPage?.get('id')
+          pageVersion = currentPage?.get('version')
           url += "contents/#{uuid}"
-          url += ":#{pageuuid}"
+          url += ":#{pageuuid}" if pageuuid
+          url += "@#{pageVersion}" if pageVersion
           url += "/#{trim(title)}" if title
 
       return url
