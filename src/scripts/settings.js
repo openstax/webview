@@ -49,7 +49,7 @@
       },
 
       accountProfile: 'https://accounts.cnx.org/profile',
-      
+
       terpUrl: function (itemCode) {
         return 'https://openstaxtutor.org/terp/' + itemCode + '/quiz_start';
       },
