@@ -10,8 +10,8 @@
 
       // Hostname and port for the cnx-archive server
       cnxarchive: {
-        host: 'cnx-dev-vm.org',
-        port: 6543
+        host: 'devarchive.cnx.org',
+        port: 80
       },
 
       // Hostname and port for the cnx-authoring server
@@ -48,8 +48,8 @@
         'introductory_statistics': '30189442-6998-4686-ac05-ed152b91b9de@17.20'
       },
 
-      accountProfile: 'https://cnx-dev-vm.org:3000/profile',
-
+      accountProfile: 'https://accounts.cnx.org/profile',
+      
       terpUrl: function (itemCode) {
         return 'https://openstaxtutor.org/terp/' + itemCode + '/quiz_start';
       },
