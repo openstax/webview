@@ -58,7 +58,7 @@ describe('backbone base view helper tests', function () {
       // should update the title
       myBase.pageTitle = 'title tests';
       myBase.updatePageInfo();
-      document.title.should.equal('OpenStax CNX - title tests');
+      document.title.should.equal('title tests - OpenStax CNX');
 
       // canonical should still not have been set
       should.not.exist(document.querySelector('link[rel=\'canonical\']'));

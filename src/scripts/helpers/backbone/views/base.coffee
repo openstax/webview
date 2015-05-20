@@ -68,7 +68,7 @@ define (require) ->
 
     # Update page title, canonical link and Open Graph tags
     updatePageInfo: () ->
-      document.title = settings.titlePrefix + @pageTitle if @pageTitle
+      document.title = @pageTitle + settings.titleSuffix if @pageTitle
 
       canonical = @canonical?() or @canonical
       if canonical isnt undefined

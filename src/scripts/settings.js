@@ -10,8 +10,8 @@
 
       // Hostname and port for the cnx-archive server
       cnxarchive: {
-        host: 'devarchive.cnx.org',
-        port: 80
+        host: 'cnx-dev-vm.org',
+        port: 6543
       },
 
       // Hostname and port for the cnx-authoring server
@@ -21,7 +21,7 @@
       },
 
       // Prefix to prepend to page titles
-      titlePrefix: 'OpenStax CNX - ',
+      titleSuffix: ' - OpenStax CNX',
 
       // Google Analytics tracking ID
       analyticsID: 'UA-7903479-1',
@@ -48,7 +48,7 @@
         'introductory_statistics': '30189442-6998-4686-ac05-ed152b91b9de@17.20'
       },
 
-      accountProfile: 'https://accounts.cnx.org/profile',
+      accountProfile: 'https://cnx-dev-vm.org:3000/profile',
 
       terpUrl: function (itemCode) {
         return 'https://openstaxtutor.org/terp/' + itemCode + '/quiz_start';
