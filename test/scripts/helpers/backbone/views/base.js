@@ -58,7 +58,7 @@ describe('backbone base view helper tests', function () {
       // should update the title
       myBase.pageTitle = 'title tests';
       myBase.updatePageInfo();
-      document.title.should.equal('OpenStax CNX - title tests');
+      document.title.should.equal('title tests - OpenStax CNX');
 
       // canonical should still not have been set
       should.not.exist(document.querySelector('link[rel=\'canonical\']'));
@@ -151,7 +151,14 @@ describe('backbone base view helper tests', function () {
       document.querySelector('meta[property=\'og:image\']').getAttribute('content').should.equal('file:///' +
         'images/social/logo.png');
     });
-    it('should set description meta data', function () {
+    it('should set description meta data if summary exists', function () {
+      var myBase = new BaseView();
+      myBase.description = 'description';
+      myBase.summary = 'summary';
+      myBase.addMetaTags();
+      document.querySelector('meta[name=\'description\']').getAttribute('content').should.equal('description summary');
+    });
+    it('should set description meta data if summary doesnt exist', function () {
       var myBase = new BaseView();
       myBase.description = 'description';
       myBase.addMetaTags();
@@ -179,7 +186,7 @@ describe('backbone base view helper tests', function () {
         'images/social/logo.png');
       document.querySelectorAll('meta[property=\'og:image\']').length.should.equal(1);
       document.querySelector('meta[name=\'description\']').getAttribute('content').should.equal('second ' +
-        'description');
+        'description' + ' ' + 'second summary');
       document.querySelectorAll('meta[name=\'description\']').length.should.equal(1);
     });
   });

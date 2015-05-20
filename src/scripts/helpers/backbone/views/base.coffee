@@ -68,7 +68,7 @@ define (require) ->
 
     # Update page title, canonical link and Open Graph tags
     updatePageInfo: () ->
-      document.title = settings.titlePrefix + @pageTitle if @pageTitle
+      document.title = @pageTitle + settings.titleSuffix if @pageTitle
 
       canonical = @canonical?() or @canonical
       if canonical isnt undefined
@@ -117,7 +117,8 @@ define (require) ->
 
       if description isnt undefined
         $('meta[name="description"]').remove()
-        head.append("<meta name=\"description\" content=\"#{description}\">")
+        fullDescription = description + if summary isnt undefined then " " + summary else ""
+        head.append("<meta name=\"description\" content=\"#{fullDescription}\">")
 
     _render: () ->
       _.each @regions, (region) -> region.empty()

@@ -21,7 +21,7 @@
       },
 
       // Prefix to prepend to page titles
-      titlePrefix: 'OpenStax CNX - ',
+      titleSuffix: ' - OpenStax CNX',
 
       // Google Analytics tracking ID
       analyticsID: 'UA-7903479-1',
