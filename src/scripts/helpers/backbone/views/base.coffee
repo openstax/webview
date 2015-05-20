@@ -117,6 +117,8 @@ define (require) ->
 
       if description isnt undefined
         $('meta[name="description"]').remove()
+        if summary isnt undefined
+          description += " " + summary
         head.append("<meta name=\"description\" content=\"#{description}\">")
 
     _render: () ->
