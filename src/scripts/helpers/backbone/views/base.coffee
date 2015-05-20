@@ -117,9 +117,8 @@ define (require) ->
 
       if description isnt undefined
         $('meta[name="description"]').remove()
-        if summary isnt undefined
-          description += " " + summary
-        head.append("<meta name=\"description\" content=\"#{description}\">")
+        fullDescription = description + if summary isnt undefined then " " + summary else ""
+        head.append("<meta name=\"description\" content=\"#{fullDescription}\">")
 
     _render: () ->
       _.each @regions, (region) -> region.empty()
