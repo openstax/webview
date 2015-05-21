@@ -71,6 +71,7 @@ define (require) ->
       if @pageTitle
         @addCanonicalMetaDataToDerivedCopies()
         document.title = settings.titlePrefix + @pageTitle
+      @addMetaTags()
 
     getTemplate: () -> @template?(@getTemplateData()) or @template
 
@@ -88,6 +89,31 @@ define (require) ->
             data[key] = value
 
       return data
+
+    addMetaTags: () ->
+      summary = @summary?() or @summary
+      description = @description?() or @description
+      location.origin = linksHelper.locationOrigin()
+      head = $('head')
+
+      if summary isnt undefined
+        url = window.location.href
+        title = document.title
+        image = location.origin + '/images/social/logo.png'
+        head = $('head')
+        $('meta[property="og:url"]').remove()
+        head.append("<meta property=\"og:url\" content=\"#{url}\">")
+        $('meta[property="og:title"]').remove()
+        head.append("<meta property=\"og:title\" content=\"#{title}\">")
+        $('meta[property="og:description"]').remove()
+        head.append("<meta property=\"og:description\" content=\"#{summary}\">")
+        $('meta[property="og:image"]').remove()
+        head.append("<meta property=\"og:image\" content=\"#{image}\">")
+
+      if description isnt undefined
+        $('meta[name="description"]').remove()
+        head.append("<meta name=\"description\" content=\"#{description}\">")
+
 
     addCanonicalMetaDataToDerivedCopies: () ->
       # Remove canonical links to content
