@@ -14,6 +14,8 @@ define (require) ->
   return class ContentsPage extends BaseView
     template: template
     pageTitle: 'Content Library'
+    summary: 'OpenStax Content Library'
+    description: 'Search for free, online textbooks.'
 
     initialize: (options = {}) ->
       super()

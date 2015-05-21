@@ -11,6 +11,9 @@ define (require) ->
   return class HomePage extends BaseView
     template: template
     pageTitle: 'Sharing Knowledge and Building Communities'
+    summary: 'View and share free educational material as courses, books,reports or other academic assignments.'
+    description: 'Free, online educational material such as courses, books and reports.'
+
 
     regions:
       splash: '#splash'

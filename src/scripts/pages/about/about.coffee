@@ -18,6 +18,8 @@ define (require) ->
     regions:
       find: '.find'
       content: '.about-content'
+      summary: 'About OpenStax CNX'
+      description: 'OpenStax CNX is a non-profit organization providing thousands of free online textbooks.'
 
     initialize: (options = {}) ->
       super()
