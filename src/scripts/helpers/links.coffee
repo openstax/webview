@@ -70,3 +70,8 @@ define (require) ->
           str.push("#{encodeURI(p)}=#{encodeURI(obj[p])}")
 
       return str.join("&")
+
+    locationOrigin: () ->
+      #Polyfill for location.origin since IE doesn't support it
+      port = if location.port then ":#{location.port}" else ''
+      location.origin = location.origin or "#{location.protocol}//#{location.hostname}#{port}"
