@@ -5,6 +5,7 @@ define (require) ->
   router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')
   template = require('hbs!./body-template')
+  SimModal = require('cs!./embeddables/modals/sims/sims')
   require('less!./body')
   embeddableTemplates =
     'exercise': require('hbs!./embeddables/exercise-template')
@@ -28,8 +29,8 @@ define (require) ->
 
     events:
       'click a': 'changePage'
-      'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle,
-        .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
+      'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle, .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
+      'click .os-interactive': 'simLink'
 
     initialize: () ->
       super()
@@ -54,6 +55,9 @@ define (require) ->
 
       try
         if @owner.get('loaded') and @model?.get('loaded') and @model?.get('active')
+
+          if $temp.find('.os-interactive .os-embed')
+            @model.set('sims', true)
 
           # Remove the module title and abstract TODO: check if it is still necessary
           $temp.children('[data-type="title"]').remove()
@@ -144,6 +148,9 @@ define (require) ->
 
     onRender: () ->
       if not @model?.get('active') then return
+
+      if @model.get('sims') is true
+        @parent?.regions.self.append(new SimModal({model: @model}))
 
       # MathJax rendering must be done after the HTML has been added to the DOM
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
@@ -357,3 +364,10 @@ define (require) ->
     onUneditable: () ->
       @$el.find('.media-body').removeClass('draft')
       @render() # Re-render body view to cleanup aloha issues
+
+    simLink: (evt) ->
+      evt.preventDefault()
+      link = $(evt.currentTarget)
+      @model.set('simUrl', link.attr('href'))
+      @model.set('simTitle', link.parents('figure').find('[data-type="title"]').text())
+      $('#sims-modal').modal('show')
