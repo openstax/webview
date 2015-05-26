@@ -115,4 +115,11 @@
     <dd>
       <div>{{date revised}}</div>
     </dd>
+  <dt>Last Revised By:</dt>
+    <dd>
+    {{~#if submitter.fullname~}}
+       <div>{{submitter.fullname}}</div>
+    {{~/if}}
+    </dd>
+
 </dl>
