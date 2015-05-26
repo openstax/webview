@@ -13,6 +13,8 @@ define (require) ->
   return class DonatePage extends BaseView
     template: template
     pageTitle: 'Support OpenStax CNX'
+    summary: 'Donate to OpenStax CNX'
+    description: 'Donate to OpenStax CNX'
 
     regions:
       find: '.find'
