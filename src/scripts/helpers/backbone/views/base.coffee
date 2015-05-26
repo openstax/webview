@@ -70,7 +70,7 @@ define (require) ->
     updateTitle: () ->
       if @pageTitle
         @addCanonicalMetaDataToDerivedCopies()
-        document.title = settings.titlePrefix + @pageTitle
+        document.title = @pageTitle + settings.titleSuffix
 
     getTemplate: () -> @template?(@getTemplateData()) or @template
 
