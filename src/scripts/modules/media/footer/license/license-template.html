@@ -13,14 +13,4 @@
       {{~/if~}}
     {{/or}}
   </div>
-
-  <div class="last-edit">
-    <span>Last edited</span>
-    {{~#if submitter.fullname~}}
-      <span> by <span class="name">{{submitter.fullname}}</span></span>
-    {{~/if}}
-    {{~#if revised~}}
-      <span> on {{date revised}}.</span>
-    {{~/if~}}
-  </div>
 {{/if}}
