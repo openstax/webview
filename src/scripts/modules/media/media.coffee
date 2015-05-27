@@ -49,6 +49,17 @@ define (require) ->
       @listenTo(@model, 'change:editable', @toggleEditor)
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updateUrl)
       @listenTo(@model, 'change:abstract', @updateSummary)
+      
+      # 1. passing title:loaded
+      @listenTo(Backbone, 'title:loaded', @titleHandler)
+      # 2. listening for change in model
+      # @listenTo(@model, 'change:currentPage.title', @titleHandler)
+
+    titleHandler: (t) ->
+      # 1
+      @this = t
+      # alert(t)
+      @updatePageInfo()
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))
@@ -91,7 +102,9 @@ define (require) ->
       $('html, body').animate({scrollTop: $mediaNav.offset().top}, '500', 'swing') if y > maxY
 
     updatePageInfo: () ->
-      @pageTitle = @model.get('title')
+      if not @this?
+        @this = " default "
+      @pageTitle = @model.get('title') + " - " + @this
       super()
 
     updateLegacyLink: () ->
