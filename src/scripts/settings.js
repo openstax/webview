@@ -20,7 +20,7 @@
         port: 80
       },
 
-      // Prefix to prepend to page titles
+      // Suffix to append to HTML page titles
       titleSuffix: ' - OpenStax CNX',
 
       // Google Analytics tracking ID
