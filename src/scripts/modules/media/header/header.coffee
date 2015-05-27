@@ -18,7 +18,6 @@ define (require) ->
       if currentPage
         currentPage = currentPage.toJSON()
         currentPage.encodedTitle = encodeURI(currentPage.title)
-        # 1., caught by 1. in media.coffee.  Seems to be sending correct title...
         if currentPage.title
           Backbone.trigger('title:loaded', currentPage.title) #currentPage ?
       else

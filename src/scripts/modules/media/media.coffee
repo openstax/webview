@@ -49,16 +49,10 @@ define (require) ->
       @listenTo(@model, 'change:editable', @toggleEditor)
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updateUrl)
       @listenTo(@model, 'change:abstract', @updateSummary)
-      
-      # 1. passing title:loaded
       @listenTo(Backbone, 'title:loaded', @titleHandler)
-      # 2. listening for change in model
-      # @listenTo(@model, 'change:currentPage.title', @titleHandler)
 
     titleHandler: (t) ->
-      # 1
       @this = t
-      # alert(t)
       @updatePageInfo()
 
     onRender: () ->
@@ -103,7 +97,7 @@ define (require) ->
 
     updatePageInfo: () ->
       if not @this?
-        @this = " default "
+        @this = "default"
       @pageTitle = @model.get('title') + " - " + @this
       super()
 
