@@ -74,16 +74,6 @@ define (require) ->
       @listenTo(session, 'change', @render)
       @listenTo(@model, 'change:currentPage.editable change:currentPage.canPublish', @render)
 
-      #@listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @passTitle)
-
-    passTitle: () ->
-      if currentPage.title
-        Backbone.trigger('title:loaded', "6 of 1")
-      else
-        Backbone.trigger('title:loaded', "half dozen of the other")
-
-
-
     onRender: () ->
       if not @model.asPage()?.get('active') then return
 
