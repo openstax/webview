@@ -49,6 +49,10 @@ define (require) ->
       @listenTo(@model, 'change:editable', @toggleEditor)
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updateUrl)
       @listenTo(@model, 'change:abstract', @updateSummary)
+      @listenTo(@model, 'change:currentPage.title', @myAlertFunc)
+
+    myAlertFunc: () ->
+      alert("title change heard")
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))
