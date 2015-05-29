@@ -116,4 +116,3 @@ define (require) ->
       @pageTitle = @model.get('title')
       if @model.asPage()?
         @pageTitle = "#{@model.get('title')} - #{@model.get('currentPage').get('title')}"
-      alert("New page title: " + @pageTitle)
