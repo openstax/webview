@@ -3,6 +3,7 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
   trim = require('cs!helpers/handlebars/trim')
+  dash = require('cs!helpers/handlebars/dash')
 
   shortcodes = settings.shortcodes
   inverseShortcodes = _.invert(shortcodes)
@@ -20,7 +21,7 @@ define (require) ->
           uuid = data.model.getVersionedId()
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
           title = data.model.get('title')
-          url += "contents/#{uuid}"
+          url += "contents/#{dash(uuid)}"
           url += ":#{data.page}" if data.page
           url += "/#{trim(title)}" if title
 
@@ -29,7 +30,7 @@ define (require) ->
     # Get the URL to view a given content model
     getModelPath: (model) ->
       page = ''
-      id = model.getUuid?() or model.id
+      id = dash(model.getUuid?()) or model.id
       version = model.get?('version') or model.version
       title = trim(model.get?('title') or model.title)
 
