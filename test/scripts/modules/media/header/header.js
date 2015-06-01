@@ -18,11 +18,10 @@ describe('media header tests', function () {
           'title': 'Chapter'
         }
       });
+      cont.get('currentPage').get('title');
       myHeader = new MediaHeaderView({
         'model': cont
       });
-      // why doesn't this work?  Thought: function doesn't have get built in?
-      // cont.get('currentPage').get('title').should.equal('asdf');
       done();
     });
   });
