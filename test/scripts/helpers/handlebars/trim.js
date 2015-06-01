@@ -16,12 +16,12 @@ describe('handlebars trim helper tests', function () {
     returnVal.length.should.equal(30);
     returnVal.should.equal('thisisastringwiththirtysixchar');
   });
-  it('should replace white space with underscores', function () {
+  it('should replace white space with dashes', function () {
     // space
-    Handlebars.helpers.trim('  lots of    spaces ').should.equal('__lots_of____spaces_');
+    Handlebars.helpers.trim('  lots of    spaces ').should.equal('--lots-of----spaces-');
     // tabs
-    Handlebars.helpers.trim('\tsome\ttabs\t').should.equal('_some_tabs_');
+    Handlebars.helpers.trim('\tsome\ttabs\t').should.equal('-some-tabs-');
     // new lines
-    Handlebars.helpers.trim('anewline\n').should.equal('anewline_');
+    Handlebars.helpers.trim('anewline\n').should.equal('anewline-');
   });
 });
