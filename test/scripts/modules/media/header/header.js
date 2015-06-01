@@ -11,24 +11,27 @@ describe('media header tests', function () {
       Content = arguments[1];
       Backbone = arguments[2];
 
-      var cont = new Content();
-      cont.set({
-        'title': 'Book',
-        'currentPage': {
-          'title': 'Chapter'
-        }
-      });
-      cont.get('currentPage').get('title');
+      var model = new Content();
+      model.set('title', 'Book');
+      var curPage = (new Content()).asPage();
+      curPage.set('title', 'Chapter');
+      model.set('currentPage', curPage);
       myHeader = new MediaHeaderView({
-        'model': cont
+        'model': model
       });
       done();
     });
   });
   describe('title update test', function () {
-    it('should include the title and page name in title', function () {
+    it('should include the title and page name in title when updateTitle is called', function () {
       myHeader.updateTitle();
       myHeader.pageTitle.should.equal('Book - Chapter');
+    });
+    it('should automatically call updateTitle when currentPage changes', function () {
+      var newCurPage = new Content();
+      newCurPage.set('title', 'New Chapter');
+      myHeader.model.set('currentPage', newCurPage);
+      myHeader.pageTitle.should.equal('Book - New Chapter');
     });
   });
 });
