@@ -41,7 +41,7 @@
       // Content shortcodes
       shortcodes: {
         'college-physics': '031da8d3-b525-429c-80cf-6c8ed997733a@8.1',
-        'college-introduction_to_sociology': 'afe4332a-c97f-4fc4-be27-4e4d384a32d8@7.15',
+        'college-introduction-to-sociology': 'afe4332a-c97f-4fc4-be27-4e4d384a32d8@7.15',
         'biology': '185cbf87-c72e-48f5-b51e-f14f21b5eabd@9.44',
         'concepts-of-biology': 'b3c1e1d2-839c-42b0-a314-e119a8aafbdd@8.39',
         'anatomy-and-physiology': '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@6.19',
