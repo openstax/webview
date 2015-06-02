@@ -1,37 +1,42 @@
 describe('media header tests', function () {
   'use strict';
-  var MediaHeaderView, Content, myHeader, Backbone;
-  // var should = chai.should();
+  var headerView, content, page;
+  var Header, Page, Content, Backbone;
 
   beforeEach(function (done) {
     this.timeout(10000);
 
-    require(['cs!modules/media/header/header', 'cs!models/content', 'backbone'], function () {
-      MediaHeaderView = arguments[0];
-      Content = arguments[1];
-      Backbone = arguments[2];
+    require(['cs!modules/media/header/header', 'cs!models/content', 'cs!models/content', 'backbone'],
+      function () {
+        Header = arguments[0];
+        Content = arguments[1];
+        Page = arguments[2];
+        Backbone = arguments[3];
 
-      var model = new Content();
-      model.set('title', 'Book');
-      var curPage = (new Content()).asPage();
-      curPage.set('title', 'Chapter');
-      model.set('currentPage', curPage);
-      myHeader = new MediaHeaderView({
-        'model': model
+        content = new Content();
+        headerView = new Header({
+          'model': content
+        });
+        page = new Page();
+        done();
       });
-      done();
-    });
   });
   describe('title update test', function () {
     it('should include the title and page name in title when updateTitle is called', function () {
-      myHeader.updateTitle();
-      myHeader.pageTitle.should.equal('Book - Chapter');
+      page.set('title', 'Page');
+      content.set('currentPage', page);
+      content.set('title', 'Book');
+      headerView = new Header({
+        'model': content
+      });
+      headerView.updateTitle();
+      headerView.pageTitle.should.equal('Book - Page');
     });
     it('should automatically call updateTitle when currentPage changes', function () {
-      var newCurPage = new Content();
-      newCurPage.set('title', 'New Chapter');
-      myHeader.model.set('currentPage', newCurPage);
-      myHeader.pageTitle.should.equal('Book - New Chapter');
+      content.set('title', 'Book');
+      page.set('title', 'New Chapter');
+      content.set('currentPage', page);
+      headerView.pageTitle.should.equal('Book - New Chapter');
     });
   });
 });
