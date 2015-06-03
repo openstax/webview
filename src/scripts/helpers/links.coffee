@@ -20,6 +20,10 @@ define (require) ->
           uuid = data.model.getVersionedId()
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
           title = data.model.get('title')
+          if data.model.asPage?()
+            #Gets the right information at least
+            title += "_=)_"
+            #alert('2' + title)
           url += "contents/#{uuid}"
           url += ":#{data.page}" if data.page
           url += "/#{trim(title)}" if title
@@ -32,10 +36,14 @@ define (require) ->
       id = model.getUuid?() or model.id
       version = model.get?('version') or model.version
       title = trim(model.get?('title') or model.title)
-
+      if model.asPage?()
+        title += " =) "
       if model.isBook?()
         page = ":#{model.getPageNumber()}"
 
+      
+      # alert("4: #{settings.root}contents/#{id}#{page}/#{title}")
+      # spaces on the first one, next 3 or so have no smiley whatsoever
       return "#{settings.root}contents/#{id}#{page}/#{title}"
 
     getCurrentPathComponents: () ->
@@ -43,7 +51,8 @@ define (require) ->
       path = components[0]
       if path?.slice(-1) is '/'
         path = path.slice(0, -1)
-
+      #alert('URL @getCPC: ' + path)
+      #at first no smiley, then _=)_
       return {
         path: path
         uuid: components[1]
@@ -61,7 +70,6 @@ define (require) ->
         item = prop.split('=')
         if item.length is 2
           queryString[decodeURIComponent(item.shift())] = decodeURIComponent(item.shift())
-
       return queryString
 
     param: (obj) ->

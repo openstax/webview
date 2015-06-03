@@ -72,10 +72,13 @@ define (require) ->
     updateUrl: () ->
       components = linksHelper.getCurrentPathComponents()
       components.version = "@#{components.version}" if components.version
-      title = linksHelper.cleanUrl(@model.get('title'))
+      title = linksHelper.cleanUrl(@model.get('title')+'_=)_')
       qs = components.rawquery
 
       if title isnt components.title
+        alert('In updateURL, title: '+title)
+        # ^ DOESN"T HAVE SMILEY, probs cuz just getting title (and cutting)?
+        alert('In updateURL, components.title: ' + components.title)
         router.navigate("contents/#{components.uuid}#{components.version}/#{title}#{qs}", {replace: true})
 
     trackAnalytics: () ->
