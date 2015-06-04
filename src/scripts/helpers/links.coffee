@@ -20,7 +20,7 @@ define (require) ->
           uuid = data.model.getVersionedId()
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
           title = data.model.get('title')
-          if data.model.asPage?()
+          if data.model.get?('currentPage') and data.model.get('currentPage')?
             title = data.model.get('currentPage').get('title')
           url += "contents/#{uuid}"
           url += ":#{data.page}" if data.page
