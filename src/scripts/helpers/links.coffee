@@ -18,9 +18,10 @@ define (require) ->
         when 'contents'
           uuid = data.model.getVersionedId()
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
-          title = data.model.get('title')
           if data.model.asPage?() and data.model.get('currentPage')?
             title = data.model.get('currentPage').get('title')
+          else
+            title = data.model.get('title')
           url += "contents/#{uuid}"
           url += ":#{data.page}" if data.page
           url += "/#{trim(title)}" if title
@@ -32,10 +33,10 @@ define (require) ->
       page = ''
       id = model.getUuid?() or model.id
       version = model.get?('version') or model.version
-      title = trim(model.get?('title') or model.title)
       if model.asPage?() and model.get('currentPage')?
         title = trim(model.get?('currentPage').get('title') or model.title)
-
+      else
+        title = trim(model.get?('title') or model.title)
       if model.isBook?()
         page = ":#{model.getPageNumber()}"
       return "#{settings.root}contents/#{id}#{page}/#{title}"
@@ -45,7 +46,8 @@ define (require) ->
       path = components[0]
       if path?.slice(-1) is '/'
         path = path.slice(0, -1)
-
+      #alert('URL @getCPC: ' + path)
+      #at first no smiley, then _=)_
       return {
         path: path
         uuid: components[1]
@@ -63,7 +65,6 @@ define (require) ->
         item = prop.split('=')
         if item.length is 2
           queryString[decodeURIComponent(item.shift())] = decodeURIComponent(item.shift())
-
       return queryString
 
     param: (obj) ->
