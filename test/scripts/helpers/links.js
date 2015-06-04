@@ -31,6 +31,9 @@ describe('links helper tests', function () {
           getVersionedId: function () {
             return 'not real';
           },
+          asPage: function () {
+            return true;
+          },
           get: function () {
             return {
               get: function () {
@@ -49,6 +52,9 @@ describe('links helper tests', function () {
           getVersionedId: function () {
             return '031da8d3-b525-429c-80cf-6c8ed997733a@8.1';
           },
+          asPage: function () {
+            return true;
+          },
           get: function () {
             return {
               get: function () {
@@ -66,6 +72,9 @@ describe('links helper tests', function () {
         model: {
           getVersionedId: function () {
             return '031da8d3-b525-429c-80cf-6c8ed997733a@8.1';
+          },
+          asPage: function () {
+            return true;
           },
           get: function () {
             return {
