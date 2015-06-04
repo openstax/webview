@@ -34,7 +34,6 @@ define (require) ->
 
     initialize: (options) ->
       super()
-      alert('init: o.vers: '+options.version + ' , o.page: ' + options.page)
       if not options or not options.uuid
         throw new Error('A media view must be instantiated with the uuid of the media to display')
 
@@ -49,7 +48,6 @@ define (require) ->
       @listenTo(@model, 'change:editable', @toggleEditor)
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updateUrl)
       @listenTo(@model, 'change:abstract', @updateSummary)
-      alert('model created?')
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))
@@ -74,16 +72,10 @@ define (require) ->
       components = linksHelper.getCurrentPathComponents()
       components.version = "@#{components.version}" if components.version
       title = linksHelper.cleanUrl(@model.get('title'))
-      alert('beginning updateUrl2')
       if @model.asPage?() and @model.asPage()?
-        alert('in')
-        alert('media.cof current page: ' + @model.get('currentPage').get('title'))
-        title = @model.get('currentPage').get('title')
-      else
-        alert('out')
+        title = linksHelper.cleanUrl(@model.get('currentPage').get('title'))
       qs = components.rawquery
 
-      alert('end updateUrl')
       if title isnt components.title
         router.navigate("contents/#{components.uuid}#{components.version}/#{title}#{qs}", {replace: true})
 

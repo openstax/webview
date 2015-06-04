@@ -14,7 +14,6 @@ define (require) ->
 
     getPath: (page, data) ->
       url = settings.root
-      #alert('beginning getPath')
       switch page
         when 'contents'
           uuid = data.model.getVersionedId()
@@ -26,23 +25,19 @@ define (require) ->
           url += ":#{data.page}" if data.page
           url += "/#{trim(title)}" if title
 
-      #alert('end get path')
       return url
 
     # Get the URL to view a given content model
     getModelPath: (model) ->
-      #alert('beginning getModelPath')
       page = ''
       id = model.getUuid?() or model.id
       version = model.get?('version') or model.version
       title = trim(model.get?('title') or model.title)
       if model.asPage?() and model.get('currentPage')?
-        alert('dm: '+ (model.get?('currentPage').get('title') or model.title))
-        title = model.get?('currentPage').get('title') or model.title
+        title = trim(model.get?('currentPage').get('title') or model.title)
 
       if model.isBook?()
         page = ":#{model.getPageNumber()}"
-      #alert('end getModelPath')
       return "#{settings.root}contents/#{id}#{page}/#{title}"
 
     getCurrentPathComponents: () ->
