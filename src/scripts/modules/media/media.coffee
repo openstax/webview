@@ -148,7 +148,7 @@ define (require) ->
       key[e.keyCode] = true
       #ctrl+alt+shift+l+i
       if key[16] and key[17] and key[18] and key[73] and key[76]
-        if @model.get('canChangeLicense')
+        if @model.get('canChangeLicense') or @model.get('derivedFrom') is null
           $('#license-modal').modal('show')
 
     resetKeySequence: (e) ->
