@@ -8,4 +8,4 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:currentPage.license', @render)
+      @listenTo(@model, 'change:licenseCode', @render)

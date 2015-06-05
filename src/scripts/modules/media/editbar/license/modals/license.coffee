@@ -56,6 +56,7 @@ define (require) ->
             page.set('changed', true)
 
       @parent.model.set('changed', true)
+      @parent.model.set('licenseCode', @parent.model.get('license').code)
 
     selectedLicense: (license, model, selectedLicense) ->
       license.setLicense(model.code = selectedLicense.get('code'))
