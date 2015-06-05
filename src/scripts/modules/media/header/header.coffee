@@ -71,6 +71,7 @@ define (require) ->
       @listenTo(@model, 'change:abstract change:currentPage.abstract', @render)
       @listenTo(session, 'change', @render)
       @listenTo(@model, 'change:currentPage.editable change:currentPage.canPublish', @render)
+      @listenTo(@model, 'change:currentPage', @updateTitle)
 
     onRender: () ->
       if not @model.asPage()?.get('active') then return
@@ -110,3 +111,8 @@ define (require) ->
           router.navigate(href, {trigger: false, analytics: true})
 
       @model.deriveCurrentPage(options)
+
+    updateTitle: () ->
+      @pageTitle = @model.get('title')
+      if @model.asPage()?
+        @pageTitle = "#{@model.get('title')} - #{@model.get('currentPage').get('title')}"
