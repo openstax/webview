@@ -1,7 +1,7 @@
 define (require) ->
   Handlebars = require('hbs/handlebars')
 
-  trim = (str = '') -> str.replace(/\s/g, '_').substring(0, 30)
+  trim = (str = '') -> str.replace(/\s/g, '-').substring(0, 30)
 
   Handlebars.registerHelper 'trim', (str) -> trim(str)
 
