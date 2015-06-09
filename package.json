@@ -13,7 +13,8 @@
     "url": "https://github.com/Connexions/webview.git"
   },
   "dependencies": {
-    "grunt": "~0.4.5"
+    "grunt": "~0.4.5",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "grunt-contrib-requirejs": "~0.4.4",
