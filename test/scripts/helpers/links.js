@@ -36,7 +36,7 @@ describe('links helper tests', function () {
           }
         }
       };
-      links.getPath(page, data).should.equal('/contents/not real/book_title');
+      links.getPath(page, data).should.equal('/contents/not real/book-title');
     });
     it('should append uuid and book title from settings to url', function () {
       var page = 'contents';
@@ -50,7 +50,7 @@ describe('links helper tests', function () {
           }
         }
       };
-      links.getPath(page, data).should.equal('/contents/college_physics/book_title');
+      links.getPath(page, data).should.equal('/contents/college-physics/book-title');
     });
     it('should append uuid, page info and book title to url', function () {
       var page = 'contents';
@@ -65,7 +65,7 @@ describe('links helper tests', function () {
         },
         page: 'page'
       };
-      links.getPath(page, data).should.equal('/contents/college_physics:page/book_title');
+      links.getPath(page, data).should.equal('/contents/college-physics:page/book-title');
     });
   });
   describe('serialize query tests', function () {
