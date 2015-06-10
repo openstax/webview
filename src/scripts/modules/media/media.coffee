@@ -73,6 +73,8 @@ define (require) ->
       components = linksHelper.getCurrentPathComponents()
       components.version = "@#{components.version}" if components.version
       title = linksHelper.cleanUrl(@model.get('title'))
+      if @model.asPage?() and @model.asPage()?
+         title = linksHelper.cleanUrl(@model.get('currentPage').get('title'))
       qs = components.rawquery
 
       if title isnt components.title
