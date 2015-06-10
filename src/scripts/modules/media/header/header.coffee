@@ -61,6 +61,7 @@ define (require) ->
       @listenTo(@model, 'change:currentPage', @updateModelListener)
       @listenTo(session, 'change', @render)
       @listenTo(@page, 'change:active change:loaded', @updateModelListener) if @page
+      @listenTo(@model, 'change:currentPage', @redoTitle)
 
     updateModelListener: () ->
       @setupModelListener()
@@ -84,6 +85,11 @@ define (require) ->
 
       $summary.find('h5').toggleClass('active')
       @$el.find('.abstract').toggle()
+
+    redoTitle: () ->
+      @pageTitle = @model.get('title')
+      if @model.asPage()?
+        @pageTitle = "#{@model.get('currentPage').get('title')} - #{@model.get('title')}"
 
     #derivePage: () ->
     #  options =
