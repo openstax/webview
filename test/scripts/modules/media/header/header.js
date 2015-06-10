@@ -20,7 +20,7 @@ describe('media header tests', function () {
       content.set('title', 'Book');
       page.set('title', 'New Chapter');
       content.set('currentPage', page);
-      headerView.updateTitle().should.equal('Book - New Chapter');
+      headerView.updateTitle().should.equal('New Chapter - Book');
     });
   });
 });
