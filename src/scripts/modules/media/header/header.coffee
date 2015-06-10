@@ -115,4 +115,4 @@ define (require) ->
     updateTitle: () ->
       @pageTitle = @model.get('title')
       if @model.asPage()?
-        @pageTitle = "#{@model.get('title')} - #{@model.get('currentPage').get('title')}"
+        @pageTitle = "#{@model.get('currentPage').get('title')} - #{@model.get('title')}"
