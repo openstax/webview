@@ -40,7 +40,7 @@ define (require) ->
       if model.isBook?()
         page = ":#{model.getPageNumber()}"
 
-      return "#{settings.root}contents/#{id}#{page}/#{title}"
+      return "#{settings.root}contents/#{id}#{version}:#{page}/#{title}"
 
     getCurrentPathComponents: () ->
       components = Backbone.history.fragment.match(@componentRegEx) or []
