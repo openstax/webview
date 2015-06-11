@@ -20,7 +20,7 @@ define (require) ->
           uuid = data.model.getVersionedId()
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
           title = data.model.get('title')
-          if data.model.asPage?() and data.model.get('currentPage')?
+          if data.model.isBook() and data.model.get('currentPage')?
             title = data.model.get('currentPage').get('title')
           url += "contents/#{uuid}"
           url += ":#{data.page}" if data.page
@@ -34,10 +34,9 @@ define (require) ->
       id = model.getUuid?() or model.id
       version = model.get?('version') or model.version
       title = trim(model.get?('title') or model.title)
-      if model.asPage?() and model.get('currentPage')?
-        title = trim(model.get?('currentPage').get('title') or model.title)
 
       if model.isBook?()
+        title = trim(model.get?('currentPage').get('title') or model.title)
         page = ":#{model.getPageNumber()}"
 
       return "#{settings.root}contents/#{id}#{page}/#{title}"
