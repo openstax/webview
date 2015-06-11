@@ -51,6 +51,8 @@ define (require) ->
         if canEdit isnt undefined and canEdit.toString().indexOf(session.get('id')) < 0
           if @model.get('license')?.code isnt settings.defaultLicense.code
             @model.set('canChangeLicense', false)
+          else
+            @model.set('canChangeLicense', true)
           return true
 
     editable:
