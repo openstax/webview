@@ -32,14 +32,10 @@ describe('links helper tests', function () {
             return 'not real';
           },
           get: function () {
-            return {
-              get: function () {
-                return 'page title!';
-              }
-            };
+            return 'page title';
           },
           isBook: function () {
-            return true;
+            return false;
           }
         }
       };
@@ -53,20 +49,16 @@ describe('links helper tests', function () {
             return '031da8d3-b525-429c-80cf-6c8ed997733a@8.1';
           },
           get: function () {
-            return {
-              get: function () {
-                return 'page title!';
-              }
-            };
+            return 'book title';
           },
           isBook: function () {
-            return true;
+            return false;
           }
         }
       };
-      links.getPath(page, data).should.equal('/contents/college-physics/page-title');
+      links.getPath(page, data).should.equal('/contents/college-physics/book-title');
     });
-    it('should append uuid, page info and page title to url', function () {
+    it('should append uuid, book info and page title to url', function () {
       var page = 'contents';
       var data = {
         model: {
@@ -74,6 +66,9 @@ describe('links helper tests', function () {
             return '031da8d3-b525-429c-80cf-6c8ed997733a@8.1';
           },
           get: function () {
+            return 'book name';
+          },
+          _lookupPage: function () {
             return {
               get: function () {
                 return 'page title!';
