@@ -4,5 +4,11 @@ define (require) ->
   return class Book extends Backbone.Model
     defaults:
       title: 'Untitled Book'
-      cover: '/images/books/default.png'
       description: 'This book has no description.'
+      cover: '/images/books/default.png'
+      version: ''
+      legacy_id: ''
+      legacy_version: ''
+      type: ''
+      id: ''
+      link: ''
