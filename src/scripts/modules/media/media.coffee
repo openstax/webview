@@ -77,7 +77,7 @@ define (require) ->
         title = linksHelper.cleanUrl(@model.get('currentPage').get('title'))
       qs = components.rawquery
 
-      if title isnt components.title
+      if title isnt components.title and not @model.asPage()?
         router.navigate("contents/#{components.uuid}#{components.version}/#{title}#{qs}", {replace: true})
 
     trackAnalytics: () ->
