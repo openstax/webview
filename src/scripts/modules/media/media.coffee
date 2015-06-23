@@ -73,11 +73,9 @@ define (require) ->
       components = linksHelper.getCurrentPathComponents()
       components.version = "@#{components.version}" if components.version
       title = linksHelper.cleanUrl(@model.get('title'))
-      if @model.isBook() and @model.asPage()?
-        title = linksHelper.cleanUrl(@model.get('currentPage').get('title'))
       qs = components.rawquery
 
-      if title isnt components.title and not @model.isBook() and @model.asPage()?
+      if title isnt components.title and not @model.isBook()
         router.navigate("contents/#{components.uuid}#{components.version}/#{title}#{qs}", {replace: true})
 
     trackAnalytics: () ->
