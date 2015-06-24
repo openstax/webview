@@ -69,7 +69,7 @@ define (require) ->
     # Update page title, canonical link and Open Graph tags
     updatePageInfo: () ->
       # If this is a page in a book/collection
-      if @pageTitle and @model? and linksHelper.getCurrentPathComponents().page?
+      if @model? and linksHelper.getCurrentPathComponents().page?
         # Only update title if the new one belongs to the current page
         if @model.getPageNumber().toString() is linksHelper.getCurrentPathComponents().page
           document.title = @pageTitle + settings.titleSuffix if @pageTitle
