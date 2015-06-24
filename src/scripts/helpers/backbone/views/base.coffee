@@ -68,16 +68,17 @@ define (require) ->
 
     # Update page title, canonical link and Open Graph tags
     updatePageInfo: () ->
-      # If this is a page in a book/collection
-      if @model? and linksHelper.getCurrentPathComponents().page?
-        # Only update title if the new one belongs to the current page
-        if @model.getPageNumber().toString() is linksHelper.getCurrentPathComponents().page
-          document.title = @pageTitle + settings.titleSuffix if @pageTitle
-        if @model.getPageNumber().toString() is '1' and linksHelper.getCurrentPathComponents().page is ''
-          document.title = @pageTitle + settings.titleSuffix if @pageTitle
-      # Just update the title if it's a standalone page
-      else
-        document.title = @pageTitle + settings.titleSuffix if @pageTitle
+      if @pageTitle
+        # If this is a page in a book/collection
+        if @model? and linksHelper.getCurrentPathComponents().page?
+          # Only update title if the new one belongs to the current page
+          if @model.getPageNumber().toString() is linksHelper.getCurrentPathComponents().page
+            document.title = @pageTitle + settings.titleSuffix
+          if @model.getPageNumber().toString() is '1' and linksHelper.getCurrentPathComponents().page is ''
+            document.title = @pageTitle + settings.titleSuffix
+        # Just update the title if it's a standalone page
+        else
+          document.title = @pageTitle + settings.titleSuffix
 
       canonical = @canonical?() or @canonical
       if canonical isnt undefined
