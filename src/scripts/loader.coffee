@@ -5,6 +5,7 @@ define (require) ->
   session = require('cs!session')
   analytics = require('cs!helpers/handlers/analytics')
   router = require('cs!router')
+  require('cs!helpers/bootstrap-modal')
   require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
   require('less!../styles/main')
 
