@@ -36,7 +36,7 @@ define (require) ->
       title = trim(model.get?('title') or model.title)
 
       if model.isBook?()
-        title = trim(model.get('currentPage').get('title')) if model.get('currentPage')?
+        title = trim(model.get('currentPage')?.get('title'))
         page = ":#{model.getPageNumber()}"
 
       return "#{settings.root}contents/#{id}#{page}/#{title}"
