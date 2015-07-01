@@ -68,17 +68,15 @@ define (require) ->
 
     # Update page title, canonical link and Open Graph tags
     updatePageInfo: () ->
-      # Only update the title if there is a new page title and it's different from the old one
-      if @model? and @pageTitle and @pageTitle + settings.titleSuffix isnt document.title
-        # If this is a page in a book/collection
-        if linksHelper.getCurrentPathComponents().page? and @model.get('currentPage')?
-          # Only update title if the new one belongs to the current page
-          if @model.getPageNumber().toString() is linksHelper.getCurrentPathComponents().page
+      currentPage = @model.getPageNumber().toString() if @model? and @model.isBook?()
+      if Backbone.history.fragment? and linksHelper.getCurrentPathComponents().page?
+        historyPage = linksHelper.getCurrentPathComponents().page
+      if @pageTitle
+        # If it's a page in a book
+        if currentPage? and historyPage?
+          if currentPage is historyPage or currentPage is '1' and historyPage is ''
             document.title = @pageTitle + settings.titleSuffix
-          if @model.getPageNumber().toString() is '1' and linksHelper.getCurrentPathComponents().page is ''
-            document.title = @pageTitle + settings.titleSuffix
-        # Just update the title if it's a standalone page
-        else if not @model.isBook?()
+        else
           document.title = @pageTitle + settings.titleSuffix
 
       canonical = @canonical?() or @canonical
