@@ -104,6 +104,10 @@ define (require) ->
               try
                 $target = $temp.find(href)
                 tag = $target?.prop('tagName')?.toLowerCase()
+                
+                if $target?.attr('data-type') isnt undefined
+                  tag = $target?.attr('data-type')?.toLowerCase()
+
                 if $el.text() is '[link]' and tag
                   tag = tag.charAt(0).toUpperCase() + tag.substring(1)
                   $el.text("#{tag}") if tag isnt 'undefined'
