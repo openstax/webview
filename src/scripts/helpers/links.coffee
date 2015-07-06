@@ -20,6 +20,8 @@ define (require) ->
           uuid = data.model.getVersionedId()
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
           title = data.model.get('title')
+          if data.model.isBook() and data.page?
+            title = data.model._lookupPage(data.page).get('title')
           url += "contents/#{uuid}"
           url += ":#{data.page}" if data.page
           url += "/#{trim(title)}" if title
@@ -34,6 +36,7 @@ define (require) ->
       title = trim(model.get?('title') or model.title)
 
       if model.isBook?()
+        title = trim(model.get('currentPage')?.get('title'))
         page = ":#{model.getPageNumber()}"
 
       return "#{settings.root}contents/#{id}#{page}/#{title}"

@@ -72,6 +72,7 @@ define (require) ->
       @listenTo(session, 'change', @render)
       @listenTo(@model, 'change:currentPage.editable change:currentPage.canPublish', @render)
       @listenTo(@model, 'change:currentPage', @updateTitle)
+      @listenTo(router, 'navigate', @updatePageInfo)
 
     onRender: () ->
       if not @model.asPage()?.get('active') then return

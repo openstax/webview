@@ -24,7 +24,7 @@ describe('links helper tests', function () {
       };
       links.getPath(page, data).should.equal('/');
     });
-    it('should append fake uuid and book title to url', function () {
+    it('should append fake uuid and page title to url', function () {
       var page = 'contents';
       var data = {
         model: {
@@ -32,13 +32,16 @@ describe('links helper tests', function () {
             return 'not real';
           },
           get: function () {
-            return 'book title';
+            return 'page title';
+          },
+          isBook: function () {
+            return false;
           }
         }
       };
-      links.getPath(page, data).should.equal('/contents/not real/book-title');
+      links.getPath(page, data).should.equal('/contents/not real/page-title');
     });
-    it('should append uuid and book title from settings to url', function () {
+    it('should append uuid and page title from settings to url', function () {
       var page = 'contents';
       var data = {
         model: {
@@ -47,12 +50,15 @@ describe('links helper tests', function () {
           },
           get: function () {
             return 'book title';
+          },
+          isBook: function () {
+            return false;
           }
         }
       };
       links.getPath(page, data).should.equal('/contents/college-physics/book-title');
     });
-    it('should append uuid, page info and book title to url', function () {
+    it('should append uuid, book info and page title to url', function () {
       var page = 'contents';
       var data = {
         model: {
@@ -60,12 +66,22 @@ describe('links helper tests', function () {
             return '031da8d3-b525-429c-80cf-6c8ed997733a@8.1';
           },
           get: function () {
-            return 'book title';
+            return 'book name';
+          },
+          _lookupPage: function () {
+            return {
+              get: function () {
+                return 'page title!';
+              }
+            };
+          },
+          isBook: function () {
+            return true;
           }
         },
         page: 'page'
       };
-      links.getPath(page, data).should.equal('/contents/college-physics:page/book-title');
+      links.getPath(page, data).should.equal('/contents/college-physics:page/page-title');
     });
   });
   describe('serialize query tests', function () {
