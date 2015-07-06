@@ -69,7 +69,7 @@ define (require) ->
     # Update page title, canonical link and Open Graph tags
     updatePageInfo: () ->
       currentPage = @model.getPageNumber().toString() if @model? and @model.isBook?()
-      if Backbone.history.fragment? and linksHelper.getCurrentPathComponents().page?
+      if Backbone.history.fragment?.match? and linksHelper.getCurrentPathComponents().page?
         historyPage = linksHelper.getCurrentPathComponents().page
       if @pageTitle
         # If it's a page in a book
