@@ -111,7 +111,7 @@ define (require) ->
           $temp.find('figcaption').each (i, el) ->
             $(el).parent().append(el)
 
-          # Convert figure and table links to show the proper name
+          # Convert figure, table, exercise, problem and note links to show the proper name
           $temp.find('a:not([data-type=footnote-number])').each (i, el) ->
             $el = $(el)
             href = $el.attr('href')
@@ -119,7 +119,12 @@ define (require) ->
             if href.substr(0, 1) is '#' and href.length > 1 and $el.data('type') isnt 'footnote-ref'
               try
                 $target = $temp.find(href)
-                tag = $target?.attr('data-type')?.toLowerCase()
+
+                tag = $target?.prop('tagName')?.toLowerCase()
+
+                if $target?.attr('data-type') isnt undefined
+                  tag = $target?.attr('data-type')?.toLowerCase()
+
                 if $el.text() is '[link]' and tag
                   tag = tag.charAt(0).toUpperCase() + tag.substring(1)
                   $el.text("#{tag}") if tag isnt 'undefined'
