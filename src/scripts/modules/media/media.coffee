@@ -39,7 +39,7 @@ define (require) ->
       @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage pageLoaded', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       #@listenTo(@model, 'change:editable', @toggleEditor)
-      @listenTo(@model, 'change:title change:currentPage pageLoaded', @updateUrl)
+      @listenTo(@model, 'pageLoaded', @updateUrl)
       @listenTo(@model, 'change:abstract', @updateSummary)
 
     onRender: () ->
@@ -62,10 +62,13 @@ define (require) ->
 
     updateUrl: () ->
       components = linksHelper.getCurrentPathComponents()
+      components.version = "@#{@model.get('version')}" if @model.get('version')
       title = linksHelper.cleanUrl(@model.get('title'))
+      if @model.get('currentPage')?.get('title')?
+        title = linksHelper.cleanUrl(@model.get('currentPage').get('title'))
 
-      if title and not components.title
-        router.navigate("#{components.path}/#{title}", {replace: true})
+      if title isnt components.title
+        router.navigate("contents/#{components.uuid}#{components.version}/#{title}", {replace: true})
 
     trackAnalytics: () ->
       # Track loading using the media's own analytics ID, if specified
