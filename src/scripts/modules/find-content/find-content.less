@@ -21,14 +21,18 @@
     text-decoration: none;
   }
 
-  > h3, > span {
+  > label > h3 {
+    color: @gray-lighter;
+  }
+
+  > label > h3,
+  > span {
     line-height: @bar-height;
     text-align: center;
   }
 
-  > h3 {
+  > label {
     .flex(2; 0; auto);
-    color: @gray-lighter;
 
     @media screen and (max-width: @screen-xs-max) {
       display: block;
