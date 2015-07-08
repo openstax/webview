@@ -40,7 +40,9 @@ define (require) ->
       @listenTo(@model, 'change:error', @displayError)
       #@listenTo(@model, 'change:editable', @toggleEditor)
       @listenTo(@model, 'pageLoaded', @updateUrl)
+      @listenTo(@model, 'change:active', @updateUrl)
       @listenTo(@model, 'change:abstract', @updateSummary)
+
 
     onRender: () ->
       @regions.media.append(new MediaEndorsedView({model: @model}))
