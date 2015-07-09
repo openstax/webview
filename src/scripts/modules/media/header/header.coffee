@@ -62,6 +62,7 @@ define (require) ->
       @listenTo(session, 'change', @render)
       @listenTo(@page, 'change:active change:loaded', @updateModelListener) if @page
       @listenTo(@model, 'change:currentPage', @setTitle)
+      @listenTo(router, 'navigate', @updateTitle)
 
     updateModelListener: () ->
       @setupModelListener()

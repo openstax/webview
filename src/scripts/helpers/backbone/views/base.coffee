@@ -71,7 +71,17 @@ define (require) ->
     updateTitle: () ->
       if @pageTitle
         @addCanonicalMetaDataToDerivedCopies()
-        document.title = @pageTitle + settings.titleSuffix
+        #document.title = @pageTitle + settings.titleSuffix
+        currentPage = @model.getPageNumber().toString() if @model? and @model.isBook?()
+        if Backbone.history.fragment?.match? and linksHelper.getCurrentPathComponents().page?
+          historyPage = linksHelper.getCurrentPathComponents().page
+        if @pageTitle
+          # If it's a page in a book
+          if currentPage? and historyPage?
+            if currentPage is historyPage or currentPage is '1' and historyPage is ''
+              document.title = @pageTitle + settings.titleSuffix
+          else
+            document.title = @pageTitle + settings.titleSuffix
       @addMetaTags()
 
     getTemplate: () -> @template?(@getTemplateData()) or @template
