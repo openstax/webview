@@ -39,8 +39,7 @@ define (require) ->
       @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage pageLoaded', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       #@listenTo(@model, 'change:editable', @toggleEditor)
-      @listenTo(@model, 'pageLoaded', @updateUrl)
-      @listenTo(@model, 'change:active', @updateUrl)
+      @listenTo(@model, 'pageLoaded change:active', @updateUrl)
       @listenTo(@model, 'change:abstract', @updateSummary)
 
 
