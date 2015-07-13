@@ -26,6 +26,7 @@ define (require) ->
     renderDom: () ->
       @$el.html @_infoTemplate
         title: @title
+        short: @title.replace(/[^A-Za-z0-9]*/g, '')
         link: @link
         linkTitle: @linkTitle
         content: @getTemplate()
@@ -39,11 +40,13 @@ define (require) ->
 
       if @_expanded
         @_expanded = false
+        $(e.currentTarget).attr('aria-expanded', 'false')
         @$el.find('.link-title').text(@linkTitle)
         @$el.find('.arrow').text('▸')
         @less?()
       else
         @_expanded = true
+        $(e.currentTarget).attr('aria-expanded', 'true')
         @$el.find('.link-title').text(@linkExpandedTitle)
         @$el.find('.arrow').text('▾')
         @more?()
