@@ -1,7 +1,7 @@
-<div id="featured-books" class="featured-books carousel">
+<div class="featured-books carousel">
   <div class="books">
     {{#each this}}
-      {{> modules/featured-books/featured-books-partial}}
+      {{> modules/featured-books/featured-books-partial prefix='car'}}
     {{/each}}
   </div>
 </div>
@@ -11,7 +11,7 @@
   <div class="books">
   {{#each this}}
     {{#is type 'OpenStax Featured'}}
-      {{> modules/featured-books/featured-books-partial}}
+      {{> modules/featured-books/featured-books-partial prefix='stax'}}
     {{/is}}
   {{/each}}
   </div>
@@ -22,7 +22,7 @@
   <div class="books">
   {{#each this}}
     {{#is type 'CNX Featured'}}
-      {{> modules/featured-books/featured-books-partial}}
+      {{> modules/featured-books/featured-books-partial prefix='cnx'}}
     {{/is}}
   {{/each}}
   </div>
