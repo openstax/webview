@@ -86,6 +86,7 @@ define (require) ->
 
     Backbone.history.start
       pushState: true
+      hashChange: false
       root: root
 
     # Force Backbone to register the full path including the query in its history
