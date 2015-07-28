@@ -18,6 +18,9 @@ define (require) ->
       accountProfile: settings.accountProfile
     }
 
+    events:
+      'click #skiptocontent a': 'skipToContent'
+
     initialize: (options = {}) ->
       super()
       @page = options.page
@@ -30,6 +33,23 @@ define (require) ->
 
     onRender: () ->
       @regions.siteStatus.show(new SiteStatusView())
+
+    skipToContent: (e) ->
+      el = document.getElementById('main')
+
+      if el
+        if !/^(?:a|select|input|button|textarea)$/i.test(el.tagName)
+          el.tabIndex = -1
+
+          removeTabIndex = () ->
+            this.removeAttribute('tabindex')
+            this.removeEventListener('blur', removeTabIndex, false)
+            this.removeEventListener('focusout', removeTabIndex, false)
+
+          el.addEventListener('blur', removeTabIndex, false)
+          el.addEventListener('focusout', removeTabIndex, false)
+
+        el.focus()
 
     setLegacyLink: (url) ->
       if url
