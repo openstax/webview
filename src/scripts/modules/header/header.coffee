@@ -13,6 +13,7 @@ define (require) ->
     templateHelpers: () -> {
       legacy: settings.legacy
       page: @page
+      results: !!document.getElementById('results')
       url: @url
       username: session.get('id')
       accountProfile: settings.accountProfile
@@ -20,6 +21,7 @@ define (require) ->
 
     events:
       'click #skiptocontent a': 'skipToContent'
+      'click #skiptoresults a': 'skipToResults'
 
     initialize: (options = {}) ->
       super()
@@ -34,8 +36,8 @@ define (require) ->
     onRender: () ->
       @regions.siteStatus.show(new SiteStatusView())
 
-    skipToContent: (e) ->
-      el = document.getElementById('main')
+    skipTo: (id) ->
+      el = document.getElementById(id)
 
       if el
         if !/^(?:a|select|input|button|textarea)$/i.test(el.tagName)
@@ -50,6 +52,12 @@ define (require) ->
           el.addEventListener('focusout', removeTabIndex, false)
 
         el.focus()
+
+    skipToContent: () ->
+      @skipTo('main')
+
+    skipToResults: () ->
+      @skipTo('results')
 
     setLegacyLink: (url) ->
       if url
