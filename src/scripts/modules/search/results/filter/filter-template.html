@@ -2,23 +2,24 @@
 <ul class="filters">
   {{#each results.limits}}
     <li>
-      <h5 class="filter-name">{{this.name}}</h5>
-      <ul class="{{#gt values.length 6}}collapsed{{/gt}}">
+      <h5 class="filter-name">{{name}}</h5>
+      <dl class="dl-horizontal {{#gt values.length 6}}collapsed{{/gt}}">
         {{#each values}}
-          <li class="limit {{#gt @index 5}}overflow hidden{{/gt}}">
-            <span class="limit-name">
-              <a href="{{../../url}} {{../tag}}:&quot;{{this.value}}&quot;">
-                {{#if this.displayValue}}
-                  {{this.displayValue}}
-                {{else}}
-                  {{this.value}}
-                {{/if}}
-              </a>
-            </span>
-            <span class="count">{{this.count}}</span>
-          </li>
+          <dt class="limit {{#gt @index 5}}overflow hidden{{/gt}}">
+            <a href="{{../../url}} {{../tag}}:&quot;{{value}}&quot;">
+              {{#if displayValue}}
+                {{displayValue}}
+              {{else}}
+                {{value}}
+              {{/if}}
+            </a>
+          </dt>
+          <dd class="count {{#gt @index 5}}overflow hidden{{/gt}}">{{count}}</dd>
         {{/each}}
-      </ul>
+        {{#gt values.length 6}}
+          <li class="toggle"><span class="text" tabindex="0" data-name="{{name}}" arai-expanded="false">More {{name}}s...</span></li>
+        {{/gt}}
+      </dl>
     </li>
   {{/each}}
 </ul>

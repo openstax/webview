@@ -1,12 +1,12 @@
 <tr>
   <td class="type">
     {{#is mediaType 'application/vnd.org.cnx.collection'}}
-      <span class="fa fa-book"></span>
+      <span class="fa fa-book" aria-label="book"></span>
     {{else}}
       {{#is mediaType 'application/vnd.org.cnx.module'}}
-        <span class="fa fa-file"></span>
+        <span class="fa fa-file" arai-label="file"></span>
       {{else}}
-        <span class="fa fa-question-circle"></span>
+        <span class="fa fa-question-circle" aria-label="unknown"></span>
       {{/is}}
     {{/is}}
   </td>

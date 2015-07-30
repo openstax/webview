@@ -22,27 +22,34 @@ define (require) ->
         return url
 
     events:
-      'click .toggle': 'toggleLimits'
+      'click .toggle, keydown .toggle': 'toggleLimits'
+      'keydown .toggle': 'toggleLimitsKeyboard'
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:results', @render)
 
-    onRender: () ->
-      @$el.find('.collapsed').append('<li class="toggle"><span class="text">More...</span></li>')
+    toggleLimit: ($target) ->
+      $limits = $target.siblings('.overflow')
+      $text = $target.children('.text')
+      name = $text.data('name')
+
+      if $text.attr('aria-expanded') is 'true'
+        $limits.addClass('hidden')
+        $text.text("More #{name}s...")
+        $text.removeClass('less')
+        $text.attr('aria-expanded', 'false')
+      else
+        $limits.removeClass('hidden')
+        $text.text("Less #{name}s...")
+        $text.addClass('less')
+        $text.attr('aria-expanded', 'true')
 
     toggleLimits: (e) ->
       $target = $(e.currentTarget)
-      $limits = $target.siblings('.overflow')
-      $text = $target.children('.text')
+      @toggleLimit($target)
 
-      if @expanded
-        $limits.addClass('hidden')
-        $text.text('More...')
-        $text.removeClass('less')
-        @expanded = false
-      else
-        $limits.removeClass('hidden')
-        $text.text('Less...')
-        $text.addClass('less')
-        @expanded = true
+    toggleLimitsKeyboard: (e) ->
+      if e.keyCode is 13 or e.keyCode is 32
+        $target = $(e.currentTarget)
+        @toggleLimit($target)
