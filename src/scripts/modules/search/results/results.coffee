@@ -1,5 +1,6 @@
 define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
+  router = require('cs!router')
   SearchHeaderView = require('cs!../header/header')
   SearchResultsFilterView = require('cs!./filter/filter')
   SearchResultsBreadcrumbsView = require('cs!./breadcrumbs/breadcrumbs')
@@ -21,3 +22,5 @@ define (require) ->
       @regions.filter.show(new SearchResultsFilterView({model: @model}))
       @regions.breadcrumbs.show(new SearchResultsBreadcrumbsView({model: @model}))
       @regions.list.show(new SearchResultsListView({model: @model}))
+
+      router.appView.regions.header.views[0].render()

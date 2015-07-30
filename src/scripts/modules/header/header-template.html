@@ -6,6 +6,11 @@
     <div id="skiptocontent">
       <a href="#main">skip to main content</a>
     </div>
+    {{#if results}}
+      <div id="skiptoresults">
+        <a href="#results">skip to results</a>
+      </div>
+    {{/if}}
     <ul>
       {{#if username}}
         <li><a data-bypass="true" href="{{accountProfile}}">Account Profile</a></li>
