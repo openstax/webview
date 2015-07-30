@@ -29,23 +29,21 @@ define (require) ->
       super()
       @listenTo(@model, 'change:results', @render)
 
-    onRender: () ->
-      @$el.find('.collapsed').append('<li class="toggle"><span class="text" tabindex="0">More...</span></li>')
-
     toggleLimit: ($target) ->
       $limits = $target.siblings('.overflow')
       $text = $target.children('.text')
+      name = $text.data('name')
 
-      if @expanded
+      if $text.attr('aria-expanded') is 'true'
         $limits.addClass('hidden')
-        $text.text('More...')
+        $text.text("More #{name}s...")
         $text.removeClass('less')
-        @expanded = false
+        $text.attr('aria-expanded', 'false')
       else
         $limits.removeClass('hidden')
-        $text.text('Less...')
+        $text.text("Less #{name}s...")
         $text.addClass('less')
-        @expanded = true
+        $text.attr('aria-expanded', 'true')
 
     toggleLimits: (e) ->
       $target = $(e.currentTarget)

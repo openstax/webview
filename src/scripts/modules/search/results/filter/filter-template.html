@@ -16,6 +16,9 @@
           </dt>
           <dd class="count {{#gt @index 5}}overflow hidden{{/gt}}">{{count}}</dd>
         {{/each}}
+        {{#gt values.length 6}}
+          <li class="toggle"><span class="text" tabindex="0" data-name="{{name}}" arai-expanded="false">More {{name}}s...</span></li>
+        {{/gt}}
       </dl>
     </li>
   {{/each}}
