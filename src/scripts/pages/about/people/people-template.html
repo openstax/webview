@@ -8,30 +8,30 @@
       Without their strong engagement of our mission,the goal of free access to high-quality
       textbooks would remain elusive.</p>
 
-    <div class="foundations">
+    <ul class="foundations">
       {{#each foundations}}
-        <div class="foundation">
+        <li class="foundation">
           <a href="{{url}}"><img alt="{{name}}" src="/images/people/foundations/{{image}}" /></a>
           <p>{{about}}</p>
-        </div>
+        </li>
       {{/each}}
-    </div>
+    </ul>
   </div>
 
   <div class="advisors-wrapper">
     <a name="strategic-advisors"/>
     <h2>Strategic Advisors</h2>
 
-    <div class="avatars">
+    <ul class="avatars">
       {{#each advisors}}
-        <div class="person">
+        <li class="person">
           <div class="info">
             <img alt="{{name}}" src="/images/people/avatars/{{image}}" />
             <span class="name">{{name}}</span>
           </div>
-        </div>
+        </li>
       {{/each}}
-    </div>
+    </ul>
   </div>
 
   <div class="team-wrapper">
@@ -40,16 +40,16 @@
     <p class="subheader-text">OpenStax College is brought to you by a team of open education professionals dedicated
       to increasing global access to high-quality learning materials for students and teachers.</p>
 
-    <div class="avatars">
+    <ul class="avatars">
       {{#each members}}
-        <div class="person">
+        <li class="person">
           <div class="info">
             <img alt="{{name}}" src="/images/people/avatars/{{image}}" />
             <span class="name">{{name}}</span>
             <span class="title">{{title}}</span>
           </div>
-        </div>
+        </li>
       {{/each}}
-    </div>
+    </ul>
   </div>
 </div>
