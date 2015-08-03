@@ -51,5 +51,6 @@ define (require) ->
 
     toggleLimitsKeyboard: (e) ->
       if e.keyCode is 13 or e.keyCode is 32
+        e.preventDefault()
         $target = $(e.currentTarget)
         @toggleLimit($target)
