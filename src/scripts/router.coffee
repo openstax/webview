@@ -23,6 +23,9 @@ define (require) ->
       @route 'contents', 'contents', () ->
         @appView.render('contents')
 
+      @route 'tos', 'tos', () ->
+        @appView.render('tos')
+
       @route /^users\/role-acceptance\/(.+)/, 'role-acceptance', () ->
         @appView.render('role-acceptance')
 
