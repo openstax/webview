@@ -1,0 +1,22 @@
+@import "../../../styles/variables.less";
+@import "../../../styles/mixins.less";
+
+#tos {
+  margin: 40px 20px;
+
+  h1, h2 {
+    margin-bottom: 30px;
+  }
+
+  h3, h4 {
+    margin-bottom: 15px;
+  }
+
+  > .tos-wrapper {
+    .make-row();
+
+    > .tos-content {
+      .make-sm-column(12);
+    }
+  }
+}
