@@ -3,6 +3,7 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   PublishModal = require('cs!./modals/publish')
   BlockPublishModal = require('cs!./block-publish/modals/block-publish')
+  LicenseModal = require('cs!./license/modals/license')
   template = require('hbs!./editbar-template')
   require('less!./editbar')
   require('bootstrapButton')
@@ -33,6 +34,7 @@ define (require) ->
       super()
       @parent?.regions.self.append(new PublishModal({model: @model}))
       @parent?.regions.self.append(new BlockPublishModal({model: @model}))
+      @parent?.regions.self.append(new LicenseModal({parent: @}))
 
       require ['aloha'], (Aloha) =>
         Aloha.ready () =>

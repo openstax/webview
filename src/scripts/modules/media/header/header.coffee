@@ -1,6 +1,7 @@
 define (require) ->
   _ = require('underscore')
   session = require('cs!session')
+  settings = require('settings')
   linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')
@@ -41,14 +42,18 @@ define (require) ->
       if @model.asPage()?.get('loaded') and @model.isDraft()
         edit = @model.asPage()?.get('canPublish')
         if edit isnt undefined and edit.toString().indexOf(session.get('id')) >= 0 and not @model.asPage()?.isDraft()
+          @model.set('canChangeLicense', true)
           return true
 
     isDerivable: () ->
       if @model.asPage()?.get('loaded') and @model.isDraft()
         canEdit = @model.asPage()?.get('canPublish')
         if canEdit isnt undefined and canEdit.toString().indexOf(session.get('id')) < 0
+          if @model.get('license')?.code isnt settings.defaultLicense.code
+            @model.set('canChangeLicense', false)
+          else
+            @model.set('canChangeLicense', true)
           return true
-
 
     editable:
       '.media-header > .title > h2':
@@ -97,7 +102,6 @@ define (require) ->
             model: @model
             page: @model.getPageNumber()
           router.navigate(href, {trigger: false, analytics: true})
-
       @model.editOrDeriveContent(options, data)
 
 

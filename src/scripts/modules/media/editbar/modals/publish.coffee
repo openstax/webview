@@ -15,7 +15,6 @@ define (require) ->
 
   return class PublishModal extends BaseView
     template: template
-
     regions:
       contents: '.publish-contents'
 
@@ -28,9 +27,7 @@ define (require) ->
 
     initialize: () ->
       super()
-
-      @listenTo(@model, 'removeNode moveNode add:contents change:title', @render)
-
+      @listenTo(@model, 'removeNode moveNode add:contents change:title change:changed', @render)
 
     onRender: () ->
       @regions.contents.show(new PublishedListSectionView({model: @model}))

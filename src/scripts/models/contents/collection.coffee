@@ -94,6 +94,8 @@ define (require) ->
 
         contents.create(model, opts or options)
 
+
+
       @set('changed', true)
 
       return @

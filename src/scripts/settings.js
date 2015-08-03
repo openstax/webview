@@ -59,6 +59,10 @@
         // // Copied from https://exercises-dev1.openstax.org/api/exercises?q=tag:k12phys-ch04-s01-lo01
         // return 'http://localhost:8000/data/exercises.json';
         return 'https://exercises-dev1.openstax.org/api/exercises?q=tag:' + itemCode;
+      },
+
+      defaultLicense: {
+        code: 'by'
       }
 
     };

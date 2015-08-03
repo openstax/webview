@@ -1,6 +1,7 @@
 define (require) ->
   $ = require('jquery')
   _ = require('underscore')
+  settings = require('settings')
   linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   searchResults = require('cs!models/search-results')
@@ -217,9 +218,13 @@ define (require) ->
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed
 
     newPage: (title) ->
+      license = @model.get('license')
       options =
         success: (model) =>
           @model.setPage(model)
           @updateUrl()
 
-      @model.create({title: title}, options)
+      if @model.get('license').code isnt settings.defaultLicense.code
+        license = { 'code': license.code, 'name': license.name, 'url': license.url, 'version': license.version }
+
+      @model.create({title: title, license: license}, options)
