@@ -45,7 +45,7 @@ define (require) ->
         .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
       'keydown .media-body': 'checkKeySequence'
       'keyup .media-body': 'resetKeySequence'
-      'click .os-interactive': 'simLink'
+      'click .os-interactive-link': 'simLink'
 
     initialize: () ->
       super()
@@ -73,7 +73,7 @@ define (require) ->
       try
         if @model.get('loaded') and @model.asPage()?.get('loaded') and @model.asPage()?.get('active')
 
-          if $temp.find('.os-interactive .os-embed')
+          if $temp.find('.os-interactive-link')
             @model.set('sims', true)
 
           # Remove the module title and abstract TODO: check if it is still necessary
