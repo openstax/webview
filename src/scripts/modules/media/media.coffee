@@ -33,10 +33,9 @@ define (require) ->
     summary:() -> @updateSummary()
     description: () -> @updateSummary()
 
-    events: {
+    events:
       'keydown .media-title > .title input': 'checkKeySequence'
       'keyup .media-title > .title input': 'resetKeySequence'
-    }
 
     initialize: (options) ->
       super()

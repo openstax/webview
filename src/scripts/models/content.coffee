@@ -266,13 +266,3 @@ define (require) ->
         $('#publish-modal').modal()
       else
         $('#reject-publish-modal').modal()
-
-    license: () ->
-      license = undefined
-      @setLicense = (value) ->
-        license = value
-        return
-
-      @getLicense = ->
-        license
-      return

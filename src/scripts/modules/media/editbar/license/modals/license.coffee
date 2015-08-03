@@ -15,10 +15,9 @@ define (require) ->
       isBook: if @parent.model.get('mediaType') is 'application/vnd.org.cnx.collection' then true
       license: @parent.model.get('license')
 
-    events: {
+    events:
       'click input[name="licenses"]': 'setLicense'
       'click .btn-submit': 'close'
-    }
 
     initialize: (options) ->
       @listenTo(@collection, 'reset', @render)
@@ -33,17 +32,17 @@ define (require) ->
       selectedValue = @$el.find('input[name="licenses"]:checked').val()
       selectedLicense = ''
       _.each licenses, (license) ->
-        if license.get('code') is selectedValue
+        versionedCode = "#{license.get('code')}-#{license.get('version')}"
+        if versionedCode is selectedValue
           selectedLicense = license
       return selectedLicense
 
     changeLicense: () ->
       licenseModel = @parent.model.get('license')
       selectedLicense = @setLicense()
-      license = new @parent.model.license
 
       if @parent.model.get('state') is 'Draft'
-        @selectedLicense(license, licenseModel, selectedLicense)
+        @selectedLicense(licenseModel, selectedLicense)
 
       if @parent.model.get('contents')?.models.length
         pages = @parent.model.get('contents').models
@@ -58,8 +57,8 @@ define (require) ->
       @parent.model.set('changed', true)
       @parent.model.set('licenseCode', @parent.model.get('license').code)
 
-    selectedLicense: (license, model, selectedLicense) ->
-      license.setLicense(model.code = selectedLicense.get('code'))
-      license.setLicense(model.name = selectedLicense.get('name'))
-      license.setLicense(model.url = selectedLicense.get('url'))
-      license.setLicense(model.version = selectedLicense.get('version'))
+    selectedLicense: (model, selectedLicense) ->
+      model.code = selectedLicense.get('code')
+      model.name = selectedLicense.get('name')
+      model.url = selectedLicense.get('url')
+      model.version = selectedLicense.get('version')
