@@ -7,6 +7,21 @@ define (require) ->
   require('less!./nav')
 
   return class MediaNavView extends BaseView
+    next: () ->
+      if @model.isBook()
+        next = @model.getNextPageNumber()
+        if next isnt @model.getTotalPages()
+          return linksHelper.getPath('contents', {model: @model, page: next})
+      return 'none'
+
+    prev: () ->
+      if @model.isBook()
+        prev = @model.getPreviousPageNumber()
+        cur = @model.getPageNumber()
+        if cur isnt 1
+          return linksHelper.getPath('contents', {model: @model, page: prev})
+      return 'none'
+
     template: template
     templateHelpers: () ->
       page = @model.getPageNumber()
