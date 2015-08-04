@@ -63,18 +63,23 @@ describe('backbone base view helper tests', function () {
       // canonical should still not have been set
       should.not.exist(document.querySelector('link[rel=\'canonical\']'));
     });
-    it('should change canonical', function () {
+    it('should change rel=next/prev', function () {
       // set it the first time
       var myBase = new BaseView();
-      myBase.canonical = 'something';
+      myBase.next = 'something1';
+      myBase.prev = 'something2';
       myBase.updatePageInfo();
-      document.querySelector('link[rel=\'canonical\']').getAttribute('href').should.equal('something');
+      document.querySelector('link[rel=\'next\']').getAttribute('href').should.equal('something1');
+      document.querySelector('link[rel=\'prev\']').getAttribute('href').should.equal('something2');
 
       // remove the old and reset
-      myBase.canonical = 'somethingElse';
+      myBase.next = 'somethingElse1';
+      myBase.prev = 'somethingElse2';
       myBase.updatePageInfo();
-      document.querySelector('link[rel=\'canonical\']').getAttribute('href').should.equal('somethingElse');
-      document.querySelectorAll('link[rel=\'canonical\']').length.should.equal(1);
+      document.querySelector('link[rel=\'next\']').getAttribute('href').should.equal('somethingElse1');
+      document.querySelector('link[rel=\'prev\']').getAttribute('href').should.equal('somethingElse2');
+      document.querySelectorAll('link[rel=\'next\']').length.should.equal(1);
+      document.querySelectorAll('link[rel=\'prev\']').length.should.equal(1);
     });
   });
 
