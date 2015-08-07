@@ -9,6 +9,7 @@ define (require) ->
 
   return class SearchPage extends BaseView
     template: template
+    canonical: null
     next: null
     prev: null
     summary: 'Search for textbooks'

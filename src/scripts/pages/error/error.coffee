@@ -9,6 +9,7 @@ define (require) ->
   return class ErrorPage extends BaseView
     template: template
     templateHelpers: () -> {error: @error}
+    canonical: null
     next: null
     prev: null
 

@@ -9,6 +9,7 @@ define (require) ->
   return class WorkspacePage extends BaseView
     template: template
     pageTitle: 'My Workspace'
+    canonical: null
     next: null
     prev: null
     summary: 'Add new content or find content and derive a copy for editing.'

@@ -18,6 +18,12 @@ define (require) ->
 
   return class MediaView extends BaseView
     key = []
+    canonical: () ->
+      uuid = @model.getUuid()
+      if uuid
+        return "//#{location.host}/contents/#{uuid}/"
+      else
+        return null
 
     template: template
     regions:

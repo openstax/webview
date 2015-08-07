@@ -15,6 +15,7 @@ define (require) ->
     templateHelpers:
       legacy: settings.legacy
     pageTitle: 'About OpenStax CNX'
+    canonical: null
     next: null
     prev: null
     summary: 'About OpenStax CNX'

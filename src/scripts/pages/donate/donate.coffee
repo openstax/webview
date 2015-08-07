@@ -13,6 +13,7 @@ define (require) ->
   return class DonatePage extends BaseView
     template: template
     pageTitle: 'Support OpenStax CNX'
+    canonical: null
     next: null
     prev: null
     summary: 'Donate to OpenStax CNX'

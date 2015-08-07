@@ -66,7 +66,7 @@ define (require) ->
     renderDom: () ->
       @$el?.html(@getTemplate())
 
-    # Update page title, next/prev link and Open Graph tags
+    # Update page title, next/prev and canonical links, and Open Graph tags
     updatePageInfo: () ->
       currentPage = @model.getPageNumber().toString() if @model? and @model.isBook?()
       if Backbone.history.fragment?.match? and linksHelper.getCurrentPathComponents().page?
@@ -78,6 +78,11 @@ define (require) ->
             document.title = @pageTitle + settings.titleSuffix
         else
           document.title = @pageTitle + settings.titleSuffix
+
+      canonical = @canonical?() or @canonical
+      if canonical isnt undefined
+        $('link[rel="canonical"]').remove()
+        $('head').append("<link rel=\"canonical\" href=\"#{canonical}\" />"> if canonical
 
       next = @next?() or @next
       if next isnt undefined
