@@ -82,7 +82,7 @@ define (require) ->
       canonical = @canonical?() or @canonical
       if canonical isnt undefined
         $('link[rel="canonical"]').remove()
-        $('head').append("<link rel=\"canonical\" href=\"#{canonical}\" />"> if canonical
+        $('head').append("<link rel=\"canonical\" href=\"#{canonical}\" />") if canonical
 
       next = @next?() or @next
       if next isnt undefined
