@@ -3,7 +3,7 @@
 {{#if loaded}}
   {{#if hasContent}}
     {{! set id because Aloha's semanticblock hardcodes this id }}
-    <div class="media-body {{#if editable}}draft{{/if}} {{#is status 'publishing'}}publishing{{/is}}">
+    <div class="media-body">
       <div id="content">
         {{include content}}
       </div>
