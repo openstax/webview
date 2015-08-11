@@ -40,8 +40,8 @@ define (require) ->
       'click a': 'changePage'
       'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle,
         .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
-      'keydown .media-body': 'checkKeySequence'
-      'keyup .media-body': 'resetKeySequence'
+      #'keydown .media-body': 'checkKeySequence'
+      #'keyup .media-body': 'resetKeySequence'
       'click .os-interactive-link': 'simLink'
 
     regions:
@@ -405,20 +405,21 @@ define (require) ->
     ###
 
     fakeExercises: ($parent) ->
-      sections = $parent.find('section[data-depth="1"]')
+      return
+      #sections = $parent.find('section[data-depth="1"]')
 
-      appendFakeExercise = (section, iter) ->
-        $(section).append(fakeExerciseTemplates[iter % fakeExerciseTemplates.length])
+      #appendFakeExercise = (section, iter) ->
+      #  $(section).append(fakeExerciseTemplates[iter % fakeExerciseTemplates.length])
 
-      _.each(sections, appendFakeExercise)
+      #_.each(sections, appendFakeExercise)
 
     onRender: () ->
       @trigger('render')
       currentPage = @model.asPage()
       return unless currentPage?
       page = currentPage ? @model.get('contents')?.models[0]?.get('book')
-      if currentPage.get('loaded') and @model.isDraft()
-        @parent?.regions.self.append(new ProcessingInstructionsModal({model: @model}))
+      #if @model.asPage()?.get('loaded') and @model.isDraft()
+      #  @parent?.regions.self.append(new ProcessingInstructionsModal({model: @model}))
 
       return unless currentPage.get('active')
       if @model.get('sims') is true
@@ -475,21 +476,23 @@ define (require) ->
       @render() # Re-render body view to cleanup aloha issues
 
     checkKeySequence: (e) ->
-      key[e.keyCode] = true
-      if @model.isDraft()
+      return
+      #key[e.keyCode] = true
+      #if @model.isDraft()
         #ctrl+alt+shift+p+i
-        if key[16] and key[17] and key[18] and key[73] and key[80]
-          instructionTags = []
-          processingInstructions = @$el.find('.media-body').find('cnx-pi')
+      #  if key[16] and key[17] and key[18] and key[73] and key[80]
+      #    instructionTags = []
+      #    processingInstructions = @$el.find('.media-body').find('cnx-pi')
 
-          _.each processingInstructions, (instruction) ->
-            instructionTags.push(instruction.outerHTML)
+      #    _.each processingInstructions, (instruction) ->
+      #      instructionTags.push(instruction.outerHTML)
 
-          $('#pi').val(instructionTags.join('\n'))
-          $('#processing-instructions-modal').modal('show')
+      #    $('#pi').val(instructionTags.join('\n'))
+      #    $('#processing-instructions-modal').modal('show')
 
     resetKeySequence: (e) ->
-      key[e.keyCode] = false
+      return
+      #key[e.keyCode] = false
 
     simLink: (evt) ->
       evt.preventDefault()
