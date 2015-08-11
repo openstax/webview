@@ -4,7 +4,7 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   ContentsView = require('cs!./contents/contents')
   MetadataView = require('cs!./metadata/metadata')
-  ToolsView = require('cs!./tools/tools')
+  #ToolsView = require('cs!./tools/tools')
   template = require('hbs!./tabs-template')
   require('less!./tabs')
 
@@ -16,7 +16,7 @@ define (require) ->
     regions:
       contents: '.contents'
       metadata: '.metadata'
-      tools: '.tools'
+      #tools: '.tools'
 
     events:
       'click .tab': 'selectTab'
@@ -29,7 +29,7 @@ define (require) ->
     onRender: () ->
       @regions.contents.show(new ContentsView({model: @model}))
       @regions.metadata.show(new MetadataView({model: @model}))
-      @regions.tools.show(new ToolsView({model: @model}))
+      #@regions.tools.show(new ToolsView({model: @model}))
 
       components = linksHelper.getCurrentPathComponents()
 
