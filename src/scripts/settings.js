@@ -10,14 +10,14 @@
 
       // Hostname and port for the cnx-archive server
       cnxarchive: {
-        host: 'archive-cte-cnx-dev.cnx.org',
+        host: 'archive.cnx.org',
         port: 80
       },
 
       // Hostname and port for the cnx-authoring server
       cnxauthoring: {
-        host: location.hostname,
-        port: 8080
+        host: 'cnx.org',
+        port: 80
       },
 
       // Prefix to prepend to page titles
