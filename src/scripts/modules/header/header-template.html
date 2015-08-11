@@ -12,10 +12,6 @@
       </div>
     {{/if}}
     <ul>
-      {{#if username}}
-        <li><a data-bypass="true" href="{{accountProfile}}">Account Profile</a></li>
-        <li><a data-bypass="true" href="/logout">Log Out {{username}}</a></li>
-      {{/if}}
       {{#if cnxSupport}}
         <li><a href="{{cnxSupport}}" title="Go to CNX Support">Support</a></li>
       {{/if}}
@@ -44,7 +40,6 @@
           <li {{#is page 'browse'}}class="active"{{/is}}><a href="/browse">Search</a></li>
           <li {{#is page 'about'}}class="active"{{/is}}><a href="/about">About Us</a></li>
           <li {{#is page 'donate'}}class="active"{{/is}}><a href="/donate">Give</a></li>
-          <li {{#is page 'workspace'}}class="active"{{/is}}><a href="/workspace">My Workspace</a></li>
           <li>
             <a href="http://www.rice.edu">
               <img src="/images/rice.png" class="rice" alt="Rice University" width="74" height="32" />
