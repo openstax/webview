@@ -1,0 +1,30 @@
+<a href="/search?minimal=true" class="advanced-search btn">Advanced Search</a>
+{{#if results.items.length}}
+  {{! Books }}
+  {{#if books.length}}
+    {{> modules/minimal/search/results/list/table-partial authorList=authorList item=books}}
+  {{/if}}
+
+  {{! Pages }}
+  {{#if pages.length}}
+    {{> modules/minimal/search/results/list/table-partial authorList=authorList item=pages}}
+  {{/if}}
+
+  {{! Results of an unknown type }}
+  {{#if misc.length}}
+    {{> modules/minimal/search/results/list/table-partial authorList=authorList item=misc}}
+  {{/if}}
+{{else}}
+  {{#if loaded}}
+    <p style="margin: 20px auto;">No results found. Please try expanding your search.</p>
+  {{else}}
+    <h2>Search Results</h2>
+    <div class="progress progress-striped active">
+      <div class="progress-bar secondary" role="progressbar" style="width: 100%">
+        <span class="sr-only">Loading</span>
+      </div>
+    </div>
+  {{/if}}
+{{/if}}
+
+{{> modules/minimal/search/results/list/pagination-partial pagination}}

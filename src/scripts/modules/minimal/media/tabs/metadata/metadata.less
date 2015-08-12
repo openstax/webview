@@ -1,0 +1,74 @@
+@import "../../../../../../styles/variables.less";
+@import "../../../../../../styles/mixins.less";
+
+.media-tabs .metadata {
+  position: relative;
+  padding: 35px 10px 10px 10px;
+  color: black;
+
+  .book-page-toggle {
+    position: absolute;
+    right: 40px;
+    top: 5px;
+
+    .btn {
+      color: black;
+      border: 1px solid @gray-lightest;
+      background-color: white;
+    }
+
+    .active {
+      color: black;
+      border: 1px solid transparent;
+      background-color: @gray-lightest;
+    }
+  }
+
+  > div > dl {
+    margin-bottom: 0;
+
+    > dt {
+      padding: 10px 0;
+      width: 125px;
+      text-align: left;
+      color: @gray-dark;
+    }
+
+    > dd {
+      margin: 0;
+      border-bottom: 1px solid @gray-lighter;
+
+      &:last-child {
+        border: none;
+      }
+
+      > div {
+        padding: 10px 10px 10px 125px;
+
+        > ul {
+          padding: 0 0 0 15px;
+        }
+      }
+
+      .pending {
+        background: rgba(243, 207, 54, 0.75) !important;
+        font-style: italic;
+      }
+
+      .rejected {
+        background: rgba(217, 83, 79, 0.75) !important;
+        text-decoration: line-through;
+      }
+    }
+
+    .summary {
+      min-height: 2.75rem;
+      background-color: #fff;
+    }
+
+    [contenteditable = "true"] {
+      border: 1px solid #aaa;
+      border-radius: 4px;
+    }
+  }
+}

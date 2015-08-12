@@ -1,0 +1,62 @@
+{{#if currentPage.loaded}}
+  <div class="media-header{{#is status 'publishing'}} publishing{{/is}}">
+    {{#if authenticated}}
+      {{#if derivable}}
+        <div class="derive tool">
+          <a class="btn">Create an Editable Copy</a>
+        </div>
+      {{/if}}
+      {{#if editable}}
+      <div class="edit tool">
+        <a class="btn">Edit Page</a>
+      </div>
+      {{/if}}
+    {{/if}}
+
+    <div class="title" align="center">
+      <h2>
+        {{#is status 'publishing'}}
+          <span class="label label-info">publishing</span>
+        {{/is}}
+        {{currentPage.title}}
+      </h2>
+      {{#if currentPage.parent.id}}
+        <span>
+          Derived from <a href="/contents/{{currentPage.parent.id}}@{{currentPage.parent.version}}">{{currentPage.parent.title}}</a> by
+          <span class="book-authors">
+            {{#each currentPage.parent.authors}}
+              <span class="list-comma">{{fullname}}</span>
+            {{/each}}
+          </span>
+        </span>
+      {{/if}}
+    </div>
+
+    <div class="info" align="center">
+      <div class="downloads">
+        {{#or hasDownloads buyLink}}
+          {{#is mediaType 'application/vnd.org.cnx.collection'}}
+            <a class="btn">Get This Book!</a>
+          {{else}}
+            <a class="btn">Get This Page!</a>
+          {{/is}}
+        {{/or}}
+      </div>
+      {{#if currentPage.authors.length}}
+        <span>Page by:</span>
+        <span class="page-authors">
+          {{~#each currentPage.authors~}}
+            <span class="list-comma">{{fullname}}</span>
+          {{~/each}}
+        </span>
+      {{/if}}
+    </div>
+
+    {{#if currentPage.abstract}}
+      <div class="summary">
+        <h5>Summary</h5>
+        <div class="abstract">{{include currentPage.abstract}}</div>
+      </div>
+    {{/if}}
+  </div>
+{{/if}}
