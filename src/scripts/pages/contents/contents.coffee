@@ -1,8 +1,11 @@
 define (require) ->
   $ = require('jquery')
+  linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
   HeaderView = require('cs!modules/header/header')
+  MinimalHeaderView = require('cs!modules/minimal/header/header')
   FooterView = require('cs!modules/footer/footer')
+  MinimalFooterView = require('cs!modules/minimal/footer/footer')
   FindContentView = require('cs!modules/find-content/find-content')
   BrowseContentView = require('cs!modules/browse-content/browse-content')
   MediaView = require('cs!modules/media/media')
@@ -25,18 +28,30 @@ define (require) ->
       @page = options.page
       @title = options.title
 
+      queryString = linksHelper.serializeQuery(location.search)
+      @minimal = false
+      if queryString.minimal
+        @minimal = true
+
     regions:
       contents: '#contents'
 
     onRender: () ->
-      @parent.regions.footer.show(new FooterView({page: 'contents'}))
-      @regions.contents.show(new FindContentView())
+      if not @minimal
+        @regions.contents.show(new FindContentView())
+        @parent.regions.footer.show(new FooterView({page: 'contents'}))
+      else
+        @parent.regions.footer.show(new MinimalFooterView({page: 'contents'}))
+
 
       #clearTimeout(@_pollingContentTimer)
 
       if @uuid
-        @parent.regions.header.show(new HeaderView({page: 'contents'}))
-        view = new MediaView({uuid: @uuid, version: @version, page: @page, title: @title})
+        if not @minimal
+          @parent.regions.header.show(new HeaderView({page: 'contents'}))
+        else
+          @parent.regions.header.show(new MinimalHeaderView({page: 'contents'}))
+        view = new MediaView({uuid: @uuid, version: @version, page: @page, title: @title, minimal: @minimal})
         @regions.contents.append(view)
 
         ###

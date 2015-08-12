@@ -5,6 +5,7 @@ define (require) ->
   analytics = require('cs!helpers/handlers/analytics')
   Content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
+
   MediaEndorsedView = require('cs!./endorsed/endorsed')
   LatestView = require('cs!./latest/latest')
   MediaTitleView = require('cs!./title/title')
@@ -13,6 +14,14 @@ define (require) ->
   MediaHeaderView = require('cs!./header/header')
   MediaBodyView = require('cs!./body/body')
   MediaFooterView = require('cs!./footer/footer')
+
+  MinimalMediaTitleView = require('cs!modules/minimal/media/title/title')
+  MinimalMediaTabsView = require('cs!modules/minimal/media/tabs/tabs')
+  MinimalMediaHeaderView = require('cs!modules/minimal/media/header/header')
+  MinimalMediaBodyView = require('cs!modules/minimal/media/body/body')
+  MinimalMediaFooterView = require('cs!modules/minimal/media/footer/footer')
+  MinimalMediaNavView = require('cs!modules/minimal/media/nav/nav')
+
   template = require('hbs!./media-template')
   require('less!./media')
 
@@ -45,26 +54,37 @@ define (require) ->
 
       @uuid = options.uuid
       @model = new Content({id: @uuid, version: options.version, page: options.page})
+      @minimal = options.minimal
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title change:parent.id', @updatePageInfo)
-      @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage
-        change:currentPage.loaded', @updateLegacyLink)
+      if not @minimal
+        @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage
+          change:currentPage.loaded', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:editable', @toggleEditor)
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updateUrl)
       @listenTo(@model, 'change:abstract', @updateSummary)
 
     onRender: () ->
-      @regions.media.append(new MediaEndorsedView({model: @model}))
-      @regions.media.append(new LatestView({model: @model}))
-      @regions.media.append(new MediaTitleView({model: @model}))
-      @regions.media.append(new MediaTabsView({model: @model}))
-      @regions.media.append(new MediaNavView({model: @model}))
-      @regions.media.append(new MediaHeaderView({model: @model}))
-      @regions.media.append(new MediaBodyView({model: @model}))
-      @regions.media.append(new MediaFooterView({model: @model}))
-      @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
+      if @minimal
+        @regions.media.append(new MinimalMediaTitleView({model: @model}))
+        @regions.media.append(new MinimalMediaTabsView({model: @model}))
+        @regions.media.append(new MinimalMediaNavView({model: @model}))
+        @regions.media.append(new MinimalMediaHeaderView({model: @model}))
+        @regions.media.append(new MinimalMediaBodyView({model: @model}))
+        @regions.media.append(new MinimalMediaFooterView({model: @model}))
+        @regions.media.append(new MinimalMediaNavView({model: @model, hideProgress: true}))
+      else
+        @regions.media.append(new MediaEndorsedView({model: @model}))
+        @regions.media.append(new LatestView({model: @model}))
+        @regions.media.append(new MediaTitleView({model: @model}))
+        @regions.media.append(new MediaTabsView({model: @model}))
+        @regions.media.append(new MediaNavView({model: @model}))
+        @regions.media.append(new MediaHeaderView({model: @model}))
+        @regions.media.append(new MediaBodyView({model: @model}))
+        @regions.media.append(new MediaFooterView({model: @model}))
+        @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
 
     updateSummary: () ->
       abstract = @model.get('abstract')
