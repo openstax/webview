@@ -148,15 +148,15 @@ define (require) ->
                 if href.search(/http:/) < 0
                   $el.attr('href', href+"?minimal=true")
           else
-              $temp.find('a:not([data-type=footnote-number])').each (i, el) =>
-                $el = $(el)
-                href = $el.attr('href')
-                if href.search(/http:/) < 0
-                  hashIndex = href.indexOf('#')
-                  if hashIndex > 0
-                    $el.attr('href', href[..hashIndex-1]+"?minimal=true"+href[hashIndex..])
-                  else if hashIndex < 0
-                    $el.attr('href', href+"?minimal=true")
+            $temp.find('a:not([data-type=footnote-number])').each (i, el) ->
+              $el = $(el)
+              href = $el.attr('href')
+              if href.search(/http:/) < 0
+                hashIndex = href.indexOf('#')
+                if hashIndex > 0
+                  $el.attr('href', href[..hashIndex-1]+"?minimal=true"+href[hashIndex..])
+                else if hashIndex < 0
+                  $el.attr('href', href+"?minimal=true")
 
           # Add nofollow to external user-generated links
           $temp.find('a[href^="http:"], a[href^="https:"], a[href^="//"]').attr('rel', 'nofollow')
