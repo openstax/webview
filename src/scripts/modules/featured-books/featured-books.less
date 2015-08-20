@@ -7,7 +7,7 @@
   overflow: hidden;
 
   > h2 {
-    padding-bottom:20px;
+    padding-bottom:2rem;
   }
 
   > .books {
@@ -18,7 +18,7 @@
     > .book {
       .make-sm-column(6);
       display: none;
-      margin-bottom: 30px; // Add spacing between books when they're aligned vertically
+      margin-bottom: 3rem; // Add spacing between books when they're aligned vertically
 
       &::after {
       	display: block;
@@ -34,12 +34,12 @@
       }
 
       &:nth-child(2n+1) {
-        padding-right: 15px;
+        padding-right: 1.5rem;
         padding-left: 0;
       }
 
       &:nth-child(2n) {
-        padding-left: 15px;
+        padding-left: 1.5rem;
       }
 
       @media screen and (max-width: @screen-xs-max) {
@@ -48,12 +48,12 @@
 
       img {
         float: left;
-        margin-right: 20px;
+        margin-right: 2rem;
         border: 0;
       }
 
       h4 {
-        margin-bottom: 10px;
+        margin-bottom: 1rem;
 
         a {
           font-weight: 300;
@@ -63,12 +63,12 @@
 
      .read-more {
        position:absolute;
-       bottom:10px;
-       right:20px;
+       bottom:1rem;
+       right:2rem;
 
        > :after {
          content: '▸';
-         margin-left:5px;
+         margin-left:0.5rem;
        }
      }
 

@@ -2,14 +2,14 @@
 @import "../../../../styles/mixins.less";
 
 .media-title {
-  padding: 15px 30px;
+  padding: 1.5rem 3rem;
 
   &:not(.publishing) { background-color: @gray-lightest; }
 
   .publishing();
 
   > .derive, .edit {
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
   }
 
   > .title {
@@ -28,13 +28,13 @@
 
     > span {
       display: block;
-      margin-top: 5px;
+      margin-top: 0.5rem;
     }
 
     // When editing is turned on the Title becomes an input box; make sure it stretches
     input[type="text"] {
-      width: 600px;
-      height: 45px;
+      width: 60rem;
+      height: 4.5rem;
       text-overflow: ellipsis;
     }
   }
@@ -45,18 +45,18 @@
 
     @media (min-width: @screen-sm-min) {
       display: inline-block;
-      margin-bottom: -39px;
+      margin-bottom: -3.9rem;
       width: 32%;
       text-align: right;
       vertical-align: top;
     }
 
     @media (max-width: @screen-xs-max) {
-      margin-top: 5px;
+      margin-top: 0.5rem;
     }
 
     > .share {
-      margin-top: 15px;
+      margin-top: 1.5rem;
 
       @media (max-width: @screen-xs-max) {
         display: none;
@@ -69,7 +69,7 @@
 
         > li {
           display: inline-block;
-          height: 28px; // Same height as the circles
+          height: 2.8rem; // Same height as the circles
           vertical-align: middle;
           cursor: pointer;
         }

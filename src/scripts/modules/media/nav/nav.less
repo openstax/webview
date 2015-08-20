@@ -1,8 +1,8 @@
 @import "../../../../styles/variables.less";
 @import "../../../../styles/mixins.less";
 
-@nav-height: 49px;
-@progress-height: 9px;
+@nav-height: 4.9rem;
+@progress-height: 0.9rem;
 
 .media-nav {
   &:not(.publishing) {
@@ -22,13 +22,13 @@
     > .progress {
       margin-top: (@nav-height - @progress-height)/2;
       height: @progress-height;
-      border-radius: 8px;
+      border-radius: 0.8rem;
       background-color: darken(@gray-lighter, 5%);
       box-shadow: none;
 
       > .progress-bar {
         .box-sizing(content-box); // Prevent the white border from being visible at 100% progress
-        border-right: 1px solid white;
+        border-right: 0.1rem solid white;
         box-shadow: none;
       }
     }
@@ -39,7 +39,7 @@
 
       > a {
         display: inline-block;
-        padding: 0 5px;
+        padding: 0 0.5rem;
       }
 
       &::before, &::after {
@@ -54,7 +54,7 @@
       font-size: 1.6rem;
       line-height: @nav-height;
       color: @brand-primary;
-      .flex(1; 0; 100px);
+      .flex(1; 0; 10rem);
 
       &.disabled {
         opacity: 0.5;
@@ -62,7 +62,7 @@
     }
 
     > .back {
-      padding-right: 20px;
+      padding-right: 2rem;
       text-align: right;
 
       &:before {
@@ -74,13 +74,13 @@
     }
 
     > .next {
-      padding-left: 20px;
+      padding-left: 2rem;
       text-align: left;
     }
 
     > .back::before, > .next::after {
       display: inline-block;
-      margin: 0 10px;
+      margin: 0 1rem;
       height: 1.6rem;
       width: 1.6rem;
       vertical-align: text-bottom;
