@@ -8,10 +8,10 @@
 // FIXME: remove this once all content is converted
 .not-converted-yet {
   background-color: #fcc;
-  border: 2px dotted #f00;
+  border: 0.2rem dotted #f00;
 }
 
-// Limit the site to a max width of 960px
+// Limit the site to a max width of 96rem
 html {
   max-width: @max-viewport-width;
   margin: 0 auto;
@@ -104,7 +104,7 @@ h5 {
 
 .btn {
   .button-variant(white; @brand-secondary);
-  border: 1px solid transparent;
+  border: 0.1rem solid transparent;
   outline: 0;
 
   &:focus {
@@ -114,28 +114,28 @@ h5 {
 
 .btn-plain {
   .button-variant(@gray-dark; white);
-  border: 1px solid @gray-dark;
+  border: 0.1rem solid @gray-dark;
 }
 
 .btn-warning, .btn-primary.btn-warning, .btn-plain.btn-warning {
   .button-variant(@gray-dark; white);
-  border: 1px solid @brand-warning;
+  border: 0.1rem solid @brand-warning;
 }
 
 .btn-danger, .btn-primary.btn-danger, .btn-plain.btn-danger {
   .button-variant(@gray-dark; white);
-  border: 1px solid @brand-danger;
+  border: 0.1rem solid @brand-danger;
 }
 
 .btn-primary {
   .button-variant(white; @brand-primary);
-  border: 1px solid transparent;
+  border: 0.1rem solid transparent;
 }
 
 .circle {
   display: inline-block;
-  height: 28px;
-  width: 28px;
+  height: 2.8rem;
+  width: 2.8rem;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -179,8 +179,8 @@ h5 {
 
 iframe.terp {
   display: block;
-  margin: 20px auto;
-  max-width: 800px;
+  margin: 2rem auto;
+  max-width: 80rem;
   border: 0;
 }
 
@@ -203,17 +203,17 @@ div#zenbox_tab.ZenboxTabRight {
   }
 
   display: block;
-  height: 100px;
-  width: 30px;
-  line-height: 100px;
+  height: 10rem;
+  width: 3rem;
+  line-height: 10rem;
   border: none;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-top-left-radius: 0.4rem;
+  border-bottom-left-radius: 0.4rem;
 
   &::before {
     display: inline-block;
-    height: 100px;
-    line-height: 120px;
+    height: 10rem;
+    line-height: 12rem;
     color: white;
     text-transform: uppercase;
     vertical-align: middle;
@@ -234,8 +234,8 @@ select {
   -moz-appearance: none;
   background-image: url('/images/icons/select-arrows.png') !important;
   background-repeat: no-repeat !important;
-  background-position: right 10px center;
-  background-size: 12px 18px;
+  background-position: right 1rem center;
+  background-size: 1.2rem 1.8rem;
  }
 }
 
@@ -256,8 +256,8 @@ select {
 }
 
 .select2-container-multi > .select2-choices > .select2-search-choice {
-  margin-top: 6px !important;
-  border-radius: 4px !important;
+  margin-top: 0.6rem !important;
+  border-radius: 0.4rem !important;
 }
 
 .modal-open {
@@ -265,7 +265,7 @@ select {
 }
 
 p:empty {
-    height: 1px;
+    height: 0.1rem;
 }
 
 // bootstrap warning yellow a little too light

@@ -61,25 +61,25 @@ define (require) ->
 
         if voffset
           # Keep the container the same height during the transition
-          $container.css({'height': $container.height()+'px'})
+          $container.css({'height': $container.height() / 10 + 'rem'})
 
         # Position the next book to scroll in
         $third.css({display: 'block'})
         if not voffset
-          $third.css({position: 'absolute', marginLeft: hoffset*-2 + 'px', paddingLeft: '15px'})
+          $third.css({position: 'absolute', marginLeft: hoffset * -0.2 + 'rem', paddingLeft: '1.5rem'})
 
         # Slide the carousel
-        $first.animate {marginLeft: hoffset+'px', marginTop: voffset+'px'}, 1000, () ->
+        $first.animate {marginLeft: hoffset / 10 + 'rem', marginTop: voffset / 10 + 'rem'}, 1000, () ->
           $first.insertAfter($books.last()).removeAttr('style')
           $container.removeAttr('style')
 
         # Adjust the second element to the first's style
-        $second.animate {paddingLeft: 0, paddingRight: '15px'}, 1000, () ->
+        $second.animate {paddingLeft: 0, paddingRight: '1.5rem'}, 1000, () ->
           $second.removeAttr('style')
 
         if not voffset
           # Adjust the third element to the second's style
-          $third.animate {marginLeft: hoffset*-1+'px'}, 1000, () ->
+          $third.animate {marginLeft: hoffset * -0.1 + 'rem'}, 1000, () ->
             $third.removeAttr('style')
 
       # Start the carousel
