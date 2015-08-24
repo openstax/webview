@@ -6,6 +6,7 @@ define (require) ->
   FindContentView = require('cs!modules/find-content/find-content')
   DefaultView = require('cs!./default/default')
   PeopleView = require('cs!./people/people')
+  ContactView = require('cs!./contact/contact')
   template = require('hbs!./about-template')
   require('less!./about')
 
@@ -34,5 +35,7 @@ define (require) ->
       switch @page
         when 'people'
           @regions.content.show(new PeopleView())
+        when 'contact'
+          @regions.content.show(new ContactView())
         else
           @regions.content.show(new DefaultView())
