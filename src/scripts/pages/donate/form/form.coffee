@@ -1,5 +1,6 @@
 define (require) ->
   linksHelper = require('cs!helpers/links')
+  validationHelper = require('cs!helpers/validation')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./form-template')
   require('less!./form')
@@ -346,6 +347,7 @@ define (require) ->
 
     events:
       'submit form': 'onSubmit'
+      'change input': 'checkForValidity'
 
     formConversions: [{
       name: 'BILL_NAME'
@@ -395,11 +397,17 @@ define (require) ->
       @uuid = queryString.uuid
       @type = queryString.type
 
+    checkForValidity: (e) ->
+      validationHelper.checkForValidity(e)
+
     onSubmit: (e) ->
-      $form = @$el.find('form')
+      if validationHelper.validateRequiredFields()
+        $form = @$el.find('form')
 
-      _.each @formConversions, (conversion) ->
-        value = conversion.value?($form) or
-          $form.find("input[name=\"#{conversion.value}\"], select[name=\"#{conversion.value}\"]").val()
+        _.each @formConversions, (conversion) ->
+          value = conversion.value?($form) or
+            $form.find("input[name=\"#{conversion.value}\"], select[name=\"#{conversion.value}\"]").val()
 
-        $form.find("input[name=\"#{conversion.name}\"]").val(value)
+          $form.find("input[name=\"#{conversion.name}\"]").val(value)
+      else
+        e.preventDefault()
