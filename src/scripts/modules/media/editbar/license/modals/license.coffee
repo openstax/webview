@@ -30,7 +30,7 @@ define (require) ->
     setLicense: () ->
       licenses = @collection.models
       selectedValue = @$el.find('input[name="licenses"]:checked').val()
-      selectedLicense = ''
+      selectedLicense = {}
       _.each licenses, (license) ->
         versionedCode = "#{license.get('code')}-#{license.get('version')}"
         if versionedCode is selectedValue
@@ -58,7 +58,7 @@ define (require) ->
       @parent.model.set('licenseCode', @parent.model.get('license').code)
 
     selectedLicense: (model, selectedLicense) ->
-      model.code = selectedLicense.get('code')
-      model.name = selectedLicense.get('name')
-      model.url = selectedLicense.get('url')
-      model.version = selectedLicense.get('version')
+      model.code = selectedLicense.get?('code')
+      model.name = selectedLicense.get?('name')
+      model.url = selectedLicense.get?('url')
+      model.version = selectedLicense.get?('version')
