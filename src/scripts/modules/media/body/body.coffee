@@ -73,7 +73,7 @@ define (require) ->
       try
         if @model.get('loaded') and @model.asPage()?.get('loaded') and @model.asPage()?.get('active')
 
-          if $temp.find('.os-interactive-link')
+          if $temp.find('.os-interactive-link').length
             @model.set('sims', true)
 
           # Remove the module title and abstract TODO: check if it is still necessary
