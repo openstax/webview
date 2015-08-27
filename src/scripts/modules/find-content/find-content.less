@@ -21,12 +21,13 @@
     text-decoration: none;
   }
 
-  > label > h3 {
+  > label > .medium-header {
+    display: block;
     color: @gray-lighter;
   }
 
-  > label > h3,
-  > span {
+  > label > .medium-header,
+  > .or {
     line-height: @bar-height;
     text-align: center;
   }
@@ -41,7 +42,7 @@
     }
   }
 
-  > span {
+  > .or {
     .flex(1; 1; auto);
     margin: 0 1.5rem;
     font-size: 1.4em;
