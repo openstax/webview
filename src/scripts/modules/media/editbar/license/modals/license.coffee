@@ -30,11 +30,20 @@ define (require) ->
     setLicense: () ->
       licenses = @collection.models
       selectedValue = @$el.find('input[name="licenses"]:checked').val()
-      selectedLicense = {}
-      _.each licenses, (license) ->
+      selectedLicense = _.find licenses, (license) ->
         versionedCode = "#{license.get('code')}-#{license.get('version')}"
         if versionedCode is selectedValue
-          selectedLicense = license
+          return license
+
+      if not selectedLicense
+        selectedLicense =
+          url: "http://cnx.org"
+          code: "unknown"
+          name: "Unknown License"
+          version: "0.1"
+          isValidForPublication: false
+        console.warn "No license found matching the selected value #{selectedValue} for #{@parent.model.get('id')}"
+
       return selectedLicense
 
     changeLicense: () ->
