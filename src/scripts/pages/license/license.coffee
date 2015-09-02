@@ -6,17 +6,17 @@ define (require) ->
   template = require('hbs!./license-template')
   require('less!./license')
 
-  return class licensePage extends BaseView
+  return class LicensePage extends BaseView
     template: template
-    pageTitle: 'License - OpenStax CNX'
+    pageTitle: 'Terms of Service - OpenStax CNX'
     canonical: null
-    summary: 'OpenStax CNX License'
-    description: 'OpenStax CNX License'
+    summary: 'OpenStax CNX Terms of Service'
+    description: 'OpenStax CNX Terms of Service'
 
     regions:
       find: '.find'
 
     onRender: () ->
-      @parent.regions.header.show(new HeaderView({page: 'license'}))
-      @parent.regions.footer.show(new FooterView({page: 'license'}))
+      @parent.regions.header.show(new HeaderView({page: 'tos'}))
+      @parent.regions.footer.show(new FooterView({page: 'tos'}))
       @regions.find.show(new FindContentView())
