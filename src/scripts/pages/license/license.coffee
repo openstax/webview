@@ -8,15 +8,15 @@ define (require) ->
 
   return class LicensePage extends BaseView
     template: template
-    pageTitle: 'Terms of Service - OpenStax CNX'
+    pageTitle: 'License FAQ - OpenStax CNX'
     canonical: null
-    summary: 'OpenStax CNX Terms of Service'
-    description: 'OpenStax CNX Terms of Service'
+    summary: 'OpenStax CNX License'
+    description: 'OpenStax CNX License Frequently Asked Questions'
 
     regions:
       find: '.find'
 
     onRender: () ->
-      @parent.regions.header.show(new HeaderView({page: 'tos'}))
-      @parent.regions.footer.show(new FooterView({page: 'tos'}))
+      @parent.regions.header.show(new HeaderView({page: 'license'}))
+      @parent.regions.footer.show(new FooterView({page: 'license'}))
       @regions.find.show(new FindContentView())
