@@ -1,13 +1,13 @@
 @import "../../../styles/variables.less";
 @import "../../../styles/mixins.less";
 
-@bar-height: 30px;
+@bar-height: 3rem;
 
 .find-content {
   .flexbox();
   .flex-flow(row; nowrap);
   .justify-content(center);
-  padding: 10px;
+  padding: 1rem;
   color: @gray-lighter;
   background-color: @gray-dark;
 
@@ -37,13 +37,13 @@
 
     @media screen and (max-width: @screen-xs-max) {
       display: block;
-      margin-bottom: 15px;
+      margin-bottom: 1.5rem;
     }
   }
 
   > span {
     .flex(1; 1; auto);
-    margin: 0 15px;
+    margin: 0 1.5rem;
     font-size: 1.4em;
     font-weight: 200;
 
@@ -55,12 +55,12 @@
 
   > .form-control {
     .flex(4; 4; 33%);
-    padding: 0 37px 0 12px;
+    padding: 0 3.7rem 0 1.2rem;
     height: @bar-height;
     font-size: 1.2em;
     color: @gray-lighter;
     background: @gray-medium url(/images/icons/search-white.png) no-repeat 98% center;
-    border: 1px solid transparent;
+    border: 0.1rem solid transparent;
     box-shadow: none;
 
     &::-webkit-input-placeholder { color: darken(@gray-lighter, 15%); }
@@ -68,13 +68,13 @@
     &:-ms-input-placeholder { color: darken(@gray-lighter, 15%); }
 
     &:focus {
-      border: 1px solid transparent;
+      border: 0.1rem solid transparent;
       box-shadow: 0 0 3pt 1pt rgb(0, 0, 0);
     }
 
     @media screen and (max-width: @screen-xs-max) {
       display: block;
-      margin-bottom: 15px;
+      margin-bottom: 1.5rem;
     }
   }
 
@@ -82,15 +82,15 @@
     .flex(4; 0; 33%);
     position: relative;
     height: @bar-height;
-    margin-right: 15px;
+    margin-right: 1.5rem;
     font-size: 1.2em;
     color: @gray-lighter;
     background-color: @gray-medium;
-    border-radius: 4px;
+    border-radius: 0.4rem;
 
     a {
       display: block;
-      padding: 0 12px;
+      padding: 0 1.2rem;
       font-weight: 300;
       line-height: @bar-height;
     }
@@ -106,14 +106,14 @@
 
     > .dropdown-menu {
       width: 100%;
-      max-height: 300px;
+      max-height: 30rem;
       overflow-y: auto;
     }
 
     @media screen and (max-width: @screen-xs-max) {
       display: block;
       margin-right: 0;
-      margin-bottom: 5px;
+      margin-bottom: 0.5rem;
     }
   }
 }

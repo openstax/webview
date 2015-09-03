@@ -9,12 +9,12 @@ h3,
 h4,
 h5,
 h6 {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
   color: @gray-dark;
 }
 
 p {
-  margin: 10px 0 0;
+  margin: 1rem 0 0;
   color: @gray;
 
   > [data-type="title"],
@@ -46,7 +46,7 @@ img {
 > figure,
 > [data-type="glossary"],
 > [data-type="footnote-refs"] {
-  margin-top: 60px;
+  margin-top: 6rem;
 
   > ol > li::before {
     content: "" !important;
@@ -55,7 +55,7 @@ img {
 
 section > section,
 section > figure {
-  margin-top: 30px;
+  margin-top: 3rem;
 }
 
 > figure,
@@ -70,7 +70,7 @@ figure {
   text-align: center;
 
   &.ui-has-child-figcaption > figcaption::before {
-    margin-right: 5px;
+    margin-right: 0.5rem;
     color: @gray-medium;
     font-weight: bold;
     content: "Figure " counter(figure) ".";
@@ -80,7 +80,7 @@ figure {
     position: absolute;
     bottom: 0;
     left: 0;
-    margin-right: 5px;
+    margin-right: 0.5rem;
     color: @gray-medium;
     font-weight: bold;
     content: "Figure " counter(figure) ".";
@@ -88,7 +88,7 @@ figure {
 
 
   > figcaption {
-    padding: 10px;
+    padding: 1rem;
     font-size: 1.3rem;
   }
 
@@ -142,7 +142,7 @@ figure:not([data-orient="vertical"]) {
   > figcaption {
     display: table-caption;
     caption-side: bottom;
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
   }
 
   // Subfigures
@@ -370,7 +370,7 @@ ul[data-labeled-item]                    { #list>.style(inline; labeled-item); }
 [data-type='list'][data-list-type='bulleted']     { #list>.style(inline; bulleted); }
 [data-type='list'][data-list-type='enumerated']   { #list>.style(inline; enumerated); }
 [data-type='list'][data-list-type='labeled-item'] { #list>.style(inline; labeled-item); }
-div[data-type='list'][data-list-type]             { padding-left: 25px; margin-bottom: 10px; }
+div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin-bottom: 1rem; }
 
 
 .footnote {
@@ -380,21 +380,21 @@ div[data-type='list'][data-list-type]             { padding-left: 25px; margin-b
 .abstract {
   position: relative;
   background-color: @gray-lightest;
-  padding: 45px 15px 15px 15px;
-  margin: 30px 6rem 0 6rem;
+  padding: 4.5rem 1.5rem 1.5rem 1.5rem;
+  margin: 3rem 6rem 0 6rem;
 
   ul {
-    margin: 15px 0 0 0;
+    margin: 1.5rem 0 0 0;
 
     &::after {
       position: absolute;
-      top: 15px;
-      left: 15px;
+      top: 1.5rem;
+      left: 1.5rem;
       font-size: 1.5rem;
       font-weight: bold;
       color: @gray;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.1rem;
       content: "Abstract";
     }
   }
@@ -427,26 +427,26 @@ div[data-type='list'][data-list-type]             { padding-left: 25px; margin-b
   .default-label(note; false) { content: 'Note'; }
   .default-label(note; true)  { content: 'Note: '; }
   .style(note) {
-    margin: 30px 6rem 0 6rem;
-    padding: 15px;
+    margin: 3rem 6rem 0 6rem;
+    padding: 1.5rem;
     background-color: @gray-lightest;
   }
   .title(note) {
     color: @gray;
     font-size: 1.5rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.1rem;
   }
   .body(note) {
-    padding: 5px 15px;
-    border-top: 1px solid @gray;
+    padding: 0.5rem 1.5rem;
+    border-top: 0.1rem solid @gray;
     background-color: @gray-lightest;
   }
 
   // Style the example
   .default-label(example; false) { content: 'Example'; }
   .default-label(example; true)  { content: 'Example: '; }
-  .style(example) { margin-top: 30px; }
+  .style(example) { margin-top: 3rem; }
   .title(example) {
     padding: 0.1em 1em;
     font-weight: bold;
@@ -539,7 +539,7 @@ div[data-type='list'][data-list-type]             { padding-left: 25px; margin-b
   // Exercise Solutions contain a button to toggle showing or hiding the solution
   [data-type="solution"],
   .solution {
-    border-top: 1px solid @gray;
+    border-top: 0.1rem solid @gray;
 
     // The Show/Hide Solution text
     > .ui-toggle-wrapper {
@@ -586,7 +586,7 @@ div[data-type='list'][data-list-type]             { padding-left: 25px; margin-b
       font-weight: bold;
       color: @gray;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.1rem;
     }
 
     [data-type="problem"]::before,
@@ -606,7 +606,7 @@ div[data-type='list'][data-list-type]             { padding-left: 25px; margin-b
 // --------------------------------------------------
 
 table {
-  margin-top: 60px;
+  margin-top: 6rem;
   width: 100%;
   max-width: 100%;
   margin-bottom: @line-height-computed;
@@ -614,7 +614,7 @@ table {
   counter-increment: table;
 
   caption {
-    margin-top: 5px;
+    margin-top: 0.5rem;
     font-size: 1.3rem;
     text-align: left;
     caption-side: bottom;
@@ -630,7 +630,7 @@ table {
       font-weight: bold;
 
       &::before {
-        margin-right: 5px;
+        margin-right: 0.5rem;
         color: @gray-medium;
         font-weight: bold;
         content: "Table " counter(table) ".";
@@ -648,7 +648,7 @@ table {
         padding: @table-cell-padding;
         line-height: @line-height-base;
         vertical-align: top;
-        border-top: 1px solid @table-border-color;
+        border-top: 0.1rem solid @table-border-color;
       }
     }
   }
@@ -657,7 +657,7 @@ table {
   thead > tr > th,
   thead > tr > td {
     vertical-align: bottom;
-    border-bottom: 2px solid @table-border-color;
+    border-bottom: 0.2rem solid @table-border-color;
     font-weight: bold;
     text-align: left;
   }
@@ -675,7 +675,7 @@ table {
 
   // Account for multiple tbody instances
   tbody + tbody {
-    border-top: 2px solid @table-border-color;
+    border-top: 0.2rem solid @table-border-color;
   }
 
   // Nesting
@@ -700,6 +700,6 @@ table {
 
 [data-type="glossary"] {
   [data-type="definition"] {
-    margin: 10px 30px;
+    margin: 1rem 3rem;
   }
 }

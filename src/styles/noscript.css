@@ -12,10 +12,10 @@ body {
 .noscript {
   position: absolute;
   left: 50%;
-  width: 300px;
-  margin-left: -150px;
+  width: 30rem;
+  margin-left: -15rem;
 }
 
 p {
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
 }

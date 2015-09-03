@@ -2,18 +2,18 @@
 @import "../../../../styles/mixins.less";
 
 .media-header {
-  padding: 0 60px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid @gray-lighter;
+  padding: 0 6rem;
+  padding-bottom: 2rem;
+  border-bottom: 0.1rem solid @gray-lighter;
 
   .publishing();
 
   > .derive, .edit {
-    margin-top: 35px;
+    margin-top: 3.5rem;
   }
 
   > .title {
-    margin-top: 20px;
+    margin-top: 2rem;
     overflow-wrap: break-word;
 
     @media (min-width: @screen-sm-min) {
@@ -24,13 +24,13 @@
 
     // When editing is turned on the Title becomes an input box; make sure it stretches
     input[type="text"] {
-      width: 550px;
+      width: 55rem;
       text-overflow: ellipsis;
     }
 
     > span {
       display: block;
-      margin-top: 5px;
+      margin-top: 0.5rem;
     }
   }
 
@@ -39,14 +39,14 @@
 
     @media (min-width: @screen-sm-min) {
       display: inline-block;
-      margin-top: 35px;
+      margin-top: 3.5rem;
       width: 32%;
       text-align: right;
       vertical-align: top;
     }
 
     @media (max-width: @screen-xs-max) {
-      margin-top: 5px;
+      margin-top: 0.5rem;
     }
 
     // Align authors and mail image
@@ -64,13 +64,13 @@
       }
 
       > .btn {
-        margin: 0 0 20px auto;
+        margin: 0 0 2rem auto;
       }
     }
   }
 
   > .summary {
-    margin-top: 15px;
+    margin-top: 1.5rem;
 
     h5 {
       .user-select(none);
@@ -95,12 +95,12 @@
 
       > ul, > list {
         display: block;
-        padding-left: 40px;
-        margin-top: 10px;
+        padding-left: 4rem;
+        margin-top: 1rem;
 
         > li, > item {
           display: list-item;
-          margin: 3px 0;
+          margin: 0.3rem 0;
           color: @gray;
         }
       }
