@@ -9,10 +9,10 @@ define (require) ->
   require('less!./advanced')
 
   # Move this to helpers?
-  parseQuery = (qstr) ->
+  parseQuery = (locationString) ->
     query = {}
-    a = decodeURI(qstr.substr(1).split('&'))
-    criteriaMatch=a.match(/criteria=(.*)/)
+    criteriaMatch = decodeURI(locationString.substr(1))
+    .match(/criteria=(.*)/)
     if criteriaMatch
       criteriaPart = criteriaMatch[1]
       .match(/(\w+:((?:.(?!\w+:))+))/g)
@@ -41,9 +41,8 @@ define (require) ->
 
     onRender: () ->
       @regions.header.show(new SearchHeaderView())
-      $el = @$el
-      $.each(@criteria, (name, value) ->
-        $item = $el.find('[name^="'+name+'"]')
+      $.each(@criteria, (name, value) =>
+        $item = @$el.find("[name^=\"#{name}\"]")
         $item.val(value)
         )
 
