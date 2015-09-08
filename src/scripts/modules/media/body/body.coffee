@@ -76,6 +76,8 @@ define (require) ->
           if $temp.find('.os-interactive-link')
             @model.set('sims', true)
 
+          $temp.find('table th').attr('scope', 'col')
+
           # Remove the module title and abstract TODO: check if it is still necessary
           $temp.children('[data-type="title"]').remove()
           $temp.children('[data-type="abstract"]').remove()
