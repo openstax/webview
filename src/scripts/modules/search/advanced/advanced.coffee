@@ -8,6 +8,21 @@ define (require) ->
   template = require('hbs!./advanced-template')
   require('less!./advanced')
 
+  # Move this to helpers?
+  parseQuery = (qstr) ->
+    query = {}
+    a = decodeURI(qstr.substr(1).split('&'))
+    criteriaMatch=a.match(/criteria=(.*)/)
+    if criteriaMatch
+      criteriaPart = criteriaMatch[1]
+      .match(/(\w+:((?:.(?!\w+:))+))/g)
+      $.each(criteriaPart, (i, entry) ->
+        pair = entry.split(':', 2)
+        valueNoQuotes = pair[1].match(/[^"]+/)
+        query[pair[0]] = valueNoQuotes[0]
+        )
+    query
+
   return class AdvancedSearchView extends BaseView
     template: template
     pageTitle: 'Advanced Search'
@@ -20,9 +35,17 @@ define (require) ->
 
     events:
       'submit form': 'submitForm'
+    initialize: () ->
+      super()
+      @criteria = parseQuery(window.location.search)
 
     onRender: () ->
       @regions.header.show(new SearchHeaderView())
+      $el = @$el
+      $.each(@criteria, (name, value) ->
+        $item = $el.find('[name^="'+name+'"]')
+        $item.val(value)
+        )
 
     submitForm: (e) ->
       e.preventDefault()
