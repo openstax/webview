@@ -22,7 +22,7 @@ define (require) ->
 
     # Called when the 'Less' link is clicked
     less: () ->
-      @$el.find('.book').slice(2).removeAttr('style')
+      @$el.find('.book').slice(2).hide()
       @_expanded = false
 
     onBeforeClose: () ->
