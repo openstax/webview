@@ -23,19 +23,20 @@
     > #skiptoresults {
       a {
         position: absolute;
-        left: -50rem;
+        opacity: 0;
 
         &:focus {
-            left: 0;
-            top: 0;
-            padding: 0.5rem 1rem;
-            font-size: 1.8rem;
-            color: white;
-            background: @brand-secondary;
-            outline: 0;
-            border-bottom-right-radius: 1rem;
-            -webkit-transition: top .1s ease-in, background .5s linear;
-            transition: top .1s ease-in, background .5s linear;
+          opacity: 1;
+          left: 0;
+          top: 0;
+          padding: 0.5rem 1rem;
+          font-size: 1.8rem;
+          color: white;
+          background: @brand-secondary;
+          outline: 0;
+          border-bottom-right-radius: 1rem;
+          -webkit-transition: top .1s ease-in, background .5s linear;
+          transition: top .1s ease-in, background .5s linear;
         }
       }
     }
