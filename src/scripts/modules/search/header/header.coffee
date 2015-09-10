@@ -8,4 +8,5 @@ define (require) ->
 
     initialize: () ->
       super()
+      @model?.attributes.results.criteria = window.location.search.replace('q=', 'criteria=')
       @listenTo(@model, 'change:results change:loaded', @render) if @model
