@@ -35,6 +35,7 @@ define (require) ->
     initialize: (options) ->
       @config(options)
       @set('loaded', false)
+      @set('timedout', false)
 
     config: (options = {}) ->
       @query = options.query or ''
@@ -54,18 +55,22 @@ define (require) ->
       return @
 
     fetch: () ->
+      fetchArgs = arguments[0]
+      fetchArgs.timeout = 60000 # one minute
       # Reset search results
       @clear({silent: true}).set(@defaults)
       @set('loaded', false)
 
-      return super(arguments...)
+      return super(fetchArgs)
       .always () =>
         @set('loaded', true)
         @unset('promise', {silent: true})
       .done () =>
         @set('error', false)
       .fail (model, response, options) =>
-        @set('error', response.status)
+        if (response == 'timeout')
+          @set('timedout', true)
+        @set('error', false)
 
     parse: (response, options) ->
       response = super(arguments...)

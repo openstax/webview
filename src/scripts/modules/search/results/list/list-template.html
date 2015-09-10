@@ -17,7 +17,13 @@
   {{/if}}
 {{else}}
   {{#if loaded}}
-    <p>No results found. Please try expanding your search.</p>
+    {{#if timedout}}
+      <p>The search seems to be taking a long time. The search engine may have the
+      results ready if you reload the page. Otherwise, go back and adjust your
+      search.</p>
+    {{else}}
+      <p>No results found. Please try expanding your search.</p>
+    {{/if}}
   {{else}}
     <div class="progress progress-striped active">
       <div class="progress-bar secondary" role="progressbar" style="width: 100%">
