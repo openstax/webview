@@ -14,16 +14,10 @@ define (require) ->
       super()
       @listenTo(@collection, 'reset', @render)
 
-
-    # Called when the 'More' link is clicked
-    more: () ->
+    onRender: () ->
+      @$el.find('.more').hide()
       @$el.find('.book').show()
       @_expanded = true
-
-    # Called when the 'Less' link is clicked
-    less: () ->
-      @$el.find('.book').slice(2).hide()
-      @_expanded = false
 
     onBeforeClose: () ->
       $(window).off('resize.featuredBooks')
