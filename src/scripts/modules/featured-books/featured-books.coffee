@@ -1,11 +1,11 @@
 define (require) ->
   $ = require('jquery')
-  InfoBlockView = require('cs!modules/inherits/info-block/info-block')
+  BaseView = require('cs!helpers/backbone/views/base')
   featuredBooks = require('cs!collections/featured-books')
   template = require('hbs!./featured-books-template')
   require('less!./featured-books')
 
-  return class FeaturedBooksView extends InfoBlockView
+  return class FeaturedBooksView extends BaseView
     template: template
     collection: featuredBooks
     title: 'Featured Books'
@@ -13,11 +13,6 @@ define (require) ->
     initialize: () ->
       super()
       @listenTo(@collection, 'reset', @render)
-
-    onRender: () ->
-      @$el.find('.more').hide()
-      @$el.find('.book').show()
-      @_expanded = true
 
     onBeforeClose: () ->
       $(window).off('resize.featuredBooks')
