@@ -2,6 +2,7 @@ define (require) ->
   _ = require('underscore')
   TocDraggableView = require('cs!./draggable')
   TocPageView = require('cs!./page')
+  SectionNameModal = require('cs!./section-name')
   template = require('hbs!./section-template')
   require('less!./section')
 
@@ -21,6 +22,7 @@ define (require) ->
       @editable = @content.get('editable')
       @regions =
         container: @itemViewContainer
+      @sectionNameModal = new SectionNameModal({model: @model})
 
       super()
 
@@ -52,10 +54,13 @@ define (require) ->
       @content.removeNode(@model)
 
     editNode: () ->
-      title = prompt('Rename the section:', @model.get('title'))
-
-      if title
-        @model.set('title', title)
+      @sectionNameModal.initialValue = @model.attributes.title
+      @sectionNameModal.onOk = (newValue) ->
+        @model.set('title', newValue)
         @model.set('changed', true)
         @model.get('book').set('childChanged', true)
         @model.get('book').set('changed', true)
+      @regions.self.appendOnce
+        view: @sectionNameModal
+        as: 'div id="section-name-modal" class="modal fade"'
+      @sectionNameModal.$el.modal('show')
