@@ -20,9 +20,9 @@ define (require) ->
         @$el.find('.btn-ok').click()
 
     promptForValue: (initialValue, @onOk) =>
-      @$el.find('input').val(initialValue)
+      @$el.find('input').val(initialValue if initialValue isnt 'Untitled')
       @$el.modal('show')
-      
+
     ok: () =>
       value = @$el.find('input').val()
       @$el.one('hidden.bs.modal', () => @onOk(value))
