@@ -54,15 +54,14 @@ define (require) ->
 
       return @
 
-    fetch: () ->
-      fetchArgs = arguments[0]
-      if fetchArgs isnt undefined
-        fetchArgs.timeout = 60000 # one minute
+    fetch: (options = {}) ->
+      options.timeout or= 1000 * 60 # 1 minute
+
       # Reset search results
       @clear({silent: true}).set(@defaults)
       @set('loaded', false)
 
-      return super(fetchArgs)
+      return super(options)
       .always () =>
         @set('loaded', true)
         @unset('promise', {silent: true})
