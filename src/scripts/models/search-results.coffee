@@ -56,7 +56,8 @@ define (require) ->
 
     fetch: () ->
       fetchArgs = arguments[0]
-      fetchArgs.timeout = 60000 # one minute
+      if fetchArgs isnt undefined
+        fetchArgs.timeout = 60000 # one minute
       # Reset search results
       @clear({silent: true}).set(@defaults)
       @set('loaded', false)
