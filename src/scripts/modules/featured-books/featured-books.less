@@ -3,6 +3,7 @@
 
 .featured-books {
   .make-row();
+  padding: 3rem;
   margin: 0 !important; // Override bootstrap css
   overflow: hidden;
 
@@ -17,7 +18,7 @@
 
     > .book {
       .make-sm-column(6);
-      display: none;
+      display: block;
       margin-bottom: 3rem; // Add spacing between books when they're aligned vertically
 
       &::after {
@@ -27,10 +28,6 @@
       	font-size: 0;
       	content: " ";
         visibility: hidden;
-      }
-
-      &:first-child, &:nth-child(2) {
-        display: block;
       }
 
       &:nth-child(2n+1) {

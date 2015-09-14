@@ -29,24 +29,6 @@ describe('backbone history helper tests', function () {
       history.fragment.should.equal('test');
     });
 
-    it('should replace the state', function () {
-      sinon.spy(history.history, 'replaceState');
-      history.navigate('test', {
-        replace: true
-      });
-      history.history.replaceState.calledWith({}, document.title, 'test');
-      history.fragment.should.equal('test');
-    });
-
-    it('should push the state', function () {
-      sinon.spy(history.history, 'pushState');
-      history.navigate('test', {
-        replace: false
-      });
-      history.history.pushState.calledWith({}, document.title, 'test');
-      history.fragment.should.equal('test');
-    });
-
     it('should trigger url to be loaded', function () {
       sinon.spy(history, 'loadUrl');
       history.navigate('test', true);
