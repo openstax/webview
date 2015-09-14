@@ -10,20 +10,17 @@ define (require) ->
     template: template
 
     events:
-      'click .btn-ok': 'ok'
-      'keydown': 'keyAction'
+      'submit': 'submit'
 
-    keyAction: (event) ->
-      if event.keyCode == 13
-        event.preventDefault()
-        event.stopPropagation()
-        @$el.find('.btn-ok').click()
-
-    promptForValue: (initialValue, @onOk) =>
-      @$el.find('input').val(initialValue if initialValue isnt 'Untitled')
-      @$el.modal('show')
-
-    ok: () =>
+    submit: (event) =>
+      event.preventDefault()
+      event.stopPropagation()
       value = @$el.find('input').val()
       @$el.one('hidden.bs.modal', () => @onOk(value))
       @$el.modal('hide')
+
+    promptForValue: (initialValue, @onOk) =>
+      input = @$el.find('input')
+      input.val(initialValue if initialValue isnt 'Untitled')
+      @$el.modal('show')
+      input.focus()
