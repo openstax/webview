@@ -11,6 +11,12 @@ define (require) ->
 
     events:
       'submit': 'onSubmit'
+      'shown.bs.modal': 'setFocus'
+
+    setFocus: (e) ->
+      $el = @$el
+      $goButton = $el.find('button[type="submit"]')
+      $goButton.focus()
 
     onSubmit: (e) ->
       e.preventDefault()
