@@ -16,8 +16,6 @@ define (require) ->
       legacy: settings.legacy
     pageTitle: 'About OpenStax CNX'
     canonical: null
-    next: null
-    prev: null
     summary: 'About OpenStax CNX'
     description: 'OpenStax CNX is a non-profit organization providing thousands of free online textbooks.'
 

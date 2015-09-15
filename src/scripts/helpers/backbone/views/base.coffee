@@ -66,7 +66,7 @@ define (require) ->
     renderDom: () ->
       @$el?.html(@getTemplate())
 
-    # Update page title, next/prev and canonical links, and Open Graph tags
+    # Update page title, canonical link, and Open Graph tags
     updatePageInfo: () ->
       currentPage = @model.getPageNumber().toString() if @model? and @model.isBook?()
       if Backbone.history.fragment?.match? and linksHelper.getCurrentPathComponents().page?
@@ -83,21 +83,6 @@ define (require) ->
       if canonical isnt undefined
         $('link[rel="canonical"]').remove()
         $('head').append("<link rel=\"canonical\" href=\"#{canonical}\" />") if canonical
-
-      next = @next?() or @next
-      if next isnt undefined
-        $('link[rel="next"]').remove()
-        $('head').append("<link rel=\"next\" href=\"#{next}\" />") if next
-      # Can't just set next to null/undef in nav, I think b/c of mutation
-      if next is 'none'
-        $('link[rel="next"]').remove()
-
-      prev = @prev?() or @prev
-      if prev isnt undefined
-        $('link[rel="prev"]').remove()
-        $('head').append("<link rel=\"prev\" href=\"#{prev}\" />") if next
-      if prev is 'none'
-        $('link[rel="prev"]').remove()
 
       #Open graph tags for social media and description tags for SEO
       @addMetaTags()

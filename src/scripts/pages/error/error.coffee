@@ -10,8 +10,6 @@ define (require) ->
     template: template
     templateHelpers: () -> {error: @error}
     canonical: null
-    next: null
-    prev: null
 
     regions:
       find: '#find-content'

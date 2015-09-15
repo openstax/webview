@@ -15,8 +15,6 @@ define (require) ->
     template: template
     pageTitle: 'Content Library'
     canonical: () -> null if not @uuid
-    next: () -> null if not @model?
-    prev: () -> null if not @model?
     summary: 'OpenStax Content Library'
     description: 'Search for free, online textbooks.'
 

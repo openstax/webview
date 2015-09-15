@@ -7,31 +7,23 @@ define (require) ->
   require('less!./nav')
 
   return class MediaNavView extends BaseView
-    next: () ->
-      if @model.isBook()
-        next = @model.getNextPageNumber()
-        if next isnt @model.getTotalPages()
-          return linksHelper.getPath('contents', {model: @model, page: next})
-      return 'none'
-
-    prev: () ->
-      if @model.isBook()
-        prev = @model.getPreviousPageNumber()
-        cur = @model.getPageNumber()
-        if cur isnt 1
-          return linksHelper.getPath('contents', {model: @model, page: prev})
-      return 'none'
-
     template: template
     templateHelpers: () ->
       page = @model.getPageNumber()
       nextPage = @model.getNextPageNumber()
       previousPage = @model.getPreviousPageNumber()
 
+      $('link[rel="next"]').remove()
       if page isnt nextPage
         next = linksHelper.getPath('contents', {model: @model, page: nextPage})
+        if next isnt undefined
+          $('head').append("<link rel=\"next\" href=\"#{location.host}#{next}\" />") if next
+
+      $('link[rel="prev"]').remove()
       if page isnt previousPage
         back = linksHelper.getPath('contents', {model: @model, page: previousPage})
+        if back isnt undefined
+          $('head').append("<link rel=\"prev\" href=\"#{location.host}#{back}\" />") if back
 
       return {
         _hideProgress: @hideProgress

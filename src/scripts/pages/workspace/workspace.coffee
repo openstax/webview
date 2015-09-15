@@ -10,8 +10,6 @@ define (require) ->
     template: template
     pageTitle: 'My Workspace'
     canonical: null
-    next: null
-    prev: null
     summary: 'Add new content or find content and derive a copy for editing.'
     description: 'Create free educational content, or derive a copy for editing.'
 
