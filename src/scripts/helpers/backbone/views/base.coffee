@@ -66,7 +66,7 @@ define (require) ->
     renderDom: () ->
       @$el?.html(@getTemplate())
 
-    # Update page title, canonical link, and Open Graph tags
+    # Update page title, canonical link and Open Graph tags
     updatePageInfo: () ->
       currentPage = @model.getPageNumber().toString() if @model? and @model.isBook?()
       if Backbone.history.fragment?.match? and linksHelper.getCurrentPathComponents().page?
