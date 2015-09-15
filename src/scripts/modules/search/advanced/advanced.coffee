@@ -15,8 +15,14 @@ define (require) ->
     .match(/criteria=(.*)/)
     if criteriaMatch
       criteriaPart = criteriaMatch[1]
-      .match(/(\w+:((?:.(?!\w+:))+))/g)
-      $.each(criteriaPart, (i, entry) ->
+      .match(///
+      (\w+:   # query field, colon
+        (     # Series of...
+          (?:.(?!\w+:))+  # character not followed by query field+colon
+        )
+      )
+      ///g)
+      if criteriaPart? then $.each(criteriaPart, (i, entry) ->
         pair = entry.split(':', 2)
         valueNoQuotes = pair[1].match(/[^"]+/)
         query[pair[0]] = valueNoQuotes[0]
