@@ -13,6 +13,7 @@ define (require) ->
 
     events:
       'click > div > span > .section': 'toggleSection'
+      'keydown > div > .section-wrapper': 'toggleSectionWithKeyboard'
       'click > div > .remove': 'removeNode'
       'click > div > .edit': 'editNode'
 
@@ -47,6 +48,12 @@ define (require) ->
         @model.set('expanded', false)
       else
         @model.set('expanded', true)
+
+    toggleSectionWithKeyboard: (e) ->
+      if e.keyCode is 13 or e.keyCode is 32
+        e.preventDefault()
+        @toggleSection(e)
+        @$el.find('> div > .section-wrapper').focus()
 
     removeNode: () ->
       @content.removeNode(@model)
