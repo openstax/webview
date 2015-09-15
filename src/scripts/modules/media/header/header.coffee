@@ -64,9 +64,10 @@ define (require) ->
       button: '.info .btn'
 
     events:
-      'click .summary h5': 'toggleSummary'
+      'click .summary': 'toggleSummary'
       'click .derive .btn': 'derivePage'
       'click .edit .btn' : 'editPage'
+      'submit .info .btn': 'getBook'
 
     initialize: () ->
       super()
@@ -78,6 +79,15 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.editable change:currentPage.canPublish', @render)
       @listenTo(@model, 'change:currentPage', @updateTitle)
       @listenTo(router, 'navigate', @updatePageInfo)
+      # make Ask Us tab-accessible by wrapping it in an anchor with the same location and size
+      $askUs = $('#zenbox_tab')
+      $askUsLink = $('<a id="zenbox_tab-wrap" href="#" tabIndex="5">').appendTo($('body'))
+      $askUsLink.css($askUs.position())
+      $askUsLink.width($askUs.width())
+      $askUsLink.height($askUs.height())
+      $askUs.appendTo($askUsLink)
+      console.debug("Ask Us link:", $askUsLink)
+      $askUsLink.click($askUs.click.bind($askUs))
 
     onRender: () ->
       if not @model.asPage()?.get('active') then return
@@ -87,8 +97,9 @@ define (require) ->
         owner: @$el.find('.info .btn')
 
     toggleSummary: (e) ->
+      console.debug("Toggling!", e)
+      e.preventDefault()
       $summary = @$el.find('.summary')
-
       $summary.find('h5').toggleClass('active')
       @$el.find('.abstract').toggle()
 
@@ -103,6 +114,9 @@ define (require) ->
             page: @model.getPageNumber()
           router.navigate(href, {trigger: false, analytics: true})
       @model.editOrDeriveContent(options, data)
+
+    getBook: (event) ->
+      console.debug("Getting book", event)
 
 
     derivePage: () ->

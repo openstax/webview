@@ -19,6 +19,8 @@ define (require) ->
       @listenTo(@model, 'change:query', @render)
 
     removeBreadcrumb: (e) ->
+      console.debug("Removing")
+      e.preventDefault()
       limits = @model.get('query').limits
       limits.splice($(e.currentTarget).parent().data('index'), 1)
 
