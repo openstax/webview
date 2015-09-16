@@ -39,6 +39,7 @@ define (require) ->
     selectTab: (e) ->
       $tab = $(e.currentTarget)
       @switchTab($tab)
+      false
 
     switchTab: ($tab) ->
       if $tab.hasClass('disabled') then return

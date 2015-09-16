@@ -79,17 +79,6 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.editable change:currentPage.canPublish', @render)
       @listenTo(@model, 'change:currentPage', @updateTitle)
       @listenTo(router, 'navigate', @updatePageInfo)
-      ###
-      # ASK US button:
-      # HTML5 allows div to take focus, so the user can navigate to the ASK US button
-      # and hit return, but the modal comes up in an iframe, and we do not have access
-      # to its contents, so accessibility fails anyway
-      $askUs = $('#zenbox_tab').attr('tabIndex', '0')
-      $askUs.on 'keypress', (event) ->
-        if (event.keyCode is 13)
-          $askUs.click()
-
-      ###
 
     onRender: () ->
       if not @model.asPage()?.get('active') then return
@@ -99,7 +88,6 @@ define (require) ->
         owner: @$el.find('.info .btn')
 
     toggleSummary: (e) ->
-      console.debug("Toggling!", e)
       e.preventDefault()
       $summary = @$el.find('.summary')
       $summary.find('h5').toggleClass('active')

@@ -15,15 +15,27 @@ define (require) ->
 
     events:
       'click > .book-page-toggle > .btn:not(.active)': 'toggleMedia'
+      'click > .book-page-toggle > .btn.active': 'stayHere'
       'click .content-display-button': 'contentDisplay'
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:currentPage change:loaded change:currentPage.loaded', @render)
 
+    stayHere: (e) ->
+      # Focus styling is undesirable except when keyboard-navigating
+      if e.screenX isnt 0
+        $(e.currentTarget).blur()
+      false
+
     toggleMedia: (e) ->
       @media = $(e.currentTarget).data('media')
       @render()
+      # If keyboard-navigating
+      if e.screenX is 0
+        # Find the re-rendered element and apply focus
+        @$el.find('.book-page-toggle .btn.active').focus()
+      false
 
     contentDisplay: (e) ->
       e.preventDefault()

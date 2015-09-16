@@ -1,8 +1,8 @@
 {{#is type 'application/vnd.org.cnx.collection'}}
   {{#if contents.length}}
     <div class="book-page-toggle btn-group">
-      <span class="btn {{#is mediaType 'application/vnd.org.cnx.collection'}}active{{/is}}" data-media="book">Book</span>
-      <span class="btn {{#is mediaType 'application/vnd.org.cnx.module'}}active{{/is}}" data-media="page">Page</span>
+      <a class="btn {{#is mediaType 'application/vnd.org.cnx.collection'}}active{{/is}}" data-media="book" href="#">Book</a>
+      <a class="btn {{#is mediaType 'application/vnd.org.cnx.module'}}active{{/is}}" data-media="page" href="#">Page</a>
     </div>
   {{/if}}
 {{/is}}

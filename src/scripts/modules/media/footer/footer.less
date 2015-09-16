@@ -38,7 +38,7 @@
         }
       }
 
-      &.active {
+      &.active, &.active>a {
         color: @gray-lightest;
         background-color: @link-color;
 
@@ -72,6 +72,9 @@
       color: black;
       border: 0.1rem solid @gray-lightest;
       background-color: white;
+      &:focus {
+        border: solid lightblue 2px;
+      }
     }
 
     .active {
