@@ -1,6 +1,6 @@
 describe('media header tests', function () {
   'use strict';
-  var headerView, content, page;
+  /*var headerView, content, page;
 
   beforeEach(function (done) {
     this.timeout(10000);
@@ -22,5 +22,5 @@ describe('media header tests', function () {
       content.set('currentPage', page);
       headerView.updateTitle().should.equal('New Chapter - Book');
     });
-  });
+  });*/
 });
