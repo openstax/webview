@@ -16,17 +16,6 @@
 	<td>/</td>
 	<td></td>
 </tr>
-<!--Click on More link for Featured Books-->
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=span.link-title</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=span.link-title</td>
-	<td></td>
-</tr>
 <!--Select "Fast Fourier Transforms"-->
 <tr>
 	<td>waitForElementPresent</td>
