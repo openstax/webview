@@ -41,6 +41,7 @@
 	<td>id=suggestions_submit</td>
 	<td></td>
 </tr>
+<!--The first run of this test sometime fails. Assume it has to do with loading the widget from Zendesk-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>link=exact:How Do I Add Pages to a Book?</td>
