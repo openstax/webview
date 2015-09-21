@@ -118,7 +118,8 @@ define (require) ->
             $el = $(el)
             href = $el.attr('href')
 
-            if href.substr(0, 1) is '#' and href.length > 1 and $el.data('type') isnt 'footnote-ref'
+            if href.substr(0, 1) is '#' and href.length > 1 and
+               $el.data('type') isnt 'footnote-ref'
               try
                 $target = $temp.find(href)
 
