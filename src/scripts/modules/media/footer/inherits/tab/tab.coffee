@@ -23,14 +23,12 @@ define (require) ->
       @listenTo(@model, 'change:currentPage change:loaded change:currentPage.loaded', @render)
 
     stayHere: (e) ->
-      false
 
     toggleMedia: (e) ->
       @media = $(e.currentTarget).data('media')
       @render()
       # Find the re-rendered element and apply focus
       @$el.find('.book-page-toggle .btn.active').focus()
-      false
 
     contentDisplay: (e) ->
       e.preventDefault()

@@ -18,6 +18,7 @@ define (require) ->
 
     events:
       'click .tab': 'selectTab'
+      'keydown .tab': 'keySelectTab'
 
     editable:
       '[data-content="downloads"]':
@@ -36,10 +37,14 @@ define (require) ->
       @regions.attribution.show(new AttributionView({model: @model}))
       @regions.license.show(new LicenseView({model: @model}))
 
+    keySelectTab: (e) ->
+      if e.keyCode is 13 or e.keyCode is 32
+        e.preventDefault()
+        $(e.currentTarget).click()
+
     selectTab: (e) ->
       $tab = $(e.currentTarget)
       @switchTab($tab)
-      false
 
     switchTab: ($tab) ->
       if $tab.hasClass('disabled') then return
