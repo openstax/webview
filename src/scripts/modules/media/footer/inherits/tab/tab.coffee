@@ -15,14 +15,11 @@ define (require) ->
 
     events:
       'click > .book-page-toggle > .btn:not(.active)': 'toggleMedia'
-      'click > .book-page-toggle > .btn.active': 'stayHere'
       'click .content-display-button': 'contentDisplay'
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:currentPage change:loaded change:currentPage.loaded', @render)
-
-    stayHere: (e) ->
 
     toggleMedia: (e) ->
       @media = $(e.currentTarget).data('media')
