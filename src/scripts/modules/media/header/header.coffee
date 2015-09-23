@@ -67,7 +67,6 @@ define (require) ->
       'click .summary': 'toggleSummary'
       'click .derive .btn': 'derivePage'
       'click .edit .btn' : 'editPage'
-      'submit .info .btn': 'getBook'
 
     initialize: () ->
       super()
@@ -104,10 +103,6 @@ define (require) ->
             page: @model.getPageNumber()
           router.navigate(href, {trigger: false, analytics: true})
       @model.editOrDeriveContent(options, data)
-
-    getBook: (event) ->
-      console.debug("Getting book", event)
-
 
     derivePage: () ->
       options =
