@@ -27,7 +27,7 @@ define (require) ->
 
       super()
 
-      @listenTo(@model, 'change:unit change:title change:expanded sync:contents', @render)
+      @listenTo(@model, 'add change:unit change:title change:expanded sync:contents', @render)
 
     onRender: () ->
       super()

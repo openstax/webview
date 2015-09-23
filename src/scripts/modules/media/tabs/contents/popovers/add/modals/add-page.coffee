@@ -222,6 +222,7 @@ define (require) ->
       options =
         success: (model) =>
           @model.setPage(model)
+          @model.trigger('add')
           @updateUrl()
 
       if @model.get('license').code isnt settings.defaultLicense.code
