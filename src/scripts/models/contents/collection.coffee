@@ -74,6 +74,7 @@ define (require) ->
     add: () ->
       results = @get('contents').add(arguments...)
       @set('changed', true)
+      @trigger('add')
 
       return results
 
