@@ -130,7 +130,6 @@ define (require) ->
                 if $el.text() is '[link]' and tag
                   tag = tag.charAt(0).toUpperCase() + tag.substring(1)
                   $el.text("#{tag}") if tag isnt 'undefined'
-              catch
 
           # Convert links to maintain context in a book, if appropriate
           if @model.isBook()
