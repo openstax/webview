@@ -38,7 +38,15 @@
         }
       }
 
-      &.active {
+      &:focus {
+        border-top: 0.1rem solid @brand-primary;
+        border-left: 0.1rem solid @brand-primary;
+        border-right: 0.1rem solid @brand-primary;
+        outline: 0;
+      }
+
+      &.active,
+      &.active > button {
         color: @gray-lightest;
         background-color: @link-color;
 
@@ -72,6 +80,9 @@
       color: black;
       border: 0.1rem solid @gray-lightest;
       background-color: white;
+      &:focus {
+        border-color: lightblue;
+      }
     }
 
     .active {

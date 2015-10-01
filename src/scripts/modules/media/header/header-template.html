@@ -36,9 +36,9 @@
       <div class="downloads">
         {{#or hasDownloads buyLink}}
           {{#is mediaType 'application/vnd.org.cnx.collection'}}
-            <a class="btn">Get This Book!</a>
+            <button class="btn" tabindex="0" type="submit">Get This Book!</button>
           {{else}}
-            <a class="btn">Get This Page!</a>
+            <button class="btn" tabindex="0" type="submit">Get This Page!</button>
           {{/is}}
         {{/or}}
       </div>
@@ -54,7 +54,7 @@
 
     {{#if currentPage.abstract}}
       <div class="summary">
-        <h5>Summary</h5>
+        <a class="toggle" href="#"><h5>Summary</h5></a>
         <div class="abstract">{{include currentPage.abstract}}</div>
       </div>
     {{/if}}

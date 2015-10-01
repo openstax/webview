@@ -24,6 +24,8 @@ define (require) ->
     toggleMedia: (e) ->
       @media = $(e.currentTarget).data('media')
       @render()
+      # Find the re-rendered element and apply focus
+      @$el.find('.book-page-toggle .btn.active').focus()
 
     contentDisplay: (e) ->
       e.preventDefault()
