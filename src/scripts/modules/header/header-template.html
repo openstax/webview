@@ -12,14 +12,8 @@
       </div>
     {{/if}}
     <ul>
-      {{#if username}}
-        <li><a data-bypass="true" href="{{accountProfile}}">Account Profile</a></li>
-        <li><a data-bypass="true" href="/logout">Log Out {{username}}</a></li>
-      {{else}}
-        <li><a data-bypass="true" href="/login">Login</a></li>
-      {{/if}}
       {{#if url}}
-        <li><a href="{{url}}" title="Switch to the CNX legacy web site">Legacy Site</a></li>
+        <li><a href="{{url}}" title="Switch to the CNX legacy web site">CNX Author | Legacy Site</a></li>
       {{/if}}
       <li><a href="/donate" class="btn">Donate</a></li>
     </ul>
@@ -43,7 +37,6 @@
         <ul class="nav nav-justified">
           <li {{#is page 'home'}}class="active"{{/is}}><a href="/">Home</a></li>
           <li {{#is page 'contents'}}class="active"{{/is}}><a href="/contents">Content</a></li>
-          <li><a href="//{{legacy}}/lenses">Lenses</a></li>
           <li {{#is page 'about'}}class="active"{{/is}}><a href="/about">About Us</a></li>
           <li {{#is page 'workspace'}}class="active"{{/is}}><a href="/workspace">My Workspace</a></li>
           <li>
