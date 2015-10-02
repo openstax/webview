@@ -84,7 +84,9 @@ define (require) ->
               url: "#{ARCHIVE}/extras/#{@getVersionedId()}"
               dataType: 'json'
             .done (response) =>
-              @set('downloads', response.downloads)
+              validDownloads = response.downloads.filter (info) ->
+                 info.size > 0
+              @set('downloads', validDownloads)
               @set('isLatest', response.isLatest)
               @set('canPublish', response.canPublish)
             .fail () =>
