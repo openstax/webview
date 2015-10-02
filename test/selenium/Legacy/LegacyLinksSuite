@@ -8,7 +8,6 @@
 <body>
 <table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
 <tr><td><b>Test Suite</b></td></tr>
-<tr><td><a href="Lenses">Lenses</a></td></tr>
 <tr><td><a href="RiceLogo">RiceLogo</a></td></tr>
 <tr><td><a href="LegacyLink">LegacyLink</a></td></tr>
 <tr><td><a href="AndroidApp">AndroidApp</a></td></tr>
