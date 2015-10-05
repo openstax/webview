@@ -1,14 +1,13 @@
 describe('nav tests', function () {
   'use strict';
-  var Backbone, MediaNavView, Content;
+  var MediaNavView, Content;
 
   beforeEach(function (done) {
     this.timeout(10000);
 
-    require(['backbone', 'cs!modules/media/nav/nav', 'cs!models/content'], function () {
-      Backbone = arguments[0];
-      MediaNavView = arguments[1];
-      Content = arguments[2];
+    require(['cs!modules/media/nav/nav', 'cs!models/content'], function () {
+      MediaNavView = arguments[0];
+      Content = arguments[1];
       done();
     });
   });
