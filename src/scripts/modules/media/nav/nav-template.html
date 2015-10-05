@@ -8,7 +8,7 @@
       {{/if}}
 
       {{#unless _hideProgress}}
-        <div class="progress">
+        <div class="progress" aria-busy="true">
           <div class="secondary progress-bar" style="width: {{percent page pages}}%;"></div>
         </div>
       {{else}}
