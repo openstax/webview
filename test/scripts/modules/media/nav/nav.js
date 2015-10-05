@@ -1,16 +1,21 @@
 describe('nav tests', function () {
   'use strict';
-  var page;
+  var nav, content;
 
   beforeEach(function (done) {
-    require(['cs!models/contents/page'], function (Page) {
-      page = new Page();
+    require(['cs!modules/media/nav/nav', 'cs!models/content'], function (MediaNavView, ContentModel) {
+      content = new ContentModel();
+      nav = new MediaNavView({
+        'model': content
+      });
       done();
     });
   });
   describe('templateHelpers tests', function () {
-    it('should set the rel=next/prev tags', function () {
-      page.get('content').should.not.equal('');
+    it('should set a single rel=next and single rel=prev tag', function () {
+      nav.templateHelpers();
+      document.querySelectorAll('link[rel=\'next\']').length.should.equal(1);
+      document.querySelectorAll('link[rel=\'prev\']').length.should.equal(1);
     });
   });
 });
