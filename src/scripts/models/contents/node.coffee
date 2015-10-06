@@ -85,7 +85,7 @@ define (require) ->
               dataType: 'json'
             .done (response) =>
               validDownloads = response.downloads.filter (info) ->
-                info.size > 0 and info.format isnt 'EPUB'
+                info.state is 'good'
               @set('downloads', validDownloads)
               @set('isLatest', response.isLatest)
               @set('canPublish', response.canPublish)
