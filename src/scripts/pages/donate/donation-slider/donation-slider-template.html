@@ -1,6 +1,9 @@
 <form class="donation-slider" role="form">
   <div class="form-group">
-    <input type="range" aria-label="Donation" class="form-control" name="donation" min="{{min}}" max="14" value="{{value}}" />
+    <input type="range" role="slider" class="form-control" name="donation"
+     aria-label="Donation" aria-live="off"
+     aria-valuemin="{{minDonation}}" aria-valuemax="{{maxDonation}}" aria-valuenow="{{donation}}"
+     min="{{min}}" max="{{max}}" value="{{value}}" />
     <span class="donation-value">${{donation}}</span>
     <span class="donation-message">{{message}}</span>
   </div>
