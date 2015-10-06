@@ -10,7 +10,9 @@
       <h5>Download Book:</h5>
       <ul>
         {{#each downloads}}
-          <li><a href="{{path}}" data-prop="true">{{format}}</a></li>
+          {{#is state 'good'}}
+            <li><a href="{{path}}" data-prop="true">{{format}}</a></li>
+          {{/is}}
         {{/each}}
       </ul>
     </div>
@@ -21,7 +23,9 @@
       <h5>Download Page:</h5>
       <ul>
         {{#each currentPage.downloads}}
-          <li><a href="{{path}}" data-prop="true">{{format}}</a></li>
+          {{#is state 'good'}}
+            <li><a href="{{path}}" data-prop="true">{{format}}</a></li>
+          {{/is}}
         {{/each}}
       </ul>
     </div>

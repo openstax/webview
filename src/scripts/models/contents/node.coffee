@@ -84,9 +84,7 @@ define (require) ->
               url: "#{ARCHIVE}/extras/#{@getVersionedId()}"
               dataType: 'json'
             .done (response) =>
-              validDownloads = response.downloads.filter (info) ->
-                info.size > 0 and info.format isnt 'EPUB'
-              @set('downloads', validDownloads)
+              @set('downloads', response.downloads)
               @set('isLatest', response.isLatest)
               @set('canPublish', response.canPublish)
             .fail () =>
