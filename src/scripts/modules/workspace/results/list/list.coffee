@@ -28,6 +28,10 @@ define (require) ->
       @parent.regions.self.appendOnce
         view: @deleteModal
         as: 'div id="delete" class="modal fade"'
+      if (@model.attributes.loaded)
+        @$el.parent().removeAttr('aria-busy')
+      else
+        @$el.parent().attr('aria-busy', 'true')
 
     events:
       'click .delete': 'clickDelete'

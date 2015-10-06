@@ -1,6 +1,6 @@
 {{#if book}}
   <div class="media-nav{{#is status 'publishing'}} publishing{{/is}}">
-    <div class="book-nav">
+    <div class="book-nav" aria-busy="true">
       {{#if back}}
         <a class="nav back" href="{{back}}" data-trigger="false">Back</a>
       {{else}}
@@ -8,7 +8,7 @@
       {{/if}}
 
       {{#unless _hideProgress}}
-        <div class="progress" aria-busy="true">
+        <div class="progress">
           <div class="secondary progress-bar" style="width: {{percent page pages}}%;"></div>
         </div>
       {{else}}
