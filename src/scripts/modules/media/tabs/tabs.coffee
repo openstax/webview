@@ -52,14 +52,14 @@ define (require) ->
       $allTabs.addClass('inactive')
       $allTabs.removeClass('active')
       $allTabs.attr('aria-selected', 'false')
-      @$el.find('.tab-content').hide()
+      @$el.find('.tab-content').hide().attr('aria-hidden', 'true')
 
     showTab: ($tab) ->
       $tab.removeClass('inactive')
       $tab.addClass('active')
       $tab.attr('aria-selected', 'true')
       @currentTab = $tab.data('content')
-      @$el.find(".#{@currentTab}").show()
+      @$el.find(".#{@currentTab}").show().removeAttr('aria-hidden')
 
     closeTabs: () ->
       $allTabs = @$el.find('.tab')
