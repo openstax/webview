@@ -110,9 +110,6 @@ figure {
   > figure {
     counter-increment: subfigure;
 
-    // do not wrap this in a .media so it applies to editing in Aloha
-    img { max-width: 50%; }
-
     &.ui-has-child-figcaption > figcaption::before {
       font-weight: bold;
       content: counter(figure) counter(subfigure,lower-alpha) ': ';
