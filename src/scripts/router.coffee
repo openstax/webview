@@ -36,8 +36,7 @@ define (require) ->
       @route linksHelper.componentRegEx, 'media', (uuid, version, page, title, qs) ->
         uuid = uuid.toLowerCase()
         uuid = settings.shortcodes[uuid] if settings.shortcodes[uuid]
-        pageId = if page?.length > 7 then page else Number(page)
-        @appView.render('contents', {uuid: uuid, version: version, page: pageId, qs: qs})
+        @appView.render('contents', {uuid: uuid, version: version, page: Number(page), qs: qs})
 
       @route /^donate\/?([^/\?;]*)?\/?([^/\?;]*)?\/?([^/\?;]*)?(?:\?)?.*/, 'donate', (page, uuid, type) ->
         @appView.render('donate', {page: page, uuid: uuid, type: type})
