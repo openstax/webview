@@ -1,5 +1,6 @@
 define (require) ->
   $ = require('jquery')
+  bind = require('./bind')
   router = require('cs!router')
   linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
