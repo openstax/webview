@@ -15,6 +15,12 @@
                 <a href="{{license.url}}">
                   {{license.name}} {{license.version}}.
                 </a>
+                {{#isnt originalLicense.url license.url}}
+                <span>( previously
+                <a href="{{originalLicense.url}}">
+                  {{originalLicense.name}} {{originalLicense.version}}.
+                </a> )</span>
+                {{/isnt}}
                 <span>I understand</span>
                 <ul>
                   <li>I retain the copyright of my work</li>
