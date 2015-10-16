@@ -36,11 +36,18 @@ define (require) ->
 
       nodes = @model.get('contents')?.models
 
-      _.each nodes, (node) =>
+      _.each nodes, (node, idx) =>
         if node.isSection()
           @regions.container.appendAs 'li', new TocSectionView
             model: node
         else
+          ###
+          The real condition is testing the "numbered" attribute
+          If it exists, it should be false, meaning skip number
+          ###
+          numbered = not(idx is 0 && node.get('title').match(/^Introduction/))
+          if numbered == false
+            node.set('numbered', false)
           @regions.container.appendAs 'li', new TocPageView
             model: node
             collection: @model
