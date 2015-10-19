@@ -1,8 +1,8 @@
-<h3>Filters</h3>
+<h2 class="medium-header">Filters</h2>
 <ul class="filters">
   {{#each results.limits}}
     <li>
-      <h5 class="filter-name">{{name}}</h5>
+      <h3 class="filter-name extra-small-header">{{name}}</h3>
       <dl class="dl-horizontal {{#gt values.length 6}}collapsed{{/gt}}">
         {{#each values}}
           <dt class="limit {{#gt @index 5}}overflow hidden{{/gt}}">

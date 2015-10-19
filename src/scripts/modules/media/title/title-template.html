@@ -15,12 +15,12 @@
     {{/if}}
 
     <div class="title">
-      <h2>
+      <h1 class="large-header">
         {{#is status 'publishing'}}
           <span class="label label-info">publishing</span>
         {{/is}}
         {{title}}
-      </h2>
+      </h1>
       {{#if parent.id}}
         <span>
           Derived from <a href="/contents/{{parent.id}}@{{parent.version}}">{{parent.title}}</a> by
