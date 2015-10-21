@@ -13,7 +13,7 @@ define (require) ->
       isCcap = (item.get('book')?.get('printStyle') ? '').match(/^ccap-/)?
       if isSection
         title = item.get('title')
-        atTopLevel = cumulativeChapters.length == 0
+        atTopLevel = depth == 0
         chapterNumber = cumulativeChapters[depth - 1]
         if not isCcap
           chapterNumber = cumulativeChapters.slice(0,depth).join('.')
