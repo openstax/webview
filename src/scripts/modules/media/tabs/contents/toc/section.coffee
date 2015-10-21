@@ -24,11 +24,6 @@ define (require) ->
       @regions =
         container: @itemViewContainer
       @sectionNameModal = new SectionNameModal({model: @model})
-      ###
-      The TOC numbering solution below only applies to OpenStax books, which are
-      identified by a print style starting with "ccao-"
-      ###
-      @isCcap = @content.get('printStyle')?.match(/^ccap-/i)
 
       super()
 
