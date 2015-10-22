@@ -24,11 +24,6 @@ define (require) ->
       @regions =
         container: @itemViewContainer
       @sectionNameModal = new SectionNameModal({model: @model})
-      ###
-      The TOC numbering solution below only applies to OpenStax books, which are
-      identified by a print style starting with "ccao-"
-      ###
-      @isCcap = @content.get('printStyle')?.match(/^ccap-/i)
 
       super()
 
@@ -41,23 +36,11 @@ define (require) ->
 
       nodes = @model.get('contents')?.models
 
-      _.each nodes, (node, idx) =>
+      _.each nodes, (node) =>
         if node.isSection()
           @regions.container.appendAs 'li', new TocSectionView
             model: node
         else
-          ###
-          Do not number pages that are the first in their section and whose
-          title begins with "Introduction"
-          !!!
-          This is an interim solution to the TOC numbering problem, which is
-          probably imperfect.
-          !!!
-          ###
-          if (@isCcap?)
-            numbered = not(idx is 0 && node.get('title').match(/^Introduction/))
-            if numbered == false
-              node.set('numbered', false)
           @regions.container.appendAs 'li', new TocPageView
             model: node
             collection: @model
