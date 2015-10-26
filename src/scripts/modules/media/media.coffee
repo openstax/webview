@@ -31,7 +31,7 @@ define (require) ->
       editbar: '.editbar'
 
     summary:() -> @updateSummary()
-    description: () -> @updateSummary()
+    description: () -> @updateDescription()
 
     events:
       'keydown .media-title > .title input': 'checkKeySequence'
@@ -53,6 +53,7 @@ define (require) ->
       @listenTo(@model, 'change:error', @displayError)
       @listenTo(@model, 'change:editable', @toggleEditor)
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updateUrl)
+      @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updatePageInfo)
       @listenTo(@model, 'change:abstract', @updateSummary)
 
     onRender: () ->
@@ -73,6 +74,13 @@ define (require) ->
       else
         return 'An OpenStax CNX book'
 
+    updateDescription: () ->
+      if @model.get('currentPage')?.get('abstract')? and
+      @model.get('currentPage').get('abstract').replace(/(<([^>]+)>)/ig, "") isnt ''
+        # regular expression to strip tags
+        return @model.get('currentPage').get('abstract').replace(/(<([^>]+)>)/ig, "")
+      else
+        return @updateSummary()
 
     updateUrl: () ->
       components = linksHelper.getCurrentPathComponents()
