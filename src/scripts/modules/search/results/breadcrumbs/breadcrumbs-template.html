@@ -1,8 +1,8 @@
 {{#each query.limits}}
   <span class="breadcrumb" data-index="{{@index}}">
-    <div class="remove">
+    <a href="#" class="remove">
       <span class="fa fa-times"></span>
-    </div>
+    </a>
     <span class="limit">{{name}}</span>
     <span class="value">
       {{~#is tag "authorID"~}}

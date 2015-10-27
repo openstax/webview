@@ -133,7 +133,7 @@ define (require) ->
         searchTitle:
           hasError: false
           check: @_isSearchTitleValid
-          message: () =>
+          message: () ->
             'Please enter a title to search for existing pages to add to this book.'
 
       # common validation methods
@@ -222,6 +222,7 @@ define (require) ->
       options =
         success: (model) =>
           @model.setPage(model)
+          @model.trigger('add')
           @updateUrl()
 
       if @model.get('license').code isnt settings.defaultLicense.code

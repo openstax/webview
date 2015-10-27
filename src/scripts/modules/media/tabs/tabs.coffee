@@ -20,6 +20,7 @@ define (require) ->
 
     events:
       'click .tab': 'selectTab'
+      'keydown .tab': 'selectTabWithKeyboard'
 
     initialize: () ->
       super()
@@ -36,6 +37,12 @@ define (require) ->
         @resetTabs()
         @showTab(@$el.find(".#{components.query.tab}-tab"))
 
+    selectTabWithKeyboard: (e) ->
+      if e.keyCode is 13 or e.keyCode is 32
+        e.preventDefault()
+        $tab = $(e.currentTarget)
+        @switchTab($tab)
+
     selectTab: (e) ->
       $tab = $(e.currentTarget)
       @switchTab($tab)
@@ -44,13 +51,15 @@ define (require) ->
       $allTabs = @$el.find('.tab')
       $allTabs.addClass('inactive')
       $allTabs.removeClass('active')
-      @$el.find('.tab-content').hide()
+      $allTabs.attr('aria-selected', 'false')
+      @$el.find('.tab-content').hide().attr('aria-hidden', 'true')
 
     showTab: ($tab) ->
       $tab.removeClass('inactive')
       $tab.addClass('active')
+      $tab.attr('aria-selected', 'true')
       @currentTab = $tab.data('content')
-      @$el.find(".#{@currentTab}").show()
+      @$el.find(".#{@currentTab}").show().removeAttr('aria-hidden')
 
     closeTabs: () ->
       $allTabs = @$el.find('.tab')

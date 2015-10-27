@@ -11,8 +11,12 @@
     <ul class="foundations">
       {{#each foundations}}
         <li class="foundation">
-          <a href="{{url}}"><img alt="{{name}}" src="/images/people/foundations/{{image}}" /></a>
-          <h4 class="sr-only">{{name}}</h4>
+          {{#if url}}
+            <a href="{{url}}"><img alt="{{name}}" src="/images/people/foundations/{{image}}" /></a>
+          {{else}}
+            <img alt="{{name}}" src="/images/people/foundations/{{image}}" />
+          {{/if}}
+          <h3 class="sr-only">{{name}}</h3>
           <p>{{about}}</p>
         </li>
       {{/each}}

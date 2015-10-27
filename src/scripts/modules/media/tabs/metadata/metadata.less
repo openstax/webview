@@ -3,23 +3,26 @@
 
 .media-tabs .metadata {
   position: relative;
-  padding: 50px 40px 30px 40px;
+  padding: 5rem 4rem 3rem 4rem;
   color: black;
 
   .book-page-toggle {
     position: absolute;
-    right: 40px;
-    top: 20px;
+    right: 4rem;
+    top: 2rem;
 
     .btn {
       color: black;
-      border: 1px solid @gray-lightest;
+      border: 0.1rem solid @gray-lightest;
       background-color: white;
+      &:focus {
+          border-color: lightblue;
+      }
     }
 
     .active {
       color: black;
-      border: 1px solid transparent;
+      border: 0.1rem solid transparent;
       background-color: @gray-lightest;
     }
   }
@@ -28,25 +31,25 @@
     margin-bottom: 0;
 
     > dt {
-      padding: 10px 0;
-      width: 225px;
+      padding: 1rem 0;
+      width: 22.5rem;
       text-align: left;
       color: @gray-dark;
     }
 
     > dd {
       margin: 0;
-      border-bottom: 1px solid @gray-lighter;
+      border-bottom: 0.1rem solid @gray-lighter;
 
       &:last-child {
         border: none;
       }
 
       > div {
-        padding: 10px 10px 10px 225px;
+        padding: 1rem 1rem 1rem 22.5rem;
 
         > ul {
-          padding: 0 0 0 15px;
+          padding: 0 0 0 1.5rem;
         }
       }
 
@@ -67,8 +70,8 @@
     }
 
     [contenteditable = "true"] {
-      border: 1px solid #aaa;
-      border-radius: 4px;
+      border: 0.1rem solid #aaa;
+      border-radius: 0.4rem;
     }
   }
 }

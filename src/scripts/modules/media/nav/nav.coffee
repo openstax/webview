@@ -13,10 +13,17 @@ define (require) ->
       nextPage = @model.getNextPageNumber()
       previousPage = @model.getPreviousPageNumber()
 
+      $('link[rel="next"]').remove()
       if page isnt nextPage
         next = linksHelper.getPath('contents', {model: @model, page: nextPage})
+        if next isnt undefined
+          $('head').append("<link rel=\"next\" href=\"#{location.host}#{next}\" />") if next
+
+      $('link[rel="prev"]').remove()
       if page isnt previousPage
         back = linksHelper.getPath('contents', {model: @model, page: previousPage})
+        if back isnt undefined
+          $('head').append("<link rel=\"prev\" href=\"#{location.host}#{back}\" />") if back
 
       return {
         _hideProgress: @hideProgress

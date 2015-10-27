@@ -1,25 +1,25 @@
 <div class="media-footer">
-  <ul>
-    <li class="tab" data-content="downloads">
+  <ul role="tablist">
+    <li id="downloads-tab" class="tab" data-content="downloads" tabindex="0" role="tab">
       <span class="tab-title">Downloads</span>
     </li>
-    <li class="tab" data-content="history">
+    <li id="history-tab" class="tab" data-content="history" tabindex="0" role="tab">
       <span class="tab-title">History</span>
     </li>
-    <li class="tab" data-content="attribution">
+    <li id="attribution-tab" class="tab" data-content="attribution" tabindex="0" role="tab">
       <span class="tab-title">Attribution</span>
     </li>
   </ul>
 
-  <div class="downloads tab-content">
+  <div class="downloads tab-content" role="tabpanel" aria-labelledby="downloads-tab">
     {{! Downloads View }}
   </div>
 
-  <div class="history tab-content">
+  <div class="history tab-content" role="tabpanel" aria-labelledby="history-tab">
     {{! History View }}
   </div>
 
-  <div class="attribution tab-content">
+  <div class="attribution tab-content" role="tabpanel" aria-labelledby="attribution-tab">
     {{! Attribution View }}
   </div>
 

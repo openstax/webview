@@ -1,31 +1,35 @@
 <div class="book-popover">
   <div class="header">
     <img src="/images/icons/download.png" width="16" height="16" alt="Download" />
-    <h4>Get This Book</h4>
+    <h2 class="small-header">Get This Book</h2>
     <p>{{! Copy}}</p>
+
+    {{#if downloads}}
+      <div class="download-book">
+        <h3 class="extra-small-header">Download Book:</h3>
+        <ul>
+          {{#each downloads}}
+            {{#is state 'good'}}
+              <li><a href="{{path}}" data-prop="true">{{format}}</a></li>
+            {{/is}}
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+
+    {{#if currentPage.downloads}}
+      <div class="download-page">
+        <h3 class="extra-small-header">Download Page:</h3>
+        <ul>
+          {{#each currentPage.downloads}}
+            {{#is state 'good'}}
+              <li><a href="{{path}}" data-prop="true">{{format}}</a></li>
+            {{/is}}
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
   </div>
-
-  {{#if downloads}}
-    <div class="download-book">
-      <h5>Download Book:</h5>
-      <ul>
-        {{#each downloads}}
-          <li><a href="{{path}}" data-prop="true">{{format}}</a></li>
-        {{/each}}
-      </ul>
-    </div>
-  {{/if}}
-
-  {{#if currentPage.downloads}}
-    <div class="download-page">
-      <h5>Download Page:</h5>
-      <ul>
-        {{#each currentPage.downloads}}
-          <li><a href="{{path}}" data-prop="true">{{format}}</a></li>
-        {{/each}}
-      </ul>
-    </div>
-  {{/if}}
 
   {{#if buyLink}}
     <a href="{{buyLink}}" class="btn order">Order Printed Book</a>

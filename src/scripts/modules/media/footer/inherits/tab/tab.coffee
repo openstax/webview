@@ -15,6 +15,7 @@ define (require) ->
 
     events:
       'click > .book-page-toggle > .btn:not(.active)': 'toggleMedia'
+      'click .content-display-button': 'contentDisplay'
 
     initialize: () ->
       super()
@@ -23,3 +24,16 @@ define (require) ->
     toggleMedia: (e) ->
       @media = $(e.currentTarget).data('media')
       @render()
+      # Find the re-rendered element and apply focus
+      @$el.find('.book-page-toggle .btn.active').focus()
+
+    contentDisplay: (e) ->
+      e.preventDefault()
+      currentTarget = $(e.currentTarget)
+      contentDisplay = $('.content-display')
+      contentDisplay.toggle()
+      if contentDisplay.is(':visible')
+        currentTarget.text('Less Details')
+      else
+        currentTarget.text('More Details')
+      return

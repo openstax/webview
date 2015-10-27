@@ -73,8 +73,10 @@ define (require) ->
       try
         if @model.get('loaded') and @model.asPage()?.get('loaded') and @model.asPage()?.get('active')
 
-          if $temp.find('.os-interactive-link')
+          if $temp.find('.os-interactive-link').length
             @model.set('sims', true)
+
+          $temp.find('table th').attr('scope', 'col')
 
           # Remove the module title and abstract TODO: check if it is still necessary
           $temp.children('[data-type="title"]').remove()
@@ -116,7 +118,8 @@ define (require) ->
             $el = $(el)
             href = $el.attr('href')
 
-            if href.substr(0, 1) is '#' and href.length > 1 and $el.data('type') isnt 'footnote-ref'
+            if href.substr(0, 1) is '#' and href.length > 1 and
+               $el.data('type') isnt 'footnote-ref'
               try
                 $target = $temp.find(href)
 
@@ -128,7 +131,6 @@ define (require) ->
                 if $el.text() is '[link]' and tag
                   tag = tag.charAt(0).toUpperCase() + tag.substring(1)
                   $el.text("#{tag}") if tag isnt 'undefined'
-              catch
 
           # Convert links to maintain context in a book, if appropriate
           if @model.isBook()

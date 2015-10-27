@@ -63,12 +63,7 @@ define (require) ->
 
       if external.test(href)
         if legacy.test(href)
-          # Going to the legacy site
-          if document.cookie.indexOf('legacy') >= 0
-            location.href = href
-          else
-            $('#legacy-modal').data('href', href) # Hack to pass href to legacy modal
-            $('#legacy-modal').modal()
+          location.href = href
         else
           window.open(href, '_blank')
       else if download.test(href)

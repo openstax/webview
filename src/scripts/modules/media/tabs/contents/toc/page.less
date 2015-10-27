@@ -2,7 +2,7 @@
 @import "../../../../../../styles/mixins.less";
 
 .media-tabs .contents .contents > .toc ul > li {
-  border-bottom: 1px solid @gray-lightest;
+  border-bottom: 0.1rem solid @gray-lightest;
 
   &:last-child {
     border-bottom: none;
@@ -11,18 +11,18 @@
   > div {
     display: inline-block; // Prevent links from spilling into multiple-columns
     width: 100%;
-    padding: 5px 0;
+    padding: 0.5rem 0;
 
     // Add transparent borders to prevent jumping when DnD code adds a border
-    border-top: 3px solid transparent;
-    border-bottom: 3px solid transparent;
+    border-top: 0.3rem solid transparent;
+    border-bottom: 0.3rem solid transparent;
 
     &.before {
-      border-top: 3px solid #6ea244;
+      border-top: 0.3rem solid #6ea244;
     }
 
     &.after {
-      border-bottom: 3px solid #6ea244;
+      border-bottom: 0.3rem solid #6ea244;
     }
 
     &.insert {
@@ -35,7 +35,7 @@
       vertical-align: middle;
 
       small {
-        margin-left: 10px;
+        margin-left: 1rem;
         color: red;
       }
 

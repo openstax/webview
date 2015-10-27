@@ -64,7 +64,7 @@ define (require) ->
       button: '.info .btn'
 
     events:
-      'click .summary h5': 'toggleSummary'
+      'click .summary': 'toggleSummary'
       'click .derive .btn': 'derivePage'
       'click .edit .btn' : 'editPage'
 
@@ -87,8 +87,8 @@ define (require) ->
         owner: @$el.find('.info .btn')
 
     toggleSummary: (e) ->
+      e.preventDefault()
       $summary = @$el.find('.summary')
-
       $summary.find('h5').toggleClass('active')
       @$el.find('.abstract').toggle()
 
@@ -103,7 +103,6 @@ define (require) ->
             page: @model.getPageNumber()
           router.navigate(href, {trigger: false, analytics: true})
       @model.editOrDeriveContent(options, data)
-
 
     derivePage: () ->
       options =

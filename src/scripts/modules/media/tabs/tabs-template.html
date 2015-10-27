@@ -1,29 +1,29 @@
 <div class="media-tabs{{#is status 'publishing'}} publishing{{/is}}">
-  <ul>
+  <ul role="tablist">
     {{#if isBook}}
-      <li class="tab contents-tab" data-content="contents">
+      <li id="contents-tab" class="tab contents-tab" data-content="contents" aria-controls="panel-contents" aria-selected="false" role="tab" tabindex="0">
         <span class="tab-title"><span class="fa fa-th-list"></span>Contents</span>
       </li>
     {{/if}}
 
-    <li class="tab metadata-tab" data-content="metadata">
+    <li id="metadata-tab" class="tab metadata-tab" data-content="metadata" aria-controls="panel-metadata" aria-selected="false" role="tab" tabindex="0">
       <span class="tab-title"><span class="fa fa-info-circle"></span>Metadata</span>
     </li>
 
-    <li class="tab tools-tab" data-content="tools">
+    <li id="tools-tab" class="tab tools-tab" data-content="tools" aria-controls="panel-tools" aria-selected="false" role="tab" tabindex="0">
       <span class="tab-title"><span class="fa fa-cog"></span>Tools</span>
     </li>
   </ul>
 
-  <div class="contents tab-content">
+  <div id="panel-contents" class="contents tab-content" aria-labelledby="contents-tab" role="tabpanel">
     {{! Content View }}
   </div>
 
-  <div class="metadata tab-content">
+  <div id="panel-metadata" class="metadata tab-content" aria-labelledby="metadata-tab" role="tabpanel">
     {{! Metadata View }}
   </div>
 
-  <div class="tools tab-content">
+  <div id="panel-tools" class="tools tab-content" aria-labelledby="tools-tab" role="tabpanel">
     {{! Tools View }}
   </div>
 </div>

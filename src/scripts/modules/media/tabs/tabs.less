@@ -10,34 +10,44 @@
 
   > ul {
     margin: 0;
-    padding: 0 0 0 30px;
+    padding: 0 0 0 3rem;
     font-size: 0;
     list-style-type: none;
     color: @link-color;
-    border-bottom: 2px solid white;
+    border-bottom: 0.2rem solid white;
 
     > li {
       display: inline-block;
-      padding: 7px 10px;
-      margin-right: 3px;
+      padding: 0.7rem 1rem;
+      margin-right: 0.3rem;
       font-size: 1.5rem;
       background-color: white;
+      border-top: 0.1rem solid transparent;
+      border-left: 0.1rem solid transparent;
+      border-right: 0.1rem solid transparent;
       cursor: pointer;
       .user-select(none);
 
+      &:focus {
+        border-top: 0.1rem solid @brand-primary;
+        border-left: 0.1rem solid @brand-primary;
+        border-right: 0.1rem solid @brand-primary;
+        outline: 0;
+      }
+
       > .tab-title {
-        margin-left: 2px;
+        margin-left: 0.2rem;
         vertical-align: middle;
 
         .fa {
-          margin-right: 5px;
+          margin-right: 0.5rem;
           font-size: 1.6rem;
           vertical-align: middle;
         }
 
         &::after {
           font-weight: bold;
-          margin-left: 5px;
+          margin-left: 0.5rem;
           vertical-align: top;
           content: "+";
         }

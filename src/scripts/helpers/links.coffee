@@ -8,7 +8,17 @@ define (require) ->
   inverseShortcodes = _.invert(shortcodes)
 
   return new class LinksHelper
-    componentRegEx: /^contents\/([^:@/]+)@?([^:/?]*):?([0-9]*)\/?([^?]*)(\?.*)?/
+    componentRegEx: ///
+    ^contents/    # After contents/
+    ([^:@/]+)     # uuid up to delimiter
+    @?            # Optional @
+    ([^:/?]*)     # Revision
+    :?            # Optional :
+    ([^/?]*)      # Page number or uuid
+    /?            # Optional /
+    ([^?]*)       # Segment of title
+    (\?.*)?       # params (optional)
+    ///
 
     cleanUrl: trim
 
@@ -21,9 +31,11 @@ define (require) ->
           uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
           title = data.model.get('title')
           if data.model.isBook() and data.page?
-            title = data.model._lookupPage(data.page).get('title')
+            pageInfo = data.model._lookupPage(data.page)
+            pageId = pageInfo?.id ? data.page
+            title = pageInfo?.get('title')
           url += "contents/#{uuid}"
-          url += ":#{data.page}" if data.page
+          url += ":#{pageId}" if pageId
           url += "/#{trim(title)}" if title
 
       return url

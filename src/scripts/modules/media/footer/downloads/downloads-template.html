@@ -1,4 +1,4 @@
-<h3>Downloads</h3>
+<h2 class="medium-header">Downloads</h2>
 
 {{> modules/media/footer/inherits/tab/toggle-partial }}
 
@@ -10,24 +10,33 @@
   </div>
 {{else}}
   {{#if downloads.length}}
+  <button class="btn content-display-button">More details</button>
     <table class="table">
       <thead>
         <tr>
-          <th>Format:</th>
-          <th>File Name:</th>
-          <th>Details:</th>
+          <th scope="col">Format:</th>
+          <th scope="col">Details</th>
+          <th scope="col">File Name:</th>
+          <th scope="col" class="content-display">Generated:</th>
+          <th scope="col" class="content-display">Size:</th>
         </tr>
       </thead>
-
       <tbody>
         {{#each downloads}}
-          <tr>
-            <td>{{format}}</td>
-            <td>
-              <a href="{{path}}">{{filename}}</a>
-            </td>
-            <td>{{details}}</td>
-          </tr>
+        <tr>
+          <td>{{format}}</td>
+          <td>{{details}}</td>
+          {{#is this.state 'good'}}
+            <td><a href="{{path}}">{{filename}}</a></td>
+            <td class="content-display">{{date created}}</td>
+            <td class="content-display">{{convertToSize size}}</td>
+            </tr>
+          {{else}}
+            <td>File not available</td>
+            <td class="content-display">0</td>
+            <td class="content-display">0</td>
+            </tr>
+          {{/is}}
         {{/each}}
       </tbody>
     </table>

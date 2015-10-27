@@ -63,17 +63,18 @@ describe('backbone base view helper tests', function () {
       // canonical should still not have been set
       should.not.exist(document.querySelector('link[rel=\'canonical\']'));
     });
+
     it('should change canonical', function () {
       // set it the first time
       var myBase = new BaseView();
-      myBase.canonical = 'something';
+      myBase.canonical = 'first thing';
       myBase.updatePageInfo();
-      document.querySelector('link[rel=\'canonical\']').getAttribute('href').should.equal('something');
+      document.querySelector('link[rel=\'canonical\']').getAttribute('href').should.equal('first thing');
 
       // remove the old and reset
-      myBase.canonical = 'somethingElse';
+      myBase.canonical = 'second thing';
       myBase.updatePageInfo();
-      document.querySelector('link[rel=\'canonical\']').getAttribute('href').should.equal('somethingElse');
+      document.querySelector('link[rel=\'canonical\']').getAttribute('href').should.equal('second thing');
       document.querySelectorAll('link[rel=\'canonical\']').length.should.equal(1);
     });
   });

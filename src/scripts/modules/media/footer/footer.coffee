@@ -18,6 +18,7 @@ define (require) ->
 
     events:
       'click .tab': 'selectTab'
+      'keydown .tab': 'keySelectTab'
 
     editable:
       '[data-content="downloads"]':
@@ -36,6 +37,11 @@ define (require) ->
       @regions.attribution.show(new AttributionView({model: @model}))
       @regions.license.show(new LicenseView({model: @model}))
 
+    keySelectTab: (e) ->
+      if e.keyCode is 13 or e.keyCode is 32
+        e.preventDefault()
+        $(e.currentTarget).click()
+
     selectTab: (e) ->
       $tab = $(e.currentTarget)
       @switchTab($tab)
@@ -46,13 +52,13 @@ define (require) ->
       $allTabs = @$el.find('.tab')
       $allTabs.addClass('inactive')
       $allTabs.removeClass('active')
-      @$el.find('.tab-content').hide()
+      @$el.find('.tab-content').hide().attr('aria-hidden', 'true')
 
       if $tab.data('content') isnt @currentTab
         $tab.removeClass('inactive')
         $tab.addClass('active')
         @currentTab = $tab.data('content')
-        @$el.find(".#{@currentTab}").show()
+        @$el.find(".#{@currentTab}").show().removeAttr('aria-hidden')
       else
         @currentTab = null
         $allTabs.removeClass('inactive')

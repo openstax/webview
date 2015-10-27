@@ -29,8 +29,11 @@ define (require) ->
     templateHelpers:
       uuid: () -> @uuid
       min: () -> @min
+      max: () -> donation.length - 1
       value: () -> @value
       donation: () -> donation[@value]
+      minDonation: () -> donation[@min]
+      maxDonation: () -> donation[@max]
       message: () -> message[@value]
       path: () -> @getPath()
 
@@ -88,6 +91,7 @@ define (require) ->
     changeDonation: (e) ->
       @value = $(e.currentTarget).val()
       @$el.find('.donation-value').text("$#{donation[@value]}")
+      @$el.find('[type="range"]').attr('aria-valuenow', donation[@value])
       @$el.find('.donation-message').text("#{message[@value]}")
 
       if @value is '0'

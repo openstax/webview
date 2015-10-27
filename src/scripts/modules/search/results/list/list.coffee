@@ -35,3 +35,8 @@ define (require) ->
       super()
       @listenTo(@model, 'change', @render)
 
+    onRender: () ->
+      if (@model.attributes.loaded)
+        @$el.parent().removeAttr('aria-busy')
+      else
+        @$el.parent().attr('aria-busy', 'true')

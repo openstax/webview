@@ -2,43 +2,51 @@
 @import "../../../../styles/mixins.less";
 
 .media-footer {
-  margin: 40px 60px 60px 60px;
+  margin: 4rem 6rem 6rem 6rem;
 
-  h3 {
-    margin-bottom: 20px;
+  h2 {
+    margin-bottom: 2rem;
     font-weight: 300;
   }
 
   > ul {
-    margin: 0 0 30px 0;
-    padding: 0 0 0 30px;
+    margin: 0 0 3rem 0;
+    padding: 0 0 0 3rem;
     font-size: 0;
     list-style-type: none;
     color: @link-color;
-    border-bottom: 1px solid @gray-light;
+    border-bottom: 0.1rem solid @gray-light;
 
     > li {
       display: inline-block;
-      padding: 7px 10px;
-      margin-right: 3px;
+      padding: 0.7rem 1rem;
+      margin-right: 0.3rem;
       font-size: 1.4rem;
       background-color: @gray-lightest;
       cursor: pointer;
       .user-select(none);
 
       > .tab-title {
-        margin-left: 2px;
+        margin-left: 0.2rem;
         vertical-align: middle;
 
         &::after {
           font-weight: bold;
-          margin-left: 5px;
+          margin-left: 0.5rem;
           vertical-align: top;
           content: "+";
         }
       }
 
-      &.active {
+      &:focus {
+        border-top: 0.1rem solid @brand-primary;
+        border-left: 0.1rem solid @brand-primary;
+        border-right: 0.1rem solid @brand-primary;
+        outline: 0;
+      }
+
+      &.active,
+      &.active > button {
         color: @gray-lightest;
         background-color: @link-color;
 
@@ -57,10 +65,10 @@
 
   > .tab-content {
     display: none;
-    padding-bottom: 40px;
-    margin-bottom: 40px;
+    padding-bottom: 4rem;
+    margin-bottom: 4rem;
     background-color: white;
-    border-bottom: 1px solid @gray-light;
+    border-bottom: 0.1rem solid @gray-light;
   }
 
   .book-page-toggle {
@@ -70,13 +78,16 @@
 
     .btn {
       color: black;
-      border: 1px solid @gray-lightest;
+      border: 0.1rem solid @gray-lightest;
       background-color: white;
+      &:focus {
+        border-color: lightblue;
+      }
     }
 
     .active {
       color: black;
-      border: 1px solid transparent;
+      border: 0.1rem solid transparent;
       background-color: @gray-lightest;
     }
   }

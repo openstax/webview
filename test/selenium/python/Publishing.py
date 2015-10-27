@@ -71,7 +71,7 @@ class Publishing(unittest.TestCase):
         dest_element.click()
         dest_element.click()
         # save Page
-        savebutton = self.driver.find_element_by_xpath('(//button[@type="button"])[23]')
+        savebutton = self.driver.find_element_by_xpath('(//button[@type="button"])[22]')
         savebutton.click()
         self.driver.implicitly_wait(2000)
         # click publish button
@@ -85,7 +85,7 @@ class Publishing(unittest.TestCase):
         description.send_keys('Publishing test')
         wait = WebDriverWait(self.driver, 10)
         # publish
-        publish = wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'(//button[@type="submit"])[5]')))
+        publish = wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'(//button[@type="submit"])[3]')))
         publish.click()
 
         # verify in workspace

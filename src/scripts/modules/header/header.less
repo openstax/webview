@@ -1,9 +1,9 @@
 @import "../../../styles/variables.less";
 
 @logo-multiplier: 0.20;
-@logo-width: 1004px * @logo-multiplier;
-@logo-height: 202px * @logo-multiplier;
-@logo-offset: 15px;
+@logo-width: 100.4rem * @logo-multiplier;
+@logo-height: 20.2rem * @logo-multiplier;
+@logo-offset: 1.5rem;
 
 .page-header {
   position: relative;
@@ -14,7 +14,7 @@
   border-bottom: none;
 
   > .login {
-    padding: 15px 15px 0 0;
+    padding: 1.5rem 1.5rem 0 0;
     font-size: 0.9em;
     font-weight: 300;
     text-align: right;
@@ -23,19 +23,20 @@
     > #skiptoresults {
       a {
         position: absolute;
-        left: -50rem;
+        opacity: 0;
 
         &:focus {
-            left: 0;
-            top: 0;
-            padding: 0.5rem 1rem;
-            font-size: 1.8rem;
-            color: white;
-            background: @brand-secondary;
-            outline: 0;
-            border-bottom-right-radius: 1rem;
-            -webkit-transition: top .1s ease-in, background .5s linear;
-            transition: top .1s ease-in, background .5s linear;
+          opacity: 1;
+          left: 0;
+          top: 0;
+          padding: 0.5rem 1rem;
+          font-size: 1.8rem;
+          color: white;
+          background: @brand-secondary;
+          outline: 0;
+          border-bottom-right-radius: 1rem;
+          -webkit-transition: top .1s ease-in, background .5s linear;
+          transition: top .1s ease-in, background .5s linear;
         }
       }
     }
@@ -48,7 +49,7 @@
         display: inline-block;
 
         &::after {
-          padding: 0 5px 0 8px;
+          padding: 0 0.5rem 0 0.8rem;
           color: @gray-lighter;
           content: "|";
         }
@@ -61,7 +62,7 @@
     }
 
     .btn {
-      padding: 3px 10px;
+      padding: 0.3rem 1rem;
     }
   }
 
@@ -78,7 +79,7 @@
 
       > .navbar-header {
         margin-right: @logo-offset;
-        padding-bottom: 7px;
+        padding-bottom: 0.7rem;
         float: left;
         clear: left;
 
@@ -88,13 +89,13 @@
         }
 
         > .navbar-brand {
-          margin-top: 5px;
-          margin-left: 15px;
+          margin-top: 0.5rem;
+          margin-left: 1.5rem;
           width: @logo-width;
           height: @logo-height;
           background: url(/images/logo.png) center center no-repeat;
           background-size: contain;
-          text-indent: -9999px;
+          text-indent: -999rem;
           white-space: nowrap;
           overflow: hidden;
         }
@@ -109,7 +110,7 @@
 
         .nav {
           > li {
-            padding: 0 10px;
+            padding: 0 1rem;
 
             &:last-child {
               padding-right: 0;
@@ -120,7 +121,7 @@
               font-size: 1.1em;
               font-weight: 500;
               color: @link-color;
-              line-height: @logo-height + (@logo-height/3) + 4px;
+              line-height: @logo-height + (@logo-height/3) + 0.4rem;
               white-space: nowrap;
 
               &:hover {
