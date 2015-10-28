@@ -357,7 +357,6 @@ define (require) ->
 
 
     onRender: () ->
-      contentHtml = @model.asPage()?.get('content')
       equations = $('*[data-type="equation"]')
       equations.each((i, item) ->
         $label = $('<span class="equation-number">').text("(#{i+1})").
