@@ -29,6 +29,7 @@ describe('nav tests', function () {
     };
   }
 
+<<<<<<< HEAD
   /*
    * Test is only valid for viewing a book
    *
@@ -51,4 +52,24 @@ describe('nav tests', function () {
       });
     });
     */
+=======
+  var nav, content;
+
+  beforeEach(function (done) {
+    require(['cs!modules/media/nav/nav', 'cs!models/content'], function (MediaNavView, ContentModel) {
+      content = new ContentModel();
+      nav = new MediaNavView({
+        'model': content
+      });
+      done();
+    });
+  });
+  describe('templateHelpers tests', function () {
+    it('should set a single rel=next and single rel=prev tag', function () {
+      nav.templateHelpers();
+      document.querySelectorAll('link[rel=\'next\']').length.should.equal(1);
+      document.querySelectorAll('link[rel=\'prev\']').length.should.equal(1);
+    });
+  });
+>>>>>>> Merge pull request #1145 from Connexions/next-prev-link
 });
