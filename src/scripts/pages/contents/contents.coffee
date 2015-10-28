@@ -5,7 +5,6 @@ define (require) ->
   HeaderView = require('cs!modules/header/header')
   MinimalHeaderView = require('cs!modules/minimal/header/header')
   FooterView = require('cs!modules/footer/footer')
-  MinimalFooterView = require('cs!modules/minimal/footer/footer')
   FindContentView = require('cs!modules/find-content/find-content')
   BrowseContentView = require('cs!modules/browse-content/browse-content')
   MediaView = require('cs!modules/media/media')
@@ -39,9 +38,7 @@ define (require) ->
     onRender: () ->
       if not @minimal
         @regions.contents.show(new FindContentView())
-        @parent.regions.footer.show(new FooterView({page: 'contents'}))
-      else
-        @parent.regions.footer.show(new MinimalFooterView({page: 'contents'}))
+      @parent.regions.footer.show(new FooterView({page: 'contents'}))
 
 
       #clearTimeout(@_pollingContentTimer)

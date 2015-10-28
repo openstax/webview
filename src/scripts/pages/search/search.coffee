@@ -7,7 +7,6 @@ define (require) ->
   SearchView = require('cs!modules/search/search')
 
   MinimalHeaderView = require('cs!modules/minimal/header/header')
-  MinimalFooterView = require('cs!modules/minimal/footer/footer')
   MinimalSearchView = require('cs!modules/minimal/search/search')
 
   template = require('hbs!./search-template')
@@ -33,7 +32,7 @@ define (require) ->
     onRender: () ->
       if @minimal
         @parent.regions.header.show(new MinimalHeaderView({page: 'search', url: 'content/search'}))
-        @parent.regions.footer.show(new MinimalFooterView({page: 'search'}))
+        @parent.regions.footer.show(new FooterView({page: 'search'}))
         @regions.search.append(new MinimalSearchView())
       else
         @parent.regions.header.show(new HeaderView({page: 'search', url: 'content/search'}))
