@@ -357,6 +357,13 @@ define (require) ->
 
 
     onRender: () ->
+      contentHtml = @model.asPage()?.get('content')
+      equations = $('*[data-type="equation"]')
+      equations.each((i, item) ->
+        $label = $('<span class="equation-number">').text("(#{i+1})").
+        prependTo(item)
+        )
+
       if @model.asPage()?.get('loaded') and @model.isDraft()
         @parent?.regions.self.append(new ProcessingInstructionsModal({model: @model}))
 
