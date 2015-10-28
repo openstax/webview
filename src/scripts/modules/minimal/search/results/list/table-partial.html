@@ -1,0 +1,30 @@
+<table class="table table-first">
+  <caption>
+    {{#is item.0.mediaType 'application/vnd.org.cnx.collection'}}
+      {{! <span class="fa fa-book"></span> }}
+      <span>Books</span>
+    {{else}}
+      {{#is item.0.mediaType 'application/vnd.org.cnx.module'}}
+        {{! <span class="fa fa-file"></span> }}
+        <span>Pages</span>
+      {{else}}
+        {{! <span class="fa fa-question-circle"></span> }}
+        <span>Miscellaneous</span>
+      {{/is}}
+    {{/is}}
+  </caption>
+  <!-- <thead> -->
+    <!-- <tr> -->
+      <!-- <th class="type">Type</th> -->
+      <!-- <th class="title">Title</th> -->
+      <!-- <th class="authors">Author(s)</th> -->
+      <!-- <th class="edited">Edited</th> -->
+    <!-- </tr> -->
+  <!-- </thead> -->
+
+  <tbody>
+    {{#each item}}
+      {{> modules/minimal/search/results/list/item-partial authorList=../authorList}}
+    {{/each}}
+  </tbody>
+</table>

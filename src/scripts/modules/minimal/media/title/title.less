@@ -1,0 +1,79 @@
+@import "../../../../../styles/variables.less";
+@import "../../../../../styles/mixins.less";
+
+.media-title {
+  padding: 15px 10px;
+
+  &:not(.publishing) { background-color: @gray-lightest; }
+
+  .publishing();
+
+  > .derive, .edit {
+    margin-bottom: 15px;
+  }
+
+  > .title {
+    overflow-wrap: break-word;
+
+    @media (min-width: @screen-sm-min) {
+      display: inline-block;
+      margin-right: 7%;
+      width: 60%;
+
+      > h2 {
+        font-weight: 400;
+      }
+
+    }
+
+    > span {
+      display: block;
+      margin-top: 5px;
+    }
+
+    // When editing is turned on the Title becomes an input box; make sure it stretches
+    input[type="text"] {
+      width: 600px;
+      height: 45px;
+      text-overflow: ellipsis;
+    }
+  }
+
+  > .info {
+    overflow-wrap: break-word;
+    .user-select(none);
+
+    @media (min-width: @screen-sm-min) {
+      display: inline-block;
+      margin-bottom: -39px;
+      width: 32%;
+      text-align: right;
+      vertical-align: top;
+    }
+
+    @media (max-width: @screen-xs-max) {
+      margin-top: 5px;
+    }
+
+    > .share {
+      margin-top: 15px;
+
+      @media (max-width: @screen-xs-max) {
+        display: none;
+      }
+
+      > ul {
+        display: inline-block;
+        padding: 0;
+        list-style-type: none;
+
+        > li {
+          display: inline-block;
+          height: 28px; // Same height as the circles
+          vertical-align: middle;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

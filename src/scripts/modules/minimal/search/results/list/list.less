@@ -1,0 +1,85 @@
+@import "../../../../../../styles/variables.less";
+
+.search .results .list {
+  caption {
+    font-size: 2.1rem;
+    color: @brand-primary;
+    text-align: left;
+  }
+
+  .advanced-search {
+    margin-top: 20px;
+    float:right;
+    z-index: 1; position:relative
+  }
+
+  .table-first {
+    top: -35px;
+    position: relative;
+  }
+
+  thead .type {
+    color: black;
+  }
+
+  .type {
+    width: 60px;
+    text-align: center;
+    color: @brand-primary;
+
+    @media (max-width: @screen-xs-max) {
+      display: none;
+    }
+  }
+
+  .authors {
+    width: 165px;
+
+    @media (max-width: @screen-xs-max) {
+      display: none;
+    }
+
+    .author {
+      display: block;
+    }
+  }
+
+  .edited {
+    width: 115px;
+
+    @media (max-width: @screen-xs-max) {
+      display: none;
+    }
+  }
+
+  .pagination {
+    display: table; // used to center the div
+    margin: 5px auto;
+    text-align: center;
+
+    > ul {
+      padding: 0;
+      list-style-type: none;
+
+      > li {
+        display: inline-block;
+        padding: 4px;
+        font-size: 1.5rem;
+
+        &.disabled {
+          display: none; // Hide disabled prev/next buttons
+        }
+
+        &.active a {
+          color: black;
+          font-weight: bold;
+          pointer-events: none; // Disable the active page's button
+        }
+      }
+    }
+  }
+
+  span.comma:last-of-type {
+    display: none;
+  }
+}

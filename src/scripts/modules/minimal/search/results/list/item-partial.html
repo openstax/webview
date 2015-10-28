@@ -1,0 +1,18 @@
+<tr>
+  <td >
+    <div class="title">
+      <h4><a href="contents/{{id}}?minimal=true">{{title}}</a></h4>
+      <!-- <span>{{include summarySnippet}}</span> -->
+    </div>
+    <!-- <div class="authors"> -->
+    <div>
+      {{#each authors}}
+        <span class="author">{{author ../authorList index 'fullname'}}</span><span class="comma">,</span>
+      {{/each}}
+    </div>
+    <div class="edited">{{date pubDate}}</td>
+  <!-- </td>
+  <td  -->
+  <!-- </td>
+  <td class="edited">{{date pubDate}}</td> -->
+</tr>

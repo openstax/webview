@@ -1,0 +1,46 @@
+@import "../../../../../styles/variables.less";
+@import "../../../../../styles/mixins.less";
+
+@DEBUG-NOT-IMPLEMENTED: true;
+
+@blue: @brand-primary;
+@page-width: 75%;
+
+// Default character that separates inline list items.
+@default-inline-list-item-sep: ';';
+
+// For content with labels we have not converted yet try to show
+.x-not-implemented(@msg) when (@DEBUG-NOT-IMPLEMENTED) {
+  content: '[' @msg ' NOT_IMPLEMENTED_YET' ']';
+}
+
+// Mark unimplemented custom labels
+*[data-label]:not([data-label=""]):not(.ui-has-child-title):not(.btn-link)::before {
+  content: attr(data-label) ': ';
+}
+
+.media-body {
+  display: block;
+  padding: 40px 10px 0 10px;
+  width: auto; // override bootstrap
+  min-height: 6rem;
+  counter-reset: figure;
+  outline: none;
+
+  &.draft:not(.publishing) {
+    padding: 40px 10px;
+    background-color: #ffc;
+    min-height: 4in;
+  }
+
+  .publishing();
+
+  // Import the content styling from a separate file so it can be included in the editing code
+  > #content {
+    @import 'content.less';
+  }
+
+  cnx-pi {
+    display: none;
+  }
+}
