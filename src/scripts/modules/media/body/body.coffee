@@ -6,6 +6,7 @@ define (require) ->
   EditableView = require('cs!helpers/backbone/views/editable')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   SimModal = require('cs!./embeddables/modals/sims/sims')
+  require('bootstrapModal')
   template = require('hbs!./body-template')
   require('less!./body')
 
@@ -33,6 +34,8 @@ define (require) ->
           return @model.asPage()?.get('loaded')
 
         return @model.get('loaded')
+      isCoach: ->
+        return true
 
     editable:
       '.media-body':
@@ -46,6 +49,7 @@ define (require) ->
       'keydown .media-body': 'checkKeySequence'
       'keyup .media-body': 'resetKeySequence'
       'click .os-interactive-link': 'simLink'
+      'click .concept-coach-launcher > button': 'launchConceptCoach'
 
     initialize: () ->
       super()
@@ -60,6 +64,12 @@ define (require) ->
         $els.show()
       else
         $els.hide()
+
+    launchConceptCoach: (event) ->
+      $modalDiv = $('cc-modal')
+      $modalDiv.modal()
+      $modalDiv.modal('show')
+      console.debug("DIV:", $modalDiv)
 
     # Toggle the visibility of teacher's edition elements
     toggleTeacher: () ->
@@ -357,6 +367,10 @@ define (require) ->
 
 
     onRender: () ->
+      $('<div id="cc-modal">').height('300px').width('600px').text('There is no I in TEAM')
+        .addClass('modal fade').appendTo(document.body)
+
+
       if @model.asPage()?.get('loaded') and @model.isDraft()
         @parent?.regions.self.append(new ProcessingInstructionsModal({model: @model}))
 

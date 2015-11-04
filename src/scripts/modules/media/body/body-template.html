@@ -8,6 +8,11 @@
         {{include content}}
       </div>
     </div>
+    {{#if isCoach}}
+    <div class="concept-coach-launcher">
+      <button type="button" class="btn">Open Concept Coach</button>
+    </div>
+    {{/if}}
   {{/if}}
 {{else}}
   <div class="media-body" aria-busy="true">
