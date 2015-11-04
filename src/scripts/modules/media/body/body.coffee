@@ -66,7 +66,7 @@ define (require) ->
         $els.hide()
 
     launchConceptCoach: (event) ->
-      $modalDiv = $('cc-modal')
+      $modalDiv = $('#cc-modal')
       $modalDiv.modal()
       $modalDiv.modal('show')
       console.debug("DIV:", $modalDiv)
@@ -368,7 +368,11 @@ define (require) ->
 
     onRender: () ->
       $('<div id="cc-modal">').height('300px').width('600px').text('There is no I in TEAM')
-        .addClass('modal fade').appendTo(document.body)
+        .addClass('modal fade').appendTo(document.body).css(
+          'backgroundColor': 'white'
+          'margin': 'auto'
+          )
+      console.debug("Modal?", $('#cc-modal'))
 
 
       if @model.asPage()?.get('loaded') and @model.isDraft()
