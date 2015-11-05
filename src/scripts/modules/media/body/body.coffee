@@ -67,7 +67,9 @@ define (require) ->
         $els.hide()
 
     launchConceptCoach: (event) ->
-      cc.open(document.body, collectionUUID: 'd52e93f4-8653-4273-86da-3850001c0786', moduleUUID: '0c917d7d-0d1d-4a21-afbe-7d66bce2782c')
+      collectionUUID = @model.getUuid()
+      moduleUUID = @model.get('currentPage').getUuid()
+      cc.open(document.body, {collectionUUID, moduleUUID})
 
     # Toggle the visibility of teacher's edition elements
     toggleTeacher: () ->
