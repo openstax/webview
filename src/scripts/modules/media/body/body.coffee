@@ -6,7 +6,7 @@ define (require) ->
   EditableView = require('cs!helpers/backbone/views/editable')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   SimModal = require('cs!./embeddables/modals/sims/sims')
-  require('bootstrapModal')
+  cc = require('OpenStaxReactComponents')
   template = require('hbs!./body-template')
   require('less!./body')
 
@@ -52,6 +52,7 @@ define (require) ->
       'click .concept-coach-launcher > button': 'launchConceptCoach'
 
     initialize: () ->
+      cc.init('http://localhost:3001')
       super()
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
@@ -66,10 +67,7 @@ define (require) ->
         $els.hide()
 
     launchConceptCoach: (event) ->
-      $modalDiv = $('#cc-modal')
-      $modalDiv.modal()
-      $modalDiv.modal('show')
-      console.debug("DIV:", $modalDiv)
+      cc.open(document.body, collectionUUID: 'd52e93f4-8653-4273-86da-3850001c0786', moduleUUID: '0c917d7d-0d1d-4a21-afbe-7d66bce2782c')
 
     # Toggle the visibility of teacher's edition elements
     toggleTeacher: () ->
@@ -367,13 +365,6 @@ define (require) ->
 
 
     onRender: () ->
-      $('<div id="cc-modal">').height('300px').width('600px').text('There is no I in TEAM')
-        .addClass('modal fade').appendTo(document.body).css(
-          'backgroundColor': 'white'
-          'margin': 'auto'
-          )
-      console.debug("Modal?", $('#cc-modal'))
-
 
       if @model.asPage()?.get('loaded') and @model.isDraft()
         @parent?.regions.self.append(new ProcessingInstructionsModal({model: @model}))
