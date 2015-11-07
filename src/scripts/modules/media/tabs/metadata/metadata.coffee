@@ -6,6 +6,7 @@ define (require) ->
   subjects = require('cs!collections/subjects')
   FooterTabView = require('cs!modules/media/footer/inherits/tab/tab')
   template = require('hbs!./metadata-template')
+  require('bootstrapTooltip')
   require('less!./metadata')
 
   authoringport = if settings.cnxauthoring.port then ":#{settings.cnxauthoring.port}" else ''
@@ -172,3 +173,8 @@ define (require) ->
         return "#{fullname} (#{id})"
       else
         return id
+
+    onRender: () ->
+      super()
+      @$el.find('[data-toggle="tooltip"]').tooltip()
+

@@ -92,10 +92,8 @@
           {{license.name}} ({{license.code}} {{license.version}})
         </a> {{~#if originalLicense ~}}
                 {{~#isnt license.url originalLicense.url~}}
-        <div>(previously:
-        <a href="{{originaLicense.url}}">
-          {{originalLicense.name}} ({{originalLicense.code}} {{originalLicense.version}})
-        </a>)</div>
+                <span data-toggle="tooltip" data-placement="right" title="Previously: {{originalLicense.name}} ({{originalLicense.code}} {{originalLicense.version}})"> <span class="fa fa-info-circle" aria-hidden="true"></span>
+                      <span class="sr-only">Info:</span></span>
                 {{~/isnt~}}
              {{~/if~}}
 
