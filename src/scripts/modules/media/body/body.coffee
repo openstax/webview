@@ -52,11 +52,11 @@ define (require) ->
       'click .concept-coach-launcher > button': 'launchConceptCoach'
 
     initialize: () ->
-      cc.init('http://localhost:3001')
       super()
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
+      @intializeConceptCoach()
 
     updateTeacher: ($temp = @$el) ->
       $els = $temp.find('.os-teacher')
@@ -66,10 +66,31 @@ define (require) ->
       else
         $els.hide()
 
+    intializeConceptCoach: ->
+      $body = $('body')
+
+      animatedScroll = (top) ->
+        $('html, body').animate({scrollTop: top}, '500', 'swing')
+
+      handleOpen = (eventData) ->
+        cc.handleOpened(eventData, animatedScroll, $body[0])
+
+      handleClose = (eventData) ->
+        cc.handleClosed(eventData, $body[0])
+
+      cc.init('http://localhost:3001')
+      cc.on('ui.close', handleClose)
+      cc.on('open', handleOpen)
+
     launchConceptCoach: (event) ->
-      collectionUUID = @model.getUuid()
-      moduleUUID = @model.get('currentPage').getUuid()
-      cc.open(document.body, {collectionUUID, moduleUUID})
+      unless cc.component?.isMounted()
+        $button = $(event.currentTarget)
+
+        collectionUUID = @model.getUuid()
+        moduleUUID = @model.get('currentPage').getUuid()
+
+        cc.open($button.parent()[0], {collectionUUID, moduleUUID})
+
 
     # Toggle the visibility of teacher's edition elements
     toggleTeacher: () ->

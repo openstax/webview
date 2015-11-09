@@ -52,8 +52,35 @@
 
 .concept-coach-launcher {
   text-align: center;
-  button {
-    font-weight: bolder;
-    font-size: 1.5rem;
+  margin: 4rem 0;
+
+  > button {
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+
+    .cc-logo {
+      text-transform: uppercase;
+    }
+  }
+}
+
+
+body {
+  .transition(background 0.5s ease-in-out);
+}
+
+
+body.cc-opened {
+  background: #e5e5e5;
+  overflow: hidden !important;
+
+  .concept-coach-wrapper {
+    margin-top: 2rem;
+    text-align: left;
+
+    .concept-coach-view {
+      max-width: 960px;
+    }
+
   }
 }
