@@ -33,11 +33,12 @@ define (require) ->
         @appView.render('role-acceptance')
 
       # Match and extract uuid and page numbers separated by a colon
-      @route linksHelper.componentRegEx, 'media', (uuid, version, page, title, qs) ->
-        uuid = uuid.toLowerCase()
+      @route linksHelper.contentsLinkRegEx, 'media', (uuid, version, page, title, qs) ->
+        # Downcase uuids, not short ids
+        if uuid.length > 10
+          uuid = uuid.toLowerCase()
         uuid = settings.shortcodes[uuid] if settings.shortcodes[uuid]
-        # page numbers will be less than 8 digits; others are uuids
-        pageId = if page?.length > 7 then page else Number(page)
+        pageId = if isNaN(page) then page else Number(page)
         @appView.render('contents', {uuid: uuid, version: version, page: pageId, qs: qs})
 
       @route /^donate\/?([^/\?;]*)?\/?([^/\?;]*)?\/?([^/\?;]*)?(?:\?)?.*/, 'donate', (page, uuid, type) ->

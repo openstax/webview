@@ -357,10 +357,24 @@ define (require) ->
 
 
     onRender: () ->
-      if @model.asPage()?.get('loaded') and @model.isDraft()
+      shortId = @model.get('shortId')
+      currentPage = @model.asPage()
+      unless currentPage?
+        return
+      if shortId?
+        longId = @model.get('id')
+        newLocation = window.location.pathname.replace(longId, shortId)
+        pageId = currentPage.get('id')
+        pageShortId = currentPage.get('shortId')
+        if pageShortId?
+          newLocation = newLocation.replace(pageId, pageShortId)
+        router.navigate(newLocation, {replace: true})
+      page = @model.asPage() ? @model.get('contents')?.models[0]?.get('book')
+
+      if currentPage.get('loaded') and @model.isDraft()
         @parent?.regions.self.append(new ProcessingInstructionsModal({model: @model}))
 
-      if not @model.asPage()?.get('active') then return
+      if not currentPage.get('active') then return
 
       if @model.get('sims') is true
         @parent?.regions.self.append(new SimModal({model: @model}))

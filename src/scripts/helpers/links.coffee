@@ -8,7 +8,7 @@ define (require) ->
   inverseShortcodes = _.invert(shortcodes)
 
   return new class LinksHelper
-    componentRegEx: ///
+    contentsLinkRegEx: ///
     ^contents/    # After contents/
     ([^:@/]+)     # uuid up to delimiter
     @?            # Optional @
@@ -54,7 +54,7 @@ define (require) ->
       return "#{settings.root}contents/#{id}#{page}/#{title}"
 
     getCurrentPathComponents: () ->
-      components = Backbone.history.fragment.match(@componentRegEx) or []
+      components = Backbone.history.fragment.match(@contentsLinkRegEx) or []
       path = components[0]
       if path?.slice(-1) is '/'
         path = path.slice(0, -1)
