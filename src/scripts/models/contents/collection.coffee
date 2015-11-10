@@ -44,7 +44,8 @@ define (require) ->
 
     _getPageId: (id) ->
       for node in @get('contents').models
-        if node is id or node.get('id') is id or node.getVersionedId() is id
+        if node is id or node.get('id') is id or node.getVersionedId() is id or
+        node.get('shortId') is id
           return node
         else if node.isSection()
           result = node.getPage(id)
