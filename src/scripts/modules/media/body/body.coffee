@@ -69,7 +69,7 @@ define (require) ->
         $els.hide()
 
     intializeConceptCoach: ->
-      return unless @templateHelpers.isCoach()
+      return unless @templateHelpers.isCoach.call(@)
       $body = $('body')
 
       animatedScroll = (top) ->
