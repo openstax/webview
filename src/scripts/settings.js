@@ -10,7 +10,7 @@
 
       // Hostname and port for the cnx-archive server
       cnxarchive: {
-        host: 'archive.cnx.org',
+        host: 'devarchive.cnx.org',
         port: 80
       },
 
@@ -63,6 +63,13 @@
 
       defaultLicense: {
         code: 'by'
+      },
+
+      conceptCoach: {
+        moduleUuids: [
+          'f10533ca-f803-490d-b935-88899941197f'
+        ],
+        url: 'https://tutor-dev.openstax.org/'
       }
 
     };

@@ -8,18 +8,19 @@ define (require) ->
   SimModal = require('cs!./embeddables/modals/sims/sims')
   cc = require('OpenStaxReactComponents')
   template = require('hbs!./body-template')
+  settings = require('settings')
   require('less!./body')
 
   embeddableTemplates =
     'exercise': require('hbs!./embeddables/exercise-template')
     'iframe': require('hbs!./embeddables/iframe-template')
 
-  fakeExerciseTemplates = [
-    require('hbs!./embeddables/fake-exercises/ex001')
-    require('hbs!./embeddables/fake-exercises/ex002')
-    require('hbs!./embeddables/fake-exercises/ex003')
-    require('hbs!./embeddables/fake-exercises/ex004')
-  ]
+  # fakeExerciseTemplates = [
+  #   require('hbs!./embeddables/fake-exercises/ex001')
+  #   require('hbs!./embeddables/fake-exercises/ex002')
+  #   require('hbs!./embeddables/fake-exercises/ex003')
+  #   require('hbs!./embeddables/fake-exercises/ex004')
+  # ]
 
   return class MediaBodyView extends EditableView
     key = []
@@ -35,7 +36,8 @@ define (require) ->
 
         return @model.get('loaded')
       isCoach: ->
-        return true
+        moduleUUID = @model.getUuid()
+        _.contains(settings.conceptCoach.moduleUuids, moduleUUID)
 
     editable:
       '.media-body':
@@ -67,6 +69,7 @@ define (require) ->
         $els.hide()
 
     intializeConceptCoach: ->
+      return unless @templateHelpers.isCoach()
       $body = $('body')
 
       animatedScroll = (top) ->
@@ -78,7 +81,7 @@ define (require) ->
       handleClose = (eventData) ->
         cc.handleClosed(eventData, $body[0])
 
-      cc.init('http://localhost:3001')
+      cc.init(settings.conceptCoach.url)
       cc.on('ui.close', handleClose)
       cc.on('open', handleOpen)
 
@@ -89,7 +92,10 @@ define (require) ->
         collectionUUID = @model.getUuid()
         moduleUUID = @model.get('currentPage').getUuid()
 
-        cc.open($button.parent()[0], {collectionUUID, moduleUUID})
+        collectionVersion = @model.get('version')
+        moduleVersion = @model.get('currentPage').get('version')
+
+        cc.open($button.parent()[0], {collectionUUID, moduleUUID, collectionVersion, moduleVersion})
 
 
     # Toggle the visibility of teacher's edition elements
