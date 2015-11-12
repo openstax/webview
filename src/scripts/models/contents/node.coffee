@@ -6,6 +6,7 @@ define (require) ->
   $ = require('jquery')
   Backbone = require('backbone')
   settings = require('settings')
+  linksHelper = require('cs!helpers/links')
   require('backbone-associations')
   session = require('cs!session')
 
@@ -167,7 +168,7 @@ define (require) ->
     # Utility Methods
     #
 
-    _getIdComponents: () -> @id?.match(/([^:@\/]+)@?([^:\/]*):?([0-9]*)\/?(.*)/)
+    _getIdComponents: -> @id?.match(///^#{linksHelper.contentPattern}///)
 
     getVersionedId: () ->
       components = @_getIdComponents() or []
