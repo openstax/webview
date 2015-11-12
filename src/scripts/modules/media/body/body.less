@@ -49,3 +49,33 @@
     padding-left: 2rem;
   }
 }
+
+.concept-coach-launcher {
+  text-align: center;
+  margin: 4rem 0;
+
+  > button {
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+
+    .cc-logo {
+      text-transform: uppercase;
+    }
+  }
+}
+
+
+body {
+  .transition(background 0.5s ease-in-out);
+}
+
+body.cc-opened {
+  .concept-coach-wrapper {
+    margin-top: 2rem;
+    text-align: left;
+
+    .concept-coach-view {
+      max-width: 960px;
+    }
+  }
+}
