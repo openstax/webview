@@ -15,13 +15,6 @@ define (require) ->
     'exercise': require('hbs!./embeddables/exercise-template')
     'iframe': require('hbs!./embeddables/iframe-template')
 
-  # fakeExerciseTemplates = [
-  #   require('hbs!./embeddables/fake-exercises/ex001')
-  #   require('hbs!./embeddables/fake-exercises/ex002')
-  #   require('hbs!./embeddables/fake-exercises/ex003')
-  #   require('hbs!./embeddables/fake-exercises/ex004')
-  # ]
-
   return class MediaBodyView extends EditableView
     key = []
     media: 'page'
