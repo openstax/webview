@@ -3,6 +3,7 @@ define (require) ->
   embeddablesConfig = require('cs!configs/embeddables')
   Mathjax = require('mathjax')
   router = require('cs!router')
+  linksHelper = require('cs!helpers/links')
   EditableView = require('cs!helpers/backbone/views/editable')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   SimModal = require('cs!./embeddables/modals/sims/sims')
@@ -52,22 +53,16 @@ define (require) ->
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
-      @listenTo(@model, 'change:currentPage.loaded change:currentPage.active', @handleShortIds)
+      @listenTo(@model, 'change:currentPage.loaded change:currentPage.active', @canonicalizePath)
 
-    handleShortIds: () ->
-      pageIsLoaded = @model.get('currentPage')?.get('loaded')
-      return unless pageIsLoaded
-      currentPage = @model.asPage()
+    canonicalizePath: =>
+      currentPage = @model.get('currentPage')
+      pageIsLoaded = currentPage?.get('loaded')
+      return unless pageIsLoaded and currentPage.get('active')
       currentRoute = Backbone.history.getFragment()
-      shortId = @model.get('shortId')
-      if shortId?
-        longId = @model.get('id')
-        newLocation = currentRoute.replace(longId, shortId)
-        pageId = currentPage.get('id')
-        pageShortId = currentPage.get('shortId')
-        if pageShortId?
-          newLocation = newLocation.replace(pageId, pageShortId)
-        router.navigate(newLocation, {replace: true})
+      canonicalPath = linksHelper.getPath('contents', {model: @model, page: currentPage.get('shortId')})
+      if (canonicalPath isnt "/#{currentRoute}")
+        router.navigate(canonicalPath, {replace: true})
 
     updateTeacher: ($temp = @$el) ->
       $els = $temp.find('.os-teacher')
