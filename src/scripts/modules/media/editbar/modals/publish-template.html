@@ -15,7 +15,14 @@
                 <a href="{{license.url}}">
                   {{license.name}} {{license.version}}.
                 </a>
-                <span>I understand</span>
+                {{#isnt originalLicense.url license.url}}
+                <br/><span>(previously
+                <a href="{{originalLicense.url}}">
+                  {{originalLicense.name}} {{originalLicense.version}}.
+                </a>)</span>
+                {{/isnt}}
+                <br/><br/>
+                <span>I understand:</span>
                 <ul>
                   <li>I retain the copyright of my work</li>
                   <li>I warrant that I am the author or have permission to distribute the work in question</li>
