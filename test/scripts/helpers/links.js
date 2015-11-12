@@ -31,15 +31,24 @@ describe('links helper tests', function () {
           getVersionedId: function () {
             return 'not real';
           },
-          get: function () {
-            return 'page title';
+          get: function (which) {
+            switch (which) {
+              case 'shortId':
+                return 'shortId';
+              case 'version':
+                return 'version';
+              case 'title':
+                return 'title';
+              default:
+                return 'something';
+            }
           },
           isBook: function () {
             return false;
           }
         }
       };
-      links.getPath(page, data).should.equal('/contents/not real/page-title');
+      links.getPath(page, data).should.equal('/contents/shortId@version/title');
     });
     it('should append uuid and page title from settings to url', function () {
       var page = 'contents';
@@ -56,7 +65,7 @@ describe('links helper tests', function () {
           }
         }
       };
-      links.getPath(page, data).should.equal('/contents/college-physics/book-title');
+      links.getPath(page, data).should.equal('/contents/book title@book title/book-title');
     });
     it('should append uuid, book info and page title to url', function () {
       var page = 'contents';
@@ -81,7 +90,7 @@ describe('links helper tests', function () {
         },
         page: 'page'
       };
-      links.getPath(page, data).should.equal('/contents/college-physics:page/page-title');
+      links.getPath(page, data).should.equal('/contents/book name@book name:page title!@page title!/page-title');
     });
   });
   describe('serialize query tests', function () {
