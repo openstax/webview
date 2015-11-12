@@ -70,7 +70,7 @@
           'f10533ca-f803-490d-b935-88899941197f',
           '8QUzyvgD'
         ],
-        url: 'http://localhost:3001/'
+        url: 'https://tutor-dev.openstax.org'
       }
 
     };
