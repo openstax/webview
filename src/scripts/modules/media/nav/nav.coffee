@@ -3,6 +3,7 @@ define (require) ->
   router = require('cs!router')
   linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
+  ContentsView = require('cs!../tabs/contents/contents')
   template = require('hbs!./nav-template')
   require('less!./nav')
 
@@ -34,15 +35,34 @@ define (require) ->
         page: if @model.get('loaded') then @model.getPageNumber() else 0
       }
 
+    regions:
+      tocPanel: '.toc-panel'
+
     initialize: (options) ->
       super()
       @hideProgress = options.hideProgress
+      @tocIsOpen = false
 
       @listenTo(@model, 'change:loaded change:currentPage removeNode moveNode add:contents', @render)
 
     events:
       'click .next': 'nextPage'
       'click .back': 'previousPage'
+      'click .toggle.btn': 'toggleContents'
+
+    toggleContents: (e) ->
+      @tocIsOpen = not @tocIsOpen
+      @updateToc()
+
+    updateToc: ->
+      button = @$el.find('.toggle.btn')
+      panel = @$el.find('.toc-panel')
+      if (@tocIsOpen)
+        button.addClass('open')
+        panel.show(100)
+      else
+        button.removeClass('open')
+        panel.hide(100)
 
     nextPage: (e) ->
       nextPage = @model.getNextPageNumber()
@@ -65,3 +85,7 @@ define (require) ->
       href = $(e.currentTarget).attr('href')
       router.navigate href, {trigger: false}, () => @parent.trackAnalytics()
       @parent.scrollToTop()
+
+    onRender: ->
+      @regions.tocPanel.show(new ContentsView({model: @model}))
+      @updateToc()
