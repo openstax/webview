@@ -3,6 +3,7 @@ define (require) ->
   DownloadsView = require('cs!./downloads/downloads')
   HistoryView = require('cs!./history/history')
   AttributionView = require('cs!./attribution/attribution')
+  MetadataView = require('cs!./metadata/metadata')
   LicenseView = require('cs!./license/license')
   template = require('hbs!./footer-template')
   require('less!./footer')
@@ -15,6 +16,7 @@ define (require) ->
       history: '.history'
       attribution: '.attribution'
       license: '.license'
+      metadata: '.metadata'
 
     events:
       'click .tab': 'selectTab'
@@ -36,6 +38,7 @@ define (require) ->
       @regions.history.show(new HistoryView({model: @model}))
       @regions.attribution.show(new AttributionView({model: @model}))
       @regions.license.show(new LicenseView({model: @model}))
+      @regions.metadata.show(new MetadataView({model: @model}))
 
     keySelectTab: (e) ->
       if e.keyCode is 13 or e.keyCode is 32
