@@ -46,6 +46,7 @@ define (require) ->
           url += ":#{pageId}" if pageId
           url += "@#{pageVersion}" if pageVersion?
           url += "/#{trim(title)}" if title
+          url += window.location.search
 
       return url
 

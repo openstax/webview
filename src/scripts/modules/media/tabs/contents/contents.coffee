@@ -8,6 +8,7 @@ define (require) ->
   cumulativeChapters = []
   numberChapters = (toc, depth=0) ->
     sectionNumber = 0
+    skippedIntro = false
     for item in toc
       isSection = not item.get('contents')?
       isCcap = (item.get('book')?.get('printStyle') ? '').match(/^ccap-/)?
@@ -18,24 +19,24 @@ define (require) ->
         if not isCcap
           chapterNumber = cumulativeChapters.slice(0,depth).join('.')
           sectionNumber = cumulativeChapters[depth] ? 0
-        if not (
-          atTopLevel or
-          isCcap and sectionNumber is 0 and title.match(/^Introduction/)
-        )
-          sectionNumber += 1
-          cumulativeChapters[depth] = sectionNumber
-          item.set('chapter', "#{chapterNumber}.#{sectionNumber}")
+        else if not atTopLevel
+          if sectionNumber > 0 or skippedIntro
+            sectionNumber += 1
+            cumulativeChapters[depth] = sectionNumber
+            item.set('chapter', "#{chapterNumber}.#{sectionNumber}")
+          else
+            skippedIntro = true
       else
         if cumulativeChapters[depth]?
           cumulativeChapters[depth] += 1
         else
           cumulativeChapters[depth] = 1
         contentsModels = item.get('contents')?.models
-        if not isCcap
+        if isCcap
+          chapterNumber = cumulativeChapters[depth]
+        else
           cumulativeChapters[depth + 1] = 0
           chapterNumber = cumulativeChapters.slice(0,depth+1).join('.')
-        else
-          chapterNumber = cumulativeChapters[depth]
         numberChapters(contentsModels, depth+1) if contentsModels?
         item.set('chapter', chapterNumber)
 
@@ -51,11 +52,17 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable removeNode moveNode add:contents', @render)
-      cumulativeChapters = []
-      numberChapters(@model.attributes.contents.models) if @model.attributes.contents?.models?
+      @listenTo(@model, 'change:editable removeNode moveNode', @render)
+      @listenTo(@model, 'change:contents', =>
+        nodes = @model.attributes.contents?.models
+        if nodes?
+          cumulativeChapters = []
+          numberChapters(nodes)
+          @render()
+        )
 
     onRender: () ->
+      @$el.addClass('table-of-contents')
       @regions.toc.show new TocSectionView
         model: @model
 

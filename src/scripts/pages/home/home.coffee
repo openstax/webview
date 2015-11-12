@@ -1,33 +1,29 @@
 define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
-  HeaderView = require('cs!modules/header/header')
-  FooterView = require('cs!modules/footer/footer')
+  MainPageView = require('cs!modules/main-page/main-page')
   SplashView = require('cs!modules/splash/splash')
-  FindContentView = require('cs!modules/find-content/find-content')
   FeaturedBooksView = require('cs!modules/featured-books/featured-books')
   template = require('hbs!./home-template')
   require('less!./home')
 
-  return class HomePage extends BaseView
+  class InnerView extends BaseView
     template: template
-    pageTitle: 'Sharing Knowledge and Building Communities'
-    canonical: null
-    summary: 'View and share free educational material as courses, books,reports or other academic assignments.'
-    description: 'Free, online educational material such as courses, books and reports.'
 
     regions:
       splash: '#splash'
       find: '#find-content'
       featured: '#featured-books'
-      #news: '#news'
-      #spotlight: '#spotlight'
 
     onRender: () ->
-      @parent.regions.header.show(new HeaderView({page: 'home', url: 'content'}))
-      @parent.regions.footer.show(new FooterView({page: 'home'}))
-
       @regions.splash.show(new SplashView())
       @regions.featured.show(new FeaturedBooksView())
-      @regions.find.show(new FindContentView())
-      #@regions.news.show(new NewsView())
-      #@regions.spotlight.show(new SpotlightView())
+
+  return class HomePage extends MainPageView
+    pageTitle: 'Sharing Knowledge and Building Communities'
+    canonical: null
+    summary: 'View and share free educational material as courses, books,reports or other academic assignments.'
+    description: 'Free, online educational material such as courses, books and reports.'
+
+    onRender: ->
+      super()
+      @regions.main.show(new InnerView())
