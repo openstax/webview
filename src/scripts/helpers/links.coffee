@@ -33,15 +33,18 @@ define (require) ->
 
       switch page
         when 'contents'
-          uuid = data.model.getVersionedId()
-          uuid = inverseShortcodes[uuid] if inverseShortcodes[uuid]
+          uuid = data.model.get('shortId')
+          version = data.model.get('version')
+          uuid += "@#{version}" if version?
           title = data.model.get('title')
           if data.model.isBook() and data.page?
             pageInfo = data.model._lookupPage(data.page)
-            pageId = pageInfo?.id ? data.page
+            pageId = pageInfo?.get('shortId') ? pageInfo?.id ? data.page
+            pageVersion = pageInfo?.get('version')
             title = pageInfo?.get('title')
           url += "contents/#{uuid}"
           url += ":#{pageId}" if pageId
+          url += "@#{pageVersion}" if pageVersion?
           url += "/#{trim(title)}" if title
 
       return url
