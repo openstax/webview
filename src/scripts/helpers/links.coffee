@@ -7,9 +7,10 @@ define (require) ->
   shortcodes = settings.shortcodes
   inverseShortcodes = _.invert(shortcodes)
 
-  return new class LinksHelper
-    contentsLinkRegEx: ///
-    ^contents/    # After contents/
+  # For interpolating into reg exps, it has to be a string without
+  # the surrounding slashes
+  contentPattern =
+    ///
     ([^:@/]+)     # uuid up to delimiter
     @?            # Optional @
     ([^:/?]*)     # Revision
@@ -18,7 +19,12 @@ define (require) ->
     /?            # Optional /
     ([^?]*)       # Segment of title
     (\?.*)?       # params (optional)
-    ///
+    ///.toString().slice(1, -1)
+
+  return new class LinksHelper
+    contentPattern: contentPattern
+
+    contentsLinkRegEx: ///^contents/#{contentPattern}///
 
     cleanUrl: trim
 

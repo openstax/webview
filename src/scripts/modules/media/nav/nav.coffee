@@ -47,14 +47,14 @@ define (require) ->
     nextPage: (e) ->
       nextPage = @model.getNextPageNumber()
       # Show the next page if there is one
-      @model.setPage(nextPage)
       @changePage(e)
+      @model.setPage(nextPage)
 
     previousPage: (e) ->
       previousPage = @model.getPreviousPageNumber()
       # Show the previous page if there is one
-      @model.setPage(previousPage)
       @changePage(e)
+      @model.setPage(previousPage)
 
     changePage: (e) ->
       # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab

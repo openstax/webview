@@ -52,6 +52,22 @@ define (require) ->
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
+      @listenTo(@model, 'change:currentPage.loaded change:currentPage.active', @handleShortIds)
+
+    handleShortIds: () ->
+      pageIsLoaded = @model.get('currentPage')?.get('loaded')
+      return unless pageIsLoaded
+      currentPage = @model.asPage()
+      currentRoute = Backbone.history.getFragment()
+      shortId = @model.get('shortId')
+      if shortId?
+        longId = @model.get('id')
+        newLocation = currentRoute.replace(longId, shortId)
+        pageId = currentPage.get('id')
+        pageShortId = currentPage.get('shortId')
+        if pageShortId?
+          newLocation = newLocation.replace(pageId, pageShortId)
+        router.navigate(newLocation, {replace: true})
 
     updateTeacher: ($temp = @$el) ->
       $els = $temp.find('.os-teacher')
@@ -355,27 +371,14 @@ define (require) ->
 
       _.each(sections, appendFakeExercise)
 
-
     onRender: () ->
-      shortId = @model.get('shortId')
       currentPage = @model.asPage()
-      unless currentPage?
-        return
-      if shortId?
-        longId = @model.get('id')
-        newLocation = window.location.pathname.replace(longId, shortId)
-        pageId = currentPage.get('id')
-        pageShortId = currentPage.get('shortId')
-        if pageShortId?
-          newLocation = newLocation.replace(pageId, pageShortId)
-        router.navigate(newLocation, {replace: true})
-      page = @model.asPage() ? @model.get('contents')?.models[0]?.get('book')
-
+      return unless currentPage?
+      page = currentPage ? @model.get('contents')?.models[0]?.get('book')
       if currentPage.get('loaded') and @model.isDraft()
         @parent?.regions.self.append(new ProcessingInstructionsModal({model: @model}))
 
-      if not currentPage.get('active') then return
-
+      return unless currentPage.get('active')
       if @model.get('sims') is true
         @parent?.regions.self.append(new SimModal({model: @model}))
 
@@ -385,7 +388,7 @@ define (require) ->
       # Update the hash fragment after the content has loaded
       # to force the browser window to find the intended content
       jumpToHash = () =>
-        if @model.asPage().get('loaded') and not @fragmentReloaded and window.location.hash
+        if currentPage.get('loaded') and not @fragmentReloaded and window.location.hash
           @fragmentReloaded = true
           hash = window.location.hash
           window.location.hash = ''
