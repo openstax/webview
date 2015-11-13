@@ -53,6 +53,7 @@ define (require) ->
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active', @canonicalizePath)
+      @intializeConceptCoach()
 
     canonicalizePath: =>
       currentPage = @model.get('currentPage')
