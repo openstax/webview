@@ -26,7 +26,7 @@ define (require) ->
       }
 
     editable:
-      '.media-title > .title > h2':
+      '.media-title > .title > h1':
         value: 'title'
         type: 'textinput'
 

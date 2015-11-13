@@ -3,22 +3,18 @@ define (require) ->
   embeddablesConfig = require('cs!configs/embeddables')
   Mathjax = require('mathjax')
   router = require('cs!router')
+  linksHelper = require('cs!helpers/links')
   EditableView = require('cs!helpers/backbone/views/editable')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   SimModal = require('cs!./embeddables/modals/sims/sims')
+  cc = require('OpenStaxReactComponents')
   template = require('hbs!./body-template')
+  settings = require('settings')
   require('less!./body')
 
   embeddableTemplates =
     'exercise': require('hbs!./embeddables/exercise-template')
     'iframe': require('hbs!./embeddables/iframe-template')
-
-  fakeExerciseTemplates = [
-    require('hbs!./embeddables/fake-exercises/ex001')
-    require('hbs!./embeddables/fake-exercises/ex002')
-    require('hbs!./embeddables/fake-exercises/ex003')
-    require('hbs!./embeddables/fake-exercises/ex004')
-  ]
 
   return class MediaBodyView extends EditableView
     key = []
@@ -33,6 +29,9 @@ define (require) ->
           return @model.asPage()?.get('loaded')
 
         return @model.get('loaded')
+      isCoach: ->
+        moduleUUID = @model.getUuid()
+        _.contains(settings.conceptCoach.moduleUuids, moduleUUID)
 
     editable:
       '.media-body':
@@ -46,28 +45,24 @@ define (require) ->
       'keydown .media-body': 'checkKeySequence'
       'keyup .media-body': 'resetKeySequence'
       'click .os-interactive-link': 'simLink'
+      'click .concept-coach-launcher > button': 'launchConceptCoach'
 
     initialize: () ->
       super()
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
-      @listenTo(@model, 'change:currentPage.loaded change:currentPage.active', @handleShortIds)
+      @listenTo(@model, 'change:currentPage.loaded change:currentPage.active', @canonicalizePath)
+      @intializeConceptCoach()
 
-    handleShortIds: () ->
-      pageIsLoaded = @model.get('currentPage')?.get('loaded')
-      return unless pageIsLoaded
-      currentPage = @model.asPage()
+    canonicalizePath: =>
+      currentPage = @model.get('currentPage')
+      pageIsLoaded = currentPage?.get('loaded')
+      return unless pageIsLoaded and currentPage.get('active')
       currentRoute = Backbone.history.getFragment()
-      shortId = @model.get('shortId')
-      if shortId?
-        longId = @model.get('id')
-        newLocation = currentRoute.replace(longId, shortId)
-        pageId = currentPage.get('id')
-        pageShortId = currentPage.get('shortId')
-        if pageShortId?
-          newLocation = newLocation.replace(pageId, pageShortId)
-        router.navigate(newLocation, {replace: true})
+      canonicalPath = linksHelper.getPath('contents', {model: @model, page: currentPage.get('shortId')})
+      if (canonicalPath isnt "/#{currentRoute}")
+        router.navigate(canonicalPath, {replace: true})
 
     updateTeacher: ($temp = @$el) ->
       $els = $temp.find('.os-teacher')
@@ -76,6 +71,36 @@ define (require) ->
         $els.show()
       else
         $els.hide()
+
+    intializeConceptCoach: ->
+      return unless @templateHelpers.isCoach.call(@)
+      $body = $('body')
+
+      animatedScroll = (top) ->
+        $('html, body').animate({scrollTop: top}, '500', 'swing')
+
+      handleOpen = (eventData) ->
+        cc.handleOpened(eventData, animatedScroll, $body[0])
+
+      handleClose = (eventData) ->
+        cc.handleClosed(eventData, $body[0])
+
+      cc.init(settings.conceptCoach.url)
+      cc.on('ui.close', handleClose)
+      cc.on('open', handleOpen)
+
+    launchConceptCoach: (event) ->
+      unless cc.component?.isMounted()
+        $button = $(event.currentTarget)
+
+        collectionUUID = @model.getUuid()
+        moduleUUID = @model.get('currentPage').getUuid()
+
+        collectionVersion = @model.get('version')
+        moduleVersion = @model.get('currentPage').get('version')
+
+        cc.open($button.parent()[0], {collectionUUID, moduleUUID, collectionVersion, moduleVersion})
+
 
     # Toggle the visibility of teacher's edition elements
     toggleTeacher: () ->

@@ -26,6 +26,8 @@
       // Use Minified Aloha because loading files in a different requirejs context is a royal pain
       aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
 
+      OpenStaxReactComponents: '../../bower_components/concept-coach/dist/full-build.min',
+
       // ## UI Libraries and Helpers
       tooltip: 'helpers/backbone/views/attached/tooltip/tooltip',
       popover: 'helpers/backbone/views/attached/popover/popover',
