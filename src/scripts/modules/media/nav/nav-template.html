@@ -1,7 +1,9 @@
 {{#if book}}
   <div class="media-nav{{#is status 'publishing'}} publishing{{/is}}">
     <div class="media-toolbar">
+      {{#unless _hideProgress}}
       <span class="toggle btn" role="button"><span class="fa fa-th-list"></span> Contents</span>
+      {{/unless}}
       <div class="media-navbar">
         <div class="book-nav" aria-busy="true">
           {{#if back}}
