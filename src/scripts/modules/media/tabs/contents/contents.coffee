@@ -8,7 +8,6 @@ define (require) ->
   cumulativeChapters = []
   numberChapters = (toc, depth=0) ->
     sectionNumber = 0
-    skippedIntro = false
     for item in toc
       isSection = not item.get('contents')?
       isCcap = (item.get('book')?.get('printStyle') ? '').match(/^ccap-/)?
@@ -20,12 +19,10 @@ define (require) ->
           chapterNumber = cumulativeChapters.slice(0,depth).join('.')
           sectionNumber = cumulativeChapters[depth] ? 0
         else if not atTopLevel
-          if sectionNumber > 0 or skippedIntro
-            sectionNumber += 1
+          if sectionNumber > 0
             cumulativeChapters[depth] = sectionNumber
             item.set('chapter', "#{chapterNumber}.#{sectionNumber}")
-          else
-            skippedIntro = true
+          sectionNumber += 1
       else
         if cumulativeChapters[depth]?
           cumulativeChapters[depth] += 1
