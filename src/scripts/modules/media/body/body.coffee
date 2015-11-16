@@ -53,14 +53,18 @@ define (require) ->
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active', @canonicalizePath)
-      @intializeConceptCoach()
+      @initializeConceptCoach()
 
     canonicalizePath: =>
-      currentPage = @model.get('currentPage')
-      pageIsLoaded = currentPage?.get('loaded')
-      return unless pageIsLoaded and currentPage.get('active')
+      if @model.isBook()
+        currentPage = @model.get('currentPage')
+        pageIsLoaded = currentPage?.get('loaded')
+        return unless pageIsLoaded and currentPage.get('active')
+        pageId = currentPage.get('shortId')
+      else
+        pageId = 0
       currentRoute = Backbone.history.getFragment()
-      canonicalPath = linksHelper.getPath('contents', {model: @model, page: currentPage.get('shortId')})
+      canonicalPath = linksHelper.getPath('contents', {model: @model, page: pageId})
       if (canonicalPath isnt "/#{currentRoute}")
         router.navigate(canonicalPath, {replace: true})
 
@@ -72,7 +76,7 @@ define (require) ->
       else
         $els.hide()
 
-    intializeConceptCoach: ->
+    initializeConceptCoach: ->
       return unless @templateHelpers.isCoach.call(@)
       $body = $('body')
 
