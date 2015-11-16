@@ -1,22 +1,18 @@
 define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
-  HeaderView = require('cs!modules/header/header')
-  FooterView = require('cs!modules/footer/footer')
-  FindContentView = require('cs!modules/find-content/find-content')
+  MainPageView = require('cs!modules/main-page/main-page')
   template = require('hbs!./license-template')
   require('less!./license')
 
-  return class LicensePage extends BaseView
+  class InnerView extends BaseView
     template: template
+
+  return class LicensePage extends MainPageView
     pageTitle: 'License FAQ - OpenStax CNX'
     canonical: null
     summary: 'OpenStax CNX License'
     description: 'OpenStax CNX License Frequently Asked Questions'
 
-    regions:
-      find: '.find'
-
-    onRender: () ->
-      @parent.regions.header.show(new HeaderView({page: 'license'}))
-      @parent.regions.footer.show(new FooterView({page: 'license'}))
-      @regions.find.show(new FindContentView())
+    onRender: ->
+      super()
+      @regions.main.show(new InnerView(@options))

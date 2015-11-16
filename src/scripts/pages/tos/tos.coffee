@@ -1,22 +1,18 @@
 define (require) ->
+  MainPageView = require('cs!modules/main-page/main-page')
   BaseView = require('cs!helpers/backbone/views/base')
-  HeaderView = require('cs!modules/header/header')
-  FooterView = require('cs!modules/footer/footer')
-  FindContentView = require('cs!modules/find-content/find-content')
   template = require('hbs!./tos-template')
   require('less!./tos')
 
-  return class TosPage extends BaseView
+  class InnerView extends BaseView
     template: template
+
+  return class TosPage extends MainPageView
     pageTitle: 'Terms of Service - OpenStax CNX'
     canonical: null
     summary: 'OpenStax CNX Terms of Service'
     description: 'OpenStax CNX Terms of Service'
 
-    regions:
-      find: '.find'
-
-    onRender: () ->
-      @parent.regions.header.show(new HeaderView({page: 'tos'}))
-      @parent.regions.footer.show(new FooterView({page: 'tos'}))
-      @regions.find.show(new FindContentView())
+    onRender: ->
+      super()
+      @regions.main.show(new InnerView())

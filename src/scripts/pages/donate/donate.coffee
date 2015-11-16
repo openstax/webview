@@ -1,8 +1,6 @@
 define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
-  HeaderView = require('cs!modules/header/header')
-  FooterView = require('cs!modules/footer/footer')
-  FindContentView = require('cs!modules/find-content/find-content')
+  MainPageView = require('cs!modules/main-page/main-page')
   DefaultView = require('cs!./default/default')
   FormView = require('cs!./form/form')
   DownloadView = require('cs!./download/download')
@@ -10,30 +8,17 @@ define (require) ->
   template = require('hbs!./donate-template')
   require('less!./donate')
 
-  return class DonatePage extends BaseView
+  class InnerView extends BaseView
     template: template
-    pageTitle: 'Support OpenStax CNX'
-    canonical: null
-    summary: 'Donate to OpenStax CNX'
-    description: 'Donate to OpenStax CNX'
 
     regions:
-      find: '.find'
       content: '.donate-content'
 
-    initialize: (options = {}) ->
+    initialize: (@options) ->
       super()
-      @page = options.page
-      @options =
-        uuid: options.uuid
-        type: options.type
 
     onRender: () ->
-      @parent.regions.header.show(new HeaderView({page: 'donate'}))
-      @parent.regions.footer.show(new FooterView({page: 'donate'}))
-      @regions.find.show(new FindContentView())
-
-      switch @page
+      switch @options.page
         when 'download'
           @regions.content.show new DownloadView
             uuid: @options.uuid
@@ -46,3 +31,16 @@ define (require) ->
             type: @options.type
         else
           @regions.content.show(new DefaultView())
+
+  return class DonatePage extends MainPageView
+    pageTitle: 'Support OpenStax CNX'
+    canonical: null
+    summary: 'Donate to OpenStax CNX'
+    description: 'Donate to OpenStax CNX'
+
+    initialize: (@options) ->
+      super()
+
+    onRender: () ->
+      super()
+      @regions.main.show(new InnerView(@options))

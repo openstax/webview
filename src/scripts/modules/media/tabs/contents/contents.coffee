@@ -56,6 +56,7 @@ define (require) ->
       numberChapters(@model.attributes.contents.models) if @model.attributes.contents?.models?
 
     onRender: () ->
+      @$el.addClass('table-of-contents')
       @regions.toc.show new TocSectionView
         model: @model
 

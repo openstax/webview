@@ -1,20 +1,14 @@
 define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
-  HeaderView = require('cs!modules/header/header')
-  FooterView = require('cs!modules/footer/footer')
-  FindContentView = require('cs!modules/find-content/find-content')
+  MainPageView = require('cs!modules/main-page/main-page')
   template = require('hbs!./error-template')
   require('less!./error')
 
-  return class ErrorPage extends BaseView
+  class InnerView extends BaseView
     template: template
     templateHelpers: () -> {error: @error}
-    canonical: null
 
-    regions:
-      find: '#find-content'
-
-    initialize: (@error = {}) ->
+    initialize: (@error) ->
       if not @error.reason
         switch @error.code
           when 403 then @error.reason = 'Forbidden'
@@ -27,8 +21,12 @@ define (require) ->
       @pageTitle = @error.reason
       super()
 
-    onRender: () ->
-      @parent.regions.header.show(new HeaderView({page: 'error'}))
-      @parent.regions.footer.show(new FooterView({page: 'error'}))
+  return class ErrorPage extends MainPageView
+    canonical: null
 
-      @regions.find.show(new FindContentView())
+    initialize: (@error = {}) ->
+      super()
+
+    onRender: ->
+      super()
+      @regions.main.show(new InnerView(@error))
