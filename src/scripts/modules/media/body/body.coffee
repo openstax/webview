@@ -52,7 +52,8 @@ define (require) ->
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
-      @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
+      @listenTo(@model, 'change:currentPage.loaded change:currentPage.active', @canonicalizePath)
+      @initializeConceptCoach()
 
     canonicalizePath: =>
       if @model.isBook()
@@ -75,7 +76,7 @@ define (require) ->
       else
         $els.hide()
 
-    intializeConceptCoach: ->
+    initializeConceptCoach: ->
       return unless @templateHelpers.isCoach.call(@)
       $body = $('body')
 
