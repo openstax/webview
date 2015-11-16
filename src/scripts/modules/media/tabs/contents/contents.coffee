@@ -20,7 +20,7 @@ define (require) ->
           sectionNumber = cumulativeChapters[depth] ? 0
         if not (
           atTopLevel or
-          isCcap and sectionNumber is 0 and title.match(/^Introduction/)
+          isCcap and sectionNumber is 0
         )
           sectionNumber += 1
           cumulativeChapters[depth] = sectionNumber
@@ -60,9 +60,14 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable removeNode moveNode add:contents', @render)
-      cumulativeChapters = []
-      numberChapters(@model.attributes.contents.models) if @model.attributes.contents?.models?
+      @listenTo(@model, 'change:editable removeNode moveNode', @render)
+      @listenTo(@model, 'change:contents', =>
+        nodes = @model.attributes.contents?.models
+        if nodes?
+          cumulativeChapters = []
+          numberChapters(nodes)
+          @render()
+        )
 
       console.debug("Contents:", @model.attributes.contents)
       nodes = @model.attributes.contents?.models
