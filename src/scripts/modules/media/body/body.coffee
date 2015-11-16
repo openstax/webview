@@ -52,7 +52,7 @@ define (require) ->
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
-      @listenTo(@model, 'change:currentPage.loaded change:currentPage.active', @canonicalizePath)
+      @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
       @initializeConceptCoach()
 
     canonicalizePath: =>
