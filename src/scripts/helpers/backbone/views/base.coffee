@@ -72,12 +72,7 @@ define (require) ->
       if Backbone.history.fragment?.match? and linksHelper.getCurrentPathComponents().page?
         historyPage = linksHelper.getCurrentPathComponents().page
       if @pageTitle
-        # If it's a page in a book
-        if currentPage? and historyPage?
-          if currentPage is historyPage or currentPage is '1' and historyPage is ''
-            document.title = @pageTitle + settings.titleSuffix
-        else
-          document.title = @pageTitle + settings.titleSuffix
+        document.title = @pageTitle + settings.titleSuffix
 
       canonical = @canonical?() or @canonical
       if canonical isnt undefined
