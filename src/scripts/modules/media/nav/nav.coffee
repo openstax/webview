@@ -84,7 +84,7 @@ define (require) ->
       @mediaParent.scrollToTop()
 
     backToTop: (e) ->
-      e.preventDefault();
+      e.preventDefault()
       @mediaParent.scrollToTop()
 
     onRender: ->
