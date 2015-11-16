@@ -9,14 +9,12 @@ define (require) ->
   MediaEndorsedView = require('cs!./endorsed/endorsed')
   LatestView = require('cs!./latest/latest')
   MediaTitleView = require('cs!./title/title')
-  MediaTabsView = require('cs!./tabs/tabs')
   MediaNavView = require('cs!./nav/nav')
   MediaHeaderView = require('cs!./header/header')
   MediaBodyView = require('cs!./body/body')
   MediaFooterView = require('cs!./footer/footer')
 
   MinimalMediaTitleView = require('cs!modules/minimal/media/title/title')
-  MinimalMediaTabsView = require('cs!modules/minimal/media/tabs/tabs')
   MinimalMediaHeaderView = require('cs!modules/minimal/media/header/header')
   MinimalMediaBodyView = require('cs!modules/minimal/media/body/body')
   MinimalMediaFooterView = require('cs!modules/minimal/media/footer/footer')
@@ -70,7 +68,6 @@ define (require) ->
     onRender: () ->
       if @minimal
         @regions.media.append(new MinimalMediaTitleView({model: @model}))
-        @regions.media.append(new MinimalMediaTabsView({model: @model}))
         @regions.media.append(new MinimalMediaNavView({model: @model}))
         @regions.media.append(new MinimalMediaHeaderView({model: @model}))
         @regions.media.append(new MinimalMediaBodyView({model: @model}))
@@ -80,7 +77,6 @@ define (require) ->
         @regions.media.append(new MediaEndorsedView({model: @model}))
         @regions.media.append(new LatestView({model: @model}))
         @regions.media.append(new MediaTitleView({model: @model}))
-        @regions.media.append(new MediaTabsView({model: @model}))
         @regions.media.append(new MediaNavView({model: @model}))
         @regions.media.append(new MediaHeaderView({model: @model}))
         @regions.media.append(new MediaBodyView({model: @model}))

@@ -3,7 +3,6 @@ define (require) ->
   linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
   ContentsView = require('cs!./contents/contents')
-  MetadataView = require('cs!./metadata/metadata')
   ToolsView = require('cs!./tools/tools')
   template = require('hbs!./tabs-template')
   require('less!./tabs')
@@ -15,7 +14,6 @@ define (require) ->
 
     regions:
       contents: '.contents'
-      metadata: '.metadata'
       tools: '.tools'
 
     events:
@@ -28,7 +26,6 @@ define (require) ->
 
     onRender: () ->
       @regions.contents.show(new ContentsView({model: @model}))
-      @regions.metadata.show(new MetadataView({model: @model}))
       @regions.tools.show(new ToolsView({model: @model}))
 
       components = linksHelper.getCurrentPathComponents()

@@ -9,86 +9,115 @@
     background-color: @gray-lightest;
   }
 
-  > .book-nav {
-    .flexbox();
-    .flex-flow(row; nowrap);
-    .justify-content(center);
-    .user-select(none);
-
-    > .progress, > .back-to-top {
-      .flex(1; 1; 75%);
-    }
-
-    > .progress {
-      margin-top: (@nav-height - @progress-height)/2;
-      height: @progress-height;
-      border-radius: 0.8rem;
-      background-color: darken(@gray-lighter, 5%);
-      box-shadow: none;
-
-      > .progress-bar {
-        .box-sizing(content-box); // Prevent the white border from being visible at 100% progress
-        border-right: 0.1rem solid white;
-        box-shadow: none;
-      }
-    }
-
-    > .back-to-top {
-      text-align: center;
-      line-height: @nav-height;
-
-      > a {
-        display: inline-block;
-        padding: 0 0.5rem;
-      }
-
-      &::before, &::after {
-        font-size: 1.4em;
-        color: @link-color;
-        content: "\25b4"; // ▴
-      }
-    }
-
-    > .nav {
+  > .media-toolbar {
+    >* {
       display: inline-block;
-      font-size: 1.6rem;
-      line-height: @nav-height;
-      color: @brand-primary;
-      .flex(1; 0; 10rem);
-
-      &.disabled {
-        opacity: 0.5;
-      }
     }
 
-    > .back {
-      padding-right: 2rem;
-      text-align: right;
-
-      &:before {
-        // Flip the background-image horizontally
-        -ms-transform: scaleX(-1);
-        -webkit-transform: scaleX(-1);
-        transform: scaleX(-1);
-      }
-    }
-
-    > .next {
-      padding-left: 2rem;
-      text-align: left;
-    }
-
-    > .back::before, > .next::after {
-      display: inline-block;
-      margin: 0 1rem;
-      height: 1.6rem;
-      width: 1.6rem;
-      vertical-align: text-bottom;
-      border-radius: 50%;
+    .toggle.btn {
+      background-color: @brand-primary;
       color: white;
-      background: @brand-primary url(/images/icons/arrow-white.png) no-repeat 0.6rem center;
-      background-size: 40%;
-      content: ""
+      border: solid 2px @brand-primary;
+      width: 9em;
+      margin-left: 0.3em;
+      &.open {
+        background-color: white;
+        color: @brand-primary;
+      }
     }
+
+    .media-navbar {
+      width: ~"calc(90% - 9em)";
+
+      > .book-nav {
+        .flexbox();
+        .flex-flow(row; nowrap);
+        .justify-content(center);
+        .user-select(none);
+
+        > .progress, > .back-to-top {
+          .flex(1; 1; 75%);
+        }
+
+        > .progress {
+          margin-top: (@nav-height - @progress-height)/2;
+          height: @progress-height;
+          border-radius: 0.8rem;
+          background-color: darken(@gray-lighter, 5%);
+          box-shadow: none;
+
+          > .progress-bar {
+            .box-sizing(content-box); // Prevent the white border from being visible at 100% progress
+            border-right: 0.1rem solid white;
+            box-shadow: none;
+          }
+        }
+
+        > .back-to-top {
+          text-align: center;
+          line-height: @nav-height;
+
+          > a {
+            display: inline-block;
+            padding: 0 0.5rem;
+          }
+
+          &::before, &::after {
+            font-size: 1.4em;
+            color: @link-color;
+            content: "\25b4"; // ▴
+          }
+        }
+
+        > .nav {
+          display: inline-block;
+          font-size: 1.6rem;
+          line-height: @nav-height;
+          color: @brand-primary;
+          .flex(1; 0; 10rem);
+
+          &.disabled {
+            opacity: 0.5;
+          }
+        }
+
+        > .back {
+          padding-right: 2rem;
+          text-align: right;
+
+          &:before {
+            // Flip the background-image horizontally
+            -ms-transform: scaleX(-1);
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+          }
+        }
+
+        > .next {
+          padding-left: 2rem;
+          text-align: left;
+        }
+
+        > .back::before, > .next::after {
+          display: inline-block;
+          margin: 0 1rem;
+          height: 1.6rem;
+          width: 1.6rem;
+          vertical-align: text-bottom;
+          border-radius: 50%;
+          color: white;
+          background: @brand-primary url(/images/icons/arrow-white.png) no-repeat 0.6rem center;
+          background-size: 40%;
+          content: ""
+        }
+      }
+    }
+  }
+
+  .toc-panel {
+    width: 100%;
+    background-color: white;
+    border: solid 2px @gray-lightest;
+    display: none;
   }
 }
