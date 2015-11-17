@@ -10,7 +10,8 @@
   }
 
   > .media-toolbar {
-    >* {
+    > div,
+    > span {
       display: inline-block;
     }
 
@@ -18,7 +19,7 @@
       background-color: @brand-primary;
       color: white;
       border: solid 2px @brand-primary;
-      width: 9em;
+      width: 9rem;
       margin-left: 0.3em;
       &.open {
         background-color: white;
@@ -27,7 +28,7 @@
     }
 
     .media-navbar {
-      width: ~"calc(90% - 9em)";
+      width: ~"calc(90% - 9rem)";
 
       > .book-nav {
         .flexbox();
