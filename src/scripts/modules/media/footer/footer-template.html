@@ -9,6 +9,10 @@
     <li id="attribution-tab" class="tab" data-content="attribution" tabindex="0" role="tab">
       <span class="tab-title">Attribution</span>
     </li>
+    <li id="metadata-tab" class="tab" data-content="metadata"
+        aria-controls="panel-metadata" aria-selected="false" tabindex="0" role="tab">
+      <span class="tab-title"><span class="fa fa-info-circle"></span>More Information</span>
+    </li>
   </ul>
 
   <div class="downloads tab-content" role="tabpanel" aria-labelledby="downloads-tab">
@@ -22,6 +26,10 @@
   <div class="attribution tab-content" role="tabpanel" aria-labelledby="attribution-tab">
     {{! Attribution View }}
   </div>
+  <div class="metadata tab-content" role="tabpanel" aria-labelledby="metadata-tab">
+    {{! Metadata View }}
+  </div>
+
 
   <div class="license">
     {{! License View }}

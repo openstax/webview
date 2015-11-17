@@ -1,27 +1,32 @@
 {{#if book}}
   <div class="media-nav{{#is status 'publishing'}} publishing{{/is}}">
-    <div class="book-nav" aria-busy="true">
-      {{#if back}}
-        <a class="nav back" href="{{back}}" data-trigger="false">Back</a>
-      {{else}}
-        <div class="nav back disabled">Back</div>
-      {{/if}}
+    <div class="media-toolbar">
+      <span class="toggle btn" role="button"><span class="fa fa-th-list"></span> Contents</span>
+      <div class="media-navbar">
+        <div class="book-nav" aria-busy="true">
+          {{#if back}}
+            <a class="nav back" href="{{back}}" data-trigger="false">Back</a>
+          {{else}}
+            <div class="nav back disabled">Back</div>
+          {{/if}}
 
-      {{#unless _hideProgress}}
-        <div class="progress">
-          <div class="secondary progress-bar" style="width: {{percent page pages}}%;"></div>
-        </div>
-      {{else}}
-        <div class="back-to-top">
-          <a href="#">Back to Top</a>
-        </div>
-      {{/unless}}
+          {{#unless _hideProgress}}
+            <div class="progress">
+              <div class="secondary progress-bar" style="width: {{percent page pages}}%;"></div>
+            </div>
+          {{else}}
+            <div class="back-to-top">
+              <a href="#">Back to Top</a>
+            </div>
+          {{/unless}}
 
-      {{#if next}}
-        <a class="nav next" href="{{next}}" data-trigger="false">Next</a>
-      {{else}}
-        <div class="nav next disabled">Next</div>
-      {{/if}}
+          {{#if next}}
+            <a class="nav next" href="{{next}}" data-trigger="false">Next</a>
+          {{else}}
+            <div class="nav next disabled">Next</div>
+          {{/if}}
+        </div>
+      </div>
     </div>
   </div>
 {{/if}}

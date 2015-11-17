@@ -1,26 +1,19 @@
 define (require) ->
   settings = require('settings')
   BaseView = require('cs!helpers/backbone/views/base')
-  HeaderView = require('cs!modules/header/header')
-  FooterView = require('cs!modules/footer/footer')
-  FindContentView = require('cs!modules/find-content/find-content')
+  MainPageView = require('cs!modules/main-page/main-page')
   DefaultView = require('cs!./default/default')
   PeopleView = require('cs!./people/people')
   ContactView = require('cs!./contact/contact')
   template = require('hbs!./about-template')
   require('less!./about')
 
-  return class AboutPage extends BaseView
+  class InnerView extends BaseView
     template: template
     templateHelpers:
       legacy: settings.legacy
-    pageTitle: 'About OpenStax CNX'
-    canonical: null
-    summary: 'About OpenStax CNX'
-    description: 'OpenStax CNX is a non-profit organization providing thousands of free online textbooks.'
 
     regions:
-      find: '.find'
       content: '.about-content'
 
     initialize: (options = {}) ->
@@ -28,10 +21,11 @@ define (require) ->
       @page = options.page
 
     onRender: () ->
-      @parent.regions.header.show(new HeaderView({page: 'about'}))
-      @parent.regions.footer.show(new FooterView({page: 'about'}))
-      @regions.find.show(new FindContentView())
-
+      $items = $('nav.about-nav li').removeClass('active')
+      if (@page)
+        $items.find("a[href*=#{@page}]").parent().addClass('active')
+      else
+        $items.first().addClass('active')
       switch @page
         when 'people'
           @regions.content.show(new PeopleView())
@@ -39,3 +33,16 @@ define (require) ->
           @regions.content.show(new ContactView())
         else
           @regions.content.show(new DefaultView())
+
+  return class AboutPage extends MainPageView
+    pageTitle: 'About OpenStax CNX'
+    canonical: null
+    summary: 'About OpenStax CNX'
+    description: 'OpenStax CNX is a non-profit organization providing thousands of free online textbooks.'
+
+    initialize: (@options) ->
+      super()
+
+    onRender: ->
+      super()
+      @regions.main.show(new InnerView(@options))

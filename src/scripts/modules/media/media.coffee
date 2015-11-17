@@ -5,25 +5,43 @@ define (require) ->
   analytics = require('cs!helpers/handlers/analytics')
   Content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
+  MainPageView = require('cs!modules/main-page/main-page')
+
+  ContentsView = require('cs!modules/media/tabs/contents/contents')
 
   MediaEndorsedView = require('cs!./endorsed/endorsed')
   LatestView = require('cs!./latest/latest')
   MediaTitleView = require('cs!./title/title')
-  MediaTabsView = require('cs!./tabs/tabs')
   MediaNavView = require('cs!./nav/nav')
   MediaHeaderView = require('cs!./header/header')
+  WindowWithSidebarView = require('cs!modules/window-with-sidebar/window-with-sidebar')
   MediaBodyView = require('cs!./body/body')
   MediaFooterView = require('cs!./footer/footer')
 
-  MinimalMediaTitleView = require('cs!modules/minimal/media/title/title')
-  MinimalMediaTabsView = require('cs!modules/minimal/media/tabs/tabs')
-  MinimalMediaHeaderView = require('cs!modules/minimal/media/header/header')
-  MinimalMediaBodyView = require('cs!modules/minimal/media/body/body')
-  MinimalMediaFooterView = require('cs!modules/minimal/media/footer/footer')
-  MinimalMediaNavView = require('cs!modules/minimal/media/nav/nav')
-
   template = require('hbs!./media-template')
   require('less!./media')
+
+  ###
+  Returns an event handler that will handle hiding and showing
+  items based on the scroll direction. Attach the handler to
+  a scroll event to hook it up.
+  ###
+  headerController = ($hideables) ->
+    oldTop = 0
+    inTransition = false
+    update = (event) ->
+      return () ->
+        oldTop = $(event.target).scrollTop()
+        Backbone.trigger 'window:resize'
+    return (event) ->
+      top = $(event.target).scrollTop()
+      return unless Math.abs(top - oldTop) > 5
+      if (top < oldTop and not $hideables.is(":visible"))
+        $hideables.show(300, update(event))
+      else if (top > oldTop and $hideables.is(":visible"))
+        $hideables.hide(300, update(event))
+      else
+        oldTop = top
 
   return class MediaView extends BaseView
     key = []
@@ -67,25 +85,28 @@ define (require) ->
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updatePageInfo)
       @listenTo(@model, 'change:abstract', @updateSummary)
 
-    onRender: () ->
-      if @minimal
-        @regions.media.append(new MinimalMediaTitleView({model: @model}))
-        @regions.media.append(new MinimalMediaTabsView({model: @model}))
-        @regions.media.append(new MinimalMediaNavView({model: @model}))
-        @regions.media.append(new MinimalMediaHeaderView({model: @model}))
-        @regions.media.append(new MinimalMediaBodyView({model: @model}))
-        @regions.media.append(new MinimalMediaFooterView({model: @model}))
-        @regions.media.append(new MinimalMediaNavView({model: @model, hideProgress: true}))
-      else
-        @regions.media.append(new MediaEndorsedView({model: @model}))
-        @regions.media.append(new LatestView({model: @model}))
-        @regions.media.append(new MediaTitleView({model: @model}))
-        @regions.media.append(new MediaTabsView({model: @model}))
-        @regions.media.append(new MediaNavView({model: @model}))
-        @regions.media.append(new MediaHeaderView({model: @model}))
-        @regions.media.append(new MediaBodyView({model: @model}))
-        @regions.media.append(new MediaFooterView({model: @model}))
-        @regions.media.append(new MediaNavView({model: @model, hideProgress: true}))
+    onRender: () =>
+      @regions.media.append(new MediaEndorsedView({model: @model}))
+      @regions.media.append(new LatestView({model: @model}))
+      mediaTitleView = new MediaTitleView({model: @model})
+      @regions.media.append(mediaTitleView)
+      navView = new MediaNavView({model: @model})
+      @regions.media.append(navView)
+      windowWithSidebar = new WindowWithSidebarView()
+      @regions.media.append(windowWithSidebar)
+      mainPage = new MainPageView()
+      windowWithSidebar.regions.main.append(mainPage)
+      mainPage.regions.main.append(new MediaHeaderView({model: @model}))
+      navView.on('tocIsOpen', windowWithSidebar.open)
+      tocView = new ContentsView({model: @model})
+      windowWithSidebar.regions.sidebar.append(tocView)
+      mainPage.regions.main.append(new MediaBodyView({model: @model}))
+      mainPage.regions.main.append(new MediaFooterView({model: @model}))
+      mainPage.regions.main.append(new MediaNavView({model: @model, hideProgress: true, mediaParent: @}))
+      @mainContent = windowWithSidebar.regions.main
+
+      headerHandler = headerController(mediaTitleView.$el)
+      $('.fullsize-container .main').scroll(headerHandler)
 
     updateSummary: () ->
       abstract = @model.get('abstract')
@@ -117,11 +138,7 @@ define (require) ->
       analytics.send(analyticsID) if analyticsID
 
     scrollToTop: () ->
-      $mediaNav = $('.media-nav').first()
-      maxY = $mediaNav.offset().top + $mediaNav.height()
-      y = window.pageYOffset or document.documentElement.scrollTop
-
-      $('html, body').animate({scrollTop: $mediaNav.offset().top}, '500', 'swing') if y > maxY
+      @mainContent.$el.scrollTop(0)
 
     updatePageInfo: () ->
       @pageTitle = @model.get('title')

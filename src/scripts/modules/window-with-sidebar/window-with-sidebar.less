@@ -1,0 +1,40 @@
+@import "../../../styles/variables.less";
+
+@sidebar-width: 315px;
+@fudge: 7px;
+
+.fullsize-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  > div {
+    vertical-align: top;
+    display: inline-block;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: visibility 250ms, width 250ms;
+  }
+  > .sidebar {
+    width: 0;
+    visibility: hidden;
+    overflow: hidden;
+  }
+  > .main {
+    width: ~"calc(100% -" @fudge ~")";
+    overflow-y: auto;
+  }
+  &.sidebar-open {
+    > .sidebar {
+      min-height: 20em;
+      visibility: visible;
+      border-right: 1px solid @gray-light;
+      width: @sidebar-width;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    > .main {
+      width: ~"calc(100% -" @sidebar-width + @fudge ~")";
+    }
+  }
+}

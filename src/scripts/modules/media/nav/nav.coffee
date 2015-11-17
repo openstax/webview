@@ -3,6 +3,7 @@ define (require) ->
   router = require('cs!router')
   linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
+  ContentsView = require('cs!../tabs/contents/contents')
   template = require('hbs!./nav-template')
   require('less!./nav')
 
@@ -37,12 +38,28 @@ define (require) ->
     initialize: (options) ->
       super()
       @hideProgress = options.hideProgress
-
+      @mediaParent = options.mediaParent
+      @tocIsOpen = false
+      @.trigger('tocIsOpen', @tocIsOpen)
       @listenTo(@model, 'change:loaded change:currentPage removeNode moveNode add:contents', @render)
 
     events:
       'click .next': 'nextPage'
       'click .back': 'previousPage'
+      'click .toggle.btn': 'toggleContents'
+      'click .back-to-top > a': 'backToTop'
+
+    toggleContents: (e) ->
+      @tocIsOpen = not @tocIsOpen
+      @.trigger('tocIsOpen', @tocIsOpen)
+      @updateToc()
+
+    updateToc: ->
+      button = @$el.find('.toggle.btn')
+      if (@tocIsOpen)
+        button.addClass('open')
+      else
+        button.removeClass('open')
 
     nextPage: (e) ->
       nextPage = @model.getNextPageNumber()
@@ -63,5 +80,15 @@ define (require) ->
       e.preventDefault()
       e.stopPropagation()
       href = $(e.currentTarget).attr('href')
-      router.navigate href, {trigger: false}, () => @parent.trackAnalytics()
-      @parent.scrollToTop()
+      router.navigate href, {trigger: false}, () => @mediaParent.trackAnalytics()
+      @mediaParent.scrollToTop()
+
+    backToTop: (e) ->
+      e.preventDefault()
+      @mediaParent.scrollToTop()
+
+    onRender: ->
+      if not @mediaParent?
+        @mediaParent = @parent
+      @regions.tocPanel?.show(new ContentsView({model: @model}))
+      @updateToc()
