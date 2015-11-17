@@ -10,7 +10,8 @@
   }
 
   > .media-toolbar {
-    >* {
+    > div,
+    > span {
       display: inline-block;
     }
 
@@ -35,6 +36,9 @@
         top: 1.3em;
         color: @gray-light;
         font-size: 150%;
+        &.fa-close {
+          cursor: pointer;
+        }
       }
     }
 

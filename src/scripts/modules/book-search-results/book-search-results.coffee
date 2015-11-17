@@ -28,7 +28,6 @@ define (require) ->
 
     setResults: (searchResults) ->
       @collection.reset()
-      console.debug("Results:", searchResults)
       _.each(searchResults.items, (item) =>
         pageId = item.id.replace(/\@.*/, '')
         @collection.add({

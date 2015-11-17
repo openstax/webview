@@ -9,7 +9,9 @@ define (require) ->
   return class TocSectionView extends TocDraggableView
     template: template
     templateHelpers:
-      editable: () -> @editable
+      editable: -> @editable
+      visible: ->
+        @model.get('visible') ? true
     itemViewContainer: '> ul'
 
     events:
@@ -26,37 +28,23 @@ define (require) ->
       @sectionNameModal = new SectionNameModal({model: @model})
       super()
       @listenTo(@model, 'add change:unit change:title change:expanded sync:contents', @render)
-      @listenTo(@model, 'change:searchResults', @handleSearchResults)
 
     onRender: () ->
+      return if @model.get('visible') == false
       super()
       @regions.container.empty()
+      isVisible = @model.get('visible')
       nodes = @model.get('contents')?.models
       _.each nodes, (node) =>
-        if node.isSection()
-          @regions.container.appendAs 'li', new TocSectionView
-            model: node
-        else
-          @regions.container.appendAs 'li', new TocPageView
-            model: node
-            collection: @model
-
-    handleSearchResults: ->
-      nodes = @model.get('contents')?.models
-      nodeIdx = 0
-      results = @model.get('searchResults')?.items
-      resultIdx = 0
-      return unless nodes? and results?
-      console.debug("Look for", results, "in", nodes)
-      while (nodeIdx < nodes.length and resultIdx < results.length)
-        node = nodes[nodeIdx]
-        item = results[resultIdx]
-        if item.id == node.id
-          console.debug("Match!")
-          ++resultIdx
-        else
-          console.debug("Nope:", item.id, node.id)
-        ++nodeIdx
+        isVisible = node.get('visible') ? true
+        if isVisible
+          if node.isSection()
+            @regions.container.appendAs 'li', new TocSectionView
+              model: node
+          else
+            @regions.container.appendAs 'li', new TocPageView
+              model: node
+              collection: @model
 
     toggleSection: () ->
       @model.set('expanded', not @model.get('expanded'))

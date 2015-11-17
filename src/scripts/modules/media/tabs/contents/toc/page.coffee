@@ -16,6 +16,8 @@ define (require) ->
         page: pageNumber
         url: linksHelper.getPath('contents', {model: @content, page: pageNumber})
         editable: @editable
+        searchResult: @model.get('searchResult')
+        visible: @model.get('visible') ? true
       }
 
     tagName: 'li'
@@ -27,7 +29,6 @@ define (require) ->
 
     initialize: () ->
       super()
-
       @content = @model.get('book')
       @editable = @content.get('editable')
 
@@ -39,6 +40,10 @@ define (require) ->
         router.navigate(href, {trigger: false, analytics: false, replace: true})
 
       @listenTo(@model, 'change:active change:page change:changed change:title', @render)
+
+    onRender: ->
+      super()
+      at = @model.attributes
 
     scrollToContentTop: () ->
       $mediaNav = $('.media-nav').first()

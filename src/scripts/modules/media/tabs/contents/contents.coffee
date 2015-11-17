@@ -40,7 +40,7 @@ define (require) ->
   allPages = (nodes, collection) ->
     _.each nodes, (node) =>
       if node.isSection()
-        children = node.get('contents').get('models')
+        children = node.get('contents').models
         allPages(children, collection)
       else
         collection.push(node)
@@ -60,19 +60,15 @@ define (require) ->
       super()
       @listenTo(@model, 'change:editable removeNode moveNode', @render)
       @listenTo(@model, 'change:contents', =>
-        nodes = @model.attributes.contents?.models
+        nodes = @model.get('contents')?.models
         if nodes?
           cumulativeChapters = []
           numberChapters(nodes)
+          @allPages = []
+          allPages(nodes, @allPages)
           @render()
         )
-
-      console.debug("Contents:", @model.attributes.contents)
-      nodes = @model.attributes.contents?.models
-      @allPages = []
-      if nodes?
-        allPages(nodes, @allPages)
-        console.debug("Pages:", @allPages)
+      @listenTo(@model, 'change:searchResults', @handleSearchResults)
 
     onRender: () ->
       @$el.addClass('table-of-contents')
@@ -83,6 +79,38 @@ define (require) ->
         model: @model
         owner: @$el.find('.add.btn')
 
+    expandContainers: (page, isExpanded, showingResults) =>
+      container = page.get('_parent')
+      visible = isExpanded or not showingResults
+      while container.isSection()
+        container.set('expanded', isExpanded)
+        container.set('visible', visible)
+        container = container.get('_parent')
+
+    handleSearchResults: ->
+      expandContainers = @expandContainers
+      pages = @allPages
+      results = @model.get('searchResults')?.items
+      showingResults = results?.length > 0
+      _.each pages, (page) ->
+        page.unset('searchResult')
+        page.set('visible', not showingResults)
+        expandContainers(page, false, showingResults)
+      if pages? and showingResults
+        _.each results, (result) ->
+          resultId = result.id.replace(/@.*/, '')
+          snippet = result.headline.
+          replace('<q-match>', '<span class="q-match">').
+          replace('</q-match>', '</span>')
+          _.some pages, (page) ->
+            pageId = page.id.replace(/@.*/, '')
+            matched = (resultId == pageId)
+            if matched
+              page.set('visible', matched)
+              page.set('searchResult', snippet)
+              expandContainers(page, true, true)
+            return matched
+      @render()
 
     onDragStart: (e) ->
       # Prevent children from interfering with drag events
