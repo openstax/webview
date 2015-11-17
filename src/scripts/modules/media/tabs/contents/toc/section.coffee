@@ -24,18 +24,14 @@ define (require) ->
       @regions =
         container: @itemViewContainer
       @sectionNameModal = new SectionNameModal({model: @model})
-
       super()
-
       @listenTo(@model, 'add change:unit change:title change:expanded sync:contents', @render)
+      @listenTo(@model, 'change:searchResults', @handleSearchResults)
 
     onRender: () ->
       super()
-
       @regions.container.empty()
-
       nodes = @model.get('contents')?.models
-
       _.each nodes, (node) =>
         if node.isSection()
           @regions.container.appendAs 'li', new TocSectionView
@@ -45,16 +41,30 @@ define (require) ->
             model: node
             collection: @model
 
-    toggleSection: (e) ->
-      if @model.get('expanded')
-        @model.set('expanded', false)
-      else
-        @model.set('expanded', true)
+    handleSearchResults: ->
+      nodes = @model.get('contents')?.models
+      nodeIdx = 0
+      results = @model.get('searchResults')?.items
+      resultIdx = 0
+      return unless nodes? and results?
+      console.debug("Look for", results, "in", nodes)
+      while (nodeIdx < nodes.length and resultIdx < results.length)
+        node = nodes[nodeIdx]
+        item = results[resultIdx]
+        if item.id == node.id
+          console.debug("Match!")
+          ++resultIdx
+        else
+          console.debug("Nope:", item.id, node.id)
+        ++nodeIdx
+
+    toggleSection: () ->
+      @model.set('expanded', not @model.get('expanded'))
 
     toggleSectionWithKeyboard: (e) ->
       if e.keyCode is 13 or e.keyCode is 32
         e.preventDefault()
-        @toggleSection(e)
+        @toggleSection()
         @$el.find('> div > .section-wrapper').focus()
 
     removeNode: () ->

@@ -22,6 +22,8 @@ By default, webview will use [cnx-archive](https://github.com/Connexions/cnx-arc
 ##### Testing
 
 From the root `webview` directory, run `npm test`.
+npm test failures are not as informative as they could be.
+If `coffeelint` fails, you can run it with `grunt coffeelint` to get more information
 
 ##### Building
 

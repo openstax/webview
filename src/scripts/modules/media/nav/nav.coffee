@@ -4,6 +4,7 @@ define (require) ->
   linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
   ContentsView = require('cs!../tabs/contents/contents')
+  BookSearchResults = require('cs!models/book-search-results')
   template = require('hbs!./nav-template')
   require('less!./nav')
 
@@ -48,6 +49,7 @@ define (require) ->
       'click .back': 'previousPage'
       'click .toggle.btn': 'toggleContents'
       'click .back-to-top > a': 'backToTop'
+      'keydown .searchbar input': 'handleSearchInput'
 
     toggleContents: (e) ->
       @tocIsOpen = not @tocIsOpen
@@ -86,6 +88,20 @@ define (require) ->
     backToTop: (e) ->
       e.preventDefault()
       @mediaParent.scrollToTop()
+
+    handleSearchInput: (event) ->
+      if (event.keyCode == 13 and event.target.value?)
+        event.preventDefault()
+        options = {
+          bookId: "#{@model.get('id')}@#{@model.get('version')}",
+          query: event.target.value
+        }
+        results = BookSearchResults.fetch(options)
+        results.done((data) =>
+          if not @tocIsOpen
+            @toggleContents()
+          @model.set('searchResults', data.results)
+          )
 
     onRender: ->
       if not @mediaParent?

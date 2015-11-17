@@ -39,6 +39,15 @@ define (require) ->
         numberChapters(contentsModels, depth+1) if contentsModels?
         item.set('chapter', chapterNumber)
 
+  allPages = (nodes, collection) ->
+    _.each nodes, (node) =>
+      if node.isSection()
+        children = node.get('contents').get('models')
+        allPages(children, collection)
+      else
+        collection.push(node)
+    collection
+
   return class ContentsView extends BaseView
     template: template
 
@@ -55,6 +64,13 @@ define (require) ->
       cumulativeChapters = []
       numberChapters(@model.attributes.contents.models) if @model.attributes.contents?.models?
 
+      console.debug("Contents:", @model.attributes.contents)
+      nodes = @model.attributes.contents?.models
+      @allPages = []
+      if nodes?
+        allPages(nodes, @allPages)
+        console.debug("Pages:", @allPages)
+
     onRender: () ->
       @$el.addClass('table-of-contents')
       @regions.toc.show new TocSectionView
@@ -63,6 +79,7 @@ define (require) ->
       @regions.self.append new AddPopoverView
         model: @model
         owner: @$el.find('.add.btn')
+
 
     onDragStart: (e) ->
       # Prevent children from interfering with drag events

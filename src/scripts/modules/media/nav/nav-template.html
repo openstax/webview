@@ -2,6 +2,10 @@
   <div class="media-nav{{#is status 'publishing'}} publishing{{/is}}">
     <div class="media-toolbar">
       <span class="toggle btn" role="button"><span class="fa fa-th-list"></span> Contents</span>
+      <div class="searchbar">
+        <span class="fa fa-search"></span>
+        <input class="find form-control" type="search" placeholder="Search this book"/>
+      </div>
       <div class="media-navbar">
         <div class="book-nav" aria-busy="true">
           {{#if back}}
