@@ -33,11 +33,9 @@ define (require) ->
       return if @model.get('visible') == false
       super()
       @regions.container.empty()
-      isVisible = @model.get('visible')
       nodes = @model.get('contents')?.models
       _.each nodes, (node) =>
-        isVisible = node.get('visible') ? true
-        if isVisible
+        if node.get('visible') ? true
           if node.isSection()
             @regions.container.appendAs 'li', new TocSectionView
               model: node
