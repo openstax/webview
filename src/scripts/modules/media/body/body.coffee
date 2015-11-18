@@ -49,11 +49,13 @@ define (require) ->
 
     initialize: () ->
       super()
+      @initializeConceptCoach()
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
-      @initializeConceptCoach()
+      @listenTo Backbone, 'window:popstate', @controlConceptCoachView
+      # @listenTo(@model, 'change:currentPage.loaded', @controlConceptCoachView)
 
     canonicalizePath: =>
       if @model.isBook()
@@ -89,9 +91,26 @@ define (require) ->
       handleClose = (eventData) ->
         cc.handleClosed(eventData, $body[0])
 
-      cc.init(settings.conceptCoach.url)
+      cc.init(settings.conceptCoach.url, {prefix: '', base: 'cc-view='})
       cc.on('ui.close', handleClose)
       cc.on('open', handleOpen)
+      cc.on 'view.update', (eventData) ->
+        return unless eventData.route?
+        queryString = "?#{eventData.route}"
+        if queryString isnt location.search
+          router.navigate(queryString, {trigger: false})
+
+      # router.on 'navigate', @controlConceptCoachView
+
+    controlConceptCoachView: ->
+      route = ''
+
+      mounter = $('.concept-coach-launcher > button').parent()[0]
+      collectionUUID = @model.getUuid()
+      moduleUUID = @model.get('currentPage')?.getUuid()
+
+      cc.setOptions({mounter, collectionUUID, moduleUUID})
+      cc.updateToRoute(route)
 
     launchConceptCoach: (event) ->
       unless cc.component?.isMounted()
@@ -102,8 +121,9 @@ define (require) ->
 
         collectionVersion = @model.get('version')
         moduleVersion = @model.get('currentPage').get('version')
+        cnxUrl = location.origin
 
-        cc.open($button.parent()[0], {collectionUUID, moduleUUID, collectionVersion, moduleVersion})
+        cc.open($button.parent()[0], {collectionUUID, moduleUUID, cnxUrl, collectionVersion, moduleVersion})
 
 
     # Toggle the visibility of teacher's edition elements
