@@ -120,7 +120,7 @@ define (require) ->
 
     loadHighlightedPage: ->
       response = @model.get('searchResults')
-      if response
+      if response and not page.get('searchHtml')
         searchTerm = @model.get('searchResults').query.search_term
         page = @model.asPage()
         return if page.get('searchHtml')
