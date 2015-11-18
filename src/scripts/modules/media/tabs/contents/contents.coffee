@@ -62,6 +62,7 @@ define (require) ->
       @listenTo(@model, 'change:editable removeNode moveNode', @render)
       @listenTo(@model, 'change:contents', @processPages)
       @listenTo(@model, 'change:searchResults', @handleSearchResults)
+      @listenTo(@model, 'change:currentPage', @loadHighlightedPage)
 
     onRender: () ->
       @$el.addClass('table-of-contents')
@@ -104,34 +105,43 @@ define (require) ->
         _.each results, (result) ->
           resultId = result.id.replace(/@.*/, '')
           snippet = result.headline.
-          replace('<q-match>', '<span class="q-match">').
-          replace('</q-match>', '</span>')
+          replace(/<q-match>/g, '<span class="q-match">').
+          replace(/<\/q-match>/g, '</span>')
           _.some pages, (page) ->
             pageId = page.id.replace(/@.*/, '')
             matched = (resultId == pageId)
             if matched
               page.set('visible', matched)
               page.set('searchResult', snippet)
-              book = page.get('book')
-              bookId = "#{book.get('id')}@#{book.get('version')}"
-              pageId = "#{page.get('id')}@#{page.get('version')}"
-              BookSearchResults.fetch(
-                bookId: "#{bookId}/#{pageId}"
-                query: response.query.search_term
-              ).done((data) ->
-                html = data.results.items[0].html.replace('<q-match>', '<span class="q-match">').
-                replace('</q-match>', '</span class="q-match">')
-                $htmlNodes = $(html)
-                metaIndex = 0
-                # Heuristic: The actual content starts with a paragraph that has an id
-                ++metaIndex until $htmlNodes[metaIndex]?.id or metaIndex > $htmlNodes.length
-                $htmlNodes = $htmlNodes.slice(metaIndex)
-                html = $('<div>').append($htmlNodes).html()
-                page.set('searchHtml', html)
-              )
               expandContainers(page, true, true)
             return matched
+      @loadHighlightedPage()
       @render()
+
+    loadHighlightedPage: ->
+      response = @model.get('searchResults')
+      if response
+        searchTerm = @model.get('searchResults').query.search_term
+        page = @model.asPage()
+        book = page.get('book')
+        bookId = "#{book.get('id')}@#{book.get('version')}"
+        pageId = "#{page.get('id')}@#{page.get('version')}"
+        BookSearchResults.fetch(
+          bookId: "#{bookId}/#{pageId}"
+          query: response.query.search_term
+        ).done((data) ->
+          return unless data.results.items.length
+          html = data.results.items[0].html.replace(/<q-match>/g, '<span class="q-match">').
+          replace(/<\/q-match>/g, '</span class="q-match">')
+          $htmlNodes = $(html)
+          metaIndex = 0
+          # Heuristic: The actual content starts with a paragraph that has an id
+          ++metaIndex until $htmlNodes[metaIndex]?.id or metaIndex > $htmlNodes.length
+          $htmlNodes = $htmlNodes.slice(metaIndex)
+          html = $('<div>').append($htmlNodes).html()
+          page.set('searchHtml', html)
+        )
+
 
     onDragStart: (e) ->
       # Prevent children from interfering with drag events
