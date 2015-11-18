@@ -60,15 +60,7 @@ define (require) ->
     initialize: () ->
       super()
       @listenTo(@model, 'change:editable removeNode moveNode', @render)
-      @listenTo(@model, 'change:contents', =>
-        nodes = @model.get('contents')?.models
-        if nodes?
-          cumulativeChapters = []
-          numberChapters(nodes)
-          @allPages = []
-          allPages(nodes, @allPages)
-          @render()
-        )
+      @listenTo(@model, 'change:contents', @processPages)
       @listenTo(@model, 'change:searchResults', @handleSearchResults)
 
     onRender: () ->
@@ -79,6 +71,15 @@ define (require) ->
       @regions.self.append new AddPopoverView
         model: @model
         owner: @$el.find('.add.btn')
+
+    processPages: ->
+      nodes = @model.get('contents')?.models
+      if nodes?
+        cumulativeChapters = []
+        numberChapters(nodes)
+        @allPages = []
+        allPages(nodes, @allPages)
+        @render()
 
     expandContainers: (page, isExpanded, showingResults) =>
       container = page.get('_parent')

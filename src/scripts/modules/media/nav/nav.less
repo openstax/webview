@@ -3,6 +3,8 @@
 
 @nav-height: 4.9rem;
 @progress-height: 0.9rem;
+@button-width: 12rem;
+@searchbar-margin: 3px;
 
 .media-nav {
   &:not(.publishing) {
@@ -19,8 +21,8 @@
       background-color: @brand-primary;
       color: white;
       border: solid 2px @brand-primary;
-      width: 9em;
-      margin-left: 0.3em;
+      width: @button-width;
+      margin-left: @searchbar-margin;
       &.open {
         background-color: white;
         color: @brand-primary;
@@ -28,11 +30,14 @@
     }
 
     .searchbar {
-      width: ~"calc(35% - 6em)";
-      margin: 0.3rem;
+      width: ~"calc(35% - " @button-width * .5 ~")";
+      @media (max-width: 640px) {
+        width: ~"calc(100% - " @button-width ~"- 3rem)"
+      }
+      margin: @searchbar-margin;
       .fa {
         position: relative;
-        left: ~"calc(100% - 1.3em)";
+        left: ~"calc(100% - 27px)";
         top: 1.3em;
         color: @gray-light;
         font-size: 150%;
@@ -43,7 +48,11 @@
     }
 
     .media-navbar {
-      width: ~"calc(65% - 5em)";
+      width: ~"calc(65% - " @button-width * .7 ~")";
+      @media (max-width: 640px) {
+        width: 100%;
+        display: block;
+      }
 
       > .book-nav {
         .flexbox();
