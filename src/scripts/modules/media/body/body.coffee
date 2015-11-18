@@ -22,7 +22,7 @@ define (require) ->
     template: template
     templateHelpers:
       editable: () -> @model.get('currentPage')?.isEditable()
-      content: () -> @model.asPage()?.get('content')
+      content: () -> @model.asPage()?.get('searchHtml') ? @model.asPage()?.get('content')
       hasContent: () -> typeof @model.asPage()?.get('content') is 'string'
       loaded: () ->
         if @model.isBook() and @model.getTotalLength()
@@ -53,6 +53,7 @@ define (require) ->
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
+      @listenTo(@model, 'change:currentPage.searchHtml', @render)
       @initializeConceptCoach()
 
     canonicalizePath: =>
@@ -401,6 +402,11 @@ define (require) ->
       _.each(sections, appendFakeExercise)
 
     onRender: () ->
+      normalContent = @model.asPage()?.get('content')
+      highlightedContent = @model.asPage()?.get('nonSearchHtml')
+      if highlightedContent?
+        console.debug("Normal content:", normalContent.substr(0, 50) + '...')
+        console.debug("Search HTML?", highlightedContent.substr(0, 50) + '...')
       currentPage = @model.asPage()
       return unless currentPage?
       page = currentPage ? @model.get('contents')?.models[0]?.get('book')

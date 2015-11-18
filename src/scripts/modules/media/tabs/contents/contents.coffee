@@ -2,6 +2,7 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   TocSectionView = require('cs!./toc/section')
   AddPopoverView = require('cs!./popovers/add/add')
+  BookSearchResults = require('cs!models/book-search-results')
   template = require('hbs!./contents-template')
   require('less!./contents')
 
@@ -90,10 +91,12 @@ define (require) ->
     handleSearchResults: ->
       expandContainers = @expandContainers
       pages = @allPages
-      results = @model.get('searchResults')?.items
+      response = @model.get('searchResults')
+      results = response?.items
       showingResults = results?.length > 0
       _.each pages, (page) ->
         page.unset('searchResult')
+        page.unset('searchHtml')
         page.set('visible', not showingResults)
         expandContainers(page, false, showingResults)
       if pages? and showingResults
@@ -108,6 +111,23 @@ define (require) ->
             if matched
               page.set('visible', matched)
               page.set('searchResult', snippet)
+              book = page.get('book')
+              bookId = "#{book.get('id')}@#{book.get('version')}"
+              pageId = "#{page.get('id')}@#{page.get('version')}"
+              BookSearchResults.fetch(
+                bookId: "#{bookId}/#{pageId}"
+                query: response.query.search_term
+              ).done((data) ->
+                html = data.results.items[0].html.replace('<q-match>', '<span class="q-match">').
+                replace('</q-match>', '</span class="q-match">')
+                $htmlNodes = $(html)
+                metaIndex = 0
+                # Heuristic: The actual content starts with a paragraph that has an id
+                ++metaIndex until $htmlNodes[metaIndex]?.id or metaIndex > $htmlNodes.length
+                $htmlNodes = $htmlNodes.slice(metaIndex)
+                html = $('<div>').append($htmlNodes).html()
+                page.set('searchHtml', html)
+              )
               expandContainers(page, true, true)
             return matched
       @render()
