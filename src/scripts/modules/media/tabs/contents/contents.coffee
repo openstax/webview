@@ -73,6 +73,15 @@ define (require) ->
         model: @model
         owner: @$el.find('.add.btn')
 
+    processPages: ->
+      nodes = @model.get('contents')?.models
+      if nodes?
+        cumulativeChapters = []
+        numberChapters(nodes)
+        @allPages = []
+        allPages(nodes, @allPages)
+        @render()
+
     expandContainers: (page, isExpanded, showingResults) =>
       container = page.get('_parent')
       visible = isExpanded or not showingResults
