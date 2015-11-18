@@ -402,6 +402,11 @@ define (require) ->
       _.each(sections, appendFakeExercise)
 
     onRender: () ->
+      normalContent = @model.asPage()?.get('content')
+      highlightedContent = @model.asPage()?.get('nonSearchHtml')
+      if highlightedContent?
+        console.debug("Normal content:", normalContent.substr(0, 50) + '...')
+        console.debug("Search HTML?", highlightedContent.substr(0, 50) + '...')
       currentPage = @model.asPage()
       return unless currentPage?
       page = currentPage ? @model.get('contents')?.models[0]?.get('book')

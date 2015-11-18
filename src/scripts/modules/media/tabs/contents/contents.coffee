@@ -104,6 +104,23 @@ define (require) ->
             if matched
               page.set('visible', matched)
               page.set('searchResult', snippet)
+              book = page.get('book')
+              bookId = "#{book.get('id')}@#{book.get('version')}"
+              pageId = "#{page.get('id')}@#{page.get('version')}"
+              BookSearchResults.fetch(
+                bookId: "#{bookId}/#{pageId}"
+                query: response.query.search_term
+              ).done((data) ->
+                html = data.results.items[0].html.replace('<q-match>', '<span class="q-match">').
+                replace('</q-match>', '</span class="q-match">')
+                $htmlNodes = $(html)
+                metaIndex = 0
+                # Heuristic: The actual content starts with a paragraph that has an id
+                ++metaIndex until $htmlNodes[metaIndex]?.id or metaIndex > $htmlNodes.length
+                $htmlNodes = $htmlNodes.slice(metaIndex)
+                html = $('<div>').append($htmlNodes).html()
+                page.set('searchHtml', html)
+              )
               expandContainers(page, true, true)
             return matched
       @loadHighlightedPage()
