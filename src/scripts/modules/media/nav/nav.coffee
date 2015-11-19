@@ -88,7 +88,7 @@ define (require) ->
       if window.innerWidth < 640
         if @tocIsOpen
           @toggleContents()
-      @mediaParent.scrollToTop()
+        @mediaParent.scrollToTop()
 
     backToTop: (e) ->
       e.preventDefault()
