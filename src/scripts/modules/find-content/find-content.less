@@ -15,43 +15,24 @@
     display: block;
   }
 
-  a {
-    font-size: 1.6rem;
-    color: @gray-lighter;
-    text-decoration: none;
-  }
-
-  > label > .medium-header {
-    display: block;
-    color: @gray-lighter;
-  }
-
-  > label > .medium-header,
-  > .or {
-    line-height: @bar-height;
-    text-align: center;
-  }
-
   > label {
     margin: 0;
-    .flex(2; 0; auto);
+    .flex(1; 0; auto);
 
     @media screen and (max-width: @screen-xs-max) {
       display: block;
       margin-bottom: 1.5rem;
     }
-  }
 
-  > .or {
-    .flex(1; 1; auto);
-    margin: 0 1.5rem;
-    font-size: 1.4em;
-    font-weight: 200;
-
-    // Don't display on screens smaller than a tablet
-    @media screen and (max-width: @screen-xs-max) {
-      display: none;
+    > .medium-header {
+      display: block;
+      color: @gray-lighter;
     }
+    > .medium-header,
+    > .or {
+     line-height: @bar-height;
+     text-align: center;
+   }
   }
 
   > .form-control {
@@ -79,42 +60,22 @@
     }
   }
 
-  .dropdown {
-    .flex(4; 0; 33%);
-    position: relative;
-    height: @bar-height;
-    margin-right: 1.5rem;
-    font-size: 1.2em;
-    color: @gray-lighter;
-    background-color: @gray-medium;
-    border-radius: 0.4rem;
+  > .or {
+    .flex(1; 0; auto);
+    text-align: center;
+    margin: 0 1.5rem;
+    font-size: 1.4em;
+    font-weight: 200;
 
-    a {
-      display: block;
-      padding: 0 1.2rem;
-      font-weight: 300;
-      line-height: @bar-height;
-    }
-
-    > .dropdown-toggle {
-      outline: none;
-      background: transparent url(/images/icons/arrows-white.png) no-repeat 98% center;
-      
-      &:focus {
-        box-shadow: 0 0 3pt 1pt rgb(0, 0, 0);
-      }
-    }
-
-    > .dropdown-menu {
-      width: 100%;
-      max-height: 30rem;
-      overflow-y: auto;
-    }
-
+    // Don't display on screens smaller than a tablet
     @media screen and (max-width: @screen-xs-max) {
-      display: block;
-      margin-right: 0;
-      margin-bottom: 0.5rem;
+      display: none;
     }
   }
+
+  > .advanced-search {
+    font-size: 1.2em;
+    padding: 0.3rem 2.5rem;
+  }
+
 }

@@ -10,9 +10,9 @@ define (require) ->
     sectionNumber = 0
     skippedIntro = false
     for item in toc
-      isSection = not item.get('contents')?
+      isPage = not item.get('contents')?
       isCcap = (item.get('book')?.get('printStyle') ? '').match(/^ccap-/)?
-      if isSection
+      if isPage
         title = item.get('title')
         atTopLevel = depth == 0
         chapterNumber = cumulativeChapters[depth - 1]

@@ -23,6 +23,9 @@ define (require) ->
       @route 'contents', 'contents', () ->
         @appView.render('contents')
 
+      @route 'browse', 'browse', ->
+        @appView.render('browse-content')
+
       @route 'tos', 'tos', () ->
         @appView.render('tos')
 

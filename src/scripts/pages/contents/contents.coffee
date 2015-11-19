@@ -2,8 +2,8 @@ define (require) ->
   $ = require('jquery')
   linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
-  BrowseContentView = require('cs!modules/browse-content/browse-content')
   MediaView = require('cs!modules/media/media')
+  router = require('cs!router')
   template = require('hbs!./contents-template')
   require('less!./contents')
 
@@ -41,7 +41,7 @@ define (require) ->
           )
         @regions.contents.append(view)
       else
-        @regions.contents.append(new BrowseContentView())
+        router.navigate('/browse', {trigger: true})
 
     displayChangedRemotely: () ->
       # Regions do not support a `.$el` unless `.show(view)` has been called so select the alert
