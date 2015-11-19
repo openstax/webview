@@ -9,6 +9,7 @@ define (require) ->
   cumulativeChapters = []
   numberChapters = (toc, depth=0) ->
     sectionNumber = 0
+    skippedIntro = false
     for item in toc
       isSection = not item.get('contents')?
       isCcap = (item.get('book')?.get('printStyle') ? '').match(/^ccap-/)?

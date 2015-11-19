@@ -44,6 +44,7 @@ define (require) ->
       @tocIsOpen = false
       @.trigger('tocIsOpen', @tocIsOpen)
       @listenTo(@model, 'change:loaded change:currentPage removeNode moveNode add:contents', @render)
+      @listenTo(@model, 'change:currentPage', @closeContentsOnSmallScreen)
 
     events:
       'click .next': 'nextPage'
@@ -86,6 +87,12 @@ define (require) ->
       href = $(e.currentTarget).attr('href')
       router.navigate href, {trigger: false}, () => @mediaParent.trackAnalytics()
       @mediaParent.scrollToTop()
+
+    closeContentsOnSmallScreen: ->
+      if window.innerWidth < 640
+        if @tocIsOpen
+          @toggleContents()
+        @mediaParent.scrollToTop()
 
     backToTop: (e) ->
       e.preventDefault()
