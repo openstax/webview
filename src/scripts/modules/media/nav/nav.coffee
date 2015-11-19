@@ -127,9 +127,9 @@ define (require) ->
             @toggleContents()
           @model.set('searchResults', data.results)
           @enableClearSearch()
-          ).fail((err) ->
-            console.error("Search failed:", err)
-            )
+        ).fail((err) ->
+          console.error("Search failed:", err)
+        )
 
     onRender: ->
       if not @mediaParent?

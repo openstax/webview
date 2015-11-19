@@ -40,7 +40,7 @@ define (require) ->
         item.set('chapter', chapterNumber)
 
   allPages = (nodes, collection) ->
-    _.each nodes, (node) =>
+    _.each nodes, (node) ->
       if node.isSection()
         children = node.get('contents').models
         allPages(children, collection)
@@ -83,7 +83,7 @@ define (require) ->
         allPages(nodes, @allPages)
         @render()
 
-    expandContainers: (page, isExpanded, showingResults) =>
+    expandContainers: (page, isExpanded, showingResults) ->
       container = page.get('_parent')
       visible = isExpanded or not showingResults
       while container.isSection()
