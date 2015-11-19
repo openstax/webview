@@ -121,9 +121,9 @@ define (require) ->
 
     loadHighlightedPage: ->
       response = @model.get('searchResults')
+      page = @model.asPage()
       if response and not page.get('searchHtml')
         searchTerm = @model.get('searchResults').query.search_term
-        page = @model.asPage()
         return if page.get('searchHtml')
         book = page.get('book')
         bookId = "#{book.get('id')}@#{book.get('version')}"
