@@ -3,7 +3,7 @@ define (require) ->
   settings = require('settings')
 
   archiveport = if settings.cnxarchive.port then ":#{settings.cnxarchive.port}" else ''
-  SEARCH_URI = "#{location.origin}/contents/search"
+  SEARCH_URI = "#{location.protocol}//#{settings.cnxarchive.host}#{archiveport}/search"
 
   return new class BookSearchResults extends Backbone.Model
     url: () -> "#{SEARCH_URI}/#{@bookId}?#{@query}"
