@@ -39,7 +39,5 @@ define (require) ->
         @sizeScrollableContent()
         window.onresize = ->
           Backbone.trigger 'window:resize'
-        window.onpopstate = (popEvent) ->
-          Backbone.trigger 'window:popstate', popEvent
 
       return @
