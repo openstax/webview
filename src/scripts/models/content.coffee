@@ -35,7 +35,8 @@ define (require) ->
           @set('error', false)
           if @isBook()
             if @get('contents').length
-              @setPage(options.page or 1) # Default to page 1
+              console.debug("Default loading", @)
+              @setPage(options.page or @defaultPage()) # Default to page 1
           else
             @set('active', true)
         .always () =>
@@ -43,6 +44,12 @@ define (require) ->
 
         .fail (model, response, options) =>
           @set('error', response?.status or model?.status or 9000)
+
+    defaultPage: ->
+      result = 1
+      if @isBook() and @get('printStyle')?.match(/^ccap-/)
+        result += 1 while @getPage(result).get('title') == 'Preface'
+      return result
 
     parse: (response, options = {}) ->
       super(arguments...)

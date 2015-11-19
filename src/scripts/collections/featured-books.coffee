@@ -26,8 +26,7 @@ define (require) ->
         book.cover = "#{archive}#{book.resourcePath}"
         book.link = "contents/#{book.id}"
 
-      featuredLinks = _.shuffle(books)
-      return featuredLinks
+      return books
 
 
     initialize: () ->

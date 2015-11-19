@@ -11,7 +11,9 @@ define (require) ->
   return class TocSectionView extends TocDraggableView
     template: template
     templateHelpers:
-      editable: () -> @editable
+      editable: -> @editable
+      visible: ->
+        @model.get('visible') ? true
     itemViewContainer: '> ul'
 
     events:
@@ -27,39 +29,36 @@ define (require) ->
       @regions =
         container: @itemViewContainer
       @sectionNameModal = new SectionNameModal({model: @model})
-
       super()
-
       @listenTo(@model, 'add change:unit change:title change:expanded sync:contents', @render)
       introPage = @model.introduction()
       if introPage
         @listenTo(introPage, 'change:active', @reflectIntroActive)
 
     onRender: () ->
+      return if @model.get('visible') == false
       super()
       @regions.container.empty()
       nodes = @model.get('contents')?.models
       _.each nodes, (node) =>
-        if node.isSection()
-          @regions.container.appendAs 'li', new TocSectionView
-            model: node
-        else
-          unless node is @model.introduction()
-            @regions.container.appendAs 'li', new TocPageView
+        if node.get('visible') ? true
+          if node.isSection()
+            @regions.container.appendAs 'li', new TocSectionView
               model: node
-              collection: @model
+          else
+            unless node is @model.introduction()
+              @regions.container.appendAs 'li', new TocPageView
+                model: node
+                collection: @model
       @reflectIntroActive()
 
-    toggleSection: (e) ->
-      if @model.get('expanded')
-        @model.set('expanded', false)
-      else
-        @model.set('expanded', true)
+    toggleSection: () ->
+      @model.set('expanded', not @model.get('expanded'))
 
     toggleSectionWithKeyboard: (e) ->
       if e.keyCode is 13 or e.keyCode is 32
         e.preventDefault()
-        @toggleSection(e)
+        @toggleSection()
         @$el.find('> div > .section-wrapper').focus()
 
     toggleOrLoad: (e) ->

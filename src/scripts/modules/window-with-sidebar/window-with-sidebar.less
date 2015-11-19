@@ -32,6 +32,11 @@
       width: @sidebar-width;
       overflow-x: hidden;
       overflow-y: auto;
+      @media (max-width: 640px) {
+        position: absolute;
+        z-index: 1;
+        background-color: white;
+      }
     }
     > .main {
       width: ~"calc(100% -" @sidebar-width + @fudge ~")";
