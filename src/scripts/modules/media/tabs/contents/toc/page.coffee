@@ -41,6 +41,10 @@ define (require) ->
 
       @listenTo(@model, 'change:active change:page change:changed change:title', @render)
 
+    onRender: ->
+      super()
+      at = @model.attributes
+
     scrollToContentTop: () ->
       $mediaNav = $('.media-nav').first()
       minY = $mediaNav.offset().top + $mediaNav.height() + 200

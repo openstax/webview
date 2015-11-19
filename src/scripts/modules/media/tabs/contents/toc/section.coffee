@@ -33,6 +33,7 @@ define (require) ->
       return if @model.get('visible') == false
       super()
       @regions.container.empty()
+      isVisible = @model.get('visible')
       nodes = @model.get('contents')?.models
       _.each nodes, (node) =>
         if node.get('visible') ? true
