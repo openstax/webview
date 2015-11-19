@@ -4,6 +4,7 @@ define (require) ->
   linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
   ContentsView = require('cs!../tabs/contents/contents')
+  BookSearchResults = require('cs!models/book-search-results')
   template = require('hbs!./nav-template')
   require('less!./nav')
 
@@ -33,6 +34,7 @@ define (require) ->
         back: back
         pages: if @model.get('loaded') then @model.getTotalPages() else 0
         page: if @model.get('loaded') then @model.getPageNumber() else 0
+        searchTerm: @searchTerm
       }
 
     initialize: (options) ->
@@ -49,6 +51,8 @@ define (require) ->
       'click .back': 'previousPage'
       'click .toggle.btn': 'toggleContents'
       'click .back-to-top > a': 'backToTop'
+      'keydown .searchbar input': 'handleSearchInput'
+      'click .searchbar > .fa-close': 'clearSearch'
 
     toggleContents: (e) ->
       @tocIsOpen = not @tocIsOpen
@@ -94,8 +98,42 @@ define (require) ->
       e.preventDefault()
       @mediaParent.scrollToTop()
 
+    clearSearch: ->
+      @searchTerm = ''
+      @$el.find('.searchbar input').val(@searchTerm)
+      @model.unset('searchResults')
+      @$el.find('.searchbar > .fa').
+      removeClass('fa-close').
+      addClass('fa-search')
+
+    enableClearSearch: ->
+      @$el.find('.searchbar > .fa').
+      removeClass('fa-search').
+      addClass('fa-close')
+
+    handleSearchInput: (event) ->
+      if (event.keyCode == 13 and event.target.value?)
+        @searchTerm = event.target.value
+        event.preventDefault()
+        if @searchTerm == ''
+          @clearSearch()
+          return
+        options = {
+          bookId: "#{@model.get('id')}@#{@model.get('version')}",
+          query: @searchTerm
+        }
+        BookSearchResults.fetch(options).done((data) =>
+          if not @tocIsOpen
+            @toggleContents()
+          @model.set('searchResults', data.results)
+          @enableClearSearch()
+        ).fail((err) ->
+          console.error("Search failed:", err)
+        )
+
     onRender: ->
       if not @mediaParent?
         @mediaParent = @parent
       @regions.tocPanel?.show(new ContentsView({model: @model}))
+      @enableClearSearch() if @model.get('searchResults')?
       @updateToc()

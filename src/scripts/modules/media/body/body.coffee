@@ -22,7 +22,7 @@ define (require) ->
     template: template
     templateHelpers:
       editable: () -> @model.get('currentPage')?.isEditable()
-      content: () -> @model.asPage()?.get('content')
+      content: () -> @model.asPage()?.get('searchHtml') ? @model.asPage()?.get('content')
       hasContent: () -> typeof @model.asPage()?.get('content') is 'string'
       loaded: () ->
         if @model.isBook() and @model.getTotalLength()
@@ -53,6 +53,7 @@ define (require) ->
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
+      @listenTo(@model, 'change:currentPage.searchHtml', @render)
       @initializeConceptCoach()
 
     canonicalizePath: =>

@@ -3,6 +3,10 @@
     <div class="media-toolbar">
       {{#unless _hideProgress}}
         <span class="toggle btn" role="button"><span class="fa fa-th-list"></span> Contents</span>
+        <div class="searchbar">
+          <span class="fa fa-search"></span>
+          <input class="find form-control" type="search" placeholder="Search this book" value="{{searchTerm}}"/>
+        </div>
       {{/unless}}
       <div class="media-navbar">
         <div class="book-nav" aria-busy="true">
