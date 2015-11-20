@@ -11,7 +11,7 @@ define (require) ->
     templateHelpers:
       editable: -> @editable
       visible: ->
-        @model.get('visible') ? true
+        @model.get('visible')
     itemViewContainer: '> ul'
 
     events:
@@ -35,7 +35,7 @@ define (require) ->
       @regions.container.empty()
       nodes = @model.get('contents')?.models
       _.each nodes, (node) =>
-        if node.get('visible') ? true
+        if node.get('visible')
           if node.isSection()
             @regions.container.appendAs 'li', new TocSectionView
               model: node
