@@ -31,6 +31,7 @@ define (require) ->
 
       return {
         currentPage: currentPage
+        pageTitle: currentPage.searchTitle ? currentPage.title
         hasDownloads: (_.isArray(downloads) and downloads?.length) or
           (_.isArray(pageDownloads) and pageDownloads?.length)
         derivable: @isDerivable()
@@ -78,6 +79,7 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.editable change:currentPage.canPublish', @render)
       @listenTo(@model, 'change:currentPage', @updateTitle)
       @listenTo(router, 'navigate', @updatePageInfo)
+      @listenTo(@model, 'change:currentPage.searchTitle', @render)
 
     onRender: () ->
       if not @model.asPage()?.get('active') then return
