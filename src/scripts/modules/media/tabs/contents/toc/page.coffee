@@ -16,6 +16,8 @@ define (require) ->
         page: pageNumber
         url: linksHelper.getPath('contents', {model: @content, page: pageNumber})
         editable: @editable
+        searchResult: @model.get('searchResult')
+        visible: @model.get('visible') ? true
       }
 
     tagName: 'li'
@@ -27,7 +29,6 @@ define (require) ->
 
     initialize: () ->
       super()
-
       @content = @model.get('book')
       @editable = @content.get('editable')
 

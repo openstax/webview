@@ -71,7 +71,11 @@
           '8QUzyvgD'
         ],
         url: 'https://tutor-dev.openstax.org'
-      }
+      },
+
+      hideExercises: [
+        '031da8d3-b525-429c-80cf-6c8ed997733a'
+      ]
 
     };
 
