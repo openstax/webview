@@ -138,16 +138,9 @@ define (require) ->
 
       {query} = linksHelper.getCurrentPathComponents()
       view = query['cc-view'] or 'close'
-      @cc.updateToView(view)
 
-      if view is 'close'
-        @cc.handleClose()
-      else if @cc.component?
-        ccFromTop = $(@cc.component.getDOMNode()).offset().top - $(window).scrollTop()
-        if ccFromTop > 200
-          _.delay =>
-            @cc.handleOpen({coach: el: @cc.component.getDOMNode()})
-          , 1000
+      @cc.updateToView(view)
+      @cc.handleClose() if view is 'close'
 
     launchConceptCoach: (event) ->
       unless @cc.component?.isMounted()
