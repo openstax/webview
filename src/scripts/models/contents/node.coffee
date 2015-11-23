@@ -17,9 +17,8 @@ define (require) ->
 
   return class Node extends Backbone.AssociatedModel
     eTag: null
-    defaults: {
+    defaults:
       visible: true
-    }
 
     # url: () -> "#{SERVER}/contents/#{@id}"
     url: () ->

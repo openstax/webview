@@ -28,9 +28,11 @@ define (require) ->
 
       downloads = @model.get('downloads')
       pageDownloads = currentPage?.get?('downloads')
+      chapter = currentPage.chapter ? ''
 
       return {
         currentPage: currentPage
+        chapter: chapter
         pageTitle: currentPage.searchTitle ? currentPage.title
         hasDownloads: (_.isArray(downloads) and downloads?.length) or
           (_.isArray(pageDownloads) and pageDownloads?.length)

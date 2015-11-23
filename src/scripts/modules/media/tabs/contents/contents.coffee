@@ -6,47 +6,12 @@ define (require) ->
   template = require('hbs!./contents-template')
   require('less!./contents')
 
-  cumulativeChapters = []
-  oldNnumberChapters = (toc, depth=0) ->
-    sectionNumber = 0
-    skippedIntro = false
-    isCcap = toc[0].isCcap?()?
-    for item in toc
-      isPage = not item.get('contents')?
-      if isPage
-        title = item.get('title')
-        atTopLevel = depth == 0
-        chapterNumber = cumulativeChapters[depth - 1]
-        if not isCcap
-          if depth > 0
-            chapterNumber = cumulativeChapters.slice(0,depth).join('.') + '.'
-          sectionNumber = cumulativeChapters[depth] ? 0
-          item.set('chapter', "#{chapterNumber}#{sectionNumber}")
-        else if not atTopLevel
-          if sectionNumber > 0
-            cumulativeChapters[depth] = sectionNumber
-            item.set('chapter', "#{chapterNumber}.#{sectionNumber}")
-          sectionNumber += 1
-      else
-        if cumulativeChapters[depth]?
-          cumulativeChapters[depth] += 1
-        else
-          cumulativeChapters[depth] = 1
-        contentsModels = item.get('contents')?.models
-        if isCcap
-          chapterNumber = cumulativeChapters[depth]
-        else
-          cumulativeChapters[depth + 1] = 0
-          chapterNumber = cumulativeChapters.slice(0,depth+1).join('.')
-        numberChapters(contentsModels, depth+1) if contentsModels?
-        item.set('chapter', chapterNumber)
-
   basicNumbering = (nodes, parentNumber) ->
     for node, index in nodes
       chapterNumber = if parentNumber?
-         "#{parentNumber}.#{index}"
+         "#{parentNumber}.#{index+1}"
        else
-         index
+         index+1
       node.set('chapter', chapterNumber)
       if node.isSection()
         childNodes = node.get('contents')?.models
@@ -67,6 +32,7 @@ define (require) ->
           pageNumber = 0
           previousChapter = chapter
           chapter.set('chapter', chapterNumber)
+          page.set('chapter', chapterNumber)
         if pageNumber > 0
           page.set('chapter', "#{chapterNumber}.#{pageNumber}")
 
@@ -92,7 +58,7 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable removeNode moveNode', @render)
+      @listenTo(@model, 'change:editable removeNode moveNode change:currentPage', @render)
       @listenTo(@model, 'change:contents', @processPages)
       @listenTo(@model, 'change:searchResults', @handleSearchResults)
       @listenTo(@model, 'change:currentPage', @loadHighlightedPage)
@@ -109,10 +75,13 @@ define (require) ->
     processPages: ->
       nodes = @model.get('contents')?.models
       if nodes?
-        cumulativeChapters = []
-        basicNumbering(nodes)
-        if nodes[0].isCcap()
-          continuousNumberChapters(nodes)
+        isCcap = nodes[0].isCcap()
+        if isCcap
+          sections = nodes.filter((node) -> node.isSection())
+          basicNumbering(sections)
+          continuousNumberChapters(sections)
+        else
+          basicNumbering(nodes)
         @allPages = allPages(nodes)
         @render()
 

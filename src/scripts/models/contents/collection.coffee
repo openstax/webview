@@ -21,7 +21,7 @@ define (require) ->
     }]
 
     introduction: ->
-      return unless @isCcap()
+      return unless @isCcap() and @isSection()
       firstChild = @get('contents')?.models?[0]
       return if firstChild.isSection()
       firstChild

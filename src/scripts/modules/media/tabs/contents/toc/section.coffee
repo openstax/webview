@@ -24,6 +24,7 @@ define (require) ->
       'click > div > .edit': 'editNode'
 
     initialize: () ->
+      return unless @model
       @content = @model.get('book') or @model
       @editable = @content.get('editable')
       @regions =
@@ -34,11 +35,16 @@ define (require) ->
       introPage = @model.introduction()
       if introPage
         @listenTo(introPage, 'change:active', @reflectIntroActive)
+      @listenTo(@content, 'change:currentPage', @updateActiveContainer)
+      @listenTo(@model, 'change:activeContainer', @render)
 
     onRender: () ->
       return if @model.get('visible') == false
       super()
+      return unless @regions
       @regions.container.empty()
+      if @model.get('activeContainer')
+        @$el.addClass('active-container')
       nodes = @model.get('contents')?.models
       _.each nodes, (node) =>
         if node.get('visible')
@@ -51,6 +57,17 @@ define (require) ->
                 model: node
                 collection: @model
       @reflectIntroActive()
+
+    updateActiveContainer: ->
+      page = @content.get('currentPage')
+      containers = page.containers()
+      titles = containers.map((c) -> c.get('title'))
+      thisTitle = @model.get('title')
+      if (titles.indexOf(thisTitle) >= 0)
+        @model.set('activeContainer', true)
+      else if @model.get('activeContainer')
+        @model.unset('activeContainer')
+
 
     toggleSection: () ->
       @model.set('expanded', not @model.get('expanded'))
@@ -78,6 +95,7 @@ define (require) ->
       introPage = @model.introduction()
       return unless introPage
       $title = @$el.find('> div > span > .title')
+      activePage = @model.get('book').get('currentPage')
       if @model.introduction().get('active')
         $title.addClass('active')
       else

@@ -6,6 +6,7 @@ define (require) ->
     defaults:
       mediaType: 'application/vnd.org.cnx.module'
       content: '<p>Enter some content here. Format content, and drag and drop elements from the toolbar.</p>'
+      visible: true
 
     toJSON: (options = {}) ->
       results = super(arguments...)

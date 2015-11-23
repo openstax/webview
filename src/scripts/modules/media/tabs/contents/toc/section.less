@@ -7,7 +7,6 @@
     font-size: 1.25rem;
     list-style-type: none;
 
-
     li {
       border-bottom: 0.1rem solid @gray-lightest;
 
@@ -99,6 +98,10 @@
         &:hover > .edit {
           opacity: 1;
         }
+      }
+
+      &.active-container > div[data-expandable="true"]:not([data-expanded="true"]) {
+        font-weight: bold;
       }
 
       > ul {

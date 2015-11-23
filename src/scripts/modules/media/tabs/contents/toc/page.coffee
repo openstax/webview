@@ -30,22 +30,16 @@ define (require) ->
       super()
       @content = @model.get('book')
       @editable = @content.get('editable')
-
-      # If this is the active page, update the URL bar to the correct page number
-      if @model.get('active')
-        href = linksHelper.getPath 'contents',
-          model: @content
-          page: @model.getPageNumber()
-        router.navigate(href, {trigger: false, analytics: false, replace: true})
-
       @listenTo(@model, 'change:active change:page change:changed change:title', @render)
+      @listenTo(@model, 'change:active', @handleActiveChange)
 
-    scrollToContentTop: () ->
-      $mediaNav = $('.media-nav').first()
-      minY = $mediaNav.offset().top + $mediaNav.height() + 200
-      y = (window.pageYOffset or document.documentElement.scrollTop) + $(window).height()
-
-      $('html, body').animate({scrollTop: $mediaNav.offset().top}, '500', 'swing') if minY > y
+    handleActiveChange: ->
+      isActive = @model.get('active')
+      for container in @model.containers()
+        if isActive
+          container.set('activeContainer', true)
+        else if container.get('activeContainer')
+          container.unset('activeContainer')
 
     changePage: (e) ->
       # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab
@@ -57,7 +51,6 @@ define (require) ->
       $link = $(e.currentTarget)
       @model.get('book').setPage($link.data('page'))
       router.navigate $link.attr('href'), {trigger: false}, () => @trackNav()
-      @scrollToContentTop()
 
     trackNav: () ->
       tree = @collection.get('book') or @collection
