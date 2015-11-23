@@ -30,7 +30,7 @@ define (require) ->
 
         return @model.get('loaded')
       isCoach: ->
-        moduleUUID = @model.getUuid()
+        moduleUUID = @model.getUuid()?.split('?')[0]
         _.contains(settings.conceptCoach.moduleUuids, moduleUUID)
 
     editable:
@@ -54,7 +54,8 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.editable', @render)
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
       @listenTo(@model, 'change:currentPage.searchHtml', @render)
-      @initializeConceptCoach()
+      @initializeConceptCoach() if @templateHelpers.isCoach.call(@)
+      @listenTo(@model, 'change:currentPage.loaded', @controlConceptCoachView) if @templateHelpers.isCoach.call(@)
 
     canonicalizePath: =>
       if @model.isBook()
@@ -78,33 +79,75 @@ define (require) ->
         $els.hide()
 
     initializeConceptCoach: ->
-      return unless @templateHelpers.isCoach.call(@)
+      return unless @templateHelpers.isCoach.call(@) and not @cc
       $body = $('body')
+      @cc = cc
 
       animatedScroll = (top) ->
         $('html, body').animate({scrollTop: top}, '500', 'swing')
 
-      handleOpen = (eventData) ->
-        cc.handleOpened(eventData, animatedScroll, $body[0])
+      @cc.handleOpen = (eventData) ->
+        @handleOpened(eventData, animatedScroll, $body[0])
 
-      handleClose = (eventData) ->
-        cc.handleClosed(eventData, $body[0])
+      @cc.handleClose = (eventData) ->
+        @handleClosed(eventData, $body[0])
 
-      cc.init(settings.conceptCoach.url)
-      cc.on('ui.close', handleClose)
-      cc.on('open', handleOpen)
+      @cc.init(settings.conceptCoach.url, {prefix: '?', base: 'cc-view='})
+
+      @cc.on('ui.close', @cc.handleClose)
+      @cc.on('open', @cc.handleOpen)
+
+      @cc.on 'view.update', (eventData) =>
+        {newPath, options} = @getPathForCoach(eventData)
+        router.navigate(newPath, options) if newPath?
+
+    getPathForCoach: (coachData) ->
+      return unless coachData?.route?
+      {path, query} = linksHelper.getCurrentPathComponents()
+      options =
+        trigger: false
+
+      if query['cc-view'] isnt coachData.state.view
+        newQuery = _.extend({}, query, 'cc-view': coachData.state.view)
+        pathFragments = [path.split('?')[0]]
+
+        if coachData.state.view is 'close'
+          delete newQuery['cc-view']
+        else if query['cc-view']?
+          options.replace = true
+
+        if not _.isEmpty(newQuery)
+          pathFragments.push(linksHelper.param(newQuery))
+
+        newPath = pathFragments.join('?')
+
+      {newPath, options}
+
+    getOptionsForCoach: ->
+      options =
+        collectionUUID: @model.getUuid()
+        moduleUUID: @model.get('currentPage')?.getUuid()
+        cnxUrl: location.origin
+
+      _.clone(options)
+
+    controlConceptCoachView: ->
+      options = @getOptionsForCoach()
+      options.mounter = $('.concept-coach-launcher > button').parent()[0]
+      @cc.setOptions(options)
+
+      {query} = linksHelper.getCurrentPathComponents()
+      view = query['cc-view'] or 'close'
+
+      @cc.updateToView(view)
+      @cc.handleClose() if view is 'close'
 
     launchConceptCoach: (event) ->
-      unless cc.component?.isMounted()
+      unless @cc.component?.isMounted()
         $button = $(event.currentTarget)
+        options = @getOptionsForCoach()
 
-        collectionUUID = @model.getUuid()
-        moduleUUID = @model.get('currentPage').getUuid()
-
-        collectionVersion = @model.get('version')
-        moduleVersion = @model.get('currentPage').get('version')
-
-        cc.open($button.parent()[0], {collectionUUID, moduleUUID, collectionVersion, moduleVersion})
+        @cc.open($button.parent()[0], options)
 
 
     # Toggle the visibility of teacher's edition elements
