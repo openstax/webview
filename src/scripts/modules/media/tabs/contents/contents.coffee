@@ -131,14 +131,13 @@ define (require) ->
       _.each pages, (page) ->
         page.unset('searchResult')
         page.unset('searchHtml')
+        page.unset('searchTitle')
         page.set('visible', not showingResults)
         expandContainers(page, false, showingResults)
       if pages? and showingResults
         _.each results, (result) ->
           resultId = result.id.replace(/@.*/, '')
-          snippet = result.headline.
-          replace(/<q-match>/g, '<span class="q-match">').
-          replace(/<\/q-match>/g, '</span>')
+          snippet = result.headline
           _.some pages, (page) ->
             pageId = page.id.replace(/@.*/, '')
             matched = (resultId == pageId)
@@ -160,19 +159,20 @@ define (require) ->
         bookId = "#{book.get('id')}@#{book.get('version')}"
         pageId = "#{page.get('id')}@#{page.get('version')}"
         BookSearchResults.fetch(
-          bookId: "#{bookId}/#{pageId}"
+          bookId: "#{bookId}:#{pageId}"
           query: response.query.search_term
         ).done((data) ->
           return unless data.results.items.length
-          html = data.results.items[0].html.replace(/<q-match>/g, '<span class="q-match">').
-          replace(/<\/q-match>/g, '</span class="q-match">')
-          $htmlNodes = $(html)
-          metaIndex = 0
-          # Heuristic: The actual content starts with a paragraph that has an id
-          ++metaIndex until $htmlNodes[metaIndex]?.id or metaIndex > $htmlNodes.length
-          $htmlNodes = $htmlNodes.slice(metaIndex)
-          html = $('<div>').append($htmlNodes).html()
+          html = data.results.items[0].html
+
+          # Adapted from models/contents/node.coffee; make a parseBody utility?
+          $body = $('<div>' + html.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>')
+          $title = $body.children('[data-type=document-title]').eq(0).remove()
+          $body.children('[data-type=abstract]').eq(0).remove()
+          html = $body.html()
+
           page.set('searchHtml', html)
+          page.set('searchTitle', $title.html())
         )
 
     onDragStart: (e) ->

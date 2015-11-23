@@ -16,7 +16,7 @@ define (require) ->
         url: linksHelper.getPath('contents', {model: @content, page: pageNumber})
         editable: @editable
         searchResult: @model.get('searchResult')
-        visible: @model.get('visible') ? true
+        visible: @model.get('visible')
       }
 
     tagName: 'li'
