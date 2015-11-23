@@ -103,7 +103,9 @@ define (require) ->
       windowWithSidebar.regions.sidebar.append(tocView)
       mainPage.regions.main.append(new MediaBodyView({model: @model}))
       mainPage.regions.main.append(new MediaFooterView({model: @model}))
-      mainPage.regions.main.append(new MediaNavView({model: @model, hideProgress: true, mediaParent: @}))
+      footerNav = new MediaNavView({model: @model, hideProgress: true, mediaParent: @})
+      mainPage.regions.main.append(footerNav)
+      footerNav.$el.addClass('footer-nav')
       @mainContent = windowWithSidebar.regions.main
 
       hideThese = mediaTitleView.$el

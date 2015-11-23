@@ -21,7 +21,7 @@ define (require) ->
     }]
 
     introduction: ->
-      return unless @get('book')?.get('printStyle')?.match(/^ccap-/)
+      return unless @isCcap()
       firstChild = @get('contents')?.models?[0]
       return if firstChild.isSection()
       firstChild

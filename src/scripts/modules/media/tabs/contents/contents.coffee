@@ -7,19 +7,21 @@ define (require) ->
   require('less!./contents')
 
   cumulativeChapters = []
-  numberChapters = (toc, depth=0) ->
+  oldNnumberChapters = (toc, depth=0) ->
     sectionNumber = 0
     skippedIntro = false
+    isCcap = toc[0].isCcap?()?
     for item in toc
       isPage = not item.get('contents')?
-      isCcap = (item.get('book')?.get('printStyle') ? '').match(/^ccap-/)?
       if isPage
         title = item.get('title')
         atTopLevel = depth == 0
         chapterNumber = cumulativeChapters[depth - 1]
         if not isCcap
-          chapterNumber = cumulativeChapters.slice(0,depth).join('.')
+          if depth > 0
+            chapterNumber = cumulativeChapters.slice(0,depth).join('.') + '.'
           sectionNumber = cumulativeChapters[depth] ? 0
+          item.set('chapter', "#{chapterNumber}#{sectionNumber}")
         else if not atTopLevel
           if sectionNumber > 0
             cumulativeChapters[depth] = sectionNumber
@@ -39,7 +41,37 @@ define (require) ->
         numberChapters(contentsModels, depth+1) if contentsModels?
         item.set('chapter', chapterNumber)
 
-  allPages = (nodes, collection) ->
+  basicNumbering = (nodes, parentNumber) ->
+    for node, index in nodes
+      chapterNumber = if parentNumber?
+         "#{parentNumber}.#{index}"
+       else
+         index
+      node.set('chapter', chapterNumber)
+      if node.isSection()
+        childNodes = node.get('contents')?.models
+        basicNumbering(childNodes, chapterNumber) if childNodes?
+
+  continuousNumberChapters = (nodes) ->
+    pages = allPages(nodes)
+    previousChapter = ''
+    chapterNumber = 0
+    pageNumber = 0
+    for page in pages
+      chapter = page.get('_parent')
+      if chapter? and chapter.isSection()
+        if chapter == previousChapter
+          pageNumber += 1
+        else
+          chapterNumber += 1
+          pageNumber = 0
+          previousChapter = chapter
+          chapter.set('chapter', chapterNumber)
+        if pageNumber > 0
+          page.set('chapter', "#{chapterNumber}.#{pageNumber}")
+
+
+  allPages = (nodes, collection=[]) ->
     _.each nodes, (node) ->
       if node.isSection()
         children = node.get('contents').models
@@ -78,18 +110,17 @@ define (require) ->
       nodes = @model.get('contents')?.models
       if nodes?
         cumulativeChapters = []
-        numberChapters(nodes)
-        @allPages = []
-        allPages(nodes, @allPages)
+        basicNumbering(nodes)
+        if nodes[0].isCcap()
+          continuousNumberChapters(nodes)
+        @allPages = allPages(nodes)
         @render()
 
     expandContainers: (page, isExpanded, showingResults) ->
-      container = page.get('_parent')
       visible = isExpanded or not showingResults
-      while container.isSection()
+      for container in page.containers()
         container.set('expanded', isExpanded)
         container.set('visible', visible)
-        container = container.get('_parent')
 
     handleSearchResults: ->
       expandContainers = @expandContainers
