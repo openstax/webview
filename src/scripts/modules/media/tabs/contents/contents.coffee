@@ -9,9 +9,9 @@ define (require) ->
   basicNumbering = (nodes, parentNumber) ->
     for node, index in nodes
       chapterNumber = if parentNumber?
-         "#{parentNumber}.#{index+1}"
+        "#{parentNumber}.#{index+1}"
        else
-         index+1
+        index+1
       node.set('chapter', chapterNumber)
       if node.isSection()
         childNodes = node.get('contents')?.models
