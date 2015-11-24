@@ -55,7 +55,7 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
       @listenTo(@model, 'change:currentPage.searchHtml', @render)
       @initializeConceptCoach() if @templateHelpers.isCoach.call(@)
-      @listenTo(@model, 'change:currentPage.loaded', @controlConceptCoachView) if @templateHelpers.isCoach.call(@)
+      @listenTo(@model, 'change:currentPage', @controlConceptCoachView) if @templateHelpers.isCoach.call(@)
 
     canonicalizePath: =>
       if @model.isBook()
@@ -132,15 +132,22 @@ define (require) ->
       _.clone(options)
 
     controlConceptCoachView: ->
+      currentPage = @model.get('currentPage')
+      return unless currentPage?.isValid()
+
       options = @getOptionsForCoach()
-      options.mounter = $('.concept-coach-launcher > button').parent()[0]
-      @cc.setOptions(options)
+      isMountable = $('.concept-coach-launcher > button').parent()[0]?
+      waitToMount = if isMountable then 0 else 1000
 
       {query} = linksHelper.getCurrentPathComponents()
       view = query['cc-view'] or 'close'
-
-      @cc.updateToView(view)
       @cc.handleClose() if view is 'close'
+
+      _.delay () =>
+        options.mounter ?= $('.concept-coach-launcher > button').parent()[0]
+        @cc.setOptions(options)
+        @cc.updateToView(view)
+      , waitToMount
 
     launchConceptCoach: (event) ->
       unless @cc.component?.isMounted()
