@@ -31,7 +31,7 @@ define (require) ->
         return @model.get('loaded')
       isCoach: ->
         moduleUUID = @model.getUuid()?.split('?')[0]
-        _.contains(settings.conceptCoach.moduleUuids, moduleUUID)
+        moduleUUID of settings.conceptCoach.moduleUuids
 
     editable:
       '.media-body':
