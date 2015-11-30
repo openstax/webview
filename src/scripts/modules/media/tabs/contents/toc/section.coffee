@@ -36,15 +36,23 @@ define (require) ->
       if introPage
         @listenTo(introPage, 'change:active', @reflectIntroActive)
       @listenTo(@content, 'change:currentPage', @updateActiveContainer)
-      @listenTo(@model, 'change:activeContainer', @render)
+      @listenTo(@model, 'change:activeContainer', @handleActiveContainer)
+
+    handleActiveContainer: ->
+      isActive = @model.get('activeContainer')
+      hasClass = @$el.hasClass('active-container')
+      return if isActive? and hasClass
+      if isActive
+        @$el.addClass('active-container')
+      else
+        @$el.removeClass('active-container')
 
     onRender: () ->
       return if @model.get('visible') == false
       super()
       return unless @regions
       @regions.container.empty()
-      if @model.get('activeContainer')
-        @$el.addClass('active-container')
+      @handleActiveContainer()
       nodes = @model.get('contents')?.models
       _.each nodes, (node) =>
         if node.get('visible')
@@ -59,15 +67,15 @@ define (require) ->
       @reflectIntroActive()
 
     updateActiveContainer: ->
+      isCurrentActive = @model.get('activeContainer')
       page = @content.get('currentPage')
       containers = page.containers()
-      titles = containers.map((c) -> c.get('title'))
-      thisTitle = @model.get('title')
-      if (titles.indexOf(thisTitle) >= 0)
+      shouldBeActive = containers.indexOf(@model) >= 0
+      return if isCurrentActive? == shouldBeActive
+      if shouldBeActive
         @model.set('activeContainer', true)
-      else if @model.get('activeContainer')
+      else
         @model.unset('activeContainer')
-
 
     toggleSection: () ->
       @model.set('expanded', not @model.get('expanded'))

@@ -31,15 +31,6 @@ define (require) ->
       @content = @model.get('book')
       @editable = @content.get('editable')
       @listenTo(@model, 'change:active change:page change:changed change:title', @render)
-      @listenTo(@model, 'change:active', @handleActiveChange)
-
-    handleActiveChange: ->
-      isActive = @model.get('active')
-      for container in @model.containers()
-        if isActive
-          container.set('activeContainer', true)
-        else if container.get('activeContainer')
-          container.unset('activeContainer')
 
     changePage: (e) ->
       # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab

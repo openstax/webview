@@ -134,12 +134,12 @@ define (require) ->
     controlConceptCoachView: ->
       options = @getOptionsForCoach()
       options.mounter = $('.concept-coach-launcher > button').parent()[0]
-      @cc.setOptions(options)
+      @cc.setOptions?(options)
 
       {query} = linksHelper.getCurrentPathComponents()
       view = query['cc-view'] or 'close'
 
-      @cc.updateToView(view)
+      @cc.updateToView?(view)
       @cc.handleClose() if view is 'close'
 
     launchConceptCoach: (event) ->
@@ -254,13 +254,9 @@ define (require) ->
           # @fakeExercises($temp)
 
           # Hide Exercises for Concept Coach
-          if settings.hideExercises.indexOf(@model.getUuid())
-            hiddenClasses = []
-            processingInstructions = @$el.find('.media-body').find('cnx-pi[data-hide]')
-            _.each processingInstructions, (instruction) ->
-              hiddenClasses.concat(instruction.text().split(','))
-            if hiddenClasses.length > 0
-              $(hidddenClasses.join()).hide()
+          hiddenClasses = settings?.conceptCoach?.moduleUuids?[@model.getUuid()] || []
+          if hiddenClasses.length > 0
+            $(hiddenClasses.map((name) -> ".#{name}").join()).hide()
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
