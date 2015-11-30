@@ -66,10 +66,10 @@
       },
 
       conceptCoach: {
-        moduleUuids: [
-          'f10533ca-f803-490d-b935-88899941197f',
-          '8QUzyvgD'
-        ],
+        moduleUuids: {
+          'f10533ca-f803-490d-b935-88899941197f': ['introduction'],
+          '8QUzyvgD': ['introduction']
+        },
         url: 'https://tutor-qa.openstax.org'
       },
 
