@@ -49,6 +49,12 @@ define (require) ->
 
   return class ContentsView extends BaseView
     template: template
+    templateHelpers:
+      resultCount: () ->
+        hits = @model?.get('searchResults')?.total
+        return unless hits?
+        s = if hits is 1 then '' else 's'
+        "#{hits} page#{s} matched"
 
     regions:
       toc: '.toc'
@@ -86,37 +92,38 @@ define (require) ->
         @allPages = allPages(nodes)
         @render()
 
-    expandContainers: (page, isExpanded, showingResults) ->
-      visible = isExpanded or not showingResults
+    expandContainers: (page, isExpanded, handlingResults) ->
+      visible = isExpanded or not handlingResults
       for container in page.containers()
         container.set('expanded', isExpanded)
         container.set('visible', visible)
 
     handleSearchResults: ->
+      response = @model.get('searchResults')
+      handlingResults = response?
       expandContainers = @expandContainers
       pages = @allPages
-      response = @model.get('searchResults')
-      results = response?.items
-      showingResults = results?.length > 0
       _.each pages, (page) ->
         page.unset('searchResult')
         page.unset('searchHtml')
         page.unset('searchTitle')
-        page.set('visible', not showingResults)
-        expandContainers(page, false, showingResults)
-      if pages? and showingResults
-        _.each results, (result) ->
-          resultId = result.id.replace(/@.*/, '')
-          snippet = result.headline
-          _.some pages, (page) ->
-            pageId = page.id.replace(/@.*/, '')
-            matched = (resultId == pageId)
-            if matched
-              page.set('visible', matched)
-              page.set('searchResult', snippet)
-              expandContainers(page, true, true)
-            return matched
-      @loadHighlightedPage()
+        page.set('visible', not handlingResults)
+        expandContainers(page, false, handlingResults)
+      if handlingResults
+        results = response.items ? []
+        if pages?
+          _.each results, (result) ->
+            resultId = result.id.replace(/@.*/, '')
+            snippet = result.headline
+            _.some pages, (page) ->
+              pageId = page.id.replace(/@.*/, '')
+              matched = (resultId == pageId)
+              if matched
+                page.set('visible', matched)
+                page.set('searchResult', snippet)
+                expandContainers(page, true, true)
+              return matched
+        @loadHighlightedPage()
       @render()
 
     loadHighlightedPage: ->
