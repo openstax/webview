@@ -20,6 +20,12 @@ define (require) ->
           return new Page(attrs)
     }]
 
+    introduction: ->
+      return unless @isCcap() and @isSection()
+      firstChild = @get('contents')?.models?[0]
+      return if firstChild.isSection()
+      firstChild
+
     getTotalLength: () ->
       contents = @get('contents')
       length = 0

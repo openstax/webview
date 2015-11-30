@@ -57,14 +57,22 @@ define (require) ->
     toggleContents: (e) ->
       @tocIsOpen = not @tocIsOpen
       @.trigger('tocIsOpen', @tocIsOpen)
+      if @tocIsOpen
+        for container in @model.get('currentPage').containers()
+          container.set('expanded', true)
       @updateToc()
 
     updateToc: ->
       button = @$el.find('.toggle.btn')
+      indicator = button.find('.open-indicator')
       if (@tocIsOpen)
         button.addClass('open')
+        indicator.removeClass('fa-plus')
+        indicator.addClass('fa-minus')
       else
         button.removeClass('open')
+        indicator.addClass('fa-plus')
+        indicator.removeClass('fa-minus')
 
     nextPage: (e) ->
       nextPage = @model.getNextPageNumber()

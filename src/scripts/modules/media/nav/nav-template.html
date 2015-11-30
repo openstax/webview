@@ -2,7 +2,11 @@
   <div class="media-nav{{#is status 'publishing'}} publishing{{/is}}">
     <div class="media-toolbar">
       {{#unless _hideProgress}}
-        <span class="toggle btn" role="button"><span class="fa fa-th-list"></span> Contents</span>
+        <span class="toggle btn" role="button">
+          <span class="fa fa-th-list"></span>
+           <span class="text">Contents</span>
+           <span class="fa fa-plus open-indicator"></span>
+         </span>
         <div class="searchbar">
           <span class="fa fa-search"></span>
           <input class="find form-control" type="search" placeholder="Search this book" value="{{searchTerm}}"/>

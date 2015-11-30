@@ -134,12 +134,12 @@ define (require) ->
     controlConceptCoachView: ->
       options = @getOptionsForCoach()
       options.mounter = $('.concept-coach-launcher > button').parent()[0]
-      @cc.setOptions(options)
+      @cc.setOptions?(options)
 
       {query} = linksHelper.getCurrentPathComponents()
       view = query['cc-view'] or 'close'
 
-      @cc.updateToView(view)
+      @cc.updateToView?(view)
       @cc.handleClose() if view is 'close'
 
     launchConceptCoach: (event) ->
