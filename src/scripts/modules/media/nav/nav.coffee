@@ -52,7 +52,7 @@ define (require) ->
       'click .toggle.btn': 'toggleContents'
       'click .back-to-top > a': 'backToTop'
       'keydown .searchbar input': 'handleSearchInput'
-      'click .searchbar > .fa-close': 'clearSearch'
+      'click .searchbar > .clear-search': 'clearSearch'
 
     toggleContents: (e) ->
       @tocIsOpen = not @tocIsOpen
@@ -111,13 +111,13 @@ define (require) ->
       @$el.find('.searchbar input').val(@searchTerm)
       @model.unset('searchResults')
       @$el.find('.searchbar > .fa').
-      removeClass('fa-close').
+      removeClass('fa-times-circle clear-search').
       addClass('fa-search')
 
     enableClearSearch: ->
       @$el.find('.searchbar > .fa').
       removeClass('fa-search').
-      addClass('fa-close')
+      addClass('fa-times-circle clear-search')
 
     handleSearchInput: (event) ->
       if (event.keyCode == 13 and event.target.value?)

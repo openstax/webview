@@ -55,6 +55,16 @@ define (require) ->
         return unless hits?
         s = if hits is 1 then '' else 's'
         "#{hits} page#{s} matched"
+      clearResults: () ->
+        hits = @model?.get('searchResults')?.total
+        return unless hits?
+        '''
+        <br>
+        <a class="clear-results" href="#">
+          <span class="fa fa-arrow-circle-left"></span>
+          Back to Table of Contents
+        </a>
+        '''
 
     regions:
       toc: '.toc'
@@ -62,6 +72,7 @@ define (require) ->
     events:
       'dragstart .toc [draggable]': 'onDragStart'
       'dragend .toc [draggable]': 'onDragEnd'
+      'click .clear-results': 'clearSearchResults'
 
     initialize: () ->
       super()
@@ -125,6 +136,10 @@ define (require) ->
               return matched
         @loadHighlightedPage()
       @render()
+
+    clearSearchResults: (event) ->
+      event.preventDefault()
+      @model.unset('searchResults')
 
     loadHighlightedPage: ->
       response = @model.get('searchResults')
