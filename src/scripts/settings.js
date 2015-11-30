@@ -67,8 +67,8 @@
 
       conceptCoach: {
         moduleUuids: {
-          'f10533ca-f803-490d-b935-88899941197f': ['introduction'],
-          '8QUzyvgD': ['introduction']
+          'f10533ca-f803-490d-b935-88899941197f': ['exercise'],
+          '8QUzyvgD': ['exercise'] // only long-codes are currently supported
         },
         url: 'https://tutor-qa.openstax.org'
       },
