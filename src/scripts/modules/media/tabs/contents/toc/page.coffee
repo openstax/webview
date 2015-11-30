@@ -40,8 +40,8 @@ define (require) ->
       e.stopPropagation()
 
       $link = $(e.currentTarget)
-      @model.get('book').setPage($link.data('page'))
       router.navigate $link.attr('href'), {trigger: false}, () => @trackNav()
+      @model.get('book').setPage($link.data('page'))
 
     trackNav: () ->
       tree = @collection.get('book') or @collection

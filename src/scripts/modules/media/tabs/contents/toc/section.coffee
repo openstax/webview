@@ -94,8 +94,8 @@ define (require) ->
         pageNumber = introPage.getPageNumber()
         info = {model: book, page: pageNumber}
         path = linksHelper.getPath('contents', info)
-        book.setPage(pageNumber)
         router.navigate(path)
+        book.setPage(pageNumber)
       else
         @toggleSection()
 
