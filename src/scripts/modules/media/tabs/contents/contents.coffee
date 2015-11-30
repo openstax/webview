@@ -58,7 +58,13 @@ define (require) ->
       clearResults: () ->
         hits = @model?.get('searchResults')?.total
         return unless hits?
-        '<br><a class="clear-results" href="#"><span class="fa fa-arrow-circle-left"></span>Back to Table of Contents</a>'
+        '''
+        <br>
+        <a class="clear-results" href="#">
+          <span class="fa fa-arrow-circle-left"></span>
+          Back to Table of Contents
+        </a>
+        '''
 
     regions:
       toc: '.toc'
@@ -132,7 +138,7 @@ define (require) ->
       @render()
 
     clearSearchResults: (event) ->
-      event.preventDefault();
+      event.preventDefault()
       @model.unset('searchResults')
 
     loadHighlightedPage: ->
