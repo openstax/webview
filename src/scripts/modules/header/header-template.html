@@ -3,9 +3,6 @@
     {{! Site Status View }}
   </div>
   <div class="login">
-    <div id="skiptocontent">
-      <a href="#main">skip to main content</a>
-    </div>
     {{#if results}}
       <div id="skiptoresults">
         <a href="#results">skip to results</a>
@@ -19,7 +16,6 @@
       {{#if url}}
         <li><a href="{{url}}" title="Switch to the CNX legacy web site">CNX Author | Legacy Site</a></li>
       {{/if}}
-      <li><a href="/donate" class="btn">Donate</a></li>
     </ul>
   </div>
 
@@ -41,6 +37,7 @@
         <ul class="nav nav-justified">
           <li {{#is page 'browse'}}class="active"{{/is}}><a href="/browse">Search</a></li>
           <li {{#is page 'about'}}class="active"{{/is}}><a href="/about">About Us</a></li>
+          <li {{#is page 'donate'}}class="active"{{/is}}><a href="/donate">Give</a></li>
           <li {{#is page 'workspace'}}class="active"{{/is}}><a href="/workspace">My Workspace</a></li>
           <li>
             <a href="http://www.rice.edu">

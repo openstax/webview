@@ -2,20 +2,20 @@
   <div class="media-nav{{#is status 'publishing'}} publishing{{/is}}">
     <div class="media-toolbar">
       {{#unless _hideProgress}}
-        <span class="toggle btn" role="button">
+        <button class="toggle btn" role="button" tabindex="1">
           <span class="fa fa-th-list"></span>
            <span class="text">Contents</span>
            <span class="fa fa-plus open-indicator"></span>
-         </span>
+         </button>
         <div class="searchbar">
           <span class="fa fa-search"></span>
-          <input class="find form-control" type="search" placeholder="Search this book" value="{{searchTerm}}"/>
+          <input class="find form-control" type="search" placeholder="Search this book" value="{{searchTerm}}" tabindex="2"/>
         </div>
       {{/unless}}
       <div class="media-navbar">
         <div class="book-nav" aria-busy="true">
           {{#if back}}
-            <a class="nav back" href="{{back}}" data-trigger="false">Back</a>
+            <a class="nav back" href="{{back}}" data-trigger="false"{{#unless _hideProgress}} tabindex="2"{{/unless}}>Back</a>
           {{else}}
             <div class="nav back disabled">Back</div>
           {{/if}}
@@ -31,7 +31,7 @@
           {{/unless}}
 
           {{#if next}}
-            <a class="nav next" href="{{next}}" data-trigger="false">Next</a>
+            <a class="nav next" href="{{next}}" data-trigger="false"{{#unless _hideProgress}} tabindex="2"{{/unless}}>Next</a>
           {{else}}
             <div class="nav next disabled">Next</div>
           {{/if}}
