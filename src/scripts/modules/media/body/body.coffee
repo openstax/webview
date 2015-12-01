@@ -263,7 +263,9 @@ define (require) ->
           # Hide Exercises for Concept Coach
           hiddenClasses = settings?.conceptCoach?.uuids?[@model.getUuid()] or []
           if hiddenClasses.length > 0
-            $temp.find(hiddenClasses.map((name) -> ".#{name}").join()).hide()
+            hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
+            $exercisesToHide = $temp.find(hiddenSelectors)
+            $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
