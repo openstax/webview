@@ -4,11 +4,6 @@
 .table-of-contents > .toc ul > li {
   border-bottom: 0.1rem solid @gray-lightest;
 
-  q {
-    display: block;
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
-  }
   a:hover {
     text-decoration: none;
   }
@@ -20,7 +15,6 @@
   > div {
     display: inline-block; // Prevent links from spilling into multiple-columns
     width: 100%;
-    padding: 0.5rem 0;
 
     // Add transparent borders to prevent jumping when DnD code adds a border
     border-top: 0.3rem solid transparent;
@@ -40,7 +34,6 @@
 
     > .name-wrapper {
       display: inline-block;
-      width: 90%;
       vertical-align: middle;
 
       small {
@@ -102,7 +95,7 @@
 
   > ul {
     display: none; // Hide content of sections unless expanded
-    font-size: 0.9em;
+    font-size: 0.95em;
 
     &[data-expanded="true"] {
       display: block;
