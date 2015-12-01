@@ -31,7 +31,7 @@ define (require) ->
         return @model.get('loaded')
       isCoach: ->
         moduleUUID = @model.getUuid()?.split('?')[0]
-        moduleUUID of settings.conceptCoach.moduleUuids
+        moduleUUID of settings.conceptCoach.uuids
 
     editable:
       '.media-body':
@@ -55,7 +55,7 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
       @listenTo(@model, 'change:currentPage.searchHtml', @render)
       @initializeConceptCoach() if @templateHelpers.isCoach.call(@)
-      @listenTo(@model, 'change:currentPage.loaded', @controlConceptCoachView) if @templateHelpers.isCoach.call(@)
+      @listenTo(@model, 'change:currentPage', @controlConceptCoachView) if @templateHelpers.isCoach.call(@)
 
     canonicalizePath: =>
       if @model.isBook()
@@ -132,15 +132,22 @@ define (require) ->
       _.clone(options)
 
     controlConceptCoachView: ->
+      currentPage = @model.get('currentPage')
+      return unless currentPage?.isValid()
+
       options = @getOptionsForCoach()
-      options.mounter = $('.concept-coach-launcher > button').parent()[0]
-      @cc.setOptions?(options)
+      isMountable = $('.concept-coach-launcher > button').parent()[0]?
+      waitToMount = if isMountable then 0 else 1000
 
       {query} = linksHelper.getCurrentPathComponents()
       view = query['cc-view'] or 'close'
-
-      @cc.updateToView?(view)
       @cc.handleClose() if view is 'close'
+
+      _.delay () =>
+        options.mounter ?= $('.concept-coach-launcher > button').parent()[0]
+        @cc.setOptions(options)
+        @cc.updateToView(view)
+      , waitToMount
 
     launchConceptCoach: (event) ->
       unless @cc.component?.isMounted()
@@ -254,9 +261,11 @@ define (require) ->
           # @fakeExercises($temp)
 
           # Hide Exercises for Concept Coach
-          hiddenClasses = settings?.conceptCoach?.moduleUuids?[@model.getUuid()] or []
+          hiddenClasses = settings?.conceptCoach?.uuids?[@model.getUuid()] or []
           if hiddenClasses.length > 0
-            $temp.find(hiddenClasses.map((name) -> ".#{name}").join()).hide()
+            hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
+            $exercisesToHide = $temp.find(hiddenSelectors)
+            $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
