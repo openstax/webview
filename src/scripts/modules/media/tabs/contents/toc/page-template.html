@@ -1,11 +1,15 @@
 {{#if visible}}
   <div {{#if editable}}draggable="true"{{/if}}>
     <span class="name-wrapper">
+      {{#unless isIntroduction}}
       {{#if chapter}}<span class="chapter-number">{{chapter}}</span>{{/if}}
+      {{/unless}}
       <a href="{{url}}" data-page="{{page}}" data-trigger="false" tabindex="1">
+        {{#unless isIntroduction}}
         <span class="title{{#if active}} active{{/if}}" data-depth="{{depth}}">
           {{title}}
         </span>
+        {{/unless}}
         {{#if searchResult}}
           <div><q>{{{searchResult}}}</q></div>
         {{/if}}

@@ -60,10 +60,9 @@ define (require) ->
             @regions.container.appendAs 'li', new TocSectionView
               model: node
           else
-            unless node is @model.introduction()
-              @regions.container.appendAs 'li', new TocPageView
-                model: node
-                collection: @model
+            @regions.container.appendAs 'li', new TocPageView
+              model: node
+              collection: @model
       @reflectIntroActive()
 
     updateActiveContainer: ->

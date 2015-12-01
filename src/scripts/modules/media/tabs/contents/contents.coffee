@@ -32,7 +32,11 @@ define (require) ->
           chapterNumber += 1
           pageNumber = 0
           previousChapter = chapter
-          chapter.set('chapter', chapterNumber)
+          # Chapters inside units get labeled "Chapter ##"
+          if chapter.get('book') is chapter.get('_parent')
+            chapter.set('chapter', chapterNumber)
+          else
+            chapter.set('chapter', "Chapter #{chapterNumber}.")
           page.set('chapter', chapterNumber)
         if pageNumber > 0
           page.set('chapter', "#{chapterNumber}.#{pageNumber}")
