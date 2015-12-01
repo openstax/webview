@@ -29,8 +29,8 @@ define (require) ->
   headerController = ($el, selector) ->
     threshold = window.innerHeight / 5
     fudge = 8
-    hideAbove = threshold + fudge
-    showBelow = threshold
+    hideAbove = threshold
+    showBelow = fudge
     update = (event) ->
       return () ->
         Backbone.trigger 'window:resize'
