@@ -23,26 +23,24 @@ define (require) ->
 
   ###
   Returns an event handler that will handle hiding and showing
-  items based on the scroll direction. Attach the handler to
+  items based on the scroll position. Attach the handler to
   a scroll event to hook it up.
   ###
   headerController = ($el, selector) ->
-    oldTop = 0
-    inTransition = false
+    threshold = window.innerHeight / 5
+    fudge = 8
+    hideAbove = threshold + fudge
+    showBelow = threshold
     update = (event) ->
       return () ->
-        oldTop = $(event.target).scrollTop()
         Backbone.trigger 'window:resize'
     return (event) ->
       $hideables = $el.find(selector)
       top = $(event.target).scrollTop()
-      return unless Math.abs(top - oldTop) > 5
-      if (top < oldTop and not $hideables.is(":visible"))
+      if (top < showBelow and not $hideables.is(":visible"))
         $hideables.show(300, update(event))
-      else if (top > oldTop and $hideables.is(":visible"))
+      else if (top > hideAbove and $hideables.is(":visible"))
         $hideables.hide(300, update(event))
-      else
-        oldTop = top
 
   return class MediaView extends BaseView
     key = []
