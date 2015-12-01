@@ -26,7 +26,7 @@ define (require) ->
   items based on the scroll position. Attach the handler to
   a scroll event to hook it up.
   ###
-  headerController = ($el, selector) ->
+  headerController = ($el, selector, compactSelector) ->
     threshold = window.innerHeight / 5
     fudge = 8
     hideAbove = threshold
@@ -36,11 +36,14 @@ define (require) ->
         Backbone.trigger 'window:resize'
     return (event) ->
       $hideables = $el.find(selector)
+      $compactables = $el.find(compactSelector)
       top = $(event.target).scrollTop()
       if (top < showBelow and not $hideables.is(":visible"))
         $hideables.show(300, update(event))
+        $compactables.removeClass('compact')
       else if (top > hideAbove and $hideables.is(":visible"))
         $hideables.hide(300, update(event))
+        $compactables.addClass('compact')
 
   return class MediaView extends BaseView
     key = []
@@ -107,9 +110,9 @@ define (require) ->
       @mainContent = windowWithSidebar.regions.main
 
       hideThese = mediaTitleView.$el
-      headerHandler = headerController(hideThese, '.share')
+      headerHandler = headerController(hideThese, '.share', '.media-title')
       $('.fullsize-container .main').scroll(headerHandler)
-      mainHeaderHandler = headerController($('#header'), '>div')
+      mainHeaderHandler = headerController($('#header'), '>div', '.media-title')
       $('.fullsize-container .main').scroll(mainHeaderHandler)
 
     updateSummary: () ->
