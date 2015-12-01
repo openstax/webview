@@ -3,9 +3,6 @@
     {{! Site Status View }}
   </div>
   <div class="login">
-    <div id="skiptocontent">
-      <a href="#main">skip to main content</a>
-    </div>
     {{#if results}}
       <div id="skiptoresults">
         <a href="#results">skip to results</a>
@@ -15,13 +12,10 @@
       {{#if username}}
         <li><a data-bypass="true" href="{{accountProfile}}">Account Profile</a></li>
         <li><a data-bypass="true" href="/logout">Log Out {{username}}</a></li>
-      {{else}}
-        <li><a data-bypass="true" href="/login">Login</a></li>
       {{/if}}
       {{#if url}}
         <li><a href="{{url}}" title="Switch to the CNX legacy web site">CNX Author | Legacy Site</a></li>
       {{/if}}
-      <li><a href="/donate" class="btn">Donate</a></li>
     </ul>
   </div>
 
@@ -41,9 +35,9 @@
       {{! Collect the nav links, forms, and other content for toggling }}
       <div class="collapse navbar-collapse" id="page-nav">
         <ul class="nav nav-justified">
-          <li {{#is page 'home'}}class="active"{{/is}}><a href="/">Home</a></li>
-          <li {{#is page 'contents'}}class="active"{{/is}}><a href="/contents">Search</a></li>
+          <li {{#is page 'browse'}}class="active"{{/is}}><a href="/browse">Search</a></li>
           <li {{#is page 'about'}}class="active"{{/is}}><a href="/about">About Us</a></li>
+          <li {{#is page 'donate'}}class="active"{{/is}}><a href="/donate">Give</a></li>
           <li {{#is page 'workspace'}}class="active"{{/is}}><a href="/workspace">My Workspace</a></li>
           <li>
             <a href="http://www.rice.edu">

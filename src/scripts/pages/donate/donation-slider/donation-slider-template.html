@@ -3,12 +3,12 @@
     <input type="range" role="slider" class="form-control" name="donation"
      aria-label="Donation" aria-live="off"
      aria-valuemin="{{minDonation}}" aria-valuemax="{{maxDonation}}" aria-valuenow="{{donation}}"
-     min="{{min}}" max="{{max}}" value="{{value}}" />
+     min="{{min}}" max="{{max}}" value="{{value}}" tabindex="1"/>
     <span class="donation-value">${{donation}}</span>
     <span class="donation-message">{{message}}</span>
   </div>
 
-  <button type="submit" class="btn btn-default">Donate Now</button>
+  <button type="submit" class="btn btn-default" tabindex="1">Donate Now</button>
 
   {{#if uuid}}
     <div class="centered">

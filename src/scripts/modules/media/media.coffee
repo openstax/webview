@@ -26,7 +26,7 @@ define (require) ->
   items based on the scroll direction. Attach the handler to
   a scroll event to hook it up.
   ###
-  headerController = ($hideables) ->
+  headerController = ($el, selector) ->
     oldTop = 0
     inTransition = false
     update = (event) ->
@@ -34,6 +34,7 @@ define (require) ->
         oldTop = $(event.target).scrollTop()
         Backbone.trigger 'window:resize'
     return (event) ->
+      $hideables = $el.find(selector)
       top = $(event.target).scrollTop()
       return unless Math.abs(top - oldTop) > 5
       if (top < oldTop and not $hideables.is(":visible"))
@@ -102,11 +103,16 @@ define (require) ->
       windowWithSidebar.regions.sidebar.append(tocView)
       mainPage.regions.main.append(new MediaBodyView({model: @model}))
       mainPage.regions.main.append(new MediaFooterView({model: @model}))
-      mainPage.regions.main.append(new MediaNavView({model: @model, hideProgress: true, mediaParent: @}))
+      footerNav = new MediaNavView({model: @model, hideProgress: true, mediaParent: @})
+      mainPage.regions.main.append(footerNav)
+      footerNav.$el.addClass('footer-nav')
       @mainContent = windowWithSidebar.regions.main
 
-      headerHandler = headerController(mediaTitleView.$el)
+      hideThese = mediaTitleView.$el
+      headerHandler = headerController(hideThese, '.share')
       $('.fullsize-container .main').scroll(headerHandler)
+      mainHeaderHandler = headerController($('#header'), '>div')
+      $('.fullsize-container .main').scroll(mainHeaderHandler)
 
     updateSummary: () ->
       abstract = @model.get('abstract')

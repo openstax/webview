@@ -52,19 +52,27 @@ define (require) ->
       'click .toggle.btn': 'toggleContents'
       'click .back-to-top > a': 'backToTop'
       'keydown .searchbar input': 'handleSearchInput'
-      'click .searchbar > .fa-close': 'clearSearch'
+      'click .searchbar > .clear-search': 'clearSearch'
 
     toggleContents: (e) ->
       @tocIsOpen = not @tocIsOpen
       @.trigger('tocIsOpen', @tocIsOpen)
+      if @tocIsOpen
+        for container in @model.get('currentPage').containers()
+          container.set('expanded', true)
       @updateToc()
 
     updateToc: ->
       button = @$el.find('.toggle.btn')
+      indicator = button.find('.open-indicator')
       if (@tocIsOpen)
         button.addClass('open')
+        indicator.removeClass('fa-plus')
+        indicator.addClass('fa-minus')
       else
         button.removeClass('open')
+        indicator.addClass('fa-plus')
+        indicator.removeClass('fa-minus')
 
     nextPage: (e) ->
       nextPage = @model.getNextPageNumber()
@@ -103,13 +111,13 @@ define (require) ->
       @$el.find('.searchbar input').val(@searchTerm)
       @model.unset('searchResults')
       @$el.find('.searchbar > .fa').
-      removeClass('fa-close').
+      removeClass('fa-times-circle clear-search').
       addClass('fa-search')
 
     enableClearSearch: ->
       @$el.find('.searchbar > .fa').
       removeClass('fa-search').
-      addClass('fa-close')
+      addClass('fa-times-circle clear-search')
 
     handleSearchInput: (event) ->
       if (event.keyCode == 13 and event.target.value?)

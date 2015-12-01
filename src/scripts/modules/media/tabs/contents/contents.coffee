@@ -6,40 +6,39 @@ define (require) ->
   template = require('hbs!./contents-template')
   require('less!./contents')
 
-  cumulativeChapters = []
-  numberChapters = (toc, depth=0) ->
-    sectionNumber = 0
-    skippedIntro = false
-    for item in toc
-      isSection = not item.get('contents')?
-      isCcap = (item.get('book')?.get('printStyle') ? '').match(/^ccap-/)?
-      if isSection
-        title = item.get('title')
-        atTopLevel = depth == 0
-        chapterNumber = cumulativeChapters[depth - 1]
-        if not isCcap
-          chapterNumber = cumulativeChapters.slice(0,depth).join('.')
-          sectionNumber = cumulativeChapters[depth] ? 0
-        else if not atTopLevel
-          if sectionNumber > 0
-            cumulativeChapters[depth] = sectionNumber
-            item.set('chapter', "#{chapterNumber}.#{sectionNumber}")
-          sectionNumber += 1
-      else
-        if cumulativeChapters[depth]?
-          cumulativeChapters[depth] += 1
+  basicNumbering = (nodes, parentNumber) ->
+    for node, index in nodes
+      chapterNumber =
+        if parentNumber?
+          "#{parentNumber}.#{index+1}"
         else
-          cumulativeChapters[depth] = 1
-        contentsModels = item.get('contents')?.models
-        if isCcap
-          chapterNumber = cumulativeChapters[depth]
-        else
-          cumulativeChapters[depth + 1] = 0
-          chapterNumber = cumulativeChapters.slice(0,depth+1).join('.')
-        numberChapters(contentsModels, depth+1) if contentsModels?
-        item.set('chapter', chapterNumber)
+          index+1
+      node.set('chapter', chapterNumber)
+      if node.isSection()
+        childNodes = node.get('contents')?.models
+        basicNumbering(childNodes, chapterNumber) if childNodes?
 
-  allPages = (nodes, collection) ->
+  continuousNumberChapters = (nodes) ->
+    pages = allPages(nodes)
+    previousChapter = ''
+    chapterNumber = 0
+    pageNumber = 0
+    for page in pages
+      chapter = page.get('_parent')
+      if chapter? and chapter.isSection()
+        if chapter == previousChapter
+          pageNumber += 1
+        else
+          chapterNumber += 1
+          pageNumber = 0
+          previousChapter = chapter
+          chapter.set('chapter', chapterNumber)
+          page.set('chapter', chapterNumber)
+        if pageNumber > 0
+          page.set('chapter', "#{chapterNumber}.#{pageNumber}")
+
+
+  allPages = (nodes, collection=[]) ->
     _.each nodes, (node) ->
       if node.isSection()
         children = node.get('contents').models
@@ -50,6 +49,22 @@ define (require) ->
 
   return class ContentsView extends BaseView
     template: template
+    templateHelpers:
+      resultCount: () ->
+        hits = @model?.get('searchResults')?.total
+        return unless hits?
+        s = if hits is 1 then '' else 's'
+        "#{hits} page#{s} matched"
+      clearResults: () ->
+        hits = @model?.get('searchResults')?.total
+        return unless hits?
+        '''
+        <br>
+        <a class="clear-results" href="#">
+          <span class="fa fa-arrow-circle-left"></span>
+          Back to Table of Contents
+        </a>
+        '''
 
     regions:
       toc: '.toc'
@@ -57,10 +72,11 @@ define (require) ->
     events:
       'dragstart .toc [draggable]': 'onDragStart'
       'dragend .toc [draggable]': 'onDragEnd'
+      'click .clear-results': 'clearSearchResults'
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable removeNode moveNode', @render)
+      @listenTo(@model, 'change:editable removeNode moveNode change:currentPage', @render)
       @listenTo(@model, 'change:contents', @processPages)
       @listenTo(@model, 'change:searchResults', @handleSearchResults)
       @listenTo(@model, 'change:currentPage', @loadHighlightedPage)
@@ -77,46 +93,53 @@ define (require) ->
     processPages: ->
       nodes = @model.get('contents')?.models
       if nodes?
-        cumulativeChapters = []
-        numberChapters(nodes)
-        @allPages = []
-        allPages(nodes, @allPages)
+        isCcap = nodes[0].isCcap()
+        if isCcap
+          sections = nodes.filter((node) -> node.isSection())
+          basicNumbering(sections)
+          continuousNumberChapters(sections)
+        else
+          basicNumbering(nodes)
+        @allPages = allPages(nodes)
         @render()
 
-    expandContainers: (page, isExpanded, showingResults) ->
-      container = page.get('_parent')
-      visible = isExpanded or not showingResults
-      while container.isSection()
+    expandContainers: (page, isExpanded, handlingResults) ->
+      visible = isExpanded or not handlingResults
+      for container in page.containers()
         container.set('expanded', isExpanded)
         container.set('visible', visible)
-        container = container.get('_parent')
 
     handleSearchResults: ->
+      response = @model.get('searchResults')
+      handlingResults = response?
       expandContainers = @expandContainers
       pages = @allPages
-      response = @model.get('searchResults')
-      results = response?.items
-      showingResults = results?.length > 0
       _.each pages, (page) ->
         page.unset('searchResult')
         page.unset('searchHtml')
         page.unset('searchTitle')
-        page.set('visible', not showingResults)
-        expandContainers(page, false, showingResults)
-      if pages? and showingResults
-        _.each results, (result) ->
-          resultId = result.id.replace(/@.*/, '')
-          snippet = result.headline
-          _.some pages, (page) ->
-            pageId = page.id.replace(/@.*/, '')
-            matched = (resultId == pageId)
-            if matched
-              page.set('visible', matched)
-              page.set('searchResult', snippet)
-              expandContainers(page, true, true)
-            return matched
-      @loadHighlightedPage()
+        page.set('visible', not handlingResults)
+        expandContainers(page, false, handlingResults)
+      if handlingResults
+        results = response.items ? []
+        if pages?
+          _.each results, (result) ->
+            resultId = result.id.replace(/@.*/, '')
+            snippet = result.headline
+            _.some pages, (page) ->
+              pageId = page.id.replace(/@.*/, '')
+              matched = (resultId == pageId)
+              if matched
+                page.set('visible', matched)
+                page.set('searchResult', snippet)
+                expandContainers(page, true, true)
+              return matched
+        @loadHighlightedPage()
       @render()
+
+    clearSearchResults: (event) ->
+      event.preventDefault()
+      @model.unset('searchResults')
 
     loadHighlightedPage: ->
       response = @model.get('searchResults')

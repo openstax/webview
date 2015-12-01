@@ -35,7 +35,7 @@ define (require) ->
           @set('error', false)
           if @isBook()
             if @get('contents').length
-              @setPage(options.page or 1) # Default to page 1
+              @setPage(options.page or @defaultPage())
           else
             @set('active', true)
         .always () =>
@@ -43,6 +43,12 @@ define (require) ->
 
         .fail (model, response, options) =>
           @set('error', response?.status or model?.status or 9000)
+
+    defaultPage: ->
+      result = 1
+      if @isBook() and @isCcap()
+        result += 1 while @getPage(result).get('title').match(/^Preface/)
+      return result
 
     parse: (response, options = {}) ->
       super(arguments...)

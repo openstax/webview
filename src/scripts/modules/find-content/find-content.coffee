@@ -21,6 +21,7 @@ define (require) ->
       @listenTo(@collection, 'reset', @render)
 
     onRender: () ->
+      @$el.addClass('find-content')
       @updateSearchBar()
 
     selectSubject: (e) ->

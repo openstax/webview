@@ -31,7 +31,7 @@ define (require) ->
         return @model.get('loaded')
       isCoach: ->
         moduleUUID = @model.getUuid()?.split('?')[0]
-        _.contains(settings.conceptCoach.moduleUuids, moduleUUID)
+        moduleUUID of settings.conceptCoach.moduleUuids
 
     editable:
       '.media-body':
@@ -261,13 +261,9 @@ define (require) ->
           # @fakeExercises($temp)
 
           # Hide Exercises for Concept Coach
-          if settings.hideExercises.indexOf(@model.getUuid())
-            hiddenClasses = []
-            processingInstructions = @$el.find('.media-body').find('cnx-pi[data-hide]')
-            _.each processingInstructions, (instruction) ->
-              hiddenClasses.concat(instruction.text().split(','))
-            if hiddenClasses.length > 0
-              $(hidddenClasses.join()).hide()
+          hiddenClasses = settings?.conceptCoach?.moduleUuids?[@model.getUuid()] or []
+          if hiddenClasses.length > 0
+            $temp.find(hiddenClasses.map((name) -> ".#{name}").join()).hide()
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))

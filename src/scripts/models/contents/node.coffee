@@ -17,9 +17,8 @@ define (require) ->
 
   return class Node extends Backbone.AssociatedModel
     eTag: null
-    defaults: {
+    defaults:
       visible: true
-    }
 
     # url: () -> "#{SERVER}/contents/#{@id}"
     url: () ->
@@ -133,6 +132,14 @@ define (require) ->
 
       return response
 
+    containers: ->
+      result = []
+      parent = @get('_parent')
+      while parent.isSection()
+        result.push(parent)
+        parent = parent.get('_parent')
+      result
+
     toJSON: (options = {}) ->
       results = super(arguments...)
 
@@ -241,6 +248,10 @@ define (require) ->
       return editable
 
     isInBook: () -> !!@get('book')
+
+    isCcap: ->
+      book = if @isBook() then @ else @get('book')
+      book?.get('printStyle')?.match(/^ccap-/)?
 
     canEdit: () ->
       if @get('loaded') and not @isDraft() and @get('canPublish') isnt undefined
