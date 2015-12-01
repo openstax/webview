@@ -31,7 +31,7 @@ define (require) ->
         return @model.get('loaded')
       isCoach: ->
         moduleUUID = @model.getUuid()?.split('?')[0]
-        moduleUUID of settings.conceptCoach.moduleUuids
+        moduleUUID of settings.conceptCoach.uuids
 
     editable:
       '.media-body':
@@ -261,7 +261,7 @@ define (require) ->
           # @fakeExercises($temp)
 
           # Hide Exercises for Concept Coach
-          hiddenClasses = settings?.conceptCoach?.moduleUuids?[@model.getUuid()] or []
+          hiddenClasses = settings?.conceptCoach?.uuids?[@model.getUuid()] or []
           if hiddenClasses.length > 0
             $temp.find(hiddenClasses.map((name) -> ".#{name}").join()).hide()
 
