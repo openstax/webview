@@ -31,11 +31,11 @@
         border-bottom: 0.3rem solid transparent;
 
         &.before {
-          border-top: 0.3rem solid #6ea244;
+          border-top: 0.3rem solid @brand-secondary-dim;
         }
 
         &.after {
-          border-bottom: 0.3rem solid #6ea244;
+          border-bottom: 0.3rem solid @brand-secondary-dim;
         }
 
         &.insert {
@@ -55,6 +55,16 @@
           .active {
             font-weight: bold;
             color: @brand-secondary;
+          }
+
+          > a:hover {
+            text-decoration: none;
+            > .title {
+              color: @brand-secondary-dim;
+            }
+          }
+          &.opens-introduction:hover {
+            color: @brand-secondary-dim;
           }
         }
 

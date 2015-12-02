@@ -54,10 +54,17 @@ define (require) ->
       'keydown .searchbar input': 'handleSearchInput'
       'click .searchbar > .clear-search': 'clearSearch'
 
+    closeAllContainers: (nodes = @model.get('contents').models) =>
+      for node in nodes
+        if node.isSection()
+          node.set('expanded', false)
+          @closeAllContainers(node.get('contents').models)
+
     toggleContents: (e) ->
       @tocIsOpen = not @tocIsOpen
       @.trigger('tocIsOpen', @tocIsOpen)
       if @tocIsOpen
+        @closeAllContainers() unless @model.get('searchResults')
         for container in @model.get('currentPage').containers()
           container.set('expanded', true)
       @updateToc()
