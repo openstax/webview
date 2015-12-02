@@ -136,9 +136,11 @@ define (require) ->
       expandContainers = @expandContainers
       pages = @allPages
       _.each pages, (page) ->
+        #! Need to refactor this into a single object
         page.unset('searchResult')
         page.unset('searchHtml')
         page.unset('searchTitle')
+        page.unset('searchResultCount')
         page.set('visible', not handlingResults)
         expandContainers(page, false, handlingResults)
       if handlingResults
@@ -146,13 +148,15 @@ define (require) ->
         if pages?
           _.each results, (result) ->
             resultId = result.id.replace(/@.*/, '')
-            snippet = result.headline
+            snippet = result.snippet ? result.headline # backward-compatible
+            matchCount = result.matches
             _.some pages, (page) ->
               pageId = page.id.replace(/@.*/, '')
               matched = (resultId == pageId)
               if matched
                 page.set('visible', matched)
                 page.set('searchResult', snippet)
+                page.set('searchResultCount', matchCount)
                 expandContainers(page, true, true)
               return matched
         @loadHighlightedPage()
