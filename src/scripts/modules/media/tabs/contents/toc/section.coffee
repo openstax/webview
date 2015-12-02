@@ -17,8 +17,7 @@ define (require) ->
     itemViewContainer: '> ul'
 
     events:
-      'click > div > .section-wrapper': 'toggleSection'
-      'click > div > .section-wrapper > .title': 'toggleOrLoad'
+      'click > div > .section-wrapper': 'toggleOrLoad'
       'keydown > div > .section-wrapper': 'toggleSectionWithKeyboard'
       'click > div > .remove': 'removeNode'
       'click > div > .edit': 'editNode'
@@ -60,10 +59,9 @@ define (require) ->
             @regions.container.appendAs 'li', new TocSectionView
               model: node
           else
-            unless node is @model.introduction()
-              @regions.container.appendAs 'li', new TocPageView
-                model: node
-                collection: @model
+            @regions.container.appendAs 'li', new TocPageView
+              model: node
+              collection: @model
       @reflectIntroActive()
 
     updateActiveContainer: ->
@@ -86,23 +84,25 @@ define (require) ->
         @toggleSection()
         @$el.find('> div > .section-wrapper').focus()
 
+    # If already open, just close
+    # If closed, open AND
     toggleOrLoad: (e) ->
       e.stopPropagation()
       introPage = @model.introduction()
-      if introPage
+      if introPage and not @model.get('expanded')
         book = @model.get('book')
         pageNumber = introPage.getPageNumber()
         info = {model: book, page: pageNumber}
         path = linksHelper.getPath('contents', info)
         router.navigate(path)
         book.setPage(pageNumber)
-      else
-        @toggleSection()
+      @toggleSection()
 
     reflectIntroActive: ->
       introPage = @model.introduction()
       return unless introPage
       $title = @$el.find('> div > span > .title')
+      $title.parent().addClass('opens-introduction')
       activePage = @model.get('book').get('currentPage')
       if @model.introduction().get('active')
         $title.addClass('active')

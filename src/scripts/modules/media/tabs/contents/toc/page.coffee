@@ -10,13 +10,15 @@ define (require) ->
     template: template
     templateHelpers: () ->
       pageNumber = @content.getPageNumber(@model)
-
+      isIntroduction =  @model.get('_parent')?.introduction?() is @model
+      searchResult = @model.get('searchResult')
       return {
         page: pageNumber
         url: linksHelper.getPath('contents', {model: @content, page: pageNumber})
         editable: @editable
-        searchResult: @model.get('searchResult')
-        visible: @model.get('visible')
+        isIntroduction: isIntroduction
+        searchResult: searchResult
+        visible: @model.get('visible') and (not isIntroduction or searchResult)
       }
 
     tagName: 'li'

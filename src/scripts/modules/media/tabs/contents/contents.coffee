@@ -32,7 +32,11 @@ define (require) ->
           chapterNumber += 1
           pageNumber = 0
           previousChapter = chapter
-          chapter.set('chapter', chapterNumber)
+          # Chapters inside units get labeled "Chapter ##"
+          if chapter.get('book') is chapter.get('_parent')
+            chapter.set('chapter', chapterNumber)
+          else
+            chapter.set('chapter', "Chapter #{chapterNumber}.")
           page.set('chapter', chapterNumber)
         if pageNumber > 0
           page.set('chapter', "#{chapterNumber}.#{pageNumber}")
@@ -53,17 +57,34 @@ define (require) ->
       resultCount: () ->
         hits = @model?.get('searchResults')?.total
         return unless hits?
-        s = if hits is 1 then '' else 's'
-        "#{hits} page#{s} matched"
+        if hits is 0
+          '''
+          <div>No matching results were found.</div>
+          <div>
+          <b>Search Suggestions:</b>
+          <ul>
+            <li>Check spelling.</li>
+            <li>Try more general words.</li>
+            <li>Try different words that mean the
+              same thing.</li>
+          </ul>
+          </div>
+          '''
+        else
+          s = if hits is 1 then '' else 's'
+          """
+          <div>#{hits} page#{s} matched</div>
+          """
       clearResults: () ->
         hits = @model?.get('searchResults')?.total
         return unless hits?
         '''
-        <br>
+        <div>
         <a class="clear-results" href="#">
           <span class="fa fa-arrow-circle-left"></span>
           Back to Table of Contents
         </a>
+        </div>
         '''
 
     regions:
