@@ -12,12 +12,14 @@ define (require) ->
       pageNumber = @content.getPageNumber(@model)
       isIntroduction =  @model.get('_parent')?.introduction?() is @model
       searchResult = @model.get('searchResult')
+      occurrences = @model.get('searchResultCount')
       return {
         page: pageNumber
         url: linksHelper.getPath('contents', {model: @content, page: pageNumber})
         editable: @editable
         isIntroduction: isIntroduction
         searchResult: searchResult
+        occurrences: occurrences
         visible: @model.get('visible') and (not isIntroduction or searchResult)
       }
 

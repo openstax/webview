@@ -11,7 +11,10 @@
         </span>
         {{/unless}}
         {{#if searchResult}}
-          <div class="snippet"><q>{{{searchResult}}}</q></div>
+          <div class="snippet">
+            {{#if occurrences}}<div>({{occurrences}} occurrences)</div>{{/if}}
+            <q>{{{searchResult}}}</q>
+          </div>
         {{/if}}
       </a>
       {{~#if changed}}
