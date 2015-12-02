@@ -84,24 +84,27 @@ define (require) ->
         @toggleSection()
         @$el.find('> div > .section-wrapper').focus()
 
-    # If already open, just close
-    # If closed, open AND
+    # Interim solution: link navigates and opens, does not close
+    # Arrows open/close, do not navigate
     toggleOrLoad: (e) ->
       e.stopPropagation()
       introPage = @model.introduction()
-      if introPage and not @model.get('expanded')
+      insideOpener = $(e.target).parent().hasClass('opens-introduction')
+      if insideOpener and introPage
         book = @model.get('book')
         pageNumber = introPage.getPageNumber()
         info = {model: book, page: pageNumber}
         path = linksHelper.getPath('contents', info)
         router.navigate(path)
         book.setPage(pageNumber)
-      @toggleSection()
+        @model.set('expanded', true)
+      else
+        @toggleSection()
 
     reflectIntroActive: ->
       introPage = @model.introduction()
       return unless introPage
-      $title = @$el.find('> div > span > .title')
+      $title = @$el.find('> div > span > span > .title')
       $title.parent().addClass('opens-introduction')
       activePage = @model.get('book').get('currentPage')
       if @model.introduction().get('active')

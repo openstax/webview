@@ -56,15 +56,6 @@
       cursor: pointer;
     }
 
-    &[data-expandable="true"] .name-wrapper::before {
-      font-size: 170%;
-      content: "\25b8"; // ▸
-    }
-
-    &[data-expanded="true"] .name-wrapper::before {
-      content: "\25be"; // ▾
-    }
-
     &:hover > .remove, &:hover > .edit {
       opacity: 1;
     }

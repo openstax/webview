@@ -59,18 +59,21 @@
 
           > a:hover {
             text-decoration: none;
-            > .title {
-              color: @brand-secondary-dim;
-            }
           }
           &:not(.opens-introduction) {
             color: black;
             &:hover {
-              color: gray;
+              :not(.chapter-number),
+              :not(.title) {
+                color: gray;
+              }
             }
           }
-          &.opens-introduction:hover {
-            color: @brand-secondary-dim;
+          > .opens-introduction:hover {
+            > .chapter-number,
+            > .title {
+                color: @brand-secondary-dim;
+            }
           }
         }
 
