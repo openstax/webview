@@ -60,15 +60,6 @@ define (require) ->
         if hits is 0
           '''
           <div>No matching results were found.</div>
-          <div>
-          <b>Search Suggestions:</b>
-          <ul>
-            <li>Check spelling.</li>
-            <li>Try more general words.</li>
-            <li>Try different words that mean the
-              same thing.</li>
-          </ul>
-          </div>
           '''
         else
           s = if hits is 1 then '' else 's'

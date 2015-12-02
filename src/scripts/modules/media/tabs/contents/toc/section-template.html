@@ -3,9 +3,11 @@
     <div {{#if editable}}draggable="true"{{/if}} data-expandable="true" {{#if expanded}}data-expanded="true"{{/if}}>
       <span class="section-wrapper name-wrapper" tabindex="1"
        {{#if expanded}}aria-expanded="true"{{else}}aria-expanded="false"{{/if}}>
-       {{#if chapter}}<span class="chapter-number">{{chapter}}</span>{{/if}}
-        <span class="title section">
-          {{title}}
+       <span>
+         {{#if chapter}}<span class="chapter-number">{{chapter}}</span>{{/if}}
+          <span class="title section">
+            {{title}}
+          </span>
         </span>
       </span>
 
