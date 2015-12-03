@@ -185,6 +185,12 @@
       select2: {
         deps: ['jquery', 'css!../../bower_components/select2/select2'],
         exports: 'Select2'
+      },
+
+      // concept-coach
+      OpenStaxReactComponents: {
+        deps: ['css!../../bower_components/concept-coach/assets/main.min'],
+        exports: 'OpenStaxReactComponents'
       }
     },
 
