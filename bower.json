@@ -23,7 +23,7 @@
     "require-handlebars-plugin": "1.0.0",
     "aloha-editor": "oerpub/Aloha-Editor#master",
     "select2": "3.5.4",
-    "concept-coach": "openstax/concept-coach#415f90b296c52b0e9f5ad2e75313c59d779f2d91"
+    "concept-coach": "openstax/concept-coach#ac39b81eef885f428209fcc036ba1d31ea331cd3"
   },
   "devDependencies": {
     "chai": "3.2.0",

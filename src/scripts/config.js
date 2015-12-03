@@ -189,7 +189,7 @@
 
       // concept-coach
       OpenStaxReactComponents: {
-        deps: ['css!../../bower_components/concept-coach/assets/main.min'],
+        deps: ['css!../../bower_components/concept-coach/assets/main'],
         exports: 'OpenStaxReactComponents'
       }
     },
