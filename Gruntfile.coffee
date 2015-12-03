@@ -147,6 +147,7 @@ module.exports = (grunt) ->
               'cs!pages/home/home'
               'cs!pages/contents/contents'
               'cs!pages/search/search'
+              'cs!pages/browse-content/browse-content'
               'cs!pages/workspace/workspace'
               'cs!pages/about/about'
               'cs!pages/tos/tos'
