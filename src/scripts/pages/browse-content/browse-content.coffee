@@ -17,13 +17,11 @@ define (require) ->
     onRender: ->
       super()
       @$el.addClass('browse-content')
-      findContentView = new FindContentView()
-      findContentView.$el.insertBefore(@$el)
-      findContentView.render()
-
 
   return class BrowseContentView extends MainPageView
 
     onRender: () ->
       super()
-      @regions.main.show(new InnerView(@options))
+      findContentView = new FindContentView()
+      @regions.main.show(findContentView)
+      @regions.main.append(new InnerView(@options))
