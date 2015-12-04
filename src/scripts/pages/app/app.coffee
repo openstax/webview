@@ -18,6 +18,8 @@ define (require) ->
     initialize: () ->
       super()
       @$el.html(@template)
+      $(window).resize(->
+        Backbone.trigger 'window:resize')
 
     render: (page, options) ->
       queryString = linksHelper.serializeQuery(location.search)

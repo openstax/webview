@@ -78,7 +78,6 @@ define (require) ->
       mainPage = new MainPageView()
       windowWithSidebar.regions.main.append(mainPage)
       mainPage.regions.main.append(new MediaHeaderView({model: @model}))
-      navView.on('tocIsOpen', windowWithSidebar.open)
       windowWithSidebar.regions.sidebar.append(tocView)
       mainPage.regions.main.append(new MediaBodyView({model: @model}))
       mainPage.regions.main.append(new MediaFooterView({model: @model}))
@@ -91,32 +90,50 @@ define (require) ->
       $titleArea = -> mediaTitleView.$el.find('.media-title')
       $toc = tocView.$el
       isPinned = false
-      setTocHeight = ->
+      setTocHeight = _.throttle(->
+        pHeight = $pinnable.height()
+        $toc.css('top', "#{pHeight}px")
         winHeight = window.innerHeight
         tocTop = $toc.position().top
         $toc.height("#{winHeight - tocTop}px")
+      , 80)
       adjustMainMargin = (height) ->
         mainPage.regions.main.$el.css('margin-top', "#{height}px")
+      pinNavBar = ->
+        $pinnable.addClass('pinned')
+        $titleArea().addClass('compact')
+        $toc.addClass('pinned')
+        isPinned = true
+        adjustMainMargin($pinnable.height())
+        setTocHeight()
+      unpinNavBar = ->
+        $pinnable.removeClass('pinned')
+        $titleArea().removeClass('compact')
+        $toc.removeClass('pinned')
+        isPinned = false
+        adjustMainMargin(0)
+        setTocHeight()
+        pinnableTop = $pinnable.offset().top
+
+      Backbone.on('window:resize', setTocHeight)
       handleHeaderViewPinning = _.throttle(->
         top = $(window).scrollTop()
         if top > pinnableTop
           if not isPinned
-            $pinnable.addClass('pinned')
-            $titleArea().addClass('compact')
-            $toc.addClass('pinned')
-            isPinned = true
-            adjustMainMargin($pinnable.height())
-            setTocHeight()
+            pinNavBar()
         else if isPinned
-          $pinnable.removeClass('pinned')
-          $titleArea().removeClass('compact')
-          $toc.removeClass('pinned')
-          isPinned = false
-          setTocHeight()
-          adjustMainMargin(0)
-          pinnableTop = $pinnable.offset().top
+          unpinNavBar()
       , 80)
       $(window).scroll(handleHeaderViewPinning)
+      navView.on('tocIsOpen', (whether) ->
+        windowWithSidebar.open(whether)
+        # On small screens, when the contents is opened,
+        # auto-scroll to make header minimize
+        if window.innerWidth < 640 and whether
+          top = $(window).scrollTop()
+          if top < pinnableTop
+            $(window).scrollTop(pinnableTop + 10)
+        )
 
     updateSummary: () ->
       abstract = @model.get('abstract')
@@ -146,9 +163,6 @@ define (require) ->
       # Track loading using the media's own analytics ID, if specified
       analyticsID = @model.get('googleAnalytics')
       analytics.send(analyticsID) if analyticsID
-
-    scrollToTop: () ->
-      @mainContent.$el.scrollTop(0)
 
     updatePageInfo: () ->
       @pageTitle = @model.get('title')

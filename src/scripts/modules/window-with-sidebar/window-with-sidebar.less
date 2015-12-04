@@ -8,7 +8,6 @@
     width: 0;
     height: 0;
     visibility: hidden;
-    overflow: hidden;
     display: inline-block;
     vertical-align: top;
   }
@@ -18,21 +17,16 @@
   }
   &.sidebar-open {
     > .sidebar {
-      min-height: 20em;
-      height: auto;
       visibility: visible;
       border-right: 1px solid @gray-light;
       width: @sidebar-width;
-      overflow-x: hidden;
-      overflow-y: auto;
-      @media (max-width: 640px) {
-        position: absolute;
-        z-index: 1;
-        background-color: white;
-      }
+      height: 100%;
     }
     > .main {
       width: ~"calc(100% -" @sidebar-width + @fudge ~")";
+      @media (max-width: 640px) {
+        visibility:hidden;
+      }
     }
   }
 }

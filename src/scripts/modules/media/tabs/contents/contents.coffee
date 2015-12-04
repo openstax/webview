@@ -58,26 +58,10 @@ define (require) ->
         hits = @model?.get('searchResults')?.total
         return unless hits?
         if hits is 0
-          '''
-          <div>No matching results were found.</div>
-          '''
+          "No matching results were found."
         else
           s = if hits is 1 then '' else 's'
-          """
-          <div>#{hits} page#{s} matched</div>
-          """
-      clearResults: () ->
-        hits = @model?.get('searchResults')?.total
-        return unless hits?
-        '''
-        <div>
-        <a class="clear-results" href="#">
-          <span class="fa fa-arrow-circle-left"></span>
-          Back to Table of Contents
-        </a>
-        </div>
-        '''
-
+          "#{hits} page#{s} matched"
     regions:
       toc: '.toc'
 

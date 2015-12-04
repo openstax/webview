@@ -501,7 +501,7 @@ define (require) ->
         @model.setPage($el.data('page'))
 
         router.navigate href, {trigger: false}, () => @parent.trackAnalytics()
-        @parent.scrollToTop()
+        $(window).scrollTop(0)
 
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')
