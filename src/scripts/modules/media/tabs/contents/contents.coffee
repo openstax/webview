@@ -85,10 +85,17 @@ define (require) ->
       @regions.self.append new AddPopoverView
         model: @model
         owner: @$el.find('.add.btn')
+      # Try to scroll toc to active page, needs a little time
+      setTimeout( =>
+        $activePage = @$el.find('span.active')
+        if $activePage.length > 0
+          @$el.scrollTop($activePage.offset().top)
+      , 50)
+
 
     processPages: ->
       nodes = @model.get('contents')?.models
-      if nodes?
+      if nodes?.length
         isCcap = nodes[0].isCcap()
         if isCcap
           sections = nodes.filter((node) -> node.isSection())
