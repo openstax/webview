@@ -133,6 +133,7 @@ define (require) ->
           top = $(window).scrollTop()
           if top < pinnableTop
             $(window).scrollTop(pinnableTop + 10)
+        setTocHeight()
         )
 
     updateSummary: () ->
