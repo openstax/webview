@@ -6,7 +6,7 @@ define (require) ->
   template = require('hbs!./header-template')
   require('less!./header')
   require('bootstrapCollapse')
-  require('zendesk')
+  #require('zendesk')
 
   return class HeaderView extends BaseView
     template: template
@@ -26,6 +26,9 @@ define (require) ->
       super()
       @page = options.page
       @url = @createLink(options.url) if options.url
+
+      # HACK: Lazy-load Zendesk so it doesn't get overwritten
+      require(['zendesk'])
 
       @listenTo(session, 'change', @render)
 
