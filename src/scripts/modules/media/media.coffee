@@ -38,10 +38,10 @@ define (require) ->
       $compactables = $el.find(compactSelector)
       top = $(event.target).scrollTop()
       if (top < showBelow and not $hideables.is(":visible"))
-        $hideables.show(300, update(event))
+        $hideables.fadeIn(150).show(update(event))
         $compactables.removeClass('compact')
       else if (top > hideAbove and $hideables.is(":visible"))
-        $hideables.hide(300, update(event))
+        $hideables.fadeOut(150).hide(update(event))
         $compactables.addClass('compact')
 
   return class MediaView extends BaseView
@@ -113,6 +113,7 @@ define (require) ->
       $('.fullsize-container .main').scroll(headerHandler)
       mainHeaderHandler = headerController($('#header'), '>div', '.media-title')
       $('.fullsize-container .main').scroll(mainHeaderHandler)
+      Backbone.trigger 'window:resize'
 
     updateSummary: () ->
       abstract = @model.get('abstract')

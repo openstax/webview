@@ -12,15 +12,18 @@ define (require) ->
       pageNumber = @content.getPageNumber(@model)
       isIntroduction =  @model.get('_parent')?.introduction?() is @model
       searchResult = @model.get('searchResult')
-      occurrences = @model.get('searchResultCount')
+      searchCount = @model.get('searchResultCount')
+      matchEnding = if searchCount == '1' then '' else 'es'
+      matchCount = "#{searchCount} match#{matchEnding}"
+
       return {
         page: pageNumber
         url: linksHelper.getPath('contents', {model: @content, page: pageNumber})
         editable: @editable
         isIntroduction: isIntroduction
         searchResult: searchResult
-        occurrences: occurrences
-        visible: @model.get('visible') and (not isIntroduction or searchResult)
+        matchCount: matchCount
+        visible: @model.get('visible')
       }
 
     tagName: 'li'
@@ -28,6 +31,7 @@ define (require) ->
 
     events:
       'click a': 'changePage'
+      'keydown a': 'selectPageWithKeyboard'
       'click .remove': 'removeNode'
 
     initialize: () ->
@@ -35,6 +39,10 @@ define (require) ->
       @content = @model.get('book')
       @editable = @content.get('editable')
       @listenTo(@model, 'change:active change:page change:changed change:title', @render)
+
+    selectPageWithKeyboard: (e) ->
+      if e.keyCode is 13 or e.keyCode is 32
+        e.target.click()
 
     changePage: (e) ->
       # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab

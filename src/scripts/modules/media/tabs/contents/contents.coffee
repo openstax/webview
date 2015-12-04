@@ -37,7 +37,7 @@ define (require) ->
             chapter.set('chapter', chapterNumber)
           else
             chapter.set('chapter', "Chapter #{chapterNumber}.")
-          page.set('chapter', chapterNumber)
+          page.unset('chapter', chapterNumber)
         if pageNumber > 0
           page.set('chapter', "#{chapterNumber}.#{pageNumber}")
 
