@@ -17,7 +17,7 @@ define (require) ->
     itemViewContainer: '> ul'
 
     events:
-      'click > div > .section-wrapper': 'toggleOrLoad'
+      'click > div > .section-wrapper': 'toggleSection'
       'keydown > div > .section-wrapper': 'toggleSectionWithKeyboard'
       'click > div > .remove': 'removeNode'
       'click > div > .edit': 'editNode'
@@ -31,9 +31,6 @@ define (require) ->
       @sectionNameModal = new SectionNameModal({model: @model})
       super()
       @listenTo(@model, 'add change:unit change:title change:expanded sync:contents', @render)
-      introPage = @model.introduction()
-      if introPage
-        @listenTo(introPage, 'change:active', @reflectIntroActive)
       @listenTo(@content, 'change:currentPage', @updateActiveContainer)
       @listenTo(@model, 'change:activeContainer', @handleActiveContainer)
 
@@ -62,7 +59,6 @@ define (require) ->
             @regions.container.appendAs 'li', new TocPageView
               model: node
               collection: @model
-      @reflectIntroActive()
 
     updateActiveContainer: ->
       isCurrentActive = @model.get('activeContainer')
@@ -83,34 +79,6 @@ define (require) ->
         e.preventDefault()
         @toggleSection()
         @$el.find('> div > .section-wrapper').focus()
-
-    # Interim solution: link navigates and opens, does not close
-    # Arrows open/close, do not navigate
-    toggleOrLoad: (e) ->
-      e.stopPropagation()
-      introPage = @model.introduction()
-      insideOpener = $(e.target).parent().hasClass('opens-introduction')
-      if insideOpener and introPage
-        book = @model.get('book')
-        pageNumber = introPage.getPageNumber()
-        info = {model: book, page: pageNumber}
-        path = linksHelper.getPath('contents', info)
-        router.navigate(path)
-        book.setPage(pageNumber)
-        @model.set('expanded', true)
-      else
-        @toggleSection()
-
-    reflectIntroActive: ->
-      introPage = @model.introduction()
-      return unless introPage
-      $title = @$el.find('> div > span > span > .title')
-      $title.parent().addClass('opens-introduction')
-      activePage = @model.get('book').get('currentPage')
-      if @model.introduction().get('active')
-        $title.addClass('active')
-      else
-        $title.removeClass('active')
 
     removeNode: () ->
       @content.removeNode(@model)

@@ -58,21 +58,24 @@
           }
 
           > a:hover {
+            color: @brand-secondary;
             text-decoration: none;
           }
-          &:not(.opens-introduction) {
+          &.section-wrapper {
             color: black;
             &:hover {
-              :not(.chapter-number),
-              :not(.title) {
-                color: gray;
-              }
+              text-decoration: underline;
             }
           }
-          > .opens-introduction:hover {
-            > .chapter-number,
-            > .title {
-                color: @brand-secondary-dim;
+
+          .snippet {
+            > .match-count {
+              text-align: right;
+              margin-bottom: 0.5rem;
+            }
+            .q-match {
+              font-weight: bold;
+              background-color: inherit;
             }
           }
         }
