@@ -3,4 +3,19 @@
 .media-container,
 .media {
   height: 100%;
+
+  .pinnable.pinned {
+    position: fixed;
+    top: 0;
+    width: @max-viewport-width;
+    z-index: 1;
+  }
+  .table-of-contents{
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 315px;
+    &.pinned {
+      position: fixed;
+    }
+  }
 }

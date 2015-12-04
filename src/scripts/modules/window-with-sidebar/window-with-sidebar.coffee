@@ -13,7 +13,6 @@ define (require) ->
 
     initialize: ->
       super()
-      @listenTo Backbone, 'window:resize', @resetHeight
 
     open: (whether) =>
       $el = $(@regions.container.el)
@@ -22,13 +21,6 @@ define (require) ->
       else
         $el.removeClass('sidebar-open')
 
-    resetHeight: ->
-      return unless @$el
-      top = @$el.position().top
-      wh = window.innerHeight
-      @$el.height((wh - top) + 'px')
-
     onRender: ->
       super()
       @$el.addClass('fullsize-container')
-      @resetHeight()

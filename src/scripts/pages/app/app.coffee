@@ -18,13 +18,6 @@ define (require) ->
     initialize: () ->
       super()
       @$el.html(@template)
-      @listenTo Backbone, 'window:resize', @sizeScrollableContent
-
-    sizeScrollableContent: ->
-      $sc = $('#scrollable-content')
-      top = $sc.offset().top
-      wh = window.innerHeight
-      $sc.height((wh - top) + 'px')
 
     render: (page, options) ->
       queryString = linksHelper.serializeQuery(location.search)
@@ -36,8 +29,4 @@ define (require) ->
       # Lazy-load the page
       require ["cs!pages/#{page}/#{page}"], (View) =>
         @regions.main.show(new View(options))
-        @sizeScrollableContent()
-        window.onresize = ->
-          Backbone.trigger 'window:resize'
-
       return @
