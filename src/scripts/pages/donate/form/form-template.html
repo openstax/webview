@@ -31,7 +31,7 @@
       <label>
         <span class="control-label col-sm-2">Title</span>
         <div class="col-sm-10">
-          <select name="title" class="form-control" tabindex="1">
+          <select name="title" class="form-control">
             <option value="">Dr.</option>
             <option value="pubDate">Mr.</option>
             <option value="popularity">Mrs.</option>
@@ -45,7 +45,7 @@
       <label>
         <span class="control-label col-sm-2">First Name</span>
         <div class="col-sm-10">
-          <input type="text" name="First_Name" class="form-control" required tabindex="1" />
+          <input type="text" name="First_Name" class="form-control" required />
           <div class="alert" role="alert" style="display:none"></div>
         </div>
       </label>
@@ -55,7 +55,7 @@
       <label>
         <span class="control-label col-sm-2">Last Name</span>
         <div class="col-sm-10">
-          <input type="text" name="Last_Name" class="form-control" required tabindex="1" />
+          <input type="text" name="Last_Name" class="form-control" required />
           <div class="alert" role="alert" style="display:none"></div>
         </div>
       </label>
@@ -65,7 +65,7 @@
       <label>
         <span class="control-label col-sm-2">Suffix</span>
         <div class="col-sm-10">
-          <input type="text" name="Suffix" class="form-control" tabindex="1" />
+          <input type="text" name="Suffix" class="form-control" />
         </div>
       </label>
     </div>
@@ -76,7 +76,7 @@
         <div class="col-sm-10">
           <input type="hidden" name="Email" />
           <input type="hidden" name="TNE_Customer_Email" />
-          <input type="email" name="BILL_EMAIL_ADDRESS" class="form-control" required tabindex="1" />
+          <input type="email" name="BILL_EMAIL_ADDRESS" class="form-control" required />
           <div class="alert" role="alert" style="display:none"></div>
         </div>
       </label>
@@ -87,7 +87,7 @@
         <span class="control-label col-sm-2">Address</span>
         <div class="col-sm-10">
           <input type="hidden" name="Mailing_Address" />
-          <input type="text" name="BILL_STREET1" class="form-control" required tabindex="1" />
+          <input type="text" name="BILL_STREET1" class="form-control" required />
           <div class="alert" role="alert" style="display:none"></div>
         </div>
       </label>
@@ -98,7 +98,7 @@
         <span class="control-label col-sm-2"></span>
         <div class="col-sm-10">
           <input type="hidden" name="Mailing_Address2" />
-          <input type="text" name="BILL_STREET2" class="form-control" tabindex="1" />
+          <input type="text" name="BILL_STREET2" class="form-control" />
         </div>
       </label>
     </div>
@@ -108,7 +108,7 @@
         <span class="control-label col-sm-2">City</span>
         <div class="col-sm-10">
           <input type="hidden" name="Mailing_City" />
-          <input type="text" name="BILL_CITY" class="form-control" required tabindex="1" />
+          <input type="text" name="BILL_CITY" class="form-control" required />
           <div class="alert" role="alert" style="display:none"></div>
         </div>
       </label>
@@ -119,7 +119,7 @@
         <span class="control-label col-sm-2">State</span>
         <div class="col-sm-10">
           <input type="hidden" name="Mailing_State" />
-          <select name="BILL_STATE" class="form-control" tabindex="1">
+          <select name="BILL_STATE" class="form-control">
             {{#each states}}
               <option value="{{this.code}}">{{this.name}}</option>
             {{/each}}
@@ -133,7 +133,7 @@
         <span class="control-label col-sm-2">Zip Code</span>
         <div class="col-sm-10">
           <input type="hidden" name="Mailing_Zip" />
-          <input type="text" name="BILL_POSTAL_CODE" class="form-control" required tabindex="1" />
+          <input type="text" name="BILL_POSTAL_CODE" class="form-control" required />
           <div class="alert" role="alert" style="display:none"></div>
         </div>
       </label>
@@ -144,7 +144,7 @@
         <span class="control-label col-sm-2">Country</span>
         <div class="col-sm-10">
           <input type="hidden" name="Mailing_Country" />
-          <select name="BILL_COUNTRY" class="form-control" tabindex="1">
+          <select name="BILL_COUNTRY" class="form-control">
             {{#each countries}}
               <option value="{{this.code}}">{{this.name}}</option>
             {{/each}}
@@ -159,7 +159,7 @@
         <div class="col-sm-10">
           <div class="input-group">
             <span class="input-group-addon">$</span>
-            <input type="number" step="5" min="5" value="{{amount}}" name="AMT" class="form-control" tabindex="1" />
+            <input type="number" step="5" min="5" value="{{amount}}" name="AMT" class="form-control" />
             <span class="input-group-addon">.00</span>
           </div>
         </div>
@@ -168,7 +168,7 @@
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn col-sm-3" tabindex="1">Continue</button>
+        <button type="submit" class="btn col-sm-3">Continue</button>
       </div>
     </div>
   </form>

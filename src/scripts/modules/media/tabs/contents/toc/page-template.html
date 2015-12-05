@@ -1,7 +1,7 @@
 {{#if visible}}
   <div {{#if editable}}draggable="true"{{/if}}>
     <span class="name-wrapper">
-      <a href="{{url}}" data-page="{{page}}" data-trigger="false" tabindex="1">
+      <a href="{{url}}" data-page="{{page}}" data-trigger="false">
         {{#if chapter}}<span class="chapter-number">{{chapter}}</span>{{/if}}
         <span class="title{{#if active}} active{{/if}}" data-depth="{{depth}}">
           {{title}}
