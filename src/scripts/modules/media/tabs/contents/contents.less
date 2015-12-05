@@ -7,9 +7,20 @@
   > div {
     margin-bottom: 1rem;
   }
-  .columns(29rem; 3rem; 0.1rem solid @gray-lighter);
-  margin-right: -0.1rem; // Hide 3rd column rule
-  padding: 1.5rem;
+  padding-left: 0.5rem;
+  padding-right: 1.5rem;
+
+  .clear-results {
+    padding-top: 0.75rem;
+  }
+
+  .result-count {
+    text-align: right;
+    color: gray;
+    font-weight: 300;
+    padding-bottom: 5px;
+    border-bottom: solid 1px @gray-lightest;
+  }
 
   > .add {
     margin: 0.5rem 0 0.5rem @left-menu-indent;

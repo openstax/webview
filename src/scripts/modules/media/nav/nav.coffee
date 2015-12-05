@@ -101,17 +101,17 @@ define (require) ->
       e.stopPropagation()
       href = $(e.currentTarget).attr('href')
       router.navigate href, {trigger: false}, () => @mediaParent.trackAnalytics()
-      @mediaParent.scrollToTop()
+      $(window).scrollTop(0)
 
     closeContentsOnSmallScreen: ->
       if window.innerWidth < 640
         if @tocIsOpen
           @toggleContents()
-        @mediaParent.scrollToTop()
+        $(window).scrollTop(0)
 
     backToTop: (e) ->
       e.preventDefault()
-      @mediaParent.scrollToTop()
+      $(window).scrollTop(0)
 
     clearSearch: ->
       @searchTerm = ''

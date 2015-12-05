@@ -21,29 +21,6 @@ define (require) ->
   template = require('hbs!./media-template')
   require('less!./media')
 
-  ###
-  Returns an event handler that will handle hiding and showing
-  items based on the scroll position. Attach the handler to
-  a scroll event to hook it up.
-  ###
-  headerController = ($el, selector, compactSelector) ->
-    threshold = window.innerHeight / 5
-    hideAbove = threshold
-    showBelow = 8
-    update = (event) ->
-      return () ->
-        Backbone.trigger 'window:resize'
-    return (event) ->
-      $hideables = $el.find(selector)
-      $compactables = $el.find(compactSelector)
-      top = $(event.target).scrollTop()
-      if (top < showBelow and not $hideables.is(":visible"))
-        $hideables.fadeIn(150).show(update(event))
-        $compactables.removeClass('compact')
-      else if (top > hideAbove and $hideables.is(":visible"))
-        $hideables.fadeOut(150).hide(update(event))
-        $compactables.addClass('compact')
-
   return class MediaView extends BaseView
     key = []
     canonical: () ->
@@ -56,6 +33,7 @@ define (require) ->
     template: template
     regions:
       media: '.media'
+      pinnable: '.pinnable'
       editbar: '.editbar'
 
     summary:() -> @updateSummary()
@@ -90,30 +68,73 @@ define (require) ->
       @regions.media.append(new MediaEndorsedView({model: @model}))
       @regions.media.append(new LatestView({model: @model}))
       mediaTitleView = new MediaTitleView({model: @model})
-      @regions.media.append(mediaTitleView)
       navView = new MediaNavView({model: @model})
-      @regions.media.append(navView)
       windowWithSidebar = new WindowWithSidebarView()
+      tocView = new ContentsView({model: @model})
+      footerNav = new MediaNavView({model: @model, hideProgress: true, mediaParent: @})
+      @regions.pinnable.append(mediaTitleView)
+      @regions.pinnable.append(navView)
       @regions.media.append(windowWithSidebar)
       mainPage = new MainPageView()
       windowWithSidebar.regions.main.append(mainPage)
       mainPage.regions.main.append(new MediaHeaderView({model: @model}))
-      navView.on('tocIsOpen', windowWithSidebar.open)
-      tocView = new ContentsView({model: @model})
       windowWithSidebar.regions.sidebar.append(tocView)
       mainPage.regions.main.append(new MediaBodyView({model: @model}))
       mainPage.regions.main.append(new MediaFooterView({model: @model}))
-      footerNav = new MediaNavView({model: @model, hideProgress: true, mediaParent: @})
       mainPage.regions.main.append(footerNav)
       footerNav.$el.addClass('footer-nav')
       @mainContent = windowWithSidebar.regions.main
 
-      hideThese = mediaTitleView.$el
-      headerHandler = headerController(hideThese, '.share', '.media-title')
-      $('.fullsize-container .main').scroll(headerHandler)
-      mainHeaderHandler = headerController($('#header'), '>div', '.media-title')
-      $('.fullsize-container .main').scroll(mainHeaderHandler)
-      Backbone.trigger 'window:resize'
+      $pinnable = @regions.pinnable.$el
+      pinnableTop = $pinnable.offset().top
+      $titleArea = -> mediaTitleView.$el.find('.media-title')
+      $toc = tocView.$el
+      isPinned = false
+      setTocHeight = _.throttle(->
+        pHeight = $pinnable.height()
+        $toc.css('top', "#{pHeight}px")
+        winHeight = window.innerHeight
+        tocTop = $toc.position().top
+        $toc.height("#{winHeight - tocTop}px")
+      , 80)
+      adjustMainMargin = (height) ->
+        mainPage.regions.main.$el.css('margin-top', "#{height}px")
+      pinNavBar = ->
+        $pinnable.addClass('pinned')
+        $titleArea().addClass('compact')
+        $toc.addClass('pinned')
+        isPinned = true
+        adjustMainMargin($pinnable.height())
+        setTocHeight()
+      unpinNavBar = ->
+        $pinnable.removeClass('pinned')
+        $titleArea().removeClass('compact')
+        $toc.removeClass('pinned')
+        isPinned = false
+        adjustMainMargin(0)
+        setTocHeight()
+        pinnableTop = $pinnable.offset().top
+
+      Backbone.on('window:resize', setTocHeight)
+      handleHeaderViewPinning = _.throttle(->
+        top = $(window).scrollTop()
+        if top > pinnableTop
+          if not isPinned
+            pinNavBar()
+        else if isPinned
+          unpinNavBar()
+      , 80)
+      $(window).scroll(handleHeaderViewPinning)
+      navView.on('tocIsOpen', (whether) ->
+        windowWithSidebar.open(whether)
+        # On small screens, when the contents is opened,
+        # auto-scroll to make header minimize
+        if window.innerWidth < 640 and whether
+          top = $(window).scrollTop()
+          if top < pinnableTop
+            $(window).scrollTop(pinnableTop + 10)
+        setTocHeight()
+        )
 
     updateSummary: () ->
       abstract = @model.get('abstract')
@@ -144,15 +165,13 @@ define (require) ->
       analyticsID = @model.get('googleAnalytics')
       analytics.send(analyticsID) if analyticsID
 
-    scrollToTop: () ->
-      @mainContent.$el.scrollTop(0)
-
     updatePageInfo: () ->
       @pageTitle = @model.get('title')
       super()
 
     updateLegacyLink: () ->
-      headerView = @parent.parent.regions.header.views[0]
+      headerView = @parent.parent.regions.header.views?[0]
+      return unless headerView?
       id = @model.get('legacy_id')
       version = @model.get('legacy_version')
 

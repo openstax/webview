@@ -57,27 +57,33 @@
             color: @brand-secondary;
           }
 
-          > a:hover {
-            color: @brand-secondary;
-            text-decoration: none;
+          > a {
+            &:hover {
+              color: @brand-secondary;
+              text-decoration: none;
+            }
+            > .snippet {
+              color: black;
+              padding-bottom: 1.25rem;
+              > .match-count {
+                font-weight: 300;
+                text-align: right;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+                color: gray;
+              }
+              .q-match {
+                font-weight: bold;
+                background-color: inherit;
+              }
+            }
           }
           &.section-wrapper {
-            color: black;
             &:hover {
               text-decoration: underline;
             }
           }
 
-          .snippet {
-            > .match-count {
-              text-align: right;
-              margin-bottom: 0.5rem;
-            }
-            .q-match {
-              font-weight: bold;
-              background-color: inherit;
-            }
-          }
         }
 
         &[data-expandable="true"] {

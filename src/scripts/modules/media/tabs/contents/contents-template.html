@@ -1,8 +1,15 @@
   {{#if editable}}
     <button type="button" class="add btn btn-default">Add <span class="caret"></span></button>
   {{/if}}
-  {{{clearResults}}}
-  {{{resultCount}}}
+  {{#if resultCount}}
+    <div class="clear-results">
+      <a class="clear-results" href="#">
+        <span class="fa fa-arrow-circle-left"></span>
+        Back to Table of Contents
+      </a>
+    </div>
+    <div class="result-count">{{resultCount}}</div>
+  {{/if}}
   <div class="toc">
     {{! TocView}}
   </div>
