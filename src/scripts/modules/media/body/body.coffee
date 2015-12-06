@@ -55,7 +55,6 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
       @listenTo(@model, 'change:currentPage.searchHtml', @render)
       @initializeConceptCoach() if @templateHelpers.isCoach.call(@)
-      @listenTo(@model, 'change:currentPage', @controlConceptCoachView) if @templateHelpers.isCoach.call(@)
 
     canonicalizePath: =>
       if @model.isBook()
@@ -92,62 +91,37 @@ define (require) ->
       @cc.handleClose = (eventData) ->
         @handleClosed(eventData, $body[0])
 
-      @cc.init(settings.conceptCoach.url, {prefix: '?', base: 'cc-view='})
+      @cc.init(settings.conceptCoach.url)
 
       @cc.on('ui.close', @cc.handleClose)
       @cc.on('open', @cc.handleOpen)
+      @cc.on('book.update', @changePageByUuids)
 
-      @cc.on 'view.update', (eventData) =>
-        {newPath, options} = @getPathForCoach(eventData)
-        router.navigate(newPath, options) if newPath?
+    changePageByUuids: ({collectionUUID, moduleUUID, link}) =>
+      if @model.getUuid() is collectionUUID
+        page = @model.getPage(moduleUUID)
 
-    getPathForCoach: (coachData) ->
-      return unless coachData?.route?
-      {path, query} = linksHelper.getCurrentPathComponents()
-      options =
-        trigger: false
+        if page?
 
-      if query['cc-view'] isnt coachData.state.view
-        newQuery = _.extend({}, query, 'cc-view': coachData.state.view)
-        pathFragments = [path.split('?')[0]]
+          pageId = page.get('shortId')
+          return if pageId is @model.get('currentPage').get('shortId')
+          href = linksHelper.getPath('contents', {model: @model, page: pageId})
+          @goToPage(page.getPageNumber(), href)
+          return
+      router.navigate(link, {trigger: true})
 
-        if coachData.state.view is 'close'
-          delete newQuery['cc-view']
-        else if query['cc-view']?
-          options.replace = true
-
-        if not _.isEmpty(newQuery)
-          pathFragments.push(linksHelper.param(newQuery))
-
-        newPath = pathFragments.join('?')
-
-      {newPath, options}
+    goToPage: (pageNumber, href) ->
+      @model.setPage(pageNumber)
+      router.navigate href, {trigger: false}, => @parent.parent.parent.trackAnalytics()
+      $(window).scrollTop(0)
 
     getOptionsForCoach: ->
       options =
         collectionUUID: @model.getUuid()
         moduleUUID: @model.get('currentPage')?.getUuid()
-        cnxUrl: location.origin
+        cnxUrl: ''
 
       _.clone(options)
-
-    controlConceptCoachView: ->
-      currentPage = @model.get('currentPage')
-      return unless currentPage?.isValid()
-
-      options = @getOptionsForCoach()
-      isMountable = $('.concept-coach-launcher > button').parent()[0]?
-      waitToMount = if isMountable then 0 else 1000
-
-      {query} = linksHelper.getCurrentPathComponents()
-      view = query['cc-view'] or 'close'
-      @cc.handleClose() if view is 'close'
-
-      _.delay () =>
-        options.mounter ?= $('.concept-coach-launcher > button').parent()[0]
-        @cc.setOptions(options)
-        @cc.updateToView(view)
-      , waitToMount
 
     launchConceptCoach: (event) ->
       unless @cc.component?.isMounted()
@@ -497,11 +471,7 @@ define (require) ->
       if href?.indexOf("/contents/#{@model.getVersionedId()}:") is 0
         e.preventDefault()
         e.stopPropagation()
-
-        @model.setPage($el.data('page'))
-
-        router.navigate href, {trigger: false}, () => @parent.trackAnalytics()
-        $(window).scrollTop(0)
+        @goToPage($el.data('page'), href)
 
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')
