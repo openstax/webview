@@ -78,7 +78,6 @@ define (require) ->
         $els.hide()
 
     initializeConceptCoach: ->
-      window.hello = @
       return unless @templateHelpers.isCoach.call(@) and not @cc
       $body = $('body')
       @cc = cc
@@ -106,12 +105,9 @@ define (require) ->
 
           pageId = page.get('shortId')
           return if pageId is @model.get('currentPage').get('shortId')
-
           href = linksHelper.getPath('contents', {model: @model, page: pageId})
           @goToPage(page.getPageNumber(), href)
-
           return
-
       router.navigate(link, {trigger: true})
 
     goToPage: (pageNumber, href) ->
