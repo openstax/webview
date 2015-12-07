@@ -15,6 +15,7 @@ define (require) ->
   embeddableTemplates =
     'exercise': require('hbs!./embeddables/exercise-template')
     'iframe': require('hbs!./embeddables/iframe-template')
+    'cc-launcher': require('hbs!./embeddables/cc-launcher-template')
 
   return class MediaBodyView extends EditableView
     key = []
@@ -240,6 +241,9 @@ define (require) ->
             hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
             $exercisesToHide = $temp.find(hiddenSelectors)
             $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
+
+            if @templateHelpers.isCoach.call(@)
+              $(embeddableTemplates['cc-launcher']()).insertAfter(_.last($exercisesToHide))
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
