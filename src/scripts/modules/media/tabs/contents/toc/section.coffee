@@ -44,11 +44,11 @@ define (require) ->
         @$el.removeClass('active-container')
 
     onRender: () ->
+      @handleActiveContainer()
       return if @model.get('visible') == false
       super()
       return unless @regions
       @regions.container.empty()
-      @handleActiveContainer()
       nodes = @model.get('contents')?.models
       _.each nodes, (node) =>
         if node.get('visible')
