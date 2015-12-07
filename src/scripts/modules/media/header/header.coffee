@@ -28,7 +28,7 @@ define (require) ->
 
       downloads = @model.get('downloads')
       pageDownloads = currentPage?.get?('downloads')
-      chapter = currentPage.chapter ? ''
+      chapter = currentPage.chapter ? currentPage._parent?.get('chapter') ? ''
 
       return {
         currentPage: currentPage
