@@ -437,6 +437,7 @@ define (require) ->
       _.each(sections, appendFakeExercise)
 
     onRender: () ->
+      @trigger('render')
       currentPage = @model.asPage()
       return unless currentPage?
       page = currentPage ? @model.get('contents')?.models[0]?.get('book')

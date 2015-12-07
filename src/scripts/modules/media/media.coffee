@@ -79,7 +79,8 @@ define (require) ->
       windowWithSidebar.regions.main.append(mainPage)
       mainPage.regions.main.append(new MediaHeaderView({model: @model}))
       windowWithSidebar.regions.sidebar.append(tocView)
-      mainPage.regions.main.append(new MediaBodyView({model: @model}))
+      mediaBodyView = new MediaBodyView({model: @model})
+      mainPage.regions.main.append(mediaBodyView)
       mainPage.regions.main.append(new MediaFooterView({model: @model}))
       mainPage.regions.main.append(footerNav)
       footerNav.$el.addClass('footer-nav')
@@ -135,6 +136,14 @@ define (require) ->
             $(window).scrollTop(pinnableTop + 10)
         setTocHeight()
         )
+      wasPinnedAtChange = false
+      @model.on('change:currentPage', ->
+        wasPinnedAtChange = isPinned
+      )
+      mediaBodyView.on('render', ->
+        scrollTo = if wasPinnedAtChange then pinnableTop + 1 else 0
+        $(window).scrollTop(scrollTo)
+      )
 
     updateSummary: () ->
       abstract = @model.get('abstract')

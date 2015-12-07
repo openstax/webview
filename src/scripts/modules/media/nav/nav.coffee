@@ -101,7 +101,6 @@ define (require) ->
       e.stopPropagation()
       href = $(e.currentTarget).attr('href')
       router.navigate href, {trigger: false}, () => @mediaParent.trackAnalytics()
-      $(window).scrollTop(0)
 
     closeContentsOnSmallScreen: ->
       if window.innerWidth < 640
