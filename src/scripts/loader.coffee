@@ -1,4 +1,7 @@
 define (require) ->
+  # This needs to load first--at least for now--to ensure that styles in main is loaded before
+  # component specific styles.  This affects the order of the styles in the dist version.
+  require('less!../styles/main')
   $ = require('jquery')
   Backbone = require('backbone')
   settings = require('settings')
@@ -6,7 +9,6 @@ define (require) ->
   analytics = require('cs!helpers/handlers/analytics')
   router = require('cs!router')
   require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
-  require('less!../styles/main')
 
   RegExp.escape = (str) -> str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
 
