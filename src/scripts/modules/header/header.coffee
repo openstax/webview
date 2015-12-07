@@ -20,6 +20,7 @@ define (require) ->
     }
 
     events:
+      'click #skiptocontent a': 'skipToContent'
       'click #skiptoresults a': 'skipToResults'
 
     initialize: (options = {}) ->
@@ -54,6 +55,9 @@ define (require) ->
           el.addEventListener('focusout', removeTabIndex, false)
 
         el.focus()
+
+    skipToContent: () ->
+      @skipTo('main')
 
     skipToResults: () ->
       @skipTo('results')

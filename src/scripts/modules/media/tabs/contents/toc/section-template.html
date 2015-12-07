@@ -1,7 +1,7 @@
 {{#if visible}}
   {{#if book}} {{! Only display if the model has a reference to the book, and therefore is not the book }}
     <div {{#if editable}}draggable="true"{{/if}} data-expandable="true" {{#if expanded}}data-expanded="true"{{/if}}>
-      <span class="section-wrapper name-wrapper" tabindex="1"
+      <span class="section-wrapper name-wrapper" tabindex="0"
        {{#if expanded}}aria-expanded="true"{{else}}aria-expanded="false"{{/if}}>
        {{#if chapter}}<span class="chapter-number">{{chapter}}</span>{{/if}}
         <span class="title section">
