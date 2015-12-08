@@ -7,7 +7,7 @@ define (require) ->
   EditableView = require('cs!helpers/backbone/views/editable')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   SimModal = require('cs!./embeddables/modals/sims/sims')
-  cc = require('OpenStaxReactComponents')
+  ConceptCoachAPI = require('OpenStaxConceptCoach')
   template = require('hbs!./body-template')
   settings = require('settings')
   require('less!./body')
@@ -55,7 +55,9 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.editable', @render)
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
       @listenTo(@model, 'change:currentPage.searchHtml', @render)
-      @initializeConceptCoach() if @templateHelpers.isCoach.call(@)
+      if @templateHelpers.isCoach.call(@)
+        @initializeConceptCoach()
+        @listenTo(@model, 'change:currentPage', @updateCCOptions)
 
     canonicalizePath: =>
       if @model.isBook()
@@ -81,7 +83,7 @@ define (require) ->
     initializeConceptCoach: ->
       return unless @templateHelpers.isCoach.call(@) and not @cc
       $body = $('body')
-      @cc = cc
+      @cc = new ConceptCoachAPI(settings.conceptCoach.url)
 
       animatedScroll = (top) ->
         $('html, body').animate({scrollTop: top}, '500', 'swing')
@@ -92,13 +94,20 @@ define (require) ->
       @cc.handleClose = (eventData) ->
         @handleClosed(eventData, $body[0])
 
-      @cc.init(settings.conceptCoach.url)
-
       @cc.on('ui.close', @cc.handleClose)
       @cc.on('open', @cc.handleOpen)
-      @cc.on('book.update', @changePageByUuids)
+      @cc.on('book.update', @updatePageFromCCNav)
 
-    changePageByUuids: ({collectionUUID, moduleUUID, link}) =>
+      Backbone.on('window:resize', =>
+        @cc.handleResize()
+      )
+
+    updateCCOptions: ->
+      options = @getOptionsForCoach()
+      @cc.handleClose()
+      @cc.setOptions(options)
+
+    updatePageFromCCNav: ({collectionUUID, moduleUUID, link}) =>
       if @model.getUuid() is collectionUUID
         page = @model.getPage(moduleUUID)
 
