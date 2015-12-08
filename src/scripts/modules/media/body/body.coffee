@@ -137,7 +137,6 @@ define (require) ->
     goToPage: (pageNumber, href) ->
       @model.setPage(pageNumber)
       router.navigate href, {trigger: false}, => @parent.parent.parent.trackAnalytics()
-      $(window).scrollTop(0)
 
     getOptionsForCoach: ->
       options =
