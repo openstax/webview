@@ -55,8 +55,9 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.editable', @render)
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
       @listenTo(@model, 'change:currentPage.searchHtml', @render)
-      @initializeConceptCoach() if @templateHelpers.isCoach.call(@)
-      @listenTo(@model, 'change:currentPage', @updateCCOptions)
+      if @templateHelpers.isCoach.call(@)
+        @initializeConceptCoach() 
+        @listenTo(@model, 'change:currentPage', @updateCCOptions)
 
     canonicalizePath: =>
       if @model.isBook()
@@ -103,6 +104,7 @@ define (require) ->
 
     updateCCOptions: ->
       options = @getOptionsForCoach()
+      @cc.handleClose()
       @cc.setOptions(options)
 
     updatePageFromCCNav: ({collectionUUID, moduleUUID, link}) =>
