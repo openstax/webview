@@ -91,13 +91,13 @@ define (require) ->
       $titleArea = -> mediaTitleView.$el.find('.media-title')
       $toc = tocView.$el
       isPinned = false
-      setTocHeight = _.throttle(->
-        pHeight = $pinnable.height()
-        $toc.css('top', "#{pHeight}px")
-        winHeight = window.innerHeight
-        tocTop = $toc.position().top
-        $toc.height("#{winHeight - tocTop}px")
-      , 80)
+      setTocHeight = ->
+        tocTop = $pinnable.height()
+        if not isPinned
+          tocTop += $pinnable.offset().top
+        $toc.css('top', "#{tocTop}px")
+        newHeight = window.innerHeight - tocTop
+        $toc.height("#{newHeight}px")
       adjustMainMargin = (height) ->
         mainPage.regions.main.$el.css('margin-top', "#{height}px")
       pinNavBar = ->
@@ -106,17 +106,19 @@ define (require) ->
         $toc.addClass('pinned')
         isPinned = true
         adjustMainMargin($pinnable.height())
-        setTocHeight()
       unpinNavBar = ->
         $pinnable.removeClass('pinned')
         $titleArea().removeClass('compact')
         $toc.removeClass('pinned')
         isPinned = false
         adjustMainMargin(0)
-        setTocHeight()
         pinnableTop = $pinnable.offset().top
+      mediaTitleView.on('render', ->
+        if isPinned
+          $titleArea().addClass('compact')
+      )
 
-      Backbone.on('window:resize', setTocHeight)
+      Backbone.on('window:resize', _.throttle(setTocHeight, 80))
       handleHeaderViewPinning = _.throttle(->
         top = $(window).scrollTop()
         if top > pinnableTop
@@ -124,6 +126,7 @@ define (require) ->
             pinNavBar()
         else if isPinned
           unpinNavBar()
+        setTocHeight()
       , 80)
       $(window).scroll(handleHeaderViewPinning)
       navView.on('tocIsOpen', (whether) ->

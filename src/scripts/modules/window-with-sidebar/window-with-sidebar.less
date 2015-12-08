@@ -18,9 +18,11 @@
   &.sidebar-open {
     > .sidebar {
       visibility: visible;
-      border-right: 1px solid @gray-light;
       width: @sidebar-width;
       height: 100%;
+      > div {
+        border-right: 1px solid @gray-light;
+      }
     }
     > .main {
       width: ~"calc(100% -" @sidebar-width + @fudge ~")";

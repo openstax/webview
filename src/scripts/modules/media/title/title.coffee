@@ -39,6 +39,9 @@ define (require) ->
       @listenTo(@model, 'change:loaded change:title change:canPublish', @render)
       @listenTo(router, 'navigate', @render)
 
+    onRender: ->
+      @trigger('render')
+
     edit: () ->
       data = JSON.stringify({id: @model.get('id')})
       options =
