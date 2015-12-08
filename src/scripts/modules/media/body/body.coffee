@@ -98,7 +98,7 @@ define (require) ->
       @cc.on('open', @cc.handleOpen)
       @cc.on('book.update', @updatePageFromCCNav)
 
-      Backbone.on('window:optimizedResize', =>
+      Backbone.on('window:resize', =>
         @cc.handleResize()
       )
 
@@ -108,7 +108,7 @@ define (require) ->
       @cc.setOptions(options)
 
     lookUpPageByUuid: (uuid) ->
-      {allPages} = @parent?.parent?.regions?.sidebar?.views?[0]
+      {allPages} = @parent.parent.regions.sidebar.views[0]
       _.find(allPages, (page) ->
         page.getUuid() is uuid
       )
@@ -130,12 +130,11 @@ define (require) ->
             pageNumber = page.getPageNumber()
 
         href = linksHelper.getPath('contents', pathInfo)
-        @goToPage(pageNumber, href)
+        return @goToPage(page.getPageNumber(), href)
 
       router.navigate(link, {trigger: true})
 
     goToPage: (pageNumber, href) ->
-      console.info('goToPage', pageNumber, href)
       @model.setPage(pageNumber)
       router.navigate href, {trigger: false}, => @parent.parent.parent.trackAnalytics()
       $(window).scrollTop(0)
