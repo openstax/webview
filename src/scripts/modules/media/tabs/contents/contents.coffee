@@ -69,6 +69,7 @@ define (require) ->
       'dragstart .toc [draggable]': 'onDragStart'
       'dragend .toc [draggable]': 'onDragEnd'
       'click .clear-results': 'clearSearchResults'
+      'scroll': 'saveScrollPosition'
 
     initialize: () ->
       super()
@@ -76,6 +77,7 @@ define (require) ->
       @listenTo(@model, 'change:contents', @processPages)
       @listenTo(@model, 'change:searchResults', @handleSearchResults)
       @listenTo(@model, 'change:currentPage', @loadHighlightedPage)
+      @scrollPosition = 0
 
     onRender: () ->
       @$el.addClass('table-of-contents')
@@ -85,13 +87,10 @@ define (require) ->
       @regions.self.append new AddPopoverView
         model: @model
         owner: @$el.find('.add.btn')
-      # Try to scroll toc to active page, needs a little time
-      setTimeout( =>
-        $activePage = @$el.find('span.active')
-        if $activePage.length > 0
-          @$el.scrollTop($activePage.offset().top)
-      , 50)
+      @$el.scrollTop(@scrollPosition)
 
+    saveScrollPosition: ->
+      @scrollPosition = @$el.scrollTop()
 
     processPages: ->
       nodes = @model.get('contents')?.models
