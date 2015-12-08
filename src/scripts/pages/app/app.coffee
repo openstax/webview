@@ -18,8 +18,16 @@ define (require) ->
     initialize: () ->
       super()
       @$el.html(@template)
-      $(window).resize(->
-        Backbone.trigger 'window:resize')
+      $window = $(window)
+      throttleTime = 80
+
+      $window.resize(_.throttle(->
+        Backbone.trigger('window:optimizedResize')
+      , throttleTime))
+
+      $window.scroll(_.throttle(->
+        Backbone.trigger('window:optimizedScroll')
+      , throttleTime))
 
     render: (page, options) ->
       queryString = linksHelper.serializeQuery(location.search)

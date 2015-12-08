@@ -118,8 +118,8 @@ define (require) ->
           $titleArea().addClass('compact')
       )
 
-      Backbone.on('window:resize', _.throttle(setTocHeight, 80))
-      handleHeaderViewPinning = _.throttle(->
+      Backbone.on('window:optimizedResize', setTocHeight)
+      handleHeaderViewPinning = ->
         top = $(window).scrollTop()
         if top > pinnableTop
           if not isPinned
@@ -127,8 +127,8 @@ define (require) ->
         else if isPinned
           unpinNavBar()
         setTocHeight()
-      , 80)
-      $(window).scroll(handleHeaderViewPinning)
+
+      Backbone.on('window:optimizedScroll', handleHeaderViewPinning)
       navView.on('tocIsOpen', (whether) ->
         windowWithSidebar.open(whether)
         # On small screens, when the contents is opened,
