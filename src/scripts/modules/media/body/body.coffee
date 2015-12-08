@@ -107,9 +107,15 @@ define (require) ->
       @cc.handleClose()
       @cc.setOptions(options)
 
+    lookUpPageByUuid: (uuid) ->
+      {allPages} = @parent.parent.regions.sidebar.views[0]
+      _.find(allPages, (page) ->
+        page.getUuid() is uuid
+      )
+
     updatePageFromCCNav: ({collectionUUID, moduleUUID, link}) =>
       if @model.getUuid() is collectionUUID
-        page = @model.getPage(moduleUUID)
+        page = @lookUpPageByUuid(moduleUUID)
 
         if page?
 
