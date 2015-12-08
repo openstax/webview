@@ -56,7 +56,7 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
       @listenTo(@model, 'change:currentPage.searchHtml', @render)
       if @templateHelpers.isCoach.call(@)
-        @initializeConceptCoach() 
+        @initializeConceptCoach()
         @listenTo(@model, 'change:currentPage', @updateCCOptions)
 
     canonicalizePath: =>
