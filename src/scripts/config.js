@@ -21,7 +21,7 @@
       mathjax: '//cdn.mathjax.org/mathjax/2.5-latest/MathJax.js?config=MML_HTMLorMML',
 
       // ## Zendesk
-      zendesk: '//assets.zendesk.com/external/zenbox/v2.6/zenbox',
+      //zendesk: '//assets.zendesk.com/external/zenbox/v2.6/zenbox',
 
       // Use Minified Aloha because loading files in a different requirejs context is a royal pain
       aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
@@ -131,7 +131,7 @@
         }
       },
 
-      zendesk: {
+      /*zendesk: {
         deps: ['jquery', 'css!//assets.zendesk.com/external/zenbox/v2.6/zenbox'],
         exports: 'Zendesk',
         init: function ($) {
@@ -164,7 +164,7 @@
 
           return window.Zenbox;
         }
-      },
+      },*/
 
       // ## UI Libraries
       // # Bootstrap Plugins
