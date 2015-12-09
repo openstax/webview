@@ -235,6 +235,16 @@ define (require) ->
           # # uncomment to embed fake exercises and see embeddable exercises in action
           # @fakeExercises($temp)
 
+          # Update Zendesk to use Concept Coach button
+          if settings?.conceptCoach?.uuids?[@model.getUuid()]
+            window.zHook.zendeskHost = 'openstaxcc.zendesk.com'
+            #window.Zenbox.update
+            #  url: 'https://openstaxcc.zendesk.com/hc/en-us'
+          else
+            window.zHook.zendeskHost = 'openstaxcnx.zendesk.com'
+            #window.Zenbox.update
+            #  url: 'https://openstaxcnx.zendesk.com'
+
           # Hide Exercises for Concept Coach
           hiddenClasses = settings?.conceptCoach?.uuids?[@model.getUuid()] or []
           if hiddenClasses.length > 0

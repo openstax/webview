@@ -29,7 +29,8 @@ define (require) ->
       @url = @createLink(options.url) if options.url
 
       # HACK: Lazy-load Zendesk so it doesn't get overwritten
-      require(['zendesk'])
+      #require(['zendesk'])
+      require(['./zendesk'])
 
       @listenTo(session, 'change', @render)
 
