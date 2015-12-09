@@ -115,21 +115,28 @@ define (require) ->
 
     updatePageFromCCNav: ({collectionUUID, moduleUUID, link}) =>
       if @model.getUuid() is collectionUUID
-        page = @lookUpPageByUuid(moduleUUID)
+        pathInfo =
+          model: @model
+        pageNumber = 0
 
-        if page?
+        if moduleUUID?
+          page = @lookUpPageByUuid(moduleUUID)
 
-          pageId = page.get('shortId')
-          return if pageId is @model.get('currentPage').get('shortId')
-          href = linksHelper.getPath('contents', {model: @model, page: pageId})
-          @goToPage(page.getPageNumber(), href)
-          return
+          if page?
+            pageId = page.get('shortId')
+            return if pageId is @model.get('currentPage').get('shortId')
+
+            pathInfo.page = pageId
+            pageNumber = page.getPageNumber()
+
+        href = linksHelper.getPath('contents', pathInfo)
+        return @goToPage(page.getPageNumber(), href)
+
       router.navigate(link, {trigger: true})
 
     goToPage: (pageNumber, href) ->
       @model.setPage(pageNumber)
       router.navigate href, {trigger: false}, => @parent.parent.parent.trackAnalytics()
-      $(window).scrollTop(0)
 
     getOptionsForCoach: ->
       options =
