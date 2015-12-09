@@ -20,8 +20,8 @@ define (require) ->
     }
 
     events:
-      'click #skiptocontent a': 'skipToContent'
-      'click #skiptoresults a': 'skipToResults'
+      'click #skiptocontent a': 'skipTo'
+      'click #skiptoresults a': 'skipTo'
 
     initialize: (options = {}) ->
       super()
@@ -39,28 +39,24 @@ define (require) ->
     onRender: () ->
       @regions.siteStatus.show(new SiteStatusView())
 
-    skipTo: (id) ->
-      el = document.getElementById(id)
+    skipTo: (e) ->
+      e.preventDefault()
+      hashId = e.target.href.match(/#(.*)/)[1]
+      el = document.getElementById(hashId)
 
       if el
         if !/^(?:a|select|input|button|textarea)$/i.test(el.tagName)
           el.tabIndex = -1
 
-          removeTabIndex = () ->
-            this.removeAttribute('tabindex')
-            this.removeEventListener('blur', removeTabIndex, false)
-            this.removeEventListener('focusout', removeTabIndex, false)
+          removeTabIndex = ->
+            el.removeAttribute('tabindex')
+            el.removeEventListener('blur', removeTabIndex, false)
+            el.removeEventListener('focusout', removeTabIndex, false)
 
           el.addEventListener('blur', removeTabIndex, false)
           el.addEventListener('focusout', removeTabIndex, false)
 
         el.focus()
-
-    skipToContent: () ->
-      @skipTo('main')
-
-    skipToResults: () ->
-      @skipTo('results')
 
     setLegacyLink: (url) ->
       if url
