@@ -87,6 +87,10 @@ define (require) ->
 
       animatedScroll = (top) ->
         $('html, body').animate({scrollTop: top}, '500', 'swing')
+        # Ensure, for sure, scroll to CC.  Animate scroll didn't seem to be firing in Edge.
+        _.delay(->
+          window.scrollTo(0, top)
+        , 550)
 
       @cc.handleOpen = (eventData) ->
         @handleOpened(eventData, animatedScroll, $body[0])
@@ -98,7 +102,7 @@ define (require) ->
       @cc.on('open', @cc.handleOpen)
       @cc.on('book.update', @updatePageFromCCNav)
 
-      Backbone.on('window:resize', =>
+      Backbone.on('window:optimizedResize', =>
         @cc.handleResize()
       )
 
