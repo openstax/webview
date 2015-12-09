@@ -262,8 +262,10 @@ define (require) ->
           # @fakeExercises($temp)
 
           # Hide Exercises for Concept Coach
+          zE(() -> window.zE.hide())
           hiddenClasses = settings?.conceptCoach?.uuids?[@model.getUuid()] or []
           if hiddenClasses.length > 0
+            zE(() -> window.zE.show())
             hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
             $exercisesToHide = $temp.find(hiddenSelectors)
             $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
