@@ -268,8 +268,10 @@ define (require) ->
 
           # Hide Exercises for Concept Coach
           zE(() -> window.zE.hide())
+          $('#zenbox_tab').show()
           hiddenClasses = settings?.conceptCoach?.uuids?[@model.getUuid()] or []
           if hiddenClasses.length > 0
+            $('#zenbox_tab').hide()
             zE(() -> window.zE.show())
             hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
             $exercisesToHide = $temp.find(hiddenSelectors)
