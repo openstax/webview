@@ -30,9 +30,6 @@ define (require) ->
 
       # HACK: Lazy-load Zendesk so it doesn't get overwritten
       require(['zendesk'])
-      # CC Zendesk
-      require ['./zendesk'], () ->
-        zE(() -> window.zE.hide())
 
       @listenTo(session, 'change', @render)
 
@@ -41,6 +38,7 @@ define (require) ->
 
     onRender: () ->
       @regions.siteStatus.show(new SiteStatusView())
+      $('#zenbox_tab').show()
 
     skipTo: (e) ->
       e.preventDefault()
