@@ -163,7 +163,7 @@ module.exports = (grunt) ->
 
               'cs!configs/aloha'
 
-              'modules/header/zendesk'
+              'modules/media/body/zendesk'
             ]
             exclude: ['coffee-script', 'less/normalize']
             excludeShallow: ['settings']
