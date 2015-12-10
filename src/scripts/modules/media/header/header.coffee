@@ -86,9 +86,12 @@ define (require) ->
     onRender: () ->
       if not @model.asPage()?.get('active') then return
 
-      @regions.button.append new BookPopoverView
+      # IE doesn't like it being inside the button. Move it out.
+      popoverView = new BookPopoverView
         model: @model
         owner: @$el.find('.info .btn')
+      @regions.button.append popoverView
+      popoverView.$el.insertAfter(popoverView.$el.parent())
 
     toggleSummary: (e) ->
       e.preventDefault()
