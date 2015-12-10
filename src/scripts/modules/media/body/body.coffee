@@ -87,10 +87,6 @@ define (require) ->
 
       animatedScroll = (top) ->
         $('html, body').animate({scrollTop: top}, '500', 'swing')
-        # Ensure, for sure, scroll to CC.  Animate scroll didn't seem to be firing in Edge.
-        _.delay(->
-          window.scrollTo(0, top)
-        , 550)
 
       @cc.handleOpen = (eventData) ->
         @handleOpened(eventData, animatedScroll, $body[0])
@@ -98,9 +94,18 @@ define (require) ->
       @cc.handleClose = (eventData) ->
         @handleClosed(eventData, $body[0])
 
+      # nab math rendering from exercise embeddables config
+      {onRender} = _.findWhere(embeddablesConfig.embeddableTypes, {embeddableType: 'exercise'})
+
       @cc.on('ui.close', @cc.handleClose)
       @cc.on('open', @cc.handleOpen)
       @cc.on('book.update', @updatePageFromCCNav)
+      @cc.on('exercise.component.loaded', ->
+        # TO DO should have element to parse passed in, but will just do this for now.
+        $hasHtml = $('.openstax-has-html')
+        $hasHtml.each (iter, element) ->
+          onRender($(element))
+      )
 
       Backbone.on('window:optimizedResize', =>
         @cc.handleResize()
