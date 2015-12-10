@@ -272,7 +272,7 @@ define (require) ->
             zendesk('https://assets.zendesk.com/embeddable_framework/main.js', 'openstaxcc.zendesk.com')
             window.zE(() -> window.zE.hide())
 
-            if settings?.conceptCoach?.uuids?[model.getUuid()].length > 0
+            if settings?.conceptCoach?.uuids?[model.getUuid()]?.length > 0
               $('#zenbox_tab').hide()
               window.zE(() -> window.zE.show())
 
