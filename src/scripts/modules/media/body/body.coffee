@@ -94,35 +94,22 @@ define (require) ->
       @cc.handleClose = (eventData) ->
         @handleClosed(eventData, $body[0])
 
+      # nab math rendering from exercise embeddables config
+      {onRender} = _.findWhere(embeddablesConfig.embeddableTypes, {embeddableType: 'exercise'})
+
       @cc.on('ui.close', @cc.handleClose)
       @cc.on('open', @cc.handleOpen)
       @cc.on('book.update', @updatePageFromCCNav)
-      @cc.on('exercise.component.loaded', @renderMaths)
+      @cc.on('exercise.component.loaded', ->
+        # TO DO should have element to parse passed in, but will just do this for now.
+        $hasHtml = $('.openstax-has-html')
+        $hasHtml.each (iter, element) ->
+          onRender($(element))
+      )
 
       Backbone.on('window:optimizedResize', =>
         @cc.handleResize()
       )
-
-    renderMaths: =>
-      # TO DO should have element to parse passed in, but will just do this for now.
-      $hasHtml = $('.openstax-has-html')
-      $hasHtml.each @processMaths
-
-    # From embeddables, post render for exercises already.
-    # TO DO clean up
-    processMaths: (iter, parent) ->
-      $parent = $(parent)
-
-      $mathElements = $parent.find('[data-math]')
-      $mathElements.each (iter, element) ->
-
-        $element = $(element)
-        formula = $element.data('math')
-
-        mathTex = "[TEX_START]#{formula}[TEX_END]"
-        $element.text(mathTex)
-
-        MathJax?.Hub.Queue(['Typeset', MathJax.Hub], $element[0])
 
     updateCCOptions: ->
       options = @getOptionsForCoach()
