@@ -87,10 +87,6 @@ define (require) ->
 
       animatedScroll = (top) ->
         $('html, body').animate({scrollTop: top}, '500', 'swing')
-        # Ensure, for sure, scroll to CC.  Animate scroll didn't seem to be firing in Edge.
-        _.delay(->
-          window.scrollTo(0, top)
-        , 550)
 
       @cc.handleOpen = (eventData) ->
         @handleOpened(eventData, animatedScroll, $body[0])
@@ -101,10 +97,32 @@ define (require) ->
       @cc.on('ui.close', @cc.handleClose)
       @cc.on('open', @cc.handleOpen)
       @cc.on('book.update', @updatePageFromCCNav)
+      @cc.on('exercise.component.loaded', @renderMaths)
 
       Backbone.on('window:optimizedResize', =>
         @cc.handleResize()
       )
+
+    renderMaths: =>
+      # TO DO should have element to parse passed in, but will just do this for now.
+      $hasHtml = $('.openstax-has-html')
+      $hasHtml.each @processMaths
+
+    # From embeddables, post render for exercises already.
+    # TO DO clean up
+    processMaths: (iter, parent) ->
+      $parent = $(parent)
+
+      $mathElements = $parent.find('[data-math]')
+      $mathElements.each (iter, element) ->
+
+        $element = $(element)
+        formula = $element.data('math')
+
+        mathTex = "[TEX_START]#{formula}[TEX_END]"
+        $element.text(mathTex)
+
+        MathJax?.Hub.Queue(['Typeset', MathJax.Hub], $element[0])
 
     updateCCOptions: ->
       options = @getOptionsForCoach()
