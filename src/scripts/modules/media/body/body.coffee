@@ -266,16 +266,6 @@ define (require) ->
           # # uncomment to embed fake exercises and see embeddable exercises in action
           # @fakeExercises($temp)
 
-          # CC Zendesk
-          model = @model
-          require ['./zendesk'], (zendesk) ->
-            zendesk('https://assets.zendesk.com/embeddable_framework/main.js', 'openstaxcc.zendesk.com')
-            window.zE(() -> window.zE.hide())
-
-            if settings?.conceptCoach?.uuids?[model.getUuid()]?.length > 0
-              $('#zenbox_tab').hide()
-              window.zE(() -> window.zE.show())
-
           # Hide Exercises for Concept Coach
           $('#zenbox_tab').show()
           hiddenClasses = settings?.conceptCoach?.uuids?[@model.getUuid()] or []
