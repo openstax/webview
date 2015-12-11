@@ -39,6 +39,7 @@ define (require) ->
     onRender: () ->
       session.update()
       @regions.siteStatus.show(new SiteStatusView())
+      $('#zenbox_tab').show()
 
     skipTo: (e) ->
       e.preventDefault()
