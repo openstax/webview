@@ -31,10 +31,13 @@ describe('links helper tests', function () {
           getVersionedId: function () {
             return 'not real';
           },
+          getShortUuid: function () {
+            return 'shortId';
+          },
           get: function (which) {
             switch (which) {
               case 'shortId':
-                return 'shortId';
+                return 'book title';
               case 'version':
                 return 'version';
               case 'title':
@@ -57,6 +60,9 @@ describe('links helper tests', function () {
           getVersionedId: function () {
             return '031da8d3-b525-429c-80cf-6c8ed997733a@8.1';
           },
+          getShortUuid: function () {
+            return 'book title';
+          },
           get: function () {
             return 'book title';
           },
@@ -74,6 +80,9 @@ describe('links helper tests', function () {
           getVersionedId: function () {
             return '031da8d3-b525-429c-80cf-6c8ed997733a@8.1';
           },
+          getShortUuid: function () {
+            return 'book name';
+          },
           get: function () {
             return 'book name';
           },
@@ -81,7 +90,10 @@ describe('links helper tests', function () {
             return {
               get: function () {
                 return 'page title!';
-              }
+              },
+              getShortUuid: function () {
+                return 'page title!';
+              },
             };
           },
           isBook: function () {
