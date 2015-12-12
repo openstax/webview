@@ -189,8 +189,16 @@ define (require) ->
       return "#{id}#{version}"
 
     getUuid: () ->
-      components = @_getIdComponents()
+      components = @_getIdComponents() or []
       id = components[1] or ''
+
+      return id
+
+    getShortUuid: () ->
+      id = @get('shortId') or ''
+
+      if typeof id is 'string'
+        id = id.replace(/@.+/, '')
 
       return id
 
