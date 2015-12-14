@@ -59,6 +59,11 @@ define (require) ->
         @initializeConceptCoach()
         @listenTo(@model, 'change:currentPage', @updateCCOptions)
 
+    onBeforeClose: ->
+      if @cc?
+        @cc.destroy?()
+        delete @cc
+
     canonicalizePath: =>
       if @model.isBook()
         currentPage = @model.get('currentPage')
@@ -113,7 +118,6 @@ define (require) ->
 
     updateCCOptions: ->
       options = @getOptionsForCoach()
-      @cc.handleClose()
       @cc.setOptions(options)
 
     lookUpPageByUuid: (uuid) ->
