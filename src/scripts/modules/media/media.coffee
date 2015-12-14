@@ -88,7 +88,6 @@ define (require) ->
 
       $pinnable = @regions.pinnable.$el
       pinnableTop = $pinnable.offset().top
-      $titleArea = -> mediaTitleView.$el.find('.media-title')
       $toc = tocView.$el
       isPinned = false
       setTocHeight = ->
@@ -98,27 +97,33 @@ define (require) ->
         $toc.css('top', "#{tocTop}px")
         newHeight = window.innerHeight - tocTop
         $toc.height("#{newHeight}px")
+      Backbone.on('window:optimizedResize', setTocHeight)
+      @on('closing', ->
+        Backbone.off('window:optimizedResize', setTocHeight)
+      )
+
       adjustMainMargin = (height) ->
         mainPage.regions.main.$el.css('margin-top', "#{height}px")
+
+      $titleArea = mediaTitleView.$el.find('.media-title')
       pinNavBar = ->
         $pinnable.addClass('pinned')
-        $titleArea().addClass('compact')
+        $titleArea.addClass('compact')
         $toc.addClass('pinned')
         isPinned = true
         adjustMainMargin($pinnable.height())
       unpinNavBar = ->
         $pinnable.removeClass('pinned')
-        $titleArea().removeClass('compact')
+        $titleArea.removeClass('compact')
         $toc.removeClass('pinned')
         isPinned = false
         adjustMainMargin(0)
         pinnableTop = $pinnable.offset().top
       mediaTitleView.on('render', ->
-        if isPinned
-          $titleArea().addClass('compact')
+        $titleArea = mediaTitleView.$el.find('.media-title')
+        $titleArea.addClass('compact') if isPinned
       )
 
-      Backbone.on('window:optimizedResize', setTocHeight)
       handleHeaderViewPinning = ->
         top = $(window).scrollTop()
         if top > pinnableTop
@@ -127,8 +132,11 @@ define (require) ->
         else if isPinned
           unpinNavBar()
         setTocHeight()
-
       Backbone.on('window:optimizedScroll', handleHeaderViewPinning)
+      @on('closing', ->
+        Backbone.off('window:optimizedScroll', handleHeaderViewPinning)
+      )
+
       navView.on('tocIsOpen', (whether) ->
         windowWithSidebar.open(whether)
         # On small screens, when the contents is opened,
@@ -147,6 +155,9 @@ define (require) ->
         scrollTo = if wasPinnedAtChange then pinnableTop + 1 else 0
         $(window).scrollTop(scrollTo)
       )
+
+    close: ->
+      @trigger('closing')
 
     updateSummary: () ->
       abstract = @model.get('abstract')
