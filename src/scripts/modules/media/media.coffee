@@ -98,6 +98,8 @@ define (require) ->
         newHeight = window.innerHeight - tocTop
         $toc.height("#{newHeight}px")
       Backbone.on('window:optimizedResize', setTocHeight)
+
+      # closing is triggered in 'onBeforeClose'
       @on('closing', ->
         Backbone.off('window:optimizedResize', setTocHeight)
       )
@@ -133,6 +135,7 @@ define (require) ->
           unpinNavBar()
         setTocHeight()
       Backbone.on('window:optimizedScroll', handleHeaderViewPinning)
+      # closing is triggered in 'onBeforeClose'
       @on('closing', ->
         Backbone.off('window:optimizedScroll', handleHeaderViewPinning)
       )
@@ -155,9 +158,6 @@ define (require) ->
         scrollTo = if wasPinnedAtChange then pinnableTop + 1 else 0
         $(window).scrollTop(scrollTo)
       )
-
-    close: ->
-      @trigger('closing')
 
     updateSummary: () ->
       abstract = @model.get('abstract')
@@ -236,6 +236,7 @@ define (require) ->
       if @model.get('editable')
         @model.set('editable', false, {silent: true})
         @closeEditor()
+      @trigger('closing')
 
     checkKeySequence: (e) ->
       key[e.keyCode] = true
