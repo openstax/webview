@@ -113,7 +113,7 @@ define (require) ->
       )
 
       Backbone.on('window:optimizedResize', =>
-        @cc.handleResize()
+        @cc?.handleResize?()
       )
 
     updateCCOptions: ->
