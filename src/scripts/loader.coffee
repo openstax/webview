@@ -92,8 +92,6 @@ define (require) ->
 
     analytics.send() # Track analytics for the initial page
 
-    session.startChecking() # Begin tracking session status
-
     # Prefix all non-external AJAX requests with the root URI
     $.ajaxPrefilter (options, originalOptions, jqXHR) ->
       if not external.test(options.url)

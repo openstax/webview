@@ -37,6 +37,7 @@ define (require) ->
       siteStatus: '.site-status'
 
     onRender: () ->
+      session.update()
       @regions.siteStatus.show(new SiteStatusView())
       $('#zenbox_tab').show()
 
