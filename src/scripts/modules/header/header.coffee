@@ -8,6 +8,8 @@ define (require) ->
   require('bootstrapCollapse')
   #require('zendesk')
 
+  $(window).focus(session.update.bind(session))
+
   return class HeaderView extends BaseView
     template: template
     templateHelpers: () -> {
