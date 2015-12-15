@@ -25,6 +25,9 @@ define (require) ->
 
     initialize: (options = {}) ->
       @set('loaded', false)
+      @on('change:contents', =>
+        @cachedPages = @allPages()
+      )
 
       # Immediately load content that has an id
       if @id
@@ -122,17 +125,10 @@ define (require) ->
         @trigger('change:currentPage.loaded')
 
     _lookupPage: (page) ->
-      if typeof page is 'number'
-        # Do not skip if the currentPage is the arg being passed in
-        # because otherwise it will not get fetched
-        pages = @getTotalPages()
-        if page < 1 then page = 1
-        if page > pages then page = pages
-
       return @getPage(page)
 
     setPage: (page) ->
-      lookedUpPage = @_lookupPage(page)
+      lookedUpPage = @getPage(page)
       unless lookedUpPage?
         @set('error', 404)
       @_setPage(lookedUpPage)

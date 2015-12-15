@@ -26,27 +26,16 @@ define (require) ->
       return if firstChild.isSection()
       firstChild
 
+    cachedPages: undefined
+
     getTotalLength: () ->
-      contents = @get('contents')
-      length = 0
-
-      if contents
-        length = contents.reduce ((memo, node) -> memo + node.getTotalLength()), 0
-
-      return length
+      (@cachedPages or @allPages()).length
 
     _getPageNum: (num) ->
-      page = 0
-
-      for node in @get('contents').models
-        position = node.getTotalLength() + page
-
-        if position < num
-          page = position
-        else if num is position and not node.isSection() # Sections don't have page numbers
-          return node
-        else
-          return node.getPage(num-page)
+      pages = @cachedPages or @allPages()
+      return pages[0] if (num <= 1)
+      return pages[page.length - 1] if (num > pages.length)
+      return pages[num - 1]
 
     allPages: (nodes=@get('contents').models, collection=[]) ->
       _.each nodes, (node) =>
@@ -58,7 +47,7 @@ define (require) ->
       collection
 
     _getPageFromId: (id) ->
-      pages = @allPages()
+      pages = @cachedPages or @allPages()
       idPattern = ///^#{id}///
       for page in pages
         id = page.get('id')
@@ -110,8 +99,6 @@ define (require) ->
           opts = _.extend({derivedOnly: true}, options)
 
         contents.create(model, opts or options)
-
-
 
       @set('changed', true)
 
