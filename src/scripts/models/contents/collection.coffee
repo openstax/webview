@@ -48,14 +48,23 @@ define (require) ->
         else
           return node.getPage(num-page)
 
-    _getPageId: (id) ->
-      for node in @get('contents').models
-        if node is id or node.get('id') is id or node.getVersionedId() is id or
-        node.get('shortId').match(///^#{id}///)
-          return node
-        else if node.isSection()
-          result = node.getPage(id)
-          return result if result
+    allPages: (nodes=@get('contents').models, collection=[]) ->
+      _.each nodes, (node) =>
+        if node.isSection()
+          children = node.get('contents').models
+          @allPages(children, collection)
+        else
+          collection.push(node)
+      collection
+
+    _getPageFromId: (id) ->
+      pages = @allPages()
+      idPattern = ///^#{id}///
+      for page in pages
+        id = page.get('id')
+        if page.get('id').match(idPattern) or
+        page.get('shortId').match(idPattern)
+          return page
 
       return
 
@@ -63,7 +72,7 @@ define (require) ->
       if typeof page is 'number'
         return @_getPageNum(page)
 
-      return @_getPageId(page)
+      return @_getPageFromId(page)
 
     toJSON: (options = {}) ->
       results = super(arguments...)
