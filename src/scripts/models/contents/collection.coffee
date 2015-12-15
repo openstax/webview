@@ -66,6 +66,7 @@ define (require) ->
         page.get('shortId').match(idPattern)
           return page
 
+      @set('error', 404)
       return
 
     getPage: (page) ->
