@@ -116,7 +116,7 @@ define (require) ->
         page.set('active', true)
 
         if not page.get('loaded')
-          page.fetch().done () ->
+          page.fetch().done ->
             page.set('loaded', true)
       else
         @trigger('change:currentPage.loaded')
@@ -131,7 +131,11 @@ define (require) ->
 
       return @getPage(page)
 
-    setPage: (page) -> @_setPage(@_lookupPage(page))
+    setPage: (page) ->
+      lookedUpPage = @_lookupPage(page)
+      unless lookedUpPage?
+        @set('error', 404)
+      @_setPage(lookedUpPage)
 
     getTotalPages: () ->
       # FIX: cache total pages and recalculate on add/remove events?
