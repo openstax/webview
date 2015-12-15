@@ -106,6 +106,7 @@ define (require) ->
         @trigger("change:currentPage.#{eventName.slice(7)}", page, value)
 
     _setPage: (page) ->
+      @set('error', 404) if not page?
       currentPage = @get('currentPage')
 
       if currentPage
@@ -127,11 +128,7 @@ define (require) ->
     _lookupPage: (page) ->
       return @getPage(page)
 
-    setPage: (page) ->
-      lookedUpPage = @getPage(page)
-      unless lookedUpPage?
-        @set('error', 404)
-      @_setPage(lookedUpPage)
+    setPage: (page) -> @_setPage(@getPage(page))
 
     getTotalPages: () ->
       # FIX: cache total pages and recalculate on add/remove events?

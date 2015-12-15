@@ -29,7 +29,7 @@ define (require) ->
     cachedPages: undefined
 
     getTotalLength: () ->
-      (@cachedPages or @allPages()).length
+      (@cachedPages or @allPages())?.length
 
     _getPageNum: (num) ->
       pages = @cachedPages or @allPages()
@@ -37,8 +37,9 @@ define (require) ->
       return pages[page.length - 1] if (num > pages.length)
       return pages[num - 1]
 
-    allPages: (nodes=@get('contents').models, collection=[]) ->
-      _.each nodes, (node) =>
+    allPages: (nodes=@get('contents')?.models, collection=[]) ->
+      return unless nodes
+      for node in nodes
         if node.isSection()
           children = node.get('contents').models
           @allPages(children, collection)
