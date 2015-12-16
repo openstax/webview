@@ -69,7 +69,7 @@ define (require) ->
         currentPage = @model.get('currentPage')
         pageIsLoaded = currentPage?.get('loaded')
         return unless pageIsLoaded and currentPage.get('active')
-        pageId = currentPage.get('shortId')
+        pageId = currentPage.getShortUuid()
       else
         pageId = 0
       currentRoute = Backbone.history.getFragment()

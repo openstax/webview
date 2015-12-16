@@ -195,7 +195,7 @@ define (require) ->
       return id
 
     getShortUuid: () ->
-      id = @get('shortId') or ''
+      id = @get('shortId') or @get('id')
 
       if typeof id is 'string'
         id = id.replace(/@.+/, '')
