@@ -7,7 +7,10 @@ define (require) ->
   AppView = require('cs!pages/app/app')
 
   return new class Router extends Backbone.Router
-    initialize: () ->
+    initialize: (args...) ->
+      decodedPathname = decodeURIComponent(window.location.pathname)
+      if (decodedPathname != window.location.pathname)
+        window.location.pathname = decodedPathname
       @appView = new AppView()
 
       # Default Route
