@@ -10,7 +10,7 @@ define (require) ->
     initialize: (args...) ->
       decodedPathname = decodeURIComponent(window.location.pathname)
       if (decodedPathname != window.location.pathname)
-        window.location.pathname = decodedPathname
+        Backbone.history.navigate(decodedPathname)
       @appView = new AppView()
 
       # Default Route
