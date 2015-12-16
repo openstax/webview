@@ -48,12 +48,12 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=div.summary &gt; h5</td>
+	<td>css=h5</td>
 	<td>Summary</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=div.summary &gt; h5</td>
+	<td>css=h5</td>
 	<td></td>
 </tr>
 <tr>
@@ -61,7 +61,6 @@
 	<td>css=div.abstract &gt; div</td>
 	<td>This module utilizes two 1835 letters by James Cramp in order to comment upon tensions between the United States and Mexico during this period.</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

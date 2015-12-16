@@ -9,12 +9,6 @@
 <table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
 <tr><td><b>Test Suite</b></td></tr>
 <tr><td><a href="Featured-books">Featured-books</a></td></tr>
-<tr><td><a href="Arts-subject-search">Arts-Subject-search</a></td></tr>
-<tr><td><a href="Business-subject-search">Business-Subject-search</a></td></tr>
-<tr><td><a href="Humanities-subject-search">Humanities-subject-search</a></td></tr>
-<tr><td><a href="Mathematics-subject-search">Mathematics-subject-search</a></td></tr>
-<tr><td><a href="Science-subject-search">Science-subject-search</a></td></tr>
-<tr><td><a href="Social-subject-search">Social-subject-search</a></td></tr>
 <tr><td><a href="Verify-License">Verify-License</a></td></tr>
 <tr><td><a href="Page-viewing">Page-viewing</a></td></tr>
 <tr><td><a href="Book-viewing-1">Book-viewing-1</a></td></tr>

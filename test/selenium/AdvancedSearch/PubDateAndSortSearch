@@ -74,12 +74,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=aside.filter &gt; div &gt; h3</td>
+	<td>css=h2.medium-header</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>css=aside.filter &gt; div &gt; h3</td>
+	<td>css=h2.medium-header</td>
 	<td>Filters</td>
 </tr>
 </tbody></table>
