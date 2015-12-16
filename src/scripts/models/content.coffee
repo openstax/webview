@@ -26,7 +26,7 @@ define (require) ->
     initialize: (options = {}) ->
       @set('loaded', false)
       @on('change:contents', =>
-        @cachedPages = @allPages()
+        @cachedPages = undefined
       )
 
       # Immediately load content that has an id

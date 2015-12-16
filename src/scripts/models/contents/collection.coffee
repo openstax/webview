@@ -26,29 +26,32 @@ define (require) ->
       return if firstChild.isSection()
       firstChild
 
-    cachedPages: undefined
-
     getTotalLength: () ->
-      (@cachedPages or @allPages())?.length
+      @allPages()?.length
 
     _getPageNum: (num) ->
-      pages = @cachedPages or @allPages()
+      pages = @allPages()
       return pages[0] if (num <= 1)
       return pages[page.length - 1] if (num > pages.length)
       return pages[num - 1]
 
-    allPages: (nodes=@get('contents')?.models, collection=[]) ->
-      return unless nodes
-      for node in nodes
-        if node.isSection()
-          children = node.get('contents').models
-          @allPages(children, collection)
-        else
-          collection.push(node)
-      collection
+    cachedPages: undefined
+
+    allPages: =>
+      return @cachedPages if @cachedPages
+      allPages = (nodes, collection=[]) ->
+        return unless nodes
+        for node in nodes
+          if node.isSection()
+            children = node.get('contents').models
+            allPages(children, collection)
+          else
+            collection.push(node)
+        collection
+      @cachedPages = allPages(@get('contents')?.models)
 
     _getPageFromId: (id) ->
-      pages = @cachedPages or @allPages()
+      pages = @allPages()
       idPattern = ///^#{id}///
       for page in pages
         id = page.get('id')
