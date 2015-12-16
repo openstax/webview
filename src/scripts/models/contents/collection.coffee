@@ -27,35 +27,37 @@ define (require) ->
       firstChild
 
     getTotalLength: () ->
-      contents = @get('contents')
-      length = 0
-
-      if contents
-        length = contents.reduce ((memo, node) -> memo + node.getTotalLength()), 0
-
-      return length
+      @allPages()?.length
 
     _getPageNum: (num) ->
-      page = 0
+      pages = @allPages()
+      return pages[0] if (num <= 1)
+      return pages[page.length - 1] if (num > pages.length)
+      return pages[num - 1]
 
-      for node in @get('contents').models
-        position = node.getTotalLength() + page
+    cachedPages: undefined
 
-        if position < num
-          page = position
-        else if num is position and not node.isSection() # Sections don't have page numbers
-          return node
-        else
-          return node.getPage(num-page)
+    allPages: =>
+      return @cachedPages if @cachedPages
+      allPages = (nodes, collection=[]) ->
+        return unless nodes
+        for node in nodes
+          if node.isSection()
+            children = node.get('contents').models
+            allPages(children, collection)
+          else
+            collection.push(node)
+        collection
+      @cachedPages = allPages(@get('contents')?.models)
 
-    _getPageId: (id) ->
-      for node in @get('contents').models
-        if node is id or node.get('id') is id or node.getVersionedId() is id or
-        node.get('shortId').match(///^#{id}///)
-          return node
-        else if node.isSection()
-          result = node.getPage(id)
-          return result if result
+    _getPageFromId: (id) ->
+      pages = @allPages()
+      idPattern = ///^#{id}///
+      for page in pages
+        id = page.get('id')
+        if page.get('id').match(idPattern) or
+        page.get('shortId').match(idPattern)
+          return page
 
       return
 
@@ -63,7 +65,7 @@ define (require) ->
       if typeof page is 'number'
         return @_getPageNum(page)
 
-      return @_getPageId(page)
+      return @_getPageFromId(page)
 
     toJSON: (options = {}) ->
       results = super(arguments...)
@@ -101,8 +103,6 @@ define (require) ->
           opts = _.extend({derivedOnly: true}, options)
 
         contents.create(model, opts or options)
-
-
 
       @set('changed', true)
 

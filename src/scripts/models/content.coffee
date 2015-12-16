@@ -25,6 +25,9 @@ define (require) ->
 
     initialize: (options = {}) ->
       @set('loaded', false)
+      @on('change:contents', =>
+        @cachedPages = undefined
+      )
 
       # Immediately load content that has an id
       if @id
@@ -103,6 +106,7 @@ define (require) ->
         @trigger("change:currentPage.#{eventName.slice(7)}", page, value)
 
     _setPage: (page) ->
+      @set('error', 404) if not page?
       currentPage = @get('currentPage')
 
       if currentPage
@@ -116,22 +120,15 @@ define (require) ->
         page.set('active', true)
 
         if not page.get('loaded')
-          page.fetch().done () ->
+          page.fetch().done ->
             page.set('loaded', true)
       else
         @trigger('change:currentPage.loaded')
 
     _lookupPage: (page) ->
-      if typeof page is 'number'
-        # Do not skip if the currentPage is the arg being passed in
-        # because otherwise it will not get fetched
-        pages = @getTotalPages()
-        if page < 1 then page = 1
-        if page > pages then page = pages
-
       return @getPage(page)
 
-    setPage: (page) -> @_setPage(@_lookupPage(page))
+    setPage: (page) -> @_setPage(@getPage(page))
 
     getTotalPages: () ->
       # FIX: cache total pages and recalculate on add/remove events?
