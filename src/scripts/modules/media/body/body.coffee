@@ -46,7 +46,6 @@ define (require) ->
       'keydown .media-body': 'checkKeySequence'
       'keyup .media-body': 'resetKeySequence'
       'click .os-interactive-link': 'simLink'
-      'click .concept-coach-launcher > button': 'launchConceptCoach'
 
     initialize: () ->
       super()
@@ -90,11 +89,8 @@ define (require) ->
       $body = $('body')
       @cc = new ConceptCoachAPI(settings.conceptCoach.url)
 
-      animatedScroll = (top) ->
-        $('html, body').animate({scrollTop: top}, '500', 'swing')
-
       @cc.handleOpen = (eventData) ->
-        @handleOpened(eventData, animatedScroll, $body[0])
+        @handleOpened(eventData, $body[0])
 
       @cc.handleClose = (eventData) ->
         @handleClosed(eventData, $body[0])
@@ -102,19 +98,10 @@ define (require) ->
       # nab math rendering from exercise embeddables config
       {onRender} = _.findWhere(embeddablesConfig.embeddableTypes, {embeddableType: 'exercise'})
 
+      @cc.on('ui.launching', @openConceptCoach)
       @cc.on('ui.close', @cc.handleClose)
       @cc.on('open', @cc.handleOpen)
       @cc.on('book.update', @updatePageFromCCNav)
-      @cc.on('exercise.component.loaded', ->
-        # TO DO should have element to parse passed in, but will just do this for now.
-        $hasHtml = $('.openstax-has-html')
-        $hasHtml.each (iter, element) ->
-          onRender($(element))
-      )
-
-      Backbone.on('window:optimizedResize', =>
-        @cc?.handleResize?()
-      )
 
     updateCCOptions: ->
       options = @getOptionsForCoach()
@@ -152,19 +139,23 @@ define (require) ->
       router.navigate href, {trigger: false}, => @parent.parent.parent.trackAnalytics()
 
     getOptionsForCoach: ->
+      # nab math rendering from exercise embeddables config
+      {onRender} = _.findWhere(embeddablesConfig.embeddableTypes, {embeddableType: 'exercise'})
+
       options =
         collectionUUID: @model.getUuid()
         moduleUUID: @model.get('currentPage')?.getUuid()
         cnxUrl: ''
+        processHtmlAndMath: (root) ->
+          onRender($(root))
+          true
 
       _.clone(options)
 
-    launchConceptCoach: (event) ->
+    openConceptCoach: =>
       unless @cc.component?.isMounted()
-        $button = $(event.currentTarget)
         options = @getOptionsForCoach()
-
-        @cc.open($button.parent()[0], options)
+        @cc.open($('#cc-launcher').parent()[0], options)
 
 
     # Toggle the visibility of teacher's edition elements
@@ -279,7 +270,11 @@ define (require) ->
             $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
 
             if @templateHelpers.isCoach.call(@)
-              $(embeddableTemplates['cc-launcher']()).insertAfter(_.last($exercisesToHide))
+              $launcher = $('<div id="cc-launcher"></div>')
+              $launcher.insertAfter(_.last($exercisesToHide))
+              _.defer =>
+                # ensures that #cc-launcher is on DOM before mounting the launcher
+                @cc.displayLauncher?($('#cc-launcher')[0])
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))

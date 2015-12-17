@@ -26,7 +26,7 @@ define (require) ->
 
       onRender: ($parent) ->
         # For the maths.  you know. it do what it do.
-        $mathElements = $parent.find('[data-math]')
+        $mathElements = $parent.find('[data-math]:not(.math-rendered)')
         $mathElements.each (iter, element) ->
 
           $element = $(element)
@@ -38,6 +38,9 @@ define (require) ->
           # Moved adding to MathJax queue here. Means the queue gets pushed onto more (once per math element),
           # but what it trys to parse for matching math is WAY less than the whole page.
           MathJax?.Hub.Queue(['Typeset', MathJax.Hub], $element[0])
+          MathJax?.Hub.Queue( ->
+            $element[0].classList.add('math-rendered')
+          )
 
       async: true
     }]
