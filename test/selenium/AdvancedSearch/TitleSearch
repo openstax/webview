@@ -44,12 +44,12 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h1</td>
+	<td>css=#s1 &gt; h1</td>
 	<td>Related Keys</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>css=h1</td>
+	<td>css=#s1 &gt; h1</td>
 	<td>Related Keys</td>
 </tr>
 </tbody></table>

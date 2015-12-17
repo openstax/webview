@@ -19,12 +19,12 @@
 <!--Click on metadata tab-->
 <tr>
 	<td>waitForText</td>
-	<td>css=li.tab.metadata-tab &gt; span.tab-title</td>
-	<td>Metadata</td>
+	<td>css=#metadata-tab &gt; span.tab-title</td>
+	<td>More Information</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=li.tab.metadata-tab &gt; span.tab-title</td>
+	<td>css=#metadata-tab &gt; span.tab-title</td>
 	<td></td>
 </tr>
 <!--verify license text-->
