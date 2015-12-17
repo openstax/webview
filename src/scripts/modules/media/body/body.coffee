@@ -102,16 +102,6 @@ define (require) ->
       @cc.on('ui.close', @cc.handleClose)
       @cc.on('open', @cc.handleOpen)
       @cc.on('book.update', @updatePageFromCCNav)
-      @cc.on('exercise.component.loaded', ->
-        # TO DO should have element to parse passed in, but will just do this for now.
-        $hasHtml = $('.openstax-has-html')
-        $hasHtml.each (iter, element) ->
-          onRender($(element))
-      )
-
-      Backbone.on('window:optimizedResize', =>
-        @cc?.handleResize?()
-      )
 
     updateCCOptions: ->
       options = @getOptionsForCoach()
@@ -149,10 +139,16 @@ define (require) ->
       router.navigate href, {trigger: false}, => @parent.parent.parent.trackAnalytics()
 
     getOptionsForCoach: ->
+      # nab math rendering from exercise embeddables config
+      {onRender} = _.findWhere(embeddablesConfig.embeddableTypes, {embeddableType: 'exercise'})
+
       options =
         collectionUUID: @model.getUuid()
         moduleUUID: @model.get('currentPage')?.getUuid()
         cnxUrl: ''
+        processHtmlAndMath: (root) ->
+          onRender($(root))
+          true
 
       _.clone(options)
 
