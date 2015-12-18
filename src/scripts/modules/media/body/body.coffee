@@ -155,7 +155,7 @@ define (require) ->
     openConceptCoach: =>
       unless @cc.component?.isMounted()
         options = @getOptionsForCoach()
-        @cc.open($('#cc-launcher').parent()[0], options)
+        @cc.open(options)
 
 
     # Toggle the visibility of teacher's edition elements
@@ -274,7 +274,7 @@ define (require) ->
               $launcher.insertAfter(_.last($exercisesToHide))
               _.defer =>
                 # ensures that #cc-launcher is on DOM before mounting the launcher
-                @cc?.displayLauncher?($('#cc-launcher')[0])
+                @cc?.initialize?($('#cc-launcher')[0])
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
