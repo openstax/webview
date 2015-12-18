@@ -274,7 +274,7 @@ define (require) ->
               $launcher.insertAfter(_.last($exercisesToHide))
               _.defer =>
                 # ensures that #cc-launcher is on DOM before mounting the launcher
-                @cc.displayLauncher?($('#cc-launcher')[0])
+                @cc?.displayLauncher?($('#cc-launcher')[0])
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
