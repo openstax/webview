@@ -64,8 +64,10 @@ body.cc-opened {
   .concept-coach-wrapper {
     text-align: left;
   }
+
   [data-math]:not(.math-rendered) {
-    display: none;
+    // hide math while it is unformatted
+    visibility: hidden;
   }
 
   .media-body > #content .concept-coach-wrapper .dropdown-menu > li > a {
