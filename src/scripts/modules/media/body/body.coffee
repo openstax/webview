@@ -148,7 +148,7 @@ define (require) ->
           # If the main body's MathJax is still processing,
           # queueing up additional elements freezes the main body's
           # MathJax and prevents the coach's MathJax from ever processing.
-          # 
+          #
           # This will que up the coach's MathJax-ing if the main jaxing is
           # in progress, and will run the coach's MathJax-ing immediately
           # otherwise.
