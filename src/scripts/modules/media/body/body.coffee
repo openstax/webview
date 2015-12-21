@@ -153,6 +153,7 @@ define (require) ->
           # in progress, and will run the coach's MathJax-ing immediately
           # otherwise.
           if @jaxing
+            return unless @cc.component?.props?.open
             toRender = @processCCMath
             @processCCMath = ->
               toRender?()
