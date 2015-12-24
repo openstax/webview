@@ -15,7 +15,6 @@ define (require) ->
   embeddableTemplates =
     'exercise': require('hbs!./embeddables/exercise-template')
     'iframe': require('hbs!./embeddables/iframe-template')
-    'cc-launcher': require('hbs!./embeddables/cc-launcher-template')
 
   return class MediaBodyView extends EditableView
     key = []
@@ -30,9 +29,6 @@ define (require) ->
           return @model.asPage()?.get('loaded')
 
         return @model.get('loaded')
-      isCoach: ->
-        moduleUUID = @model.getUuid()?.split('?')[0]
-        moduleUUID of settings.conceptCoach.uuids
 
     editable:
       '.media-body':
@@ -55,14 +51,9 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.editable', @render)
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
       @listenTo(@model, 'change:currentPage.searchHtml', @render)
-      if @templateHelpers.isCoach.call(@)
+      if @isCoach()
         @initializeConceptCoach()
-        @listenTo(@model, 'change:currentPage', @updateCCOptions)
-
-    onBeforeClose: ->
-      if @cc?
-        @cc.destroy?()
-        delete @cc
+        @listenTo(@model, 'change:currentPage', @updateCoachOptions)
 
     canonicalizePath: =>
       if @model.isBook()
@@ -85,8 +76,24 @@ define (require) ->
       else
         $els.hide()
 
+    goToPage: (pageNumber, href) ->
+      @model.setPage(pageNumber)
+      router.navigate href, {trigger: false}, => @parent.parent.parent.trackAnalytics()
+
+    getCoach: ->
+      moduleUUID = @model.getUuid()?.split('?')[0]
+      settings.conceptCoach?.uuids?[moduleUUID]
+
+    isCoach: ->
+      @getCoach()?
+
+    onBeforeClose: ->
+      if @cc?
+        @cc.destroy?()
+        delete @cc
+
     initializeConceptCoach: ->
-      return unless @templateHelpers.isCoach.call(@) and not @cc
+      return unless @isCoach() and not @cc
       $body = $('body')
       @cc = new ConceptCoachAPI(settings.conceptCoach.url)
 
@@ -96,12 +103,42 @@ define (require) ->
       @cc.handleClose = (eventData) ->
         @handleClosed(eventData, $body[0])
 
-      @cc.on('ui.launching', @openConceptCoach)
+      @cc.on('ui.launching', @openCoach)
       @cc.on('ui.close', @cc.handleClose)
       @cc.on('open', @cc.handleOpen)
-      @cc.on('book.update', @updatePageFromCCNav)
+      @cc.on('book.update', @updatePageFromCoach)
+      @cc.on 'view.update', (eventData) =>
+        {newPath, options} = @getPathForCoach(eventData)
+        router.navigate(newPath, options) if newPath?
 
-    updateCCOptions: ->
+    canCoach: ->
+      @isCoach() and @cc?
+
+    hideExercises: ($el) ->
+      hiddenClasses = @getCoach()
+      hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
+      $exercisesToHide = $el.find(hiddenSelectors)
+      $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
+
+      $exercisesToHide
+
+    getMounterForCoach: ($exercises, wrapperId = 'coach-wrapper') ->
+      return if $("##{wrapperId}").length > 0
+      $launcher = $("<div id=\"#{wrapperId}\"></div>")
+      $launcher.insertAfter(_.last($exercises))
+      coachOptions = @getOptionsForCoach()
+
+      # ensures that #cc-launcher is on DOM before mounting the launcher
+      ($el) =>
+        $launcher = $el.find("##{wrapperId}")
+        @cc.initialize($launcher[0], coachOptions) if $launcher.length > 0
+
+    handleCoach: ($el) ->
+      return unless @canCoach()
+      $hiddenExercises = @hideExercises($el)
+      @getMounterForCoach($hiddenExercises) if $hiddenExercises.length
+
+    updateCoachOptions: ->
       options = @getOptionsForCoach()
       @cc.setOptions(options)
 
@@ -111,7 +148,7 @@ define (require) ->
         page.getUuid() is uuid
       )
 
-    updatePageFromCCNav: ({collectionUUID, moduleUUID, link}) =>
+    updatePageFromCoach: ({collectionUUID, moduleUUID, link}) =>
       if @model.getUuid() is collectionUUID
         pathInfo =
           model: @model
@@ -132,11 +169,32 @@ define (require) ->
 
       router.navigate(link, {trigger: true})
 
-    goToPage: (pageNumber, href) ->
-      @model.setPage(pageNumber)
-      router.navigate href, {trigger: false}, => @parent.parent.parent.trackAnalytics()
+    getPathForCoach: (coachData) ->
+      return unless coachData?.route?
+      {path, query} = linksHelper.getCurrentPathComponents()
+      options =
+        trigger: false
+
+      if query['cc-view'] isnt coachData.state.view
+        newQuery = _.extend({}, query, 'cc-view': coachData.state.view)
+        pathFragments = [path.split('?')[0]]
+
+        if coachData.state.view is 'close'
+          delete newQuery['cc-view']
+        else if query['cc-view']?
+          options.replace = true
+
+        if not _.isEmpty(newQuery)
+          pathFragments.push(linksHelper.param(newQuery))
+
+        newPath = pathFragments.join('?')
+
+      {newPath, options}
 
     getOptionsForCoach: ->
+      {query} = linksHelper.getCurrentPathComponents()
+      view = query['cc-view']
+
       # nab math rendering from exercise embeddables config
       {onRender} = _.findWhere(embeddablesConfig.embeddableTypes, {embeddableType: 'exercise'})
 
@@ -162,9 +220,13 @@ define (require) ->
             onRender($(root))
           true
 
+      if view?
+        options.view = view
+        options.open = true
+
       _.clone(options)
 
-    openConceptCoach: =>
+    openCoach: =>
       options = @getOptionsForCoach()
       @cc.open(options)
 
@@ -272,20 +334,10 @@ define (require) ->
           # # uncomment to embed fake exercises and see embeddable exercises in action
           # @fakeExercises($temp)
 
-          # Hide Exercises for Concept Coach
           $('#zenbox_tab').show()
-          hiddenClasses = settings?.conceptCoach?.uuids?[@model.getUuid()] or []
-          if hiddenClasses.length > 0
-            hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
-            $exercisesToHide = $temp.find(hiddenSelectors)
-            $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
 
-            if $exercisesToHide.length and @templateHelpers.isCoach.call(@) and @cc?
-              $launcher = $('<div id="cc-launcher"></div>')
-              $launcher.insertAfter(_.last($exercisesToHide))
-              _.defer =>
-                # ensures that #cc-launcher is on DOM before mounting the launcher
-                @cc.initialize?($('#cc-launcher')[0])
+          # Hide Exercises and display launcher for Concept Coach, only if canCoach
+          coachMounter = @handleCoach($temp)
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
@@ -298,6 +350,7 @@ define (require) ->
         console.log error
 
       @$el?.html($temp.html())
+      coachMounter?(@$el)
 
 
 
