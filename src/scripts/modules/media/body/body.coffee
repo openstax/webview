@@ -64,7 +64,7 @@ define (require) ->
       else
         pageId = 0
       currentRoute = Backbone.history.getFragment()
-      canonicalPath = linksHelper.getPath('contents', {model: @model, page: pageId})
+      canonicalPath = linksHelper.getPath('contents', {model: @model, page: pageId}, [])
       if (canonicalPath isnt "/#{currentRoute}")
         router.navigate(canonicalPath, {replace: true})
 
@@ -123,20 +123,20 @@ define (require) ->
       $exercisesToHide
 
     getMounterForCoach: ($exercises, wrapperId = 'coach-wrapper') ->
-      return if $("##{wrapperId}").length > 0
-      $launcher = $("<div id=\"#{wrapperId}\"></div>")
-      $launcher.insertAfter(_.last($exercises))
+      $("##{wrapperId}").remove()
+      $coachWrapper = $("<div id=\"#{wrapperId}\"></div>")
+      $coachWrapper.insertAfter(_.last($exercises))
       coachOptions = @getOptionsForCoach()
 
       # ensures that #cc-launcher is on DOM before mounting the launcher
       ($el) =>
-        $launcher = $el.find("##{wrapperId}")
-        @cc.initialize($launcher[0], coachOptions) if $launcher.length > 0
+        $coach = $el.find("##{wrapperId}")
+        @cc.initialize($coach[0], coachOptions) if $coach.length > 0
 
     handleCoach: ($el) ->
       return unless @canCoach()
       $hiddenExercises = @hideExercises($el)
-      @getMounterForCoach($hiddenExercises) if $hiddenExercises.length
+      @getMounterForCoach($hiddenExercises) if $hiddenExercises.length > 0
 
     updateCoachOptions: ->
       options = @getOptionsForCoach()
@@ -212,8 +212,8 @@ define (require) ->
           # otherwise.
           if @jaxing
             return unless @cc.component?.props?.open
-            toRender = @processCCMath
-            @processCCMath = ->
+            toRender = @processCoachMath
+            @processCoachMath = ->
               toRender?()
               onRender($(root))
           else
@@ -336,8 +336,8 @@ define (require) ->
 
           $('#zenbox_tab').show()
 
-          # Hide Exercises and display launcher for Concept Coach, only if canCoach
-          coachMounter = @handleCoach($temp)
+          # Hide Exercises and set mounter for Concept Coach, only if canCoach
+          @coachMounter = @handleCoach($temp)
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
@@ -350,7 +350,6 @@ define (require) ->
         console.log error
 
       @$el?.html($temp.html())
-      coachMounter?(@$el)
 
 
 
@@ -543,13 +542,16 @@ define (require) ->
       if @model.get('sims') is true
         @parent?.regions.self.append(new SimModal({model: @model}))
 
+      # mount the Concept Coach if the mounter has been configured/if `canCoach`
+      @coachMounter?(@$el)
+
       # MathJax rendering must be done after the HTML has been added to the DOM
       MathJax?.Hub.Queue =>
         @jaxing = true
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
       MathJax?.Hub.Queue =>
         @jaxing = false
-        @processCCMath?()
+        @processCoachMath?()
 
       # Update the hash fragment after the content has loaded
       # to force the browser window to find the intended content
