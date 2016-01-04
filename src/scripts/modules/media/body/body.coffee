@@ -7,7 +7,7 @@ define (require) ->
   EditableView = require('cs!helpers/backbone/views/editable')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   SimModal = require('cs!./embeddables/modals/sims/sims')
-  ConceptCoachAPI = require('OpenStaxConceptCoach')
+  Coach = require('cs!./embeddables/coach')
   template = require('hbs!./body-template')
   settings = require('settings')
   require('less!./body')
@@ -43,6 +43,9 @@ define (require) ->
       'keyup .media-body': 'resetKeySequence'
       'click .os-interactive-link': 'simLink'
 
+    regions:
+      coach: '#coach-wrapper'
+
     initialize: () ->
       super()
       @jaxing = false
@@ -51,9 +54,6 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.editable', @render)
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
       @listenTo(@model, 'change:currentPage.searchHtml', @render)
-      if @isCoach()
-        @initializeConceptCoach()
-        @listenTo(@model, 'change:currentPage', @updateCoachOptions)
 
     canonicalizePath: =>
       if @model.isBook()
@@ -87,33 +87,6 @@ define (require) ->
     isCoach: ->
       @getCoach()?
 
-    onBeforeClose: ->
-      if @cc?
-        @cc.destroy?()
-        delete @cc
-
-    initializeConceptCoach: ->
-      return unless @isCoach() and not @cc
-      $body = $('body')
-      @cc = new ConceptCoachAPI(settings.conceptCoach.url)
-
-      @cc.handleOpen = (eventData) ->
-        @handleOpened(eventData, $body[0])
-
-      @cc.handleClose = (eventData) ->
-        @handleClosed(eventData, $body[0])
-
-      @cc.on('ui.launching', @openCoach)
-      @cc.on('ui.close', @cc.handleClose)
-      @cc.on('open', @cc.handleOpen)
-      @cc.on('book.update', @updatePageFromCoach)
-      @cc.on 'view.update', (eventData) =>
-        {newPath, options} = @getPathForCoach(eventData)
-        router.navigate(newPath, options) if newPath?
-
-    canCoach: ->
-      @isCoach() and @cc?
-
     hideExercises: ($el) ->
       hiddenClasses = @getCoach()
       hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
@@ -122,114 +95,15 @@ define (require) ->
 
       $exercisesToHide
 
-    getMounterForCoach: ($exercises, wrapperId = 'coach-wrapper') ->
+    makeRegionForCoach: ($exercises, wrapperId = 'coach-wrapper') ->
       $("##{wrapperId}").remove()
       $coachWrapper = $("<div id=\"#{wrapperId}\"></div>")
       $coachWrapper.insertAfter(_.last($exercises))
-      coachOptions = @getOptionsForCoach()
-
-      # ensures that #cc-launcher is on DOM before mounting the launcher
-      ($el) =>
-        $coach = $el.find("##{wrapperId}")
-        @cc.initialize($coach[0], coachOptions) if $coach.length > 0
 
     handleCoach: ($el) ->
-      return unless @canCoach()
+      return unless @isCoach()
       $hiddenExercises = @hideExercises($el)
-      @getMounterForCoach($hiddenExercises) if $hiddenExercises.length > 0
-
-    updateCoachOptions: ->
-      options = @getOptionsForCoach()
-      @cc.setOptions(options)
-
-    lookUpPageByUuid: (uuid) ->
-      {allPages} = @parent.parent.regions.sidebar.views[0]
-      _.find(allPages, (page) ->
-        page.getUuid() is uuid
-      )
-
-    updatePageFromCoach: ({collectionUUID, moduleUUID, link}) =>
-      if @model.getUuid() is collectionUUID
-        pathInfo =
-          model: @model
-        pageNumber = 0
-
-        if moduleUUID?
-          page = @lookUpPageByUuid(moduleUUID)
-
-          if page?
-            pageId = page.get('shortId')
-            return if pageId is @model.get('currentPage').get('shortId')
-
-            pathInfo.page = pageId
-            pageNumber = page.getPageNumber()
-
-        href = linksHelper.getPath('contents', pathInfo)
-        return @goToPage(page.getPageNumber(), href)
-
-      router.navigate(link, {trigger: true})
-
-    getPathForCoach: (coachData) ->
-      return unless coachData?.route?
-      {path, query} = linksHelper.getCurrentPathComponents()
-      options =
-        trigger: false
-
-      if query['cc-view'] isnt coachData.state.view
-        newQuery = _.extend({}, query, 'cc-view': coachData.state.view)
-        pathFragments = [path.split('?')[0]]
-
-        if coachData.state.view is 'close'
-          delete newQuery['cc-view']
-        else if query['cc-view']?
-          options.replace = true
-
-        if not _.isEmpty(newQuery)
-          pathFragments.push(linksHelper.param(newQuery))
-
-        newPath = pathFragments.join('?')
-
-      {newPath, options}
-
-    getOptionsForCoach: ->
-      {query} = linksHelper.getCurrentPathComponents()
-      view = query['cc-view']
-
-      # nab math rendering from exercise embeddables config
-      {onRender} = _.findWhere(embeddablesConfig.embeddableTypes, {embeddableType: 'exercise'})
-
-      options =
-        collectionUUID: @model.getUuid()
-        moduleUUID: @model.get('currentPage')?.getUuid()
-        cnxUrl: ''
-        processHtmlAndMath: (root) =>
-          # If the main body's MathJax is still processing,
-          # queueing up additional elements freezes the main body's
-          # MathJax and prevents the coach's MathJax from ever processing.
-          #
-          # This will que up the coach's MathJax-ing if the main jaxing is
-          # in progress, and will run the coach's MathJax-ing immediately
-          # otherwise.
-          if @jaxing
-            return unless @cc.component?.props?.open
-            toRender = @processCoachMath
-            @processCoachMath = ->
-              toRender?()
-              onRender($(root))
-          else
-            onRender($(root))
-          true
-
-      if view?
-        options.view = view
-        options.open = true
-
-      _.clone(options)
-
-    openCoach: =>
-      options = @getOptionsForCoach()
-      @cc.open(options)
-
+      @makeRegionForCoach($hiddenExercises) if $hiddenExercises.length > 0
 
     # Toggle the visibility of teacher's edition elements
     toggleTeacher: () ->
@@ -336,8 +210,8 @@ define (require) ->
 
           $('#zenbox_tab').show()
 
-          # Hide Exercises and set mounter for Concept Coach, only if canCoach
-          @coachMounter = @handleCoach($temp)
+          # Hide Exercises and set region for Concept Coach, only if canCoach
+          @handleCoach($temp)
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
@@ -543,7 +417,7 @@ define (require) ->
         @parent?.regions.self.append(new SimModal({model: @model}))
 
       # mount the Concept Coach if the mounter has been configured/if `canCoach`
-      @coachMounter?(@$el)
+      @regions.coach.append(new Coach({model: @model})) if @isCoach()
 
       # MathJax rendering must be done after the HTML has been added to the DOM
       MathJax?.Hub.Queue =>
