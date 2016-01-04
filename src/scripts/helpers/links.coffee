@@ -28,7 +28,7 @@ define (require) ->
 
     cleanUrl: trim
 
-    getPath: (page, data) ->
+    getPath: (page, data, paramsToIgnore = ['cc-view']) ->
       url = settings.root
 
       switch page
@@ -46,7 +46,7 @@ define (require) ->
           url += ":#{pageId}" if pageId
           url += "@#{pageVersion}" if pageVersion?
           url += "/#{trim(title)}" if title
-          url += window.location.search
+          url += @getCleanSearchQuery(window.location.search, paramsToIgnore)
 
       return url
 
@@ -62,6 +62,18 @@ define (require) ->
         page = ":#{model.getPageNumber()}"
 
       return "#{settings.root}contents/#{id}#{page}/#{title}"
+
+    getCleanSearchQuery: (queryString, paramsToIgnore) ->
+      queryString ?= window.location.search
+
+      return queryString if _.isEmpty(paramsToIgnore)
+
+      query = @serializeQuery(queryString)
+
+      cleanedQuery = _.omit(query, paramsToIgnore)
+      cleanedQueryString = @param(cleanedQuery)
+
+      if _.isEmpty(cleanedQuery) then '' else "?#{@param(cleanedQuery)}"
 
     getCurrentPathComponents: () ->
       components = Backbone.history.fragment.match(@contentsLinkRegEx) or []

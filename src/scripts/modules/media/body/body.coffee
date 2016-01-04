@@ -7,7 +7,7 @@ define (require) ->
   EditableView = require('cs!helpers/backbone/views/editable')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   SimModal = require('cs!./embeddables/modals/sims/sims')
-  ConceptCoachAPI = require('OpenStaxConceptCoach')
+  Coach = require('cs!./embeddables/coach')
   template = require('hbs!./body-template')
   settings = require('settings')
   require('less!./body')
@@ -15,7 +15,6 @@ define (require) ->
   embeddableTemplates =
     'exercise': require('hbs!./embeddables/exercise-template')
     'iframe': require('hbs!./embeddables/iframe-template')
-    'cc-launcher': require('hbs!./embeddables/cc-launcher-template')
 
   return class MediaBodyView extends EditableView
     key = []
@@ -30,9 +29,6 @@ define (require) ->
           return @model.asPage()?.get('loaded')
 
         return @model.get('loaded')
-      isCoach: ->
-        moduleUUID = @model.getUuid()?.split('?')[0]
-        moduleUUID of settings.conceptCoach.uuids
 
     editable:
       '.media-body':
@@ -47,6 +43,9 @@ define (require) ->
       'keyup .media-body': 'resetKeySequence'
       'click .os-interactive-link': 'simLink'
 
+    regions:
+      coach: '#coach-wrapper'
+
     initialize: () ->
       super()
       @jaxing = false
@@ -55,14 +54,6 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.editable', @render)
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
       @listenTo(@model, 'change:currentPage.searchHtml', @render)
-      if @templateHelpers.isCoach.call(@)
-        @initializeConceptCoach()
-        @listenTo(@model, 'change:currentPage', @updateCCOptions)
-
-    onBeforeClose: ->
-      if @cc?
-        @cc.destroy?()
-        delete @cc
 
     canonicalizePath: =>
       if @model.isBook()
@@ -73,7 +64,7 @@ define (require) ->
       else
         pageId = 0
       currentRoute = Backbone.history.getFragment()
-      canonicalPath = linksHelper.getPath('contents', {model: @model, page: pageId})
+      canonicalPath = linksHelper.getPath('contents', {model: @model, page: pageId}, [])
       if (canonicalPath isnt "/#{currentRoute}")
         router.navigate(canonicalPath, {replace: true})
 
@@ -85,89 +76,34 @@ define (require) ->
       else
         $els.hide()
 
-    initializeConceptCoach: ->
-      return unless @templateHelpers.isCoach.call(@) and not @cc
-      $body = $('body')
-      @cc = new ConceptCoachAPI(settings.conceptCoach.url)
-
-      @cc.handleOpen = (eventData) ->
-        @handleOpened(eventData, $body[0])
-
-      @cc.handleClose = (eventData) ->
-        @handleClosed(eventData, $body[0])
-
-      @cc.on('ui.launching', @openConceptCoach)
-      @cc.on('ui.close', @cc.handleClose)
-      @cc.on('open', @cc.handleOpen)
-      @cc.on('book.update', @updatePageFromCCNav)
-
-    updateCCOptions: ->
-      options = @getOptionsForCoach()
-      @cc.setOptions(options)
-
-    lookUpPageByUuid: (uuid) ->
-      {allPages} = @parent.parent.regions.sidebar.views[0]
-      _.find(allPages, (page) ->
-        page.getUuid() is uuid
-      )
-
-    updatePageFromCCNav: ({collectionUUID, moduleUUID, link}) =>
-      if @model.getUuid() is collectionUUID
-        pathInfo =
-          model: @model
-        pageNumber = 0
-
-        if moduleUUID?
-          page = @lookUpPageByUuid(moduleUUID)
-
-          if page?
-            pageId = page.get('shortId')
-            return if pageId is @model.get('currentPage').get('shortId')
-
-            pathInfo.page = pageId
-            pageNumber = page.getPageNumber()
-
-        href = linksHelper.getPath('contents', pathInfo)
-        return @goToPage(page.getPageNumber(), href)
-
-      router.navigate(link, {trigger: true})
-
     goToPage: (pageNumber, href) ->
       @model.setPage(pageNumber)
       router.navigate href, {trigger: false}, => @parent.parent.parent.trackAnalytics()
 
-    getOptionsForCoach: ->
-      # nab math rendering from exercise embeddables config
-      {onRender} = _.findWhere(embeddablesConfig.embeddableTypes, {embeddableType: 'exercise'})
+    getCoach: ->
+      moduleUUID = @model.getUuid()?.split('?')[0]
+      settings.conceptCoach?.uuids?[moduleUUID]
 
-      options =
-        collectionUUID: @model.getUuid()
-        moduleUUID: @model.get('currentPage')?.getUuid()
-        cnxUrl: ''
-        processHtmlAndMath: (root) =>
-          # If the main body's MathJax is still processing,
-          # queueing up additional elements freezes the main body's
-          # MathJax and prevents the coach's MathJax from ever processing.
-          #
-          # This will que up the coach's MathJax-ing if the main jaxing is
-          # in progress, and will run the coach's MathJax-ing immediately
-          # otherwise.
-          if @jaxing
-            return unless @cc.component?.props?.open
-            toRender = @processCCMath
-            @processCCMath = ->
-              toRender?()
-              onRender($(root))
-          else
-            onRender($(root))
-          true
+    isCoach: ->
+      @getCoach()?
 
-      _.clone(options)
+    hideExercises: ($el) ->
+      hiddenClasses = @getCoach()
+      hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
+      $exercisesToHide = $el.find(hiddenSelectors)
+      $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
 
-    openConceptCoach: =>
-      options = @getOptionsForCoach()
-      @cc.open(options)
+      $exercisesToHide
 
+    makeRegionForCoach: ($exercises, wrapperId = 'coach-wrapper') ->
+      $("##{wrapperId}").remove()
+      $coachWrapper = $("<div id=\"#{wrapperId}\"></div>")
+      $coachWrapper.insertAfter(_.last($exercises))
+
+    handleCoach: ($el) ->
+      return unless @isCoach()
+      $hiddenExercises = @hideExercises($el)
+      @makeRegionForCoach($hiddenExercises) if $hiddenExercises.length > 0
 
     # Toggle the visibility of teacher's edition elements
     toggleTeacher: () ->
@@ -272,20 +208,10 @@ define (require) ->
           # # uncomment to embed fake exercises and see embeddable exercises in action
           # @fakeExercises($temp)
 
-          # Hide Exercises for Concept Coach
           $('#zenbox_tab').show()
-          hiddenClasses = settings?.conceptCoach?.uuids?[@model.getUuid()] or []
-          if hiddenClasses.length > 0
-            hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
-            $exercisesToHide = $temp.find(hiddenSelectors)
-            $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
 
-            if $exercisesToHide.length and @templateHelpers.isCoach.call(@) and @cc?
-              $launcher = $('<div id="cc-launcher"></div>')
-              $launcher.insertAfter(_.last($exercisesToHide))
-              _.defer =>
-                # ensures that #cc-launcher is on DOM before mounting the launcher
-                @cc.initialize?($('#cc-launcher')[0])
+          # Hide Exercises and set region for Concept Coach, only if canCoach
+          @handleCoach($temp)
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
@@ -490,13 +416,16 @@ define (require) ->
       if @model.get('sims') is true
         @parent?.regions.self.append(new SimModal({model: @model}))
 
+      # mount the Concept Coach if the mounter has been configured/if `canCoach`
+      @regions.coach.append(new Coach({model: @model})) if @isCoach()
+
       # MathJax rendering must be done after the HTML has been added to the DOM
       MathJax?.Hub.Queue =>
         @jaxing = true
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
       MathJax?.Hub.Queue =>
         @jaxing = false
-        @processCCMath?()
+        @processCoachMath?()
 
       # Update the hash fragment after the content has loaded
       # to force the browser window to find the intended content
