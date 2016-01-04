@@ -49,6 +49,7 @@ define (require) ->
 
     initialize: () ->
       super()
+      @jaxing = false
       @listenTo(@model, 'change:loaded', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
@@ -94,9 +95,6 @@ define (require) ->
 
       @cc.handleClose = (eventData) ->
         @handleClosed(eventData, $body[0])
-
-      # nab math rendering from exercise embeddables config
-      {onRender} = _.findWhere(embeddablesConfig.embeddableTypes, {embeddableType: 'exercise'})
 
       @cc.on('ui.launching', @openConceptCoach)
       @cc.on('ui.close', @cc.handleClose)
@@ -146,16 +144,29 @@ define (require) ->
         collectionUUID: @model.getUuid()
         moduleUUID: @model.get('currentPage')?.getUuid()
         cnxUrl: ''
-        processHtmlAndMath: (root) ->
-          onRender($(root))
+        processHtmlAndMath: (root) =>
+          # If the main body's MathJax is still processing,
+          # queueing up additional elements freezes the main body's
+          # MathJax and prevents the coach's MathJax from ever processing.
+          #
+          # This will que up the coach's MathJax-ing if the main jaxing is
+          # in progress, and will run the coach's MathJax-ing immediately
+          # otherwise.
+          if @jaxing
+            return unless @cc.component?.props?.open
+            toRender = @processCCMath
+            @processCCMath = ->
+              toRender?()
+              onRender($(root))
+          else
+            onRender($(root))
           true
 
       _.clone(options)
 
     openConceptCoach: =>
-      unless @cc.component?.isMounted()
-        options = @getOptionsForCoach()
-        @cc.open($('#cc-launcher').parent()[0], options)
+      options = @getOptionsForCoach()
+      @cc.open(options)
 
 
     # Toggle the visibility of teacher's edition elements
@@ -269,12 +280,12 @@ define (require) ->
             $exercisesToHide = $temp.find(hiddenSelectors)
             $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
 
-            if @templateHelpers.isCoach.call(@)
+            if $exercisesToHide.length and @templateHelpers.isCoach.call(@) and @cc?
               $launcher = $('<div id="cc-launcher"></div>')
               $launcher.insertAfter(_.last($exercisesToHide))
               _.defer =>
                 # ensures that #cc-launcher is on DOM before mounting the launcher
-                @cc.displayLauncher?($('#cc-launcher')[0])
+                @cc.initialize?($('#cc-launcher')[0])
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
@@ -480,7 +491,12 @@ define (require) ->
         @parent?.regions.self.append(new SimModal({model: @model}))
 
       # MathJax rendering must be done after the HTML has been added to the DOM
+      MathJax?.Hub.Queue =>
+        @jaxing = true
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
+      MathJax?.Hub.Queue =>
+        @jaxing = false
+        @processCCMath?()
 
       # Update the hash fragment after the content has loaded
       # to force the browser window to find the intended content

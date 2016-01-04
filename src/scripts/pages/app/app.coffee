@@ -35,6 +35,7 @@ define (require) ->
       if queryString.minimal
         @minimal = true
       headerView = if @minimal then new MinimalHeaderView() else new HeaderView()
+      headerView.setLegacyLink('content')
       @regions.header.show(headerView)
       # Lazy-load the page
       require ["cs!pages/#{page}/#{page}"], (View) =>

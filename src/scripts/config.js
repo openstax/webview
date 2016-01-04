@@ -106,7 +106,8 @@
             tex2jax: {
               inlineMath: [
                 ['[TEX_START]', '[TEX_END]'],
-                ['\\(', '\\)']
+                ['\\(', '\\)'],
+                ['\u200b\u200b\u200b', '\u200b\u200b\u200b']
               ]
             },
             TeX: {

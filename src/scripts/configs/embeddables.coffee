@@ -25,22 +25,15 @@ define (require) ->
       #   , @)
 
       onRender: ($parent) ->
+        MATH_MARKER_INLINE = '\u200b\u200b\u200b'
         # For the maths.  you know. it do what it do.
         $mathElements = $parent.find('[data-math]:not(.math-rendered)')
         $mathElements.each (iter, element) ->
-
-          $element = $(element)
-          formula = $element.data('math')
-
-          mathTex = "[TEX_START]#{formula}[TEX_END]"
-          $element.text(mathTex)
-
-          # Moved adding to MathJax queue here. Means the queue gets pushed onto more (once per math element),
-          # but what it trys to parse for matching math is WAY less than the whole page.
-          MathJax?.Hub.Queue(['Typeset', MathJax.Hub], $element[0])
-          MathJax?.Hub.Queue( ->
-            $element[0].classList.add('math-rendered')
-          )
+          formula = element.dataset.math
+          element.textContent = "#{MATH_MARKER_INLINE}#{formula}#{MATH_MARKER_INLINE}"
+          MathJax?.Hub.Queue(['Typeset', MathJax.Hub], element)
+          MathJax?.Hub.Queue ->
+            element.classList.add('math-rendered')
 
       async: true
     }]
