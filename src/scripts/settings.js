@@ -10,7 +10,7 @@
 
       // Hostname and port for the cnx-archive server
       cnxarchive: {
-        host: 'archive.cnx.org',
+        host: 'devarchive.cnx.org',
         port: 80
       },
 
