@@ -106,6 +106,7 @@ define (require) ->
         @trigger("change:currentPage.#{eventName.slice(7)}", page, value)
 
     _setPage: (page) ->
+      return if @cachedPages.length == 0
       @set('error', 404) if not page?
       currentPage = @get('currentPage')
 
