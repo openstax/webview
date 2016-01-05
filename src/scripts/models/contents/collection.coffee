@@ -32,7 +32,7 @@ define (require) ->
     _getPageNum: (num) ->
       pages = @allPages()
       return pages[0] if (num <= 1)
-      return pages[page.length - 1] if (num > pages.length)
+      return pages[pages.length - 1] if (num > pages.length)
       return pages[num - 1]
 
     cachedPages: undefined
