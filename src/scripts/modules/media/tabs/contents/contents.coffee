@@ -74,7 +74,7 @@ define (require) ->
     initialize: () ->
       super()
       @listenTo(@model, 'change:editable removeNode moveNode change:currentPage', @render)
-      @listenTo(@model, 'change:contents', @processPages)
+      @listenTo(@model, 'change:contents add:contents remove:contents', @processPages)
       @listenTo(@model, 'change:searchResults', @handleSearchResults)
       @listenTo(@model, 'change:currentPage', @loadHighlightedPage)
       @scrollPosition = 0

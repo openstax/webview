@@ -67,9 +67,9 @@ define (require) ->
       '.keywords > input':
         value: 'keywords'
         type: 'select2'
-        select2: () ->
-          @$el.find('.keywords > input').val(@getProperty('keywords') or [])
-          _.extend({}, s2Defaults, tags: @getProperty('keywords') or [])
+        select2: () =>
+          @$el?.find('.keywords > input').val(@getProperty('keywords') or [])
+          _.extend({}, s2Defaults, tags: @getProperty?('keywords') ? [])
 
       '.printStyle > select':
         value: 'printStyle'
@@ -177,4 +177,3 @@ define (require) ->
     onRender: () ->
       super()
       @$el.find('[data-toggle="tooltip"]').tooltip()
-

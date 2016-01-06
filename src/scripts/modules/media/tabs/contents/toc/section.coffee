@@ -63,6 +63,7 @@ define (require) ->
     updateActiveContainer: ->
       isCurrentActive = @model.get('activeContainer')
       page = @content.get('currentPage')
+      return unless page
       containers = page.containers()
       shouldBeActive = containers.indexOf(@model) >= 0
       return if isCurrentActive? == shouldBeActive

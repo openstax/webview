@@ -56,7 +56,7 @@ define (require) ->
       for page in pages
         id = page.get('id')
         if page.get('id').match(idPattern) or
-        page.get('shortId').match(idPattern)
+        page.get('shortId')?.match(idPattern)
           return page
 
       return
