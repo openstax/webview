@@ -69,7 +69,6 @@ define (require) ->
       'dragstart .toc [draggable]': 'onDragStart'
       'dragend .toc [draggable]': 'onDragEnd'
       'click .clear-results': 'clearSearchResults'
-      'scroll': 'saveScrollPosition'
 
     initialize: () ->
       super()
@@ -87,10 +86,8 @@ define (require) ->
       @regions.self.append new AddPopoverView
         model: @model
         owner: @$el.find('.add.btn')
-      @$el.scrollTop(@scrollPosition)
 
-    saveScrollPosition: ->
-      @scrollPosition = @$el.scrollTop()
+
 
     processPages: ->
       nodes = @model.get('contents')?.models
