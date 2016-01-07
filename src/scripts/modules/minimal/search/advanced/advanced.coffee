@@ -40,6 +40,7 @@ define (require) ->
       format = (obj) ->
         _.map obj, (limit, index) ->
           if not limit.value then return
+          limit.value = encodeURIComponent(limit.value)
 
           # Split keywords into multiple keyword:value pairs
           if limit.name is 'keywords'
