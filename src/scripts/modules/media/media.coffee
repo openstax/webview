@@ -98,10 +98,18 @@ define (require) ->
         newHeight = window.innerHeight - tocTop
         $toc.height("#{newHeight}px")
       Backbone.on('window:optimizedResize', setTocHeight)
+      adjustHashTop = ->
+        handleHeaderViewPinning()
+        if isPinned
+          obscured = $pinnable.height()
+          top = $(window.location.hash).position().top
+          $(window).scrollTop(top - obscured)
+      Backbone.on('window:hashChange', adjustHashTop)
 
       # closing is triggered in 'onBeforeClose'
       @on('closing', ->
         Backbone.off('window:optimizedResize', setTocHeight)
+        Backbone.off('window:hashChange', adjustHashTop)
       )
 
       adjustMainMargin = (height) ->
