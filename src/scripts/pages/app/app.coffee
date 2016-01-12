@@ -29,6 +29,9 @@ define (require) ->
         Backbone.trigger('window:optimizedScroll')
       , throttleTime))
 
+      window.onhashchange = (arg...) ->
+        Backbone.trigger('window:hashChange')
+
     render: (page, options) ->
       queryString = linksHelper.serializeQuery(location.search)
       @minimal = false
