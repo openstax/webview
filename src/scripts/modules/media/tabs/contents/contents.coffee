@@ -72,8 +72,8 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable removeNode moveNode change:currentPage', @render)
-      @listenTo(@model, 'change:contents add:contents remove:contents', @processPages)
+      @listenTo(@model, 'change:editable removeNode moveNode change:currentPage', _.debounce(@render, 250))
+      @listenTo(@model, 'change:contents add:contents remove:contents', _.debounce(@processPages, 250))
       @listenTo(@model, 'change:searchResults', @handleSearchResults)
       @listenTo(@model, 'change:currentPage', @loadHighlightedPage)
       @scrollPosition = 0
@@ -87,9 +87,9 @@ define (require) ->
         model: @model
         owner: @$el.find('.add.btn')
 
-
-
     processPages: ->
+      return unless @model
+      @model.cachedPages = undefined
       nodes = @model.get('contents')?.models
       if nodes?.length
         isCcap = nodes[0].isCcap()
@@ -100,7 +100,6 @@ define (require) ->
         else
           basicNumbering(nodes)
         @allPages = allPages(nodes)
-        @render()
 
     expandContainers: (page, isExpanded, handlingResults) ->
       visible = isExpanded or not handlingResults
