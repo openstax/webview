@@ -34,6 +34,7 @@ define (require) ->
 
       # Use the default analytics ID in settings if no account is specified
       account ?= settings.analyticsID
+      ga('create', account, 'auto', account)
 
-      @ga('send', 'pageview')
+      @ga("#{account}.send", 'pageview')
       #@gaq(['_setAccount', account], ['_trackPageview', fragment])
