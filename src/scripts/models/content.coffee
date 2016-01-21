@@ -107,7 +107,9 @@ define (require) ->
 
     _setPage: (page) ->
       return if @cachedPages.length == 0
-      @set('error', 404) if not page?
+      if not page?
+        @set('error', 404)
+        console.error("Setpage error")
       currentPage = @get('currentPage')
 
       if currentPage

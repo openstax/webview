@@ -65,7 +65,7 @@ define (require) ->
       @.trigger('tocIsOpen', @tocIsOpen)
       if @tocIsOpen
         @closeAllContainers() unless @model.get('searchResults')
-        for container in @model.get('currentPage').containers()
+        for container in @model.get('currentPage')?.containers() ? []
           container.set('expanded', true)
       @updateToc()
 

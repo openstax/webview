@@ -76,7 +76,7 @@ define (require) ->
 
       @listenTo(@model, 'change:downloads change:buyLink change:title change:active', @render)
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
-      @listenTo(@model, 'change:abstract change:currentPage.abstract', @render)
+      @listenTo(@model, 'change:abstract change:currentPage.abstract change:currentPage.chapter', @render)
       @listenTo(session, 'change', @render)
       @listenTo(@model, 'change:currentPage.editable change:currentPage.canPublish', @render)
       @listenTo(@model, 'change:currentPage', @updateTitle)
