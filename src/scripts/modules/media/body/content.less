@@ -73,23 +73,14 @@ figure {
   color: @gray;
   text-align: center;
 
-  &.ui-has-child-figcaption > figcaption::before {
+  &.ui-has-child-figcaption > figcaption::before,
+  &:not(.ui-has-child-figcaption)::after
+  {
     margin-right: 0.5rem;
     color: @gray-medium;
     font-weight: bold;
     content: "Figure " counter(figure) ".";
   }
-
-  &:not(.ui-has-child-figcaption)::after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    margin-right: 0.5rem;
-    color: @gray-medium;
-    font-weight: bold;
-    content: "Figure " counter(figure) ".";
-  }
-
 
   > figcaption {
     padding: 1rem;
