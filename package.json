@@ -3,8 +3,8 @@
   "version": "0.19.1-dev",
   "description": "Connexions (cnx.org) web site",
   "scripts": {
-    "prepublish": "bower install --config.analytics=false; grunt aloha --verbose",
-    "upgrade": "npm update; bower update --config.analytics=false; grunt aloha --verbose",
+    "prepublish": "bower install --config.analytics=false",
+    "upgrade": "npm update; bower update --config.analytics=false",
     "test": "grunt test --verbose",
     "dist": "grunt dist --verbose"
   },
@@ -31,7 +31,6 @@
     "grunt-string-replace": "~1.2.0",
     "less": "~1.7.5",
     "csso": "~1.3.11",
-    "grunt-nginx": "~0.2.2",
     "grunt-mocha": "~0.4.11"
   },
   "license": [
