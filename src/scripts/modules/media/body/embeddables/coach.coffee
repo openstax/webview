@@ -17,13 +17,14 @@ define (require) ->
       @cc.on('ui.close', _.partial(@cc.handleClosed, _, $body[0]))
       @cc.on('open', _.partial(@cc.handleOpened, _, $body[0]))
       @cc.on('book.update', @updatePageFromCoach)
+      @cc.on('book.continue', @updatePageNext)
       @cc.on 'view.update', (eventData) =>
         {newPath, options} = @getPathForCoach(eventData)
         router.navigate(newPath, options) if newPath?
 
       @listenTo(@model, 'change:currentPage', @updateCoachOptions)
 
-    onRender: () ->
+    onRender: ->
       return unless @$el[0]?
       coachOptions = @getOptionsForCoach()
       @cc.initialize(@$el[0], coachOptions)
@@ -57,32 +58,38 @@ define (require) ->
       options = @getOptionsForCoach()
       @cc.setOptions(options)
 
-    lookUpPageByUuid: (uuid) ->
+    findPageInAllPages: (findBy) =>
       {allPages} = @parent.parent.parent.regions.sidebar.views[0]
-      _.find(allPages, (page) ->
+      _.find allPages, findBy
+
+    getPageNumberByUuid: (uuid) ->
+      page = @findPageInAllPages (page) ->
         page.getUuid() is uuid
-      )
 
-    updatePageFromCoach: ({collectionUUID, moduleUUID, link}) =>
+      page?.getPageNumber()
+
+    updatePageFromCoach: ({collectionUUID, moduleUUID, pageNumber, link}) =>
       if @model.getUuid() is collectionUUID
-        pathInfo =
-          model: @model
-        pageNumber = 0
+        pageNumber = @getPageNumberByUuid(moduleUUID) if moduleUUID?
+        pageNumber ?= 0
+        return if pageNumber is @model.getPageNumber()
 
-        if moduleUUID?
-          page = @lookUpPageByUuid(moduleUUID)
-
-          if page?
-            pageId = page.get('shortId')
-            return if pageId is @model.get('currentPage').get('shortId')
-
-            pathInfo.page = pageId
-            pageNumber = page.getPageNumber()
-
-        href = linksHelper.getPath('contents', pathInfo)
-        return @parent.goToPage(page.getPageNumber(), href)
+        href = linksHelper.getPath('contents', model: @model, page: pageNumber)
+        return @parent.goToPage(pageNumber, href)
 
       router.navigate(link, {trigger: true})
+
+    updatePageNext: ({collectionUUID}) =>
+      pageNumber = @model.getNextPageNumber()
+      @updatePageFromCoach({collectionUUID, pageNumber})
+
+    getNextPageLabel: ->
+      nextPageNumber = @model.getNextPageNumber()
+      nextPage = @findPageInAllPages (page) ->
+        page.getPageNumber() is nextPageNumber
+
+      return "" unless nextPage?
+      "#{nextPage.get('chapter')} #{nextPage.get('searchTitle') or nextPage.get('title')}"
 
     getPathForCoach: (coachData) ->
       return unless coachData?.route?
@@ -116,6 +123,7 @@ define (require) ->
       options =
         collectionUUID: @model.getUuid()
         moduleUUID: @model.get('currentPage')?.getUuid()
+        nextPage: @getNextPageLabel()
         cnxUrl: ''
         processHtmlAndMath: (root) =>
           # If the main body's MathJax is still processing,
@@ -134,7 +142,7 @@ define (require) ->
           else
             onRender($(root))
           true
-
+      console.info(options)
       if view?
         options.view = view
         options.open = true
