@@ -88,11 +88,14 @@ define (require) ->
       router.navigate(link, {trigger: true})
 
     getNextPage: ({moduleUUID}) =>
-      nextPageNumber = @getNextPageNumberFromUuid(moduleUUID)
+      nextPageNumber = if moduleUUID?
+        @getNextPageNumberFromUuid(moduleUUID)
+      else
+        @model.getNextPageNumber()
       nextPage = @findPageInAllPages (page) ->
         page.getPageNumber() is nextPageNumber
 
-      return '' unless nextPage?
+      return null unless nextPage?
 
       chapter = nextPage.get('chapter') or nextPage.get('_parent')?.get('chapter') or ''
       title = nextPage.get('searchTitle') or nextPage.get('title') or ''
