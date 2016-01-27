@@ -142,7 +142,7 @@ define (require) ->
           else
             onRender($(root))
           true
-      console.info(options)
+
       if view?
         options.view = view
         options.open = true
