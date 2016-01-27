@@ -88,8 +88,11 @@ define (require) ->
       nextPage = @findPageInAllPages (page) ->
         page.getPageNumber() is nextPageNumber
 
-      return "" unless nextPage?
-      "#{nextPage.get('chapter')} #{nextPage.get('searchTitle') or nextPage.get('title')}"
+      return '' unless nextPage?
+
+      chapter = nextPage.get('chapter') or nextPage.get('_parent')?.get('chapter') or ''
+      title = nextPage.get('searchTitle') or nextPage.get('title') or ''
+      "#{chapter} #{title}"
 
     getPathForCoach: (coachData) ->
       return unless coachData?.route?
