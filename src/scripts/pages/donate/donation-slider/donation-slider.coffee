@@ -36,6 +36,7 @@ define (require) ->
       maxDonation: () -> donation[@max]
       message: () -> message[@value]
       path: () -> @getPath()
+      isIpad: navigator.userAgent.match(/iPad/i) != null
 
     min: 1 # Default minimum donation
     value: 2 # Default donation setting
@@ -44,6 +45,8 @@ define (require) ->
       'mousedown input[type="range"]': 'onSlideStart'
       'change input[type="range"]': 'changeDonation'
       'submit form': 'onSubmit'
+      'click [data-ipad="true"]': (e) ->
+        window.location.href = e.target.href
 
     initialize: (options = {}) ->
       super()

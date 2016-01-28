@@ -10,7 +10,13 @@
         <ul>
           {{#each downloads}}
             {{#is state 'good'}}
-              <li><a href="{{path}}" data-prop="true">{{format}}</a></li>
+              <li><a href="{{path}}"
+                {{#if ../../isIpad}}
+                  {{#is ../../format 'PDF'}}
+                    data-ipad="true"
+                  {{/is}}
+                {{/if}}
+                data-prop="true">{{format}}</a></li>
             {{/is}}
           {{/each}}
         </ul>
