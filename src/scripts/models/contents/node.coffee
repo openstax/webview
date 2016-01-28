@@ -135,7 +135,7 @@ define (require) ->
     containers: ->
       result = []
       parent = @get('_parent')
-      while parent.isSection()
+      while parent?.isSection()
         result.push(parent)
         parent = parent.get('_parent')
       result

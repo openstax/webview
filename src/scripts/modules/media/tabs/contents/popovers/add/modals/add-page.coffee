@@ -211,8 +211,8 @@ define (require) ->
       else
         _.each data, (input) =>
           if input.name isnt 'title'
-            @model.add({id: input.name, title: input.value})
-            @model.setPage(input.name)
+            added = @model.add({id: input.name, title: input.value})
+            @model.setPage(added)
             @updateUrl()
 
       $('.modal-backdrop').remove() # HACK: Ensure bootstrap modal backdrop is removed

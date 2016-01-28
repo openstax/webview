@@ -59,12 +59,13 @@ define (require) ->
         page.get('shortId')?.match(idPattern)
           return page
 
-      return
+      return new Page({id: id})
 
     getPage: (page) ->
+      if page instanceof Page
+        return page
       if typeof page is 'number'
         return @_getPageNum(page)
-
       return @_getPageFromId(page)
 
     toJSON: (options = {}) ->

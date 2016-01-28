@@ -72,7 +72,8 @@ define (require) ->
 
     initialize: () ->
       super()
-      @listenTo(@model, 'change:editable removeNode moveNode change:currentPage', _.debounce(@render, 250))
+      @listenTo(@model, 'removeNode addNode moveNode', @processPages)
+      @listenTo(@model, 'change:editable change:currentPage addNode removeNode moveNode', _.debounce(@render, 250))
       @listenTo(@model, 'change:contents add:contents remove:contents', _.debounce(@processPages, 250))
       @listenTo(@model, 'change:searchResults', @handleSearchResults)
       @listenTo(@model, 'change:currentPage', @loadHighlightedPage)
@@ -179,3 +180,4 @@ define (require) ->
 
       # Reset styling for all draggable elements
       e.currentTarget.className = ''
+      @model.trigger('moveNode')
