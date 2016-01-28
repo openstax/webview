@@ -100,7 +100,8 @@ define (require) ->
       chapter = nextPage.get('chapter') or nextPage.get('_parent')?.get('chapter') or ''
       title = nextPage.get('searchTitle') or nextPage.get('title') or ''
 
-      nextLabel: "#{chapter} #{title}"
+      nextChapter: chapter
+      nextTitle: title
       nextModuleUUID: nextPage.getUuid()
 
     getPathForCoach: (coachData) ->
