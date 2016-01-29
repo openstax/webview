@@ -1,26 +1,38 @@
 @import "../../../styles/variables.less";
+@import "@{dependencyDir}/bootstrap/less/mixins.less"; // Bootstrap Mixins
 
 @sidebar-width: 315px;
 @fudge: 7px;
+@transition-style: 0.2s ease-in-out;
 
 .fullsize-container {
   > .sidebar {
     width: 0;
     height: 0;
-    visibility: hidden;
     display: inline-block;
     vertical-align: top;
+    .transition(~"width" @transition-style);
+
+    > div {
+      .transition(~"margin-left" @transition-style);
+      // Use a negative margin to slide child element out of sight,
+      // regardless of `position` property.
+      // i.e. The toc has position fixed or static depending on whether it's pinned.
+      margin-left: -@sidebar-width;
+    }
   }
   > .main {
+    .transition(~"width" @transition-style);
     width: ~"calc(100% -" @fudge ~")";
     display: inline-block;
   }
   &.sidebar-open {
     > .sidebar {
-      visibility: visible;
       width: @sidebar-width;
       height: 100%;
+
       > div {
+        margin-left: 0;
         border-right: 1px solid @gray-light;
       }
     }
