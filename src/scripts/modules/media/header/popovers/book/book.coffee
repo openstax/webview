@@ -8,6 +8,10 @@ define (require) ->
     templateHelpers:
       currentPage: () ->
         return @model.asPage()
+      isIpad: navigator.userAgent.match(/iPad/i) != null
+    events:
+      'click [data-ipad="true"]': (e) ->
+        window.location.href = e.target.href
 
     placement: 'bottom'
 

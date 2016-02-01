@@ -12,7 +12,13 @@
 
   {{#if uuid}}
     <div class="centered">
-      <a class="btn btn-primary {{#unless path}}disabled{{/unless}}" href="{{path}}">Download for Free</a>
+      <a class="btn btn-primary {{#unless path}}disabled{{/unless}}"
+        {{#if ../../isIpad}}
+          {{#is ../../format 'PDF'}}
+            data-ipad="true"
+          {{/is}}
+        {{/if}}
+        href="{{path}}">Download for Free</a>
     </div>
   {{/if}}
 </form>
