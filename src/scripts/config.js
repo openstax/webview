@@ -8,6 +8,9 @@
       text: '../../bower_components/requirejs-text/text',
       hbs: '../../bower_components/require-handlebars-plugin/hbs',
 
+      // ## Google Analytics
+      analytics: '//www.google-analytics.com/analytics',
+
       // ## Core Libraries
       jquery: '../../bower_components/jquery/dist/jquery',
       underscore: '../../bower_components/underscore/underscore',
@@ -66,6 +69,11 @@
 
     // # Shims
     shim: {
+      // ## Google Analytics
+      'analytics': {
+        exports: '__ga__'
+      },
+
       // ## Aloha
       aloha: {
         // To disable MathJax comment out the `mathjax` entry in `deps` below.
