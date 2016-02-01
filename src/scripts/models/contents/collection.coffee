@@ -52,7 +52,12 @@ define (require) ->
 
     _getPageFromId: (id) ->
       pages = @allPages()
-      idPattern = ///^#{id}///
+      try
+        idPattern = ///^#{id}///
+      catch error
+        console.warn 'Cannot form valid Regex for _getPageFromId -- ', id
+        return null
+
       for page in pages
         id = page.get('id')
         if page.get('id').match(idPattern) or
