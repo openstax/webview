@@ -52,7 +52,7 @@ define (require) ->
 
     _getPageFromId: (id) ->
       pages = @allPages()
-      try 
+      try
         idPattern = ///^#{id}///
       catch error
         console.warn 'Cannot form valid Regex for _getPageFromId -- ', id
