@@ -1,3 +1,4 @@
+
 define (require) ->
   $ = require('jquery')
   embeddablesConfig = require('cs!configs/embeddables')
@@ -177,7 +178,7 @@ define (require) ->
 
           # Convert links to maintain context in a book, if appropriate
           if @model.isBook()
-            $temp.find('a:not([data-type=footnote-number]):not(href^="#")').each (i, el) =>
+            $temp.find('a:not([data-type=footnote-number]):not([href^="#"])').each (i, el) =>
               $el = $(el)
               href = $el.attr('href')
 
