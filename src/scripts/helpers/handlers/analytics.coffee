@@ -30,7 +30,9 @@ define (require) ->
       require ['analytics'], (ga) ->
         # Use the default analytics ID in settings if no account is specified
         account ?= settings.analyticsID
-        ga('create', account, 'auto', account)
+        # TODO investigate if we need a different name for our tracker name
+        trackerName = 'cnxTracker'
+        ga('create', account, 'auto', trackerName)
 
-        ga("#{account}.send", 'pageview', fragment)
+        ga("#{trackerName}.send", 'pageview', fragment)
         #@gaq(['_setAccount', account], ['_trackPageview', fragment])
