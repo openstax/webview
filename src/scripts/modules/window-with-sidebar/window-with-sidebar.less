@@ -11,9 +11,11 @@
     height: 0;
     display: inline-block;
     vertical-align: top;
+    visibility: hidden;
     .transition(~"width" @transition-style);
 
     > div {
+      overflow-y: hidden;
       .transition(~"margin-left" @transition-style);
       // Use a negative margin to slide child element out of sight,
       // regardless of `position` property.
@@ -30,8 +32,10 @@
     > .sidebar {
       width: @sidebar-width;
       height: 100%;
+      visibility: visible;
 
       > div {
+        overflow-y: auto;
         margin-left: 0;
         border-right: 1px solid @gray-light;
       }
