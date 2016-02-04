@@ -158,12 +158,11 @@ define (require) ->
             $(el).parent().append(el)
 
           # Convert figure, table, exercise, problem and note links to show the proper name
-          $temp.find('a:not([data-type=footnote-number])').each (i, el) ->
+          $temp.find('a[href^="#"]:not([data-type=footnote-number]):not([data-type=footnote-ref])').each (i, el) ->
             $el = $(el)
             href = $el.attr('href')
 
-            if href.substr(0, 1) is '#' and href.length > 1 and
-               $el.data('type') isnt 'footnote-ref'
+            if href.length > 1
               try
                 $target = $temp.find(href)
 
@@ -178,17 +177,16 @@ define (require) ->
 
           # Convert links to maintain context in a book, if appropriate
           if @model.isBook()
-            $temp.find('a:not([data-type=footnote-number])').each (i, el) =>
+            $temp.find('a:not([data-type=footnote-number]):not(href^="#")').each (i, el) =>
               $el = $(el)
               href = $el.attr('href')
 
-              if href.substr(0, 1) isnt '#'
-                page = @model.getPage(href.substr(10))
+              page = @model.getPage(href.substr(10))
 
-                if page
-                  pageNumber = page.getPageNumber()
-                  $el.attr('href', "/contents/#{@model.getVersionedId()}:#{pageNumber}")
-                  $el.attr('data-page', pageNumber)
+              if page
+                pageNumber = page.getPageNumber()
+                $el.attr('href', "/contents/#{@model.getVersionedId()}:#{pageNumber}")
+                $el.attr('data-page', pageNumber)
 
           # Add nofollow to external user-generated links
           $temp.find('a[href^="http:"], a[href^="https:"], a[href^="//"]').attr('rel', 'nofollow')
