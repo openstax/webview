@@ -6,6 +6,8 @@ define (require) ->
   Page = require('cs!./page')
   require('backbone-associations')
 
+  idRegEx = /^[-@.a-z0-9_]+$/i
+
   return class Collection extends Node
     relations: [{
       type: Backbone.Many
@@ -19,6 +21,9 @@ define (require) ->
 
           return new Page(attrs)
     }]
+
+    isValidId: (id) ->
+      idRegEx.test(id)
 
     introduction: ->
       return unless @isCcap() and @isSection()
@@ -51,6 +56,8 @@ define (require) ->
       @cachedPages = allPages(@get('contents')?.models)
 
     _getPageFromId: (id) ->
+      return unless @isValidId(id)
+
       pages = @allPages()
       try
         idPattern = ///^#{id}///
@@ -59,7 +66,6 @@ define (require) ->
         return null
 
       for page in pages
-        id = page.get('id')
         if page.get('id').match(idPattern) or
         page.get('shortId')?.match(idPattern)
           return page
