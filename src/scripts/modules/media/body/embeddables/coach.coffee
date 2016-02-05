@@ -126,6 +126,9 @@ define (require) ->
 
       {newPath, options}
 
+    shouldClickPropagate: (clickEvent) ->
+      $(clickEvent.target).is($('#zenbox_tab')) or $(clickEvent.target).is($('#zenbox_close'))
+
     getOptionsForCoach: ->
       {query} = linksHelper.getCurrentPathComponents()
       view = query['cc-view']
@@ -138,6 +141,7 @@ define (require) ->
         moduleUUID: @model.get('currentPage')?.getUuid()
         getNextPage: @getNextPage
         cnxUrl: ''
+        filterClick: @shouldClickPropagate
         processHtmlAndMath: (root) =>
           # If the main body's MathJax is still processing,
           # queueing up additional elements freezes the main body's

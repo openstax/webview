@@ -161,11 +161,13 @@
 
             $overlay.remove();
 
-            $tab.click(function () {
+            $tab.on('click', function () {
               $overlay.insertAfter($tab);
+              window.Zenbox.show();
             });
 
-            $close.click(function () {
+            $close.on('click', function () {
+              window.Zenbox.hide();
               $overlay.remove();
             });
             // END HACK
