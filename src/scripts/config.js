@@ -163,11 +163,11 @@
 
             $tab.on('click', function () {
               $overlay.insertAfter($tab);
-              Zenbox.show();
+              window.Zenbox.show();
             });
 
             $close.on('click', function () {
-              Zenbox.hide();
+              window.Zenbox.hide();
               $overlay.remove();
             });
             // END HACK
