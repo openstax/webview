@@ -104,6 +104,12 @@ define (require) ->
           obscured = $pinnable.height()
           top = $(window.location.hash).position().top
           $(window).scrollTop(top - obscured)
+          # On page load, might need to re-adjust
+          setTimeout(->
+            top2 = $(window.location.hash).position().top
+            if top2 != top
+              $(window).scrollTop(top2 - obscured)
+          , 125)
       Backbone.on('window:hashChange', adjustHashTop)
 
       # closing is triggered in 'onBeforeClose'
