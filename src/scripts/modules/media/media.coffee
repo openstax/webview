@@ -42,6 +42,7 @@ define (require) ->
     events:
       'keydown .media-title > .title input': 'checkKeySequence'
       'keyup .media-title > .title input': 'resetKeySequence'
+      'click a[href*="#"]': 'triggerHashChange'
 
     initialize: (options) ->
       super()
@@ -63,6 +64,9 @@ define (require) ->
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updateUrl)
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updatePageInfo)
       @listenTo(@model, 'change:abstract', @updateSummary)
+
+    triggerHashChange: (e) ->
+      Backbone.trigger('window:hashChange')
 
     onRender: () =>
       @regions.media.append(new MediaEndorsedView({model: @model}))
@@ -98,19 +102,15 @@ define (require) ->
         newHeight = window.innerHeight - tocTop
         $toc.height("#{newHeight}px")
       Backbone.on('window:optimizedResize', setTocHeight)
+
       adjustHashTop = ->
         handleHeaderViewPinning()
         if isPinned
           obscured = $pinnable.height()
           top = $(window.location.hash).position().top
           $(window).scrollTop(top - obscured)
-          # On page load, might need to re-adjust
-          setTimeout(->
-            top2 = $(window.location.hash).position().top
-            if top2 != top
-              $(window).scrollTop(top2 - obscured)
-          , 125)
-      Backbone.on('window:hashChange', adjustHashTop)
+
+      Backbone.on('window:hashChange', _.debounce(adjustHashTop, 150))
 
       # closing is triggered in 'onBeforeClose'
       @on('closing', ->
