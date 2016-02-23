@@ -1,6 +1,9 @@
 (function () {
   'use strict';
 
+  var coachBasePath = '//openstax.github.io/concept-coach/';
+
+
   require.config({
     // # Paths
     paths: {
@@ -29,7 +32,7 @@
       // Use Minified Aloha because loading files in a different requirejs context is a royal pain
       aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
 
-      OpenStaxConceptCoach: '../../bower_components/concept-coach/dist/full-build.min',
+      OpenStaxConceptCoach: coachBasePath + 'dist/full-build.min',
 
       // ## UI Libraries and Helpers
       tooltip: 'helpers/backbone/views/attached/tooltip/tooltip',
@@ -200,7 +203,7 @@
 
       // concept-coach
       OpenStaxConceptCoach: {
-        deps: ['css!../../bower_components/concept-coach/assets/main'],
+        deps: ['css!' + coachBasePath + 'assets/main'],
         exports: 'OpenStaxConceptCoach'
       }
     },
