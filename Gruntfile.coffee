@@ -138,6 +138,7 @@ module.exports = (grunt) ->
           keepBuildDir: false
           preserveLicenseComments: false
           skipDirOptimize: true
+          generateSourceMaps: true
           optimize: 'none'
           stubModules: ['cs']
           modules: [{
@@ -210,6 +211,7 @@ module.exports = (grunt) ->
           'dist/scripts/**/*'
           'dist/styles/**/*.less'
           '!dist/scripts/main.js'
+          '!dist/scripts/main.js.map'
           '!dist/scripts/require.js'
           '!dist/scripts/settings.js'
           '!dist/scripts/aloha.js'
@@ -233,9 +235,13 @@ module.exports = (grunt) ->
     # Uglify
     uglify:
       dist:
+        options:
+          sourceMap: true
+          sourceMapIncludeSources: true
+          sourceMapIn: 'dist/scripts/main.js.map'
         files:
-          'dist/scripts/require.js': ['dist/scripts/require.js']
           'dist/scripts/main.js': ['dist/scripts/main.js']
+          'dist/scripts/require.js': ['dist/scripts/require.js']
 
     # HTML min
     htmlmin:
