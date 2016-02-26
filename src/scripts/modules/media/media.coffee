@@ -107,8 +107,8 @@ define (require) ->
         handleHeaderViewPinning()
         if isPinned
           obscured = $pinnable.height()
-          top = $(window.location.hash).position().top
-          $(window).scrollTop(top - obscured)
+          top = $(window.location.hash)?.position()?.top
+          $(window).scrollTop(top - obscured) if top
 
       Backbone.on('window:hashChange', _.debounce(adjustHashTop, 150))
 
