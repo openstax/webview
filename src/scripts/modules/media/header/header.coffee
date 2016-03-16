@@ -67,7 +67,7 @@ define (require) ->
       button: '.info .btn'
 
     events:
-      'click .summary': 'toggleSummary'
+      'click .summary .toggle': 'toggleSummary'
       'click .derive .btn': 'derivePage'
       'click .edit .btn' : 'editPage'
 
