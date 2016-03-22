@@ -38,6 +38,10 @@ define (require) ->
       #if @get('title') then delete response.title
       response.title = @get('title') or response.title
 
+      # extract abstract from cnxml wrapper
+      if response.abstract?
+        response.abstract = $(response.abstract).unwrap().html()
+
       if response.mediaType is 'application/vnd.org.cnx.collection'
         # Only load the contents once
         response.contents = @get('contents') or response.tree.contents or []
