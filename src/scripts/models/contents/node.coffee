@@ -28,6 +28,9 @@ define (require) ->
         url = "#{AUTHORING}/users/contents"
       else if @isDraft()
         url = "#{AUTHORING}/contents/#{id}.json" # FIX: Remove .json from URL
+      else if @isInBook()
+        book = @get('book')
+        url = "#{ARCHIVE}/contents/#{book.getVersionedId()}:#{id}.json"
       else
         url = "#{ARCHIVE}/contents/#{id}.json"
 
