@@ -21,7 +21,7 @@
       },
 
       // Prefix to prepend to page titles
-      titleSuffix: ' - OpenStax CNX',
+      titlePrefix: ' - OpenStax CNX',
 
       // Google Analytics tracking ID
       analyticsID: 'UA-7903479-1',
@@ -48,7 +48,7 @@
         'introductory-statistics': '30189442-6998-4686-ac05-ed152b91b9de@17.20'
       },
 
-      accountProfile: 'https://accounts.cnx.org/profile',
+      accountProfile: 'https://cnx-dev-vm.org:3000/profile',
 
       terpUrl: function (itemCode) {
         return 'https://openstaxtutor.org/terp/' + itemCode + '/quiz_start';
