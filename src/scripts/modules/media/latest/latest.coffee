@@ -8,7 +8,10 @@ define (require) ->
   return class LatestView extends BaseView
     template: template
     templateHelpers:
-      url: () -> linksHelper.getModelPath(@model)
+      url: () -> 
+        path = linksHelper.getModelPath(@model)
+        queryString = linksHelper.serializeQuery(location.search)
+        if queryString.minimal then return path + "?minimal=true" else return path
 
     initialize: () ->
       super()

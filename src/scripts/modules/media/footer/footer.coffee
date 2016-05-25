@@ -13,7 +13,7 @@ define (require) ->
     template: template
 
     templateHelpers:
-      minimal: () ->
+      minimal:() ->
         queryString = linksHelper.serializeQuery(location.search)
         if queryString.minimal
           return true
