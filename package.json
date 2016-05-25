@@ -20,7 +20,7 @@
     "grunt-contrib-requirejs": "~0.4.4",
     "rjs-build-analysis": "~0.0.3",
     "grunt-contrib-clean": "~0.6.0",
-    "grunt-contrib-jshint": "0.11.0",
+    "grunt-contrib-jshint": "~0.11.0",
     "grunt-coffeelint": "~0.0.13",
     "grunt-jsbeautifier": "~0.2.8",
     "grunt-targethtml": "~0.2.6",
