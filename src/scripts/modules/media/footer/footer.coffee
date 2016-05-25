@@ -6,10 +6,18 @@ define (require) ->
   MetadataView = require('cs!./metadata/metadata')
   LicenseView = require('cs!./license/license')
   template = require('hbs!./footer-template')
+  linksHelper = require('cs!helpers/links')
   require('less!./footer')
 
   return class MediaFooterView extends EditableView
     template: template
+
+    templateHelpers:
+      minimal: () ->
+        queryString = linksHelper.serializeQuery(location.search)
+        if queryString.minimal
+          return true
+        return false
 
     regions:
       downloads: '.downloads'
