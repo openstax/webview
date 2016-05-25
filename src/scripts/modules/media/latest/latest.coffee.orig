@@ -9,10 +9,14 @@ define (require) ->
     template: template
     templateHelpers:
 <<<<<<< HEAD
+<<<<<<< HEAD
       url: () ->
 =======
-      url: () -> 
+      url: () ->
 >>>>>>> changed latest.coffee to maintain minimal view when going to updated version from minimal view.
+=======
+      url: () ->
+>>>>>>> Fixed a whitespace error.
         path = linksHelper.getModelPath(@model)
         queryString = linksHelper.serializeQuery(location.search)
         if queryString.minimal then return path + '?minimal=true' else return path
