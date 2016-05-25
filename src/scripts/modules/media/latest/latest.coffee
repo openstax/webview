@@ -11,7 +11,7 @@ define (require) ->
       url: () -> 
         path = linksHelper.getModelPath(@model)
         queryString = linksHelper.serializeQuery(location.search)
-        if queryString.minimal then return path + "?minimal=true" else return path
+        if queryString.minimal then return path + '?minimal=true' else return path
 
     initialize: () ->
       super()
