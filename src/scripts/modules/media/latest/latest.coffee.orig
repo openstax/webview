@@ -11,7 +11,7 @@ define (require) ->
 <<<<<<< HEAD
       url: () ->
 =======
-      url: () ->
+      url: () -> 
 >>>>>>> changed latest.coffee to maintain minimal view when going to updated version from minimal view.
         path = linksHelper.getModelPath(@model)
         queryString = linksHelper.serializeQuery(location.search)
