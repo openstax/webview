@@ -8,10 +8,17 @@ define (require) ->
   return class LatestView extends BaseView
     template: template
     templateHelpers:
+<<<<<<< HEAD
       url: () ->
         path = linksHelper.getModelPath(@model)
         queryString = linksHelper.serializeQuery(location.search)
         if queryString.minimal then return path + '?minimal=true' else return path
+=======
+      url: () ->
+        path = linksHelper.getModelPath(@model)
+        queryString = linksHelper.serializeQuery(location.search)
+        if queryString.minimal then return path + "?minimal=true" else return path
+>>>>>>> Modified latest.coffee so that url will maintain the minimal parameter
 
     initialize: () ->
       super()
