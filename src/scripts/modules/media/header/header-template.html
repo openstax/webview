@@ -34,15 +34,23 @@
     </div>
 
     <div class="info">
-      <div class="downloads">
-        {{#or hasDownloads buyLink}}
-          {{#is mediaType 'application/vnd.org.cnx.collection'}}
-            <button class="btn" tabindex="0" type="submit">Get This Book!</button>
-          {{else}}
-            <button class="btn" tabindex="0" type="submit">Get This Page!</button>
-          {{/is}}
-        {{/or}}
-      </div>
+      {{#if conceptCoach}}
+        {{#if jumpToCC}}
+          <div class="jump-to-cc">
+            <a class="btn" href="#coach-wrapper">Jump to Concept Coach</a>
+          </div>
+        {{/if}}
+      {{else}}
+        <div class="downloads">
+          {{#or hasDownloads buyLink}}
+            {{#is mediaType 'application/vnd.org.cnx.collection'}}
+              <button class="btn" tabindex="0" type="submit">Get This Book!</button>
+            {{else}}
+              <button class="btn" tabindex="0" type="submit">Get This Page!</button>
+            {{/is}}
+          {{/or}}
+        </div>
+      {{/if}}
       {{#if currentPage.authors.length}}
         <span>Page by:</span>
         <span class="page-authors">
