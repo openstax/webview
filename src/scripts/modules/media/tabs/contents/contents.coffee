@@ -154,7 +154,7 @@ define (require) ->
         bookId = "#{book.get('id')}@#{book.get('version')}"
         pageId = "#{page.get('id')}"
         pageVersion = page.get('version')
-        pageId += "@#{pageVersion}" if pageVersion? 
+        pageId += "@#{pageVersion}" if pageVersion?
 
         BookSearchResults.fetch(
           bookId: "#{bookId}:#{pageId}"
