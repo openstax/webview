@@ -155,7 +155,6 @@ define (require) ->
         pageId = "#{page.get('id')}"
         pageVersion = page.get('version')
         pageId += "@#{pageVersion}" if pageVersion?
-
         BookSearchResults.fetch(
           bookId: "#{bookId}:#{pageId}"
           query: response.query.search_term
