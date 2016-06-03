@@ -152,7 +152,10 @@ define (require) ->
         return if page.get('searchHtml')
         book = page.get('book')
         bookId = "#{book.get('id')}@#{book.get('version')}"
-        pageId = "#{page.get('id')}@#{page.get('version')}"
+        pageId = "#{page.get('id')}"
+        pageVersion = page.get('version')
+        pageId += "@#{pageVersion}" if pageVersion?
+
         BookSearchResults.fetch(
           bookId: "#{bookId}:#{pageId}"
           query: response.query.search_term
