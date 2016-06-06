@@ -21,7 +21,7 @@ define (require) ->
 
       # Sort the languages in alphabetical order
       codes.sort (a,b) ->
-        return if a.name.toUpperCase() > b.name.toUpperCase() then 1 else -1
+        return if a.name > b.name then 1 else -1
 
       for lang in codes
         availableLanguages["#{lang.code}"] = allLanguages["#{lang.code}"]
