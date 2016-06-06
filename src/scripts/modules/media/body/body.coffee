@@ -416,7 +416,9 @@ define (require) ->
         @parent?.regions.self.append(new SimModal({model: @model}))
 
       # mount the Concept Coach if the mounter has been configured/if `canCoach`
-      @regions.coach.append(new Coach({model: @model})) if @isCoach()
+      if @isCoach()
+        @coach = new Coach({model: @model})
+        @regions.coach.append(@coach)
 
       # MathJax rendering must be done after the HTML has been added to the DOM
       MathJax?.Hub.Queue =>
