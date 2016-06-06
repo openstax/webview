@@ -1,3 +1,14 @@
+<script>
+function show() {
+
+    if(document.getElementById("notesbox").style.display == "none"){
+   document.getElementById("notesbox").style.display ="";    }
+   else{
+    document.getElementById("notesbox").style.display ="none";
+   }
+}
+</script>
+
 {{#if book}}
   <div class="media-nav{{#is status 'publishing'}} publishing{{/is}}">
     <div class="media-toolbar">
@@ -7,10 +18,11 @@
            <span class="text">Contents</span>
            <span class="fa fa-plus open-indicator"></span>
         </button>
-        <button class="toggle notes btn" role="button">
+        <button class="toggle notes btn" role="button" onclick="show()">
           <span class="text">Notes</span>
           <span class="fa fa-plus open-indicator"></span>
         </button>
+        
         <div class="searchbar">
           <span class="fa fa-search"></span>
           <input class="find form-control" type="search" placeholder="Search this book" value="{{searchTerm}}" />
@@ -40,7 +52,11 @@
             <div class="nav next disabled">Next</div>
           {{/if}}
         </div>
-      </div>
+        
+      </div><br><textarea id="notesbox" rows="4" cols="50" 
+      style="display:none;">
+          Type notes here
+        </textarea>
     </div>
   </div>
 {{/if}}

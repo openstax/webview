@@ -80,6 +80,7 @@ define (require) ->
       @noteIsOpen = not @noteIsOpen
       @.trigger('noteIsOpen',@noteIsOpen)
       @updateNote()
+      
       if @tocIsOpen
         @tocIsOpen = not @tocIsOpen
         @.trigger('tocIsOpen', @tocIsOpen)
