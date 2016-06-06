@@ -81,9 +81,14 @@ define (require) ->
       @regions.media.append(windowWithSidebar)
       mainPage = new MainPageView()
       windowWithSidebar.regions.main.append(mainPage)
-      mainPage.regions.main.append(new MediaHeaderView({model: @model}))
+      mediaBody = new MediaBodyView({model: @model})
+      mainPage.regions.main.append(new MediaHeaderView({
+        model: @model
+        mediaParent: @
+        mediaBody: mediaBody
+      }))
       windowWithSidebar.regions.sidebar.append(tocView)
-      mediaBodyView = new MediaBodyView({model: @model})
+      mediaBodyView = mediaBody
       mainPage.regions.main.append(mediaBodyView)
       mainPage.regions.main.append(new MediaFooterView({model: @model}))
       mainPage.regions.main.append(footerNav)
