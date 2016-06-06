@@ -18,12 +18,13 @@ define (require) ->
           code: language[0].substring(0, 2)
           name: allLanguages["#{language[0].substring(0, 2)}"].english
         codes.push(lang)
-       
+
+      # Sort the languages in alphabetical order
       codes.sort (a,b) ->
         return if a.name.toUpperCase() > b.name.toUpperCase() then 1 else -1
-      orderedCodes = (lang.code for lang in codes when lang.code)
-      for code in orderedCodes
-        availableLanguages["#{code}"] = allLanguages["#{code}"]
+
+      for lang in codes
+        availableLanguages["#{lang.code}"] = allLanguages["#{lang.code}"]
       return availableLanguages
 
     initialize: () ->
