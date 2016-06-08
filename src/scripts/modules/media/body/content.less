@@ -306,7 +306,7 @@ figure[data-orient="vertical"] {
   .style(@display, enumerated) {
     // Since we have to "emulate" the list, reset and increment the `list-item` counter.
     counter-reset: list-item;
-    list-style-type: none;
+    list-style-type: decimal;
 
     > [data-type="item"],
     > li {
@@ -316,8 +316,8 @@ figure[data-orient="vertical"] {
     > [data-type="item"]::before,
     > li::before {
       content: attr(data-mark-prefix) counter(list-item, decimal) attr(data-mark-suffix) '. ';
-      margin-right: 0.2em;
-      margin-left: -1.2em;
+      margin-right: 1.1em;
+      margin-left: -0.5em;
     }
 
     // "Emulate" the numbering for inline numbered lists
