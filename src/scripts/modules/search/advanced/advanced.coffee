@@ -55,7 +55,6 @@ define (require) ->
 
     submitForm: (e) ->
       e.preventDefault()
-
       $form = $(e.currentTarget)
       values = $form.serializeArray()
       query = @formatQuery(values)
@@ -69,7 +68,10 @@ define (require) ->
       format = (obj) ->
         _.map obj, (limit, index) ->
           if not limit.value then return
+<<<<<<< HEAD
 
+=======
+>>>>>>> Fixed advanced.coffee in advanced search so that it does not encode the search query twice.
           # Split keywords into multiple keyword:value pairs
           if limit.name is 'keywords'
             keywords = limit.value.match(/(?:[^\s"]+|"[^"]*")+/g)
