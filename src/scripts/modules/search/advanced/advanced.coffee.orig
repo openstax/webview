@@ -69,7 +69,14 @@ define (require) ->
       format = (obj) ->
         _.map obj, (limit, index) ->
           if not limit.value then return
+<<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> Fixed advanced.coffee in advanced search so that it does not encode the search query twice.
+=======
+
+>>>>>>> Made the spacing consistent.
           # Split keywords into multiple keyword:value pairs
           if limit.name is 'keywords'
             keywords = limit.value.match(/(?:[^\s"]+|"[^"]*")+/g)
