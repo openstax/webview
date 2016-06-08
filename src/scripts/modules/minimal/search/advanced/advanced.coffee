@@ -6,13 +6,14 @@ define (require) ->
   SearchHeaderView = require('cs!modules/search/header/header')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!modules/search/advanced/advanced-template')
+  availableLanguages = require('cs!collections/languages')
   require('less!./advanced')
 
   return class AdvancedSearchView extends BaseView
     template: template
     pageTitle: 'Advanced Search'
     templateHelpers:
-      languages: settings.languages
+      languages: availableLanguages.models[0].attributes
       years: [(new Date).getFullYear()..1999]
 
     regions:
