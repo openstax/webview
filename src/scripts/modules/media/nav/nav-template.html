@@ -1,7 +1,8 @@
 <script>
 function show() {
 
-  document.getElementById("notesbox").value = localStorage.notes;
+  var x = document.URL;
+  document.getElementById("notesbox").value = localStorage.getItem(x);
 
   if(document.getElementById("notesbox").style.display == "none"){
     document.getElementById("notesbox").style.display ="";    
@@ -12,8 +13,8 @@ function show() {
 }
 
 function save(){
-
-  localStorage.notes = document.getElementById("notesbox").value;
+  var x = document.URL;
+  localStorage.setItem(String(x), document.getElementById("notesbox").value);
 
 }
 </script>
