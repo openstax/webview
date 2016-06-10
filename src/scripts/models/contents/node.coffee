@@ -38,7 +38,7 @@ define (require) ->
       #if @get('title') then delete response.title
       response.title = @get('title') or response.title
 
-      # extract abstract from cnxml wrapper
+      # extract abstract from wrapper
       if response.abstract?
         response.abstract = $(response.abstract).unwrap().html()
 
