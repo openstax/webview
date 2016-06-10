@@ -14,9 +14,10 @@ define (require) ->
       availableLanguages = {}
       codes = []
       _.each languages, (language) ->
+        code = language[0].substring(0, 2)
         lang =
-          code: language[0].substring(0, 2)
-          name: allLanguages["#{language[0].substring(0, 2)}"].english
+          code: code
+          name: allLanguages[code].english
         codes.push(lang)
 
       # Sort the languages in alphabetical order
@@ -24,7 +25,7 @@ define (require) ->
         return if a.name > b.name then 1 else -1
 
       for lang in codes
-        availableLanguages["#{lang.code}"] = allLanguages["#{lang.code}"]
+        availableLanguages[lang.code] = allLanguages[lang.code]
       return availableLanguages
 
     initialize: () ->
