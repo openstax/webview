@@ -6,6 +6,7 @@ define (require) ->
   SearchHeaderView = require('cs!../header/header')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./advanced-template')
+  availableLanguages = require('cs!collections/languages')
   require('less!./advanced')
 
   # Move this to helpers?
@@ -33,7 +34,7 @@ define (require) ->
     template: template
     pageTitle: 'Advanced Search'
     templateHelpers:
-      languages: settings.languages
+      languages: availableLanguages.models[0].attributes
       years: [(new Date).getFullYear()..1999]
 
     regions:
