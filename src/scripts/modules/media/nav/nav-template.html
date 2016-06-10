@@ -1,14 +1,20 @@
 <script>
+var loaded = 0;
 function show() {
 
   var x = document.URL;
-  document.getElementById("notesbox").value = localStorage.getItem(x);
+  if(loaded == 0){
+    document.getElementById("notesbox").value = localStorage.getItem(x);
+    loaded = 1;
+  }
 
   if(document.getElementById("notesbox").style.display == "none"){
-    document.getElementById("notesbox").style.display ="";    
+    document.getElementById("notesbox").style.display ="";
+    document.getElementById("saveme").style.display ="";    
   }
   else{
     document.getElementById("notesbox").style.display ="none";
+    document.getElementById("saveme").style.display ="none";
    }
 }
 
@@ -17,6 +23,8 @@ function save(){
   localStorage.setItem(String(x), document.getElementById("notesbox").value);
 
 }
+
+
 </script>
 
 {{#if book}}
@@ -64,11 +72,9 @@ function save(){
         </div>
         
       </div><br><textarea id="notesbox" rows="4" cols="50" 
-      style="display:none;">
-          Type notes here
-        </textarea>
+      style="display:none;" value=""></textarea>
         <br>
-        <button class="save" role="button" onclick="save()">
+        <button class="save" role="button" id="saveme" onclick="save()" style="display:none;">
            <span class="text">Save Notes</span>
         </button>
     </div>
