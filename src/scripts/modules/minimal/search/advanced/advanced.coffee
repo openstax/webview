@@ -13,7 +13,10 @@ define (require) ->
     template: template
     pageTitle: 'Advanced Search'
     templateHelpers:
-      languages: availableLanguages.models[0].attributes
+      languages: () ->
+        if availableLanguages.models[0]?
+          return availableLanguages.models[0].attributes
+        return settings.languages
       years: [(new Date).getFullYear()..1999]
 
     regions:

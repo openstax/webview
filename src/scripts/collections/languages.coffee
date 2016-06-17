@@ -14,12 +14,12 @@ define (require) ->
       availableLanguages = {}
       codes = []
       _.each languages, (language) ->
-        code = language[0].substring(0, 2)
-        lang =
-          code: code
-          name: allLanguages[code].english
-        codes.push(lang)
-
+        if (language[0]?)
+          code = language[0].substring(0, 2)
+          lang =
+            code: code
+            name: allLanguages[code].english
+          codes.push(lang)
       # Sort the languages in alphabetical order
       codes.sort (a,b) ->
         return if a.name > b.name then 1 else -1
