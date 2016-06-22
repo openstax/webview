@@ -23,6 +23,8 @@
 
 # MAIN PAGE - Title - src/scripts/pages/home/home.coffee
 
+home-pageTitle = Sharing Knowledge and Building Communities - OpenStax CNX
+
 # MAIN PAGE - Featured Textbooks - src/scripts/modules/featured-books/featured-books-partial.html
 
 

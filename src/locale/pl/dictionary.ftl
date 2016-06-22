@@ -21,6 +21,8 @@
 
 # MAIN PAGE - Title - src/scripts/pages/home/home.coffee
 
+home-pageTitle = Propagując wiedzę i budując społeczności - OpenStax CNX
+
 # MAIN PAGE - Featured Textbooks - src/scripts/modules/featured-books/featured-books-partial.html
 
 
