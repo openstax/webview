@@ -196,6 +196,9 @@ module.exports = (grunt) ->
       require:
         src: 'bower_components/requirejs/require.js'
         dest: 'dist/scripts/require.js'
+      l20n:
+        src: 'bower_components/l20n/dist/bundle/web/l20n.js'
+        dest: 'dist/scripts/l20n.js'
       #aloha:
       #  src: 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha.js'
       #  dest: 'dist/scripts/aloha.js'
@@ -219,6 +222,7 @@ module.exports = (grunt) ->
           '!dist/scripts/require.js'
           '!dist/scripts/settings.js'
           '!dist/scripts/aloha.js'
+          '!dist/scripts/l20n.js'
         ]
         filter: 'isFile'
       directories:
