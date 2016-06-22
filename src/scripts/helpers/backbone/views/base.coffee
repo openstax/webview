@@ -71,8 +71,14 @@ define (require) ->
       currentPage = @model.getPageNumber().toString() if @model? and @model.isBook?()
       if Backbone.history.fragment?.match? and linksHelper.getCurrentPathComponents().page?
         historyPage = linksHelper.getCurrentPathComponents().page
+      title = document.querySelector('title')
       if @pageTitle
-        document.title = linksHelper.stripTags(@pageTitle) + settings.titleSuffix
+        title.dataset.l10nId = @pageTitle
+        if @pageTitleArgs
+          console.log(@pageTitleArgs, JSON.stringify(@pageTitleArgs))
+          title.dataset.l10nArgs = JSON.stringify(@pageTitleArgs)
+        else
+          title.dataset.l10nArgs = "{}"
 
       canonical = @canonical?() or @canonical
       if canonical isnt undefined
