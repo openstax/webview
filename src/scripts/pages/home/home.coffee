@@ -19,7 +19,7 @@ define (require) ->
       @regions.featured.show(new FeaturedBooksView())
 
   return class HomePage extends MainPageView
-    pageTitle: 'Sharing Knowledge and Building Communities'
+    pageTitle: 'home-pageTitle'
     canonical: null
     summary: 'View and share free educational material as courses, books,reports or other academic assignments.'
     description: 'Free, online educational material such as courses, books and reports.'
