@@ -72,7 +72,7 @@ define (require) ->
       if Backbone.history.fragment?.match? and linksHelper.getCurrentPathComponents().page?
         historyPage = linksHelper.getCurrentPathComponents().page
       if @pageTitle
-        document.title = @pageTitle + settings.titleSuffix
+        document.title = linksHelper.stripTags(@pageTitle) + settings.titleSuffix
 
       canonical = @canonical?() or @canonical
       if canonical isnt undefined
