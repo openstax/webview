@@ -45,7 +45,7 @@ define (require) ->
           url += "contents/#{uuid}"
           url += ":#{pageId}" if pageId
           url += "@#{pageVersion}" if pageVersion?
-          url += "/#{trim(title)}" if title
+          url += "/#{@stripTags(trim(title))}" if title
           url += @getCleanSearchQuery(window.location.search, paramsToIgnore)
 
       return url
@@ -55,10 +55,10 @@ define (require) ->
       page = ''
       id = model.getUuid?() or model.id
       version = model.get?('version') or model.version
-      title = trim(model.get?('title') or model.title)
+      title = @stripTags(trim(model.get?('title') or model.title))
 
       if model.isBook?()
-        title = trim(model.get('currentPage')?.get('title'))
+        title = @stripTags(trim(model.get('currentPage')?.get('title')))
         page = ":#{model.getPageNumber()}"
 
       return "#{settings.root}contents/#{id}#{page}/#{title}"
@@ -114,3 +114,8 @@ define (require) ->
       # Polyfill for location.origin since IE doesn't support it
       port = if location.port then ":#{location.port}" else ''
       location.origin = location.origin or "#{location.protocol}//#{location.hostname}#{port}"
+      
+   stripTags: (html) ->
+     temp = document.createElement("div")
+     temp.innerHTML = html
+     return temp.textContent 
