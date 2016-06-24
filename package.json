@@ -25,7 +25,7 @@
     "grunt-jsbeautifier": "~0.2.8",
     "grunt-targethtml": "~0.2.6",
     "grunt-contrib-copy": "~0.8.1",
-    "grunt-contrib-uglify": ">=0.9.2",
+    "grunt-contrib-uglify": "~0.9.2",
     "grunt-contrib-htmlmin": "~0.4.0",
     "grunt-contrib-imagemin": "~1.0.0",
     "grunt-string-replace": "~1.2.0",
