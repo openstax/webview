@@ -1,32 +1,30 @@
 define (require) ->
+  $ = require('jquery')
   Backbone = require('backbone')
   settings = require('settings')
+  AvailableLanguage = require('cs!models/available-language')
 
   archiveport = if settings.cnxarchive.port then ":#{settings.cnxarchive.port}" else ''
   archive = "#{location.protocol}//#{settings.cnxarchive.host}#{archiveport}"
 
-  return new class Language extends Backbone.Collection
+  return new class AvailableLanguages extends Backbone.Collection
     url: "#{archive}/extras"
+    model: AvailableLanguage
+    comparator: 'english'
 
     parse: (response) ->
       languages = response.languages_and_count
       allLanguages = settings.languages
-      availableLanguages = {}
-      codes = []
+      availableLanguages = []
       _.each languages, (language) ->
-        if (language[0]?)
-          code = language[0].substring(0, 2)
-          lang =
-            code: code
-            name: allLanguages[code].english
-          codes.push(lang)
-      # Sort the languages in alphabetical order
-      codes.sort (a,b) ->
-        return if a.name > b.name then 1 else -1
-
-      for lang in codes
-        availableLanguages[lang.code] = allLanguages[lang.code]
+        if language[0]?
+          id = language[0].substring(0, 2)
+          availableLanguages.push({
+            id: id
+            native: allLanguages[id].native
+            english: allLanguages[id].english
+          })
       return availableLanguages
-
+      
     initialize: () ->
       @fetch({reset: true})
