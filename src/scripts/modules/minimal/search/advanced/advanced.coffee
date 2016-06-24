@@ -17,7 +17,6 @@ define (require) ->
       languages: () ->
         if availableLanguages.models?
           return availableLanguages.models
-        console.log("not here")
         return settings.languages
       filtered: () ->
         if availableLanguages.models? then return true else false
