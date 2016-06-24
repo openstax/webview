@@ -6,13 +6,20 @@ define (require) ->
   SearchHeaderView = require('cs!modules/search/header/header')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!modules/search/advanced/advanced-template')
+  availableLanguages = require('cs!collections/languages')
   require('less!./advanced')
 
   return class AdvancedSearchView extends BaseView
     template: template
     pageTitle: 'Advanced Search'
+    collection: availableLanguages
     templateHelpers:
-      languages: settings.languages
+      languages: () ->
+        if availableLanguages.models?
+          return availableLanguages.models
+        return settings.languages
+      filtered: () ->
+        if availableLanguages.models? then return true else false
       years: [(new Date).getFullYear()..1999]
 
     regions:
@@ -20,6 +27,10 @@ define (require) ->
 
     events:
       'submit form': 'submitForm'
+
+    initialize: () ->
+      super()
+      @listenTo(@collection, 'reset', @render)
 
     onRender: () ->
       @regions.header.show(new SearchHeaderView())
