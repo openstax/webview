@@ -66,16 +66,28 @@
         <span class="control-label col-sm-2">Language</span>
         <div class="col-sm-10">
           <select name="language" class="form-control">
-            <option value="">Any</option>
-            {{~#each languages~}}
-              <option value="{{@key}}">
-                {{~#is native english~}}
-                  {{native}}
-                {{~else~}}
-                  {{native}} ({{english}})
-                {{~/is~}}
-              </option>
-            {{~/each~}}
+	    <option value="">Any</option>
+            {{~#if filtered~}}
+              {{~#each languages~}}
+                <option value="{{@key}}">
+                  {{~#is this.attributes.native this.attributes.english~}}
+                    {{this.attributes.native}}
+                  {{~else~}}
+                    {{this.attributes.native}} ({{this.attributes.english}})
+                  {{~/is~}}
+                </option>
+              {{~/each~}}
+            {{~else~}}
+              {{~#each languages~}}
+                <option value="{{@key}}">
+                  {{~#is native english~}}
+                    {{native}}
+                  {{~else~}}
+                    {{native}} ({{english}})
+                  {{~/is~}}
+                </option>
+              {{~/each~}}
+            {{~/if~}}
           </select>
         </div>
       </label>

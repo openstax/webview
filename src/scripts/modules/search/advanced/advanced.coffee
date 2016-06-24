@@ -33,14 +33,14 @@ define (require) ->
   return class AdvancedSearchView extends BaseView
     template: template
     pageTitle: 'Advanced Search'
-    console.log("availableLanguages", availableLanguages)
-    console.log("availableLanguages.models", availableLanguages.models)
-    console.log("availableLanguages.models[0]", availableLanguages.models[0])
+    collection: availableLanguages
     templateHelpers:
-      languages: () -> 
-        if availableLanguages.models[0]?
-          return availableLanguages.models[0].attributes
+      languages: () ->
+        if availableLanguages.models?
+          return availableLanguages.models
         return settings.languages
+      filtered: () ->
+        if availableLanguages.models? then return true else false
       years: [(new Date).getFullYear()..1999]
 
     regions:
@@ -51,6 +51,7 @@ define (require) ->
     initialize: () ->
       super()
       @criteria = parseQuery(window.location.search)
+      @listenTo(@collection, 'reset', @render)
 
     onRender: () ->
       @regions.header.show(new SearchHeaderView())

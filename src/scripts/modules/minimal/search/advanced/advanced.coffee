@@ -12,11 +12,15 @@ define (require) ->
   return class AdvancedSearchView extends BaseView
     template: template
     pageTitle: 'Advanced Search'
+    collection: availableLanguages
     templateHelpers:
       languages: () ->
-        if availableLanguages.models[0]?
-          return availableLanguages.models[0].attributes
+        if availableLanguages.models?
+          return availableLanguages.models
+        console.log("not here")
         return settings.languages
+      filtered: () ->
+        if availableLanguages.models? then return true else false
       years: [(new Date).getFullYear()..1999]
 
     regions:
@@ -24,6 +28,10 @@ define (require) ->
 
     events:
       'submit form': 'submitForm'
+
+    initialize: () ->
+      super()
+      @listenTo(@collection, 'reset', @render)
 
     onRender: () ->
       @regions.header.show(new SearchHeaderView())
