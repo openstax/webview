@@ -235,10 +235,10 @@ module.exports = (grunt) ->
     # Uglify
     uglify:
       dist:
-        #options:
-          #sourceMap: true
-          #sourceMapIncludeSources: true
-          #sourceMapIn: 'dist/scripts/main.js.map'
+        options:
+          sourceMap: true
+          sourceMapIncludeSources: true
+          sourceMapIn: 'dist/scripts/main.js.map'
         files:
           'dist/scripts/main.js': ['dist/scripts/main.js']
           'dist/scripts/require.js': ['dist/scripts/require.js']
