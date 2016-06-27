@@ -43,9 +43,9 @@ define (require) ->
       @hideProgress = options.hideProgress
       @mediaParent = options.mediaParent
       @tocIsOpen = false
-      @noteIsOpen = false
+      @preferencesIsOpen = false
       @.trigger('tocIsOpen', @tocIsOpen)
-      @.trigger('noteIsOpen',@noteIsOpen)
+      @.trigger('preferencesIsOpen',@preferencesIsOpen)
       @listenTo(@model, 'change:loaded change:currentPage removeNode moveNode add:contents', @render)
       @listenTo(@model, 'change:currentPage', @closeContentsOnSmallScreen)
 
@@ -53,7 +53,7 @@ define (require) ->
       'click .next': 'nextPage'
       'click .back': 'previousPage'
       'click .toggle.contents.btn': 'toggleContents'
-      'click .toggle.notes.btn' : 'toggleNotes'
+      'click .toggle.preferences.btn' : 'togglePreferences'
       'click .back-to-top > a': 'backToTop'
       'keydown .searchbar input': 'handleSearchInput'
       'click .searchbar > .clear-search': 'clearSearch'
@@ -72,14 +72,14 @@ define (require) ->
         for container in @model.get('currentPage')?.containers() ? []
           container.set('expanded', true)
       @updateToc()
-      if @noteIsOpen
-        @noteIsOpen = not @noteIsOpen
-        @updateNote()
+      if @preferencesIsOpen
+        @preferencesIsOpen = not @preferencesIsOpen
+        @updatePreferences()
       
-    toggleNotes: (e) ->
-      @noteIsOpen = not @noteIsOpen
-      @.trigger('noteIsOpen',@noteIsOpen)
-      @updateNote()
+    togglePreferences: (e) ->
+      @preferencesIsOpen = not @preferencesIsOpen
+      @.trigger('preferencesIsOpen',@preferencesIsOpen)
+      @updatePreferences()
       
       if @tocIsOpen
         @tocIsOpen = not @tocIsOpen
@@ -89,10 +89,10 @@ define (require) ->
           container.set('expanded', true)
         @updateToc()
 
-    updateNote: ->
-      button = @$el.find('.toggle.notes.btn')
+    updatePreferences: ->
+      button = @$el.find('.toggle.preferences.btn')
       indicator = button.find('.open-indicator')
-      if (@noteIsOpen)
+      if (@preferencesIsOpen)
         button.addClass('open')
         indicator.removeClass('fa-plus')
         indicator.addClass('fa-minus')
