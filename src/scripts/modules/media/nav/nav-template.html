@@ -42,11 +42,6 @@ function loadnotes() {
 
 function savenotes() {
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-      
-    }
-  };
   xhttp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+document.title+".txt", true);
   xhttp.send(document.getElementById("notesbox").value);
 }
