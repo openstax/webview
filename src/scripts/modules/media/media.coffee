@@ -196,7 +196,7 @@ define (require) ->
     updateUrl: () ->
       components = linksHelper.getCurrentPathComponents()
       components.version = "@#{components.version}" if components.version
-      title = linksHelper.cleanUrl(@model.get('title'))
+      title = linksHelper.cleanUrl(linksHelper.stripTags(@model.get('title')))
       qs = components.rawquery
 
       if title isnt components.title and not @model.isBook()
