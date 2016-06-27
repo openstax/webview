@@ -1,10 +1,11 @@
 <script>
 var loaded = 0;
+var prev = 0;
 function show() {
 
   var x = document.URL;
   if(loaded == 0){
-    document.getElementById("notesbox").value = localStorage.getItem(x);
+    loadDoc();
     loaded = 1;
   }
 
@@ -15,13 +16,39 @@ function show() {
   else{
     document.getElementById("notesbox").style.display ="none";
     document.getElementById("saveme").style.display ="none";
+
    }
 }
 
 function save(){
   var x = document.URL;
   localStorage.setItem(String(x), document.getElementById("notesbox").value);
+}
 
+function revert(){
+
+}
+
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      document.getElementById("notesbox").value = xhttp.responseText;
+    }
+  };
+  xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+document.title+".txt", true);
+  xhttp.send();
+}
+
+function saveDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      
+    }
+  };
+  xhttp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+document.title+".txt", true);
+  xhttp.send(document.getElementById("notesbox").value);
 }
 
 
@@ -72,9 +99,9 @@ function save(){
         </div>
         
       </div><br><textarea id="notesbox" rows="4" cols="50" 
-      style="display:none;" value=""></textarea>
+      value="" style="display:none;"></textarea>
         <br>
-        <button class="save" role="button" id="saveme" onclick="save()" style="display:none;">
+        <button class="save" role="button" id="saveme" onclick="saveDoc()" style="display:none;">
            <span class="text">Save Notes</span>
         </button>
     </div>
