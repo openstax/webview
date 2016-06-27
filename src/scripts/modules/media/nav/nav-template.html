@@ -5,7 +5,7 @@ function show() {
 
   var x = document.URL;
   if(loaded == 0){
-    loadDoc();
+    loadnotes();
     loaded = 1;
   }
 
@@ -29,7 +29,7 @@ function revert(){
 
 }
 
-function loadDoc() {
+function loadnotes() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -40,7 +40,7 @@ function loadDoc() {
   xhttp.send();
 }
 
-function saveDoc() {
+function savenotes() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -101,7 +101,7 @@ function saveDoc() {
       </div><br><textarea id="notesbox" rows="4" cols="50" 
       value="" style="display:none;"></textarea>
         <br>
-        <button class="save" role="button" id="saveme" onclick="saveDoc()" style="display:none;">
+        <button class="save" role="button" id="saveme" onclick="savenotes()" style="display:none;">
            <span class="text">Save Notes</span>
         </button>
     </div>
