@@ -206,7 +206,29 @@ about-people-team-content =
 
 # SEARCH - Top bar - src/scripts/modules/find-content/find-content-template.html
 
+search-find-content = Find Content
+
+search-search = Search
+  [html/placeholder]  Search
+
+search-or = or
+
+search-advanced-search = Advanced Search
+
 # SEARCH - Content - src/scripts/pages/browse-content/browse-content-template.html
+
+search-header = Welcome to the OpenStax CNX Library
+
+search-content =
+  | The content in OpenStax CNX comes in two formats:
+  | <strong>modules</strong>, which are like small "knowledge chunks,"
+  | and <strong>collections</strong>, which are groups of modules
+  | structured into books or course notes, or for other uses. Our open
+  | license allows for free use and reuse of all our content.
+
+search-pages = Pages: { $count }
+
+search-books = Books: { $count }
 
 
 
