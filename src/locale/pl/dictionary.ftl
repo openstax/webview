@@ -205,7 +205,29 @@ about-people-team-content =
 
 # SEARCH - Top bar - src/scripts/modules/find-content/find-content-template.html
 
+search-find-content = Szukaj zasobów
+
+search-search = Search
+  [html/placeholder]  Szukaj
+
+search-or = lub
+
+search-advanced-search = Zaawansowane wyszukiwanie
+
 # SEARCH - Content - src/scripts/pages/browse-content/browse-content-template.html
+
+search-header = Witaj w cyfrowej bibliotece OpenStax CNX
+
+search-content =
+  | Zasoby OpenStax CNX udostępniane są w dwóch postaciach:
+  | <strong>modułów</strong>, stanowiących małe "porcje wiedzy," oraz
+  | <strong>kolekcji</strong>, stanowiących zestawy modułów ułożone w formę
+  | książki, kursu lub kompletu o innym przeznaczeniu. Otwarte licencje
+  | pozwalają na swobodne użytkowanie wszystkich zasobów.
+
+search-pages = Strony: { $count }
+
+search-books = Książki: { $count }
 
 
 
