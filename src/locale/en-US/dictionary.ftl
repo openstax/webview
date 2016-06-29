@@ -399,6 +399,8 @@ textbook-view-contents = Contents
 
 # TEXTBOOK VIEW - Endorsement - src/scripts/modules/media/endorsed/endorsed-template.html
 
+textbook-view-endorsed-by = Endorsed by: OpenStax College
+
 # TEXTBOOK VIEW - Header - src/scripts/modules/media/header/header-template.html
 
 # TEXTBOOK VIEW - Metadata - src/scripts/modules/media/footer/metadata/metadata-template.html
