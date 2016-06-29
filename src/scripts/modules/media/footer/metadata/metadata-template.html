@@ -1,47 +1,43 @@
 {{> modules/media/footer/inherits/tab/toggle-partial }}
 
 <dl class="dl-horizontal">
-  <dt>Name:</dt>
+  <dt data-l10n-id="textbook-view-dt-name">Name:</dt>
     <dd>
       <div>
         <a href="{{url}}">{{{title}}}</a>
       </div>
     </dd>
-  <dt>ID:</dt>
+  <dt data-l10n-id="textbook-view-dt-id">ID:</dt>
     <dd>
       <div>{{id}}</div>
     </dd>
-  <dt>Language:</dt>
+  <dt data-l10n-id="textbook-view-dt-language">Language:</dt>
     <dd>
       <div class="language">
         {{~#unless editable~}}
-          {{#is languageName.native languageName.english~}}
-            {{languageName.native}}
-          {{~else~}}
-            {{languageName.native}} ({{languageName.english}})
-          {{~/is~}}
+          {{~#each languages~}}
+            {{#is @key ../language}}
+              <span data-l10n-id="advanced-search-language-option" data-l10n-args='{"native":"{{this}}", "code":"{{@key}}"}'></span>
+            {{/is}}
+          {{~/each~}}
         {{else~}}
           <select name="language">
             {{~#each languages~}}
-              <option value="{{@key}}" {{#is @key ../language}}selected{{/is}}>
-                {{~#is native english~}}
-                  {{native}}
-                {{~else~}}
-                  {{native}} ({{english}})
-                {{~/is~}}
+              <option value="{{@key}}" data-l10n-id="advanced-search-language-option" data-l10n-args='{"native":"{{this}}", "code":"{{@key}}"}' {{#is @key ../language}}selected{{/is}}>
+                {{this}}
               </option>
             {{~/each~}}
           </select>
         {{~/unless~}}
       </div>
     </dd>
-  <dt>Summary:</dt>
+  <dt data-l10n-id="textbook-view-dt-summary">Summary:</dt>
     <dd>
       <div class="summary-wrapper">
         <div class="summary">{{include abstract}}</div>
       </div>
     </dd>
-  <dt>Subjects:</dt>
+  <dt data-l10n-id="textbook-view-dt-subjects">Subjects:</dt>
     <dd>
       <div class="subjects">
         {{~#unless editable~}}
@@ -57,7 +53,7 @@
         {{~/unless~}}
       </div>
     </dd>
-  <dt>Keywords:</dt>
+  <dt data-l10n-id="textbook-view-dt-keywords">Keywords:</dt>
     <dd>
       <div class="keywords">
         {{~#unless editable~}}
@@ -69,7 +65,7 @@
         {{~/unless~}}
       </div>
     </dd>
-  <dt>Print Style:</dt>
+  <dt data-l10n-id="textbook-view-dt-print-style">Print Style:</dt>
     <dd>
       <div class="printStyle">
         {{~#unless editable~}}
@@ -85,7 +81,7 @@
         {{~/unless~}}
       </div>
     </dd>
-  <dt>License:</dt>
+  <dt data-l10n-id="textbook-view-dt-license">License:</dt>
     <dd>
       <div>
         <a href="{{license.url}}">
@@ -99,7 +95,7 @@
 
       </div>
     </dd>
-  <dt>Authors:</dt>
+  <dt data-l10n-id="textbook-view-dt-authors">Authors:</dt>
     <dd>
       <div class="authors">
         {{~#unless editable~}}
@@ -111,7 +107,7 @@
         {{~/unless~}}
       </div>
     </dd>
-  <dt>Copyright Holders:</dt>
+  <dt data-l10n-id="textbook-view-dt-copyright-holders">Copyright Holders:</dt>
     <dd>
       <div class="licensors">
       {{~#unless editable~}}
@@ -123,7 +119,7 @@
         {{~/unless~}}
       </div>
     </dd>
-  <dt>Publishers:</dt>
+  <dt data-l10n-id="textbook-view-dt-publishers">Publishers:</dt>
     <dd>
       <div class="publishers">
     {{~#unless editable~}}
@@ -135,19 +131,19 @@
       {{~/unless~}}
       </div>
     </dd>
-  <dt>Latest Version:</dt>
+  <dt data-l10n-id="textbook-view-dt-latest-version">Latest Version:</dt>
     <dd>
       <div>{{version}}</div>
     </dd>
-  <dt>First Publication Date:</dt>
+  <dt data-l10n-id="textbook-view-dt-first-publication-date">First Publication Date:</dt>
     <dd>
       <div>{{date created}}</div>
     </dd>
-  <dt>Latest Revision:</dt>
+  <dt data-l10n-id="textbook-view-dt-latest-revision">Latest Revision:</dt>
     <dd>
       <div>{{date revised}}</div>
     </dd>
-  <dt>Last Edited By:</dt>
+  <dt data-l10n-id="textbook-view-dt-last-edited-by">Last Edited By:</dt>
     <dd>
     {{~#if submitter.fullname~}}
       <div>{{submitter.fullname}}<div>

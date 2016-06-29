@@ -424,6 +424,46 @@ textbook-view-header-derived-from =
 
 # TEXTBOOK VIEW - Metadata - src/scripts/modules/media/footer/metadata/metadata-template.html
 
+textbook-view-dt-name = Nazwa:
+
+textbook-view-dt-id = Identyfikator:
+
+textbook-view-dt-language = Język:
+
+textbook-view-dt-summary = Podsumowanie:
+
+textbook-view-dt-subjects = Przedmioty:
+
+textbook-view-dt-keywords = Słowa kluczowe:
+
+textbook-view-dt-print-style = Styl wydruku:
+
+textbook-view-dt-license = Licencja:
+
+textbook-view-dt-authors = Autorzy:
+
+textbook-view-dt-copyright-holders = Właściciele licencji:
+
+textbook-view-dt-publishers = Wydawcy:
+
+textbook-view-dt-latest-version = Najnowsza wersja:
+
+textbook-view-dt-first-publication-date = Data pierwszej publikacji:
+
+textbook-view-dt-latest-revision = Ostatnia modyfikacja:
+
+textbook-view-dt-last-edited-by = Ostatnia modyfikacja przez:
+
+textbook-view-subject-name = { $name ->
+  [Arts] Sztuka
+  [Business] Przedsiębiorczość
+  [Humanities] Nauki humanistyczne
+  [Mathematics and Statistics] Matematyka i Statystyka
+  [Science and Technology] Pozostałe nauki ścisłe, przyrodnicze i techniczne
+  [Social Sciences] Nauki społeczne
+ *[other] { $name }
+}
+
 # TEXTBOOK VIEW - Attribution - src/scripts/modules/media/footer/attribution/attribution-template.html
 
 # TEXTBOOK VIEW - Get Book Drop Down - src/scripts/modules/media/header/popovers/book/book-template.html
