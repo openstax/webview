@@ -43,7 +43,18 @@ home-pageTitle = Sharing Knowledge and Building Communities - OpenStax CNX
 
 # HEADER - Top Right Message - src/scripts/modules/header/header-template.html
 
+all-cnx-author-legacy-site = CNX Author | Legacy Site
+  [html/title] Switch to the CNX legacy web site
+
 # HEADER - Nav Bar - src/scripts/modules/header/header-template.html
+
+all-navbar-search = Search
+
+all-navbar-about-us = About Us
+
+all-navbar-give = Give
+
+all-navbar-workspace = My Workspace
 
 
 
