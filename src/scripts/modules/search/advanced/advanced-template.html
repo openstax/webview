@@ -6,7 +6,7 @@
   <form class="form-horizontal" role="form">
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Author</span>
+        <span class="control-label col-sm-2" data-l10n-id="advanced-search-author">Author</span>
         <div class="col-sm-10">
           <input type="text" name="author" class="form-control" />
         </div>
@@ -15,7 +15,7 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Title</span>
+        <span class="control-label col-sm-2" data-l10n-id="advanced-search-title">Title</span>
         <div class="col-sm-10">
           <input type="text" name="title" class="form-control" />
         </div>
@@ -24,16 +24,16 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Subject</span>
+        <span class="control-label col-sm-2" data-l10n-id="advanced-search-subject">Subject</span>
         <div class="col-sm-10">
           <select name="subject" class="form-control">
-            <option value="">Any</option>
-            <option>Arts</option>
-            <option>Business</option>
-            <option>Humanities</option>
-            <option>Mathematics and Statistics</option>
-            <option>Science and Technology</option>
-            <option>Social Sciences</option>
+            <option value="" data-l10n-id="advanced-search-subject-default-any">Any</option>
+            <option data-l10n-id="advanced-search-subject-arts">Arts</option>
+            <option data-l10n-id="advanced-search-subject-business">Business</option>
+            <option data-l10n-id="advanced-search-subject-humanities">Humanities</option>
+            <option data-l10n-id="advanced-search-subject-math">Mathematics and Statistics</option>
+            <option data-l10n-id="advanced-search-subject-science">Science and Technology</option>
+            <option data-l10n-id="advanced-search-subject-social-sciences">Social Sciences</option>
           </select>
         </div>
       </label>
@@ -41,7 +41,7 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Keywords</span>
+        <span class="control-label col-sm-2" data-l10n-id="advanced-search-keywords">Keywords</span>
         <div class="col-sm-10">
           <input type="text" name="keywords" class="form-control" />
         </div>
@@ -50,12 +50,12 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Type</span>
+        <span class="control-label col-sm-2" data-l10n-id="advanced-search-type">Type</span>
         <div class="col-sm-10">
           <select name="type" class="form-control">
-            <option value="">Any</option>
-            <option value="book">Books</option>
-            <option value="page">Pages</option>
+            <option value="" data-l10n-id="advanced-search-type-default-any">Any</option>
+            <option value="book" data-l10n-id="advanced-search-type-books">Books</option>
+            <option value="page" data-l10n-id="advanced-search-type-pages">Pages</option>
           </select>
         </div>
       </label>
@@ -63,31 +63,19 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Language</span>
+        <span class="control-label col-sm-2" data-l10n-id="advanced-search-language">Language</span>
         <div class="col-sm-10">
           <select name="language" class="form-control">
-	    <option value="">Any</option>
-            {{~#if filtered~}}
-              {{~#each languages~}}
-                <option value="{{this.attributes.id}}">
-                  {{~#is this.attributes.native this.attributes.english~}}
-                    {{this.attributes.native}}
-                  {{~else~}}
-                    {{this.attributes.native}} ({{this.attributes.english}})
-                  {{~/is~}}
-                </option>
-              {{~/each~}}
-            {{~else~}}
-              {{~#each languages~}}
-                <option value="{{@key}}">
-                  {{~#is native english~}}
-                    {{native}}
-                  {{~else~}}
-                    {{native}} ({{english}})
-                  {{~/is~}}
-                </option>
-              {{~/each~}}
-            {{~/if~}}
+            <option value="" data-l10n-id="advanced-search-language-default-any">Any</option>
+            {{~#each languages~}}
+              <option value="{{@key}}">
+                {{~#is native english~}}
+                  {{native}}
+                {{~else~}}
+                  {{native}} ({{english}})
+                {{~/is~}}
+              </option>
+            {{~/each~}}
           </select>
         </div>
       </label>
@@ -95,10 +83,10 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Publication Date</span>
+        <span class="control-label col-sm-2" data-l10n-id="advanced-search-publication-date">Publication Date</span>
         <div class="col-sm-10">
           <select name="pubYear" class="form-control">
-            <option value="">Any</option>
+            <option value="" data-l10n-id="advanced-search-publication-date-default-any">Any</option>
             {{~#each years~}}
               <option>{{this}}</option>
             {{~/each~}}
@@ -109,12 +97,12 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Sort By</span>
+        <span class="control-label col-sm-2" data-l10n-id="advanced-search-sort">Sort By</span>
         <div class="col-sm-10">
           <select name="sort" class="form-control">
-            <option value="">Relevance</option>
-            <option value="pubDate">Publication Date</option>
-            <option value="popularity">Popularity</option>
+            <option value="" data-l10n-id="advanced-search-sort-default-relevance">Relevance</option>
+            <option value="pubDate" data-l10n-id="advanced-search-sort-publication-date">Publication Date</option>
+            <option value="popularity" data-l10n-id="advanced-search-sort-popularity">Popularity</option>
           </select>
         </div>
       </label>
@@ -122,7 +110,7 @@
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn col-sm-3">Submit</button>
+        <button type="submit" class="btn col-sm-3" data-l10n-id="advanced-search-submit">Submit</button>
       </div>
     </div>
   </form>
