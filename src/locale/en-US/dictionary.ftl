@@ -106,6 +106,25 @@ about-nav-contact = Contact
 
 # PEOPLE - People - src/scripts/pages/about/people/people-template.html
 
+about-people-header = People
+
+about-people-foundation-header = Foundation Support
+
+about-people-foundation-content =
+  | OpenStax College is grateful for the
+  | tremendous support from our foundation sponsors. Without their
+  | strong engagement of our mission,the goal of free access to
+  | high-quality textbooks would remain elusive.
+
+about-people-strategic-advisors = Strategic Advisors
+
+about-people-team-header = The OpenStax College Team
+
+about-people-team-content =
+  | OpenStax College is brought to you by a
+  | team of open education professionals dedicated to increasing global
+  | access to high-quality learning materials for students and teachers.
+
 
 
 ### CONTACT ###
