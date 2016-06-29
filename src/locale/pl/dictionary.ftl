@@ -365,6 +365,16 @@ textbook-view-file-description = { $format ->
 
 # TEXTBOOK VIEW - History - src/scripts/modules/media/footer/history/history-template.html
 
+textbook-view-version-history-header = Historia wersji
+
+textbook-view-th-version = Wersja:
+
+textbook-view-th-datetime = Data/Godzina:
+
+textbook-view-th-changes = Zmiany:
+
+textbook-view-th-publisher = Wydawca:
+
 # TEXTBOOK VIEW - Footer Tabs - src/scripts/modules/media/footer/footer-template.html
 
 # TEXTBOOK VIEW - Navigation - src/scripts/modules/media/nav/nav-template.html
