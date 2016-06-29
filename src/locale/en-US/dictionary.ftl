@@ -78,6 +78,38 @@ all-header-support = Support
 
 # FOOTER - Footer - src/scripts/modules/footer/footer-template.html
 
+all-footer-support =
+  | Supported by William &amp; Flora Hewlett Foundation,
+  | Bill &amp; Melinda Gates Foundation, 20 Million Minds Foundation,
+  | Maxfield Foundation, Open Society Foundations, and Rice University.
+  | Powered by OpenStax CNX.
+
+all-footer-ap =
+  | Advanced Placement® and AP® are trademarks registered
+  | and/or owned by the College Board, which was not involved in the
+  | production of, and does not endorse, this site.
+
+all-footer-creative-commons =
+  | Rice University. Except where otherwise
+  | noted, content created on this site is licensed under
+  | a Creative Commons Attribution 4.0 License.
+
+all-footer-licensing = Licensing
+
+all-footer-terms-of-use = Terms of Use
+
+all-footer-contact = Contact
+
+all-footer-connect = Connect
+
+all-footer-android-app = Android App
+
+all-footer-dev-blog = Dev Blog
+
+all-footer-itunes = iTunes U
+
+all-footer-share = Share
+
 
 
 ### ABOUT ###
