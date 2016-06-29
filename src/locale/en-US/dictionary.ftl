@@ -218,6 +218,54 @@ about-people-team-content =
 
 # ADVANCED SEARCH - Content - src/scripts/modules/search/advanced/advanced-template.html
 
+advanced-search-author = Author
+
+advanced-search-title = Title
+
+advanced-search-subject = Subject
+
+advanced-search-subject-default-any = Any
+
+advanced-search-subject-arts = Arts
+
+advanced-search-subject-business = Business
+
+advanced-search-subject-humanities = Humanities
+
+advanced-search-subject-math = Mathematics and Statistics
+
+advanced-search-subject-science = Science and Technology
+
+advanced-search-subject-social-sciences = Social Sciences
+
+advanced-search-keywords = Keywords
+
+advanced-search-type = Type
+
+advanced-search-type-default-any = Any
+
+advanced-search-type-books = Books
+
+advanced-search-type-pages = Pages
+
+advanced-search-language = Language
+
+advanced-search-language-default-any = Any
+
+advanced-search-publication-date = Publication Date
+
+advanced-search-publication-date-default-any = Any
+
+advanced-search-sort = Sort By
+
+advanced-search-sort-default-relevance = Relevance
+
+advanced-search-sort-publication-date = Publication Date
+
+advanced-search-sort-popularity = Popularity
+
+advanced-search-submit = Submit
+
 
 
 ### SEARCH RESULTS ###

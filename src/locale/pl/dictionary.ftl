@@ -217,6 +217,54 @@ about-people-team-content =
 
 # ADVANCED SEARCH - Content - src/scripts/modules/search/advanced/advanced-template.html
 
+advanced-search-author = Autor
+
+advanced-search-title = Tytuł
+
+advanced-search-subject = Dziedzina
+
+advanced-search-subject-default-any = Dowolna
+
+advanced-search-subject-arts = Muzyka i plastyka
+
+advanced-search-subject-business = Przedsiębiorczość
+
+advanced-search-subject-humanities = Nauki humanistyczne
+
+advanced-search-subject-math = Matematyka i statystyka
+
+advanced-search-subject-science = Pozostałe nauki ścisłe, przyrodnicze i techniczne
+
+advanced-search-subject-social-sciences = Nauki społeczne
+
+advanced-search-keywords = Słowa kluczowe
+
+advanced-search-type = Typ
+
+advanced-search-type-default-any = Dowolny
+
+advanced-search-type-books = Książki
+
+advanced-search-type-pages = Strony
+
+advanced-search-language = Język
+
+advanced-search-language-default-any = Dowolny
+
+advanced-search-publication-date = Rok publikacji
+
+advanced-search-publication-date-default-any = Dowolny
+
+advanced-search-sort = Sortuj według
+
+advanced-search-sort-default-relevance = Trafności
+
+advanced-search-sort-publication-date = Roku publikacji
+
+advanced-search-sort-popularity = Popularności
+
+advanced-search-submit = Wybierz
+
 
 
 ### SEARCH RESULTS ###
