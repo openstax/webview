@@ -423,6 +423,38 @@ textbook-view-header-derived-from =
 
 # TEXTBOOK VIEW - Metadata - src/scripts/modules/media/footer/metadata/metadata-template.html
 
+textbook-view-dt-name = Name:
+
+textbotok-view-dt-id = ID:
+
+textbook-view-dt-language = Language:
+
+textbook-view-dt-summary = Summary:
+
+textbook-view-dt-subjects = Subjects:
+
+textbook-view-dt-keywords = Keywords:
+
+textbook-view-dt-print-style = Print Style:
+
+textbook-view-dt-license = License:
+
+textbook-view-dt-authors = Authors:
+
+textbook-view-dt-copyright-holders = Copyright Holders:
+
+textbook-view-dt-publishers = Publishers:
+
+textbook-view-dt-latest-version = Latest Version:
+
+textbook-view-dt-first-publication-date = First Publication Date:
+
+textbook-view-dt-latest-revision = Latest Revision:
+
+textbook-view-dt-last-edited-by = Last Edited By:
+
+textbook-view-subject-name = { $name }
+
 # TEXTBOOK VIEW - Attribution - src/scripts/modules/media/footer/attribution/attribution-template.html
 
 # TEXTBOOK VIEW - Get Book Drop Down - src/scripts/modules/media/header/popovers/book/book-template.html
