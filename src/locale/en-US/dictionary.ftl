@@ -368,6 +368,12 @@ textbook-view-file-description = { $format ->
 
 # TEXTBOOK VIEW - Navigation - src/scripts/modules/media/nav/nav-template.html
 
+textbook-view-btn-back = Back
+
+textbook-view-btn-back-to-top = Back to Top
+
+textbook-view-btn-next = Next
+
 # TEXTBOOK VIEW - Endorsement - src/scripts/modules/media/endorsed/endorsed-template.html
 
 # TEXTBOOK VIEW - Header - src/scripts/modules/media/header/header-template.html

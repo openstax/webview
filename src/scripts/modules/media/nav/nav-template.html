@@ -15,9 +15,9 @@
       <div class="media-navbar">
         <div class="book-nav" aria-busy="true">
           {{#if back}}
-            <a class="nav back" href="{{back}}" data-trigger="false">Back</a>
+            <a class="nav back" href="{{back}}" data-trigger="false" data-l10n-id="textbook-view-btn-back">Back</a>
           {{else}}
-            <div class="nav back disabled">Back</div>
+            <div class="nav back disabled" data-l10n-id="textbook-view-btn-back">Back</div>
           {{/if}}
 
           {{#unless _hideProgress}}
@@ -26,14 +26,14 @@
             </div>
           {{else}}
             <div class="back-to-top">
-              <a href="#">Back to Top</a>
+              <a href="#" data-l10n-id="textbook-view-btn-back-to-top">Back to Top</a>
             </div>
           {{/unless}}
 
           {{#if next}}
-            <a class="nav next" href="{{next}}" data-trigger="false">Next</a>
+            <a class="nav next" href="{{next}}" data-trigger="false" data-l10n-id="textbook-view-btn-next">Next</a>
           {{else}}
-            <div class="nav next disabled">Next</div>
+            <div class="nav next disabled" data-l10n-id="textbook-view-btn-next">Next</div>
           {{/if}}
         </div>
       </div>
