@@ -134,6 +134,22 @@ home-pageTitle = Propagując wiedzę i budując społeczności - OpenStax CNX
 
 # TEXTBOOK VIEW - Title - src/scripts/modules/media/title/title-template.html
 
+textbook-view-btn-edit = Edytuj
+
+textbook-view-btn-create = Utwórz kopię do edycji
+
+textbook-view-publishing = publikujesz { $title }
+
+textbook-view-derived-from =
+  | Utworzone z <a href="{ $url }">{ $title }</a> przez
+  | <span class="collection-authors">{ TAKE(50, $authors) }</span>
+
+textbook-view-book-by =
+  | Utworzone przez: <span class="collection-authors">{ TAKE(50, $authors) }</span>
+
+textbook-view-page-by =
+  | Utworzone przez: <span class="collection-authors">{ TAKE(50, $authors) }</span>
+
 # TEXTBOOK VIEW - Downloads - src/scripts/modules/media/footer/downloads/downloads-template.html
 
 # TEXTBOOK VIEW - History - src/scripts/modules/media/footer/history/history-template.html

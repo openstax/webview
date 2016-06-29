@@ -135,6 +135,22 @@ home-pageTitle = Sharing Knowledge and Building Communities - OpenStax CNX
 
 # TEXTBOOK VIEW - Title - src/scripts/modules/media/title/title-template.html
 
+textbook-view-btn-edit = Edit
+
+textbook-view-btn-create = Create an Editable Copy
+
+textbook-view-publishing = publishing { $title }
+
+textbook-view-derived-from =
+  | Derived from <a href="{ $url }">{ $title }</a> by
+  | <span class="collection-authors">{ TAKE(50, $authors) }</span>
+
+textbook-view-book-by =
+  | Book by: <span class="collection-authors">{ TAKE(50, $authors) }</span>
+
+textbook-view-page-by =
+  | Page by: <span class="collection-authors">{ TAKE(50, $authors) }</span>
+
 # TEXTBOOK VIEW - Downloads - src/scripts/modules/media/footer/downloads/downloads-template.html
 
 # TEXTBOOK VIEW - History - src/scripts/modules/media/footer/history/history-template.html
