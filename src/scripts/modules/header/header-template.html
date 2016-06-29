@@ -16,7 +16,9 @@
         <li><a href="{{cnxSupport}}" title="Go to CNX Support">Support</a></li>
       {{/if}}
       {{#if url}}
-        <li><a href="{{url}}" title="Switch to the CNX legacy web site">CNX Author | Legacy Site</a></li>
+
+        <li><a href="{{url}}" data-l10n-id="all-cnx-author-legacy-site">CNX Author | Legacy Site</a></li>
+
       {{/if}}
     </ul>
   </div>
@@ -37,9 +39,9 @@
       {{! Collect the nav links, forms, and other content for toggling }}
       <div class="collapse navbar-collapse" id="page-nav">
         <ul class="nav nav-justified">
-          <li {{#is page 'browse'}}class="active"{{/is}}><a href="/browse">Search</a></li>
-          <li {{#is page 'about'}}class="active"{{/is}}><a href="/about">About Us</a></li>
-          <li {{#is page 'donate'}}class="active"{{/is}}><a href="/donate">Give</a></li>
+          <li {{#is page 'browse'}}class="active"{{/is}}><a href="/browse" data-l10n-id="all-navbar-search"></a></li>
+          <li {{#is page 'about'}}class="active"{{/is}}><a href="/about" data-l10n-id="all-navbar-about-us"></a></li>
+          <li {{#is page 'donate'}}class="active"{{/is}}><a href="/donate" data-l10n-id="all-navbar-give"></a></li>
           <li>
             <a href="http://www.rice.edu">
               <img src="/images/rice.png" class="rice" alt="Rice University" width="74" height="32" />

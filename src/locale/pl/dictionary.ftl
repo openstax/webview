@@ -42,7 +42,18 @@ home-pageTitle = Propagując wiedzę i budując społeczności - OpenStax CNX
 
 # HEADER - Top Right Message - src/scripts/modules/header/header-template.html
 
+all-cnx-author-legacy-site = Autor CNX | Stara Strona
+  [html/title] Przejdź do starej wersji CNX
+
 # HEADER - Nav Bar - src/scripts/modules/header/header-template.html
+
+all-navbar-search = Szukaj
+
+all-navbar-about-us = O nas
+
+all-navbar-give = Wesprzyj nas
+
+all-navbar-workspace = Moje biurko
 
 
 
