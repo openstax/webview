@@ -376,6 +376,14 @@ textbook-view-th-publisher = Publisher:
 
 # TEXTBOOK VIEW - Footer Tabs - src/scripts/modules/media/footer/footer-template.html
 
+textbook-view-tab-downloads = Downloads
+
+textbook-view-tab-history = History
+
+textbook-view-tab-attribution = Attribution
+
+textbook-view-tab-more-info = More Information
+
 # TEXTBOOK VIEW - Navigation - src/scripts/modules/media/nav/nav-template.html
 
 textbook-view-btn-back = Back
