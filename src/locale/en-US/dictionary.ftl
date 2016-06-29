@@ -88,6 +88,12 @@ all-header-support = Support
 
 # ABOUT - Navigation - src/scripts/pages/about/about-template.html
 
+about-nav-about-us = About Us
+
+about-nav-people = People
+
+about-nav-contact = Contact
+
 # ABOUT - Content - src/scripts/pages/about/default/default-template.html
 
 # ABOUT - Foundations - src/scripts/pages/about/people/people-template.html & src/scripts/pages/about/people/people.coffee
