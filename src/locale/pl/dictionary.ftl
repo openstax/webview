@@ -77,6 +77,38 @@ all-header-support = Pomoc
 
 # FOOTER - Footer - src/scripts/modules/footer/footer-template.html
 
+all-footer-support =
+  | Serwis powstał dzięki pomocy William &amp;
+  | Flora Hewlett Foundation, Bill &amp; Melinda Gates Foundation,
+  | 20 Million Minds Foundation, Maxfield Foundation, Open Society Foundations oraz Rice University.
+  | Obsługiwany przez OpenStax CNX.
+
+all-footer-ap =
+  | Advanced Placement® oraz AP® to zarejestrowane znaki
+  | towarowe będące własnością College Board, która nie uczestniczyła w
+  | tworzeniu niniejszej strony ani jej nie autoryzowała.
+
+all-footer-creative-commons =
+  | Rice University. Wszystkie treści zawarte
+  | w serwisie zostały opublikowane na licencji Creative Commons Uznanie
+  | Autorstwa 4.0, z wyjątkiem tych, dla których wskazano inną licencję.
+
+all-footer-licensing = Licencje
+
+all-footer-terms-of-use = Warunki użytkowania
+
+all-footer-contact = Kontakt
+
+all-footer-connect = Łącza
+
+all-footer-android-app = Aplikacja na Androida
+
+all-footer-dev-blog = Blog
+
+all-footer-itunes = iTunes
+
+all-footer-share = Udostępnij
+
 
 
 ### ABOUT ###
