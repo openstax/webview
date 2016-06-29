@@ -152,6 +152,35 @@ textbook-view-page-by =
 
 # TEXTBOOK VIEW - Downloads - src/scripts/modules/media/footer/downloads/downloads-template.html
 
+textbook-view-downloads-header = Do pobrania
+
+textbook-view-loading = Ładowanie
+
+textbook-view-loading-more-details-btn = Więcej szczegółów
+
+textbook-view-th-format = Format:
+
+textbook-view-th-details = Szczegóły
+
+textbook-view-th-file-name = Nazwa pliku:
+
+textbook-view-th-generated = Wygenerowany:
+
+textbook-view-th-size = Rozmiar:
+
+textbook-view-file-not-available = Plik niedostępny
+
+textbook-view-no-downloads = Pobieranie w tej chwili jest niedostępne.
+
+textbook-view-file-description = { $format ->
+  [PDF] Plik PDF, najlepszy do drukowania.
+  [EPUB] Książka cyfrowa, najlepsza do przeglądania na urządzeniach mobilnych bez połączenia z internetem.
+  [Offline ZIP]
+    | Archiwum HTML, najlepsze do przeglądania na komputerze bez połączenia z internetem.
+    | Zawiera XML, multimedia i inne zasoby dodatkowe.
+ *[other] { $format }
+}
+
 # TEXTBOOK VIEW - History - src/scripts/modules/media/footer/history/history-template.html
 
 # TEXTBOOK VIEW - Footer Tabs - src/scripts/modules/media/footer/footer-template.html
