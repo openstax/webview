@@ -105,6 +105,25 @@ about-nav-contact = Kontakt
 
 # PEOPLE - People - src/scripts/pages/about/people/people-template.html
 
+about-people-header = Ludzie
+
+about-people-foundation-header = Darczyńcy
+
+about-people-foundation-content =
+  | OpenStax College jest wdzięczny za
+  | ogromne wsparcie ze strony sponsorów. Bez ich głębokiego
+  | zaangażowania, realizacja naszej misji upowszechniania
+  | darmowego dostępu do najwyższej jakości podręczników byłaby poza naszym zasięgiem.
+
+about-people-strategic-advisors = Doradcy
+
+about-people-team-header = Zespół OpenStax College
+
+about-people-team-content =
+  | OpenStax College powstał dzięki grupie
+  | specjalistów od otwartych zasobów edukacyjnych, którzy postanowili
+  | polepszyć dostęp do wysokiej jakości podręczników dla studentów i nauczycieli z całego świata.
+
 
 
 ### CONTACT ###
