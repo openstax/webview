@@ -153,6 +153,33 @@ textbook-view-page-by =
 
 # TEXTBOOK VIEW - Downloads - src/scripts/modules/media/footer/downloads/downloads-template.html
 
+textbook-view-downloads-header = Downloads
+
+textbook-view-loading = Loading
+
+textbook-view-loading-more-details-btn = More details
+
+textbook-view-th-format = Format:
+
+textbook-view-th-details = Details
+
+textbook-view-th-file-name = File Name:
+
+textbook-view-th-generated = Generated:
+
+textbook-view-th-size = Size:
+
+textbook-view-file-not-available = File not available
+
+textbook-view-no-downloads = No downloads are available at this time.
+
+textbook-view-file-description = { $format ->
+  [PDF] PDF file, for viewing content offline and printing.
+  [EPUB] Electronic book format file, for viewing on mobile devices.
+  [Offline ZIP] An offline HTML copy of the content. Also includes XML, included media files, and other support files.
+ *[other] { $format }
+}
+
 # TEXTBOOK VIEW - History - src/scripts/modules/media/footer/history/history-template.html
 
 # TEXTBOOK VIEW - Footer Tabs - src/scripts/modules/media/footer/footer-template.html
