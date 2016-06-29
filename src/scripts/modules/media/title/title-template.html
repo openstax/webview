@@ -3,12 +3,12 @@
     {{#if authenticated}}
       {{#if editable}}
         <div class="edit tool">
-          <a class="btn">Edit</a>
+          <a class="btn" data-l10n-id="textbook-view-btn-edit">Edit</a>
         </div>
       {{else}}
         {{#if derivable}}
           <div class="derive tool">
-            <a class="btn">Create an Editable Copy</a>
+            <a class="btn" data-l10n-id="textbook-view-btn-create">Create an Editable Copy</a>
           </div>
         {{/if}}
       {{/if}}
@@ -17,13 +17,13 @@
     <div class="title">
       <h1 class="large-header">
         {{#is status 'publishing'}}
-          <span class="label label-info">publishing</span>
+          <span class="label label-info" data-l10n-id="textbook-view-publishing" data-l10n-args='{"title":"{{title}}"}'>publishing {{{title}}}</span>
+        {{else}}
+          {{title}}
         {{/is}}
-        {{{title}}}
       </h1>
       {{#if parent.id}}
-        <span>
-          Derived from <a href="/contents/{{parent.id}}@{{parent.version}}">{{parent.title}}</a> by
+        <span data-l10n-id="textbook-view-derived-from" data-l10n-args='{"url":"/contents/{{parent.id}}@{{parent.version}}", "title":"{{parent.title}}","authors":[{{~#each parent.authors}}"{{fullname}}"{{#unless @last}},{{/unless}}{{/each~}}]}'>Derived from <a href="/contents/{{parent.id}}@{{parent.version}}">{{parent.title}}</a> by
           <span class="collection-authors">
             {{~#each parent.authors}}
               <span class="list-comma">{{fullname}}</span>
@@ -35,11 +35,15 @@
 
     <div class="info">
       {{#if authors.length}}
-        <span>{{#if isBook}}Book{{else}}Page{{/if}} by:</span>
-        <span class="collection-authors">
-          {{~#each authors}}
-            <span class="list-comma">{{fullname}}</span>
-          {{/each~}}
+        {{#if isBook}}<span data-l10n-id="textbook-view-book-by" data-l10n-args='{"authors": [{{~#each authors}}"{{fullname}}"{{#unless @last}},{{/unless}}{{/each~}}]}'>Book
+        {{else}}<span data-l10n-id="textbook-view-page-by" data-l10n-args='{"authors": [{{~#each authors}}"{{fullname}}"{{#unless @last}},{{/unless}}{{/each~}}]}'>Page
+        {{/if}}
+        by:
+          <span class="collection-authors">
+            {{~#each authors}}
+              <span class="list-comma">{{fullname}}</span>
+            {{/each~}}
+          </span>
         </span>
       {{/if}}
 
