@@ -19,6 +19,15 @@
 
 # MAIN PAGE - Splash - src/scripts/modules/splash/splash-template.html
 
+main-splash-head = Odkryj materiały edukacyjne w Otwartych Przestrzeniach.
+
+main-splash-content =
+  | Przeglądaj i dziel się wolnymi materiałami w małych fragmentach,
+  | które mogą być składane w kursy, książki, raporty oraz inne formy
+  | akademickie.
+
+main-learn-more = Ucz Się Więcej
+
 # MAIN PAGE - Title - src/scripts/pages/home/home.coffee
 
 home-pageTitle = Propagując wiedzę i budując społeczności - OpenStax CNX
