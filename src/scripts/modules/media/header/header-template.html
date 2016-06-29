@@ -3,18 +3,18 @@
     {{#if authenticated}}
       {{#if derivable}}
         <div class="derive tool">
-          <a class="btn">Create an Editable Copy</a>
+          <a class="btn" data-l10n-id="textbook-view-btn-create-copy">Create an Editable Copy</a>
         </div>
       {{/if}}
       {{#if editable}}
       <div class="edit tool">
-        <a class="btn">Edit Page</a>
+        <a class="btn" data-l10n-id="textbook-view-btn-edit-page">Edit Page</a>
       </div>
       {{/if}}
     {{/if}}
 
     <div class="title">
-      <h2>
+      <h2 data-l10n-id="textbook-view-header-{{#isnt status 'publishing'}}no-{{/isnt}}publishing{{#if chapter}}-chapter{{/if}}" data-l10n-args='{"chapter":"{{chapter}}","title":"{{{pageTitle}}}"}'>
         {{#is status 'publishing'}}
           <span class="label label-info">publishing</span>
         {{/is}}
@@ -22,7 +22,7 @@
         {{{pageTitle}}}
       </h2>
       {{#if currentPage.parent.id}}
-        <span>
+        <span data-l10n-id="textbook-view-header-derived-from" data-l10n-args='{"url":"/contents/{{currentPage.parent.id}}@{{currentPage.parent.version}}","title":"{{currentPage.parent.title}}","authors": {{toJSON currentPage.parent.authors}} }'>
           Derived from <a href="/contents/{{currentPage.parent.id}}@{{currentPage.parent.version}}">{{currentPage.parent.title}}</a> by
           <span class="book-authors">
             {{#each currentPage.parent.authors}}
@@ -37,22 +37,22 @@
       {{#if conceptCoach}}
         {{#if jumpToCC}}
           <div class="jump-to-cc">
-            <a class="btn" href="#coach-wrapper">Jump to Concept Coach</a>
+            <a class="btn" href="#coach-wrapper" data-l10n-id="textbook-view-btn-jump-to-concept-coach">Jump to Concept Coach</a>
           </div>
         {{/if}}
       {{else}}
         <div class="downloads">
           {{#or hasDownloads buyLink}}
             {{#is mediaType 'application/vnd.org.cnx.collection'}}
-              <button class="btn" tabindex="0" type="submit">Get This Book!</button>
+              <button class="btn" tabindex="0" type="submit" data-l10n-id="textbook-view-btn-get-this-book">Get This Book!</button>
             {{else}}
-              <button class="btn" tabindex="0" type="submit">Get This Page!</button>
+              <button class="btn" tabindex="0" type="submit" data-l10n-id="textbook-view-btn-get-this-page">Get This Page!</button>
             {{/is}}
           {{/or}}
         </div>
       {{/if}}
       {{#if currentPage.authors.length}}
-        <span>Page by:</span>
+        <span data-l10n-id="textbook-view-page-by">Page by:</span>
         <span class="page-authors">
           {{~#each currentPage.authors~}}
             <span class="list-comma">{{fullname}}</span>
@@ -63,7 +63,7 @@
 
     {{#if currentPage.abstract}}
       <div class="summary">
-        <a class="toggle" href="#"><h5>Summary</h5></a>
+        <a class="toggle" href="#"><h5 data-l10n-id="textbook-view-summary">Summary</h5></a>
         <div class="abstract">{{include currentPage.abstract}}</div>
       </div>
     {{/if}}

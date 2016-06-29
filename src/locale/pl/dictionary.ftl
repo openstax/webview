@@ -320,12 +320,6 @@ textbook-view-btn-edit = Edytuj
 
 textbook-view-btn-create = Utwórz kopię do edycji
 
-textbook-view-publishing = publikujesz { $title }
-
-textbook-view-derived-from =
-  | Utworzone z <a href="{ $url }">{ $title }</a> przez
-  | <span class="collection-authors">{ TAKE(50, $authors) }</span>
-
 textbook-view-book-by =
   | Utworzone przez: <span class="collection-authors">{ TAKE(50, $authors) }</span>
 
@@ -403,6 +397,30 @@ textbook-view-contents = Spis treści
 textbook-view-endorsed-by = Zatwierdzone przez: OpenStax College
 
 # TEXTBOOK VIEW - Header - src/scripts/modules/media/header/header-template.html
+
+textbook-view-btn-create-copy = Utwórz kopię do edycji
+
+textbook-view-btn-edit-page = Edytuj stronę
+
+textbook-view-btn-jump-to-concept-coach = Idź do Concept Coach
+
+textbook-view-btn-get-this-book = Weź tę książkę!
+
+textbook-view-btn-get-this-page = Weź tę stronę!
+
+textbook-view-summary = Podsumowanie
+
+textbook-view-header-publishing = <span class="label label-info">publikujesz</span> { $title }
+
+textbook-view-header-publishing-chapter =
+  | <span class="label label-info">publikujesz</span> <span class="title-chapter">{ $chapter }</span> { $title }
+
+textbook-view-header-no-publishing = { $title }
+
+textbook-view-header-no-publishing-chapter = <span class="title-chapter">{ $chapter }</span> { $title }
+
+textbook-view-header-derived-from =
+  | Utworzone z <a href="{ $url }">{ $title }</a> przez <span class="book-authors">{ TAKE(50, $authors) }</span>
 
 # TEXTBOOK VIEW - Metadata - src/scripts/modules/media/footer/metadata/metadata-template.html
 
