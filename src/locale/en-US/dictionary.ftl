@@ -457,6 +457,40 @@ textbook-view-subject-name = { $name }
 
 # TEXTBOOK VIEW - Attribution - src/scripts/modules/media/footer/attribution/attribution-template.html
 
+textbook-view-textbook-attribute-header = How to Reuse &amp; Attribute This Content
+
+textbook-view-textbook-content-produced =
+  | Textbook content produced by <span>{ TAKE(50, $authors) }</span>
+  | is licensed under a <a href="{ $url }">{ $title }</a> license.
+
+textbook-view-attribution-p-1 =
+  | Under this license, any user of this textbook or the textbook contents herein must provide proper attribution
+  | as follows:
+
+textbook-view-attribution-p-2-strong =
+  | The OpenStax College name, OpenStax College logo, OpenStax College book covers,
+  | OpenStax CNX name, and OpenStax CNX logo are not subject to the creative commons license
+  | and may not be reproduced without the prior and express written consent of Rice University.
+
+textbook-view-attribution-p-2-span =
+  | For questions regarding this license, please contact <a href="{ $url }">{ $title }</a>.
+
+textbook-view-attribution-li-1 =
+  | If you use this textbook as a bibliographic reference, then you should cite it as follows:
+
+textbook-view-attribution-li-2-title =
+  | If you redistribute this textbook in a print format,
+  | then you must include on every physical page the following attribution:
+
+textbook-view-attribution-li-2-attribution = "Download for free at { $url }."
+
+textbook-view-attribution-li-3-title =
+  | If you redistribute part of this textbook, then you must retain in every
+  | digital format page view (including but not limited to EPUB, PDF, and HTML)
+  | and on every physical printed page the following attribution:
+
+textbook-view-attribution-li-3-attribution = "Download for free at { $url }."
+
 # TEXTBOOK VIEW - Get Book Drop Down - src/scripts/modules/media/header/popovers/book/book-template.html
 
 # TEXTBOOK VIEW - Footer Toggle - src/scripts/modules/media/footer/inherits/tab/toggle-partial.html
