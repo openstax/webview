@@ -321,12 +321,6 @@ textbook-view-btn-edit = Edit
 
 textbook-view-btn-create = Create an Editable Copy
 
-textbook-view-publishing = publishing { $title }
-
-textbook-view-derived-from =
-  | Derived from <a href="{ $url }">{ $title }</a> by
-  | <span class="collection-authors">{ TAKE(50, $authors) }</span>
-
 textbook-view-book-by =
   | Book by: <span class="collection-authors">{ TAKE(50, $authors) }</span>
 
@@ -402,6 +396,30 @@ textbook-view-contents = Contents
 textbook-view-endorsed-by = Endorsed by: OpenStax College
 
 # TEXTBOOK VIEW - Header - src/scripts/modules/media/header/header-template.html
+
+textbook-view-btn-create-copy = Create an Editable Copy
+
+textbook-view-btn-edit-page = Edit Page
+
+textbook-view-btn-jump-to-concept-coach = Jump to Concept Coach
+
+textbook-view-btn-get-this-book = Get This Book!
+
+textbook-view-btn-get-this-page = Get This Page!
+
+textbook-view-summary = Summary
+
+textbook-view-header-publishing = <span class="label label-info">publishing</span> { $title }
+
+textbook-view-header-publishing-chapter =
+  | <span class="label label-info">publishing</span> <span class="title-chapter">{ $chapter }</span> { $title }
+
+textbook-view-header-no-publishing = { $title }
+
+textbook-view-header-no-publishing-chapter = <span class="title-chapter">{ $chapter }</span> { $title }
+
+textbook-view-header-derived-from =
+  | Derived from <a href="{ $url }">{ $title }</a> by <span class="book-authors">{ TAKE(50, $authors) }</span>
 
 # TEXTBOOK VIEW - Metadata - src/scripts/modules/media/footer/metadata/metadata-template.html
 
