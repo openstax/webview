@@ -95,6 +95,53 @@ about-nav-contact = Kontakt
 
 # ABOUT - Content - src/scripts/pages/about/default/default-template.html
 
+about-header = O nas
+
+about-content =
+  | <p>My w OpenStax wierzymy, że każdy może się czegoś nauczyć i każdy może czegoś nauczyć.</p>
+  |
+  | <p>Zirytowany ograniczeniami tradycyjnych podręczników, w 1999 roku na Rice University dr Richard Baraniuk
+  | założył OpenStax (wówczas Connexions), aby udostępnić autorom i studentom miejsce, gdzie mogliby swobodnie
+  | publikować i modyfikować otwarte zasoby edukacyjne takie jak kursy, podręczniki czy skrypty.</p>
+  |
+  | <p>Obecnie OpenStax CNX to dynamicznie rozwijający się cyfrowy ekosystem, dzięki któremu miliony użytkowników
+  | miesięcznie uczą się z otwartych zasobów edukacyjnych nie płacąc za to ani grosza.</p>
+  |
+  | <p>Serwis zawiera dziesiątki tysięcy modułów edukacyjnych zwanych <b>stronami</b>, które zgrupowane są w
+  | <b>książki</b> tworząc gotowe podręczniki z wielu różnych dziedzin, łatwo dostępne przez internet i w każdej chwili
+  | gotowe do pobrania na niemal dowolne urządzenie.</p>
+  |
+  | <p>A co najlepsze, to wszystko jest dostępne za darmo dzięki wspaniałomyślnej pomocy Rice University i wielu
+  | organizacji charytatywnych.</p>
+
+about-how-it-works-header = Jak to działa
+
+about-authors-can-header = Autorzy mogą:
+
+about-allowing-learners-header = Pozwala studentom:
+
+about-frictionless-remix-header = Łatwe adaptowanie
+
+frictionless-content =
+  | <p>OpenStax CNX powstał z myślą o promocji otwartego udostępniania i adaptacji zasobów edukacyjnych. Wiedzę
+  | zgromadzoną w OpenStax CNX mogą poszerzać wszyscy, ponieważ jest dostępna do modyfikacji:</p>
+  | <ul>
+  | <li><b>pod względem edukacyjnym:</b>
+  | Zachęcamy autorów, aby tworzyli każdą stronę jako samowystarczalny, odrębny zasób. Dzięki temu innym łatwiej będzie
+  | wykorzystać ją we własnych kolekcjach tworzonych na potrzeby ich studentów.</li>
+  |
+  | <li><b>pod względem technicznym:</b>
+  | wszystkie zasoby oparte są na prostym składniowo formacie HTML5, z wbudowanym wsparciem dla osób o specjalnych
+  | potrzebach, aby mogli korzystać z nich wszyscy. Dzięki narzędziom udostępnionym w OpenStax CNX, autorzy mogą tworzyć
+  | i modyfikować zasoby równie łatwo, jak gdyby pracowali w Google Docs lub w Microsoft Word.</li>
+  |
+  | <li><b>pod względem prawnym:</b>
+  | wszystkie zasoby tworzone na OpenStax są udostępniane na otwartych licencjach Creative Commons.
+  | Dzięki temu autorzy mogą łatwo umożliwić innym zgodne z prawem wykorzystywanie i adaptowanie ich pracy,
+  | jednocześnie zachowując prawo do należnego uznania autorstwa. Oprogramowanie OpenStax CNX samo dba o przytoczenie
+  | oryginalnego autora, więc proces adaptacji jest bezbolesny.</li>
+  | </ul>
+
 # ABOUT - Foundations - src/scripts/pages/about/people/people-template.html & src/scripts/pages/about/people/people.coffee
 
 about-foundations-hewlett =
