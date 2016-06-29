@@ -96,6 +96,53 @@ about-nav-contact = Contact
 
 # ABOUT - Content - src/scripts/pages/about/default/default-template.html
 
+about-header = About Us
+
+about-content =
+  | <p>OpenStax believes that everyone has something to learn, and everyone has something to teach.</p>
+  |
+  | <p>Frustrated by the limitations of traditional textbooks and courses, Dr. Richard Baraniuk
+  | founded OpenStax (then Connexions) in 1999 at Rice University to provide authors and learners with
+  | an open space where they can share and freely adapt educational materials such as courses, books, and reports. </p>
+  |
+  | <p>Today, OpenStax CNX is a dynamic non-profit digital ecosystem serving millions of users per month in the delivery
+  | of educational content to improve learning outcomes.</p>
+  |
+  | <p>There are tens of thousands of learning objects, called <b>pages</b>, that are organized into thousands
+  | of textbook-style <b>books</b> in a host of disciplines, all easily accessible online and downloadable to almost
+  | any device, anywhere, anytime.</p>
+  |
+  | <p>The best part? Everything is available for free thanks to generous support from Rice University and several
+  | philanthropic organizations.</p>
+
+about-how-it-works-header = How it works
+
+about-authors-can-header = Authors can:
+
+about-allowing-learners-header = Allowing learners to:
+
+about-frictionless-remix-header = Frictionless Remix
+
+frictionless-content =
+  | <p>OpenStax CNX is designed to encourage the sharing and reuse of educational content. The knowledge in OpenStax CNX
+  | can be shared and built upon by all because it is reusable:</p>
+  | <ul>
+  | <li><b>educationally:</b>
+  | We encourage authors to write each page to stand on its own so that others can easily use it in different
+  | collections and contexts specially designed for their students.</li>
+  |
+  | <li><b>technologically:</b>
+  | all content is built in a simple semantic HTML5 format rich with built-in accessibility features to ensure it can
+  | all be read by everyone. Also the OpenStax CNX toolset makes it easy for author to create and adapt content using
+  | a word processor similar to Google Docs or Word.</li>
+  |
+  | <li><b>legally:</b>
+  | all content produced in OpenStax is available under a Creative Commons open-content licenses.
+  | This makes it easy for authors to share their work - allowing others to use and reuse it legally - while still
+  | getting recognition and attribution for their efforts. The OpenStax CNX software maintains attribution to the
+  | original author for you, making remixing a cinch.</li>
+  | </ul>
+
 # ABOUT - Foundations - src/scripts/pages/about/people/people-template.html & src/scripts/pages/about/people/people.coffee
 
 about-foundations-hewlett =
