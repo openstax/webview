@@ -466,6 +466,41 @@ textbook-view-subject-name = { $name ->
 
 # TEXTBOOK VIEW - Attribution - src/scripts/modules/media/footer/attribution/attribution-template.html
 
+textbook-view-textbook-attribute-header = Zasady korzystania z tego zasobu
+
+textbook-view-textbook-content-produced =
+  | Treść tej książki została stworzona przez <span>{ TAKE(50, $authors) }</span>
+  | i jest udostępniona na licencji <a href="{ $url }">{ $title }</a>.
+
+textbook-view-attribution-p-1 =
+  | Na mocy tej licencji, każdy użytkownik tej książki lub jej fragmentów zobowiązany jest do uznania autorstwa
+  | w następujący sposób:
+
+textbook-view-attribution-p-2-strong =
+  | Nazwa OpenStax College, logo OpenStax College, okładki książek OpenStax College,
+  | nazwa OpenStax CNX i logo OpenStax CNX nie podlegają licencji Creative Commons
+  | i wykorzystywanie ich jest dozwolone tylko na mocy uprzedniego, pisemnego upoważnienia ze strony Rice University.
+
+textbook-view-attribution-p-2-span =
+  | Jeśli masz jakiekolwiek pytania odnośnie tej licencji, skontaktuj się z <a href="{ $url }">{ $title }</a>.
+
+textbook-view-attribution-li-1 =
+  | Jeśli chcesz umieścić odnośnik do tej książki w bibliografii,
+  | zrób to zgodnie z poniższym przykładem:
+
+textbook-view-attribution-li-2-title =
+  | Jeśli rozpowszechniasz tę książkę w formie drukowanej,
+  | jesteś zobowiązany do umieszczenia na każdej jej kartce następującej informacji:
+
+textbook-view-attribution-li-2-attribution = "Pobierz za darmo z { $url }."
+
+textbook-view-attribution-li-3-title =
+  | Jeśli rozpowszechniasz fragment tej książki, jesteś zobowiązany do umieszczenia
+  | na każdym cyfrowym widoku strony (w tym w plikach EPUB, PDF i HTML)
+  | a także na każdej drukowanej kartce następującej informacji:
+
+textbook-view-attribution-li-3-attribution = "Pobierz za darmo z { $url }."
+
 # TEXTBOOK VIEW - Get Book Drop Down - src/scripts/modules/media/header/popovers/book/book-template.html
 
 # TEXTBOOK VIEW - Footer Toggle - src/scripts/modules/media/footer/inherits/tab/toggle-partial.html

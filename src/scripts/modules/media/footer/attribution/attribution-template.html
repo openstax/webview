@@ -1,32 +1,35 @@
-<h2 class="medium-header">How to Reuse &amp; Attribute This Content</h2>
+<h2 class="medium-header" data-l10n-id="textbook-view-textbook-attribute-header">How to Reuse &amp; Attribute This Content</h2>
 
 {{> modules/media/footer/inherits/tab/toggle-partial }}
 
 <p>
   <span>© {{date revised}}</span>
   <span>{{#each authors}}<span class="list-comma">{{fullname}}</span>{{/each}}.</span>
-  <span>Textbook content produced by
+  <span data-l10n-id="textbook-view-textbook-content-produced" data-l10n-args='{"url":"{{license.url}}","title":"{{license.name}} {{license.version}}","authors":{{toJSON authors}} }'>
+    Textbook content produced by
     <span>{{#each authors}}<span class="list-comma">{{fullname}}</span>{{/each}}</span>
     is licensed under a <a href="{{license.url}}">{{license.name}} {{license.version}}</a> license.
   </span>
 </p>
 <p>
-  <span>Under this license, any user of this textbook or the textbook contents herein must provide proper attribution as follows:</span>
+  <span data-l10n-id="textbook-view-attribution-p-1">Under this license, any user of this textbook or the textbook contents herein must provide proper attribution as follows:</span>
 </p>
 <p>
-  <strong>The OpenStax College name, OpenStax College logo, OpenStax College book covers,
+  <strong data-l10n-id="textbook-view-attribution-p-2-strong">The OpenStax College name, OpenStax College logo, OpenStax College book covers,
     OpenStax CNX name, and OpenStax CNX logo are not subject to the creative commons license
     and may not be reproduced without the prior and express written consent of Rice University.
   </strong>
-  <span>For questions regarding this license, please contact
+  <span data-l10n-id="textbook-view-attribution-p-2-span" data-l10n-args='{"url":"mailto:partners@openstaxcollege.org","title":"partners@openstaxcollege.org"}'>
+    For questions regarding this license, please contact
     <a href="mailto:partners@openstaxcollege.org">partners@openstaxcollege.org</a>.
   </span>
 </p>
 
 <ul>
   <li>
-    If you use this textbook as a bibliographic reference,
-    then you should cite it as follows:
+    <span data-l10n-id="textbook-view-attribution-li-1">
+      If you use this textbook as a bibliographic reference, then you should cite it as follows:
+    </span>
     <div class="citation">
       <span>{{#each authors}}<span class="name">{{fullname}}</span>{{/each}}, </span>
       <span>{{title}}. OpenStax CNX. </span>
@@ -34,14 +37,22 @@
     </div>
   </li>
   <li>
-    If you redistribute this textbook in a print format,
-    then you must include on every physical page the following attribution:<br />
-    "Download for free at http://cnx.org/contents/{{id}}."
+    <span data-l10n-id="textbook-view-attribution-li-2-title">
+      If you redistribute this textbook in a print format,
+      then you must include on every physical page the following attribution:
+    </span><br />
+    <span data-l10n-id="textbook-view-attribution-li-2-attribution" data-l10n-args='{"url":"http://cnx.org/contents/{{id}}"}'>
+      "Download for free at http://cnx.org/contents/{{id}}."
+    </span>
   </li>
   <li>
-    If you redistribute part of this textbook, then you must retain in every
-    digital format page view (including but not limited to EPUB, PDF, and HTML)
-    and on every physical printed page the following attribution:<br />
-    "Download for free at http://cnx.org/contents/{{id}}."
+    <span data-l10n-id="textbook-view-attribution-li-3-title">
+      If you redistribute part of this textbook, then you must retain in every
+      digital format page view (including but not limited to EPUB, PDF, and HTML)
+      and on every physical printed page the following attribution:
+    </span><br />
+    <span data-l10n-id="textbook-view-attribution-li-3-attribution" data-l10n-args='{"url":"http://cnx.org/contents/{{id}}"}'>
+      "Download for free at http://cnx.org/contents/{{id}}."
+    </span>
   </li>
 </ul>
