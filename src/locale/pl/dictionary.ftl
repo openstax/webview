@@ -524,6 +524,18 @@ advanced-search-language-option = { $native } ({ $code ->
 
 # SEARCH RESULTS - Header - src/scripts/modules/search/header/header-template.html
 
+search-results-search-results = Wyniki wyszukiwania
+
+search-results-advanced-search = Zaawansowane wyszukiwanie
+
+search-results-tips-and-help = Wyszukiwanie - porady i pomoc
+
+search-results-number-results = { PLURAL($counter) ->
+  [0]   Brak wyników
+  [1]   { $counter } result found
+ *[other] Znaleziono <strong>{ $counter }</strong> wyników
+}
+
 # SEARCH RESULTS - Filter - src/scripts/modules/search/results/filter/filter-template.html, src/scripts/models/search-results.coffee
 
 # SEARCH RESULTS - Table - src/scripts/modules/search/results/list/table-partial.html
