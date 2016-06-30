@@ -2,23 +2,23 @@
   <caption>
     {{#is item.0.mediaType 'application/vnd.org.cnx.collection'}}
       {{! <span class="fa fa-book"></span> }}
-      <span>Books</span>
+      <span data-l10n-id="search-results-books">Books</span>
     {{else}}
       {{#is item.0.mediaType 'application/vnd.org.cnx.module'}}
         {{! <span class="fa fa-file"></span> }}
-        <span>Pages</span>
+        <span data-l10n-id="search-results-pages">Pages</span>
       {{else}}
         {{! <span class="fa fa-question-circle"></span> }}
-        <span>Miscellaneous</span>
+        <span data-l10n-id="search-results-miscellaneous">Miscellaneous</span>
       {{/is}}
     {{/is}}
   </caption>
   <thead>
     <tr>
-      <th scope="col" class="type">Type</th>
-      <th scope="col" class="title">Title</th>
-      <th scope="col" class="authors">Author(s)</th>
-      <th scope="col" class="edited">Edited</th>
+      <th scope="col" class="type" data-l10n-id="search-results-table-type">Type</th>
+      <th scope="col" class="title" data-l10n-id="search-results-table-title">Title</th>
+      <th scope="col" class="authors" data-l10n-id="search-results-table-authors">Author(s)</th>
+      <th scope="col" class="edited" data-l10n-id="search-results-table-edited">Edited</th>
     </tr>
   </thead>
 
