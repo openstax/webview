@@ -68,12 +68,8 @@
           <select name="language" class="form-control">
             <option value="" data-l10n-id="advanced-search-language-default-any">Any</option>
             {{~#each languages~}}
-              <option value="{{@key}}">
-                {{~#is native english~}}
-                  {{native}}
-                {{~else~}}
-                  {{native}} ({{english}})
-                {{~/is~}}
+              <option value="{{@key}}" data-l10n-id="language" data-l10n-args='{"native":"{{this}}", "code":"{{@key}}"}'>
+                {{this}}
               </option>
             {{~/each~}}
           </select>
