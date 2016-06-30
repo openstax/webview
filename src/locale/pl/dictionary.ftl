@@ -375,6 +375,11 @@ textbook-view-btn-back-to-top = Do góry
 
 textbook-view-btn-next = Dalej
 
+textbook-view-search-this-book =
+  [html/placeholder] Szukaj w tej książce
+
+textbook-view-contents = Spis treści
+
 # TEXTBOOK VIEW - Endorsement - src/scripts/modules/media/endorsed/endorsed-template.html
 
 # TEXTBOOK VIEW - Header - src/scripts/modules/media/header/header-template.html
