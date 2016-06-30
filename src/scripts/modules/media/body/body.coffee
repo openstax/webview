@@ -90,7 +90,7 @@ define (require) ->
 
     hideExercises: ($el) ->
       hiddenClasses = @getCoach()
-      hiddenSelectors = hiddenClasses.map((name) -> ".#{name}[data-depth=1]").join(', ')
+      hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
       $exercisesToHide = $el.find(hiddenSelectors)
       $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
 
@@ -99,7 +99,7 @@ define (require) ->
     makeRegionForCoach: ($exercises, wrapperId = 'coach-wrapper') ->
       $("##{wrapperId}").remove()
       $coachWrapper = $("<div id=\"#{wrapperId}\"></div>")
-      $coachWrapper.insertAfter(_.last($exercises))
+      $coachWrapper.insertBefore(_.first($exercises))
 
     handleCoach: ($el) ->
       return unless @isCoach()
