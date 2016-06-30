@@ -1,7 +1,7 @@
 define (require) ->
   $ = require('jquery')
   BaseView = require('cs!helpers/backbone/views/base')
-  template = require('hbs!./window-with-preferences-template')
+  template = require('hbs!./window-with-preferences')
   require('less!./window-with-preferences')
 
   return class WindowWithPreferencesView extends BaseView
