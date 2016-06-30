@@ -4,23 +4,23 @@ function show() {
 
   var x = document.URL;
   if(loaded == 0){
-    document.getElementById("notesbox").value = localStorage.getItem(x);
+    document.getElementById("preferences-options").value = localStorage.getItem(x);
     loaded = 1;
   }
 
-  if(document.getElementById("notesbox").style.display == "none"){
-    document.getElementById("notesbox").style.display ="";
+  if(document.getElementById("preferences-options").style.display == "none"){
+    document.getElementById("preferences-options").style.display ="";
     document.getElementById("saveme").style.display ="";    
   }
   else{
-    document.getElementById("notesbox").style.display ="none";
+    document.getElementById("preferences-options").style.display ="none";
     document.getElementById("saveme").style.display ="none";
    }
 }
 
 function save(){
   var x = document.URL;
-  localStorage.setItem(String(x), document.getElementById("notesbox").value);
+  localStorage.setItem(String(x), document.getElementById("preferences-options").value);
 
 }
 
@@ -71,12 +71,34 @@ function save(){
           {{/if}}
         </div>
         
-      </div><br><textarea id="notesbox" rows="4" cols="50" 
-      style="display:none;" value=""></textarea>
-        <br>
-        <button class="save" role="button" id="saveme" onclick="save()" style="display:none;">
-           <span class="text">Save Notes</span>
-        </button>
+      </div>
+      <br>
+	<div  id="preferences-options" rows="4" cols="50" 
+      value="" style="display:none;">
+	<div class="preferences-box">
+	Contrast<br>
+	<button id="black-white" class="contrast-option">a</button>
+	<button id="white-black" class="contrast-option">a</button>	
+ 	<button id="black-yellow" class="contrast-option">a</button>
+	<button id="yellow-black" class="contrast-option">a</button>
+	</div>
+        
+	<div class="preferences-box"  >
+        Fonts<br>
+        </div>
+
+	<div class="preferences-box"  >
+        Line Spacing<br>
+	</div>
+
+	<div class="preferences-box"  >
+        Keyword Hilighting<br>
+        </div>
+        
+
+
+	</div>
+
     </div>
   </div>
 {{/if}}
