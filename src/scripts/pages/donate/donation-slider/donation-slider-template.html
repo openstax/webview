@@ -4,11 +4,11 @@
      aria-label="Donation" aria-live="off"
      aria-valuemin="{{minDonation}}" aria-valuemax="{{maxDonation}}" aria-valuenow="{{donation}}"
      min="{{min}}" max="{{max}}" value="{{value}}" />
-    <span class="donation-value">${{donation}}</span>
-    <span class="donation-message">{{message}}</span>
+    <span class="donation-value" data-l10n-id="donate-slider-amount" data-l10n-args='{"amount": 10}'></span>
+    <span class="donation-message" data-l10n-id="donate-slider-10">{{message}}</span>
   </div>
 
-  <button type="submit" class="btn btn-default">Donate Now</button>
+  <button type="submit" class="btn btn-default" data-l10n-id="donate-donate-now-button">Donate Now</button>
 
   {{#if uuid}}
     <div class="centered">
@@ -18,7 +18,7 @@
             data-ipad="true"
           {{/is}}
         {{/if}}
-        href="{{path}}">Download for Free</a>
+        href="{{path}}" data-l10n-id="donation-download-for-free">Download for Free</a>
     </div>
   {{/if}}
 </form>
