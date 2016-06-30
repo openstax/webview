@@ -1,19 +1,19 @@
 <div class="header">
   {{#if results}}
-    <h1>Search Results</h1>
+    <h1 data-l10n-id="search-results-search-results">Search Results</h1>
   {{else}}
-    <h1>Advanced Search</h1>
+    <h1 data-l10n-id="search-results-advanced-search">Advanced Search</h1>
   {{/if}}
 
   {{! <span class="help">
     <span class="fa fa-question-circle"></span>
-    <span class="tips">Search Tips &amp; Help</span>
+    <span class="tips" data-l10n-id="search-results-tips-and-help">Search Tips &amp; Help</span>
   </span> }}
 
   {{#if loaded}}
     {{#if results}}
-      <span><strong>{{results.total}}</strong> results found</span>
-      <a href="/search{{results.criteria}}" class="advanced-search btn">Advanced Search</a>
+      <span data-l10n-id="search-results-number-results" data-l10n-args='{ "counter" : "{{results.total}}" }'><strong>{{results.total}}</strong> results found</span>
+      <a href="/search{{results.criteria}}" class="advanced-search btn" data-l10n-id="search-results-advanced-search">Advanced Search</a>
     {{/if}}
   {{/if}}
 </div>
