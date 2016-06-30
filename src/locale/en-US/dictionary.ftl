@@ -538,9 +538,45 @@ search-results-number-results = { PLURAL($counter) ->
 
 # SEARCH RESULTS - Filter - src/scripts/modules/search/results/filter/filter-template.html, src/scripts/models/search-results.coffee
 
+search-results-filters = Filter
+
+search-results-filter-moreless = { $ismore ->
+ *[0] More
+  [1] Less
+}
+
+search-results-filter-author = Author
+search-results-filter-authorID = Author
+search-results-filter-keyword = Keyword
+search-results-filter-language = Language
+search-results-filter-mediaType = Type
+search-results-filter-type = Type
+search-results-filter-pubYear = Publication Date
+search-results-filter-subject = Subject
+search-results-filter-title = Title
+search-results-filter-text = Text
+
+search-results-filter-book-page = { $displayval ->
+  [Book] Book
+  [Page] Page
+  *[other] { $displayval }
+}
+
 # SEARCH RESULTS - Table - src/scripts/modules/search/results/list/table-partial.html
 
+search-results-table-type = Type
+search-results-table-title = Title
+search-results-table-authors = Author(s)
+search-results-table-edited = Edited
+
+search-results-books = Books
+search-results-pages = Pages
+search-results-miscellaneous = Miscellaneous
+
 # SEARCH RESULTS - Navigation - src/scripts/modules/search/results/list/pagination-partial.html
+
+search-results-navigation-prev = Prev
+search-results-navigation-next = Next
 
 # SEARCH RESULTS - No Results - src/scripts/modules/search/results/list/list-template.html
 

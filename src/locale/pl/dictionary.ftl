@@ -530,17 +530,55 @@ search-results-advanced-search = Zaawansowane wyszukiwanie
 
 search-results-tips-and-help = Wyszukiwanie - porady i pomoc
 
-search-results-number-results = { PLURAL($counter) ->
-  [0]   Brak wyników
-  [1]   { $counter } result found
- *[other] Znaleziono <strong>{ $counter }</strong> wyników
+search-results-number-results = { $counter ->
+  [0] Brak wyników
+  [1] Znaleziono jeden wynik
+  [few] Znaleziono <strong>{ $counter }</strong> wyniki
+  [many] Znaleziono <strong>{ $counter }</strong> wyników
+ *[other] Znaleziono <strong>{ $counter }</strong> wyniku
 }
 
 # SEARCH RESULTS - Filter - src/scripts/modules/search/results/filter/filter-template.html, src/scripts/models/search-results.coffee
 
+search-results-filters = Filtry
+
+search-results-filter-moreless = { $ismore ->
+ *[0] Więcej
+  [1] Mniej
+}
+
+search-results-filter-author = Autor
+search-results-filter-authorID = Autor
+search-results-filter-keyword = Słowa kluczowe
+search-results-filter-language = Język
+search-results-filter-mediaType = Typ
+search-results-filter-type = Typ
+search-results-filter-pubYear = Rok publikacji
+search-results-filter-subject = Dziedzina
+search-results-filter-title = Tytuł
+search-results-filter-text = Tekst
+
+search-results-filter-book-page = { $displayval ->
+  [Book] Książka
+  [Page] Strona
+ *[other] { $displayval }
+}
+
 # SEARCH RESULTS - Table - src/scripts/modules/search/results/list/table-partial.html
 
+search-results-table-type = Typ
+search-results-table-title = Tytuł
+search-results-table-authors = Autorzy
+search-results-table-edited = Ostatnia modyfikacja
+
+search-results-books = Książki
+search-results-pages = Strony
+search-results-miscellaneous = Dodatkowe
+
 # SEARCH RESULTS - Navigation - src/scripts/modules/search/results/list/pagination-partial.html
+
+search-results-navigation-prev = Wstecz
+search-results-navigation-next = Dalej
 
 # SEARCH RESULTS - No Results - src/scripts/modules/search/results/list/list-template.html
 
