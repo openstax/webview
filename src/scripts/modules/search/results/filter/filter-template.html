@@ -1,4 +1,4 @@
-<h2 class="medium-header">Filters</h2>
+<h2 class="medium-header" data-l10n-id="search-results-filters">Filters</h2>
 <ul class="filters">
   {{#each results.limits}}
     <li>
@@ -8,7 +8,7 @@
           <dt class="limit {{#gt @index 5}}overflow hidden{{/gt}}">
             <a href="{{../../url}} {{../tag}}:&quot;{{value}}&quot;">
               {{#if displayValue}}
-                {{displayValue}}
+                <span data-l10n-args='{"displayval":"{{displayValue}}"}' data-l10n-id="search-results-filter-book-page">{{displayValue}}</span>
               {{else}}
                 {{value}}
               {{/if}}
@@ -17,7 +17,15 @@
           <dd class="count {{#gt @index 5}}overflow hidden{{/gt}}">{{count}}</dd>
         {{/each}}
         {{#gt values.length 6}}
-          <li class="toggle"><span class="text" tabindex="0" data-name="{{name}}" arai-expanded="false">More {{name}}s...</span></li>
+          <li class="toggle">
+            <span
+            class="text"
+            tabindex="0"
+            data-name="{{name}}"
+            arai-expanded="false"
+            data-l10n-id="search-results-filter-moreless"
+            data-l10n-args='{"ismore": 0}'
+            ></span></li>
         {{/gt}}
       </dl>
     </li>
