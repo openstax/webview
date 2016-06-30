@@ -855,15 +855,136 @@ workspace-delete-OK = OK
 
 # DONATE - Page Title and Description - src/scripts/pages/donate/donate.coffee
 
+donate-pageTitle = Wesprzyj OpenStax CNX
+
+donate-summary = 
+
+donate-description =
+
 # DONATE - Header and Content - src/scripts/pages/donate/default/default-template.html
+
+donate-header = Wesprzyj OpenStax CNX
+
+donate-subheader = Twoja darowizna zmienia świat
+
+donate-content =
+  | Dzięki twojej darowiźnie, wciąż rosnące zasoby OpenStax CNX będą mogły
+  | pozostać. darmowe dla nauczycieli i studentów z całego świata.
+
+donate-donation-handle-message =
+  | O bezpieczne przekazanie darowizny dba Rice University we współpracy z
+  | <a href="http://www.touchnet.com/">Touchnet</a>.
 
 # DONATE - Slider - src/scripts/pages/donate/donation-slider/donation-slider.coffee, src/scripts/pages/donate/donation-slider/donation-slider-template.html
 
+donate-slider-0 = Wolność (każda) mnie uszczęśliwia
+donate-slider-5 = Marszałek byłby dumny
+donate-slider-10 = OpenStax CNX to świetny pomysł, warto wspomóc
+donate-slider-15 = Dzięki wam zaoszczędziłem/łam setki dolarów!
+donate-slider-20 = Mój bankomat chce, żebym wam to dał
+donate-slider-25 = Marszałek byłby dumny (i zszokowany bankomatem)
+donate-slider-50 = Hej, OpenStax, dajcie drukowany egzemplarz potrzebującej szkole
+donate-slider-75 = Dołożę się, niech te książki będą darmowe!
+donate-slider-100 = Pomaganie nigdy nie było tak przyjemne
+donate-slider-250 = Wypełnijcie waszymi książkami szkolne bibilioteki – ja stawiam!
+donate-slider-500 = Kupcie sobie za to porządne tłumaczenie!
+donate-slider-1000 = Kolejny rozdział książki na OpenStax ja stawiam!
+donate-slider-2500 = Kolejną część książki na OpenStax ja stawiam!
+donate-slider-5000 = Bill Gates II, do usług
+donate-slider-10000 = Ja cię kręcę!!!!
+
+donate-slider-amount = { $amount ->
+  [0] 0 zł
+  [5] 5 zł
+  *[10] 10 zł
+  [15] 15 zł
+  [20] 20 zł
+  [25] 25 zł
+  [50] 50 zł
+  [75] 75 zł
+  [100] 100 zł
+  [250] 250 zł
+  [500] 500 zł
+  [1000] 1 000 zł
+  [2500] 2 500 zł
+  [5000] 5 000 zł
+  [10000] 10 000 zł
+}
+
+donate-donate-now-button = Wspomóż nas
+
+donation-download-for-free = Pobierz za darmo
+
 # DONATE - Form - src/scripts/pages/donate/form/form-template.html
+
+donate-form-support-cnx = Wesprzyj OpenStax CNX
+
+donate-form-header-message = Twoja darowizna zmienia świat
+
+donate-form-content =
+  | Dzięki twojej darowiźnie, wciąż rosnące zasoby OpenStax CNX będą mogły
+  | pozostać darmowe dla nauczycieli i studentów z całego świata.
+
+donate-form-prompt =
+  | Wpisz swoje dane jako darczyńcy i kliknij "Dalej" aby przejść do
+  | bezpiecznej płatności.
+
+donate-form-title = Tytuł
+
+donate-form-first-name = Imię
+
+donate-form-last-name = Nazwisko
+
+donate-form-suffix = Suffiks
+
+donate-form-email = E-Mail
+
+donate-form-address = Adres
+
+donate-form-city = Miasto
+
+donate-form-state =
+
+donate-form-zip-code = Kod pocztowy
+
+donate-form-country = Państwo
+
+donate-form-donation = Darowizna
+
+donate-form-continue = Kontynuuj
 
 # DONATE - Download Page - src/scripts/pages/donate/download/download-template.html
 
+donate-download-header = Pobierz
+
+donate-download-support-header = Wesprzyj OpenStax CNX
+
+donate-download-support-content =
+  | Czy chcesz, żebyśmy nadal za darmo udostępniali zasoby warte miliony
+  | dolarów? Pomóż nam utrzymać ten projekt przy życiu przekazując nam darowiznę!
+
+donate-download-donation-handled =
+  | O bezpieczne przekazanie darowizny dba Rice University we współpracy z
+  | <a href="http://www.touchnet.com/">Touchnet</a>.
+
 # DONATE - Thank You - src/scripts/pages/donate/thankyou/thankyou-template.html
+
+donate-thank-you-thank-you-header = Dziękujemy!
+
+donate-thank-you-download-title = Pobierz { $title }
+
+donate-thank-you-download-message =
+  | Pobieranie powinno rozpocząć się automatycznie. Jeśli to nie nastąpi,
+  | kliknij poniższy przycisk.
+
+donate-thank-you-download-button = Pobierz
+
+donate-thank-you-thank-you-for-generosity = Dziękujemy za twoją szczodrość
+
+donate-thank-you-appreciation-message =
+  | Dzięki twojej darowiźnie, wciąż rosnące zasoby OpenStax CNX będą mogły
+  | pozostać darmowe dla nauczycieli i studentów z całego świata. Oto dane,
+  | które wpisałeś.
 
 
 
@@ -925,6 +1046,12 @@ workspace-delete-OK = OK
 # OTHER CONTENT - Contents Out of Date Alert - src/scripts/pages/contents/contents-template.html
 
 # OTHER CONTENT - Contents Library Page title and description - src/scripts/pages/contents/contents.coffee
+
+content-library-pageTitle = Biblioteka zasobów
+
+content-library-summary = Biblioteka zasobów OpenStax
+
+content-library-description = Szukaj darmowych, cyfrowych książek.
 
 
 

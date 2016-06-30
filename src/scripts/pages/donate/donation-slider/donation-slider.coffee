@@ -5,7 +5,7 @@ define (require) ->
   template = require('hbs!./donation-slider-template')
   require('less!./donation-slider')
 
-  donation = ['0', '5', '10', '15', '20', '25', '50', '75', '100', '250', '500', '1,000', '2,500', '5,000', '10,000']
+  donation = [0, 5, 10, 15, 20, 25, 50, 75, 100, 250, 500, 1000, 2500, 5000, 10000]
   message = [
     'Free makes me happy'
     'Abe Lincoln would be proud'
@@ -102,7 +102,15 @@ define (require) ->
     changeDonation: (e) ->
       @value = $(e.currentTarget).val()
       @$el.find('[type="range"]').attr('aria-valuenow', donation[@value])
-      @$el.find('.donation-message').text("#{message[@value]}")
+
+      # Dummy check if l20n exist:
+      # If l20n exist/works this will prevent `.donation-value` value from flickering during donation slider moving.
+      if (document.l10n)
+        @$el.find('.donation-value').attr('data-l10n-args', "{\"amount\": #{donation[@value]} }")
+        @$el.find('.donation-message').attr('data-l10n-id', "donate-slider-#{donation[@value]}")
+      else
+        @$el.find('.donation-value').text("$#{donation[@value]}")
+        @$el.find('.donation-message').text("#{message[@value]}")
 
       if @value is '0'
         @$el.find('.btn-default').hide()
