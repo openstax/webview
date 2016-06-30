@@ -2,13 +2,13 @@
   <div class="pagination">
     <ul>
       {{#paginate this type="previous"}}
-        <li {{#if disabled}}class="disabled" aria-disabled="true"{{/if}}><a href="{{../this.url}}{{n}}" >Prev</a></li>
+        <li {{#if disabled}}class="disabled" aria-disabled="true"{{/if}}><a href="{{../this.url}}{{n}}" data-l10n-id="search-results-navigation-prev">Prev</a></li>
       {{/paginate}}
       {{#paginate this type="middle" limit="7"}}
         <li {{#if active}}class="active"{{/if}}><a href="{{../this.url}}{{n}}" aria-label="View page {{n}} of results">{{n}}</a></li>
       {{/paginate}}
       {{#paginate this type="next"}}
-        <li {{#if disabled}}class="disabled" aria-disabled="true"{{/if}}><a href="{{../this.url}}{{n}}">Next</a></li>
+        <li {{#if disabled}}class="disabled" aria-disabled="true"{{/if}}><a href="{{../this.url}}{{n}}" data-l10n-id="search-results-navigation-next">Next</a></li>
       {{/paginate}}
     </ul>
   </div>
