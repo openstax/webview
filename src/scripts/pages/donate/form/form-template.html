@@ -1,11 +1,11 @@
 <div class="donation-form">
-  <h1>Support OpenStax CNX</h1>
+  <h1 data-l10n-id="donate-form-support-cnx">Support OpenStax CNX</h1>
 
-  <h3>Your donation makes a difference</h3>
-  <p>Your donation helps keep OpenStax CNX's rapidly growing repository of educational materials vibrant,
+  <h3 data-l10n-id="donate-form-header-message">Your donation makes a difference</h3>
+  <p data-l10n-id="donate-form-content">Your donation helps keep OpenStax CNX's rapidly growing repository of educational materials vibrant,
     free, and available to educators and learners all over the world.</p>
 
-  <p>Please enter your donor information and click "Continue" to be taken to the secure payment site.</p>
+  <p data-l10n-id="donate-form-prompt">Please enter your donor information and click "Continue" to be taken to the secure payment site.</p>
 
   <form class="form-horizontal" role="form" method="post" action="https://ebank.rice.edu/C21279_upay/web/index.jsp">
     <input type="hidden" name="SUCCESS_LINK" value="{{successUrl}}" />
@@ -29,7 +29,7 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Title</span>
+        <span class="control-label col-sm-2" data-l10n-id="donate-form-title">Title</span>
         <div class="col-sm-10">
           <select name="title" class="form-control">
             <option value="">Dr.</option>
@@ -43,7 +43,7 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">First Name</span>
+        <span class="control-label col-sm-2" data-l10n-id="donate-form-first-name">First Name</span>
         <div class="col-sm-10">
           <input type="text" name="First_Name" class="form-control" required />
           <div class="alert" role="alert" style="display:none"></div>
@@ -53,7 +53,7 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Last Name</span>
+        <span class="control-label col-sm-2" data-l10n-id="donate-form-last-name">Last Name</span>
         <div class="col-sm-10">
           <input type="text" name="Last_Name" class="form-control" required />
           <div class="alert" role="alert" style="display:none"></div>
@@ -63,7 +63,7 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Suffix</span>
+        <span class="control-label col-sm-2" data-l10n-id="donate-form-suffix">Suffix</span>
         <div class="col-sm-10">
           <input type="text" name="Suffix" class="form-control" />
         </div>
@@ -72,7 +72,7 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">E-Mail</span>
+        <span class="control-label col-sm-2" data-l10n-id="donate-form-email">E-Mail</span>
         <div class="col-sm-10">
           <input type="hidden" name="Email" />
           <input type="hidden" name="TNE_Customer_Email" />
@@ -84,7 +84,7 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Address</span>
+        <span class="control-label col-sm-2" data-l10n-id="donate-form-address">Address</span>
         <div class="col-sm-10">
           <input type="hidden" name="Mailing_Address" />
           <input type="text" name="BILL_STREET1" class="form-control" required />
@@ -105,7 +105,7 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">City</span>
+        <span class="control-label col-sm-2" data-l10n-id="donate-form-city">City</span>
         <div class="col-sm-10">
           <input type="hidden" name="Mailing_City" />
           <input type="text" name="BILL_CITY" class="form-control" required />
@@ -116,7 +116,7 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">State</span>
+        <span class="control-label col-sm-2" data-l10n-id="donate-form-state">State</span>
         <div class="col-sm-10">
           <input type="hidden" name="Mailing_State" />
           <select name="BILL_STATE" class="form-control">
@@ -130,7 +130,7 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Zip Code</span>
+        <span class="control-label col-sm-2" data-l10n-id="donate-form-zip-code">Zip Code</span>
         <div class="col-sm-10">
           <input type="hidden" name="Mailing_Zip" />
           <input type="text" name="BILL_POSTAL_CODE" class="form-control" required />
@@ -141,7 +141,7 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Country</span>
+        <span class="control-label col-sm-2" data-l10n-id="donate-form-country">Country</span>
         <div class="col-sm-10">
           <input type="hidden" name="Mailing_Country" />
           <select name="BILL_COUNTRY" class="form-control">
@@ -155,7 +155,7 @@
 
     <div class="form-group">
       <label>
-        <span class="control-label col-sm-2">Donation</span>
+        <span class="control-label col-sm-2" data-l10n-id="donate-form-donation">Donation</span>
         <div class="col-sm-10">
           <div class="input-group">
             <span class="input-group-addon">$</span>
@@ -168,7 +168,7 @@
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn col-sm-3">Continue</button>
+        <button type="submit" class="btn col-sm-3" data-l10n-id="donate-form-continue">Continue</button>
       </div>
     </div>
   </form>
