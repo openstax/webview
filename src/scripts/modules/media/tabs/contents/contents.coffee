@@ -94,12 +94,14 @@ define (require) ->
       nodes = @model.get('contents')?.models
       if nodes?.length
         isCcap = nodes[0].isCcap()
-        if isCcap
-          sections = nodes.filter((node) -> node.isSection())
-          basicNumbering(sections)
-          continuousNumberChapters(sections)
-        else
-          basicNumbering(nodes)
+        isCollated = nodes[0].isCollated()
+        unless isCollated
+          if isCcap
+            sections = nodes.filter((node) -> node.isSection())
+            basicNumbering(sections)
+            continuousNumberChapters(sections)
+          else
+            basicNumbering(nodes)
         @allPages = allPages(nodes)
 
     expandContainers: (page, isExpanded, handlingResults) ->

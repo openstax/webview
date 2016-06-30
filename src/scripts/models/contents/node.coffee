@@ -242,6 +242,11 @@ define (require) ->
 
       return pages
 
+    isCollated: () ->
+      book = if @isBook() then @ else @get('book')
+      collated = if book?.get('collated')? then book?.get('collated') else false
+      return collated
+
     isSection: () -> not @isBook() and @get('contents') instanceof Backbone.Collection
 
     isBook: () -> @get('mediaType') is 'application/vnd.org.cnx.collection'
