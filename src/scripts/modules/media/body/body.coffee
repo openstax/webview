@@ -90,7 +90,7 @@ define (require) ->
 
     hideExercises: ($el) ->
       hiddenClasses = @getCoach()
-      hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
+      hiddenSelectors = hiddenClasses.map((name) -> ".#{name}[data-depth=1]").join(', ')
       $exercisesToHide = $el.find(hiddenSelectors)
       $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
 
