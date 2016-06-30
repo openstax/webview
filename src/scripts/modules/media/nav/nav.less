@@ -25,7 +25,7 @@
       vertical-align: bottom;
     }
 
-    .toggle.btn {
+    .toggle.contents.btn {
       background-color: @brand-primary;
       color: white;
       border: solid 2px @brand-primary;
@@ -42,11 +42,27 @@
         box-shadow: 0 0 3px 2px lightblue;
       }
     }
-
+    .toggle.preferences.btn {
+      background-color: @brand-secondary;
+      color: white;
+      border: solid 2px @brand-secondary;
+      width: @button-width;
+      margin: @searchbar-margin;
+      .text {
+        margin: 0 6px;
+      }
+      &.open {
+        background-color: white;
+        color: @brand-secondary;
+      }
+      &:focus {
+        box-shadow: 0 0 3px 2px lightblue;
+      }
+    }
     .searchbar {
-      width: ~"calc(35% - " @button-width * .5 ~")";
+      width: ~"calc(35% - " 2*@button-width * .5 ~")";
       @media (max-width: 640px) {
-        width: ~"calc(100% - " @button-width ~"- 3rem)"
+        width: ~"calc(100% - " 2*@button-width ~"- 3rem)"
       }
       position: relative;
       margin: @searchbar-margin;
@@ -63,7 +79,7 @@
     }
 
     .media-navbar {
-      width: ~"calc(65% - " @button-width * .7 ~")";
+      width: ~"calc(65% - " 2*@button-width * .7 ~")";
       @media (max-width: 640px) {
         width: 100%;
         display: block;

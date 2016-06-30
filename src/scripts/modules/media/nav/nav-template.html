@@ -1,12 +1,46 @@
+<script>
+var loaded = 0;
+function show() {
+
+  var x = document.URL;
+  if(loaded == 0){
+    document.getElementById("notesbox").value = localStorage.getItem(x);
+    loaded = 1;
+  }
+
+  if(document.getElementById("notesbox").style.display == "none"){
+    document.getElementById("notesbox").style.display ="";
+    document.getElementById("saveme").style.display ="";    
+  }
+  else{
+    document.getElementById("notesbox").style.display ="none";
+    document.getElementById("saveme").style.display ="none";
+   }
+}
+
+function save(){
+  var x = document.URL;
+  localStorage.setItem(String(x), document.getElementById("notesbox").value);
+
+}
+
+
+</script>
+
 {{#if book}}
   <div class="media-nav{{#is status 'publishing'}} publishing{{/is}}">
     <div class="media-toolbar">
       {{#unless _hideProgress}}
-        <button class="toggle btn" role="button">
+        <button class="toggle contents btn" role="button">
           <span class="fa fa-th-list"></span>
            <span class="text">Contents</span>
            <span class="fa fa-plus open-indicator"></span>
-         </button>
+        </button>
+        <button class="toggle preferences btn" role="button" onclick="show()">
+          <span class="text">Preferences</span>
+          <span class="fa fa-plus open-indicator"></span>
+        </button>
+        
         <div class="searchbar">
           <span class="fa fa-search"></span>
           <input class="find form-control" type="search" placeholder="Search this book" value="{{searchTerm}}" />
@@ -36,7 +70,13 @@
             <div class="nav next disabled">Next</div>
           {{/if}}
         </div>
-      </div>
+        
+      </div><br><textarea id="notesbox" rows="4" cols="50" 
+      style="display:none;" value=""></textarea>
+        <br>
+        <button class="save" role="button" id="saveme" onclick="save()" style="display:none;">
+           <span class="text">Save Notes</span>
+        </button>
     </div>
   </div>
 {{/if}}

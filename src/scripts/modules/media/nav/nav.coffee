@@ -4,6 +4,7 @@ define (require) ->
   linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
   ContentsView = require('cs!../tabs/contents/contents')
+  #NotesView = require('cs!../tabs/notes/notes')
   BookSearchResults = require('cs!models/book-search-results')
   template = require('hbs!./nav-template')
   require('less!./nav')
@@ -42,14 +43,17 @@ define (require) ->
       @hideProgress = options.hideProgress
       @mediaParent = options.mediaParent
       @tocIsOpen = false
+      @preferencesIsOpen = false
       @.trigger('tocIsOpen', @tocIsOpen)
+      @.trigger('preferencesIsOpen',@preferencesIsOpen)
       @listenTo(@model, 'change:loaded change:currentPage removeNode moveNode add:contents', @render)
       @listenTo(@model, 'change:currentPage', @closeContentsOnSmallScreen)
 
     events:
       'click .next': 'nextPage'
       'click .back': 'previousPage'
-      'click .toggle.btn': 'toggleContents'
+      'click .toggle.contents.btn': 'toggleContents'
+      'click .toggle.preferences.btn' : 'togglePreferences'
       'click .back-to-top > a': 'backToTop'
       'keydown .searchbar input': 'handleSearchInput'
       'click .searchbar > .clear-search': 'clearSearch'
@@ -68,9 +72,37 @@ define (require) ->
         for container in @model.get('currentPage')?.containers() ? []
           container.set('expanded', true)
       @updateToc()
+      if @preferencesIsOpen
+        @preferencesIsOpen = not @preferencesIsOpen
+        @updatePreferences()
+      
+    togglePreferences: (e) ->
+      @preferencesIsOpen = not @preferencesIsOpen
+      @.trigger('preferencesIsOpen',@preferencesIsOpen)
+      @updatePreferences()
+      
+      if @tocIsOpen
+        @tocIsOpen = not @tocIsOpen
+        @.trigger('tocIsOpen', @tocIsOpen)
+        @closeAllContainers() unless @model.get('searchResults')
+        for container in @model.get('currentPage')?.containers() ? []
+          container.set('expanded', true)
+        @updateToc()
+
+    updatePreferences: ->
+      button = @$el.find('.toggle.preferences.btn')
+      indicator = button.find('.open-indicator')
+      if (@preferencesIsOpen)
+        button.addClass('open')
+        indicator.removeClass('fa-plus')
+        indicator.addClass('fa-minus')
+      else
+        button.removeClass('open')
+        indicator.addClass('fa-plus')
+        indicator.removeClass('fa-minus')
 
     updateToc: ->
-      button = @$el.find('.toggle.btn')
+      button = @$el.find('.toggle.contents.btn')
       indicator = button.find('.open-indicator')
       if (@tocIsOpen)
         button.addClass('open')
