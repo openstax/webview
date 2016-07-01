@@ -1,7 +1,6 @@
 <script>
 var loaded = 0;
 
-
 function show() {
   var x = document.URL;
   if(loaded == 0){
@@ -10,19 +9,34 @@ function show() {
   }
   if(document.getElementById("preferences-options").style.display == "none"){
     document.getElementById("preferences-options").style.display ="";
-    document.getElementById("saveme").style.display ="";    
   }
   else{
     document.getElementById("preferences-options").style.display ="none";
-    document.getElementById("saveme").style.display ="none";
    }
 }
-function save(){
-  var x = document.URL;
-  localStorage.setItem(String(x), document.getElementById("preferences-options").value);
+
+
+function contrast_black_white() {
+  document.getElementById("content").style.color ="#ffffff";
+  document.getElementById("content").style.backgroundColor ="#000000";
+}
+function contrast_white_black() {
+  document.getElementById("content").style.color ="#000000";
+  document.getElementById("content").style.backgroundColor ="#ffffff";
+}
+function contrast_black_yellow() {
+  document.getElementById("content").style.color ="yellow";
+  document.getElementById("content").style.backgroundColor ="#000000";
+}
+function contrast_yellow_black() {
+  document.getElementById("content").style.color ="#000000";
+  document.getElementById("content").style.backgroundColor ="yellow";
 }
 
-
+function font_change() {
+  var font = document.getElementById("text-style").value;
+  document.getElementById("content").style.fontFamily = font;
+}
 
 </script>
 
@@ -77,20 +91,20 @@ function save(){
 
 	<div class="preferences-box">
 	<b>Contrast</b><br>
-	<button id="black-white" class="contrast-option">a</button>
-	<button id="white-black" class="contrast-option">a</button>	
- 	<button id="black-yellow" class="contrast-option">a</button>
-	<button id="yellow-black" class="contrast-option">a</button>
+	<button id="black-white" class="contrast-option" onclick="contrast_black_white()">a</button>
+	<button id="white-black" class="contrast-option" onclick="contrast_white_black()">a</button>	
+ 	<button id="black-yellow" class="contrast-option" onclick="contrast_black_yellow()">a</button>
+	<button id="yellow-black" class="contrast-option" onclick="contrast_yellow_black()">a</button>
 	</div>
         
 	<div class="preferences-box"  >
 	<div class="dropdown">
 	  <b>Text Style</b><br>
-	  <select name="text-style">
+	  <select id="text-style" onchange="font_change()" >
 	    <option value="default">Default</option>
  	    <option value="dyslexie">Dyslexie</option>
-	    <option value="times">Times New Roman</option>
-	    <option value="helvetuca">Helvetica</option>
+	    <option value="Times">Times New Roman</option>
+	    <option value="Helvetica">Helvetica</option>
 	  </select>
 	</div>
         </div>
