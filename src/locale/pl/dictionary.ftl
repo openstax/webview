@@ -243,6 +243,32 @@ about-people-team-content =
 
 # CONTACT - Content - src/scripts/pages/about/contact/contact-template.html
 
+about-contact-google-maps = Mapa Google™
+
+about-contact-header = Kontakt
+
+about-contact-phone = Telefon: { $phone }
+
+about-contact-email = E-mail: { $email }
+
+about-contact-questions-header = Masz pytanie?
+
+about-contact-questions-content = Napisz do nas, jeśli potrzebujesz dodatkowych informacji.
+
+about-contact-technical-support-header = Pomoc techniczna
+
+about-contact-technical-support-content =
+  | W przypadku problemów technicznych na naszej stronie prosimy o wysłanie wiadomości e-mail na adres
+  | <a href="mailto:techsupport@cnx.org">techsupport@cnx.org</a>.
+  | Możesz również wysłać raport o błędzie przy użyciu formularza do zgłaszania błędów.
+
+about-contact-general-questions-header = Pytania ogólne
+
+about-contact-general-questions-content =
+  | Jeśli masz pytania dotyczące naszego serwisu, chcesz zapisać się na
+  | szkolenie dla autorów lub uzyskać inne informacje na temat Openstax CNX,
+  | wyślij e-mail na adres cnx@cnx.org.
+
 
 
 ### SEARCH ###
