@@ -1,13 +1,13 @@
 <script>
 var loaded = 0;
-function show() {
 
+
+function show() {
   var x = document.URL;
   if(loaded == 0){
     document.getElementById("preferences-options").value = localStorage.getItem(x);
     loaded = 1;
   }
-
   if(document.getElementById("preferences-options").style.display == "none"){
     document.getElementById("preferences-options").style.display ="";
     document.getElementById("saveme").style.display ="";    
@@ -17,12 +17,11 @@ function show() {
     document.getElementById("saveme").style.display ="none";
    }
 }
-
 function save(){
   var x = document.URL;
   localStorage.setItem(String(x), document.getElementById("preferences-options").value);
-
 }
+
 
 
 </script>
@@ -73,10 +72,11 @@ function save(){
         
       </div>
       <br>
-	<div  id="preferences-options" rows="4" cols="50" 
-      value="" style="display:none;">
+	<div  id="preferences-options" value="" style="display:none;">
+	
+
 	<div class="preferences-box">
-	Contrast<br>
+	<b>Contrast</b><br>
 	<button id="black-white" class="contrast-option">a</button>
 	<button id="white-black" class="contrast-option">a</button>	
  	<button id="black-yellow" class="contrast-option">a</button>
@@ -84,19 +84,30 @@ function save(){
 	</div>
         
 	<div class="preferences-box"  >
-        Fonts<br>
-        </div>
-
-	<div class="preferences-box"  >
-        Line Spacing<br>
+	<div class="dropdown">
+	  <b>Text Style</b><br>
+	  <select name="text-style">
+	    <option value="default">Default</option>
+ 	    <option value="dyslexie">Dyslexie</option>
+	    <option value="times">Times New Roman</option>
+	    <option value="helvetuca">Helvetica</option>
+	  </select>
 	</div>
+        </div>
 
 	<div class="preferences-box"  >
-        Keyword Hilighting<br>
+          <b>Keyword Hilighting</b><br>
+	  <input type="checkbox" name="highlight" value="Highlight">  Highlight Keywords<br>
         </div>
+
+	<div class="preferences-box"  >
+	<div class="dropdown">
+  	  <b>Line spacing</b><br><br>
+	  <input type="range" name="line-space" min="1" max="2" step=".1" value="1">        
+        </div>
+	</div>
         
-
-
+	
 	</div>
 
     </div>
