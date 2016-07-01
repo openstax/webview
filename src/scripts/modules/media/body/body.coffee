@@ -99,7 +99,7 @@ define (require) ->
     makeRegionForCoach: ($exercises, wrapperId = 'coach-wrapper') ->
       $("##{wrapperId}").remove()
       $coachWrapper = $("<div id=\"#{wrapperId}\"></div>")
-      $coachWrapper.insertAfter(_.last($exercises))
+      $coachWrapper.insertBefore(_.first($exercises))
 
     handleCoach: ($el) ->
       return unless @isCoach()
