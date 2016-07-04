@@ -35,6 +35,8 @@ home-pageTitle = Sharing Knowledge and Building Communities - OpenStax CNX
 
 # MAIN PAGE - Featured Textbooks - src/scripts/modules/featured-books/featured-books-partial.html
 
+featured-books-read-more = Read More
+
 
 
 ### HEADER ###
