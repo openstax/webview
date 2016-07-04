@@ -34,6 +34,8 @@ home-pageTitle = Propagując wiedzę i budując społeczności - OpenStax CNX
 
 # MAIN PAGE - Featured Textbooks - src/scripts/modules/featured-books/featured-books-partial.html
 
+featured-books-read-more = Czytaj dalej
+
 
 
 ### HEADER ###
