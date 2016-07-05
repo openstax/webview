@@ -742,6 +742,16 @@ workspace-button-recently-published = Recently Published
 
 # MY WORKSPACE - Delete - src/scripts/modules/workspace/popovers/new/new-template.html
 
+workspace-delete-close = Close
+
+workspace-delete-confirm = Confirm
+
+workspace-delete-are-you-sure = Are you sure you want to delete { $title }?
+
+workspace-delete-close-2 = Close
+
+workspace-delete-OK = OK
+
 # MY WORKSPACE - Popover - src/scripts/modules/workspace/popovers/new/modals/new-media-template.html
 
 # MY WORKSPACE - Page Title, Summary, Description - src/scripts/pages/workspace/workspace.coffee
