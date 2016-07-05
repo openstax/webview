@@ -740,6 +740,8 @@ workspace-button-recently-published = Recently Published
 
 # MY WORKSPACE - Empty Workspace Message - src/scripts/modules/workspace/results/list/list-template.html
 
+workspace-empty-workspace-msg = Empty Workspace. You can add new content or find content and Create a Copy for editing.
+
 # MY WORKSPACE - Delete - src/scripts/modules/workspace/popovers/new/new-template.html
 
 workspace-delete-close = Close

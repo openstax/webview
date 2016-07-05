@@ -751,6 +751,9 @@ workspace-button-recently-published = Ostatnio opublikowane
 
 # MY WORKSPACE - Empty Workspace Message - src/scripts/modules/workspace/results/list/list-template.html
 
+workspace-empty-workspace-msg =
+  | Twoje biurko jest puste. Możesz stworzyć nowy zasób albo wyszukać istniejący i utworzyć kopię do modyfikacji.
+
 # MY WORKSPACE - Delete - src/scripts/modules/workspace/popovers/new/new-template.html
 
 workspace-delete-close = Zamknij
