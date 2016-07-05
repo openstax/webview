@@ -743,6 +743,12 @@ textbook-view-attribution-li-3-attribution = "Pobierz za darmo z { $url }."
 
 # MY WORKSPACE - Header and Buttons - src/scripts/modules/workspace/workspace-template.html
 
+workspace-header = Moje biurko
+
+workspace-button-new = Nowa
+
+workspace-button-recently-published = Ostatnio opublikowane
+
 # MY WORKSPACE - Empty Workspace Message - src/scripts/modules/workspace/results/list/list-template.html
 
 # MY WORKSPACE - Delete - src/scripts/modules/workspace/popovers/new/new-template.html
