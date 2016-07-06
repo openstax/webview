@@ -182,11 +182,13 @@ define (require) ->
               $el = $(el)
               href = $el.attr('href')
 
+              [href, fragment] = href.split('#')
               page = @model.getPage(href.substr(10))
+              fragment = fragment and "##{fragment}" or ''
 
               if page
                 pageNumber = page.getPageNumber()
-                $el.attr('href', "/contents/#{@model.getVersionedId()}:#{pageNumber}")
+                $el.attr('href', "/contents/#{@model.getVersionedId()}:#{pageNumber}#{fragment}")
                 $el.attr('data-page', pageNumber)
 
           # Add nofollow to external user-generated links
