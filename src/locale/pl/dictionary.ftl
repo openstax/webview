@@ -814,6 +814,8 @@ textbook-view-license = Zasób udostępniony { LEN($licensors) ->
 
 # TEXTBOOK VIEW - Table of Content Search - src/scripts/modules/media/tabs/contents/toc/page-template.html
 
+textbook-view-toc-page-changed = zmienione
+
 
 
 ### MY WORKSPACE ###
