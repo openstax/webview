@@ -313,6 +313,8 @@ search-books = Książki: { $count }
 
 # ADVANCED SEARCH - Page Title - src/scripts/modules/search/advanced/advanced.coffee
 
+advanced-search-pageTitle = Zaawansowane wyszukiwanie
+
 # ADVANCED SEARCH - Content - src/scripts/modules/search/advanced/advanced-template.html
 
 advanced-search-author = Autor
@@ -523,6 +525,8 @@ advanced-search-language-option = { $native } ({ $code ->
 # search results page.
 
 # SEARCH RESULTS - Page Title - src/scripts/modules/search/search.coffee
+
+search-results-pageTitle = Szukaj
 
 # SEARCH RESULTS - Header - src/scripts/modules/search/header/header-template.html
 
