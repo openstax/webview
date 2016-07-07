@@ -1636,6 +1636,18 @@ media-latest-content = A <a href="{ $url }">newer version</a> of this { $type } 
 
 # OTHER CONTENT - Legacy Template - src/scripts/pages/app/modals/legacy-template.html
 
+legacy-template-warning-header = Warning
+
+legacy-template-warning-message =
+  | You are about to go to the legacy CNX site. To return to this page, you
+  | can use your browser's back button.
+
+legacy-template-remind-again = Don't remind me again
+
+legacy-template-cancel-button = Cancel
+
+legacy-template-go-button = Go
+
 # OTHER CONTENT - Contents Out of Date Alert - src/scripts/pages/contents/contents-template.html
 
 contents-alert-out-of-date =

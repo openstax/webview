@@ -1598,6 +1598,16 @@ media-latest-content = <a href="{ $url }">Nowsza wersja</a> { $type } jest już 
 
 # OTHER CONTENT - Legacy Template - src/scripts/pages/app/modals/legacy-template.html
 
+legacy-template-warning-header =
+
+legacy-template-warning-message =
+
+legacy-template-remind-again =
+
+legacy-template-cancel-button = Anuluj
+
+legacy-template-go-button = Dalej
+
 # OTHER CONTENT - Contents Out of Date Alert - src/scripts/pages/contents/contents-template.html
 
 contents-alert-out-of-date =
