@@ -2,35 +2,35 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="disabled navbar-toggle collapsed" data-toggle="collapse" data-target="#editbar-navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only" data-l10n-id="textbook-editor-toggle-navigation">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <span class="navbar-brand">Edit</span>
+      <span class="navbar-brand" data-l10n-id="textbook-editor-edit">Edit</span>
     </div>
 
     <div class="navbar-collapse collapse toolbar" id="editbar-navbar-collapse" role="toolbar">
       <div class="btn-group headings">
-        <button class="disabled btn btn-plain navbar-btn currentHeading" rel="tooltip" title="Text Heading">Normal Text</button>
+        <button class="disabled btn btn-plain navbar-btn currentHeading" rel="tooltip" title="Text Heading" data-l10n-id="textbook-editor-normal-text-button">Normal Text</button>
         <button class="btn btn-plain navbar-btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Change Heading">
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-          <li><a class="action changeHeading" data-tagname="p">Normal Text</a></li>
-          <li><a class="action changeHeading" data-tagname="h1">Heading 1</a></li>
-          <li><a class="action changeHeading" data-tagname="h2">Heading 2</a></li>
-          <li><a class="action changeHeading" data-tagname="h3">Heading 3</a></li>
-          <li><a class="action changeHeading" data-tagname="pre">Code</a></li>
+          <li><a class="action changeHeading" data-tagname="p" data-l10n-id="textbook-editor-normal-text">Normal Text</a></li>
+          <li><a class="action changeHeading" data-tagname="h1" data-l10n-id="textbook-editor-h1">Heading 1</a></li>
+          <li><a class="action changeHeading" data-tagname="h2" data-l10n-id="textbook-editor-h2">Heading 2</a></li>
+          <li><a class="action changeHeading" data-tagname="h3" data-l10n-id="textbook-editor-h3">Heading 3</a></li>
+          <li><a class="action changeHeading" data-tagname="pre" data-l10n-id="textbook-editor-code">Code</a></li>
         </ul>
       </div>
 
       <div class="btn-group">
-        <button type="button" title="Bold" class="action strong btn btn-plain navbar-btn"><strong>B</strong></button>
-        <button type="button" title="Italics" class="action emphasis btn btn-plain navbar-btn"><em>I</em></button>
-        <button type="button" title="Underline" class="action underline btn btn-plain navbar-btn"><u>U</u></button>
-        <button type="button" title="Superscript" class="action superscript btn btn-plain navbar-btn">A<sup>S</sup></button>
-        <button type="button" title="Subscript" class="action subscript btn btn-plain navbar-btn">A<sub>S</sub></button>
+        <button type="button" title="Bold" class="action strong btn btn-plain navbar-btn" data-l10n-id="media-editbar-tempate-bold"><strong>B</strong></button>
+        <button type="button" title="Italics" class="action emphasis btn btn-plain navbar-btn" data-l10n-id="media-editbar-tempate-italic"><em>I</em></button>
+        <button type="button" title="Underline" class="action underline btn btn-plain navbar-btn" data-l10n-id="media-editbar-tempate-underline"><u>U</u></button>
+        <button type="button" title="Superscript" class="action superscript btn btn-plain navbar-btn" data-l10n-id="media-editbar-tempate-superscript">A<sup>S</sup></button>
+        <button type="button" title="Subscript" class="action subscript btn btn-plain navbar-btn" data-l10n-id="media-editbar-tempate-subscript">A<sub>S</sub></button>
       </div>
 
       <div class="btn-group">
@@ -50,14 +50,14 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-          <li class="disabled"><a href="#" class="action addrowbefore">Add Row Before</a></li>
-          <li class="disabled"><a href="#" class="action addrowafter">Add Row After</a></li>
-          <li class="disabled"><a href="#" class="action addcolumnbefore">Add Column Before</a></li>
-          <li class="disabled"><a href="#" class="action addcolumnafter">Add Column After</a></li>
-          <li class="disabled"><a href="#" class="action addheaderrow">Add Header Row</a></li>
-          <li class="disabled"><a href="#" class="action deleterow">Delete Row</a></li>
-          <li class="disabled"><a href="#" class="action deletecolumn">Delete Column</a></li>
-          <li class="disabled"><a href="#" class="action deletetable">Delete Table</a></li>
+          <li class="disabled"><a href="#" class="action addrowbefore" data-l10n-id="textbook-editor-add-row-before">Add Row Before</a></li>
+          <li class="disabled"><a href="#" class="action addrowafter" data-l10n-id="textbook-editor-add-row-after">Add Row After</a></li>
+          <li class="disabled"><a href="#" class="action addcolumnbefore" data-l10n-id="textbook-editor-add-column-before">Add Column Before</a></li>
+          <li class="disabled"><a href="#" class="action addcolumnafter" data-l10n-id="textbook-editor-add-column-after">Add Column After</a></li>
+          <li class="disabled"><a href="#" class="action addheaderrow" data-l10n-id="textbook-editor-add-header-row">Add Header Row</a></li>
+          <li class="disabled"><a href="#" class="action deleterow" data-l10n-id="textbook-editor-delete-row">Delete Row</a></li>
+          <li class="disabled"><a href="#" class="action deletecolumn" data-l10n-id="textbook-editor-delete-column">Delete Column</a></li>
+          <li class="disabled"><a href="#" class="action deletetable" data-l10n-id="textbook-editor-delete-table">Delete Table</a></li>
         </ul>
       </div>
       <div class="btn-group">
@@ -67,21 +67,21 @@
       </div>
 
       <div class="btn-group">
-        <button type="button" title="Paste" class="action paste btn btn-plain navbar-btn" data-content="Content was copied to the clipboard. Click this button to paste the content into the page."><span class="fa fa-paste"></span></button>
+        <button type="button" title="Paste" class="action paste btn btn-plain navbar-btn" data-content="Content was copied to the clipboard. Click this button to paste the content into the page." data-l10n-id="textbook-editor-paste-button"><span class="fa fa-paste"></span></button>
       </div>
 
       <div class="navbar-right">
         {{#if changed}}
-          <button type="button" title="Save" class="save    btn btn-default navbar-btn"><i class="fa fa-save"></i> Save Draft</button>
+          <button type="button" title="Save" class="save    btn btn-default navbar-btn"><i class="fa fa-save"></i> <span data-l10n-id="textbook-editor-save-draft">Save Draft</span></button>
         {{else}}
-          <button type="button" class="publish btn btn-primary navbar-btn">Publish...</button>
+          <button type="button" class="publish btn btn-primary navbar-btn" data-l10n-id="textbook-editor-publish-button">Publish...</button>
         {{/if}}
       </div>
     </div><!-- /.navbar-collapse -->
 
 
     <div class="navbar-collapse collapse toolbar" id="semantic-toolbar" role="toolbar">
-      <span>Drag to add a new...</span>
+      <span data-l10n-id="textbook-editor-drag-to-add">Drag to add a new...</span>
 
 
       <span class="semantic-drag-source">
