@@ -1630,6 +1630,17 @@ content-library-description = Szukaj darmowych, cyfrowych książek.
 
 # ERROR PAGE - Error Page - src/scripts/pages/error/error-template.html
 
+error-page-oops = Ups!
+
+error-page-oh-no-message =
+  | O, nie!<br />Niestety, strona nie została znaleziona.<br />Spróbuj użyć
+  | <a href="/search">wyszukiwania</a> aby znaleźć to, czego szukasz.
+
+error-page-something-not-right-message =
+  | Coś poszło nie tak!<br />Przepraszamy, w systemie wystąpił błąd.
+  | <br />Spróbuj przeładować stronę. Jeśli to nie pomoże, spróbuj ponownie
+  | po kilku minutach.
+
 
 
 ### MAINTENANCE ###

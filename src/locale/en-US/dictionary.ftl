@@ -1670,6 +1670,17 @@ content-library-description = Search for free, online textbooks.
 
 # ERROR PAGE - Error Page - src/scripts/pages/error/error-template.html
 
+error-page-oops = Oops!
+
+error-page-oh-no-message =
+  | Oh, No!<br />We're sorry, but the page you requested could not be found.<br />
+  | Please try a <a href="/search">search</a> to find what you are looking for.
+
+error-page-something-not-right-message =
+  | Something's Not Right!<br />We're sorry, but we have experienced a
+  | technical error.<br />Reloading this page may fix the issue, otherwise wait
+  | a few minutes and try again.
+
 
 
 ### MAINTENANCE ###
