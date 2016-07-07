@@ -31,8 +31,8 @@ define (require) ->
 
   return class SearchPage extends MainPageView
     canonical: null
-    summary: 'Search for textbooks'
-    description: 'Search from thousands of free, online textbooks.'
+    summary: 'search-page-summary'
+    description: 'search-page-description'
 
     initialize: (@options) ->
       super()

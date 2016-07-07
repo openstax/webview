@@ -279,6 +279,10 @@ about-contact-general-questions-content =
 
 # SEARCH - Page Summary and Description - src/scripts/pages/search/search.coffee
 
+search-page-summary = Szukaj podręczników
+
+search-page-description = Szukaj wśród tysięcy wolnych, dosępnych online, podręczników.
+
 # SEARCH - Top bar - src/scripts/modules/find-content/find-content-template.html
 
 search-find-content = Szukaj zasobów
