@@ -29,21 +29,31 @@ function contrast_black_yellow() {
   document.getElementById("content").style.backgroundColor ="#000000";
 }
 function contrast_yellow_black() {
-  paragraphs = document.getElementsByTagName("p");
-  for (var x=0; x<paragraphs.length; x++){
-	pargraphs[x].style.color ="#000000";
-  }
+  var x = document.getElementsByClassName("main-page");
+  x[0].style.color ="#000000";
   document.getElementById("content").style.backgroundColor ="yellow";
 }
 
 function font_change() {
   var font = document.getElementById("text-style").value;
-  document.getElementById("content").style.fontFamily = font;
+  var x = document.getElementsByClassName("main-page");
+  x[0].style.fontFamily = font;
 }
 
 function line_spacing() {
   var spacing = document.getElementById("line-space").value;
-  document.getElementById("content").style.lineHeight = spacing;
+  var x = document.getElementsByClassName("main-page");
+  x[0].style.lineHeight = spacing;
+}
+
+function reset() {
+  document.getElementById("content").style.color = "#555555";
+  document.getElementById("content").style.backgroundColor ="white";
+  var x = document.getElementsByClassName("main-page");  
+  x[0].style.fontFamily = font;
+  x[0].style.lineHeight = "1.42857143";
+  document.getElementById("text-style").options[0].selected = 'selected';
+  document.getElementById("line-space").value = "1.42857143";
 }
 
 </script>
@@ -95,7 +105,6 @@ function line_spacing() {
       </div>
       <br>
 	<div  id="preferences-options" value="" style="display:none;">
-	
 
 	<div class="preferences-box">
 	<b>Contrast</b><br>
@@ -125,11 +134,13 @@ function line_spacing() {
 	<div class="preferences-box"  >
 	<div class="dropdown">
   	  <b>Line spacing</b><br><br>
-	  <input type="range" id="line-space" name="line-space" onchange="line_spacing()" min="1.3" max="2.3" step=".1" value="1">        
+	  <input type="range" id="line-space" name="line-space" onchange="line_spacing()" min="1.2" max="2.7" step=".15" value="1.42857143">        
         </div>
 	</div>
         
 	
+ 	<button class="reset-button" onclick="reset()">reset</button>
+
 	</div>
 
     </div>
