@@ -1,16 +1,18 @@
 {{#if loaded}}
   <div class="license-info">
     {{#or licensors.length license.name}}
-      <span>This work is licensed</span>
-      {{~#if licensors.length~}}
-        <span> by </span>
-        {{~#each licensors~}}
-          <span class="name">{{fullname}}</span>
-        {{~/each~}}
-      {{/if}}
-      {{~#if license.name~}}
-        <span> under a <a href="{{license.url}}">{{~license.name}} ({{license.code}} {{license.version~}})</a>.</span>
-      {{~/if~}}
+      <span data-l10n-id="textbook-view-license" data-l10n-args='{"url":"{{license.url}}", "name":"{{~license.name}}", "code":"{{license.code}}", "version":"{{license.version~}}", "licensors":{{toJSON licensors}} }'>
+        <span>This work is licensed</span>
+        {{~#if licensors.length~}}
+          <span> by </span>
+          {{~#each licensors~}}
+            <span class="name">{{fullname}}</span>
+          {{~/each~}}
+        {{/if}}
+        {{~#if license.name~}}
+          <span> under a <a href="{{license.url}}">{{~license.name}} ({{license.code}} {{license.version~}})</a>.</span>
+        {{~/if~}}
+      </span>
     {{/or}}
   </div>
 {{/if}}
