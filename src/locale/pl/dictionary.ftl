@@ -883,17 +883,69 @@ workspace-description = Twórz darmowe zasoby edukacyjne albo modyfikuj istniej�
 
 # TEXTBOOK EDITOR - Tabs Add Page - src/scripts/modules/media/tabs/contents/popovers/add/modals/add-page-template.html
 
+textbook-editor-add-page-header = Dodaj strony
+
+textbook-editor-add-page-show-draft = Pokaż szkice stron
+
+textbook-editor-add-page-title-label = Tytuł
+
+textbook-editor-add-page-title-input =
+  [html/placeholder] Tytuł
+
+textbook-editor-add-page-search-button = Szukaj
+
+textbook-editor-add-page-cancel-button = Anuluj
+
+textbook-editor-add-page-create-new-page-button = Utwórz nową stronę
+
 # TEXTBOOK EDITOR - Create New Dropdown Menu - src/scripts/modules/media/tabs/contents/popovers/add/add-template.html
+
+textbook-editor-menu-page = Stronę
+
+textbook-editor-menu-section = Rozdział
 
 # TEXTBOOK EDITOR - Popup Section Name - src/scripts/modules/media/tabs/contents/toc/modals/section-name/section-name-template.html
 
+textbook-editor-section-edit-header = Edit Section Name
+
+textbook-editor-section-title-label = Tytuł
+
+textbook-editor-section-title-input =
+  [html/placeholder]  Tytuł
+
+textbook-editor-section-ok-button = Ok
+
+textbook-editor-section-cancel-button = Anuluj
+
 # TEXTBOOK EDITOR - Table of Contents Search - src/scripts/modules/media/tabs/contents/contents-template.html
+
+textbook-editor-contents-add-button = Dodaj
+
+textbook-editor-contents-back-to-table =
 
 # TEXTBOOK EDITOR - Add Page List - src/scripts/modules/media/tabs/contents/popovers/add/modals/results/list/add-page-list-template.html
 
+textbook-editor-add-page-list-no-results = Brak wyników. Spróbuj rozszerzyć wyszukiwanie.
+
+textbook-editor-add-page-list-loading = Ładowanie
+
 # TEXTBOOK EDITOR - Tools - src/scripts/modules/media/tabs/tools/tools-template.html
 
+textbook-editor-tools-edit = Edytuj
+
+textbook-editor-tools-preview = Podgląd
+
+textbook-editor-tools-make-editable-copy =
+
+textbook-editor-tools-teachers-edition =
+
+textbook-editor-tools-standard-edition =
+
 # TEXTBOOK EDITOR - Content & Tools - src/scripts/modules/media/tabs/tabs-template.html
+
+textbook-editor-template-contents = Spis treści
+
+textbook-editor-template-tools = Narzędzia
 
 
 
@@ -1476,6 +1528,10 @@ media-latest-content = <a href="{ $url }">Nowsza wersja</a> { $type } jest już 
 # OTHER CONTENT - Legacy Template - src/scripts/pages/app/modals/legacy-template.html
 
 # OTHER CONTENT - Contents Out of Date Alert - src/scripts/pages/contents/contents-template.html
+
+contents-alert-out-of-date =
+  | Ta strona jest nieaktualna. <a href="" data-bypass="true">Odśwież</a>,
+  | aby zobaczyć najnowszą wersję.
 
 # OTHER CONTENT - Contents Library Page title and description - src/scripts/pages/contents/contents.coffee
 

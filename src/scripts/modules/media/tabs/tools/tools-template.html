@@ -2,17 +2,17 @@
   {{#if isEditable}}
     {{#unless editable}}
       <div class="edit tool fa fa-pencil">
-        <span>Edit</span>
+        <span data-l10n-id="textbook-editor-tools-edit">Edit</span>
       </div>
     {{else}}
       <div class="preview tool fa fa-eye">
-        <span>Preview</span>
+        <span data-l10n-id="textbook-editor-tools-preview">Preview</span>
       </div>
     {{/unless}}
   {{else}}
     {{#if derivable}}
       <div class="derive tool fa fa-pencil">
-        <span>Make an Editable Copy</span>
+        <span data-l10n-id="textbook-editor-tools-make-editable-copy">Make an Editable Copy</span>
       </div>
     {{/if}}
   {{/if}}
@@ -21,11 +21,11 @@
 {{#if hasTeachersEdition}}
   {{#unless teacher}}
     <div class="teacher-show tool fa fa-thumb-tack">
-      <span>Teacher's Edition</span>
+      <span data-l10n-id="textbook-editor-tools-teachers-edition">Teacher's Edition</span>
     </div>
   {{else}}
     <div class="teacher-hide tool fa fa-university">
-      <span>Standard Edition</span>
+      <span data-l10n-id="textbook-editor-tools-standard-edition">Standard Edition</span>
     </div>
   {{/unless}}
 {{/if}}
