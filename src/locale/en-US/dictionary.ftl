@@ -1499,6 +1499,8 @@ media-publish-template-publish-button = Publish
 
 # OTHER CONTENT - Media Latest Template - src/scripts/modules/media/latest/latest-template.html
 
+media-latest-content = A <a href="{ $url }">newer version</a> of this { $type } is now available.
+
 # OTHER CONTENTS - Minimal Search Results Table Partial - src/scripts/modules/minimal/search/results/list/table-partial.html
 
 # OTHER CONTENT - Advanced Search Minimal Page Title - src/scripts/modules/minimal/search/advanced/advanced.coffee
