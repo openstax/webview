@@ -2,14 +2,14 @@
   <caption>
     {{#is item.0.mediaType 'application/vnd.org.cnx.collection'}}
       {{! <span class="fa fa-book"></span> }}
-      <span>Books</span>
+      <span data-l10n-id="minimal-search-results-table-partial-books">Books</span>
     {{else}}
       {{#is item.0.mediaType 'application/vnd.org.cnx.module'}}
         {{! <span class="fa fa-file"></span> }}
-        <span>Pages</span>
+        <span data-l10n-id="minimal-search-results-table-partial-pages">Pages</span>
       {{else}}
         {{! <span class="fa fa-question-circle"></span> }}
-        <span>Miscellaneous</span>
+        <span data-l10n-id="minimal-search-results-table-partial-miscellaneous">Miscellaneous</span>
       {{/is}}
     {{/is}}
   </caption>
