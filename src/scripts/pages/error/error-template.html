@@ -6,19 +6,19 @@
   <div class="message">
     <h1>
       {{~#is error.code 9000~}}
-        Oops!
+        <span data-l10n-id="error-page-oops">Oops!</span>
       {{~else~}}
         {{error.code}}
       {{~/is~}}
     </h1>
     <p class="reason">{{error.reason}}</p>
     {{~#is error.code 404~}}
-      <p>Oh, No!<br />
+      <p data-l10n-id="error-page-oh-no-message">Oh, No!<br />
         We're sorry, but the page you requested could not be found.<br />
         Please try a <a href="/search">search</a> to find what you are looking for.
       </p>
     {{~else~}}
-      <p>Something's Not Right!<br />
+      <p data-l10n-id="error-page-something-not-right-message">Something's Not Right!<br />
         We're sorry, but we have experienced a technical error.<br />
         Reloading this page may fix the issue, otherwise wait a few minutes and try again.
       </p>
