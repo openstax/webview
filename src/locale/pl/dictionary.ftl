@@ -1622,3 +1622,7 @@ content-library-description = Szukaj darmowych, cyfrowych książek.
 # Content related to the page that displays when the site is in maintenance.
 
 # MAINTENANCE - Maintenance - src/maintenance.html
+
+maintenance-openstax-cnx-title =
+
+maintenance-message =

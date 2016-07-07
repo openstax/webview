@@ -1660,3 +1660,7 @@ content-library-description = Search for free, online textbooks.
 # Content related to the page that displays when the site is in maintenance.
 
 # MAINTENANCE - Maintenance - src/maintenance.html
+
+maintenance-openstax-cnx-title = OpenStax CNX is currently down for Maintenance
+
+maintenance-message = We are ironing out the kinks and should be back shortly!
