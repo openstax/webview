@@ -315,6 +315,22 @@ search-books = Books: { $count }
 
 advanced-search-pageTitle = Advanced Search
 
+# ADVANCED SEARCH - Minimal Search Results Table Partial - src/scripts/modules/minimal/search/results/list/table-partial.html
+
+minimal-search-results-table-partial-books = Books
+
+minimal-search-results-table-partial-pages = Pages
+
+minimal-search-results-table-partial-miscellaneous = Miscellaneous
+
+# ADVANCED SEARCH - Advanced Search Minimal Page Title - src/scripts/modules/minimal/search/advanced/advanced.coffee
+
+advanced-search-minimal-pageTitle = Advanced Search
+
+# ADVANCED SEARCH - Search Minimal Page Title - src/scripts/modules/minimal/search/advanced/advanced.coffee
+
+search-minimal-pageTitle = Advanced Search
+
 # ADVANCED SEARCH - Content - src/scripts/modules/search/advanced/advanced-template.html
 
 advanced-search-author = Author
