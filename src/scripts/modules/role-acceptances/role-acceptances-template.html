@@ -1,13 +1,13 @@
 <div class="role-acceptances">
-  <h3>Title: <a href="/contents/{{id}}@draft">{{title}}</a></h3>
+  <h3><span data-l10n-id="role-acceptances-title">Title:</span> <a href="/contents/{{id}}@draft">{{title}}</a></h3>
   <form>
     <table class="table">
       <thead>
         <tr>
           <th></th>
-          <th scope="col">Role</th>
-          <th scope="col">Requester</th>
-          <th scope="col">Assignment Date</th>
+          <th scope="col" data-l10n-id="role-acceptances-role">Role</th>
+          <th scope="col" data-l10n-id="role-acceptances-requester">Requester</th>
+          <th scope="col" data-l10n-id="role-acceptances-assignment-date">Assignment Date</th>
         </tr>
       </thead>
       <tbody>
@@ -28,22 +28,21 @@
     {{#if licenseRequired}}
       <div class="license-info">
         <input type="checkbox" class="license-accept" required{{#is license true}} checked{{/is}} />
-        <span>I license this work under the</span>
-        <a href="{{license.url}}">
-          Creative Commons Attribution License (CC-BY).
-        </a>
-        <span>I understand</span>
+        <span data-l10n-id="role-acceptances-license-i-license" data-l10n-args='{"url":"{{license.url}}"}'>
+          I license this work under the <a href="{{license.url}}">Creative Commons Attribution License (CC-BY).</a>
+        </span>
+        <span data-l10n-id="role-acceptances-license-understand">I understand</span>
         <ul>
-          <li>I retain the copyright of my work</li>
-          <li>I warrant that I am the author or have permission to distribute the work in question</li>
-          <li>I wish to have this distributed under the terms of the CC-BY license
+          <li data-l10n-id="role-acceptances-license-retain-copyright">I retain the copyright of my work</li>
+          <li data-l10n-id="role-acceptances-license-warrant">I warrant that I am the author or have permission to distribute the work in question</li>
+          <li data-l10n-id="role-acceptances-license-wish">I wish to have this distributed under the terms of the CC-BY license
             (<strong>including allowing modification of this work and requiring attribution</strong>)</li>
-          <li>I agree that proper attribution of my work is any attribution that includes the authors' names, the title of the work and the OpenStax CNX URL to the work</li>
+          <li data-l10n-id="role-acceptances-license-agree">I agree that proper attribution of my work is any attribution that includes the authors' names, the title of the work and the OpenStax CNX URL to the work</li>
         </ul>
       </div>
     {{/if}}
 
-    <div class="alert hidden" role="alert">
+    <div class="alert hidden" role="alert" data-l10n-id="role-acceptances-success-alert">
       <strong>Success.</strong> Your new role settings have been saved.
     </div>
 

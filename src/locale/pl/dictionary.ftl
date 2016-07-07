@@ -1480,6 +1480,36 @@ donate-thank-you-appreciation-message =
 
 # ROLE ACCEPTANCES - Content - src/scripts/modules/role-acceptances/role-acceptances-template.html
 
+role-acceptances-title = Tytuł:
+
+role-acceptances-role =
+
+role-acceptances-requester =
+
+role-acceptances-assignment-date =
+
+role-acceptances-license-i-license =
+  | Udostępniam ten zasób na licencji <a href="{ $url }">Creative Commons Attribution License (CC-BY).</a>
+
+role-acceptances-license-understand = Rozumiem,
+
+role-acceptances-license-retain-copyright =
+  | że zachowuję prawa autorskie do mojego dzieła
+
+role-acceptances-license-warrant =
+  | Oświadczam, że jestem autorem tego dzieła lub mam zgodę na jego udostępnienie
+
+role-acceptances-license-wish =
+  | Zgadzam się na publikację tego dzieła na licencji CC-BY
+  | (<strong>co obejmuje zgodę na modyfikację pod warunkiem uznania
+  | autorstwa</strong>)
+
+role-acceptances-license-agree =
+  | Zgadzam się na uznanie autorstwa mojej pracy w dowolnej formie zawierającej
+  | nazwiska autorów, tytuł pracy oraz link do niej na OpenStax CNX
+
+role-acceptances-success-alert =
+
 
 
 ### OTHER CONTENT ###
