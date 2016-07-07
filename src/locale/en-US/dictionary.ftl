@@ -1370,7 +1370,15 @@ donate-thank-you-appreciation-message =
 
 # OTHER CONTENT - Modal Processing - src/scripts/modules/media/body/processing-instructions/modals/processing-instructions-template.html
 
+modal-add-processing = Add Processing Instructions
+
+modal-cancel = Cancel
+
+modal-insert = Insert
+
 # OTHER CONTENT - Media Body - src/scripts/modules/media/body/body-template.html
+
+media-loading = Loading
 
 # OTHER CONTENT - Editbar Block Publish - src/scripts/modules/media/editbar/block-publish/modals/block-publish-template.html
 
