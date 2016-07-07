@@ -1,8 +1,8 @@
 {{#is type 'application/vnd.org.cnx.collection'}}
   {{#if contents.length}}
     <div class="book-page-toggle btn-group">
-      <button class="btn {{#is mediaType 'application/vnd.org.cnx.collection'}}active{{/is}}" data-media="book">Book</button>
-      <button class="btn {{#is mediaType 'application/vnd.org.cnx.module'}}active{{/is}}" data-media="page">Page</button>
+      <button class="btn {{#is mediaType 'application/vnd.org.cnx.collection'}}active{{/is}}" data-media="book" data-l10n-id="textbook-view-book-button">Book</button>
+      <button class="btn {{#is mediaType 'application/vnd.org.cnx.module'}}active{{/is}}" data-media="page" data-l10n-id="textbook-view-page-button">Page</button>
     </div>
   {{/if}}
 {{/is}}

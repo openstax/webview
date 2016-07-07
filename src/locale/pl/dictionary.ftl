@@ -787,7 +787,19 @@ textbook-view-attribution-li-3-attribution = "Pobierz za darmo z { $url }."
 
 # TEXTBOOK VIEW - Footer Toggle - src/scripts/modules/media/footer/inherits/tab/toggle-partial.html
 
+textbook-view-book-button = Książka
+
+textbook-view-page-button = Strona
+
 # TEXTBOOK VIEW - Footer license - src/scripts/modules/media/footer/license/license-template.html
+
+textbook-view-license = Zasób udostępniony { LEN($licensors) ->
+    [0]
+   *[other] przez { $licensors }
+  }{ LEN($name) ->
+    [0]
+   *[other] na licencji <a href="{ $url }">{ $name } ({ $code } { $version })</a>
+  }.
 
 # TEXTBOOK VIEW - Table of Content Search - src/scripts/modules/media/tabs/contents/toc/page-template.html
 
