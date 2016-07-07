@@ -1392,11 +1392,51 @@ media-loading = Ładowanie
 
 # OTHER CONTENT - Editbar Block Publish - src/scripts/modules/media/editbar/block-publish/modals/block-publish-template.html
 
+media-editbar-title-cannot-publish =
+
+media-editbar-body-cannot-publish =
+
+media-editbar-okay-button = OK
+
 # OTHER CONTENT - Editbar License Template - src/scripts/modules/media/editbar/license/modals/license-template.html
+
+media-editbar-header-change-license =
+
+media-editbar-license-note =
+
+media-editbar-license-cancel = Anuluj
+
+media-editbar-button-change-license =
 
 # OTHER CONTENT - Editbar Section Template - src/scripts/modules/media/editbar/modals/list/section-template.html
 
+media-editbar-list-publishing = publikujesz
+
 # OTHER CONTENT - Publish Template - src/scripts/modules/media/editbar/modals/publish-template.html
+
+media-publish-template-publish = Publikuj
+
+media-publish-template-previously = (previously <a href="{ $url }">{ $licensename } {$licenseversion }.</a>)
+
+media-publish-template-understand = Rozumiem:
+
+media-publish-template-understand-li-1 = Że zachowuję prawa autorskie do mojego dzieła
+media-publish-template-understand-li-2 = Oświadczam, że jestem autorem tego dzieła lub mam zgodę na jego udostępnienie
+media-publish-template-understand-li-3 =
+  | Zgadzam się na publikację tego dzieła na licencji "{ $code }"
+  | (<strong>co obejmuje zgodę na modyfikację pod warunkiem uznania autorstwa<strong>)
+media-publish-template-understand-li-4 =
+  | Zgadzam się na uznanie autorstwa mojej pracy w dowolnej formie zawierającej nazwiska autorów
+  | tytuł pracy oraz link do niej na OpenStax CNX
+
+media-publish-template-textarea-description =
+  [html/placeholder] Dołącz opis wprowadzonych przez ciebie zmian (wymagane)
+
+media-publish-template-items-to-publish = Elementy do publikacji
+
+media-publish-template-cancel-button = Anuluj
+
+media-publish-template-publish-button = Publikuj
 
 # OTHER CONTENT - Media Latest Template - src/scripts/modules/media/latest/latest-template.html
 

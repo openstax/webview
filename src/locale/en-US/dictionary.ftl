@@ -842,6 +842,49 @@ workspace-description = Create free educational content, or derive a copy for ed
 
 # TEXTBOOK EDITOR - Editbar Styling - src/scripts/modules/media/editbar/editbar-template.html
 
+textbook-editor-toggle-navigation = Toggle navigation
+
+textbook-editor-edit = Edit
+
+textbook-editor-normal-text-button = Normal Text
+
+textbook-editor-normal-text = Normal Text
+
+textbook-editor-h1 = Heading 1
+textbook-editor-h2 = Heading 2
+textbook-editor-h3 = Heading 3
+
+textbook-editor-code = Code
+
+textbook-editor-bold =
+  [html/title] Bold
+textbook-editor-italic =
+  [html/title] Italics
+textbook-editor-underline =
+  [html/title] Underline
+textbook-editor-superscript =
+  [html/title] Superscript
+textbook-editor-subscript =
+  [html/title] Subscript
+
+textbook-editor-add-row-before = Add Row Before
+textbook-editor-add-row-after = Add Row After
+textbook-editor-add-column-before = Add Column Before
+textbook-editor-add-column-after = Add Column After
+textbook-editor-add-header-row = Add Header Row
+textbook-editor-delete-row = Delete Row
+textbook-editor-delete-column = Delete Column
+textbook-editor-delete-table = Delete Table
+
+textbook-editor-paste-button =
+  [html/data-content] Content was copied to the clipboard. Click this button to paste the content into the page.
+
+textbook-editor-save-draft = Save Draft
+
+textbook-editor-publish-button = Publish...
+
+textbook-editor-drag-to-add = Drag to add a new...
+
 # TEXTBOOK EDITOR - Tabs Add Page - src/scripts/modules/media/tabs/contents/popovers/add/modals/add-page-template.html
 
 # TEXTBOOK EDITOR - Create New Dropdown Menu - src/scripts/modules/media/tabs/contents/popovers/add/add-template.html
@@ -1382,11 +1425,54 @@ media-loading = Loading
 
 # OTHER CONTENT - Editbar Block Publish - src/scripts/modules/media/editbar/block-publish/modals/block-publish-template.html
 
+media-editbar-title-cannot-publish = You Cannot Publish
+
+media-editbar-body-cannot-publish = You cannot publish because of the following reasons:
+
+media-editbar-okay-button = OK
+
 # OTHER CONTENT - Editbar License Template - src/scripts/modules/media/editbar/license/modals/license-template.html
+
+media-editbar-header-change-license = Change License for { $title }
+
+media-editbar-license-note =
+  | <em><strong>NOTE</strong></em> - This license change affects the book and
+  | all currently unpublished pages within the book.
+
+media-editbar-license-cancel = Cancel
+
+media-editbar-button-change-license = Change License
 
 # OTHER CONTENT - Editbar Section Template - src/scripts/modules/media/editbar/modals/list/section-template.html
 
+media-editbar-list-publishing = publishing
+
 # OTHER CONTENT - Publish Template - src/scripts/modules/media/editbar/modals/publish-template.html
+
+media-publish-template-publish = Publish
+
+media-publish-template-previously = (previously <a href="{ $url }">{ $licensename } {$licenseversion }.</a>)
+
+media-publish-template-understand = I understand:
+
+media-publish-template-understand-li-1 = I retain the copyright of my work
+media-publish-template-understand-li-2 =
+  | I warrant that I am the author or have permission to distribute the work in question
+media-publish-template-understand-li-3 =
+  | I wish to have this distributed under the terms of the "{ $code }" license
+  | (<strong>including allowing modification of this work and requiring attribution<strong>)
+media-publish-template-understand-li-4 =
+  | I agree that proper attribution of my work is any attribution that includes the authors' names,
+  | the title of the work and the OpenStax CNX URL to the work
+
+media-publish-template-textarea-description =
+  [html/placeholder] Include a description of your changes (required)
+
+media-publish-template-items-to-publish = Items to Publish
+
+media-publish-template-cancel-button = Cancel
+
+media-publish-template-publish-button = Publish
 
 # OTHER CONTENT - Media Latest Template - src/scripts/modules/media/latest/latest-template.html
 
