@@ -772,6 +772,17 @@ textbook-view-attribution-li-3-attribution = "Download for free at { $url }."
 
 # TEXTBOOK VIEW - Get Book Drop Down - src/scripts/modules/media/header/popovers/book/book-template.html
 
+textbook-view-book-download-image =
+  [html/alt]  Download
+
+textbook-view-book-get-this-book = Get This Book
+
+textbook-view-book-download-book = Download Book:
+
+textbook-view-book-download-page = Download Page:
+
+textbook-view-book-order-book = Order Printed Book
+
 # TEXTBOOK VIEW - Footer Toggle - src/scripts/modules/media/footer/inherits/tab/toggle-partial.html
 
 textbook-view-book-button = Book
