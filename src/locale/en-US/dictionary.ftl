@@ -1510,6 +1510,38 @@ donate-thank-you-appreciation-message =
 
 # ROLE ACCEPTANCES - Content - src/scripts/modules/role-acceptances/role-acceptances-template.html
 
+role-acceptances-title = Title:
+
+role-acceptances-role = Role
+
+role-acceptances-requester = Requester
+
+role-acceptances-assignment-date = Assignment Date
+
+role-acceptances-license-i-license =
+  | I license this work under the <a href="{ $url }">Creative Commons Attribution License (CC-BY).</a>
+
+role-acceptances-license-understand = I understand
+
+role-acceptances-license-retain-copyright = I retain the copyright of my work
+
+role-acceptances-license-warrant =
+  | I warrant that I am the author or have permission to distribute the work
+  | in question
+
+role-acceptances-license-wish =
+  | I wish to have this distributed under the terms of the CC-BY license
+  | (<strong>including allowing modification of this work and requiring
+  | attribution</strong>)
+
+role-acceptances-license-agree =
+  | I agree that proper attribution of my work is any attribution that
+  | includes the authors' names, the title of the work and the OpenStax CNX
+  | URL to the work
+
+role-acceptances-success-alert =
+  | <strong>Success.</strong> Your new role settings have been saved.
+
 
 
 ### OTHER CONTENT ###
