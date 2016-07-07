@@ -604,6 +604,12 @@ search-results-navigation-next = Dalej
 
 # SEARCH RESULTS - No Results - src/scripts/modules/search/results/list/list-template.html
 
+search-results-list-search-taking-time =
+
+search-results-list-no-results = Brak wyników. Spróbuj rozszerzyć wyszukiwanie.
+
+search-results-list-loading = Ładowanie
+
 # SEARCH RESULTS - Item - src/scripts/modules/search/results/list/item-partial.html
 
 

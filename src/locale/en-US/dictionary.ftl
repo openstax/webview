@@ -602,6 +602,15 @@ search-results-navigation-next = Next
 
 # SEARCH RESULTS - No Results - src/scripts/modules/search/results/list/list-template.html
 
+search-results-list-search-taking-time =
+  | The search seems to be taking a long time. The search engine may have the
+  | results ready if you reload the page, or you can refine your search using
+  | the Advanced Search button above.
+
+search-results-list-no-results = No results found. Please try expanding your search.
+
+search-results-list-loading = Loading
+
 # SEARCH RESULTS - Item - src/scripts/modules/search/results/list/item-partial.html
 
 
