@@ -17,20 +17,41 @@ function show() {
 
 
 function contrast_black_white() {
-  document.getElementById("content").style.color ="#ffffff";
+  var paragraphs = document.getElementsByTagName("p");
+  for(var i = 0; i < paragraphs.length; i++){
+    paragraphs[i].style.color ="#ffffff";
+  }
+  var headers = document.evaluate(".//div[@class='main-page']//h1", document, null, XPathResult.ANY_TYPE, null); 
+  var theHeader = headers.iterateNext();
+  while (theHeader){
+    theHeader.style.color ="#ffffff";  
+    theHeader = headers.iterateNext();
+  }
+  var captions = document.getElementsByTagName("figure");
+  for(var i = 0; i < captions.length; i++){
+    captions[i].style.color ="#ffffff";
+  }
   document.getElementById("content").style.backgroundColor ="#000000";
 }
 function contrast_white_black() {
-  document.getElementById("content").style.color ="#000000";
+  var paragraphs = document.getElementsByTagName("p");
+  for(var i = 0; i < paragraphs.length; i++){
+    paragraphs[i].style.color ="#000000";
+  }    
   document.getElementById("content").style.backgroundColor ="#ffffff";
 }
 function contrast_black_yellow() {
-  document.getElementById("content").style.color ="yellow";
+  var paragraphs = document.getElementsByTagName("p");
+  for(var i = 0; i < paragraphs.length; i++){
+    paragraphs[i].style.color ="yellow";
+  }    
   document.getElementById("content").style.backgroundColor ="#000000";
 }
 function contrast_yellow_black() {
-  var x = document.getElementsByClassName("main-page");
-  x[0].style.color ="#000000";
+  var paragraphs = document.getElementsByTagName("p");
+  for(var i = 0; i < paragraphs.length; i++){
+    paragraphs[i].style.color ="#000000";
+  }	
   document.getElementById("content").style.backgroundColor ="yellow";
 }
 
