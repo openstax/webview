@@ -4,10 +4,10 @@ define (require) ->
   require('less!./workspace')
 
   return class WorkspacePage extends MainPageView
-    pageTitle: 'My Workspace'
+    pageTitle: 'workspace-pageTitle'
     canonical: null
-    summary: 'Add new content or find content and derive a copy for editing.'
-    description: 'Create free educational content, or derive a copy for editing.'
+    summary: 'workspace-summary'
+    description: 'workspace-description'
 
     onRender: () ->
       super()
