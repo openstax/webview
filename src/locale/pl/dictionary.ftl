@@ -1469,6 +1469,12 @@ donate-thank-you-appreciation-message =
 
 # TERMS OF SERVICE - Page Title - src/scripts/pages/tos/tos.coffee
 
+terms-of-service-pageTitle =
+
+terms-of-service-summary =
+
+terms-of-service-description =
+
 # TERMS OF SERVICE - Content - src/scripts/pages/tos/tos-template.html
 
 

@@ -1502,6 +1502,12 @@ donate-thank-you-appreciation-message =
 
 # TERMS OF SERVICE - Page Title - src/scripts/pages/tos/tos.coffee
 
+terms-of-service-pageTitle = Terms of Service - OpenStax CNX
+
+terms-of-service-summary = OpenStax CNX Terms of Service
+
+terms-of-service-description = OpenStax CNX Terms of Service
+
 # TERMS OF SERVICE - Content - src/scripts/pages/tos/tos-template.html
 
 
