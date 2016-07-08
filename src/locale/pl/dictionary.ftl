@@ -1491,6 +1491,12 @@ terms-of-service-description =
 
 # LICENSING - Page Title - src/scripts/pages/license/license.coffee
 
+licensing-pageTitle =
+
+licensing-summary =
+
+licensing-description =
+
 # LICENSING - Content - src/scripts/pages/license/license-template.html
 
 
