@@ -1500,6 +1500,8 @@ terms-of-service-description =
 
 # ROLE ACCEPTANCES - Title - src/scripts/modules/role-acceptances/role-acceptances.coffee, src/scripts/pages/role-acceptance/role-acceptance.coffee
 
+role-acceptances-pageTitle =
+
 # ROLE ACCEPTANCES - Content - src/scripts/modules/role-acceptances/role-acceptances-template.html
 
 role-acceptances-title = Tytuł:
