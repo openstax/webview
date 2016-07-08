@@ -12,7 +12,7 @@ define (require) ->
 
   return  class RoleAcceptanceView extends BaseView
     template: template
-    pageTitle: 'Role Acceptance'
+    pageTitle: 'role-acceptances-pageTitle'
 
     templateHelpers:
       licenseRequired: () -> @licenseRequired()

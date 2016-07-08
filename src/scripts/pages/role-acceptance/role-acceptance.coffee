@@ -9,7 +9,7 @@ define (require) ->
   class InnerView extends BaseView
     template: template
     templateHelpers: () ->
-      pageTitle: 'Role Acceptance'
+      pageTitle: 'role-acceptances-pageTitle'
 
     regions:
       roleAcceptances: '.role-acceptances-wrapper'
