@@ -32,10 +32,10 @@ define (require) ->
           @regions.content.show(new DefaultView())
 
   return class AboutPage extends MainPageView
-    pageTitle: 'About OpenStax CNX'
+    pageTitle: 'about-pageTitle'
     canonical: null
-    summary: 'About OpenStax CNX'
-    description: 'OpenStax CNX is a non-profit organization providing thousands of free online textbooks.'
+    summary: 'about-summary'
+    description: 'about-description'
 
     initialize: (@options) ->
       super()

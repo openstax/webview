@@ -87,6 +87,12 @@ all-header-support = Pomoc
 
 # ABOUT - Page Title and Description - src/scripts/pages/about/about.coffee
 
+about-pageTitle =  O OpenStax CNX
+
+about-summary = O OpenStax CNX
+
+about-description = OpenStax CNX jest organizacją non-profit udostępniającą tysiące otwartych cyfrowych podręczników.
+
 # ABOUT - Navigation - src/scripts/pages/about/about-template.html
 
 about-nav-about-us = O nas
