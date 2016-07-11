@@ -6,7 +6,6 @@ define (require) ->
   template = require('hbs!./header-template')
   require('less!../../header/header')
   require('bootstrapCollapse')
-  # require('zendesk') # remove for minimal (its unused here)
 
   return class HeaderView extends BaseView
     template: template

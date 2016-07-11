@@ -6,7 +6,6 @@ define (require) ->
   template = require('hbs!./header-template')
   require('less!./header')
   require('bootstrapCollapse')
-  #require('zendesk')
 
   $(window).focus(session.update.bind(session))
 
@@ -30,9 +29,6 @@ define (require) ->
       @page = options.page
       @url = @createLink(options.url) if options.url
 
-      # HACK: Lazy-load Zendesk so it doesn't get overwritten
-      require(['zendesk'])
-
       @listenTo(session, 'change', @render)
 
     regions:
@@ -41,7 +37,6 @@ define (require) ->
     onRender: () ->
       session.update()
       @regions.siteStatus.show(new SiteStatusView())
-      $('#zenbox_tab').show()
 
     skipTo: (e) ->
       e.preventDefault()
