@@ -16,6 +16,9 @@
         <li><a data-bypass="true" href="{{accountProfile}}">Account Profile</a></li>
         <li><a data-bypass="true" href="/logout">Log Out {{username}}</a></li>
       {{/if}}
+      {{#if cnxSupport}}
+        <li><a href="{{cnxSupport}}" title="Go to CNX Support">Support</a></li>
+      {{/if}}
       {{#if url}}
         <li><a href="{{url}}" title="Switch to the CNX legacy web site">CNX Author | Legacy Site</a></li>
       {{/if}}

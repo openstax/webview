@@ -13,6 +13,7 @@ define (require) ->
     template: template
     templateHelpers: () -> {
       legacy: settings.legacy
+      cnxSupport: settings.cnxSupport
       page: @page
       results: !!document.getElementById('results')
       url: @url
