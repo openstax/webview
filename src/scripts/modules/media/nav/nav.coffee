@@ -44,6 +44,7 @@ define (require) ->
       @mediaParent = options.mediaParent
       @tocIsOpen = false
       @noteIsOpen = false
+      @loaded = false
       @.trigger('tocIsOpen', @tocIsOpen)
       @.trigger('noteIsOpen',@noteIsOpen)
       @listenTo(@model, 'change:loaded change:currentPage removeNode moveNode add:contents', @render)
@@ -73,13 +74,13 @@ define (require) ->
           container.set('expanded', true)
       @updateToc()
       if @noteIsOpen
-        @noteIsOpen = not @noteIsOpen
+        #@noteIsOpen = not @noteIsOpen
         @updateNote()
       
     toggleNotes: (e) ->
       @noteIsOpen = not @noteIsOpen
       @.trigger('noteIsOpen',@noteIsOpen)
-      @updateNote()
+      #@updateNote()
       
       if @tocIsOpen
         @tocIsOpen = not @tocIsOpen
@@ -89,13 +90,25 @@ define (require) ->
           container.set('expanded', true)
         @updateToc()
 
+      if @noteIsOpen
+        $('#notesbox').show()
+        $('#saveme').show()
+        $('#user').show()
+
+      if not @noteIsOpen
+        $('#notesbox').hide()
+        $('#saveme').hide()
+        $('#user').hide()
+
     updateNote: ->
       button = @$el.find('.toggle.notes.btn')
       indicator = button.find('.open-indicator')
       if (@noteIsOpen)
-        button.addClass('open')
-        indicator.removeClass('fa-plus')
-        indicator.addClass('fa-minus')
+        @noteIsOpen = not @noteIsOpen
+        $('#notesbox').hide()
+        $('#saveme').hide()
+        $('#user').hide()
+
       else
         button.removeClass('open')
         indicator.addClass('fa-plus')
