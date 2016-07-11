@@ -126,9 +126,6 @@ define (require) ->
 
       {newPath, options}
 
-    shouldClickPropagate: (clickEvent) ->
-      $(clickEvent.target).is($('#zenbox_tab')) or $(clickEvent.target).is($('#zenbox_close'))
-
     getOptionsForCoach: ->
       {query} = linksHelper.getCurrentPathComponents()
       view = query['cc-view']

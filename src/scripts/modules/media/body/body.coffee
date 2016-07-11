@@ -209,8 +209,6 @@ define (require) ->
           # # uncomment to embed fake exercises and see embeddable exercises in action
           # @fakeExercises($temp)
 
-          $('#zenbox_tab').show()
-
           # Hide Exercises and set region for Concept Coach, only if canCoach
           @handleCoach($temp)
 

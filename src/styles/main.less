@@ -196,42 +196,6 @@ iframe.simulation {
   border: 0;
 }
 
-//
-// Zendesk
-//
-
-div#zenbox_tab.ZenboxTabRight {
-  @media (max-width: @grid-float-breakpoint-max) {
-    display: none !important; // override ZenDesk styling
-  }
-
-  display: block;
-  height: 10rem;
-  width: 3rem;
-  line-height: 10rem;
-  border: none;
-  border-top-left-radius: 0.4rem;
-  border-bottom-left-radius: 0.4rem;
-
-  &::before {
-    display: inline-block;
-    height: 10rem;
-    line-height: 12rem;
-    color: white;
-    text-transform: uppercase;
-    vertical-align: middle;
-    white-space: nowrap;
-    .rotate(90deg);
-    -ms-transform: rotate(90deg) translateY(60px);
-    .user-select(none);
-    content: "Ask Us";
-  }
-
-  > img {
-    display: none;
-  }
-}
-
 //Firefox
 @-moz-document url-prefix() {
 select {

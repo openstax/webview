@@ -23,9 +23,6 @@
       // ## MathJax
       mathjax: '//cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=MML_HTMLorMML',
 
-      // ## Zendesk
-      zendesk: '//assets.zendesk.com/external/zenbox/v2.6/zenbox',
-
       // Use Minified Aloha because loading files in a different requirejs context is a royal pain
       aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
 
@@ -137,43 +134,6 @@
           });
 
           return window.MathJax;
-        }
-      },
-
-      zendesk: {
-        deps: ['jquery', 'css!//assets.zendesk.com/external/zenbox/v2.6/zenbox'],
-        exports: 'Zendesk',
-        init: function ($) {
-          if (typeof Zenbox !== 'undefined') {
-            window.Zenbox.init({
-              dropboxID: '20194334',
-              url: 'https://openstaxcnx.zendesk.com',
-              tabTooltip: 'Ask Us',
-              tabImageURL: 'https://p2.zdassets.com/external/zenbox/images/tab_ask_us_right.png',
-              tabColor: '#78b04a',
-              tabPosition: 'Right'
-            });
-
-            // UGLY HACK: Remove Zenbox iframe so it doesn't cause issues in Aloha
-            var $tab = $('#zenbox_tab'),
-              $overlay = $('#zenbox_overlay'),
-              $close = $('#zenbox_close');
-
-            $overlay.remove();
-
-            $tab.on('click', function () {
-              $overlay.insertAfter($tab);
-              window.Zenbox.show();
-            });
-
-            $close.on('click', function () {
-              window.Zenbox.hide();
-              $overlay.remove();
-            });
-            // END HACK
-          }
-
-          return window.Zenbox;
         }
       },
 
