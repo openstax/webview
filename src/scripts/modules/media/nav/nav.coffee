@@ -72,9 +72,6 @@ define (require) ->
         for container in @model.get('currentPage')?.containers() ? []
           container.set('expanded', true)
       @updateToc()
-      if @preferencesIsOpen
-        @preferencesIsOpen = not @preferencesIsOpen
-        @updatePreferences()
       
     togglePreferences: (e) ->
       @preferencesIsOpen = not @preferencesIsOpen
