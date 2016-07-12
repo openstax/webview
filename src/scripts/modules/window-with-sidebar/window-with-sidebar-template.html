@@ -1,2 +1,20 @@
-  <div class="sidebar"></div>
-  <div class="main"></div>
+<script type="scripted">
+  function disparity(){
+    if ($('div.fullsize-container.sidebar-open').length) && (document.getElementById("notesbox").style.display == ""){
+  	  document.getElementById("notesbox").style.display ="";
+  	}
+  	else{
+  	  document.getElementById("notesbox").style.display ="none";
+  	}
+  }
+</script>  
+<div class="sidebar">
+  <div class="testing-side" id="notesbox" style="display:none;"><textarea style="height:611px; width:315px;">{{chapter}}</textarea>
+    <br>
+    <button class="save btn" role="button" id="savebutt">
+      <span class="fa fa-floppy-o"></span>
+      <span class="text">Save Notes</span>
+    </button>
+  </div>
+</div>
+<div class="main"></div>

@@ -4,18 +4,24 @@ function show() {
   var x = document.URL;
   document.getElementById("notesbox").value = localStorage.getItem(x);
 
+  if(!($('div.fullsize-container.sidebar-open').length)){
+    document.getElementsByClassName("fullsize-container")[0].className += " sidebar-open";
+  }
   if(document.getElementById("notesbox").style.display == "none"){
+    document.getElementsByClassName("table-of-contents")[0].className += " hidden";
     document.getElementById("notesbox").style.display ="";    
   }
   else{
     document.getElementById("notesbox").style.display ="none";
+    document.getElementsByClassName("fullsize-container sidebar-open")[0].className = "fullsize-container"
    }
 }
 
-function save(){
-  var x = document.URL;
-  localStorage.setItem(String(x), document.getElementById("notesbox").value);
-
+function detect(){
+  document.getElementsByClassName("table-of-contents hidden")[0].className = "table-of-contents";
+  if(document.getElementById("notesbox").style.display == ""){
+    document.getElementById("notesbox").style.display ="none";
+  }
 }
 </script>
 
@@ -23,12 +29,13 @@ function save(){
   <div class="media-nav{{#is status 'publishing'}} publishing{{/is}}">
     <div class="media-toolbar">
       {{#unless _hideProgress}}
-        <button class="toggle contents btn" role="button">
+        <button class="toggle contents btn" role="button" onclick="detect()">
           <span class="fa fa-th-list"></span>
            <span class="text">Contents</span>
            <span class="fa fa-plus open-indicator"></span>
         </button>
-        <button class="toggle notes btn" role="button" onclick="show()">
+        <button class="toggle notes btn" role="button" onclick="show()" onclick="disparity()">
+          <span class="fa fa-file-text-o"></span>
           <span class="text">Notes</span>
           <span class="fa fa-plus open-indicator"></span>
         </button>
@@ -63,14 +70,7 @@ function save(){
           {{/if}}
         </div>
         
-      </div><br><textarea id="notesbox" rows="4" cols="50" 
-      style="display:none;">
-          Type notes here
-        </textarea>
-        <br>
-        <button class="save" role="button" onclick="save()">
-           <span class="text">Save Notes</span>
-        </button>
+      </div>
     </div>
   </div>
 {{/if}}

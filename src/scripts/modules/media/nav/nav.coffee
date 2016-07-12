@@ -4,7 +4,6 @@ define (require) ->
   linksHelper = require('cs!helpers/links')
   BaseView = require('cs!helpers/backbone/views/base')
   ContentsView = require('cs!../tabs/contents/contents')
-  #NotesView = require('cs!../tabs/notes/notes')
   BookSearchResults = require('cs!models/book-search-results')
   template = require('hbs!./nav-template')
   require('less!./nav')
@@ -80,13 +79,12 @@ define (require) ->
       @noteIsOpen = not @noteIsOpen
       @.trigger('noteIsOpen',@noteIsOpen)
       @updateNote()
-      
       if @tocIsOpen
         @tocIsOpen = not @tocIsOpen
-        @.trigger('tocIsOpen', @tocIsOpen)
-        @closeAllContainers() unless @model.get('searchResults')
-        for container in @model.get('currentPage')?.containers() ? []
-          container.set('expanded', true)
+        # @.trigger('tocIsOpen', @tocIsOpen)
+        # @closeAllContainers() unless @model.get('searchResults')
+        # for container in @model.get('currentPage')?.containers() ? []
+        #   container.set('expanded', true)
         @updateToc()
 
     updateNote: ->

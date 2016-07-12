@@ -4,6 +4,40 @@
 @sidebar-width: 315px;
 @fudge: 7px;
 @transition-style: 0.2s ease-in-out;
+@nav-height: 4.9rem;
+@progress-height: 0.9rem;
+@button-width: 13rem;
+@searchbar-margin: 3px;
+
+div.testing-side{
+  position: fixed;
+  margin-top: 0pt;
+}
+
+textarea{
+  resize:vertical;
+  font-family: Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 20pt;
+}
+
+.save.btn{
+  background-color: @brand-primary;
+  color: white;
+  border: solid 2px @brand-primary;
+  width: @button-width;
+  margin: @searchbar-margin;
+  margin-top: -3px;
+  .text {
+    margin: 0 6px;
+  }
+  &.displayed{
+    display: initial;
+  }
+  &:focus {
+    box-shadow: 0 0 3px 2px lightblue;
+  }
+}
 
 .fullsize-container {
   > .sidebar {
