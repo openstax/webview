@@ -1,8 +1,13 @@
 <script>
+var loaded = 0;
+var user = "0";
 function show() {
 
   var x = document.URL;
-  document.getElementById("notesbox").value = localStorage.getItem(x);
+  if(loaded == 0 || (document.getElementById("user").value != "" && user != document.getElementById("user").value)){
+    loadnotes();
+    loaded = 1;
+  }
 
   if(!($('div.fullsize-container.sidebar-open').length)){
     document.getElementsByClassName("fullsize-container")[0].className += " sidebar-open";
@@ -69,7 +74,7 @@ function detect(){
             <div class="nav next disabled">Next</div>
           {{/if}}
         </div>
-        
+      </div>
       </div>
     </div>
   </div>

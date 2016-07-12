@@ -43,6 +43,7 @@ define (require) ->
       @mediaParent = options.mediaParent
       @tocIsOpen = false
       @noteIsOpen = false
+      @loaded = false
       @.trigger('tocIsOpen', @tocIsOpen)
       @.trigger('noteIsOpen',@noteIsOpen)
       @listenTo(@model, 'change:loaded change:currentPage removeNode moveNode add:contents', @render)
@@ -94,6 +95,7 @@ define (require) ->
         button.addClass('open')
         indicator.removeClass('fa-plus')
         indicator.addClass('fa-minus')
+
       else
         button.removeClass('open')
         indicator.addClass('fa-plus')

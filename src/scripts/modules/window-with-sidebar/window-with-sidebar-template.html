@@ -7,14 +7,52 @@
   	  document.getElementById("notesbox").style.display ="none";
   	}
   }
+  function save(){
+    var x = document.URL;
+    localStorage.setItem(String(x), document.getElementById("notes").value);
+  }
+
+  function revert(){
+
+  }
+
+  function loadnotes() {
+    user = document.getElementById("user").value;
+    var xhttp = new XMLHttpRequest();
+    document.getElementById("notes").value = "";
+    xhttp.onreadystatechange = function() {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+        document.getElementById("notes").value = xhttp.responseText;
+      }
+    };
+    if(parseInt(user) == 0){
+      xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+document.title+".txt", true);}
+    else{
+      xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+document.title+".txt", true);
+    }
+    xhttp.send();
+  }
+
+  function savenotes() {
+    user = document.getElementById("user").value;
+    var xhttp = new XMLHttpRequest();
+    if(parseInt(user) == 0){
+      xhttp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+document.title+".txt", true);}
+    else{
+      xhttp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+document.title+".txt", true);
+    }
+    xhttp.send(document.getElementById("notes").value);
+  }
 </script>  
 <div class="sidebar">
-  <div class="testing-side" id="notesbox" style="display:none;"><textarea style="height:611px; width:315px;">{{chapter}}</textarea>
+
+  <div class="testing-side" id="notesbox" style="display:none;"><textarea id="notes" style="height:611px; width:315px;" value="">{{chapter}}</textarea>
     <br>
-    <button class="save btn" role="button" id="savebutt">
+    <button class="save btn" role="button" id="saveme" onclick="savenotes()">
       <span class="fa fa-floppy-o"></span>
       <span class="text">Save Notes</span>
     </button>
+    <input type="number" id="user" placeholder="User #" maxlength="4" style="display:none;" value="0">
   </div>
 </div>
 <div class="main"></div>
