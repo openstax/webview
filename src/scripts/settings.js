@@ -50,7 +50,7 @@
 
       accountProfile: 'https://accounts.cnx.org/profile',
 
-      cnxSupport: 'http://openstax.force.com/support?l=en_US&c=Products%3ACNX',
+      cnxSupport: 'https://openstaxcnx.zendesk.com/hc/en-us',
 
       terpUrl: function (itemCode) {
         return 'https://openstaxtutor.org/terp/' + itemCode + '/quiz_start';
