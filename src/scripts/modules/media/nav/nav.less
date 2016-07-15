@@ -176,6 +176,15 @@
     border: solid 2px @gray-lightest;
     display: none;
   }
+
+#preferences-options{
+    white-space: nowrap;    
+    height: 162px;
+    width: 1260px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
 .contrast-option{
     border-radius: 5px;
     padding: 10px;
@@ -212,10 +221,11 @@
     width: 280px;
     height: 100px;
     border: solid 2px @brand-secondary;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px;
-    float: left
+    border-radius: 8px;
+    padding: 12px;
+    margin: 6px;
+    display: inline-block;
+    vertical-align: top;
 }
 .reset-button{
     background-color: white;
@@ -223,9 +233,9 @@
     height: 30px;
     color: red;
     border: solid 2px red;
-    border-radius: 5px;
-    padding: 5px; 
-    margin: 10px;
+    border-radius: 8px;
+    padding: 0px; 
+    margin: 6px;
     float: left;
 }
 
