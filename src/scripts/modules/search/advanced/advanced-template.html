@@ -69,7 +69,7 @@
 	    <option value="">Any</option>
             {{~#if filtered~}}
               {{~#each languages~}}
-                <option value="{{@key}}">
+                <option value="{{this.attributes.id}}">
                   {{~#is this.attributes.native this.attributes.english~}}
                     {{this.attributes.native}}
                   {{~else~}}
