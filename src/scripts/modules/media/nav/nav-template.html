@@ -29,6 +29,10 @@ function detect(){
   }
 }
 
+function exportnotes(){
+  document.getElementById("notes").value = model.get('contents').models;
+}
+
 function save(){
   var x = document.URL;
   localStorage.setItem(String(x), document.getElementById("notes").value);
