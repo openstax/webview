@@ -68,17 +68,28 @@ function contrast_change(a,b,c,d){
   for(var i = 0; i < boxes.length; i++){
     boxes[i].style.backgroundColor =c;
   }
-  var sections = document.evaluate("//div[@class='note ui-has-child-title']/section", document, null, XPathResult.ANY_TYPE, null); 
-  var theSection = sections.iterateNext();
-  while (theSection){
-    theSection.style.backgroundColor =c;  
-    theSection = sections.iterateNext();
-  }
 
-  //var sections = document.getElementsByTagName("section");
-  //for(var i = 0; i < sections.length; i++){
-  //  sections[i].style.backgroundColor =c;
-  //}  
+  //var sections = document.evaluate("//div[@class='note ui-has-child-title']/section", document, null, XPathResult.ANY_TYPE, null); 
+  //var theSection = sections.iterateNext();
+  //while (theSection){
+  //  theSection.style.backgroundColor =c;  
+  //  theSection = sections.iterateNext();
+  //}
+
+  //var tables = document.getElementsByTagName("tr");
+  //for(var i = 0; i < tables.length; i++){
+  //  tables[i].style.color =a;
+  //  if(i%2 == 1){
+  //     tables[i].style.backgroundColor =c;
+  //  }
+  //}
+
+  var sections = document.getElementsByTagName("section");
+  for(var i = 0; i < sections.length; i++){
+    sections[i].style.backgroundColor =c;
+  }
+  var x = document.getElementsByClassName("main-page");
+  x[0].style.color = a;  
   document.getElementById("content").style.backgroundColor =b;
 }
 
@@ -118,6 +129,7 @@ function reset() {
   var x = document.getElementsByClassName("main-page");  
   x[0].style.fontFamily = "Helvetica Neue";
   x[0].style.lineHeight = "1.42857143";
+  x[0].style.fontSize = "100%";
   document.getElementById("text-style").options[0].selected = 'selected';
   document.getElementById("line-space").value = "1.42857143";
 }
@@ -185,17 +197,19 @@ function reset() {
 	  <b>Text Style</b><br>
 	  <select id="text-style" onchange="font_change()" >
 	    <option value="'Helvetica Neue'">Default</option>
- 	    <option value="dyslexie">Dyslexie</option>
+ 	    <option value="Dyslexie">Dyslexie</option>
 	    <option value="Times">Times New Roman</option>
 	    <option value="Helvetica">Helvetica</option>
 	  </select>
 	</div>
         </div>
 
+	<!--
 	<div class="preferences-box"  >
           <b>Keyword Hilighting</b><br>
 	  <input type="checkbox" name="highlight" value="Highlight">  Highlight Keywords<br>
         </div>
+	-->
 
 	<div class="preferences-box"  >
   	  <b>Line spacing</b><br><br>
