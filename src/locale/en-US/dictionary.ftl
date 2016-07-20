@@ -896,6 +896,10 @@ workspace-description = Create free educational content, or derive a copy for ed
 
 # MY WORKSPACE - New Popover - src/scripts/modules/workspace/popovers/new/new-template.html
 
+workspace-new-popover-book = Book
+
+workspace-new-popover-page = Page
+
 # MY WORKSPACE - Table Titles - src/scripts/modules/workspace/results/list/workspace-table-partial.html
 
 # MY WORKSPACE - Number of Items  - src/scripts/modules/workspace/header/header-template.html
