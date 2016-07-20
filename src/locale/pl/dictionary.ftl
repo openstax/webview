@@ -888,16 +888,12 @@ workspace-delete-OK = OK
 
 # MY WORKSPACE - Popover - src/scripts/modules/workspace/popovers/new/modals/new-media-template.html
 
-workspace-popover-create-new = Utwórz nową
-
 workspace-popover-title-label = Tytuł
 
 workspace-popover-title-input =
   [html/placeholder]  Tytuł
 
 workspace-popover-cancel-button = Anuluj
-
-workspace-popover-create-new-button = Utwórz nową
 
 # MY WORKSPACE - Page Title, Summary, Description - src/scripts/pages/workspace/workspace.coffee
 
@@ -908,6 +904,10 @@ workspace-summary = Stwórz nowy zasób albo wyszukaj istniejący i utwórz kopi
 workspace-description = Twórz darmowe zasoby edukacyjne albo modyfikuj istniejące.
 
 # MY WORKSPACE - New Popover - src/scripts/modules/workspace/popovers/new/new-template.html
+
+workspace-new-popover-book = Książka
+
+workspace-new-popover-page = Strona
 
 # MY WORKSPACE - Table Titles - src/scripts/modules/workspace/results/list/workspace-table-partial.html
 
