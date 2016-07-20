@@ -51,10 +51,10 @@ function contrast_change(a,b,c,d){
     lists2[i].style.color =a;
   }
 
-  var more_headers = document.getElementsByClassName("title");
-  for(var i = 0; i < more_headers.length; i++){
-    more_headers[i].style.color =a;
-  }  
+  //var more_headers = document.getElementsByClassName("title");
+  //for(var i = 0; i < more_headers.length; i++){
+  //  more_headers[i].style.color =a;
+  //}  
   var h5headers = document.getElementsByTagName("h5");
   for(var i = 0; i < h5headers.length; i++){
     h5headers[i].style.color =a;
@@ -65,16 +65,16 @@ function contrast_change(a,b,c,d){
   }  
 
   var boxes = document.getElementsByClassName("note ui-has-child-title");
-  for(var i = 0; i < boxes.length; i++){
+    for(var i = 0; i < boxes.length; i++){
     boxes[i].style.backgroundColor =c;
   }
 
-  //var sections = document.evaluate("//div[@class='note ui-has-child-title']/section", document, null, XPathResult.ANY_TYPE, null); 
-  //var theSection = sections.iterateNext();
-  //while (theSection){
-  //  theSection.style.backgroundColor =c;  
-  //  theSection = sections.iterateNext();
-  //}
+  var sections = document.evaluate("//div[@class='note ui-has-child-title']/section", document, null, XPathResult.ANY_TYPE, null); 
+  var theSection = sections.iterateNext();
+  while (theSection){
+    theSection.style.backgroundColor =c;  
+    theSection = sections.iterateNext();
+  }
 
   //var tables = document.getElementsByTagName("tr");
   //for(var i = 0; i < tables.length; i++){
@@ -84,12 +84,12 @@ function contrast_change(a,b,c,d){
   //  }
   //}
 
-  var sections = document.getElementsByTagName("section");
-  for(var i = 0; i < sections.length; i++){
-    sections[i].style.backgroundColor =c;
-  }
+  //var sections = document.getElementsByTagName("section");
+  //for(var i = 0; i < sections.length; i++){
+  //  sections[i].style.backgroundColor =c;
+  //}
   var x = document.getElementsByClassName("main-page");
-  x[0].style.color = a;  
+    x[0].style.color = a;  
   document.getElementById("content").style.backgroundColor =b;
 }
 
@@ -204,12 +204,12 @@ function reset() {
 	</div>
         </div>
 
-	<!--
+	
 	<div class="preferences-box"  >
           <b>Keyword Hilighting</b><br>
 	  <input type="checkbox" name="highlight" value="Highlight">  Highlight Keywords<br>
         </div>
-	-->
+	
 
 	<div class="preferences-box"  >
   	  <b>Line spacing</b><br><br>
