@@ -118,10 +118,19 @@ function line_spacing() {
   x[0].style.lineHeight = (spacing)*1.15;
 }
 
-function text_sizing() {
-  var text_size = document.getElementById("text-size").value;
+function text_size_small() {
   var x = document.getElementsByClassName("main-page");
-  x[0].style.fontSize = text_size+"%";
+  x[0].style.fontSize = "80%";
+}
+
+function text_size_medium() {
+  var x = document.getElementsByClassName("main-page");
+  x[0].style.fontSize = "100%";
+}
+
+function text_size_large() {
+  var x = document.getElementsByClassName("main-page");
+  x[0].style.fontSize = "140%";
 }
 
 function reset() {
@@ -205,11 +214,12 @@ function reset() {
         </div>
 
 	
+	<!--
 	<div class="preferences-box"  >
           <b>Keyword Hilighting</b><br>
 	  <input type="checkbox" name="highlight" value="Highlight">  Highlight Keywords<br>
         </div>
-	
+	-->
 
 	<div class="preferences-box"  >
   	  <b>Line spacing</b><br><br>
@@ -217,8 +227,10 @@ function reset() {
 	</div>
 
 	<div class="preferences-box"  >
-          <b>Text Size</b><br><br>
-          <input type="range" id="text-size" name="text-size" oninput="text_sizing()" min="70" max="200" step="10" value="100">
+          <b>Text Size</b><br>
+	  <button id="small-a" class="size-option" onclick="text_size_small()">a</button>
+          <button id="medium-a" class="size-option" onclick="text_size_medium()">a</button>
+          <button id="large-a" class="size-option" onclick="text_size_large()">a</button>
 	</div>
 
 
