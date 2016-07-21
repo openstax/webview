@@ -106,6 +106,9 @@ define (require) ->
             data[key] = value
           return # Do not allow implicit returns, which could terminate the loop early
 
+      if @locale
+        data.$locale = @locale
+
       return data
 
     addMetaTags: () ->
