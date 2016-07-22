@@ -1667,6 +1667,8 @@ media-editbar-list-publishing = publishing
 
 # OTHER CONTENT - Publish Template - src/scripts/modules/media/editbar/modals/publish-template.html
 
+media-publish-template-license-agreement = I license this work under the
+
 media-publish-template-publish = Publish
 
 media-publish-template-previously = (previously <a href="{ $url }">{ $licensename } {$licenseversion }.</a>)

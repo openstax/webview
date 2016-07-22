@@ -26,15 +26,15 @@ main-splash-content =
   | które można składać w kursy, podręczniki, skrypty
   | i inne publikacje akademickie. Twórz nowe zasoby i udostępniaj je innym.
 
-main-learn-more = Ucz Się Więcej
+main-learn-more = Dowiedz się więcej
 
 # MAIN PAGE - Title - src/scripts/pages/home/home.coffee
 
-home-pageTitle = Propagując wiedzę i budując społeczności - OpenStax CNX
+home-pageTitle = Propagując wiedzę tworzymy społeczeństwo - OpenStax CNX
 
 # MAIN PAGE - Featured Textbooks - src/scripts/modules/featured-books/featured-books-partial.html
 
-featured-books-read-more = Czytaj dalej
+featured-books-read-more = Więcej
 
 
 
@@ -44,7 +44,7 @@ featured-books-read-more = Czytaj dalej
 
 # HEADER - Top Right Message - src/scripts/modules/header/header-template.html
 
-all-cnx-author-legacy-site = Autor CNX | Stara Strona
+all-cnx-author-legacy-site = Autor CNX | Stara wersja
   [html/title] Przejdź do starej wersji CNX
 
 # HEADER - Nav Bar - src/scripts/modules/header/header-template.html
@@ -273,7 +273,7 @@ about-people-team-header = Zespół OpenStax College
 about-people-team-content =
   | OpenStax College powstał dzięki grupie
   | specjalistów od otwartych zasobów edukacyjnych, którzy postanowili
-  | polepszyć dostęp do wysokiej jakości podręczników dla studentów i nauczycieli z całego świata.
+  | polepszyć dostęp studentów i nauczycieli z całego świata do wysokiej jakości podręczników.
 
 
 
@@ -321,7 +321,7 @@ search-pageTitle = Szukaj w bibliotece OpenStax CNX
 
 search-page-summary = Szukaj podręczników
 
-search-page-description = Szukaj wśród tysięcy wolnych, dosępnych online, podręczników.
+search-page-description = Szukaj wśród tysięcy otwartych podręczników dostępnych online.
 
 # SEARCH - Top bar - src/scripts/modules/find-content/find-content-template.html
 
@@ -340,10 +340,10 @@ search-header = Witaj w cyfrowej bibliotece OpenStax CNX
 
 search-content =
   | Zasoby OpenStax CNX udostępniane są w dwóch postaciach:
-  | <strong>modułów</strong>, stanowiących małe "porcje wiedzy," oraz
-  | <strong>kolekcji</strong>, stanowiących zestawy modułów ułożone w formę
-  | książki, kursu lub kompletu o innym przeznaczeniu. Otwarte licencje
-  | pozwalają na swobodne użytkowanie wszystkich zasobów.
+  | <strong>modułów/stron</strong>, stanowiących małe "porcje wiedzy," oraz
+  | <strong>kolekcji/książek</strong>, stanowiących zestawy modułów ułożone w
+  | formę podręcznika, kursu lub publikacji o innym przeznaczeniu. Otwarte
+  | licencje pozwalają na swobodne użytkowanie wszystkich zasobów.
 
 search-pages = Strony: { $count }
 
@@ -417,13 +417,13 @@ advanced-search-publication-date-default-any = Dowolny
 
 advanced-search-sort = Sortuj według
 
-advanced-search-sort-default-relevance = Trafności
+advanced-search-sort-default-relevance = trafności
 
 advanced-search-sort-publication-date = Roku publikacji
 
-advanced-search-sort-popularity = Popularności
+advanced-search-sort-popularity = popularności
 
-advanced-search-submit = Wybierz
+advanced-search-submit = Szukaj
 
 advanced-search-language-option = { $native } ({ $code ->
   [aa] Afar
@@ -649,8 +649,11 @@ search-results-navigation-next = Dalej
 # SEARCH RESULTS - No Results - src/scripts/modules/search/results/list/list-template.html
 
 search-results-list-search-taking-time =
+| Wyszukiwanie trwa dłużej niż zazwyczaj. Wyniki mogą być już dostępne —
+| spróbuj przeładować stronę. Możesz też zawęzić kryteria wyszukiwania
+| wybierając „Wyszukiwanie zaawansowane” powyżej.
 
-search-results-list-no-results = Brak wyników. Spróbuj rozszerzyć wyszukiwanie.
+search-results-list-no-results = Brak wyników. Spróbuj rozszerzyć kryteria wyszukiwania.
 
 search-results-list-loading = Ładowanie
 
@@ -938,7 +941,7 @@ workspace-pageTitle = Moje biurko
 
 workspace-summary = Stwórz nowy zasób albo wyszukaj istniejący i utwórz kopię do modyfikacji.
 
-workspace-description = Twórz darmowe zasoby edukacyjne albo modyfikuj istniejące.
+workspace-description = Twórz darmowe zasoby edukacyjne lub modyfikuj istniejące.
 
 # MY WORKSPACE - New Popover - src/scripts/modules/workspace/popovers/new/new-template.html
 
@@ -1237,18 +1240,18 @@ donate-form-countries = { $countrycode ->
   [US]  Stany Zjednoczone
   [CA]  Kanada
   [AF]  Afganistan
-  [AX]  ##Aland Islands
+  [AX]  Wyspy Alandzkie
   [AL]  Albania
   [DZ]  Algieria
-  [AS]  ##American Samoa
+  [AS]  Samoa Amerykańskie
   [AD]  Andora
   [AO]  Angola
-  [AI]  ##Anguilla
-  [AQ]  ##Antarctica
+  [AI]  Anguilla
+  [AQ]  Antarktyka
   [AG]  Antigua i Barbuda
   [AR]  Argentyna
   [AM]  Armenia
-  [AW]  ##Aruba
+  [AW]  Aruba
   [AU]  Australia
   [AT]  Austria
   [AZ]  Azerbejdżan
@@ -1265,9 +1268,9 @@ donate-form-countries = { $countrycode ->
   [BO]  Boliwia
   [BA]  Bośnia i Hercegowina
   [BW]  Botswana
-  [BV]  ##Bouvet Island
+  [BV]  Wyspa Bouveta
   [BR]  Brazylia
-  [IO]  ##British Indian Ocean Territory
+  [IO]  Brytyjskie Terytorium Oceanu Indyjskiego
   [BN]  Brunei
   [BG]  Bułgaria
   [BF]  Burkina Faso
@@ -1275,18 +1278,18 @@ donate-form-countries = { $countrycode ->
   [KH]  Kambodża
   [CM]  Kamerun
   [CV]  Republika Zielonego Przylądka
-  [KY]  ##Cayman Islands
+  [KY]  Kajmany
   [CF]  Republika Środkowoafrykańska
-  [TD]  Chad
+  [TD]  Czad
   [CL]  Chile
   [CN]  Chiny
-  [CX]  ##Christmas Island
-  [CC]  ##Cocos (Keeling) Islands
+  [CX]  Wyspa Bożego Narodzenia
+  [CC]  Wyspy Kokosowe
   [CO]  Kolumbia
   [KM]  Komory
-  [CG]  ##Congo
+  [CG]  Kongo
   [CD]  Demokratyczna Republika Konga
-  [CK]  ##Cook Islands
+  [CK]  Wyspy Cooka
   [CR]  Kostaryka
   [HR]  Chorwacja
   [CU]  Kuba
@@ -1303,67 +1306,67 @@ donate-form-countries = { $countrycode ->
   [ER]  Erytrea
   [EE]  Estonia
   [ET]  Etiopia
-  [FK]  ##Falkland Islands (Malvinas)
-  [FO]  ##Faroe Islands
+  [FK]  Falklandy
+  [FO]  Wyspy Owcze
   [FJ]  Fidżi
   [FI]  Finlandia
   [FR]  Francja
-  [GF]  ##French Guiana
-  [PF]  ##French Polynesia
-  [TF]  ##French Southern Territories
+  [GF]  Gujana Francuska
+  [PF]  Polinezja Francuska
+  [TF]  Francuskie Terytoria Południowe i Antarktyczne
   [GA]  Gabon
   [GM]  Gambia
   [GE]  Gruzja
   [DE]  Niemcy
   [GH]  Ghana
-  [GI]  ##Gibraltar
+  [GI]  Gibraltar
   [GR]  Grecja
-  [GL]  ##Greenland
+  [GL]  Grenlandia
   [GD]  Grenada
-  [GP]  Guadeloupe
+  [GP]  Gwadelupa
   [GU]  Guam
   [GT]  Gwatemala
-  [GG]  Guernsey
+  [GG]  Wyspa Guernsey
   [GN]  Gwinea
   [GW]  Gwinea Bissau
   [GY]  Gujana
   [HT]  Haiti
-  [HM]  ##Heard Island and McDonald Islands
-  [VA]  ##Holy See (Vatican City State)
+  [HM]  Wyspy Heard i McDonalda
+  [VA]  Watykan
   [HN]  Honduras
-  [HK]  ##Hong Kong
+  [HK]  Hong Kong
   [HU]  Węgry
   [IS]  Islandia
   [IN]  Indie
   [ID]  Indonezja
-  [IR]  ##Iran - Islamic Republic of
+  [IR]  Iran
   [IQ]  Irak
   [IE]  Irlandia
-  [IM]  ##Isle of Man
+  [IM]  Wyspa Man
   [IL]  Izrael
   [IT]  Włochy
   [JM]  Jamajka
   [JP]  Japonia
-  [JE]  ##Jersey
+  [JE]  Wyspa Jersey
   [JO]  Jordania
   [KZ]  Kazachstan
   [KE]  Kenia
   [KI]  Kiribati
-  [KP]  ##Korea - Democratic Peoples Republic of
-  [KR]  ##Korea - Republic of
+  [KP]  Korea Północna
+  [KR]  Korea Południowa
   [KW]  Kuwejt
   [KG]  Kirgistan
-  [LA]  ##Lao Peoples Democratic Republic
+  [LA]  Laos
   [LV]  Łotwa
   [LB]  Liban
   [LS]  Lesotho
   [LR]  Liberia
-  [LY]  ##Libyan Arab Jamahiriya
+  [LY]  Libia
   [LI]  Liechtenstein
   [LT]  Litwa
   [LU]  Luksemburg
-  [MO]  ##Macao
-  [MK]  ##Macedonia - The Former Yugoslav Republic of
+  [MO]  Makau
+  [MK]  Macedonia
   [MG]  Madagaskar
   [MW]  Malawi
   [MY]  Malezja
@@ -1371,17 +1374,17 @@ donate-form-countries = { $countrycode ->
   [ML]  Mali
   [MT]  Malta
   [MH]  Wyspy Marshalla
-  [MQ]  ##Martinique
+  [MQ]  Martynika
   [MR]  Mauretania
   [MU]  Mauritius
-  [YT]  ##Mayotte
+  [YT]  Majotta
   [MX]  Meksyk
-  [FM]  ##Micronesia - Federated States of
+  [FM]  Mikronesia
   [MD]  Mołdawia
   [MC]  Monako
   [MN]  Mongolia
   [ME]  Czarnogóra
-  [MS]  ##Montserrat
+  [MS]  Montserrat
   [MA]  Maroko
   [MZ]  Mozambik
   [MM]  Mjanma
@@ -1389,40 +1392,40 @@ donate-form-countries = { $countrycode ->
   [NR]  Nauru
   [NP]  Nepal
   [NL]  Holandia
-  [AN]  ##Netherlands Antilles
-  [NC]  ##New Caledonia
+  [AN]  Antyle Holenderskie
+  [NC]  Nowa Kaledonia
   [NZ]  Nowa Zelandia
   [NI]  Nikaragua
   [NE]  Niger
   [NG]  Nigeria
-  [NU]  ##Niue
-  [NF]  ##Norfolk Island
-  [MP]  ##Northern Mariana Islands
+  [NU]  Niue
+  [NF]  Wyspa Norfolk
+  [MP]  Mariany Północne
   [NO]  Norwegia
   [OM]  Oman
   [PK]  Pakistan
   [PW]  Palau
-  [PS]  ##Palestinian Territory - Occupied
+  [PS]  Palestyna
   [PA]  Panama
   [PG]  Papua-Nowa Gwinea
   [PY]  Paragwaj
   [PE]  Peru
   [PH]  Filipiny
-  [PN]  ##Pitcairn
+  [PN]  Pitcairn
   [PL]  Polska
   [PT]  Portugalia
-  [PR]  ##Puerto Rico
+  [PR]  Portoryko
   [QA]  Katar
-  [RE]  ##Reunion
+  [RE]  Reunion
   [RO]  Rumunia
-  [RU]  ##Russian Federation
+  [RU]  Rosja
   [RW]  Rwanda
-  [BL]  ##Saint Barthelemy
-  [SH]  ##Saint Helena
+  [BL]  Saint-Barthelemy
+  [SH]  Wyspa Świętej Heleny
   [KN]  Saint Kitts i Nevis
   [LC]  Saint Lucia
-  [MF]  ##Saint Martin
-  [PM]  ##Saint Pierre and Miquelon
+  [MF]  Saint-Martin
+  [PM]  Saint-Pierre i Miquelon
   [VC]  Saint Vincent i Grenadyny
   [WS]  Samoa
   [SM]  San Marino
@@ -1438,21 +1441,21 @@ donate-form-countries = { $countrycode ->
   [SB]  Wyspy Salomona
   [SO]  Somalia
   [ZA]  Republika Południowej Afryki
-  [GS]  ##South Georgia and the South Sandwich Islands
+  [GS]  Georgia Południowa i Sandwich Południowy
   [ES]  Hiszpania
   [LK]  Sri Lanka
   [SD]  Sudan
   [SR]  Surinam
-  [SJ]  ##Svalbard and Jan Mayen
+  [SJ]  Wyspy Svalbard i Jan Mayen
   [SZ]  Suazi
   [SE]  Szwecja
   [CH]  Szwajcaria
-  [SY]  ##Syrian Arab Republic
-  [TW]  ##Taiwan - Province of China
+  [SY]  Syria
+  [TW]  Tajwan
   [TJ]  Tadżykistan
-  [TZ]  ##Tanzania - United Republic of
+  [TZ]  Tanzania
   [TH]  Tajlandia
-  [TL]  ##Timor-Leste
+  [TL]  Timor Wschodni
   [TG]  Togo
   [TK]  Tokelau
   [TO]  Tonga
@@ -1460,22 +1463,22 @@ donate-form-countries = { $countrycode ->
   [TN]  Tunezja
   [TR]  Turcja
   [TM]  Turkmenistan
-  [TC]  ##Turks and Caicos Islands
+  [TC]  Wyspy Turks i Caicos
   [TV]  Tuvalu
   [UG]  Uganda
   [UA]  Ukraina
   [AE]  Zjednoczone Emiraty Arabskie
   [GB]  Wielka Brytania
-  [UM]  ##United States Minor Outlying Islands
+  [UM]  Dalekie Wyspy Mniejsze Stanów Zjednoczonych
   [UY]  Urugwaj
   [UZ]  Uzbekistan
-  [VU]  ##Vanuatu
+  [VU]  Vanuatu
   [VE]  Wenezuela
   [VN]  Wietnam
-  [VG]  ##Virgin Islands - British
-  [VI]  ##Virgin Islands - U.S.
-  [WF]  ##Wallis and Futuna
-  [EH]  ##Western Sahara
+  [VG]  Brytyjskie Wyspy Dziewicze
+  [VI]  Wyspy Dziewicze Stanów Zjednoczonych
+  [WF]  Wallis i Futuna
+  [EH]  Sahara Zachodnia
   [YE]  Jemen
   [ZM]  Zambia
   [ZW]  Zimbabwe
@@ -1599,11 +1602,11 @@ role-acceptances-success-alert =
 
 # OTHER CONTENT - Modal Processing - src/scripts/modules/media/body/processing-instructions/modals/processing-instructions-template.html
 
-modal-add-processing =
+modal-add-processing = Dodaj wskazówki
 
 modal-cancel = Anuluj
 
-modal-insert =
+modal-insert = Wstaw
 
 # OTHER CONTENT - Media Body - src/scripts/modules/media/body/body-template.html
 
@@ -1611,33 +1614,37 @@ media-loading = Ładowanie
 
 # OTHER CONTENT - Editbar Block Publish - src/scripts/modules/media/editbar/block-publish/modals/block-publish-template.html
 
-media-editbar-title-cannot-publish =
+media-editbar-title-cannot-publish = Nie możesz publikować
 
-media-editbar-body-cannot-publish =
+media-editbar-body-cannot-publish = Nie możesz publikować z następujących powodów:
 
 media-editbar-okay-button = OK
 
 # OTHER CONTENT - Editbar License Template - src/scripts/modules/media/editbar/license/modals/license-template.html
 
-media-editbar-header-change-license =
+media-editbar-header-change-license = Zmień licencję dla { $title }
 
 media-editbar-license-note =
+  | <em><strong>UWAGA</strong></em> - Zmiana licencji obejmie tę książkę
+  | i jej wszystkie wciąż nieopublikowane strony.
 
 media-editbar-license-cancel = Anuluj
 
-media-editbar-button-change-license =
+media-editbar-button-change-license = Zmień licencję
 
 # OTHER CONTENT - Editbar Section Template - src/scripts/modules/media/editbar/modals/list/section-template.html
 
-media-editbar-list-publishing = publikujesz
+media-editbar-list-publishing = publikacja
 
 # OTHER CONTENT - Publish Template - src/scripts/modules/media/editbar/modals/publish-template.html
 
-media-publish-template-publish = Publikuj
+media-publish-template-license-agreement = Udostępniam ten zasób na licencji
 
-media-publish-template-previously = (previously <a href="{ $url }">{ $licensename } {$licenseversion }.</a>)
+media-publish-template-publish = Publikacja
 
-media-publish-template-understand = Rozumiem:
+media-publish-template-previously = (poprzednio <a href="{ $url }">{ $licensename } {$licenseversion }.</a>)
+
+media-publish-template-understand = Rozumiem, że:
 
 media-publish-template-understand-li-1 = Że zachowuję prawa autorskie do mojego dzieła
 media-publish-template-understand-li-2 = Oświadczam, że jestem autorem tego dzieła lub mam zgodę na jego udostępnienie
