@@ -31,7 +31,7 @@
       <label>
         <span class="control-label col-sm-2" data-l10n-id="donate-form-title">Title</span>
         <div class="col-sm-10">
-          <select name="title" class="form-control">
+          <select name="title" class="form-control" data-l10n-id="donate-form-titles">
             <option value="">Dr.</option>
             <option value="pubDate">Mr.</option>
             <option value="popularity">Mrs.</option>
@@ -121,7 +121,7 @@
           <input type="hidden" name="Mailing_State" />
           <select name="BILL_STATE" class="form-control">
             {{#each states}}
-              <option value="{{this.code}}">{{this.name}}</option>
+              <option value="{{this.code}}" data-l10n-args='{"statecode":"{{this.code}}","statename":"{{this.name}}"}' data-l10n-id="donate-form-states">{{this.name}}</option>
             {{/each}}
           </select>
         </div>
@@ -144,9 +144,9 @@
         <span class="control-label col-sm-2" data-l10n-id="donate-form-country">Country</span>
         <div class="col-sm-10">
           <input type="hidden" name="Mailing_Country" />
-          <select name="BILL_COUNTRY" class="form-control">
+          <select id="country-list" name="BILL_COUNTRY" class="form-control">
             {{#each countries}}
-              <option value="{{this.code}}">{{this.name}}</option>
+              <option value="{{this.code}}" data-l10n-args='{"countrycode":"{{this.code}}"}' data-l10n-id="donate-form-countries">{{this.name}}</option>
             {{/each}}
           </select>
         </div>
@@ -158,9 +158,9 @@
         <span class="control-label col-sm-2" data-l10n-id="donate-form-donation">Donation</span>
         <div class="col-sm-10">
           <div class="input-group">
-            <span class="input-group-addon">$</span>
+            <span class="input-group-addon" data-l10n-id="donate-form-currency-symbol">$</span>
             <input type="number" step="5" min="5" value="{{amount}}" name="AMT" class="form-control" />
-            <span class="input-group-addon">.00</span>
+            <span class="input-group-addon" data-l10n-id="donate-form-donation-decimal">.00</span>
           </div>
         </div>
       </label>

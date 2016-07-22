@@ -328,6 +328,7 @@ define (require) ->
     {code: 'PQ', name: 'Province du Quebec'}
     {code: 'SK', name: 'Saskatchewan'}
     {code: 'YT', name: 'Yukon Territory'}
+    {code: 'ZZ', name: 'Not Applicable'}
   ]
 
   return class DonateFormView extends BaseView
@@ -407,9 +408,7 @@ define (require) ->
         sorted = @$el.find('#country-list option').sort (a,b) ->
           a.text.toLowerCase().localeCompare b.text.toLowerCase()
         # Apply sorted list.
-        @$el.find("#country-list").empty().append sorted
-        # Select current coutry.
-        @$el.find('#country-list option[value=' + @$el.find('[data-l10n-id="country-code"]').text() + ']').prop('selected', true)
+        @$el.find("#country-list").empty().append sorted        
        , 100
 
     onSubmit: (e) ->
