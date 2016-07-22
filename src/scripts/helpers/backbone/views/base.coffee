@@ -4,6 +4,7 @@ define (require) ->
   Backbone = require('backbone')
   settings = require('settings')
   linksHelper = require('cs!helpers/links.coffee')
+  locale = require('cs!helpers/locale.coffee')
 
   dispose = (obj) ->
     delete obj.parent
@@ -106,8 +107,8 @@ define (require) ->
             data[key] = value
           return # Do not allow implicit returns, which could terminate the loop early
 
-      if @locale
-        data.$locale = @locale
+      # Provide locale code to template data.
+      data.$locale = @locale
 
       return data
 
