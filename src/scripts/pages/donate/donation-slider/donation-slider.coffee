@@ -53,7 +53,6 @@ define (require) ->
       @min = options.min if typeof options.min is 'number'
       @uuid = options.uuid
       @type = options.type or 'pdf'
-
       @listenTo(@model, 'change:downloads', @setDownload) if @model
 
     getPath: () ->

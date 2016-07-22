@@ -857,9 +857,9 @@ workspace-delete-OK = OK
 
 donate-pageTitle = Wesprzyj OpenStax CNX
 
-donate-summary = 
+donate-summary = Przekaż darowiznę dla OpenStax CNX
 
-donate-description =
+donate-description = Przekaż darowiznę dla OpenStax CNX
 
 # DONATE - Header and Content - src/scripts/pages/donate/default/default-template.html
 
@@ -869,7 +869,7 @@ donate-subheader = Twoja darowizna zmienia świat
 
 donate-content =
   | Dzięki twojej darowiźnie, wciąż rosnące zasoby OpenStax CNX będą mogły
-  | pozostać. darmowe dla nauczycieli i studentów z całego świata.
+  | pozostać darmowe dla nauczycieli i studentów z całego świata.
 
 donate-donation-handle-message =
   | O bezpieczne przekazanie darowizny dba Rice University we współpracy z
@@ -878,9 +878,9 @@ donate-donation-handle-message =
 # DONATE - Slider - src/scripts/pages/donate/donation-slider/donation-slider.coffee, src/scripts/pages/donate/donation-slider/donation-slider-template.html
 
 donate-slider-0 = Wolność (każda) mnie uszczęśliwia
-donate-slider-5 = Marszałek byłby dumny
+donate-slider-5 = Marszałek byłby z Ciebie dumny
 donate-slider-10 = OpenStax CNX to świetny pomysł, warto wspomóc
-donate-slider-15 = Dzięki wam zaoszczędziłem/łam setki dolarów!
+donate-slider-15 = Pomogliście mi zaoszczędzić setki dolarów!
 donate-slider-20 = Mój bankomat chce, żebym wam to dał
 donate-slider-25 = Marszałek byłby dumny (i zszokowany bankomatem)
 donate-slider-50 = Hej, OpenStax, dajcie drukowany egzemplarz potrzebującej szkole
@@ -888,27 +888,27 @@ donate-slider-75 = Dołożę się, niech te książki będą darmowe!
 donate-slider-100 = Pomaganie nigdy nie było tak przyjemne
 donate-slider-250 = Wypełnijcie waszymi książkami szkolne bibilioteki – ja stawiam!
 donate-slider-500 = Kupcie sobie za to porządne tłumaczenie!
-donate-slider-1000 = Kolejny rozdział książki na OpenStax ja stawiam!
-donate-slider-2500 = Kolejną część książki na OpenStax ja stawiam!
+donate-slider-1000 = Kolejny podrozdział książki OpenStax ja stawiam!
+donate-slider-2500 = Kolejną rozdział książki OpenStax ja stawiam!
 donate-slider-5000 = Bill Gates II, do usług
 donate-slider-10000 = Ja cię kręcę!!!!
 
 donate-slider-amount = { $amount ->
-  [0] 0 zł
-  [5] 5 zł
-  *[10] 10 zł
-  [15] 15 zł
-  [20] 20 zł
-  [25] 25 zł
-  [50] 50 zł
-  [75] 75 zł
-  [100] 100 zł
-  [250] 250 zł
-  [500] 500 zł
-  [1000] 1 000 zł
-  [2500] 2 500 zł
-  [5000] 5 000 zł
-  [10000] 10 000 zł
+  [0] 0 $
+  [5] 5 $
+  *[10] 10 $
+  [15] 15 $
+  [20] 20 $
+  [25] 25 $
+  [50] 50 $
+  [75] 75 $
+  [100] 100 $
+  [250] 250 $
+  [500] 500 $
+  [1000] 1000 $
+  [2500] 2500 $
+  [5000] 5000 $
+  [10000] 10000 $
 }
 
 donate-donate-now-button = Wspomóż nas
@@ -926,7 +926,7 @@ donate-form-content =
   | pozostać darmowe dla nauczycieli i studentów z całego świata.
 
 donate-form-prompt =
-  | Wpisz swoje dane jako darczyńcy i kliknij "Dalej" aby przejść do
+  | Wpisz swoje dane jako darczyńcy i kliknij "Dalej", aby przejść do
   | bezpiecznej płatności.
 
 donate-form-title = Tytuł
@@ -935,7 +935,7 @@ donate-form-first-name = Imię
 
 donate-form-last-name = Nazwisko
 
-donate-form-suffix = Suffiks
+donate-form-suffix = Sufiks
 
 donate-form-email = E-Mail
 
@@ -943,7 +943,7 @@ donate-form-address = Adres
 
 donate-form-city = Miasto
 
-donate-form-state =
+donate-form-state = Stan
 
 donate-form-zip-code = Kod pocztowy
 
@@ -952,6 +952,340 @@ donate-form-country = Państwo
 donate-form-donation = Darowizna
 
 donate-form-continue = Kontynuuj
+
+donate-form-titles =
+  | <option value="">Dr</option>
+  | <option value="pubDate">Pan</option>
+  | <option value="popularity">Pani</option>
+
+donate-form-states = { $statecode ->
+  [TX]  Texas
+  [AL]  Alabama
+  [AK]  Alaska
+  [AZ]  Arizona
+  [AR]  Arkansas
+  [CA]  California
+  [CO]  Colorado
+  [CT]  Connecticut
+  [DE]  Delaware
+  [FL]  Florida
+  [GA]  Georgia
+  [HI]  Hawaii
+  [ID]  Idaho
+  [IL]  Illinois
+  [IN]  Indiana
+  [IA]  Iowa
+  [KS]  Kansas
+  [KY]  Kentucky
+  [LA]  Louisiana
+  [ME]  Maine
+  [MD]  Maryland
+  [MA]  Massachusetts
+  [MI]  Michigan
+  [MN]  Minnesota
+  [MO]  Missouri
+  [MS]  Mississippi
+  [MT]  Montana
+  [NE]  Nebraska
+  [NV]  Nevada
+  [NH]  New Hampshire
+  [NJ]  New Jersey
+  [NM]  New Mexico
+  [NY]  New York
+  [NC]  North Carolina
+  [ND]  North Dakota
+  [OH]  Ohio
+  [OK]  Oklahoma
+  [OR]  Oregon
+  [PA]  Pennsylvania
+  [RI]  Rhode Island
+  [SC]  South Carolina
+  [SD]  South Dakota
+  [TN]  Tennessee
+  [UT]  Utah
+  [VT]  Vermont
+  [VA]  Virginia
+  [WA]  Washington
+  [WV]  West Virginia
+  [WI]  Wisconsin
+  [WY]  Wyoming
+  [AS]  American Samoa
+  [DC]  District of Columbia
+  [FM]  Federated States of Micronesia
+  [GU]  Guam
+  [MP]  Northern Mariana Islands
+  [PW]  Palau
+  [PR]  Puerto Rico
+  [VI]  Virgin Islands
+  [AA]  Armed Forces Americas
+  [AE]  Armed Forces Europe
+  [AP]  Armed Forces Pacific
+  [AB]  Alberta
+  [BC]  British Columbia
+  [MB]  Manitoba
+  [NB]  New Brunswick
+  [NF]  Newfoundland
+  [NT]  Northwest Territories
+  [NS]  Nova Scotia
+  [ON]  Ontario
+  [PE]  Prince Edward Island
+  [PQ]  Province du Quebec
+  [SK]  Saskatchewan
+  [YT]  Yukon Territory
+  [ZZ]  Nie dotyczy
+}
+
+donate-form-countries = { $countrycode ->
+  [US]  Stany Zjednoczone
+  [CA]  Kanada
+  [AF]  Afganistan
+  [AX]  ##Aland Islands
+  [AL]  Albania
+  [DZ]  Algieria
+  [AS]  ##American Samoa
+  [AD]  Andora
+  [AO]  Angola
+  [AI]  ##Anguilla
+  [AQ]  ##Antarctica
+  [AG]  Antigua i Barbuda
+  [AR]  Argentyna
+  [AM]  Armenia
+  [AW]  ##Aruba
+  [AU]  Australia
+  [AT]  Austria
+  [AZ]  Azerbejdżan
+  [BS]  Bahamy
+  [BH]  Bahrajn
+  [BD]  Bangladesz
+  [BB]  Barbados
+  [BY]  Białoruś
+  [BE]  Belgia
+  [BZ]  Belize
+  [BJ]  Benin
+  [BM]  Bermuda
+  [BT]  Bhutan
+  [BO]  Boliwia
+  [BA]  Bośnia i Hercegowina
+  [BW]  Botswana
+  [BV]  ##Bouvet Island
+  [BR]  Brazylia
+  [IO]  ##British Indian Ocean Territory
+  [BN]  Brunei
+  [BG]  Bułgaria
+  [BF]  Burkina Faso
+  [BI]  Burundi
+  [KH]  Kambodża
+  [CM]  Kamerun
+  [CV]  Republika Zielonego Przylądka
+  [KY]  ##Cayman Islands
+  [CF]  Republika Środkowoafrykańska
+  [TD]  Chad
+  [CL]  Chile
+  [CN]  Chiny
+  [CX]  ##Christmas Island
+  [CC]  ##Cocos (Keeling) Islands
+  [CO]  Kolumbia
+  [KM]  Komory
+  [CG]  ##Congo
+  [CD]  Demokratyczna Republika Konga
+  [CK]  ##Cook Islands
+  [CR]  Kostaryka
+  [HR]  Chorwacja
+  [CU]  Kuba
+  [CY]  Cypr
+  [CZ]  Czechy
+  [DK]  Dania
+  [DJ]  Dżibuti
+  [DM]  Dominika
+  [DO]  Dominikana
+  [EC]  Ekwador
+  [EG]  Egipt
+  [SV]  Salwador
+  [GQ]  Gwinea Równikowa
+  [ER]  Erytrea
+  [EE]  Estonia
+  [ET]  Etiopia
+  [FK]  ##Falkland Islands (Malvinas)
+  [FO]  ##Faroe Islands
+  [FJ]  Fidżi
+  [FI]  Finlandia
+  [FR]  Francja
+  [GF]  ##French Guiana
+  [PF]  ##French Polynesia
+  [TF]  ##French Southern Territories
+  [GA]  Gabon
+  [GM]  Gambia
+  [GE]  Gruzja
+  [DE]  Niemcy
+  [GH]  Ghana
+  [GI]  ##Gibraltar
+  [GR]  Grecja
+  [GL]  ##Greenland
+  [GD]  Grenada
+  [GP]  Guadeloupe
+  [GU]  Guam
+  [GT]  Gwatemala
+  [GG]  Guernsey
+  [GN]  Gwinea
+  [GW]  Gwinea Bissau
+  [GY]  Gujana
+  [HT]  Haiti
+  [HM]  ##Heard Island and McDonald Islands
+  [VA]  ##Holy See (Vatican City State)
+  [HN]  Honduras
+  [HK]  ##Hong Kong
+  [HU]  Węgry
+  [IS]  Islandia
+  [IN]  Indie
+  [ID]  Indonezja
+  [IR]  ##Iran - Islamic Republic of
+  [IQ]  Irak
+  [IE]  Irlandia
+  [IM]  ##Isle of Man
+  [IL]  Izrael
+  [IT]  Włochy
+  [JM]  Jamajka
+  [JP]  Japonia
+  [JE]  ##Jersey
+  [JO]  Jordania
+  [KZ]  Kazachstan
+  [KE]  Kenia
+  [KI]  Kiribati
+  [KP]  ##Korea - Democratic Peoples Republic of
+  [KR]  ##Korea - Republic of
+  [KW]  Kuwejt
+  [KG]  Kirgistan
+  [LA]  ##Lao Peoples Democratic Republic
+  [LV]  Łotwa
+  [LB]  Liban
+  [LS]  Lesotho
+  [LR]  Liberia
+  [LY]  ##Libyan Arab Jamahiriya
+  [LI]  Liechtenstein
+  [LT]  Litwa
+  [LU]  Luksemburg
+  [MO]  ##Macao
+  [MK]  ##Macedonia - The Former Yugoslav Republic of
+  [MG]  Madagaskar
+  [MW]  Malawi
+  [MY]  Malezja
+  [MV]  Malediwy
+  [ML]  Mali
+  [MT]  Malta
+  [MH]  Wyspy Marshalla
+  [MQ]  ##Martinique
+  [MR]  Mauretania
+  [MU]  Mauritius
+  [YT]  ##Mayotte
+  [MX]  Meksyk
+  [FM]  ##Micronesia - Federated States of
+  [MD]  Mołdawia
+  [MC]  Monako
+  [MN]  Mongolia
+  [ME]  Czarnogóra
+  [MS]  ##Montserrat
+  [MA]  Maroko
+  [MZ]  Mozambik
+  [MM]  Mjanma
+  [NA]  Namibia
+  [NR]  Nauru
+  [NP]  Nepal
+  [NL]  Holandia
+  [AN]  ##Netherlands Antilles
+  [NC]  ##New Caledonia
+  [NZ]  Nowa Zelandia
+  [NI]  Nikaragua
+  [NE]  Niger
+  [NG]  Nigeria
+  [NU]  ##Niue
+  [NF]  ##Norfolk Island
+  [MP]  ##Northern Mariana Islands
+  [NO]  Norwegia
+  [OM]  Oman
+  [PK]  Pakistan
+  [PW]  Palau
+  [PS]  ##Palestinian Territory - Occupied
+  [PA]  Panama
+  [PG]  Papua-Nowa Gwinea
+  [PY]  Paragwaj
+  [PE]  Peru
+  [PH]  Filipiny
+  [PN]  ##Pitcairn
+  [PL]  Polska
+  [PT]  Portugalia
+  [PR]  ##Puerto Rico
+  [QA]  Katar
+  [RE]  ##Reunion
+  [RO]  Rumunia
+  [RU]  ##Russian Federation
+  [RW]  Rwanda
+  [BL]  ##Saint Barthelemy
+  [SH]  ##Saint Helena
+  [KN]  Saint Kitts i Nevis
+  [LC]  Saint Lucia
+  [MF]  ##Saint Martin
+  [PM]  ##Saint Pierre and Miquelon
+  [VC]  Saint Vincent i Grenadyny
+  [WS]  Samoa
+  [SM]  San Marino
+  [ST]  Wyspy Świętego Tomasza i Książęca
+  [SA]  Arabia Saudyjska
+  [SN]  Senegal
+  [RS]  Serbia
+  [SC]  Seszele
+  [SL]  Sierra Leone
+  [SG]  Singapur
+  [SK]  Słowacja
+  [SI]  Słowenia
+  [SB]  Wyspy Salomona
+  [SO]  Somalia
+  [ZA]  Republika Południowej Afryki
+  [GS]  ##South Georgia and the South Sandwich Islands
+  [ES]  Hiszpania
+  [LK]  Sri Lanka
+  [SD]  Sudan
+  [SR]  Surinam
+  [SJ]  ##Svalbard and Jan Mayen
+  [SZ]  Suazi
+  [SE]  Szwecja
+  [CH]  Szwajcaria
+  [SY]  ##Syrian Arab Republic
+  [TW]  ##Taiwan - Province of China
+  [TJ]  Tadżykistan
+  [TZ]  ##Tanzania - United Republic of
+  [TH]  Tajlandia
+  [TL]  ##Timor-Leste
+  [TG]  Togo
+  [TK]  Tokelau
+  [TO]  Tonga
+  [TT]  Trynidad i Tobago
+  [TN]  Tunezja
+  [TR]  Turcja
+  [TM]  Turkmenistan
+  [TC]  ##Turks and Caicos Islands
+  [TV]  Tuvalu
+  [UG]  Uganda
+  [UA]  Ukraina
+  [AE]  Zjednoczone Emiraty Arabskie
+  [GB]  Wielka Brytania
+  [UM]  ##United States Minor Outlying Islands
+  [UY]  Urugwaj
+  [UZ]  Uzbekistan
+  [VU]  ##Vanuatu
+  [VE]  Wenezuela
+  [VN]  Wietnam
+  [VG]  ##Virgin Islands - British
+  [VI]  ##Virgin Islands - U.S.
+  [WF]  ##Wallis and Futuna
+  [EH]  ##Western Sahara
+  [YE]  Jemen
+  [ZM]  Zambia
+  [ZW]  Zimbabwe
+}
+
+donate-form-currency-symbol = $
+
+donate-form-donation-decimal = ,00
 
 # DONATE - Download Page - src/scripts/pages/donate/download/download-template.html
 
