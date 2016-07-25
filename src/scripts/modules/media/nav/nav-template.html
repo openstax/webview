@@ -16,17 +16,30 @@ function show() {
 }
 
 
+/*
+function contrast_change(a,b,c,d){
+  var captions = document.getElementsByTagName("p");
+  for(var i = 0; i < captions.length; i++){
+    captions[i].style.color =a;
+  }
+  document.getElementById("content").style.backgroundColor =b;
+
+}
+*/
+
 function contrast_change(a,b,c,d){
   var paragraphs = document.getElementsByTagName("p");
   for(var i = 0; i < paragraphs.length; i++){
     paragraphs[i].style.color = a;
   }
+
   var headers = document.evaluate(".//div[@class='main-page']//h1", document, null, XPathResult.ANY_TYPE, null); 
   var theHeader = headers.iterateNext();
   while (theHeader){
     theHeader.style.color =a;  
     theHeader = headers.iterateNext();
   }
+
   var links = document.evaluate(".//div[@class='main-page']//a", document, null, XPathResult.ANY_TYPE, null); 
   var theLink = links.iterateNext();
   while (theLink){
@@ -46,6 +59,14 @@ function contrast_change(a,b,c,d){
   for(var i = 0; i < lists.length; i++){
     lists[i].style.color =a;
   }
+  //var lists = document.evaluate(".//div[@class='main-page']//li", document, null, XPathResult.ANY_TYPE, null); 
+  //var theList = lists.iterateNext();
+  //while (theList){
+  //  theList.style.color =a;
+  //  theList.style.backgroundColor =c;    
+  //  theList = lists.iterateNext();
+  //}
+
   var lists2 = document.getElementsByTagName("dl");
   for(var i = 0; i < lists2.length; i++){
     lists2[i].style.color =a;
@@ -88,10 +109,18 @@ function contrast_change(a,b,c,d){
   //for(var i = 0; i < sections.length; i++){
   //  sections[i].style.backgroundColor =c;
   //}
+
   var x = document.getElementsByClassName("main-page");
     x[0].style.color = a;  
-  document.getElementById("content").style.backgroundColor =b;
+    x[0].style.backgroundColor =b;
+
+  var x = document.getElementsByClassName("media-body");
+    x[0].style.color = a;  
+    x[0].style.backgroundColor =b;
+
+  //document.getElementById("content").style.backgroundColor =b;
 }
+
 
 function contrast_black_white() {
   contrast_change("white","black","#262626","#ededed");
@@ -228,9 +257,9 @@ function reset() {
 
 	<div class="preferences-box"  >
           <b>Text Size</b><br>
-	  <button id="small-a" class="size-option" onclick="text_size_small()">a</button>
-          <button id="medium-a" class="size-option" onclick="text_size_medium()">a</button>
-          <button id="large-a" class="size-option" onclick="text_size_large()">a</button>
+	  <button id="small-a" class="size-option" onclick="text_size_small()">A</button>
+          <button id="medium-a" class="size-option" onclick="text_size_medium()">A</button>
+          <button id="large-a" class="size-option" onclick="text_size_large()">A</button>
 	</div>
 
 
