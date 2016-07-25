@@ -98,11 +98,12 @@ about-nav-contact = Kontakt
 about-header = O nas
 
 about-content =
-  | <p>My w OpenStax wierzymy, że każdy może się czegoś nauczyć i każdy może czegoś nauczyć.</p>
+  | <p>Wierzymy, że każdy człowiek może nauczyć się czegoś nowego i każdy człowiek może nauczyć czegoś kogoś innego.</p>
   |
-  | <p>Zirytowany ograniczeniami tradycyjnych podręczników, w 1999 roku na Rice University dr Richard Baraniuk
-  | założył OpenStax (wówczas Connexions), aby udostępnić autorom i studentom miejsce, gdzie mogliby swobodnie
-  | publikować i modyfikować otwarte zasoby edukacyjne takie jak kursy, podręczniki czy skrypty.</p>
+  | <p>Zirytowany ograniczeniami tradycyjnych podręczników, w 1999 roku dr Richard Baraniuk
+  | założył OpenStax (wówczas Connexions) na Rice University, aby udostępnić autorom i studentom miejsce,
+  | gdzie mogliby swobodnie publikować i modyfikować otwarte zasoby edukacyjne takie jak kursy,
+  | podręczniki czy skrypty.</p>
   |
   | <p>Obecnie OpenStax CNX to dynamicznie rozwijający się cyfrowy ekosystem, dzięki któremu miliony użytkowników
   | miesięcznie uczą się z otwartych zasobów edukacyjnych nie płacąc za to ani grosza.</p>
@@ -118,13 +119,13 @@ about-how-it-works-header = Jak to działa
 
 about-authors-can-header = Autorzy mogą:
 
-about-allowing-learners-header = Pozwala studentom:
+about-allowing-learners-header = Studenci mogą:
 
 about-frictionless-remix-header = Łatwe adaptowanie
 
 frictionless-content =
-  | <p>OpenStax CNX powstał z myślą o promocji otwartego udostępniania i adaptacji zasobów edukacyjnych. Wiedzę
-  | zgromadzoną w OpenStax CNX mogą poszerzać wszyscy, ponieważ jest dostępna do modyfikacji:</p>
+  | <p>OpenStax CNX powstał z myślą o promowaniu otwartego udostępniania i adaptowania zasobów edukacyjnych.
+  | Wiedzę zgromadzoną w OpenStax CNX mogą poszerzać wszyscy, ponieważ jest dostępna do modyfikacji:</p>
   | <ul>
   | <li><b>pod względem edukacyjnym:</b>
   | Zachęcamy autorów, aby tworzyli każdą stronę jako samowystarczalny, odrębny zasób. Dzięki temu innym łatwiej będzie
