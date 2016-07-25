@@ -934,7 +934,19 @@ workspace-new-popover-page = Page
 
 # MY WORKSPACE - Table Titles - src/scripts/modules/workspace/results/list/workspace-table-partial.html
 
+workspace-table-type = Type
+workspace-table-title = Title
+workspace-table-status = Status
+workspace-table-edited = Edited
+workspace-table-delete = Delete
+
 # MY WORKSPACE - Number of Items  - src/scripts/modules/workspace/header/header-template.html
+
+workspace-results-plural = { $items ->
+  [0] <strong>No items</strong>
+  [1] <strong>1</strong> item
+ *[other] <strong>{ $counter }</strong> items
+}
 
 
 

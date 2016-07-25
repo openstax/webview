@@ -943,7 +943,21 @@ workspace-new-popover-page = Strona
 
 # MY WORKSPACE - Table Titles - src/scripts/modules/workspace/results/list/workspace-table-partial.html
 
+workspace-table-type = Typ
+workspace-table-title = Tytuł
+workspace-table-status = Status
+workspace-table-edited = Ostatnia zmiana
+workspace-table-delete = Skasuj
+
 # MY WORKSPACE - Number of Items  - src/scripts/modules/workspace/header/header-template.html
+
+workspace-results-plural = <strong>{ $items }</strong> { PLURAL($items) ->
+  [0] wyników
+  [1] wynik
+  [few] wyniki
+  [many] wyników
+ *[other] wyników
+}
 
 
 
