@@ -19,12 +19,12 @@
 
 # MAIN PAGE - Splash - src/scripts/modules/splash/splash-template.html
 
-main-splash-head = Odkryj materiały edukacyjne w Otwartych Przestrzeniach.
+main-splash-head = Odkryj materiały edukacyjne wolne od ograniczeń
 
 main-splash-content =
-  | Przeglądaj i dziel się wolnymi materiałami w małych fragmentach,
-  | które mogą być składane w kursy, książki, raporty oraz inne formy
-  | akademickie.
+  | Korzystaj z otwartych materiałów udostępnianych w postaci stron,
+  | które można składać w kursy, podręczniki, skrypty
+  | i inne publikacje akademickie. Twórz nowe zasoby i udostępniaj je innym.
 
 main-learn-more = Ucz Się Więcej
 
