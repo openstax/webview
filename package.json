@@ -17,6 +17,7 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "babel-polyfill": "^6.9.1",
     "bower": "^1.7.9",
     "csso": "~1.3.11",
     "grunt-cli": "^1.2.0",
@@ -33,10 +34,9 @@
     "grunt-nginx": "~0.2.2",
     "grunt-string-replace": "~1.2.0",
     "grunt-targethtml": "~0.2.6",
+    "l20n": "git://github.com/l20n/l20n.js.git#v4.x",
     "less": "~1.7.5",
-    "rjs-build-analysis": "~0.0.3",
-    "csso": "~1.3.11",
-    "grunt-mocha": "~0.4.11"
+    "rjs-build-analysis": "~0.0.3"
   },
   "license": [
     {
