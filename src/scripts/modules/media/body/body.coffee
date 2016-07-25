@@ -8,7 +8,7 @@ define (require) ->
   EditableView = require('cs!helpers/backbone/views/editable')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   SimModal = require('cs!./embeddables/modals/sims/sims')
-  Coach = require('cs!./embeddables/coach')
+  #Coach = require('cs!./embeddables/coach')
   template = require('hbs!./body-template')
   settings = require('settings')
   require('less!./body')
