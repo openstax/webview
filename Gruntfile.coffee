@@ -195,6 +195,13 @@ module.exports = (grunt) ->
       l20n:
         src: 'src/scripts/patch/l20n.js'
         dest: 'dist/scripts/l20n.js'
+      patch:
+        #patch for webcomponents template.
+        src: 'src/scripts/patch/Template.min.js'
+        dest: 'dist/scripts/Template.min.js'
+      polifills:
+        src : 'node_modules/babel-polyfill/browser.js'
+        dest: 'dist/scripts/browser.js'
       aloha:
         src: 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha.js'
         dest: 'dist/scripts/aloha.js'
@@ -219,6 +226,8 @@ module.exports = (grunt) ->
           '!dist/scripts/settings.js'
           '!dist/scripts/aloha.js'
           '!dist/scripts/l20n.js'
+          '!dist/scripts/browser.js'
+          '!dist/scripts/Template.min.js'
         ]
         filter: 'isFile'
       directories:
