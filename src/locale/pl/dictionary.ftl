@@ -317,6 +317,8 @@ about-contact-general-questions-content =
 
 # SEARCH - Page Summary and Description - src/scripts/pages/search/search.coffee
 
+search-pageTitle = Szukaj w bibliotece OpenStax CNX
+
 search-page-summary = Szukaj podręczników
 
 search-page-description = Szukaj wśród tysięcy wolnych, dosępnych online, podręczników.
