@@ -9,6 +9,7 @@ define (require) ->
   require('bootstrapDropdown')
 
   return class FindContentView extends BaseView
+    pageTitle: 'search-pageTitle'
     template: template
     collection: subjects
 
