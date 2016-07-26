@@ -7,6 +7,12 @@ define (require) ->
     template: template
     templateHelpers: () ->
       model = super()
-      model.uuid = @model.getUuid()
+
+      if @media is 'page'
+        currentPage = @model.get('currentPage')
+        model.uuid = currentPage.getUuid()
+
+      else
+        model.uuid = @model.getUuid()
 
       return model
