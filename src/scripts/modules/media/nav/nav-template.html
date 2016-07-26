@@ -1,6 +1,7 @@
 <script>
 var loaded = 0;
 var user = "0";
+//var index = 0;
 function show() {
 
   var x = document.URL;
@@ -30,7 +31,58 @@ function detect(){
 }
 
 function exportnotes(){
-  document.getElementById("notes").value = model.get('contents').models;
+
+  var index = 0;
+  var exportfile = "";
+  var sections = document.getElementsByClassName("title");
+  for (section in sections){
+    //document.getElementById("notes").value = document.getElementById("notes").value + document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim();//sections[index].textContent.trim();
+    
+    //break;
+
+
+    user = document.getElementById("user").value;
+    var name = String(sections[index].textContent.trim());
+    //document.getElementById("notes").value += "\n"+name;
+    var xhttp = new XMLHttpRequest();
+    //xhttp.onreadystatechange = function() {
+      //if (xhttp.readyState == 4 && xhttp.status == 200) {
+        //exportfile += xhttp.responseText;
+        //exportfile += "\n";
+        //document.getElementById("notes").value += xhttp.responseText;
+      //}
+    //};
+    if(parseInt(user) == 0){
+      xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+name+".txt", false);}
+    else{
+      xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+name+".txt", false);
+    }
+    xhttp.send();
+    if (!xhttp.responseText.includes("NoSuchKey")){
+      exportfile += xhttp.responseText;
+      exportfile += "\n\n---\n\n";
+    }
+    //document.getElementById("notes").value += "\n " + exportfile;
+    index += 1;
+    //document.getElementById("notes").value += sections[index].textContent.trim() + "\n";
+    if (index == 10){
+      break;
+    }
+    
+  }
+
+  //document.getElementById("notes").value += "\n done";
+
+  var xhttpp = new XMLHttpRequest();
+  if(parseInt(user) == 0){
+    xhttpp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+"export"+".doc", false);}
+  else{
+    xhttpp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+"export"+".doc", false);
+  }
+  xhttpp.send(exportfile);
+
+  document.getElementById("notes").value = "Export Complete";
+  document.getElementById("downloadme").style.display = "";
 }
 
 function save(){
@@ -52,9 +104,9 @@ function loadnotes() {
     }
   };
   if(parseInt(user) == 0){
-    xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+document.title+".txt", true);}
+    xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim()+".txt", true);}
   else{
-    xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+document.title+".txt", true);
+    xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim()+".txt", true);
   }
   xhttp.send();
 }
@@ -63,11 +115,23 @@ function savenotes() {
   user = document.getElementById("user").value;
   var xhttp = new XMLHttpRequest();
   if(parseInt(user) == 0){
-    xhttp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+document.title+".txt", true);}
+    xhttp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim()+".txt", true);}
   else{
-    xhttp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+document.title+".txt", true);
+    xhttp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim()+".txt", true);
   }
   xhttp.send(document.getElementById("notes").value);
+}
+
+function hidedownload(){
+  document.getElementById("downloadme").style.display = "none";
+}
+
+function format(){
+  document.getElementById("notes").value = document.getElementsByTagName("h1")[0].textContent.trim();
+  document.getElementById("notes").value += "\n\n";
+  document.getElementById("notes").value += document.getElementsByClassName("title-chapter")[0].textContent.trim();
+  document.getElementById("notes").value += " - ";
+  document.getElementById("notes").value += document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim();
 }
 </script>
 
@@ -85,7 +149,14 @@ function savenotes() {
           <span class="text">Notes</span>
           <span class="fa fa-plus open-indicator"></span>
         </button>
-        
+
+        <a href="https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/export.doc" download>
+          <button class="download btn" role="button" id="downloadme" onclick="hidedownload()" style="display:none;">
+          <span class="fa fa-cloud-download"></span>
+          <span class="text">Download</span>
+          </button>
+        </a>
+
         <div class="searchbar">
           <span class="fa fa-search"></span>
           <input class="find form-control" type="search" placeholder="Search this book" value="{{searchTerm}}" />

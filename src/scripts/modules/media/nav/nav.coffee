@@ -54,9 +54,13 @@ define (require) ->
       'click .back': 'previousPage'
       'click .toggle.contents.btn': 'toggleContents'
       'click .toggle.notes.btn' : 'toggleNotes'
+      'click .export.btn' : 'exportall'
       'click .back-to-top > a': 'backToTop'
       'keydown .searchbar input': 'handleSearchInput'
       'click .searchbar > .clear-search': 'clearSearch'
+
+    exportall: (e) ->
+      ('#exportme').hide()
 
     closeAllContainers: (nodes = @model.get('contents').models) =>
       for node in nodes
