@@ -319,6 +319,8 @@ about-contact-general-questions-content =
 
 # SEARCH - Page Summary and Description - src/scripts/pages/search/search.coffee
 
+search-pageTitle = Search in OpenStax CNX
+
 search-page-summary = Search for textbooks
 
 search-page-description = Search from thousands of free, online textbooks.
