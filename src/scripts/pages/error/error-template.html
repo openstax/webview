@@ -11,7 +11,11 @@
         {{error.code}}
       {{~/is~}}
     </h1>
-    <p class="reason">{{error.reason}}</p>
+    {{~#if error.reason~}}
+      <p class="reason" data-l10n-id="{{error.reason}}"></p>
+    {{~else~}}
+      <p class="reason" data-l10n-id="error-page-reason" data-l10n-args='{"code":{{error.code}} }'>{{error.reason}}</p>
+    {{~/if~}}
     {{~#is error.code 404~}}
       <p data-l10n-id="error-page-oh-no-message">Oh, No!<br />
         We're sorry, but the page you requested could not be found.<br />

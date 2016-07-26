@@ -1641,6 +1641,15 @@ error-page-something-not-right-message =
   | <br />Spróbuj przeładować stronę. Jeśli to nie pomoże, spróbuj ponownie
   | po kilku minutach.
 
+error-page-reason = { $code ->
+  [403] Dostęp wzbroniony
+  [404] Nie znaleziono
+  [408] Request Timed Out
+  [500] Wewnętrzny błąd serwera
+  [503] Service Unavailable
+ *[unknown] Nieznany błąd
+}
+
 
 
 ### MAINTENANCE ###
