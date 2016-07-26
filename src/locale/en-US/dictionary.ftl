@@ -1681,6 +1681,15 @@ error-page-something-not-right-message =
   | technical error.<br />Reloading this page may fix the issue, otherwise wait
   | a few minutes and try again.
 
+error-page-reason = { $code ->
+  [403] Forbidden
+  [404] Page Not Found
+  [408] Request Timed Out
+  [500] Internal Server Error
+  [503] Service Unavailable
+ *[unknown] Unknown Error
+}
+
 
 
 ### MAINTENANCE ###
