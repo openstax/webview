@@ -6,13 +6,13 @@ define (require) ->
   return class HistoryView extends FooterTabView
     template: template
     templateHelpers: () ->
-        model = super()
+      model = super()
 
-        if @media is 'page'
-          currentPage = @model.get('currentPage')
-          model.uuid = currentPage.getUuid()
+      if @media is 'page'
+        currentPage = @model.get('currentPage')
+        model.uuid = currentPage.getUuid()
 
-        else
-          model.uuid = @model.getUuid()
+      else
+        model.uuid = @model.getUuid()
 
-        return model
+      return model
