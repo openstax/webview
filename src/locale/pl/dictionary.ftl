@@ -55,6 +55,19 @@ all-navbar-give = Wesprzyj nas
 
 all-navbar-workspace = Moje biurko
 
+all-header-skip-to-content =
+
+all-header-skip-to-results =
+
+all-header-account-profile = Ustawienia konta
+
+all-header-log-out = Wyloguj { $username }
+
+all-navbar-toggle-navigation = Przełącz nawigację
+
+all-header-support = Pomoc
+  [html/title] Przejdź do strony pomocy CNX
+
 
 
 ### FOOTER ###
