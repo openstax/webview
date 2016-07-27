@@ -56,6 +56,19 @@ all-navbar-give = Give
 
 all-navbar-workspace = My Workspace
 
+all-header-skip-to-content = skip to main content
+
+all-header-skip-to-results = skip to results
+
+all-header-account-profile = Account Profile
+
+all-header-log-out = Log Out { $username }
+
+all-navbar-toggle-navigation = Toggle navigation
+
+all-header-support = Support
+  [html/title] Got to CNX Support
+
 
 
 ### FOOTER ###
