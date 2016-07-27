@@ -249,7 +249,7 @@ about-contact-header = Contact
 
 about-contact-phone = Phone: { $phone }
 
-about-contact-email = Email: { $email }
+about-contact-email = Email: <a href="mailto:{ $email }">{ $email }</a>
 
 about-contact-questions-header = Questions?
 
@@ -267,7 +267,7 @@ about-contact-general-questions-header = General Questions
 about-contact-general-questions-content =
   | If you have questions about the site, would like to schedule author
   | training, or have any other general questions regarding OpenStax CNX,
-  | please send an email to cnx@cnx.org.
+  | please send an email to <a href="mailto:cnx@cnx.org">cnx@cnx.org</a>.
 
 
 
