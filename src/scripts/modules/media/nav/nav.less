@@ -14,6 +14,8 @@
 }
 
 .media-nav {
+  padding: 1rem;
+
   &:not(.publishing) {
     background-color: @gray-lightest;
   }
@@ -45,7 +47,8 @@
 
     .searchbar {
       width: ~"calc(35% - " @button-width * .5 ~")";
-      @media (max-width: 640px) {
+
+      @media (max-width: 768px) {
         width: ~"calc(100% - " @button-width ~"- 3rem)"
       }
       position: relative;
@@ -64,7 +67,7 @@
 
     .media-navbar {
       width: ~"calc(65% - " @button-width * .7 ~")";
-      @media (max-width: 640px) {
+      @media (max-width: 768px) {
         width: 100%;
         display: block;
       }
@@ -79,8 +82,9 @@
           .flex(1; 1; 75%);
         }
 
-        > .progress {
-          margin-top: (@nav-height - @progress-height)/2;
+        > .progress {          
+          margin-top: 1.4rem;
+          margin-bottom: 0;
           height: @progress-height;
           border-radius: 0.8rem;
           background-color: darken(@gray-lighter, 5%);
@@ -110,11 +114,10 @@
         }
 
         > .nav {
-          display: inline-block;
           font-size: 1.6rem;
-          line-height: @nav-height;
+          line-height: 3.8rem;
           color: @brand-primary;
-          .flex(1; 0; 10rem);
+          display: flex;
 
           &.disabled {
             opacity: 0.5;
@@ -140,7 +143,7 @@
 
         > .back::before, > .next::after {
           display: inline-block;
-          margin: 0 1rem;
+          margin: 1rem 1rem 0;
           height: 1.6rem;
           width: 1.6rem;
           vertical-align: text-bottom;
