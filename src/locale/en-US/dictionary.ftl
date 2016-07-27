@@ -249,7 +249,7 @@ about-contact-header = Contact
 
 about-contact-phone = Phone: { $phone }
 
-about-contact-email = Email: { $email }
+about-contact-email = Email: <a href="mailto:{ $email }">{ $email }</a>
 
 about-contact-questions-header = Questions?
 
