@@ -95,6 +95,7 @@ body.cc-opened {
     visibility: hidden;
   }
 
+  // various overrides of webview styles for concept-coach
   .media-body > #content .concept-coach-wrapper {
     .dropdown-menu > li > a {
       text-decoration: none;
@@ -102,6 +103,18 @@ body.cc-opened {
 
     .concept-coach-title h3.chapter-section-prefix {
       margin-bottom: 0;
+    }
+
+    ol:not([data-display='inline']),
+    ol[data-display='inline'] {
+      > [data-type="item"]::before,
+      > li::before {
+        content: '';
+        display: none;
+      }
+
+      // or, set list style type to none
+      // list-style-type: none;
     }
 
   }
