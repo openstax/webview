@@ -31,6 +31,7 @@ function contrast_change(a,b,c,d){
   var paragraphs = document.getElementsByTagName("p");
   for(var i = 0; i < paragraphs.length; i++){
     paragraphs[i].style.color = a;
+    //paragraphs[i].style.backgroundColor = b;
   }
 
   var headers = document.evaluate(".//div[@class='main-page']//h1", document, null, XPathResult.ANY_TYPE, null); 
@@ -55,15 +56,14 @@ function contrast_change(a,b,c,d){
   for(var i = 0; i < h2headers.length; i++){
     h2headers[i].style.color =a;
   }  
-  var lists = document.getElementsByTagName("li");
-  for(var i = 0; i < lists.length; i++){
-    lists[i].style.color =a;
-  }
-  //var lists = document.evaluate(".//div[@class='main-page']//li", document, null, XPathResult.ANY_TYPE, null); 
+  //var lists = document.getElementsByTagName("li");
+  //for(var i = 0; i < lists.length; i++){
+  //  lists[i].style.color =a;
+  //}
+  //var lists = document.evaluate(".//div[@id='content']//li", document, null, XPathResult.ANY_TYPE, null); 
   //var theList = lists.iterateNext();
   //while (theList){
   //  theList.style.color =a;
-  //  theList.style.backgroundColor =c;    
   //  theList = lists.iterateNext();
   //}
 
@@ -90,7 +90,7 @@ function contrast_change(a,b,c,d){
     boxes[i].style.backgroundColor =c;
   }
 
-  var sections = document.evaluate("//div[@class='note ui-has-child-title']/section", document, null, XPathResult.ANY_TYPE, null); 
+  var sections = document.evaluate("//div[@data-type='note' or @data-type='exercise' or @data-type='problem']//section", document, null, XPathResult.ANY_TYPE, null); 
   var theSection = sections.iterateNext();
   while (theSection){
     theSection.style.backgroundColor =c;  
@@ -105,10 +105,10 @@ function contrast_change(a,b,c,d){
   //  }
   //}
 
-  //var sections = document.getElementsByTagName("section");
-  //for(var i = 0; i < sections.length; i++){
-  //  sections[i].style.backgroundColor =c;
-  //}
+  var tables = document.getElementsByTagName("tr");
+  for(var i = 0; i < tables.length; i++){
+    tables[i].style.backgroundColor =b;
+  }
 
   var x = document.getElementsByClassName("main-page");
     x[0].style.color = a;  
@@ -172,6 +172,15 @@ function reset() {
   document.getElementById("line-space").value = "1.42857143";
 }
 
+/*
+function next_button() {
+  var x = document.getElementsByClassName("media-body");
+  color_1 = x[0].style.color;  
+  color_2 = x[0].style.backgroundColor;
+  contrast_change(color_1,color_2,color_2,color_1);
+  return true;
+}
+*/
 </script>
 
 {{#if book}}
@@ -212,7 +221,7 @@ function reset() {
           {{/unless}}
 
           {{#if next}}
-            <a class="nav next" href="{{next}}" data-trigger="false">Next</a>
+            <a class="nav next" href="{{next}}" data-trigger="false" >Next</a>
           {{else}}
             <div class="nav next disabled">Next</div>
           {{/if}}
