@@ -90,6 +90,14 @@ function contrast_change(a,b,c,d){
     boxes[i].style.backgroundColor =c;
   }
 
+  var sections2 = document.evaluate("//div[ @data-type='title']", document, null, XPathResult.ANY_TYPE, null); 
+  var theSection2 = sections2.iterateNext();
+  while (theSection2){
+    theSection2.style.color =a;  
+    theSection2 = sections2.iterateNext();
+  }
+
+
   var sections = document.evaluate("//div[@data-type='note' or @data-type='exercise' or @data-type='problem']//section", document, null, XPathResult.ANY_TYPE, null); 
   var theSection = sections.iterateNext();
   while (theSection){
@@ -105,7 +113,7 @@ function contrast_change(a,b,c,d){
   //  }
   //}
 
-  var tables = document.getElementsByTagName("tr");
+  var tables = document.getElementsByTagName("td");
   for(var i = 0; i < tables.length; i++){
     tables[i].style.backgroundColor =b;
   }
@@ -245,7 +253,7 @@ function next_button() {
 	  <select id="text-style" onchange="font_change()" >
 	    <option value="'Helvetica Neue'">Default</option>
  	    <option value="Dyslexie">Dyslexie</option>
-	    <option value="Times">Times New Roman</option>
+	    <option value="Times" style="font-family: 'Times'">Times New Roman</option>
 	    <option value="Helvetica">Helvetica</option>
 	  </select>
 	</div>
