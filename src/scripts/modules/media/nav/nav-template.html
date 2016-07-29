@@ -16,22 +16,10 @@ function show() {
 }
 
 
-/*
-function contrast_change(a,b,c,d){
-  var captions = document.getElementsByTagName("p");
-  for(var i = 0; i < captions.length; i++){
-    captions[i].style.color =a;
-  }
-  document.getElementById("content").style.backgroundColor =b;
-
-}
-*/
-
-function contrast_change(a,b,c,d){
+function contrast_change(a,b,c,d,e){
   var paragraphs = document.getElementsByTagName("p");
   for(var i = 0; i < paragraphs.length; i++){
     paragraphs[i].style.color = a;
-    //paragraphs[i].style.backgroundColor = b;
   }
 
   var headers = document.evaluate(".//div[@class='main-page']//h1", document, null, XPathResult.ANY_TYPE, null); 
@@ -41,7 +29,7 @@ function contrast_change(a,b,c,d){
     theHeader = headers.iterateNext();
   }
 
-  var links = document.evaluate(".//div[@class='main-page']//a", document, null, XPathResult.ANY_TYPE, null); 
+  var links = document.evaluate(".//div[contains(@class,'media-body') or contains(@class,'media-header') or contains(@class,'media-body')]//a", document, null, XPathResult.ANY_TYPE, null); 
   var theLink = links.iterateNext();
   while (theLink){
     theLink.style.color =d;  
@@ -56,10 +44,7 @@ function contrast_change(a,b,c,d){
   for(var i = 0; i < h2headers.length; i++){
     h2headers[i].style.color =a;
   }  
-  //var lists = document.getElementsByTagName("li");
-  //for(var i = 0; i < lists.length; i++){
-  //  lists[i].style.color =a;
-  //}
+  
   //var lists = document.evaluate(".//div[@id='content']//li", document, null, XPathResult.ANY_TYPE, null); 
   //var theList = lists.iterateNext();
   //while (theList){
@@ -72,10 +57,6 @@ function contrast_change(a,b,c,d){
     lists2[i].style.color =a;
   }
 
-  //var more_headers = document.getElementsByClassName("title");
-  //for(var i = 0; i < more_headers.length; i++){
-  //  more_headers[i].style.color =a;
-  //}  
   var h5headers = document.getElementsByTagName("h5");
   for(var i = 0; i < h5headers.length; i++){
     h5headers[i].style.color =a;
@@ -90,7 +71,7 @@ function contrast_change(a,b,c,d){
     boxes[i].style.backgroundColor =c;
   }
 
-  var sections2 = document.evaluate("//div[ @data-type='title']", document, null, XPathResult.ANY_TYPE, null); 
+  var sections2 = document.evaluate("//div[@data-type='note']//div[ @data-type='title']", document, null, XPathResult.ANY_TYPE, null); 
   var theSection2 = sections2.iterateNext();
   while (theSection2){
     theSection2.style.color =a;  
@@ -98,49 +79,68 @@ function contrast_change(a,b,c,d){
   }
 
 
-  var sections = document.evaluate("//div[@data-type='note' or @data-type='exercise' or @data-type='problem']//section", document, null, XPathResult.ANY_TYPE, null); 
+  var sections = document.evaluate("//div[@data-type='note' or @data-type='exercise' or @data-type='problem' or @data-type='media' or @data-type='example']//section", document, null, XPathResult.ANY_TYPE, null); 
   var theSection = sections.iterateNext();
   while (theSection){
     theSection.style.backgroundColor =c;  
     theSection = sections.iterateNext();
   }
 
-  //var tables = document.getElementsByTagName("tr");
-  //for(var i = 0; i < tables.length; i++){
-  //  tables[i].style.color =a;
-  //  if(i%2 == 1){
-  //     tables[i].style.backgroundColor =c;
-  //  }
-  //}
+  var tabs = document.evaluate("//div[contains(@class,'tab-content')]", document, null, XPathResult.ANY_TYPE, null); 
+  var theTab = tabs.iterateNext();
+  while (theTab){
+    theTab.style.backgroundColor =b;  
+    theTab = tabs.iterateNext();
+  }
 
-  var tables = document.getElementsByTagName("td");
+
+  var tables = document.getElementsByTagName("table");
   for(var i = 0; i < tables.length; i++){
-    tables[i].style.backgroundColor =b;
+    table_id = tables[i].getAttribute("id");
+    var rows = document.evaluate(("//table[@id='"+table_id+"']/tbody/tr"), document, null, XPathResult.ANY_TYPE, null); 
+    var theRow = rows.iterateNext();
+    var counter = 1;
+    while (theRow){
+      if(counter%2 == 1){
+        var cells = document.evaluate(("//table[@id='"+table_id+"']/tbody/tr["+counter+"]/td"), document, null, XPathResult.ANY_TYPE, null);      
+        var theCell = cells.iterateNext();
+	while(theCell){
+          theCell.style.backgroundColor =e;
+          theCell = cells.iterateNext();
+        }
+      }
+      counter++;
+      theRow = rows.iterateNext();
+    }
+    counter = 0;
+  }
+
+  var solutions = document.getElementsByClassName("btn-link ui-toggle");
+  for(var i = 0; i < solutions.length; i++){
+    solutions[i].style.color =a;
   }
 
   var x = document.getElementsByClassName("main-page");
     x[0].style.color = a;  
     x[0].style.backgroundColor =b;
 
-  var x = document.getElementsByClassName("media-body");
-    x[0].style.color = a;  
-    x[0].style.backgroundColor =b;
-
-  //document.getElementById("content").style.backgroundColor =b;
+  //var x = document.getElementsByClassName("media-body");
+  //  x[0].style.color = a;  
+  //  x[0].style.backgroundColor =b;
 }
 
 
 function contrast_black_white() {
-  contrast_change("white","black","#262626","#ededed");
+  contrast_change("white","black","#262626","#ededed","#262626");
 }
 function contrast_white_black() {
-  contrast_change("black","white","#ededed","#262626");
+  contrast_change("black","white","#ededed","#21366b","#f9f9f9");
 }
 function contrast_black_yellow() {
-  contrast_change("yellow","black","#262626","#ffd123");
+  contrast_change("yellow","black","#262626","#ffd123","#262626");
 }
 function contrast_yellow_black() {
-  contrast_change("black","#ffff66","#ffff4d","#262626");
+  contrast_change("black","#ffff66","#ffff33","#21366b","#ffff33");
 }
 
 function font_change() {
@@ -171,7 +171,7 @@ function text_size_large() {
 }
 
 function reset() {
-  contrast_change("#555555","white","#ededed","#21366b");
+  contrast_change("#555555","white","#ededed","#21366b","#f9f9f9");
   var x = document.getElementsByClassName("main-page");  
   x[0].style.fontFamily = "Helvetica Neue";
   x[0].style.lineHeight = "1.42857143";
