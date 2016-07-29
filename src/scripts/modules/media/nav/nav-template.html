@@ -3,7 +3,11 @@ var loaded = 0;
 var user = "0";
 //var index = 0;
 function show() {
-
+  // Tutorial Link 
+  // ********
+  // sweetAlert("Here is a tutorial you may find useful for learning how to use this note feature: http://localhost:8000/about");
+  // alert("Here is a tutorial you may find useful for learning how to use this note feature: http://localhost:8000/about");
+  // ********
   var x = document.URL;
   if(loaded == 0 || (document.getElementById("user").value != "" && user != document.getElementById("user").value)){
     loadnotes();
@@ -29,6 +33,29 @@ function detect(){
     document.getElementById("notesbox").style.display ="none";
   }
 }
+
+
+// Tutorial Link Function
+// ********
+
+// ********
+
+
+// Font Manipulation
+// *********
+var fontsize = 0;
+
+  function alterfontvar(input){
+    var fontsize = (2 * input) + 10;
+    var str_value = fontsize.toString();
+    changefontsize(str_value);
+  }
+
+function changefontsize(input2){
+    document.getElementsByClassName("inner-format")[0].className = "inner-format";
+    document.getElementsByClassName("inner-format")[0].className += " "+"size"+input2;
+}
+// *********
 
 function exportnotes(){
 
@@ -162,7 +189,7 @@ function format(){
            <span class="text">Contents</span>
            <span class="fa fa-plus open-indicator"></span>
         </button>
-        <button class="toggle notes btn" role="button" onclick="show()" onclick="disparity()">
+        <button class="toggle notes btn" role="button" onclick="show()" onclick="disparity()" onclick= "tutorial()">
           <span class="fa fa-file-text-o"></span>
           <span class="text">Notes</span>
           <span class="fa fa-plus open-indicator"></span>
