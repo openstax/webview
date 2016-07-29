@@ -1,3 +1,4 @@
+<script type="text/javascript"></script>
 <script type="scripted">
   function disparity(){
     if ($('div.fullsize-container.sidebar-open').length) && (document.getElementById("notesbox").style.display == ""){
@@ -7,10 +8,19 @@
   	  document.getElementById("notesbox").style.display ="none";
   	}
   }
+  // $('textarea').on('input propertychange change', 
+  //   function() {console.log('Textarea Change');
+  //     var = timer;
+  //     setTimeout(function() {autosave()}; 1000);
+  //   });
+  function autosave(){
+    savenotes();
+  }
+
 </script>  
 <div class="sidebar">
 
-  <div class="testing-side" id="notesbox" style="display:none;"><textarea id="notes" style="height:611px; width:315px;" value="">{{chapter}}</textarea>
+  <div class="testing-side" id="notesbox" style="display:none;"><textarea id="notes" class="inner-format" style="height:611px; width:315px;" value="" placeholder="Notes Go Here!">{{chapter}}</textarea>
     <br>
     <button class="save btn" role="button" id="saveme" onclick="savenotes()">
       <span class="fa fa-floppy-o"></span>
@@ -18,15 +28,32 @@
     </button>
 
     <button class="export btn" role="button" id="exportme" onclick="exportnotes()">
-      <span class="fa fa-briefcase"></span>
+      <span class="fa fa-briefcase"></span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
       <span class="text">Export</span>
     </button>
 
-    <button class="format btn" role="button" id="formatme" onclick="format()" style="display:none;">
+    <br>
+
+    <select class="font-selector" onchange="alterfontvar(this.selectedIndex);">
+      <option> 10pt </option>
+      <option selected> 12pt </option>
+      <option> 14pt </option>
+      <option> 16pt </option>
+      <option> 18pt </option>
+      <option> 20pt </option>
+    </select>
+
+    <button class="format btn" role="button" id="formatme" onclick="format()" >
       <span class="fa fa-sticky-note-o"></span>
       <span class="text">Format</span>
     </button>
     
+    <br>
+
+    <button class="tips btn" role="button" id="study" onclick="window.open('http://localhost:8000/about', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">
+      <span class="text">Study Tips</span>
+    </button>
+      
     <input type="number" id="user" placeholder="User #" maxlength="4" style="display:none;" value="0">
   </div>
 </div>
