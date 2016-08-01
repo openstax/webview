@@ -45,15 +45,15 @@ function detect(){
 // *********
 var fontsize = 0;
 
-  function alterfontvar(input){
-    var fontsize = (2 * input) + 10;
-    var str_value = fontsize.toString();
-    changefontsize(str_value);
-  }
+function alterfontvar(input){
+  var fontsize = (2 * input) + 10;
+  var str_value = fontsize.toString();
+  changefontsize(str_value);
+}
 
 function changefontsize(input2){
-    document.getElementsByClassName("inner-format")[0].className = "inner-format";
-    document.getElementsByClassName("inner-format")[0].className += " "+"size"+input2;
+  document.getElementsByClassName("inner-format")[0].className = "inner-format";
+  document.getElementsByClassName("inner-format")[0].className += " "+"size"+input2;
 }
 // *********
 
@@ -126,6 +126,7 @@ function exportnotes(){
   xhttppp.setRequestHeader('Content-Disposition', 'attachment');
   //xhttppp.setRequestHeader('Content-type', 'application/vnd.ms-word');
   xhttppp.send();
+  document.getElementById("link").href=url;
   //document.getElementById("notes").value = "the endnl..";
   //window.open(url, '_blank');
 }
@@ -195,7 +196,7 @@ function format(){
           <span class="fa fa-plus open-indicator"></span>
         </button>
 
-        <a href="https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/export.doc" download>
+        <a href="https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/1/export.doc" download id ="link">
           <button class="download btn" role="button" id="downloadme" onclick="hidedownload()" style="display:none;">
           <span class="fa fa-cloud-download"></span>
           <span class="text">Download</span>
