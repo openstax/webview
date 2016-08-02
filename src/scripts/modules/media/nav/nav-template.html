@@ -93,7 +93,6 @@ function contrast_change(a,b,c,d,e){
     theTab = tabs.iterateNext();
   }
 
-
   var tables = document.getElementsByTagName("table");
   for(var i = 0; i < tables.length; i++){
     table_id = tables[i].getAttribute("id");
@@ -166,19 +165,29 @@ function line_spacing() {
   x[0].style.lineHeight = (spacing)*1.15;
 }
 
-function text_size_small() {
+function text_size(size){
   var x = document.getElementsByClassName("main-page");
-  x[0].style.fontSize = "80%";
+  x[0].style.fontSize = size;
+  var captions = document.getElementsByTagName("figure");
+  for(var i = 0; i < captions.length; i++){
+    captions[i].style.fontSize = size;
+  }
+  var captions = document.getElementsByTagName("figcaption");
+  for(var i = 0; i < captions.length; i++){
+    captions[i].style.fontSize = size;
+  }
+}
+
+function text_size_small() {
+  text_size("80%");
 }
 
 function text_size_medium() {
-  var x = document.getElementsByClassName("main-page");
-  x[0].style.fontSize = "100%";
+  text_size("100%");
 }
 
 function text_size_large() {
-  var x = document.getElementsByClassName("main-page");
-  x[0].style.fontSize = "140%";
+  text_size("140%");
 }
 
 function reset() {
@@ -186,7 +195,7 @@ function reset() {
   var x = document.getElementsByClassName("main-page");  
   x[0].style.fontFamily = "Helvetica Neue";
   x[0].style.lineHeight = "1.42857143";
-  x[0].style.fontSize = "100%";
+  text_size_medium();
   document.getElementById("text-style").options[0].selected = 'selected';
   document.getElementById("line-space").value = "1.42857143";
 }
