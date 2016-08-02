@@ -680,7 +680,9 @@ textbook-view-downloads-header = Do pobrania
 
 textbook-view-loading = Ładowanie
 
-textbook-view-loading-more-details-btn = Więcej szczegółów
+textbook-view-loading-more-details-btn = Pokaż szczegóły
+
+textbook-view-loading-less-details-btn = Ukryj szczegóły
 
 textbook-view-th-format = Format:
 

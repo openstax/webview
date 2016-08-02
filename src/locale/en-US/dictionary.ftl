@@ -683,6 +683,8 @@ textbook-view-loading = Loading
 
 textbook-view-loading-more-details-btn = More details
 
+textbook-view-loading-less-details-btn = Less details
+
 textbook-view-th-format = Format:
 
 textbook-view-th-details = Details
