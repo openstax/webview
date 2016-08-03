@@ -255,7 +255,6 @@ define (require) ->
 
   states = [
     {code: '--', name: 'Not Applicable'}
-    {code: 'TX', name: 'Texas'}
     {code: 'AL', name: 'Alabama'}
     {code: 'AK', name: 'Alaska'}
     {code: 'AZ', name: 'Arizona'}
@@ -298,6 +297,7 @@ define (require) ->
     {code: 'SC', name: 'South Carolina'}
     {code: 'SD', name: 'South Dakota'}
     {code: 'TN', name: 'Tennessee'}
+    {code: 'TX', name: 'Texas'}
     {code: 'UT', name: 'Utah'}
     {code: 'VT', name: 'Vermont'}
     {code: 'VA', name: 'Virginia'}
