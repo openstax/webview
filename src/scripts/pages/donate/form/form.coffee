@@ -254,7 +254,7 @@ define (require) ->
   ]
 
   states = [
-    {code: 'TX', name: 'Texas'}
+    {code: '--', name: 'Not Applicable'}
     {code: 'AL', name: 'Alabama'}
     {code: 'AK', name: 'Alaska'}
     {code: 'AZ', name: 'Arizona'}
@@ -297,6 +297,7 @@ define (require) ->
     {code: 'SC', name: 'South Carolina'}
     {code: 'SD', name: 'South Dakota'}
     {code: 'TN', name: 'Tennessee'}
+    {code: 'TX', name: 'Texas'}
     {code: 'UT', name: 'Utah'}
     {code: 'VT', name: 'Vermont'}
     {code: 'VA', name: 'Virginia'}
@@ -327,7 +328,6 @@ define (require) ->
     {code: 'PQ', name: 'Province du Quebec'}
     {code: 'SK', name: 'Saskatchewan'}
     {code: 'YT', name: 'Yukon Territory'}
-    {code: '--', name: 'Not Applicable'}
   ]
 
   return class DonateFormView extends BaseView
