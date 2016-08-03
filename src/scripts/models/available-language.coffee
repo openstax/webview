@@ -5,4 +5,3 @@ define (require) ->
     defaults:
       id: ''
       native: ''
-      english: ''

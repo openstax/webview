@@ -8,7 +8,7 @@
       {{~#is tag "authorID"~}}
         {{author ../../authorList index 'fullname'}} ({{author ../../authorList index 'id'}})
       {{~else~}}
-        {{value}}
+        {{detectLanguage ../../languages value}}
       {{~/is~}}
     </span>
   </span>
