@@ -21,10 +21,9 @@ define (require) ->
           id = language[0].substring(0, 2)
           availableLanguages.push({
             id: id
-            native: allLanguages[id].native
-            english: allLanguages[id].english
+            native: allLanguages[id]
           })
       return availableLanguages
-      
+
     initialize: () ->
       @fetch({reset: true})
