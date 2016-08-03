@@ -348,8 +348,8 @@ figure[data-orient="vertical"] {
 
 
 // Block-ish lists
-ul:not([data-display='inline'])          { #list>.style(block; bulleted); }
-ol:not([data-display='inline'])          { #list>.style(block; enumerated); }
+ul[data-display]:not([data-display='inline'])          { #list>.style(block; bulleted); }
+ol[data-display]:not([data-display='inline'])          { #list>.style(block; enumerated); }
 ul[data-labeled-item]                    { #list>.style(block; labeled-item); }
 
 // Inline lists (with `data-display='inline'`)
