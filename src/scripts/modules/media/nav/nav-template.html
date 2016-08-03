@@ -152,10 +152,13 @@ function font_dyslexie() {
   var x = document.getElementsByClassName("main-page");  
   //var current_font = window.getComputedStyle( x, null ).getPropertyValue('font-family');
   var current_font = x[0].style.fontFamily;
-  if(current_font == "Dyslexie"){
+  if(current_font == "OpenDyslexic"){
     x[0].style.fontFamily = "Helvetica Neue";
+    document.getElementById("text-style").options[0].selected = 'selected';
   } else {
-    x[0].style.fontFamily = "Dyslexie";
+    x[0].style.fontFamily = "OpenDyslexic";
+    document.getElementById("text-style").options[1].selected = 'selected';
+
   }
 }
 
@@ -274,7 +277,7 @@ function next_button() {
 	<div class="dropdown">
 	  <select id="text-style" onchange="font_change()" >
 	    <option value="'Helvetica Neue'">Default</option>
- 	    <option value="OpenDyslexic">Open Dyslexic</option>
+ 	    <option value="OpenDyslexic">Dyslexie</option>
 	    <option value="Times" style="font-family: 'Times'">Times New Roman</option>
 	    <option value="Helvetica">Helvetica</option>
 	  </select>
@@ -282,7 +285,7 @@ function next_button() {
         <div class="tooltip2">
           <button id="dyslexie-button" onclick="font_dyslexie()">d</button>
   	  <span class="tooltiptext2"><font size="1.5">Dyslexie: </font>the typface for people with dyslexia</span>
-	<br><font size="0.75" face="Dyslexie">Dyslexie </font>
+	<br><font size="0.75" face="OpenDyslexic">Dyslexie </font>
 	</div>
         </div>
 
