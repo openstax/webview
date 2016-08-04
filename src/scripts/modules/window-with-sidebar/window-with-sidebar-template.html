@@ -24,15 +24,13 @@
     <br>
     <button class="save btn" role="button" id="saveme" onclick="savenotes()">
       <span class="fa fa-floppy-o"></span>
-      <span class="text">Save Notes</span>
+      <span class="text">Save</span>
     </button>
 
     <button class="export btn" role="button" id="exportme" onclick="exportnotes()">
-      <span class="fa fa-briefcase"></span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+      <span class="fa fa-briefcase"></span>
       <span class="text">Export</span>
     </button>
-
-    <br>
 
     <select class="font-selector" onchange="alterfontvar(this.selectedIndex);">
       <option> 10pt </option>
@@ -43,12 +41,11 @@
       <option> 20pt </option>
     </select>
 
+    <br>
     <button class="format btn" role="button" id="formatme" onclick="format()" >
       <span class="fa fa-sticky-note-o"></span>
       <span class="text">Format</span>
     </button>
-    
-    <br>
 
     <button class="tips btn" role="button" id="study" onclick="window.open('http://localhost:8000/about', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">
       <span class="text">Study Tips</span>
