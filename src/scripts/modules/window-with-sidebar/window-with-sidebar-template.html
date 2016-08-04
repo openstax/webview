@@ -19,11 +19,11 @@
 
 </script>  
 <div class="sidebar">
-
-  <div class="testing-side" id="notesbox" style="display:none;"><textarea id="notes" class="inner-format" style="height:400px; width:315px;" value="" placeholder="Notes Go Here!">{{chapter}}</textarea>
-    <br>
-    <button class="save btn" role="button" id="saveme" onclick="savenotes()">
+  <div class="testing-side" id="notesbox" style="display:none;">
+  <div class="options">
+  <button class="save btn" role="button" id="saveme" onclick="savenotes()">
       <span class="fa fa-floppy-o"></span>
+<<<<<<< HEAD
       <span class="text">Save</span>
     </button>
 
@@ -32,6 +32,40 @@
       <span class="text">Export</span>
     </button>
 
+=======
+  </button>
+  <button class="export btn" role="button" id="exportme" onclick="exportnotes()">
+      <span class="fa fa-briefcase"></span>                                                                                                                                
+  </button>
+  <button class="fullscreen btn" type="button" onclick="toggleFullScreen()"> 
+    <span class="fa fa-arrows-alt"></span> 
+  </button>
+  <button class="format btn" role="button" id="formatme" onclick="format()" >
+      <span class="fa fa-sticky-note-o"></span>
+  </button>
+  <button class="tips btn" role="button" id="study" onclick="window.open('http://localhost:8000/about', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">
+      <span class="text">Study Tips</span>
+  </button>
+  </div>
+  <textarea id="notes" class="inner-format" value="" placeholder='Notes Go Here!
+
+
+TIPS FOR BETTER NOTE TAKING:
+
+*Read an entire paragraph or section before starting to take notes.
+
+*If something doesn’t make sense, read it aloud.
+
+*Try to use your own words—avoid directly copying from the text.
+
+*Write down any clarification questions or observations that you may have! 
+
+*Try summarizing what you have read at the end of each section—it will help you synthesize all the information you just learned.
+
+*Click the "Study Tips" button for more helpful tips to help optimize your note taking!' >{{chapter}}</textarea>
+    <br>
+
+>>>>>>> 9f30c3e5bf0a138b5a6d7dacc2f42ac29b9722fb
     <select class="font-selector" onchange="alterfontvar(this.selectedIndex);">
       <option> 10pt </option>
       <option selected> 12pt </option>
@@ -41,6 +75,7 @@
       <option> 20pt </option>
     </select>
 
+<<<<<<< HEAD
     <br>
     <button class="format btn" role="button" id="formatme" onclick="format()" >
       <span class="fa fa-sticky-note-o"></span>
@@ -50,6 +85,13 @@
     <button class="tips btn" role="button" id="study" onclick="window.open('http://localhost:8000/about', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">
       <span class="text">Study Tips</span>
     </button>
+=======
+    
+    
+    <br>
+    
+    
+>>>>>>> 9f30c3e5bf0a138b5a6d7dacc2f42ac29b9722fb
       
     <input type="number" id="user" placeholder="User #" maxlength="4"  value="0">
   </div>
