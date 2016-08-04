@@ -9,6 +9,8 @@ function show() {
   }
   if(document.getElementById("preferences-options").style.display == "none"){
     document.getElementById("preferences-options").style.display ="";
+    document.getElementByID("gear_image").setAttribute("src", "/scripts/modules/media/nav/orange_gear.png");
+
   }
   else{
     document.getElementById("preferences-options").style.display ="none";
@@ -116,7 +118,7 @@ function contrast_change(a,b,c,d,e){
 
   var solutions = document.getElementsByClassName("btn-link ui-toggle");
   for(var i = 0; i < solutions.length; i++){
-    solutions[i].style.color =a;
+    solutions[i].style.color =d;
   }
 
   var x = document.getElementsByClassName("main-page");
@@ -227,7 +229,7 @@ function next_button() {
         <button class="toggle preferences btn" role="button" onclick="show()">
         <div class="tooltip2">
           <span class="tooltiptext2"><font size="2">Customize your textbook experience</font></span>
-	  <img src="/scripts/modules/media/nav/pic_gear.png" style="width:15px;height:15px;">
+	  <img id="gear_image" src="/scripts/modules/media/nav/pic_gear.png" style="width:15px;height:15px;">
 
           <span class="text">Preferences</span>
           <span class="fa fa-plus open-indicator"></span>
