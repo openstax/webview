@@ -2,6 +2,29 @@
 var loaded = 0;
 var user = "0";
 //var index = 0;
+
+function toggleFullScreen() {
+  if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
+   (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+    if (document.documentElement.requestFullScreen) {  
+      document.documentElement.requestFullScreen();  
+    } else if (document.documentElement.mozRequestFullScreen) {  
+      document.documentElement.mozRequestFullScreen();  
+    } else if (document.documentElement.webkitRequestFullScreen) {  
+      document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
+    }  
+  } else {  
+    if (document.cancelFullScreen) {  
+      document.cancelFullScreen();  
+    } else if (document.mozCancelFullScreen) {  
+      document.mozCancelFullScreen();  
+    } else if (document.webkitCancelFullScreen) {  
+      document.webkitCancelFullScreen();  
+    }  
+  }  
+}
+
+
 function show() {
   // Tutorial Link 
   // ********
@@ -170,7 +193,7 @@ function format(){
            <span class="text">Contents</span>
            <span class="fa fa-plus open-indicator"></span>
         </button>
-        <button class="toggle notes btn" role="button" onclick="show()" onclick="disparity()" onclick= "tutorial()">
+        <button class="toggle notes btn" role="button" onclick="show()">
           <span class="fa fa-file-text-o"></span>
           <span class="text">Notes</span>
           <span class="fa fa-plus open-indicator"></span>
