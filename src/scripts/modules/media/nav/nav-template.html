@@ -223,13 +223,17 @@ function next_button() {
            <span class="text">Contents</span>
            <span class="fa fa-plus open-indicator"></span>
         </button>
+
         <button class="toggle preferences btn" role="button" onclick="show()">
-	  <img src="/src/scripts/modules/medi/nav/pic_gear.png" style="width:15px;height:15px;">
+        <div class="tooltip2">
+          <span class="tooltiptext2"><font size="2">Customize your textbook experience</font></span>
+	  <img src="/scripts/modules/medi/nav/pic_gear.png" style="width:15px;height:15px;">
 
           <span class="text">Preferences</span>
           <span class="fa fa-plus open-indicator"></span>
-        </button>
-        
+	</div>
+	</button>
+
         <div class="searchbar">
           <span class="fa fa-search"></span>
           <input class="find form-control" type="search" placeholder="Search this book" value="{{searchTerm}}" />
@@ -282,12 +286,12 @@ function next_button() {
 	    <option value="Helvetica">Helvetica</option>
 	  </select>
 	</div>
-        <div class="tooltip2">
+        <div class="tooltip2" style="float:left; margin-left:35px">
           <button id="dyslexie-button" onclick="font_dyslexie()">d</button>
-  	  <span class="tooltiptext2"><font size="1.5">Dyslexie: </font>the typface for people with dyslexia</span>
-	<br><font size="0.75" face="OpenDyslexic">Dyslexie </font>
+  	  <span class="tooltiptext2"><font face="OpenDyslexic">Dyslexie: the typface for people with dyslexia</font></span>
+          <br><font size="0.75" face="OpenDyslexic">Dyslexie </font>
 	</div>
-        </div>
+	</div>
 
 	
 	<!--
