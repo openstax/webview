@@ -331,6 +331,23 @@ define (require) ->
     {code: 'ZZ', name: 'Not Applicable'}
   ]
 
+  sortByLowercase = (collection, key) ->
+    collection.sort (a, b) ->
+      av = a[key]
+      bv = b[key]
+      ax = av.toLowerCase()
+      bx = bv.toLowerCase()
+      ax.localeCompare(bx)
+
+  Promise.all(countries.map (country) =>
+    document.l10n.get('main').formatValue('donate-form-countries', {countrycode: country.code})
+  ).then (ftlCountries) =>
+    countries.forEach (element, index) =>
+      countries[index].name = ftlCountries[index] || countries[index].name
+
+    sortByLowercase(countries,'name')
+
+
   return class DonateFormView extends BaseView
     template: template
     templateHelpers:
