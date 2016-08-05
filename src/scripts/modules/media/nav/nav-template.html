@@ -219,11 +219,21 @@ function hidedownload(){
 }
 
 function format(){
-  document.getElementById("notes").value = document.getElementsByTagName("h1")[0].textContent.trim();
-  document.getElementById("notes").value += "\n\n";
-  document.getElementById("notes").value += document.getElementsByClassName("title-chapter")[0].textContent.trim();
-  document.getElementById("notes").value += " - ";
-  document.getElementById("notes").value += document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim();
+  //document.getElementById("notes").value = document.getElementsByTagName("h1")[0].textContent.trim();
+  //document.getElementById("notes").value += "\n\n";
+  //document.getElementById("notes").value += document.getElementsByClassName("title-chapter")[0].textContent.trim();
+  //document.getElementById("notes").value += " - ";
+  //document.getElementById("notes").value += document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim();
+
+  text = '<p style="text-align: center;">';
+  text += document.getElementsByTagName("h1")[0].textContent.trim();
+  text += "<br><br>";
+  text += document.getElementsByClassName("title-chapter")[0].textContent.trim();
+  text += " - ";
+  text += document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim();
+  text += "</p>";
+
+  tinymce.activeEditor.execCommand('mceSetContent', false, text);
 }
 
 </script>
