@@ -1,6 +1,7 @@
 <script>
 var loaded = 0;
 var user = "0";
+var opened = false;
 //var index = 0;
 
 function toggleFullScreen() {
@@ -30,6 +31,15 @@ function show() {
   // ********
   // alert("Here is a tutorial you may find useful for learning how to use this note feature: http://localhost:8000/about");
   // ********
+  if(opened == true){
+    opened = false;
+  }
+  else{
+    opened = true;
+    if(parseInt(user) == 3){
+      alert("In order to save notes, you must have an OpenStax account! Without an account you are still able to write notes, however you will be unable to save them.")
+    }
+  }
   var x = document.URL;
   if(loaded == 0 || (document.getElementById("user").value != "" && user != document.getElementById("user").value)){
     loadnotes();
@@ -132,11 +142,11 @@ function exportnotes(){
     var url = "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/export.doc";
   }
   //document.getElementById("notes").value = "header";
-  //xhttpp.setRequestHeader('Content-Disposition', 'attachment');
+  xhttpp.setRequestHeader('Content-Disposition', 'attachment');
   xhttpp.send(exportfile);
 
   document.getElementById("notes").value = "Export Complete";
-  document.getElementById("downloadme").style.display = "";
+  //document.getElementById("downloadme").style.display = "";
   
   var xhttppp = new XMLHttpRequest();
   if(parseInt(user) == 0){
@@ -145,12 +155,12 @@ function exportnotes(){
   else{
     xhttppp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+"export"+".doc", false);
   }
-  xhttppp.setRequestHeader('Content-Disposition', 'attachment');
+  //xhttppp.setRequestHeader('Content-Disposition', 'attachment');
   //xhttppp.setRequestHeader('Content-type', 'application/vnd.ms-word');
   xhttppp.send();
   document.getElementById("link").href=url;
   //document.getElementById("notes").value = "the endnl..";
-  //window.open(url, '_blank');
+  window.open(url, '_blank');
 }
 
 function save(){
@@ -173,9 +183,11 @@ function loadnotes() {
   };
   if(parseInt(user) == 0){
     xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim()+".txt", true);}
+
   else{
     xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim()+".txt", true);
   }
+  
   xhttp.send();
 }
 
@@ -192,6 +204,7 @@ function savenotes() {
 
 function hidedownload(){
   document.getElementById("downloadme").style.display = "none";
+  window.open('https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/1/export.doc');
 }
 
 function format(){
@@ -217,8 +230,8 @@ function format(){
           <span class="text">Notes</span>
           <span class="fa fa-plus open-indicator"></span>
         </button>
-        
-        <a href="https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/1/export.doc" download id ="link">
+
+        <a href="https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/1/export.doc" download id="link">
           <button class="download btn" role="button" id="downloadme" onclick="hidedownload()" style="display:none;">
           <span class="fa fa-cloud-download"></span>
           <span class="text">Download</span>
