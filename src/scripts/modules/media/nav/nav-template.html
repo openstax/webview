@@ -99,7 +99,20 @@ function changefontsize(input2){
 function exportnotes(){
 
   var index = 0;
-  var exportfile = "";
+  var exportfile = "<!DOCTYPE html>";
+  exportfile += "\n";
+  exportfile += '<html lang="en-US">';
+  exportfile += "\n";
+  exportfile += "<html>";
+  exportfile += "\n";
+  exportfile += "<head>";
+  exportfile += "\n";
+  exportfile += '<meta charset="utf-8">';
+  exportfile += "\n";
+  exportfile += "</head>";
+  exportfile += "\n";
+  exportfile += "<body>";
+  exportfile += "\n";
   var sections = document.getElementsByClassName("title");
   for (section in sections){
     //document.getElementById("notes").value = document.getElementById("notes").value + document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim();//sections[index].textContent.trim();
@@ -126,7 +139,7 @@ function exportnotes(){
     xhttp.send();
     if (!xhttp.responseText.includes("NoSuchKey")){
       exportfile += xhttp.responseText;
-      exportfile += "\n\n---\n\n";
+      exportfile += "<br><br>---<br><br>";
     }
     //document.getElementById("notes").value += "\n " + exportfile;
     index += 1;
@@ -141,30 +154,34 @@ function exportnotes(){
 
   var xhttpp = new XMLHttpRequest();
   if(parseInt(user) == 0){
-    xhttpp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+"export"+".doc", false);
-    var url = "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/export.doc";
+    xhttpp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+"export"+".html", false);
+    var url = "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/export.html";
   }
   else{
-    xhttpp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+"export"+".doc", false);
-    var url = "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/export.doc";
+    xhttpp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+"export"+".html", false);
+    var url = "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/export.html";
   }
   //document.getElementById("notes").value = "header";
-  xhttpp.setRequestHeader('Content-Disposition', 'attachment');
+  //xhttpp.setRequestHeader('Content-Disposition', 'attachment');
+  xhttpp.setRequestHeader('Content-Type', 'text/html');
+  exportfile += "</body>";
+  exportfile += "\n";
+  exportfile += "</html>";
   xhttpp.send(exportfile);
 
   //document.getElementById("notes").value = "Export Complete";
   //document.getElementById("downloadme").style.display = "";
   
-  var xhttppp = new XMLHttpRequest();
-  if(parseInt(user) == 0){
-    xhttppp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+"export"+".doc", false);
-  }
-  else{
-    xhttppp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+"export"+".doc", false);
-  }
+  //var xhttppp = new XMLHttpRequest();
+  //if(parseInt(user) == 0){
+  //  xhttppp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+"export"+".doc", false);
+  //}
+  //else{
+  //  xhttppp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+"export"+".doc", false);
+  //}
   //xhttppp.setRequestHeader('Content-Disposition', 'attachment');
   //xhttppp.setRequestHeader('Content-type', 'application/vnd.ms-word');
-  xhttppp.send();
+  //xhttppp.send();
   document.getElementById("link").href=url;
   //document.getElementById("notes").value = "the endnl..";
   window.open(url, '_blank');
