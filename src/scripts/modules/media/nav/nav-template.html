@@ -151,7 +151,7 @@ function exportnotes(){
   xhttpp.setRequestHeader('Content-Disposition', 'attachment');
   xhttpp.send(exportfile);
 
-  document.getElementById("notes").value = "Export Complete";
+  //document.getElementById("notes").value = "Export Complete";
   //document.getElementById("downloadme").style.display = "";
   
   var xhttppp = new XMLHttpRequest();
@@ -184,7 +184,9 @@ function loadnotes() {
   document.getElementById("notes").value = "";
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
-      document.getElementById("notes").value = xhttp.responseText;
+      // old load for regular textarea
+      //document.getElementById("notes").value = xhttp.responseText;
+      tinymce.activeEditor.execCommand('mceSetContent', false, xhttp.responseText);
     }
   };
   if(parseInt(user) == 0){
@@ -205,7 +207,9 @@ function savenotes() {
   else{
     xhttp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim()+".txt", true);
   }
-  xhttp.send(document.getElementById("notes").value);
+  xhttp.send(tinymce.activeEditor.getContent());
+  //old save for regular textarea
+  //xhttp.send(document.getElementById("notes").value);
 }
 
 function hidedownload(){
