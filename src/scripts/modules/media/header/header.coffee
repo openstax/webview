@@ -31,6 +31,7 @@ define (require) ->
       chapter = currentPage.chapter ? currentPage._parent?.get('chapter') ? ''
       coach = @mediaBody.regions.coach.$el?.get(0)
       isCoach = @isCoach()
+      downloadable = downloads || pageDownloads;
 
       return {
         jumpToCC: isCoach and coach instanceof Node and document.body.contains(coach)
@@ -38,8 +39,7 @@ define (require) ->
         currentPage: currentPage
         chapter: chapter
         pageTitle: currentPage.searchTitle ? currentPage.title
-        hasDownloads: (_.isArray(downloads) and downloads?.length) or
-          (_.isArray(pageDownloads) and pageDownloads?.length)
+        hasDownloads: if _.isArray downloadable then _.some downloadable, (link) -> link.state != 'missing' else false
         derivable: @isDerivable()
         authenticated: session.get('id')
         editable: @isEditable()
