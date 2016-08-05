@@ -1,3 +1,9 @@
+    <script>
+      tinymce.init({
+        selector: '#notes',
+        paste_data_images: true,
+      });
+    </script>
 <script>
 var loaded = 0;
 var user = "0";
@@ -214,8 +220,8 @@ function format(){
   document.getElementById("notes").value += " - ";
   document.getElementById("notes").value += document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim();
 }
-</script>
 
+</script>
 {{#if book}}
   <div class="media-nav{{#is status 'publishing'}} publishing{{/is}}">
     <div class="media-toolbar">
