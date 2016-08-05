@@ -657,6 +657,8 @@ search-results-list-loading = Loading
 
 # SEARCH RESULTS - Item - src/scripts/modules/search/results/list/item-partial.html
 
+search-results-item-edited = { DATETIME($date) }
+
 
 
 ### TEXTBOOK VIEW ###
