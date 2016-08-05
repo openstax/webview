@@ -24,6 +24,7 @@ define (require) ->
         searchResult: searchResult
         matchCount: matchCount
         visible: @model.get('visible')
+        searchCount: searchCount
       }
 
     tagName: 'li'
