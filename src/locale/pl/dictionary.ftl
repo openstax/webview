@@ -814,6 +814,13 @@ textbook-view-license = Zasób udostępniony { LEN($licensors) ->
 
 # TEXTBOOK VIEW - Table of Content Search - src/scripts/modules/media/tabs/contents/toc/page-template.html
 
+textbook-view-toc-page-match-count = { $count ->
+  [1] { $count } wystąpienie
+  [few] { $count } wystąpienia
+  [many] { $count } wystąpień
+ *[other] { $count } wystąpienia
+}
+
 textbook-view-toc-page-changed = zmienione
 
 
@@ -921,7 +928,15 @@ textbook-editor-section-cancel-button = Anuluj
 
 textbook-editor-contents-add-button = Dodaj
 
-textbook-editor-contents-back-to-table =
+textbook-editor-contents-back-to-table = Powrót do spisu treści
+
+textbook-editor-contents-results-matches = { $hits ->
+  [0] Nie znaleziono szukanej treści.
+  [1] Znaleziono { $hits } stronę
+  [few] Znaleziono { $hits } strony
+  [many] Znaleziono { $hits } stron
+ *[other] Znaleziono { $hits } strony
+}
 
 # TEXTBOOK EDITOR - Add Page List - src/scripts/modules/media/tabs/contents/popovers/add/modals/results/list/add-page-list-template.html
 
@@ -935,11 +950,11 @@ textbook-editor-tools-edit = Edytuj
 
 textbook-editor-tools-preview = Podgląd
 
-textbook-editor-tools-make-editable-copy =
+textbook-editor-tools-make-editable-copy = Stwórz edytowalną kopię
 
-textbook-editor-tools-teachers-edition =
+textbook-editor-tools-teachers-edition = Wydanie nauczyciela
 
-textbook-editor-tools-standard-edition =
+textbook-editor-tools-standard-edition = Wydanie standardowe
 
 # TEXTBOOK EDITOR - Content & Tools - src/scripts/modules/media/tabs/tabs-template.html
 

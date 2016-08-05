@@ -54,7 +54,7 @@ define (require) ->
   return class ContentsView extends BaseView
     template: template
     templateHelpers:
-      resultCount: () ->
+      resultCountText: () ->
         hits = @model?.get('searchResults')?.total
         return unless hits?
         if hits is 0
@@ -62,6 +62,8 @@ define (require) ->
         else
           s = if hits is 1 then '' else 's'
           "#{hits} page#{s} matched"
+      resultCount: () ->
+        @model?.get('searchResults')?.total
     regions:
       toc: '.toc'
 
