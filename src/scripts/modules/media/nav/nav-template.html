@@ -199,7 +199,8 @@ function revert(){
 function loadnotes() {
   user = document.getElementById("user").value;
   var xhttp = new XMLHttpRequest();
-  document.getElementById("notes").value = "";
+  tinymce.activeEditor.execCommand('mceSetContent', false, "");
+  //document.getElementById("notes").value = "";
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
       // old load for regular textarea
