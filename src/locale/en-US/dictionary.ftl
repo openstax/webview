@@ -803,6 +803,11 @@ textbook-view-license = This work is licensed { LEN($licensors) ->
 
 textbook-view-toc-page-changed = changed
 
+textbook-view-toc-page-match-count = { $count ->
+  [1] { $count } match
+ *[other] { $count } matches
+}
+
 
 
 ### MY WORKSPACE ###
@@ -951,6 +956,12 @@ textbook-editor-section-cancel-button = Cancel
 textbook-editor-contents-add-button = Add
 
 textbook-editor-contents-back-to-table = Back to Table of Contents
+
+textbook-editor-contents-results-matches = { $hits ->
+  [0] No matching results were found.
+  [1] { $hits } page matched
+ *[other] { $hits } pages matched
+}
 
 # TEXTBOOK EDITOR - Add Page List - src/scripts/modules/media/tabs/contents/popovers/add/modals/results/list/add-page-list-template.html
 
