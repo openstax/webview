@@ -62,6 +62,8 @@ define (require) ->
   return class BaseView extends Backbone.View
     initialize: () ->
       @regions = new Regions(@regions, @)
+      # provide global locale value.
+      locale.updateOnLanguageChange(@)
 
     renderDom: () ->
       @$el?.html(@getTemplate())

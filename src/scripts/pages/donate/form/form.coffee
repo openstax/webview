@@ -6,8 +6,6 @@ define (require) ->
   require('less!./form')
 
   countries = [
-    {code: 'US', name: 'United States'}
-    {code: 'CA', name: 'Canada'}
     {code: 'AF', name: 'Afghanistan'}
     {code: 'AX', name: 'Aland Islands'}
     {code: 'AL', name: 'Albania'}
@@ -46,6 +44,7 @@ define (require) ->
     {code: 'BI', name: 'Burundi'}
     {code: 'KH', name: 'Cambodia'}
     {code: 'CM', name: 'Cameroon'}
+    {code: 'CA', name: 'Canada'}
     {code: 'CV', name: 'Cape Verde'}
     {code: 'KY', name: 'Cayman Islands'}
     {code: 'CF', name: 'Central African Republic'}
@@ -238,6 +237,7 @@ define (require) ->
     {code: 'UA', name: 'Ukraine'}
     {code: 'AE', name: 'United Arab Emirates'}
     {code: 'GB', name: 'United Kingdom'}
+    {code: 'US', name: 'United States'}
     {code: 'UM', name: 'United States Minor Outlying Islands'}
     {code: 'UY', name: 'Uruguay'}
     {code: 'UZ', name: 'Uzbekistan'}
@@ -331,23 +331,6 @@ define (require) ->
     {code: 'ZZ', name: 'Not Applicable'}
   ]
 
-  sortByLowercase = (collection, key) ->
-    collection.sort (a, b) ->
-      av = a[key]
-      bv = b[key]
-      ax = av.toLowerCase()
-      bx = bv.toLowerCase()
-      ax.localeCompare(bx)
-
-  Promise.all(countries.map (country) =>
-    document.l10n.get('main').formatValue('donate-form-countries', {countrycode: country.code})
-  ).then (ftlCountries) =>
-    countries.forEach (element, index) =>
-      countries[index].name = ftlCountries[index] || countries[index].name
-
-    sortByLowercase(countries,'name')
-
-
   return class DonateFormView extends BaseView
     template: template
     templateHelpers:
@@ -414,19 +397,19 @@ define (require) ->
       @amount = parseFloat(queryString.amount?.replace(',', '')) or 10
       @uuid = queryString.uuid
       @type = queryString.type
+      # Make sure event is detached from previous instantiation.
+      document.removeEventListener 'DOMRetranslated', @sortCountreies
+      # Sort country list alphabetically according to current locale.
+      document.addEventListener 'DOMRetranslated', @sortCountreies
 
     checkForValidity: (e) ->
       validationHelper.checkForValidity(e)
 
-    onRender: () ->
-      # Ugly way to wait for l20n to translate the countreies list
-      # since document.l10n.ready method & 'DOMRetranslated' event dosen't work in l20n.
-      setTimeout =>
-        sorted = @$el.find('#country-list option').sort (a,b) ->
-          a.text.toLowerCase().localeCompare b.text.toLowerCase()
-        # Apply sorted list.
-        @$el.find("#country-list").empty().append sorted        
-       , 100
+    sortCountreies: () ->
+      sorted = @$el.find('#country-list option').sort (a,b) ->
+        a.text.toLowerCase().localeCompare b.text.toLowerCase()
+      # Apply sorted list.
+      @$el.find("#country-list").empty().append sorted
 
     onSubmit: (e) ->
       if validationHelper.validateRequiredFields()
