@@ -2,7 +2,15 @@
       tinymce.init({
         selector: '#notes',
         paste_data_images: true,
-        height : "480"
+        menubar:false,
+        height : "480",
+        image_dimensions: false,
+        plugins: "image",
+        plugins: "textcolor",
+        toolbar: "forecolor backcolor",
+        toolbar1: 'insertfile undo redo | styleselect | image | bold italic |  alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+        toolbar2: 'fontsizeselect | forecolor backcolor } ' ,
+        fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
       });
     </script>
 <script>
@@ -166,6 +174,10 @@ function exportnotes(){
   xhttpp.setRequestHeader('Content-Type', 'text/html');
   exportfile += "</body>";
   exportfile += "\n";
+  var count = (exportfile.match(/img src=/g) || []).length;
+  for (i = 0; i < (count+1); i++) {
+    var exportfile = exportfile.replace('../../', 'https://cnx.org/');
+  }
   exportfile += "</html>";
   xhttpp.send(exportfile);
 
