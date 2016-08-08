@@ -9,7 +9,7 @@ function show() {
   }
   if(document.getElementById("preferences-options").style.display == "none"){
     document.getElementById("preferences-options").style.display ="";
-    document.getElementByID("gear_image").setAttribute("src", "/scripts/modules/media/nav/orange_gear.png");
+    //document.getElementByID("gear_image").setAttribute("src", "/scripts/modules/media/nav/pic_gear_orange.png");
 
   }
   else{
@@ -141,7 +141,7 @@ function contrast_black_yellow() {
   contrast_change("yellow","black","#262626","#ffd123","#262626");
 }
 function contrast_yellow_black() {
-  contrast_change("black","#ffff66","#ffff33","#21366b","#ffff33");
+  contrast_change("black","#fff9c1","#fff599","#21366b","#ffff33");
 }
 
 function font_change() {
@@ -154,11 +154,11 @@ function font_dyslexie() {
   var x = document.getElementsByClassName("main-page");  
   //var current_font = window.getComputedStyle( x, null ).getPropertyValue('font-family');
   var current_font = x[0].style.fontFamily;
-  if(current_font == "OpenDyslexic"){
+  if(current_font == "Dyslexie"){
     x[0].style.fontFamily = "Helvetica Neue";
     document.getElementById("text-style").options[0].selected = 'selected';
   } else {
-    x[0].style.fontFamily = "OpenDyslexic";
+    x[0].style.fontFamily = "Dyslexie";
     document.getElementById("text-style").options[1].selected = 'selected';
 
   }
@@ -229,8 +229,9 @@ function next_button() {
         <button class="toggle preferences btn" role="button" onclick="show()">
         <div class="tooltip2">
           <span class="tooltiptext2"><font size="2">Customize your textbook experience</font></span>
-	  <img id="gear_image" src="/scripts/modules/media/nav/pic_gear.png" style="width:15px;height:15px;">
-
+	  <!--<img id="gear_image" src="/scripts/modules/media/nav/pic_gear.png" style="width:15px;height:15px;">
+-->
+          <span class="fa fa-cog"></span>
           <span class="text">Preferences</span>
           <span class="fa fa-plus open-indicator"></span>
 	</div>
@@ -283,15 +284,15 @@ function next_button() {
 	<div class="dropdown">
 	  <select id="text-style" onchange="font_change()" >
 	    <option value="'Helvetica Neue'">Default</option>
- 	    <option value="OpenDyslexic">Dyslexie</option>
+ 	    <option value="Dyslexie">Dyslexie</option>
 	    <option value="Times" style="font-family: 'Times'">Times New Roman</option>
 	    <option value="Helvetica">Helvetica</option>
 	  </select>
 	</div>
         <div class="tooltip2" style="float:left; margin-left:35px">
           <button id="dyslexie-button" onclick="font_dyslexie()">d</button>
-  	  <span class="tooltiptext2"><font face="OpenDyslexic">Dyslexie: the typface for people with dyslexia</font></span>
-          <br><font size="0.75" face="OpenDyslexic">Dyslexie </font>
+  	  <span class="tooltiptext2"><font face="Dyslexie">Dyslexie: the typface for people with dyslexia</font></span>
+          <br><font size="0.75" face="Dyslexie">Dyslexie</font>
 	</div>
 	</div>
 
