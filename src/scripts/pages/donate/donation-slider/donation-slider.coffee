@@ -82,13 +82,14 @@ define (require) ->
 
       onSlide = (e) => @changeDonation.call(@, e)
 
+
       onSlideStop = (e) ->
         # Remove event listeners when the user stops dragging the slider
         slider.removeEventListener('mousemove', onSlide, false)
         document.body.removeEventListener('mouseup', onSlideStop, false)
 
-      # Add event listeners when the user starts dragging the slider
       slider.addEventListener('mousemove', onSlide, false)
+      slider.addEventListener('input', onSlide, false)
       document.body.addEventListener('mouseup', onSlideStop, false)
 
     changeDonation: (e) ->
