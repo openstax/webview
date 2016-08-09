@@ -37,8 +37,11 @@
   <button class="fullscreen btn" type="button" data-placement="bottom" data-toggle="tooltip" title="Full Screen" onclick="toggleFullScreen()"> 
     <span class="fa fa-arrows-alt"></span> 
   </button>
-  <button class="tips btn" role="button" id="study" onclick="window.open('http://localhost:8000/about', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">
-      <span class="text">Study Tips</span>
+  <button class="faq btn" role="button" data-placement="bottom" data-toggle="tooltip" title="Help" onclick="window.open('http://localhost:8000/donate', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">
+      <span class="fa fa-question-circle"></span>
+  </button>
+  <button class="tips btn" role="button" id="study" data-placement="bottom" data-toggle="tooltip" title="Study Tips" onclick="window.open('http://localhost:8000/about', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">
+      <span class="fa fa-book"></span>
   </button>
   </div>
   <textarea id="notes" class="inner-format" value="" placeholder='Notes Go Here!
