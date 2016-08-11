@@ -1,75 +1,18 @@
 @import "../../../../styles/variables.less";
 @import "../../../../styles/mixins.less";
 
-#donate .donate {
-  .make-row();
+ h2 {
+  padding-bottom: 20px;
+  padding-top: 20px;
+ }
 
-  > h1 {
-    .make-xs-column(12);
-  }
-
-  > .support {
-    margin-top: 3rem;
-    .make-xs-column(10);
-    .make-xs-column-offset(1);
-
-    > p {
-      margin-top: 1rem;
-      font-size: 1.8rem;
-    }
-
-    > form {
-      text-align: center;
-
-    	input[type='range']::-moz-range-track {
-    		-moz-appearance: none;
-    		border-radius: 0.5rem;
-    		background-color: @brand-secondary;
-    		height: 1rem;
-    	}
-
-      input[type='range'] {
-        margin-top: 4rem;
-        margin-bottom: 4rem;
-        -webkit-appearance: none;
-        border-radius: 0.5rem;
-        background-color: @brand-secondary;
-        height: 1rem;
-    	}
-
-    	input[type='range']::-moz-range-thumb {
-    		-moz-appearance: none;
-    		background-color: @brand-primary;
-    		height: 4rem;
-    		width: 2rem;
-    	}
-
-    	input[type='range']::-webkit-slider-thumb {
-    		-webkit-appearance: none !important;
-        background-color: @brand-primary;
-    		height: 4rem;
-    		width: 2rem;
-    	}
-
-      .donation-value {
-        font-size: 8rem;
-        color: @brand-primary;
-      }
-
-      .donation-message {
-        display: block;
-        font-size: 1.5rem;
-        color: @brand-primary;
-      }
-
-      button {
-        margin: 1.5rem;
-      }
-    }
-
-    small {
-      display: block;
-      margin-top: 3rem;
-    }
-  }
+ img {
+  max-height: 300px;
+  max-width: 500px;
+  display: inline-block;
 }
+
+div.text{
+  display: inline-block;
+}
+
