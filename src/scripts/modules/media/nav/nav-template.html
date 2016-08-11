@@ -20,11 +20,16 @@ $(document).ready(function(){
 </script>
 
 <script>
+// Flag if notes have already been loaded
 var loaded = 0;
-var user = "0";
-var opened = false;
-//var index = 0;
 
+// Unique user ID, used for determining where to save notes and where to load them from
+var user = "0";
+
+// Flag for if the notes sidebar is currently open
+var opened = false;
+
+// Toggles the browser's full screen
 function toggleFullScreen() {
   if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
    (!document.mozFullScreen && !document.webkitIsFullScreen)) {
@@ -46,21 +51,20 @@ function toggleFullScreen() {
   }  
 }
 
-
+// Opens and closes the sidebar containing the notes textbox
 function show() {
-  // Tutorial Link 
-  // ********
-  // alert("Here is a tutorial you may find useful for learning how to use this note feature: http://localhost:8000/about");
-  // ********
   if(opened == true){
     opened = false;
   }
   else{
     opened = true;
+
+    // User ID 3 corresponds to a user without an account, 3 can still save and load notes, this is just to demonstrate what a guest user trying to take notes would see
     if(parseInt(user) == 3){
       alert("In order to save notes, you must have an OpenStax account! Without an account you are still able to write notes, however you will be unable to save them.")
     }
   }
+
   var x = document.URL;
   if(loaded == 0 || (document.getElementById("user").value != "" && user != document.getElementById("user").value)){
     loadnotes();
@@ -87,13 +91,6 @@ function detect(){
   }
 }
 
-
-// Tutorial Link Function
-// ********
-
-// ********
-
-
 // Font Manipulation
 // *********
 var fontsize = 0;
@@ -110,9 +107,12 @@ function changefontsize(input2){
 }
 // *********
 
+// Exports notes from all sections that notes have been taken on into an html document
 function exportnotes(){
 
   var index = 0;
+
+  // Write the beginning of the export document
   var exportfile = "<!DOCTYPE html>";
   exportfile += "\n";
   exportfile += '<html lang="en-US">';
@@ -127,56 +127,54 @@ function exportnotes(){
   exportfile += "\n";
   exportfile += "<body>";
   exportfile += "\n";
+
   var sections = document.getElementsByClassName("title");
   for (section in sections){
-    //document.getElementById("notes").value = document.getElementById("notes").value + document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim();//sections[index].textContent.trim();
-    
-    //break;
 
-
+    // Unique user ID, used to determine where to pull notes from and where to store the export
     user = document.getElementById("user").value;
+
+    // Name of the current section, will be used as the file name
     var name = String(sections[index].textContent.trim());
-    //document.getElementById("notes").value += "\n"+name;
     var xhttp = new XMLHttpRequest();
-    //xhttp.onreadystatechange = function() {
-      //if (xhttp.readyState == 4 && xhttp.status == 200) {
-        //exportfile += xhttp.responseText;
-        //exportfile += "\n";
-        //document.getElementById("notes").value += xhttp.responseText;
-      //}
-    //};
+
+    // Pull notes from address in this style 
+    // https://LOCATION.amazonaws.com/BUCKETNAME/notes/USER_ID/FILENAME.txt
     if(parseInt(user) == 0){
-      xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+name+".txt", false);}
+      xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+name+".txt", false);
+    }
+
     else{
       xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+name+".txt", false);
     }
+
     xhttp.send();
     if (!xhttp.responseText.includes("NoSuchKey")){
       exportfile += xhttp.responseText;
-      exportfile += "<br><br>---<br><br>";
+      exportfile += "<br><br><hr><br><br>";
     }
-    //document.getElementById("notes").value += "\n " + exportfile;
+
+    // Limiting the export to checking the first ten sections for notes for testing purposes and to not go above free bucket GET/PUT request limits for AWS
     index += 1;
-    //document.getElementById("notes").value += sections[index].textContent.trim() + "\n";
     if (index == 10){
       break;
-    }
-    
+    } 
+
   }
 
-  //document.getElementById("notes").value += "\n done";
-
+  // Save exported document in to bucket in this style
+  // https://LOCATION.amazonaws.com/BUCKETNAME/notes/USER_ID/export.html
   var xhttpp = new XMLHttpRequest();
   if(parseInt(user) == 0){
     xhttpp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+"export"+".html", false);
     var url = "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/export.html";
   }
+
   else{
     xhttpp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+"export"+".html", false);
     var url = "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/export.html";
   }
-  //document.getElementById("notes").value = "header";
-  //xhttpp.setRequestHeader('Content-Disposition', 'attachment');
+  
   xhttpp.setRequestHeader('Content-Type', 'text/html');
   exportfile += "</body>";
   exportfile += "\n";
@@ -184,48 +182,27 @@ function exportnotes(){
   for (i = 0; i < (count+1); i++) {
     var exportfile = exportfile.replace('../../', 'https://cnx.org/');
   }
+
   exportfile += "</html>";
   xhttpp.send(exportfile);
 
-  //document.getElementById("notes").value = "Export Complete";
-  //document.getElementById("downloadme").style.display = "";
-  
-  //var xhttppp = new XMLHttpRequest();
-  //if(parseInt(user) == 0){
-  //  xhttppp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+"export"+".doc", false);
-  //}
-  //else{
-  //  xhttppp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+"export"+".doc", false);
-  //}
-  //xhttppp.setRequestHeader('Content-Disposition', 'attachment');
-  //xhttppp.setRequestHeader('Content-type', 'application/vnd.ms-word');
-  //xhttppp.send();
-  document.getElementById("link").href=url;
-  //document.getElementById("notes").value = "the endnl..";
+  // Open the compiled notes in a new tab
   window.open(url, '_blank');
 }
 
-function save(){
-  var x = document.URL;
-  localStorage.setItem(String(x), document.getElementById("notes").value);
-}
-
-function revert(){
-
-}
-
+// Load the notes associated with the current section into the notes textbox
 function loadnotes() {
   user = document.getElementById("user").value;
   var xhttp = new XMLHttpRequest();
   tinymce.activeEditor.execCommand('mceSetContent', false, "");
-  //document.getElementById("notes").value = "";
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
-      // old load for regular textarea
-      //document.getElementById("notes").value = xhttp.responseText;
       tinymce.activeEditor.execCommand('mceSetContent', false, xhttp.responseText);
     }
   };
+
+  // Pull notes from address in this style 
+  // https://LOCATION.amazonaws.com/BUCKETNAME/notes/USER_ID/FILENAME.txt
   if(parseInt(user) == 0){
     xhttp.open("GET", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim()+".txt", true);}
 
@@ -236,31 +213,26 @@ function loadnotes() {
   xhttp.send();
 }
 
+// Save the notes currently in the notes textbox
 function savenotes() {
   user = document.getElementById("user").value;
   var xhttp = new XMLHttpRequest();
+
+  // Save notes to address in this style 
+  // https://LOCATION.amazonaws.com/BUCKETNAME/notes/USER_ID/FILENAME.txt
   if(parseInt(user) == 0){
-    xhttp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim()+".txt", true);}
+    xhttp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim()+".txt", true);
+  }
+
   else{
     xhttp.open("PUT", "https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/"+user+"/"+document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim()+".txt", true);
   }
+
   xhttp.send(tinymce.activeEditor.getContent());
-  //old save for regular textarea
-  //xhttp.send(document.getElementById("notes").value);
 }
 
-function hidedownload(){
-  document.getElementById("downloadme").style.display = "none";
-  window.open('https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/1/export.doc');
-}
-
+// Put the book title, section number, and section title in the notebox
 function format(){
-  //document.getElementById("notes").value = document.getElementsByTagName("h1")[0].textContent.trim();
-  //document.getElementById("notes").value += "\n\n";
-  //document.getElementById("notes").value += document.getElementsByClassName("title-chapter")[0].textContent.trim();
-  //document.getElementById("notes").value += " - ";
-  //document.getElementById("notes").value += document.getElementsByTagName("h2")[0].textContent.trim().substring(10).trim();
-
   text = '<h3 style="text-align: center;">';
   text += document.getElementsByTagName("h1")[0].textContent.trim();
   text += "<br><br>";
@@ -287,13 +259,6 @@ function format(){
           <span class="text">Notes</span>
           <span class="fa fa-plus open-indicator"></span>
         </button>
-
-        <a href="https://s3-us-west-2.amazonaws.com/testnotesbucket/notes/1/export.doc" download id="link">
-          <button class="download btn" role="button" id="downloadme" onclick="hidedownload()" style="display:none;">
-          <span class="fa fa-cloud-download"></span>
-          <span class="text">Download</span>
-          </button>
-        </a>
 
         <div class="searchbar">
           <span class="fa fa-search"></span>
