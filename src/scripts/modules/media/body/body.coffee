@@ -188,7 +188,7 @@ define (require) ->
 
               if page
                 pageNumber = page.getPageNumber()
-                $el.attr('href', "/contents/#{@model.getVersionedId()}:#{pageNumber}#{fragment}")
+                $el.attr('href', "/contents/#{@model.getVersionedId()}:#{page.id}#{fragment}")
                 $el.attr('data-page', pageNumber)
 
           # Add nofollow to external user-generated links
