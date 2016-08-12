@@ -80,14 +80,20 @@ define (require) ->
     onSlideStart: (e) ->
       slider = e.currentTarget
 
-      onSlide = (e) => @changeDonation.call(@, e)
-
+      onSlide = (e) =>
+        @changeDonation.call(@, e)
+        # fix for safari so that arrow keys work
+        $('[type="range"]').focus()
 
       onSlideStop = (e) ->
         # Remove event listeners when the user stops dragging the slider
         slider.removeEventListener('mousemove', onSlide, false)
         document.body.removeEventListener('mouseup', onSlideStop, false)
+        # fix for safari so that arrow keys work
+        $('[type="range"]').focus()
 
+      # fix for safari so that arrow keys work
+      $('[type="range"]').focus()
       slider.addEventListener('mousemove', onSlide, false)
       slider.addEventListener('input', onSlide, false)
       document.body.addEventListener('mouseup', onSlideStop, false)
