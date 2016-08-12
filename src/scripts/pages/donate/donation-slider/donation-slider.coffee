@@ -94,6 +94,7 @@ define (require) ->
 
       # fix for safari so that arrow keys work
       $('[type="range"]').focus()
+      # Add event listeners when the user starts dragging the slider
       slider.addEventListener('mousemove', onSlide, false)
       slider.addEventListener('input', onSlide, false)
       document.body.addEventListener('mouseup', onSlideStop, false)
