@@ -12,7 +12,9 @@ h6 {
   margin-bottom: 1.5rem;
   color: @gray-dark;
 }
-
+h2:first-child {
+  display: none;
+}
 p {
   margin: 1rem 0 0;
   color: @gray;
@@ -67,18 +69,22 @@ section > figure {
   counter-reset: subfigure;
 }
 
-figure {
+.figure {
+  .figure-number {
+    font-weight: bold;
+  }
+  figure {
   position: relative;
   color: @gray;
   text-align: center;
 
-  &.ui-has-child-figcaption > figcaption::before,
-  &:not(.ui-has-child-figcaption)::after
-  {
-    margin-right: 0.5rem;
-    color: @gray-medium;
-    font-weight: bold;
-    content: "Figure " counter(figure) ".";
+    &.ui-has-child-figcaption > figcaption::before,
+    &:not(.ui-has-child-figcaption)::after
+    {
+      margin-right: 0.5rem;
+      color: @gray-medium;
+      font-weight: bold;
+      //content: "Figure " counter(figure) ".";
   }
 
   > figcaption {
@@ -99,10 +105,9 @@ figure {
   // Subfigures
   > figure {
     counter-increment: subfigure;
-
     &.ui-has-child-figcaption > figcaption::before {
       font-weight: bold;
-      content: counter(figure) counter(subfigure,lower-alpha) ': ';
+      //content: counter(figure) counter(subfigure,lower-alpha) ': ';
     }
 
     &:not(.ui-has-child-figcaption)::after {
@@ -110,11 +115,12 @@ figure {
       display: block;
       text-align: center;
       font-weight: bold;
-      content: '(' counter(subfigure,lower-alpha) ')';
+      //content: '(' counter(subfigure,lower-alpha) ')';
+     }
     }
-
   }
 }
+
 
 // By default, figures are laid out horizontally
 // unless they have the data-orient="vertical" attribute.
@@ -690,7 +696,16 @@ div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin
 //
 // Tables
 // --------------------------------------------------
-
+.table {
+  .table-number {
+    font-weight: bold;
+    display: inline-block;
+  }
+  .caption {
+    padding-left: 0.5em;
+    display: inline-block;
+  }
+}
 table {
   margin-top: 6rem;
   width: 100%;
