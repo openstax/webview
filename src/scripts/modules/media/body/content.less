@@ -9,7 +9,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin-bottom: 1.5rem;
+  margin: 1.5rem 0 1rem 0;
   color: @gray-dark;
 }
 h2:first-child {
@@ -70,9 +70,16 @@ section > figure {
 }
 
 .figure {
-  .figure-number {
+  display: table;
+  .caption-container {
+    padding-top: 1rem;
+    display: table-caption;
+    caption-side: bottom;
+    .figure-number {
     font-weight: bold;
+    padding-right: .5rem;
   }
+}
   figure {
   position: relative;
   color: @gray;
@@ -81,10 +88,10 @@ section > figure {
     &.ui-has-child-figcaption > figcaption::before,
     &:not(.ui-has-child-figcaption)::after
     {
-      margin-right: 0.5rem;
-      color: @gray-medium;
-      font-weight: bold;
-      //content: "Figure " counter(figure) ".";
+      // margin-right: 0.5rem;
+      // color: @gray-medium;
+      // font-weight: bold;
+      // //content: "Figure " counter(figure) ".";
   }
 
   > figcaption {
@@ -106,7 +113,7 @@ section > figure {
   > figure {
     counter-increment: subfigure;
     &.ui-has-child-figcaption > figcaption::before {
-      font-weight: bold;
+      //font-weight: bold;
       //content: counter(figure) counter(subfigure,lower-alpha) ': ';
     }
 
@@ -538,12 +545,20 @@ div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin
   // Style the example
   .default-label(example; false) { content: 'Example'; }
   .default-label(example; true)  { content: 'Example: '; }
-  .style(example) { margin-top: 3rem; }
+  .style(example) {
+    margin-top: 5rem;
+    position: relative;
+   }
   .title(example) {
-    padding: 0.1em 1em;
+    font-size: 1em;
+    position: absolute;
+    top: -4rem;
+    left: 0em;
+    padding: 0.4em 1em;
     font-weight: bold;
     color: @gray-lightest;
     background-color: @gray;
+    max-width: 100%;
   }
   // Style the body of an example the same as a note
   .body(example) { .body(note); }
@@ -557,6 +572,10 @@ div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin
 
 }
 
+//refactor this
+h1.example-title .text {
+  padding-left: 1rem;
+}
 // Skeleton for constructing the blockish elements
 // This contains all the selectors for the styling
 
@@ -592,7 +611,7 @@ div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin
       &::before { .format-label(@type; @label-type; true); }
     }
     // No title exists so style the blockish::before and put the label there
-    &:not(.ui-has-child-title)::before {
+    &:not(.ui-has-child-title) .example-title {
       #blockish>.title(@type);
       .format-label(@type; @label-type; false);
     }
@@ -612,14 +631,21 @@ div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin
 .note     { .make-block(note); }
 [data-type="example"],
 .example  { .make-block(example); }
-[data-type="exercise"],
-.exercise { .make-block(exercise); }
+> :not(.eoc):not(.eob) [data-type="exercise"],
+> :not(.eoc):not(.eob) .exercise { .make-block(exercise);}
 
+.eoc [data-type="exercise"], .eoc .exercise {
+  span {
+    font-weight: bold;
+    padding-right: 0.5rem
+  }
+  p {display: inline;}
+}
 
 [data-type="example"],
-[data-type="exercise"],
+> :not(.eoc):not(.eob) [data-type="exercise"],
 .example,
-.exercise {
+> :not(.eoc):not(.eob) .exercise {
 
   [data-type="problem"],
   [data-type="solution"],
