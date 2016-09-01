@@ -17,6 +17,9 @@ define (require) ->
     events:
       'click .ok' : 'deleteMedia'
 
+    onRender: () ->
+      title = @model.get('title');      
+      @$el.find('.modal-body').attr('data-l10n-args', "{\"title\": \"#{title}\" }")
 
     deleteMedia: () ->
       version = @model.get('version')
