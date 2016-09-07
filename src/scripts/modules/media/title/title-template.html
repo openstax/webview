@@ -19,11 +19,11 @@
         {{#is status 'publishing'}}
           <span class="label label-info" data-l10n-id="textbook-view-publishing" data-l10n-args='{"title":"{{title}}"}'>publishing {{{title}}}</span>
         {{else}}
-          {{title}}
+          {{{title}}}
         {{/is}}
       </h1>
       {{#if parent.id}}
-        <span data-l10n-id="textbook-view-derived-from" data-l10n-args='{"url":"/contents/{{parent.id}}@{{parent.version}}", "title":"{{parent.title}}","authors":[{{~#each parent.authors}}"{{fullname}}"{{#unless @last}},{{/unless}}{{/each~}}]}'>Derived from <a href="/contents/{{parent.id}}@{{parent.version}}">{{parent.title}}</a> by
+        <span data-l10n-id="textbook-view-derived-from" data-l10n-args='{"url":"/contents/{{parent.id}}@{{parent.version}}", "title":"{{parent.title}}","authors": {{toJSON parent.authors}} }'>Derived from <a href="/contents/{{parent.id}}@{{parent.version}}">{{parent.title}}</a> by
           <span class="collection-authors">
             {{~#each parent.authors}}
               <span class="list-comma">{{fullname}}</span>
@@ -35,10 +35,8 @@
 
     <div class="info">
       {{#if authors.length}}
-        {{#if isBook}}<span data-l10n-id="textbook-view-book-by" data-l10n-args='{"authors": [{{~#each authors}}"{{fullname}}"{{#unless @last}},{{/unless}}{{/each~}}]}'>Book
-        {{else}}<span data-l10n-id="textbook-view-page-by" data-l10n-args='{"authors": [{{~#each authors}}"{{fullname}}"{{#unless @last}},{{/unless}}{{/each~}}]}'>Page
-        {{/if}}
-        by:
+        <span data-l10n-id="textbook-view-{{#if isBook}}book{{else}}page{{/if}}-by" data-l10n-args='{"authors": {{toJSON authors}} }'>
+          {{#if isBook}}Book{{else}}Page{{/if}} by:
           <span class="collection-authors">
             {{~#each authors}}
               <span class="list-comma">{{fullname}}</span>

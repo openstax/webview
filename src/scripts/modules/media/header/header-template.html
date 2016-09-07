@@ -52,11 +52,12 @@
         </div>
       {{/if}}
       {{#if currentPage.authors.length}}
-        <span data-l10n-id="textbook-view-page-by">Page by:</span>
-        <span class="page-authors">
-          {{~#each currentPage.authors~}}
-            <span class="list-comma">{{fullname}}</span>
-          {{~/each}}
+        <span data-l10n-id="textbook-view-page-by" data-l10n-args='{"authors": {{toJSON currentPage.authors}} }'>Page by:
+          <span class="page-authors">
+            {{~#each currentPage.authors~}}
+              <span class="list-comma">{{fullname}}</span>
+            {{~/each}}
+          </span>
         </span>
       {{/if}}
     </div>
