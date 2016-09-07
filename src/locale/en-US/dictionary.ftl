@@ -671,6 +671,10 @@ textbook-view-btn-edit = Edit
 
 textbook-view-btn-create = Create an Editable Copy
 
+textbook-view-publishing = publishing { $title }
+
+textbook-view-derived-from = Derived from <a href="{ $url }">{ $title }</a> by <span class="collection-authors">{ TAKE(50, $authors) }</span>
+
 textbook-view-book-by =
   | Book by: <span class="collection-authors">{ TAKE(50, $authors) }</span>
 
