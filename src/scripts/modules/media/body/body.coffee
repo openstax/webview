@@ -96,15 +96,16 @@ define (require) ->
 
       $exercisesToHide
 
-    makeRegionForCoach: ($exercises, wrapperId = 'coach-wrapper') ->
+    makeRegionForCoach: ($summary, wrapperId = 'coach-wrapper') ->
       $("##{wrapperId}").remove()
       $coachWrapper = $("<div id=\"#{wrapperId}\"></div>")
-      $coachWrapper.insertBefore(_.first($exercises))
+      $coachWrapper.insertAfter(_.last($summary))
 
     handleCoach: ($el) ->
       return unless @isCoach()
-      $hiddenExercises = @hideExercises($el)
-      @makeRegionForCoach($hiddenExercises) if $hiddenExercises.length > 0
+      @hideExercises($el)
+      $summary = $el.find('.summary, .section-summary')
+      @makeRegionForCoach($summary) if $summary.length > 0
 
     # Toggle the visibility of teacher's edition elements
     toggleTeacher: () ->
