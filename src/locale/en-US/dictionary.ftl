@@ -1582,6 +1582,216 @@ terms-of-service-description = OpenStax CNX Terms of Service
 
 # LICENSING - Page Title - src/scripts/pages/license/license.coffee
 
+licensing-pageTitle = License FAQ - OpenStax CNX
+
+licensing-summary = OpenStax CNX License
+
+licensing-description = OpenStax CNX License Frequently Asked Questions
+
+licensing-title = Legal
+
+licensing-document-description = Frequently asked IP (Intellectual Property) and legal questions
+
+licensing-question-1 = Why do I have to agree to your license before I can publish my work?
+
+licensing-answer-1 =
+  | <p>Our goal is to provide and maintain a commons where individuals and communities
+  | worldwide can create and freely share knowledge. The <a href="http://creativecommons.org/">Creative Commons</a>
+  | <a href="http://creativecommons.org/licenses/by/4.0/">Attribution license</a>
+  | that you and every author must agree to enables the content to be as
+  | reusable as possible. All the content is accessible to anyone without
+  | restriction and any author can use that content, share it with others,
+  | or create a derivative work that is customized and personalized for their
+  | context.</p>
+  | <p>The license also reduces everyone's risk, because it clarifies what the
+  | legal uses of the materials are. Without a license, everyone is forced
+  | to assume that the full protection of copyright law applies to your work,
+  | even if you intend to share it, or wanted it to be in the public domain.
+  | The license makes clear to lawyers and to other readers that this is
+  | your intention.</p>
+
+licensing-question-2 =
+  | Why should I make my work available under a Creative Commons Attribution license, instead of publishing
+  | it with the full protection of copyright law?
+
+licensing-answer-2 =
+  | There are several reasons. You might like the idea of others building upon
+  | your work, or the notion of contributing to an intellectual commons.
+  | As the community grows, you and other authors will have the satisfaction
+  | of helping develop new ways to collaborate. Another reason is that you
+  | may want your writings to be copied and shared, so your ideas can spread
+  | around the world. A young author may want to encourage the unrestrained
+  | dissemination of his or her works to help build a reputation. An established
+  | author might post samples of his or her work to create an interest in
+  | works that are outside of our repository. The Creative Commons license
+  | can help you implement such strategies while you retain the ultimate
+  | control of your copyright.
+
+licensing-question-3 = What is Creative Commons?
+
+licensing-answer-3 =
+  | Creative Commons is a non-profit corporation that promotes the creative
+  | licensing and re-using of intellectual works. To quote from their Web
+  | site: “Creative Commons is a new system, built within current copyright
+  | law, that allows you to share your creations with others and use music,
+  | movies, images, and text online that’s been marked with a Creative Commons
+  | license.”
+
+licensing-question-4 = Is the content copyrighted and who owns the copyright?
+
+licensing-answer-4 =
+  | All material is copyrighted and the author retains the copyright of his
+  | or her material. The material is also licensed under the Creative Commons
+  | Attribution license. Under this license the author gives others the freedom
+  | to copy, distribute, and display the work, and to make derivative works,
+  | as long as they give the original author credit. A link to a description
+  | of the Creative Commons Attribution license appears at the bottom of
+  | every content page.
+
+licensing-question-5 = How do authors license their work in the content commons?
+
+licensing-answer-5 =
+  | Before you can create a module or collection, you must agree to the Creative
+  | Content Attribution license that applies to all the content.
+
+licensing-question-6 = Can I distribute or use my material elsewhere?
+
+licensing-answer-6 =
+  | Yes. The Creative Commons license is "non-exclusive"-- which means that
+  | you are free to distribute your material under a different license elsewhere,
+  | publish it for profit, or transform it without endangering the version
+  | in our repository.
+
+licensing-question-7 = How do I control what changes are made to my modules?
+
+licensing-answer-7 =
+  | Only persons who have the maintainer role on your module have permission
+  | to modify and publish an updated version of your module. As the author
+  | of a module, you determine who has the maintainer role on your module.
+  | The Creative Commons Attribution license does allow another person to
+  | make an <a href="../authoring/expressedit">adaptation</a> of any content
+  | published in our repository. An adaptation is a derived copy of a module
+  | that is modified and published as a new module under the new author's
+  | name. Your original module is not changed and the adaptation contains
+  | a statement of attribution to you and a link to your original module.
+
+licensing-question-8 =
+  | But wait, I thought the license gave people the right to make their
+  | own adaptations of my work?
+
+licensing-answer-8 =
+  | True, another author can indeed make an adaptation of your work according
+  | to the license. However, if you determine that someone has created an
+  | adaptation that is incorrect, or contradictory with your own, or worse,
+  | is defamatory or otherwise offensive, the license gives you the legal
+  | right to ask that person to remove your name from the module -- but not
+  | to demand that he or she change it as you wish. One way to avoid creation
+  | of such adaptations is to invite these other authors into your workgroup
+  | and develop a dialog with them as collaborators or co-authors.
+
+licensing-question-9 =
+  | What prevents some dishonest person from stealing my works and claiming it as theirs?
+
+licensing-answer-9 =
+  | Nothing except the copyright law. The Creative Commons license is based
+  | on existing copyright law and your works have the same legal protections
+  | and legal standing as a copyrighted work that is published outside of
+  | our repository. You may actually run less risk using our repository than
+  | simply putting your work on your own Web page, because the license is
+  | clearly visible and clearly explains the uses people may legally make
+  | of your work. Strictly speaking, fraud and plagiarism are not the subject
+  | of copyright law, but copyright law is a good first defense.
+
+licensing-question-10 = Can people make money off of my work?
+
+licensing-answer-10 =
+  | It is possible, but to be effective at all the license we use must allow
+  | some "commercial" uses. Consider the situation in which a printing service,
+  | such as FedEx Kinko's℠, offers to print your work so that your students
+  | may have access to hard copies. Without a license that allows commercial
+  | use, the service could not charge a fee to recover their printing, binding,
+  | and handling costs.
+
+licensing-question-11 = That's fine, but what if some huge publisher decides to publish my work?
+
+licensing-answer-11 =
+  | If a publisher wants to include your module in a book of collected materials,
+  | they have that right according to the license, but remember that they
+  | are required to list you as the author and copyright holder. Our experience
+  | also suggests that most reputable publishers would want to re-negotiate
+  | a new license with you in that case. Furthermore, if you seriously expect
+  | to receive royalties from what you write, our repository is probably
+  | not the right place for the work -- though it might be the right place
+  | to experiment with an early version, or an alternative version.
+
+licensing-question-12 = Does the Creative Commons Attribution license affect fair use rights?
+
+licensing-answer-12 =
+  | No. The license includes the statement: "Nothing in this license is intended
+  | to reduce, limit, or restrict any rights arising from fair use, first
+  | sale, or other limitations on the exclusive rights of the copyright owner
+  | under copyright law or other applicable laws." Fair use, the first sale
+  | doctrine, and other such limitations apply whether a copyright holder
+  | consents to them or not.
+
+licensing-question-13 =
+  | What must I do if I want to include a portion of an author’s work in the
+  | repository in a work I am creating outside of the repository?
+
+licensing-answer-13 =
+  | You must give attribution to the portion of the original author’s work
+  | that you include outside of our repository. This attribution is as simple
+  | as clearly naming the original author and identifying the portion of
+  | his or her work you are using. In addition you must retain the copyright
+  | notice and provide the URI of the original work.
+
+licensing-question-14 =
+  | What must I do if I want to include another author’s module in a collection
+  | that I am building?
+
+licensing-answer-14 =
+  | Simply add the module to your collection with the Collection Composer tool.
+  | Our software automatically includes the name of the original author in
+  | your collection, giving him or her the attribution that is required by
+  | the Creative Commons license.
+
+licensing-question-15 =
+  | Can I include material in my modules that was originally published outside
+  | of the repository and copyrighted?
+
+licensing-answer-15 =
+  | This simple question raises some complex legal points. It can best be answered
+  | by the copyright holder or an intellectual property attorney. We can
+  | tell you that any content you put into our repository is licensed under
+  | the Creative Commons Attribution 4.0 License, which means anything you
+  | use directly in your content must to be legally publishable under that
+  | license. The University of Texas System has a <a href="http://copyright.lib.utexas.edu/">Copyright Crash Course</a>
+  | and a <a href="http://copyright.lib.utexas.edu/copypol2.html">Copyright Tutorial</a>
+  | that can provide you with general information about copyright and reuse
+  | of copyrighted material. If you do obtain permission to use copyrighted
+  | material in your modules, we recommend that you include a note with the
+  | material that indicates who holds the copyright on the material.
+
+licensing-question-16 = Does "fair use" enable me to use copyrighted material in my modules?
+
+licensing-answer-16 =
+  | Maybe yes, maybe no. There are many factors to consider before you can
+  | claim "fair use" for your reuse of copyrighted material. This is another
+  | question that can best be answered by the copyright holder or an intellectual
+  | property attorney.
+
+licensing-question-17 =
+  | What legal standing does the Creative Commons license have outside of the United States?
+
+licensing-answer-17 =
+  | The Creative Commons license was crafted to be enforceable in as many jurisdictions
+  | as possible. That said, Creative Commons cannot account for every last
+  | nuance in the world's various copyright laws, at their current level
+  | of resources. The Creative Commons license does contain "severability"
+  | clauses -- meaning that, if a certain provision is found to be unenforceable
+  | in a certain place, that provision and only that provision drops out
+  | of the license, leaving the rest of the agreement intact.
+
 # LICENSING - Content - src/scripts/pages/license/license-template.html
 
 
