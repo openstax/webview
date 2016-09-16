@@ -57,9 +57,9 @@ all-navbar-give = Wesprzyj nas
 
 all-navbar-workspace = Moje biurko
 
-all-header-skip-to-content =
+all-header-skip-to-content = Przejdź do treści
 
-all-header-skip-to-results =
+all-header-skip-to-results = Przejdź do wyników
 
 all-header-account-profile = Ustawienia konta
 
@@ -1533,11 +1533,11 @@ donate-thank-you-appreciation-message =
 
 # TERMS OF SERVICE - Page Title - src/scripts/pages/tos/tos.coffee
 
-terms-of-service-pageTitle =
+terms-of-service-pageTitle = Warunki korzystania z serwisu OpenStax CNX
 
-terms-of-service-summary =
+terms-of-service-summary = OpenStax CNX - warunki serwisu
 
-terms-of-service-description =
+terms-of-service-description = OpenStax CNX - warunki serwisu
 
 # TERMS OF SERVICE - Content - src/scripts/pages/tos/tos-template.html
 
@@ -1549,11 +1549,210 @@ terms-of-service-description =
 
 # LICENSING - Page Title - src/scripts/pages/license/license.coffee
 
-licensing-pageTitle =
+licensing-pageTitle = OpenStax CNX: Najczęsciej zadawane pytania odnośnie warunków licencyjnych
 
-licensing-summary =
+licensing-summary = Licencja OpenStax CNX
 
-licensing-description =
+licensing-description = OpenStax CNX - Najczęściej zadawane pytania dotyczące warunków licencyjnych
+
+licensing-title = Kwestie prawne
+
+licensing-document-description =
+  | Najczęściej zadawane pytania dotyczące własności intelektualnej i kwestii prawnych
+
+licensing-question-1 = Dlaczego muszę wyrazić zgodę na Waszą licencję, zanim opublikuję swoją pracę?
+
+licensing-answer-1 =
+  | <p>Naszym celem jest stworzenie i utrzymywanie miejsca (repozytorium), w którym zarówno
+  | indywidualni użytkownicy, jak i społeczności z całego świata mogą tworzyć i swobodnie
+  | dzielić się wiedzą. Licencja <a href="http://creativecommons.pl">Creative Commons</a> –
+  | <a href="https://creativecommons.org/licenses/by/3.0/pl/legalcode">Uznanie autorstwa</a>,
+  | na którą wyrażasz zgodę, podobnie jak każdy inny autor, umożliwia ponowne wykorzystywanie
+  | Twoich treści. Dzięki temu wszystkie treści są dostępne dla każdego bez ograniczeń i każdy
+  | autor może wykorzystywać te treści, dzielić się nimi z innymi albo tworzyć utwory pochodne,
+  | spersonalizowane i dopasowane do konkretnego kontekstu.</p>
+  | <p>Licencja ta również zmniejsza ryzyko prawne, ponieważ jasno określa, jakie są zgodne
+  | z prawem sposoby wykorzystania materiałów. Bez Licencji każdy musiałby założyć, że Twoja praca
+  | objęta jest pełną ochroną prawami autorskimi, nawet jeśli Twoim celem lub życzeniem jest,
+  | żeby znalazła się ona w domenie publicznej i była swobodnie dostępna. Przyjęcie Licencji
+  | daje jasno do zrozumienia - zarówno czytelnikom, jak i prawnikom - że taka właśnie
+  | jest Twoja intencja.</p>
+
+licensing-question-2 =
+  | Dlaczego miałbym udostępniać swój utwór na licencji Creative Commons – Uznanie autorstwa,
+  | zamiast publikować go z pełną ochroną prawami autorskimi?
+
+licensing-answer-2 =
+  | Jest kilka powodów. Może podobać Ci się idea, że inni będą rozwijać Twój utwór lub
+  | że przyczynisz się do rozwoju wartości intelektualnej zasobów publicznych. W miarę wzrostu
+  | tych zasobów, Ty i inni autorzy możecie czerpać satysfakcję z tego, że przyczyniacie się do
+  | rozwoju nowych sposobów współpracy. Kolejnym powodem jest to, że dzięki tej Licencji Twoje
+  | teksty będą kopiowane i rozpowszechniane na całym świecie, a wraz z nimi Twoje idee i pomysły.
+  | Nieograniczone rozpowszechnianie prac może być również korzystne dla początkującego autora
+  | w budowaniu jego reputacji. Z kolei znany autor może opublikować fragmenty swoich prac,
+  | aby wzbudzić zainteresowanie ich pełnymi wersjami rozpowszechnianymi innymi kanałami.
+  | Licencja Creative Commons może pomóc w realizacji tego typu strategii przy zachowaniu
+  | kontroli nad prawami autorskimi.
+
+licensing-question-3 = Czym jest Creative Commons?
+
+licensing-answer-3 =
+  | Creative Commons to organizacja non-profit, która promuje kreatywne licencjonowanie i ponowne
+  | wykorzystywanie twórczości intelektualnej. Cytując z ich strony internetowej:
+  | „Creative Commons to międzynarodowy projekt oferujący darmowe rozwiązania prawne i inne
+  | narzędzia służące zarządzaniu przez twórców prawami autorskimi do swoich utworów.
+  | Creative Commons wspiera wolną kulturę: produkcję i wymianę utworów traktowanych
+  | jako dobro wspólne..”
+
+licensing-question-4 = Czy treść jest chroniona prawem autorskim i kto jest właścicielem praw?
+
+licensing-answer-4 =
+  | Wszystkie materiały są objęte ochroną prawem autorskim i autor zachowuje prawa autorskie do
+  | swojego materiału. Równocześnie materiał jest udostępniany na licencji Creative Commons –
+  | Uznanie autorstwa. Zgodnie z tą Licencją autor daje innym prawo do swobodnego kopiowania,
+  | dystrybuowania oraz wyświetlania utworu, jak również do tworzenia utworów pochodnych pod
+  | warunkiem, że zawsze będzie podpisany jako oryginalny autor oraz że link do Licencji
+  | Creative Commons – Uznanie autorstwa pojawi się na każdej stronie zawierającej jego utwór.
+
+licensing-question-5 = Jak autorzy udzielają licencji na swoje utwory udostępniane w repozytorium?
+
+licensing-answer-5 =
+  | Zanim będziesz mógł/mogła stworzyć swój zasób lub zbiór zasobów, musisz zgodzić się na
+  | licencję Creative Commons - Uznanie autorstwa, która obowiązuje w odniesieniu do wszystkich
+  | treści w repozytorium.
+
+licensing-question-6 = Czy mogę rozpowszechniać lub wykorzystywać mój materiał w innych miejscach?
+
+licensing-answer-6 =
+  | Tak. Licencja Creative Commons jest „niewyłączna” – co oznacza, że możesz swobodnie udostępniać
+  | swoje materiały na mocy innej licencji w innym miejscu, publikować je dla zysku, a także
+  | przekształcać je bez wpływu na wersję znajdująca się w naszym repozytorium.
+
+licensing-question-7 = Jak mogę kontrolować zmiany dokonywane w moich zasobach?
+
+licensing-answer-7 =
+  | Jedynie osoby, którym przydzielisz funkcję współautora Twojego zasobu mają uprawnienia do
+  | modyfikowania i publikowania jego zaktualizowanych wersji. Jako autor zasobu określasz, kto
+  | może być jego współautorem. Jednakże Licencja Creative Commons – Uznanie autorstwa pozwala
+  | dowolnym osobom na dokonywanie <a href="../authoring/expressedit">adaptacji</a> treści
+  | publikowanych w naszym repozytorium. Adaptacja to utwór zależny, będący modyfikacją
+  | oryginalnego zasobu i opublikowany jako nowy zasób pod nazwiskiem nowego autora. Twój
+  | oryginalny zasób pozostaje niezmieniony, a utwór pochodny zawiera informację, że to Ty jesteś
+  | oryginalnym autorem, i link do oryginalnej wersji Twojego zasobu.
+
+licensing-question-8 =
+  | Ale chwila, czy nie przesłyszałem się, że Licencja daje ludziom prawo do
+  | przerabiania mojego utworu?
+
+licensing-answer-8 =
+  | To prawda. Zgodnie z licencją, inny autor może stworzyć własny utwór na bazie Twojego.
+  | Jednak jeśli ustalisz, że ktoś stworzył adaptację Twojego utworu, która jest niewłaściwa
+  | lub sprzeczna z Twoją własną - lub, co gorsza, jest oszczercza lub w inny sposób obraźliwa -
+  | licencja daje Ci prawo do poproszenia tej osoby o usunięcie Twojego nazwiska z zasobu –
+  | ale nie do zażądania, żeby zmieniła go zgodnie z Twoim życzeniem. Jednym ze sposobów na
+  | uniknięcie takich niepożądanych adaptacji jest zaproszenie tych autorów do Twojej grupy
+  | roboczej i nawiązanie dialogu z nimi jako współpracownikami lub współautorami.
+
+licensing-question-9 =
+  | Co powstrzyma nieuczciwą osobę przed ukradzeniem mojej pracy i przedstawianiem jej jako własnej?
+
+licensing-answer-9 =
+  | Nic, z wyjątkiem prawa autorskiego. Licencja Creative Commons jest oparta na istniejącym prawie
+  | autorskim i Twoje prace mają taką samą ochronę prawną i status prawny, jak utwory publikowane
+  | poza naszym repozytorium, objęte ustawowym prawem autorskim. W rzeczy samej, mniejsze ryzyko
+  | wiąże się z korzystaniem z naszego repozytorium niż z po prostu zamieszczeniem Twojego utworu
+  | na własnej stronie internetowej, ponieważ licencja jest wyraźnie widoczna i jasno określa,
+  | w jaki sposób można zgodnie z prawem wykorzystać Twój utwór. Mówiąc wprost, prawo autorskie
+  | nie reguluje kwestii ścigania oszustw i plagiatów, ale jest dobrą pierwszą linią obrony.
+
+licensing-question-10 = Czy inni ludzie mogą sprzedawać efekty mojej pracy?
+
+licensing-answer-10 =
+  | Jest to możliwe, o ile wybrana przez Ciebie licencja pozwala na jakiekolwiek „komercyjne”
+  | zastosowania. To może być korzystne. Rozważ sytuację, w której jakaś firma oferuje
+  | wydrukowanie Twojej pracy, aby studenci mieli dostęp do kopii papierowych. Bez licencji
+  | umożliwiającej wykorzystanie komercyjne, taka firma nie mogłaby pobierać opłaty pokrywającej
+  | koszty druku, oprawy i obsługi.
+
+licensing-question-11 = No dobrze, ale co, jeśli jakiś duży wydawca zechce opublikować moją pracę?
+
+licensing-answer-11 =
+  | Jeśli wydawca będzie chciał włączyć Twój utwór do pracy zbiorowej, ma takie prawo na mocy
+  | licencji; musi tylko wymienić Ciebie jako autora i właściciela praw autorskich. Z naszych
+  | doświadczeń wynika jednak, że w takim przypadku większość poważnych wydawców woli renegocjować
+  | z autorem nową licencję. Co więcej, jeśli naprawdę spodziewasz się, że otrzymasz tantiemy
+  | za to, co piszesz, nasze repozytorium prawdopodobnie nie jest właściwym miejscem na publikację
+  | Twojego utworu – choć może być właściwym miejscem na eksperymentowanie z jego wczesną wersją
+  | lub wersją alternatywną.
+
+licensing-question-12 =
+  | Czy licencja Creative Commons – Uznanie autorstwa wpływa na zakres dozwolonego użytku?
+
+licensing-answer-12 =
+  | Nie. Licencja obejmuje sformułowanie: „Żadne postanowienie niniejszej Licencji nie zmierza
+  | do ograniczenia, wyłączenia lub zawężenia sposobów korzystania nieobjętych prawem autorskim
+  | lub uprawnień wynikających z ograniczeń lub wyjątków od ochrony prawa autorskiego wynikających
+  | z przepisów prawa autorskiego lub innych znajdujących zastosowanie przepisów.” Dozwolony
+  | użytek, doktryna pierwszej sprzedaży i inne podobne uprawnienia mają zastosowanie bez względu
+  | na to, czy właściciel prawa autorskiego zgadza się na nie, czy nie.
+
+licensing-question-13 =
+  | Co muszę zrobić, jeśli chcę włączyć część utworu innego autora znajdującego się w repozytorium
+  | do utworu, który tworzę poza repozytorium?
+
+licensing-answer-13 =
+  | Musisz właściwie oznakować autorstwo tej części oryginalnej pracy, którą wykorzystujesz poza
+  | naszym repozytorium. Właściwe oznakowanie to po prostu podanie nazwiska oryginalnego autora
+  | i wskazanie zakresu jego pracy w Twoim utworze. Oprócz tego musisz zamieścić informację
+  | o prawie autorskim (licencji) i podać link(URL) do oryginalnej pracy w naszym repozytorium.
+
+licensing-question-14 =
+  | Co mam zrobić, jeśli pragnę włączyć utwór innego autora do zbioru, który tworzę?
+
+licensing-answer-14 =
+  | Po prostu dodaj utwór do swojego zbioru w narzędziu Collection Composer. Nasze oprogramowanie
+  | automatycznie doda nazwisko oryginalnego autora do Twojego zbioru, podając odniesienie do
+  | niego, zgodnie z wymogami licencji Creative Commons.
+
+licensing-question-15 =
+  | Czy mogę włączyć taki materiał do moich utworów pierwotnie opublikowanych poza bazą
+  | i objętych ustawowym prawem autorskim?
+
+licensing-answer-15 =
+  | To proste pytanie dotyka kilku złożonych problemów prawnych. Najlepiej odpowie na nie
+  | właściciel praw autorskich lub prawnik specjalizujący się w dziedzinie ochrony własności
+  | intelektualnej. Możemy Ci tylko przypomnieć, że wszelka treść, jaką wprowadzasz do naszego
+  | repozytorium, objęta jest licencją Creative Commons – Uznanie autorstwa, co oznacza, że
+  | wszystko, co wykorzystujesz bezpośrednio w swoich materiałach w naszym repozytorium, musi być
+  | możliwe do opublikowania zgodnie z prawem na mocy tej licencji. Na stronie
+  | <a href="http://www.creativecommons.pl">Creative Commons Polska</a> znajdziesz informację,
+  | które mogą wprowadzić Cię w temat prawa autorskiego i zasad ponownego wykorzystania materiałów
+  | objętych prawem autorskim. Jeśli uzyskasz zgodę od posiadacza praw autorskich na wykorzystanie
+  | materiału objętego prawem autorskim w swoich utworach, zalecamy włączenie tej zgody do
+  | materiału, ponieważ w ten sposób wskażesz, kto jest właścicielem praw autorskich
+  | do tego materiału.
+
+licensing-question-16 =
+  | Czy prawo “dopuszczonego użytku” pozwala mi na wykorzystanie materiału objętego prawem
+  | autorskim w moich utworach w repozytorium?
+
+licensing-answer-16 =
+  | Może tak, może nie. Jest wiele czynników, które należy wziąć pod uwagę, zanim powołasz się na
+  | „dozwolony użytek”, żeby wykorzystać materiał objęty prawem autorskim. To kolejne pytanie,
+  | na które najlepiej odpowie właściciel praw autorskich lub prawnik specjalizujący się
+  | w dziedzinie ochrony własności intelektualnej.
+
+licensing-question-17 =
+  | Jaki jest status prawny licencji Creative Commons poza Stanami Zjednoczonymi?
+
+licensing-answer-17 =
+  | Licencja Creative Commons została celowo sformułowania w taki sposób, aby była egzekwowana
+  | w różnych systemach prawnych. Niemniej jednak Creative Commons nie uwzględnia każdego
+  | najdrobniejszego niuansu w przepisach dotyczących prawa autorskiego obowiązujących
+  | w różnych krajach czy stanach. Licencja Creative Commons zawiera klauzule „rozdzielności” –
+  | co oznacza, że jeśli pewne zapisy uznane zostaną za niewykonalne w jakimś miejscu na świecie,
+  | to tylko te zapisy nie zostaną uwyględnione, a pozostała część umowy licencyjnej pozostanie
+  | w mocy.
 
 # LICENSING - Content - src/scripts/pages/license/license-template.html
 
@@ -1564,17 +1763,17 @@ licensing-description =
 
 # ROLE ACCEPTANCES - Title - src/scripts/modules/role-acceptances/role-acceptances.coffee, src/scripts/pages/role-acceptance/role-acceptance.coffee
 
-role-acceptances-pageTitle =
+role-acceptances-pageTitle = Nadawanie uprawnień
 
 # ROLE ACCEPTANCES - Content - src/scripts/modules/role-acceptances/role-acceptances-template.html
 
 role-acceptances-title = Tytuł:
 
-role-acceptances-role =
+role-acceptances-role = Uprawnienia
 
-role-acceptances-requester =
+role-acceptances-requester = Wnioskodawca
 
-role-acceptances-assignment-date =
+role-acceptances-assignment-date = Data przydzielenia
 
 role-acceptances-license-i-license =
   | Udostępniam ten zasób na licencji <a href="{ $url }">Creative Commons Attribution License (CC-BY).</a>
@@ -1597,6 +1796,7 @@ role-acceptances-license-agree =
   | nazwiska autorów, tytuł pracy oraz link do niej na OpenStax CNX
 
 role-acceptances-success-alert =
+  | <strong>Sukces.</strong> Twoje nowe ustawienia zostały zapisane
 
 
 
@@ -1680,11 +1880,13 @@ media-latest-content = <a href="{ $url }">Nowsza wersja</a> { $type } jest już 
 
 # OTHER CONTENT - Legacy Template - src/scripts/pages/app/modals/legacy-template.html
 
-legacy-template-warning-header =
+legacy-template-warning-header = Uwaga
 
 legacy-template-warning-message =
+  | Przechodzisz do starej wersji serwisu CNX. Aby powrócić do tej strony,
+  | użyj przycisku „wstecz” przeglądarki
 
-legacy-template-remind-again =
+legacy-template-remind-again = Nie przypominaj mi ponownie
 
 legacy-template-cancel-button = Anuluj
 
@@ -1739,6 +1941,6 @@ error-page-reason = { $code ->
 
 # MAINTENANCE - Maintenance - src/maintenance.html
 
-maintenance-openstax-cnx-title =
+maintenance-openstax-cnx-title = Serwis jest obecnie niedostępny ze względu na prace konserwatorskie
 
-maintenance-message =
+maintenance-message = Dopracowujemy ostatnie szczegóły i zaraz wracamy!
