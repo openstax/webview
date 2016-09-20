@@ -1566,7 +1566,7 @@ licensing-answer-1 =
   | <p>Naszym celem jest stworzenie i utrzymywanie miejsca (repozytorium), w którym zarówno
   | indywidualni użytkownicy, jak i społeczności z całego świata mogą tworzyć i swobodnie
   | dzielić się wiedzą. Licencja <a href="http://creativecommons.pl">Creative Commons</a> –
-  | <a href="https://creativecommons.org/licenses/by/3.0/pl/legalcode">Uznanie autorstwa</a>,
+  | <a href="https://creativecommons.org/licenses/by/4.0/deed.pl">Uznanie autorstwa</a>,
   | na którą wyrażasz zgodę, podobnie jak każdy inny autor, umożliwia ponowne wykorzystywanie
   | Twoich treści. Dzięki temu wszystkie treści są dostępne dla każdego bez ograniczeń i każdy
   | autor może wykorzystywać te treści, dzielić się nimi z innymi albo tworzyć utwory pochodne,
