@@ -104,7 +104,7 @@ define (require) ->
     handleCoach: ($el) ->
       return unless @isCoach()
       @hideExercises($el)
-      $summary = $el.find('section.summary[data-depth="1"], section.section-summary[data-depth="1"]')
+      $summary = $el.find('section.summary[data-depth], section.section-summary[data-depth]')
       @makeRegionForCoach($summary) if $summary.length > 0
 
     # Toggle the visibility of teacher's edition elements
