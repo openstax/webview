@@ -1,7 +1,7 @@
 {{#if loaded}}
   <div class="license-info">
     {{#or licensors.length license.name}}
-      <span data-l10n-id="textbook-view-license" data-l10n-args='{"url":"{{license.url}}", "name":"{{~license.name}}", "code":"{{license.code}}", "version":"{{license.version~}}", "licensors":{{toJSON licensors}} }'>
+      <span data-l10n-id="textbook-view-license" data-l10n-args='{"url":"{{license.url}}", "name":"{{~license.name}}", "code":"{{license.code}}", "version":"{{license.version~}}", "licensors":{{toJSON (mapField licensors "fullname")}} }'>
         <span>This work is licensed</span>
         {{~#if licensors.length~}}
           <span> by </span>
