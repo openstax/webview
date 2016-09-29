@@ -5,7 +5,7 @@
 <p>
   <span>© {{date revised}}</span>
   <span>{{#each authors}}<span class="list-comma">{{fullname}}</span>{{/each}}.</span>
-  <span data-l10n-id="textbook-view-textbook-content-produced" data-l10n-args='{"url":"{{license.url}}","title":"{{license.name}} {{license.version}}","authors":{{toJSON authors}} }'>
+  <span data-l10n-id="textbook-view-textbook-content-produced" data-l10n-args='{"url":"{{license.url}}","title":"{{license.name}} {{license.version}}","authors":{{toJSON (mapField authors "fullname")}} }'>
     Textbook content produced by
     <span>{{#each authors}}<span class="list-comma">{{fullname}}</span>{{/each}}</span>
     is licensed under a <a href="{{license.url}}">{{license.name}} {{license.version}}</a> license.

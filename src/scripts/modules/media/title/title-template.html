@@ -23,7 +23,7 @@
         {{/is}}
       </h1>
       {{#if parent.id}}
-        <span data-l10n-id="textbook-view-derived-from" data-l10n-args='{"url":"/contents/{{parent.id}}@{{parent.version}}", "title":"{{parent.title}}","authors": {{toJSON parent.authors}} }'>Derived from <a href="/contents/{{parent.id}}@{{parent.version}}">{{parent.title}}</a> by
+        <span data-l10n-id="textbook-view-derived-from" data-l10n-args='{"url":"/contents/{{parent.id}}@{{parent.version}}", "title":"{{parent.title}}","authors": {{toJSON (mapField parent.authors "fullname")}} }'>Derived from <a href="/contents/{{parent.id}}@{{parent.version}}">{{parent.title}}</a> by
           <span class="collection-authors">
             {{~#each parent.authors}}
               <span class="list-comma">{{fullname}}</span>
@@ -35,7 +35,7 @@
 
     <div class="info">
       {{#if authors.length}}
-        <span data-l10n-id="textbook-view-{{#if isBook}}book{{else}}page{{/if}}-by" data-l10n-args='{"authors": {{toJSON authors}} }'>
+        <span data-l10n-id="textbook-view-{{#if isBook}}book{{else}}page{{/if}}-by" data-l10n-args='{"authors": {{toJSON (mapField authors "fullname")}} }'>
           {{#if isBook}}Book{{else}}Page{{/if}} by:
           <span class="collection-authors">
             {{~#each authors}}
