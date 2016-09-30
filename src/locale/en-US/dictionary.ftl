@@ -1881,11 +1881,15 @@ media-editbar-list-publishing = publishing
 
 # OTHER CONTENT - Publish Template - src/scripts/modules/media/editbar/modals/publish-template.html
 
-media-publish-template-license-agreement = I license this work under the
-
 media-publish-template-publish = Publish
 
-media-publish-template-previously = (previously <a href="{ $url }">{ $licensename } {$licenseversion }.</a>)
+media-publish-template-i-license =
+  | I license this work under the <a href="{ $url }">{ $name } { $version }.</a>
+
+media-publish-template-i-license-new-license =
+  | I license this work under the <a href="{ $url }">{ $name } { $version }.</a>
+  | <br/>
+  | (previously <a href="{ $original-url }">{ $original-name } { $original-version }.</a>)
 
 media-publish-template-understand = I understand:
 
