@@ -11,15 +11,16 @@
           <div class="form-group">
             <label class="checkbox">
               <input type="checkbox" name="license"/>
-                <span data-l10n-id="media-publish-template-license-agreement">I license this work under the</span>
-                <a href="{{license.url}}">
-                  {{license.name}} {{license.version}}.
-                </a>
                 {{#isnt originalLicense.url license.url}}
-                <br/><span data-l10n-args='{"url":"{{originalLicense.url}}", "licensename":"{{originalLicense.name}}", "licenseversion":"{{originalLicense.version}}"}' data-l10n-id="media-publish-template-previously">(previously
-                <a href="{{originalLicense.url}}">
-                  {{originalLicense.name}} {{originalLicense.version}}.
-                </a>)</span>
+                  <span data-l10n-id="media-publish-template-i-license" data-l10n-args='{"url":"{{license.url}}", "name":"{{license.name}}", "version":"{{license.version}}"}'>
+                    I license this work under the <a href="{{license.url}}">{{license.name}} {{license.version}}.</a>
+                  </span>
+                {{else}}
+                  <span data-l10n-id="media-publish-template-i-license-new-license" data-l10n-args='{"url":"{{license.url}}", "name":"{{license.name}}", "version":"{{license.version}}", "original-url":"{{originalLicense.url}}", "original-name":"{{originalLicense.name}}", "original-version":"{{originalLicense.version}}"}'>
+                    I license this work under the <a href="{{license.url}}">{{license.name}} {{license.version}}.</a>
+                    <br/>
+                    (previously <a href="{{originalLicense.url}}">{{originalLicense.name}} {{originalLicense.version}}.</a>)
+                  </span>
                 {{/isnt}}
                 <br/><br/>
                 <span data-l10n-id="media-publish-template-understand">I understand:</span>
