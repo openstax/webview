@@ -7,8 +7,6 @@ define (require) ->
   require('less!./header')
   require('bootstrapCollapse')
 
-  $(window).focus(session.update.bind(session))
-
   return class HeaderView extends BaseView
     template: template
     templateHelpers: () -> {
@@ -36,7 +34,6 @@ define (require) ->
       siteStatus: '.site-status'
 
     onRender: () ->
-      session.update()
       @regions.siteStatus.show(new SiteStatusView())
 
     skipTo: (e) ->
