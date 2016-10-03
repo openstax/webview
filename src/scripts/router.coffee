@@ -58,7 +58,6 @@ define (require) ->
 
     navigate: (fragment, options = {}, cb) ->
       super(arguments...)
-      session.update() # Check for changes to the session status
       analytics.send() if options.analytics isnt false
       cb?()
       @trigger('navigate')
