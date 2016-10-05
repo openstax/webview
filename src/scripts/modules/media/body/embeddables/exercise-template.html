@@ -1,5 +1,14 @@
 {{#if data.items.[0].questions}}
     {{#each data.items.0.questions}}
-        {{{this.stem_html}}}
+        <div>{{{this.stem_html}}}</div>
+        {{#inArray this.formats  'multiple-choice'}}
+            {{#if this.answers}}
+            <ol>
+                {{#each this.answers}}
+                    <li>{{{this.content_html}}}</li>
+                {{/each}}
+            </ol>
+            {{/if}}
+        {{/inArray}}
     {{/each}}
 {{/if}}
