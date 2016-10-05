@@ -3,6 +3,10 @@
 //
 //     #content { @import 'this_file.less'; }
 
+&[data-is-collated="true"] {
+  &::before { content: 'TODO: I am a collated Page!'; }
+}
+
 h1,
 h2,
 h3,

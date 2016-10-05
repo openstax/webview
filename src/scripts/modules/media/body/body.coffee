@@ -119,6 +119,11 @@ define (require) ->
       try
         if @model.get('loaded') and @model.asPage()?.get('loaded') and @model.asPage()?.get('active')
 
+          # Add an attribute marking that this is collated
+          # TODO: Move this into the handlebars template
+          isCollated = @model.asPage().isCollated()
+          $temp.find('#content').attr('data-is-collated', isCollated)
+
           if $temp.find('.os-interactive-link').length
             @model.set('sims', true)
 
