@@ -63,6 +63,8 @@ body {
 .concept-coach-wrapper {
   margin-top: 4rem;
 }
+
+// styles for coach scene, not opened.
 .media-body > #content {
   .concept-coach-wrapper {
     h1 {
@@ -85,6 +87,7 @@ body {
   }
 }
 
+// styles for coach opened.
 body.cc-opened {
   .concept-coach-wrapper {
     text-align: left;
@@ -96,9 +99,14 @@ body.cc-opened {
   }
 
   .media-body > #content .concept-coach-wrapper {
-    p, h1 {
+    p, h1, h2, h3, h4, h5, h6 {
       color: inherit;
-      margin-bottom: inherit;
+    }
+
+    .concept-coach-view {
+      p, h1, h2, h3, h4, h5, h6 {
+        margin-bottom: inherit;
+      }
     }
 
     .dropdown-menu > li > a {
