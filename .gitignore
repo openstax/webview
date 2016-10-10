@@ -12,3 +12,6 @@ test/selenium/python/properties.ini
 
 
 pyramid.log
+
+# Log files from gulp nginx:start 
+/logs/
