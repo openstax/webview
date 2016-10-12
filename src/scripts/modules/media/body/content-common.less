@@ -9,7 +9,6 @@ h3,
 h4,
 h5,
 h6 {
-  margin-bottom: 1.5rem;
   color: @gray-dark;
 }
 
@@ -46,16 +45,6 @@ pre {
   }
 }
 
-> section,
-> figure,
-> [data-type="glossary"],
-> [data-type="footnote-refs"] {
-  margin-top: 6rem;
-  > ol {
-    list-style-type: none;
-  }
-}
-
 section > section,
 section > figure {
   margin-top: 3rem;
@@ -71,15 +60,6 @@ figure {
   position: relative;
   color: @gray;
   text-align: center;
-
-  &.ui-has-child-figcaption > figcaption::before,
-  &:not(.ui-has-child-figcaption)::after
-  {
-    margin-right: 0.5rem;
-    color: @gray-medium;
-    font-weight: bold;
-    content: "Figure " counter(figure) ".";
-  }
 
   > figcaption {
     padding: 1rem;
@@ -100,17 +80,12 @@ figure {
   > figure {
     counter-increment: subfigure;
 
-    &.ui-has-child-figcaption > figcaption::before {
-      font-weight: bold;
-      content: counter(figure) counter(subfigure,lower-alpha) ': ';
-    }
-
     &:not(.ui-has-child-figcaption)::after {
       position: relative;
       display: block;
       text-align: center;
       font-weight: bold;
-      content: '(' counter(subfigure,lower-alpha) ')';
+      // content: '(' counter(subfigure,lower-alpha) ')';
     }
 
   }
@@ -121,7 +96,7 @@ figure {
 figure:not([data-orient="vertical"]) {
   position: relative;
   display: table;
-  width: 100%;
+  // width: 100%;
   top: 0;
   table-layout: fixed;
 
@@ -442,13 +417,13 @@ div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin
   // Style the example
   .default-label(example; false) { content: 'Example'; }
   .default-label(example; true)  { content: 'Example: '; }
-  .style(example) { margin-top: 3rem; }
-  .title(example) {
-    padding: 0.1em 1em;
-    font-weight: bold;
-    color: @gray-lightest;
-    background-color: @gray;
-  }
+  // .style(example) { margin-top: 3rem; }
+  // .title(example) {
+  //   padding: 0.1em 1em;
+  //   font-weight: bold;
+  //   color: @gray-lightest;
+  //   background-color: @gray;
+  // }
   // Style the body of an example the same as a note
   .body(example) { .body(note); }
 
@@ -495,11 +470,11 @@ div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin
       #blockish>.title(@type);
       &::before { .format-label(@type; @label-type; true); }
     }
-    // No title exists so style the blockish::before and put the label there
-    &:not(.ui-has-child-title)::before {
-      #blockish>.title(@type);
-      .format-label(@type; @label-type; false);
-    }
+    // // No title exists so style the blockish::before and put the label there
+    // &:not(.ui-has-child-title)::before {
+    //   #blockish>.title(@type);
+    //   .format-label(@type; @label-type; false);
+    // }
   }
 
   // Decide which case of the label we are dealing with
@@ -516,15 +491,9 @@ div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin
 .note     { .make-block(note); }
 [data-type="example"],
 .example  { .make-block(example); }
-[data-type="exercise"],
-.exercise { .make-block(exercise); }
 
 
-[data-type="example"],
-[data-type="exercise"],
-.example,
-.exercise {
-
+.mixin-exercise() {
   [data-type="problem"],
   [data-type="solution"],
   .problem,
@@ -595,6 +564,15 @@ div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin
       content: "Solution";
     }
   }
+
+}
+
+[data-type="example"],
+[data-type="exercise"],
+.example,
+.exercise {
+
+  .mixin-exercise();
 }
 
 //
