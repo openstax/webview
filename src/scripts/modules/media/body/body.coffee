@@ -257,7 +257,10 @@ define (require) ->
       embeddableItem.$el = @$el.find(embeddableItem.selector) if embeddableItem.selector
 
       $parent = embeddableItem.$el.parent()
-      embeddableItem.$el.replaceWith(embeddableItem.html)
+      if $parent.prop('tagName')?.toLowerCase() is 'p'
+        $parent.replaceWith(embeddableItem.html)
+      else
+        embeddableItem.$el.replaceWith(embeddableItem.html)
 
       embeddableItem.onRender?($parent)
 
