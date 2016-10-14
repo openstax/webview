@@ -3,7 +3,7 @@
         <div>{{{this.stem_html}}}</div>
         {{#inArray this.formats  'multiple-choice'}}
             {{#if this.answers}}
-            <ol>
+            <ol data-number-style="lower-alpha">
                 {{#each this.answers}}
                     <li>{{{this.content_html}}}</li>
                 {{/each}}
