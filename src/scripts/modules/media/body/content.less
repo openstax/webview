@@ -246,15 +246,11 @@ figure[data-orient="vertical"] {
   .emulate-bulleted(inline; @attr-value; @char) {
     &[data-bullet-style="@{attr-value}"] {
       // Note: since this is inline, the `li` is actually a `span.item`
+      > li::before, // the li is here because <ul data-display="inline"> is possible
       > [data-type="item"]::before {
         content: @char;
         margin-right: 0.5em;
       }
-    }
-  }
-  // For Inline lists with `none`, skip the pseudoelement
-  .emulate-bulleted(inline; @attr-value; none) {
-    &[data-bullet-style="@{attr-value}"] {
     }
   }
 
@@ -265,13 +261,6 @@ figure[data-orient="vertical"] {
     }
   }
 
-
-  .style(@display; @list-type) {
-    // This mixin applies to all display and list-types
-
-    // Enter rules for the separator character (mostly for inline lists)
-    .item-sep(@display);
-  }
   .style(@display; bulleted) {
     // These are always "emulated" for bulleted lists
     .emulate-bulleted(@display; 'pilcrow';      '\00b6');
@@ -289,7 +278,30 @@ figure[data-orient="vertical"] {
     .browser-style(bulleted; 'bullet';       disc);
     .browser-style(bulleted; 'open-circle';  circle);
   }
-  .style(inline; bulleted) {
+  .style(block; enumerated) {
+    .browser-style(enumerated; 'arabic';      decimal);
+    .browser-style(enumerated; 'upper-alpha'; upper-alpha);
+    .browser-style(enumerated; 'lower-alpha'; lower-alpha);
+    .browser-style(enumerated; 'upper-roman'; upper-roman);
+    .browser-style(enumerated; 'lower-roman'; lower-roman);
+  }
+
+  .style(@display; labeled-item) {
+    list-style-type: none;
+  }
+  .style(inline; @list-type) {
+    display: inline;
+
+    > li { display: inline; }
+    .style-emulated(inline; @list-type);
+  }
+  .style-emulated(@display; @list-type) {
+    // This mixin applies to all display and list-types
+
+    // Enter rules for the separator character (mostly for inline lists)
+    .item-sep(@display);
+  }
+  .style-emulated(inline; bulleted) {
     // "emulate" all the bullets because inline lists are spans
     .emulate-bulleted(inline; 'bullet';       '\25cf'); // black circle
     .emulate-bulleted(inline; 'open-circle';  '\25cb'); // white circle
@@ -302,21 +314,24 @@ figure[data-orient="vertical"] {
 
   }
 
-  .style(@display, enumerated) {
-    // Since we have to "emulate" the list, reset and increment the `list-item` counter.
-    counter-reset: list-item;
-    list-style-type: decimal;
-
-    > [data-type="item"],
-    > li {
-      counter-increment: list-item;
-    }
-
+  // Only add margins when emulating a blockish list. For inline ones, no margins are needed
+  .style-emulated(block, @list-type) {
     > [data-type="item"]::before,
     > li::before {
       content: attr(data-mark-prefix) counter(list-item, decimal) attr(data-mark-suffix) '. ';
       margin-right: 1.1em;
       margin-left: -0.5em;
+    }
+  }
+
+  .style-emulated(@display, enumerated) {
+    // Since we have to "emulate" the list, reset and increment the `list-item` counter.
+    counter-reset: list-item;
+    list-style-type: none;
+
+    > [data-type="item"],
+    > li {
+      counter-increment: list-item;
     }
 
     // "Emulate" the numbering for inline numbered lists
@@ -340,28 +355,103 @@ figure[data-orient="vertical"] {
     .emulate-enumerated('lower-roman'; lower-roman);
   }
 
-  .style(block; labeled-item) {
+  .style-emulated(@display; labeled-item) {
     list-style-type: none;
   }
 }
 
+.style(@foo; @bar) { }
+.style-emulated(@foo; @bar) { }
 
 // Block-ish lists
-ul[data-display]:not([data-display='inline'])          { #list>.style(block; bulleted); }
-ol[data-display]:not([data-display='inline'])          { #list>.style(block; enumerated); }
+ul:not([data-display='inline'])          { #list>.style(block; bulleted); }
+ol:not([data-display='inline'])          { #list>.style(block; enumerated); }
 ul[data-labeled-item]                    { #list>.style(block; labeled-item); }
 
 // Inline lists (with `data-display='inline'`)
 ul[data-display='inline']                { #list>.style(inline; bulleted); }
 ol[data-display='inline']                { #list>.style(inline; enumerated); }
-ul[data-labeled-item]                    { #list>.style(inline; labeled-item); }
+ul[data-display='inline'][data-labeled-item] { #list>.style(inline; labeled-item); }
 
 // Lists inside a paragraph
-[data-type='list']:not([data-list-type])          { #list>.style(inline; bulleted); }
-[data-type='list'][data-list-type='bulleted']     { #list>.style(inline; bulleted); }
-[data-type='list'][data-list-type='enumerated']   { #list>.style(inline; enumerated); }
-[data-type='list'][data-list-type='labeled-item'] { #list>.style(inline; labeled-item); }
+[data-type='list']:not([data-list-type]):not([data-labeled-item])
+                                                  { #list>.style-emulated(inline; bulleted); }
+[data-type='list'][data-list-type='bulleted']     { #list>.style-emulated(inline; bulleted); }
+[data-type='list'][data-list-type='enumerated']   { #list>.style-emulated(inline; enumerated); }
+[data-type='list'][data-list-type='labeled-item'] { #list>.style-emulated(inline; labeled-item); }
 div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin-bottom: 1rem; }
+
+
+
+// List tests; inject them into the browser DOM to see how the lists render
+// <div>
+// TODO: Verify data-labeled-item
+// <p><ul><li>item1</li><li>item2</li></ul></p>
+// <p><ol><li>item1</li><li>item2</li></ol></p>
+// <p><span data-type="list"><span data-type="item">item</span></span></p>
+//
+// <hr/>
+// <p><ul data-bullet-style="myBullet"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-bullet-style="none"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-bullet-style="bullet"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-bullet-style="open-circle"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-bullet-style="pilcrow"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-bullet-style="rpilcrow"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-bullet-style="section"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-bullet-style="asterisk"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-bullet-style="dash"><li>item1</li><li>item2</li></ul></p>
+//
+// <hr/>
+// <p><ol data-number-style="arabic"><li>item1</li><li>item2</li></ol></p>
+// <p><ol data-number-style="upper-alpha"><li>item1</li><li>item2</li></ol></p>
+// <p><ol data-number-style="lower-alpha"><li>item1</li><li>item2</li></ol></p>
+// <p><ol data-number-style="upper-roman"><li>item1</li><li>item2</li></ol></p>
+// <p><ol data-number-style="lower-roman"><li>item1</li><li>item2</li></ol></p>
+//
+// <hr/>
+// Lists with data-display="inline"
+// <p><ul data-display="inline" data-bullet-style="myBullet"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-display="inline" data-bullet-style="none"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-display="inline" data-bullet-style="bullet"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-display="inline" data-bullet-style="open-circle"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-display="inline" data-bullet-style="pilcrow"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-display="inline" data-bullet-style="rpilcrow"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-display="inline" data-bullet-style="section"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-display="inline" data-bullet-style="asterisk"><li>item1</li><li>item2</li></ul></p>
+// <p><ul data-display="inline" data-bullet-style="dash"><li>item1</li><li>item2</li></ul></p>
+//
+// <hr/>
+// <p><ol data-display="inline" data-number-style="arabic"><li>item1</li><li>item2</li></ol></p>
+// <p><ol data-display="inline" data-number-style="upper-alpha"><li>item1</li><li>item2</li></ol></p>
+// <p><ol data-display="inline" data-number-style="lower-alpha"><li>item1</li><li>item2</li></ol></p>
+// <p><ol data-display="inline" data-number-style="upper-roman"><li>item1</li><li>item2</li></ol></p>
+// <p><ol data-display="inline" data-number-style="lower-roman"><li>item1</li><li>item2</li></ol></p>
+//
+// <p><ul data-display="inline" data-labeled-item="true"><li data-label="item-label1">Item1</li><li data-label="item-label2">Item2</li></ul></p>
+//
+// <hr/>
+// Inline lists
+// <p>before... <span data-type="list" data-list-type="bulleted" data-bullet-style="myBullet"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+// <p>before... <span data-type="list" data-list-type="bulleted" data-bullet-style="none"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+// <p>before... <span data-type="list" data-list-type="bulleted" data-bullet-style="bullet"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+// <p>before... <span data-type="list" data-list-type="bulleted" data-bullet-style="open-circle"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+// <p>before... <span data-type="list" data-list-type="bulleted" data-bullet-style="pilcrow"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+// <p>before... <span data-type="list" data-list-type="bulleted" data-bullet-style="rpilcrow"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+// <p>before... <span data-type="list" data-list-type="bulleted" data-bullet-style="section"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+// <p>before... <span data-type="list" data-list-type="bulleted" data-bullet-style="asterisk"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+// <p>before... <span data-type="list" data-list-type="bulleted" data-bullet-style="dash"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+//
+// <hr/>
+// <p>before... <span data-type="list" data-list-type="enumerated" data-number-style="arabic"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+// <p>before... <span data-type="list" data-list-type="enumerated" data-number-style="upper-alpha"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+// <p>before... <span data-type="list" data-list-type="enumerated" data-number-style="lower-alpha"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+// <p>before... <span data-type="list" data-list-type="enumerated" data-number-style="upper-roman"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+// <p>before... <span data-type="list" data-list-type="enumerated" data-number-style="lower-roman"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+//
+// <p>before... <span data-type="list" data-labeled-item="true"><span data-type="item" data-label="item-label1">Item1</span><span data-type="item" data-label="item-label2">Item2</span></span> ...after</p>
+
+//
+// </div>
 
 
 .footnote {
