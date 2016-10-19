@@ -151,7 +151,7 @@ define (require) ->
             $el.toggleClass('ui-has-child-title', $title.length > 0)
 
           # Wrap solutions in a div so "Show/Hide Solutions" work
-          $temp.find('.solution, [data-type="solution"]')
+          $temp.find('.exercise .solution, [data-type="exercise"] [data-type="solution"]')
           .wrapInner('<section class="ui-body">')
           .prepend('''
             <div class="ui-toggle-wrapper">
