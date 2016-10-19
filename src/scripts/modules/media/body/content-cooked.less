@@ -118,12 +118,28 @@ h1.example-title .text {
 > :not(.eoc):not(.eob) [data-type="exercise"],
 > :not(.eoc):not(.eob) .exercise { .make-block(exercise);}
 
+.exercise-number() {
+  font-size: 2rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
 .eoc [data-type="exercise"], .eoc .exercise {
   span {
     font-weight: bold;
     padding-right: 0.5rem
   }
-  p {display: inline;}
+  p { display: inline; }
+  [data-type="problem"] > .number {
+    .exercise-number();
+  }
+}
+
+.solutions-container {
+  // TODO: Fix this selector; it should be similar to the problem number one
+  [data-type="solution"] > .ui-body > a /*> .number*/ {
+    .exercise-number();
+  }
 }
 
 > :not(.eoc):not(.eob) [data-type="exercise"],
