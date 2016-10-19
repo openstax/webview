@@ -286,6 +286,9 @@ figure[data-orient="vertical"] {
     .browser-style(enumerated; 'lower-roman'; lower-roman);
   }
 
+  .style(@display; labeled-item) {
+    list-style-type: none;
+  }
   .style(inline; @list-type) {
     display: inline;
 
@@ -352,7 +355,7 @@ figure[data-orient="vertical"] {
     .emulate-enumerated('lower-roman'; lower-roman);
   }
 
-  .style-emulated(block; labeled-item) {
+  .style-emulated(@display; labeled-item) {
     list-style-type: none;
   }
 }
@@ -363,18 +366,19 @@ figure[data-orient="vertical"] {
 // Block-ish lists
 ul:not([data-display='inline'])          { #list>.style(block; bulleted); }
 ol:not([data-display='inline'])          { #list>.style(block; enumerated); }
-// ul[data-labeled-item]                    { #list>.style(block; labeled-item); }
+ul[data-labeled-item]                    { #list>.style(block; labeled-item); }
 
 // Inline lists (with `data-display='inline'`)
 ul[data-display='inline']                { #list>.style(inline; bulleted); }
 ol[data-display='inline']                { #list>.style(inline; enumerated); }
-ul[data-labeled-item]                    { #list>.style(inline; labeled-item); }
+ul[data-display='inline'][data-labeled-item] { #list>.style(inline; labeled-item); }
 
 // Lists inside a paragraph
-[data-type='list']:not([data-list-type])          { #list>.style-emulated(inline; bulleted); }
+[data-type='list']:not([data-list-type]):not([data-labeled-item])
+                                                  { #list>.style-emulated(inline; bulleted); }
 [data-type='list'][data-list-type='bulleted']     { #list>.style-emulated(inline; bulleted); }
 [data-type='list'][data-list-type='enumerated']   { #list>.style-emulated(inline; enumerated); }
-// [data-type='list'][data-list-type='labeled-item'] { #list>.style-emulated(inline; labeled-item); }
+[data-type='list'][data-list-type='labeled-item'] { #list>.style-emulated(inline; labeled-item); }
 div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin-bottom: 1rem; }
 
 
@@ -423,6 +427,8 @@ div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin
 // <p><ol data-display="inline" data-number-style="upper-roman"><li>item1</li><li>item2</li></ol></p>
 // <p><ol data-display="inline" data-number-style="lower-roman"><li>item1</li><li>item2</li></ol></p>
 //
+// <p><ul data-display="inline" data-labeled-item="true"><li data-label="item-label1">Item1</li><li data-label="item-label2">Item2</li></ul></p>
+//
 // <hr/>
 // Inline lists
 // <p>before... <span data-type="list" data-list-type="bulleted" data-bullet-style="myBullet"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
@@ -441,6 +447,9 @@ div[data-type='list'][data-list-type]             { padding-left: 2.5rem; margin
 // <p>before... <span data-type="list" data-list-type="enumerated" data-number-style="lower-alpha"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
 // <p>before... <span data-type="list" data-list-type="enumerated" data-number-style="upper-roman"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
 // <p>before... <span data-type="list" data-list-type="enumerated" data-number-style="lower-roman"><span data-type="item">item1</span><span data-type="item">item2</span></span> ...after</p>
+//
+// <p>before... <span data-type="list" data-labeled-item="true"><span data-type="item" data-label="item-label1">Item1</span><span data-type="item" data-label="item-label2">Item2</span></span> ...after</p>
+
 //
 // </div>
 
