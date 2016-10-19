@@ -11,9 +11,11 @@ h5,
 h6 {
   margin: 1.5rem 0 1rem 0;
 }
-h2:first-child {
-  display: none;
-}
+
+// It is already displayed at the top of the page in blue
+// the `>` is because collated titles (like Key Concepts) contain descendent
+// document-title elements.
+> [data-type="document-title"] { display: none; }
 
 > section,
 > figure,
