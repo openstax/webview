@@ -15,7 +15,10 @@ h6 {
 // It is already displayed at the top of the page in blue
 // the `>` is because collated titles (like Key Concepts) contain descendent
 // document-title elements.
-> [data-type="document-title"] { display: none; }
+[data-type="page"],
+[data-type="composite-page"] {
+  > [data-type="document-title"] { display: none; }
+}
 
 > section,
 > figure,
