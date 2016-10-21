@@ -31,18 +31,18 @@ h6 {
   }
 }
 
-.figure {
+.os-figure {
   display: table;
   margin: 1rem auto 0;
-  .caption-container {
+  .os-caption-container {
     padding-top: 1rem;
     display: table-caption;
     caption-side: bottom;
     font-size: 1.3rem;
-    .title-label {
+    .os-title-label {
       font-weight: bold;
     }
-    .number {
+    .os-number {
       font-weight: bold;
       padding-right: .5rem;
   }
@@ -118,16 +118,14 @@ h1.example-title .text {
 }
 
 
-> :not(.eoc):not(.eob) [data-type="exercise"],
-> :not(.eoc):not(.eob) .exercise { .make-block(exercise);}
-
 .exercise-number() {
   font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
 }
 
-.eoc [data-type="exercise"], .eoc .exercise {
+.os-eoc [data-type="exercise"],
+.os-eoc .exercise {
   span {
     font-weight: bold;
     padding-right: 0.5rem
@@ -145,8 +143,8 @@ h1.example-title .text {
   }
 }
 
-> :not(.eoc):not(.eob) [data-type="exercise"],
-> :not(.eoc):not(.eob) .exercise {
+> :not(.os-eoc):not(.os-eob) [data-type="exercise"],
+> :not(.os-eoc):not(.os-eob) .exercise {
 
   .make-block(exercise);
   .mixin-exercise();
@@ -156,13 +154,16 @@ h1.example-title .text {
 //
 // Tables
 // --------------------------------------------------
-.table {
-  .table-number {
-    font-weight: bold;
-    display: inline-block;
-  }
-  .caption {
-    padding-left: 0.5em;
-    display: inline-block;
+.os-table {
+  .os-caption-container {
+    .os-title-label,
+    .os-number {
+      font-weight: bold;
+      display: inline-block;
+      padding-right: 0.25em;
+    }
+    .os-caption {
+      display: inline-block;
+    }
   }
 }
