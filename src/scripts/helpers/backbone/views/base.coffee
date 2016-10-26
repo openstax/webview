@@ -78,7 +78,6 @@ define (require) ->
       if @pageTitle
         title.dataset.l10nId = @pageTitle
         if @pageTitleArgs
-          console.log(@pageTitleArgs, JSON.stringify(@pageTitleArgs))
           title.dataset.l10nArgs = JSON.stringify(@pageTitleArgs)
         else
           title.dataset.l10nArgs = "{}"

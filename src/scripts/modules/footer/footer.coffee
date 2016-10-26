@@ -20,7 +20,8 @@ define (require) ->
         url: locationOrigin + settings.root
         webmaster: settings.webmaster
 
-        # FIXME: Temporary solution for links related to arganization, until we have agreement about distributing policy.
+        # FIXME: Temporary solution for links related to arganization,
+        # until we have agreement about distributing policy.
         ccurl: if localizer.getLocale() == 'pl' then 'http://creativecommons.pl' else 'http://creativecommons.org'
       }
 

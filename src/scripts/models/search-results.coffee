@@ -34,14 +34,14 @@ define (require) ->
           types: []
 
     initialize: (options) ->
-      filters = Object.keys(FILTER_NAMES);
-      Promise.all(filters.map (filterName) =>
+      filters = Object.keys(FILTER_NAMES)
+      Promise.all(filters.map (filterName) ->
         document.l10n.get('main').formatValue("search-results-filter-#{ filterName }")
       ).then (ftlFilters) =>
         @config(options)
         @set('loaded', false)
         @set('timedout', false)
-        filters.forEach (filterName, index) =>
+        filters.forEach (filterName, index) ->
           FILTER_NAMES[filterName] = ftlFilters[index] || FILTER_NAMES[filterName]
 
     config: (options = {}) ->
