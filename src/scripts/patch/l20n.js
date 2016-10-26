@@ -1,12 +1,50 @@
+/* beautify preserve:start */
+/* jshint ignore:start */
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ?
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+  function (obj) {
+    return typeof obj;
+  } :
+  function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol ?
+      "symbol" :
+      typeof obj;
+  };
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+  return call && (typeof call === "object" || typeof call === "function") ?
+    call :
+    self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+  }
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass)
+    Object.setPrototypeOf ?
+    Object.setPrototypeOf(subClass, superClass) :
+    subClass.__proto__ = superClass;
+}
 
 {
   (function () {
@@ -18,12 +56,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     };
 
     var isBetween = function isBetween(n, start, end) {
-      return (typeof n === 'undefined' ? 'undefined' : _typeof(n)) === (typeof start === 'undefined' ? 'undefined' : _typeof(start)) && start <= n && n <= end;
+      return (typeof n === 'undefined' ?
+        'undefined' :
+        _typeof(n)) === (typeof start === 'undefined' ?
+        'undefined' :
+        _typeof(start)) && start <= n && n <= end;
     };
 
     // list of all plural rules methods:
     // map an integer to the plural form name to use
-
 
     var getPluralRule = function getPluralRule(code) {
       // return a function that gives the plural form name for a given integer
@@ -61,8 +102,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         var value = _iter$next.value;
         var done = _iter$next.done;
 
-        var rw = value instanceof ReadWrite ? value : unit(value);
-        return done ? rw : rw.flatMap(step);
+        var rw = value instanceof ReadWrite ?
+          value :
+          unit(value);
+        return done ?
+          rw :
+          rw.flatMap(step);
       }();
     };
 
@@ -74,22 +119,32 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       return Object.keys(opts).reduce(function (seq, cur) {
         var _Object$assign;
 
-        return Object.assign({}, seq, (_Object$assign = {}, _Object$assign[cur] = opts[cur].valueOf(), _Object$assign));
+        return Object.assign({}, seq, (_Object$assign = {}, _Object$assign[cur] = opts[cur].valueOf(),
+          _Object$assign));
       }, {});
     };
 
     // Unicode bidi isolation characters
 
-
     var mapValues = regeneratorRuntime.mark(function mapValues(arr) {
-      var values, _iterator, _isArray, _i, _ref7, elem;
+      var values,
+        _iterator,
+        _isArray,
+        _i,
+        _ref7,
+        elem;
 
       return regeneratorRuntime.wrap(function mapValues$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               values = new FTLList();
-              _iterator = arr, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();
+              _iterator = arr,
+                _isArray = Array.isArray(_iterator),
+                _i = 0,
+                _iterator = _isArray ?
+                _iterator :
+                _iterator[Symbol.iterator]();
 
             case 2:
               if (!_isArray) {
@@ -150,15 +205,26 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     // Helper for choosing entity value
 
     var DefaultMember = regeneratorRuntime.mark(function DefaultMember(members) {
-      var allowNoDefault = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+      var allowNoDefault = arguments.length <= 1 || arguments[1] === undefined ?
+        false :
+        arguments[1];
 
-      var _iterator2, _isArray2, _i2, _ref8, member;
+      var _iterator2,
+        _isArray2,
+        _i2,
+        _ref8,
+        member;
 
       return regeneratorRuntime.wrap(function DefaultMember$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _iterator2 = members, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();
+              _iterator2 = members,
+                _isArray2 = Array.isArray(_iterator2),
+                _i2 = 0,
+                _iterator2 = _isArray2 ?
+                _iterator2 :
+                _iterator2[Symbol.iterator]();
 
             case 1:
               if (!_isArray2) {
@@ -215,7 +281,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               return tell(new RangeError('No default'));
 
             case 19:
-              return _context2.abrupt('return', { val: new FTLNone() });
+              return _context2.abrupt('return', {
+                val: new FTLNone()
+              });
 
             case 20:
             case 'end':
@@ -230,7 +298,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     var EntityReference = regeneratorRuntime.mark(function EntityReference(_ref9) {
       var name = _ref9.name;
 
-      var _ref10, ctx, entity;
+      var _ref10,
+        ctx,
+        entity;
 
       return regeneratorRuntime.wrap(function EntityReference$(_context3) {
         while (1) {
@@ -269,7 +339,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var obj = _ref11.obj;
       var key = _ref11.key;
 
-      var entity, _ref12, ctx, keyword, _iterator3, _isArray3, _i3, _ref13, member, memberKey;
+      var entity,
+        _ref12,
+        ctx,
+        keyword,
+        _iterator3,
+        _isArray3,
+        _i3,
+        _ref13,
+        member,
+        memberKey;
 
       return regeneratorRuntime.wrap(function MemberExpression$(_context4) {
         while (1) {
@@ -285,7 +364,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                 break;
               }
 
-              return _context4.abrupt('return', { val: entity });
+              return _context4.abrupt('return', {
+                val: entity
+              });
 
             case 4:
               _context4.next = 6;
@@ -298,7 +379,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
             case 9:
               keyword = _context4.t1;
-              _iterator3 = entity.traits, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();
+              _iterator3 = entity.traits,
+                _isArray3 = Array.isArray(_iterator3),
+                _i3 = 0,
+                _iterator3 = _isArray3 ?
+                _iterator3 :
+                _iterator3[Symbol.iterator]();
 
             case 11:
               if (!_isArray3) {
@@ -373,7 +459,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var exp = _ref14.exp;
       var vars = _ref14.vars;
 
-      var selector, _iterator4, _isArray4, _i4, _ref15, variant, key, _ref16, _ctx;
+      var selector,
+        _iterator4,
+        _isArray4,
+        _i4,
+        _ref15,
+        variant,
+        key,
+        _ref16,
+        _ctx;
 
       return regeneratorRuntime.wrap(function SelectExpression$(_context5) {
         while (1) {
@@ -395,7 +489,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               return _context5.abrupt('return', _context5.t1);
 
             case 5:
-              _iterator4 = vars, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();
+              _iterator4 = vars,
+                _isArray4 = Array.isArray(_iterator4),
+                _i4 = 0,
+                _iterator4 = _isArray4 ?
+                _iterator4 :
+                _iterator4[Symbol.iterator]();
 
             case 6:
               if (!_isArray4) {
@@ -478,7 +577,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     // Fully-resolved expressions evaluate to FTL types
 
     var Value = regeneratorRuntime.mark(function Value(expr) {
-      var ref, mem, sel;
+      var ref,
+        mem,
+        sel;
       return regeneratorRuntime.wrap(function Value$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
@@ -503,7 +604,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
             case 5:
               _context6.t1 = expr.type;
-              _context6.next = _context6.t1 === 'kw' ? 8 : _context6.t1 === 'num' ? 9 : _context6.t1 === 'ext' ? 10 : _context6.t1 === 'fun' ? 12 : _context6.t1 === 'call' ? 14 : _context6.t1 === 'ref' ? 16 : _context6.t1 === 'mem' ? 20 : _context6.t1 === 'sel' ? 24 : 28;
+              _context6.next = _context6.t1 === 'kw' ?
+                8 :
+                _context6.t1 === 'num' ?
+                9 :
+                _context6.t1 === 'ext' ?
+                10 :
+                _context6.t1 === 'fun' ?
+                12 :
+                _context6.t1 === 'call' ?
+                14 :
+                _context6.t1 === 'ref' ?
+                16 :
+                _context6.t1 === 'mem' ?
+                20 :
+                _context6.t1 === 'sel' ?
+                24 :
+                28;
               break;
 
             case 8:
@@ -576,7 +693,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     var ExternalArgument = regeneratorRuntime.mark(function ExternalArgument(_ref17) {
       var name = _ref17.name;
 
-      var _ref18, args, arg;
+      var _ref18,
+        args,
+        arg;
 
       return regeneratorRuntime.wrap(function ExternalArgument$(_context7) {
         while (1) {
@@ -611,8 +730,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               return _context7.abrupt('return', arg);
 
             case 11:
-              _context7.t0 = typeof arg === 'undefined' ? 'undefined' : _typeof(arg);
-              _context7.next = _context7.t0 === 'string' ? 14 : _context7.t0 === 'number' ? 15 : _context7.t0 === 'object' ? 16 : 21;
+              _context7.t0 = typeof arg === 'undefined' ?
+                'undefined' :
+                _typeof(arg);
+              _context7.next = _context7.t0 === 'string' ?
+                14 :
+                _context7.t0 === 'number' ?
+                15 :
+                _context7.t0 === 'object' ?
+                16 :
+                21;
               break;
 
             case 14:
@@ -642,7 +769,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
             case 21:
               _context7.next = 23;
-              return tell(new TypeError('Unsupported external type: ' + name + ', ' + (typeof arg === 'undefined' ? 'undefined' : _typeof(arg))));
+              return tell(new TypeError('Unsupported external type: ' + name + ', ' + (typeof arg ===
+                'undefined' ?
+                'undefined' :
+                _typeof(arg))));
 
             case 23:
               return _context7.abrupt('return', new FTLNone(name));
@@ -657,7 +787,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     var FunctionReference = regeneratorRuntime.mark(function FunctionReference(_ref19) {
       var name = _ref19.name;
 
-      var _ref20, functions, func;
+      var _ref20,
+        functions,
+        func;
 
       return regeneratorRuntime.wrap(function FunctionReference$(_context8) {
         while (1) {
@@ -708,7 +840,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var name = _ref21.name;
       var args = _ref21.args;
 
-      var callee, posargs, keyargs, _iterator5, _isArray5, _i5, _ref22, _arg;
+      var callee,
+        posargs,
+        keyargs,
+        _iterator5,
+        _isArray5,
+        _i5,
+        _ref22,
+        _arg;
 
       return regeneratorRuntime.wrap(function CallExpression$(_context9) {
         while (1) {
@@ -729,7 +868,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             case 4:
               posargs = [];
               keyargs = [];
-              _iterator5 = args, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();
+              _iterator5 = args,
+                _isArray5 = Array.isArray(_iterator5),
+                _i5 = 0,
+                _iterator5 = _isArray5 ?
+                _iterator5 :
+                _iterator5[Symbol.iterator]();
 
             case 7:
               if (!_isArray5) {
@@ -801,7 +945,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       }, CallExpression, this);
     });
     var Pattern = regeneratorRuntime.mark(function Pattern(ptn) {
-      var _ref23, ctx, dirty, result, _iterator6, _isArray6, _i6, _ref24, part, value, str;
+      var _ref23,
+        ctx,
+        dirty,
+        result,
+        _iterator6,
+        _isArray6,
+        _i6,
+        _ref24,
+        part,
+        value,
+        str;
 
       return regeneratorRuntime.wrap(function Pattern$(_context10) {
         while (1) {
@@ -830,7 +984,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
               dirty.add(ptn);
               result = '';
-              _iterator6 = ptn, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();
+              _iterator6 = ptn,
+                _isArray6 = Array.isArray(_iterator6),
+                _i6 = 0,
+                _iterator6 = _isArray6 ?
+                _iterator6 :
+                _iterator6[Symbol.iterator]();
 
             case 12:
               if (!_isArray6) {
@@ -904,7 +1063,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               }
 
               _context10.next = 39;
-              return tell(new RangeError('Too many characters in placeable ' + ('(' + str.length + ', max allowed is ' + MAX_PLACEABLE_LENGTH + ')')));
+              return tell(new RangeError('Too many characters in placeable ' + ('(' + str.length +
+                ', max allowed is ' + MAX_PLACEABLE_LENGTH + ')')));
 
             case 39:
               result += FSI + str.substr(0, MAX_PLACEABLE_LENGTH) + PDI;
@@ -931,7 +1091,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       }, Pattern, this);
     });
     var Entity = regeneratorRuntime.mark(function Entity(entity) {
-      var allowNoDefault = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+      var allowNoDefault = arguments.length <= 1 || arguments[1] === undefined ?
+        false :
+        arguments[1];
       var def;
       return regeneratorRuntime.wrap(function Entity$(_context11) {
         while (1) {
@@ -1005,7 +1167,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     });
 
     var _format = function _format(ctx, args, entity) {
-      var opts = arguments.length <= 3 || arguments[3] === undefined ? _opts : arguments[3];
+      var opts = arguments.length <= 3 || arguments[3] === undefined ?
+        _opts :
+        arguments[3];
 
       // optimization: many translations are simple strings and we can very easily
       // avoid the cost of a proper resolution by having this shortcut here
@@ -1014,21 +1178,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       }
 
       return resolve(toFTLType(entity, opts)).run({
-        ctx: ctx, args: args, dirty: new WeakSet()
+        ctx: ctx,
+        args: args,
+        dirty: new WeakSet()
       });
     };
 
     var prioritizeLocales = function prioritizeLocales(def, availableLangs, requested) {
       var supportedLocales = new Set();
-      for (var _iterator7 = requested, _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
+      for (var _iterator7 = requested, _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ?
+          _iterator7 :
+          _iterator7[Symbol.iterator]();;) {
         var _ref26;
 
         if (_isArray7) {
-          if (_i7 >= _iterator7.length) break;
+          if (_i7 >= _iterator7.length)
+            break;
           _ref26 = _iterator7[_i7++];
         } else {
           _i7 = _iterator7.next();
-          if (_i7.done) break;
+          if (_i7.done)
+            break;
           _ref26 = _i7.value;
         }
 
@@ -1045,7 +1215,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
     var getDirection = function getDirection(code) {
       var tag = code.split('-')[0];
-      return ['ar', 'he', 'fa', 'ps', 'ur'].indexOf(tag) >= 0 ? 'rtl' : 'ltr';
+      return ['ar', 'he', 'fa', 'ps', 'ur'].indexOf(tag) >= 0 ?
+        'rtl' :
+        'ltr';
     };
 
     var keysFromContext = function keysFromContext(ctx, keys, method, prev) {
@@ -1058,11 +1230,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           return prev[i];
         }
 
-        var _ref36 = Array.isArray(key) ? key : [key, undefined];
+        var _ref36 = Array.isArray(key) ?
+          key :
+          [key, undefined];
 
         var id = _ref36[0];
         var args = _ref36[1];
-
 
         var result = method.call(_this17, ctx, id, args);
         errors.push.apply(errors, result[1]);
@@ -1078,7 +1251,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var entity = ctx.messages.get(id);
 
       if (entity === undefined) {
-        return [id, [new L10nError('Unknown entity: ' + id)]];
+        return [
+          id, [new L10nError('Unknown entity: ' + id)]
+        ];
       }
 
       return ctx.format(entity, args);
@@ -1088,14 +1263,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var entity = ctx.messages.get(id);
 
       if (entity === undefined) {
-        return [{ value: id, attrs: null }, [new L10nError('Unknown entity: ' + id)]];
+        return [{
+            value: id,
+            attrs: null
+          },
+          [new L10nError('Unknown entity: ' + id)]
+        ];
       }
 
       var _ctx$formatToPrimitiv = ctx.formatToPrimitive(entity, args);
 
       var value = _ctx$formatToPrimitiv[0];
       var errors = _ctx$formatToPrimitiv[1];
-
 
       var formatted = {
         value: value,
@@ -1104,15 +1283,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       if (entity.traits) {
         formatted.attrs = Object.create(null);
-        for (var _iterator14 = entity.traits, _isArray14 = Array.isArray(_iterator14), _i14 = 0, _iterator14 = _isArray14 ? _iterator14 : _iterator14[Symbol.iterator]();;) {
+        for (var _iterator14 = entity.traits, _isArray14 = Array.isArray(_iterator14), _i14 = 0, _iterator14 =
+            _isArray14 ?
+            _iterator14 :
+            _iterator14[Symbol.iterator]();;) {
           var _ref37;
 
           if (_isArray14) {
-            if (_i14 >= _iterator14.length) break;
+            if (_i14 >= _iterator14.length)
+              break;
             _ref37 = _iterator14[_i14++];
           } else {
             _i14 = _iterator14.next();
-            if (_i14.done) break;
+            if (_i14.done)
+              break;
             _ref37 = _i14.value;
           }
 
@@ -1147,7 +1331,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     var fetchFirstBundle = function fetchFirstBundle(bundles, createContext) {
       var bundle = bundles[0];
 
-
       if (!bundle) {
         return Promise.resolve(bundles);
       }
@@ -1163,9 +1346,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var requestBundles = _properties$get2.requestBundles;
       var createContext = _properties$get2.createContext;
 
-
       return l10n.interactive = requestBundles(requestedLangs).then(function (newBundles) {
-        return equal(oldBundles, newBundles) ? oldBundles : fetchFirstBundle(newBundles, createContext);
+        return equal(oldBundles, newBundles) ?
+          oldBundles :
+          fetchFirstBundle(newBundles, createContext);
       });
     };
 
@@ -1178,7 +1362,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
     // match the opening angle bracket (<) in HTML tags, and HTML entities like
     // &amp;, &#0038;, &#x0026;.
-
 
     var _overlayElement = function _overlayElement(l10n, element, translation) {
       var value = translation.value;
@@ -1197,7 +1380,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       }
 
       for (var key in translation.attrs) {
-        if (l10n.isAttrAllowed({ name: key }, element)) {
+        if (l10n.isAttrAllowed({
+            name: key
+          }, element)) {
           element.setAttribute(key, translation.attrs[key]);
         }
       }
@@ -1214,11 +1399,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     // which third-party code might have created references (e.g. two-way
     // bindings in MVC frameworks).
 
-
     var overlay = function overlay(l10n, sourceElement, translationElement) {
       var result = translationElement.ownerDocument.createDocumentFragment();
       var k = void 0,
-          attr = void 0;
+        attr = void 0;
 
       // take one node from translationElement at a time and check it against
       // the allowed list or try to match it with a corresponding element
@@ -1275,7 +1459,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     // 1) :scope is widely supported in more browsers and 2) it works with
     // DocumentFragments.
 
-
     var getNthElementOfType = function getNthElementOfType(context, element, index) {
       /* jshint boss:true */
       var nthOfType = 0;
@@ -1291,7 +1474,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     };
 
     // Get the index of the element among siblings of the same type.
-
 
     var getIndexOfType = function getIndexOfType(element) {
       var index = 0;
@@ -1353,7 +1535,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
     var getResourceLinks = function getResourceLinks(head) {
       return Array.prototype.map.call(head.querySelectorAll('link[rel="localization"]'), function (el) {
-        return [el.getAttribute('href'), el.getAttribute('name') || 'main'];
+        return [
+          el.getAttribute('href'), el.getAttribute('name') || 'main'
+        ];
       }).reduce(function (seq, _ref40) {
         var href = _ref40[0];
         var name = _ref40[1];
@@ -1367,16 +1551,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var appVersion = null;
 
       // XXX take last found instead of first?
-      var metas = Array.from(head.querySelectorAll('meta[name="availableLanguages"],' + 'meta[name="defaultLanguage"],' + 'meta[name="appVersion"]'));
-      for (var _iterator15 = metas, _isArray15 = Array.isArray(_iterator15), _i15 = 0, _iterator15 = _isArray15 ? _iterator15 : _iterator15[Symbol.iterator]();;) {
+      var metas = Array.from(head.querySelectorAll('meta[name="availableLanguages"],' +
+        'meta[name="defaultLanguage"],' +
+        'meta[name="appVersion"]'));
+      for (var _iterator15 = metas, _isArray15 = Array.isArray(_iterator15), _i15 = 0, _iterator15 = _isArray15 ?
+          _iterator15 :
+          _iterator15[Symbol.iterator]();;) {
         var _ref41;
 
         if (_isArray15) {
-          if (_i15 >= _iterator15.length) break;
+          if (_i15 >= _iterator15.length)
+            break;
           _ref41 = _iterator15[_i15++];
         } else {
           _i15 = _iterator15.next();
-          if (_i15.done) break;
+          if (_i15.done)
+            break;
           _ref41 = _i15.value;
         }
 
@@ -1412,14 +1602,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     var createLocalization = function createLocalization(name, resIds, defaultLang, availableLangs) {
       function requestBundles() {
         var languages = navigator.languages;
-        
-        for (var i=0; i < languages.length; i++) {
+
+        for (var i = 0; i < languages.length; i++) {
           if (languages[i].indexOf('-') > 0 && availableLangs.has(languages[i]) == false) {
             languages[i] = languages[i].substring(0, languages[i].indexOf('-'));
           }
         }
-		  
-        var requestedLangs = arguments.length <= 0 || arguments[0] === undefined ? new Set(languages) : arguments[0];
+
+        var requestedLangs = arguments.length <= 0 || arguments[0] === undefined ?
+          new Set(languages) :
+          arguments[0];
 
         var newLangs = prioritizeLocales(defaultLang, availableLangs, requestedLangs);
 
@@ -1628,7 +1820,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       'yo': 0,
       'zh': 0,
       'zu': 3
-    };var pluralRules = {
+    };
+    var pluralRules = {
       '0': function _() {
         return 'other';
       },
@@ -1834,7 +2027,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         return 'other';
       },
       '20': function _(n) {
-        if ((isBetween(n % 10, 3, 4) || n % 10 === 9) && !(isBetween(n % 100, 10, 19) || isBetween(n % 100, 70, 79) || isBetween(n % 100, 90, 99))) {
+        if ((isBetween(n % 10, 3, 4) || n % 10 === 9) && !(isBetween(n % 100, 10, 19) || isBetween(n % 100, 70,
+            79) || isBetween(n % 100, 90, 99))) {
           return 'few';
         }
         if (n % 1000000 === 0 && n !== 0) {
@@ -2056,8 +2250,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         var cc = this._source.charCodeAt(this._index);
 
         if (cc >= 97 && cc <= 122 || // a-z
-        cc >= 65 && cc <= 90 || // A-Z
-        cc === 95) {
+          cc >= 65 && cc <= 90 || // A-Z
+          cc === 95) {
           // _
           cc = this._source.charCodeAt(++this._index);
         } else if (name.length === 0) {
@@ -2065,9 +2259,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         }
 
         while (cc >= 97 && cc <= 122 || // a-z
-        cc >= 65 && cc <= 90 || // A-Z
-        cc >= 48 && cc <= 57 || // 0-9
-        cc === 95 || cc === 45) {
+          cc >= 65 && cc <= 90 || // A-Z
+          cc >= 48 && cc <= 57 || // 0-9
+          cc === 95 || cc === 45) {
           // _-
           cc = this._source.charCodeAt(++this._index);
         }
@@ -2092,8 +2286,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         var cc = this._source.charCodeAt(this._index);
 
         if (cc >= 97 && cc <= 122 || // a-z
-        cc >= 65 && cc <= 90 || // A-Z
-        cc === 95 || cc === 32) {
+          cc >= 65 && cc <= 90 || // A-Z
+          cc === 95 || cc === 32) {
           //  _
           cc = this._source.charCodeAt(++this._index);
         } else if (name.length === 0) {
@@ -2101,16 +2295,25 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         }
 
         while (cc >= 97 && cc <= 122 || // a-z
-        cc >= 65 && cc <= 90 || // A-Z
-        cc >= 48 && cc <= 57 || // 0-9
-        cc === 95 || cc === 45 || cc === 32) {
+          cc >= 65 && cc <= 90 || // A-Z
+          cc >= 48 && cc <= 57 || // 0-9
+          cc === 95 || cc === 45 || cc === 32) {
           //  _-
           cc = this._source.charCodeAt(++this._index);
         }
 
         name += this._source.slice(start, this._index).trimRight();
 
-        return namespace ? { type: 'kw', ns: namespace, name: name } : { type: 'kw', name: name };
+        return namespace ?
+          {
+            type: 'kw',
+            ns: namespace,
+            name: name
+          } :
+          {
+            type: 'kw',
+            name: name
+          };
       };
 
       ParseContext.prototype.getPattern = function getPattern() {
@@ -2150,7 +2353,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
         var ch = this._source[this._index];
 
-        if (ch === '\\' && (this._source[this._index + 1] === '"' || this._source[this._index + 1] === '{' || this._source[this._index + 1] === '\\')) {
+        if (ch === '\\' && (this._source[this._index + 1] === '"' || this._source[this._index + 1] === '{' ||
+            this._source[this._index + 1] === '\\')) {
           buffer += this._source[this._index + 1];
           this._index += 2;
           ch = this._source[this._index];
@@ -2432,7 +2636,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         var members = [];
 
         while (this._index < this._length) {
-          if ((this._source[this._index] !== '[' || this._source[this._index + 1] === '[') && this._source[this._index] !== '*') {
+          if ((this._source[this._index] !== '[' || this._source[this._index + 1] === '[') && this._source[this._index] !==
+            '*') {
             break;
           }
           var def = false;
@@ -2529,7 +2734,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       };
 
       ParseContext.prototype.error = function error(message) {
-        var start = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+        var start = arguments.length <= 1 || arguments[1] === undefined ?
+          null :
+          arguments[1];
 
         var pos = this._index;
 
@@ -2545,7 +2752,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
         var row = this._source.slice(0, pos).split('\n').length;
         var col = pos - this._source.lastIndexOf('\n', pos - 1);
-        err._pos = { start: pos, end: undefined, col: col, row: row };
+        err._pos = {
+          start: pos,
+          end: undefined,
+          col: col,
+          row: row
+        };
         err.offset = pos - start;
         err.description = message;
         err.context = context;
@@ -2582,8 +2794,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           var _cc = this._source.charCodeAt(start + 1);
 
           if (_cc >= 97 && _cc <= 122 || // a-z
-          _cc >= 65 && _cc <= 90 || // A-Z
-          _cc === 95) {
+            _cc >= 65 && _cc <= 90 || // A-Z
+            _cc === 95) {
             // _
             start++;
             break;
@@ -2601,8 +2813,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             var _cc2 = this._source.charCodeAt(start);
 
             if (_cc2 >= 97 && _cc2 <= 122 || // a-z
-            _cc2 >= 65 && _cc2 <= 90 || // A-Z
-            _cc2 === 95 || _cc2 === 35 || _cc2 === 91) {
+              _cc2 >= 65 && _cc2 <= 90 || // A-Z
+              _cc2 === 95 || _cc2 === 35 || _cc2 === 91) {
               // _#[
               break;
             }
@@ -2740,7 +2952,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         var name = _value.name;
         var namespace = _value.namespace;
 
-        return namespace ? namespace + ':' + name : name;
+        return namespace ?
+          namespace + ':' + name :
+          name;
       };
 
       FTLKeyword.prototype.match = function match(ctx, other) {
@@ -2831,11 +3045,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       allowNoDefault: false
     };
 
-    var optsPrimitive = { allowNoDefault: true };
+    var optsPrimitive = {
+      allowNoDefault: true
+    };
 
     var MessageContext = function () {
       function MessageContext(lang) {
-        var _ref25 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+        var _ref25 = arguments.length <= 1 || arguments[1] === undefined ?
+          {} :
+          arguments[1];
 
         var functions = _ref25.functions;
 
@@ -2862,14 +3080,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       // format `entity` to a string or null
 
-
       MessageContext.prototype.formatToPrimitive = function formatToPrimitive(entity, args) {
         var result = _format(this, args, entity, optsPrimitive);
-        return result[0] instanceof FTLNone ? [null, result[1]] : result;
+        return result[0] instanceof FTLNone ?
+          [null, result[1]] :
+          result;
       };
 
       // format `entity` to a string
-
 
       MessageContext.prototype.format = function format(entity, args) {
         var result = _format(this, args, entity);
@@ -3013,7 +3231,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       };
 
       LocalizationObserver.prototype.observeRoot = function observeRoot(root) {
-        var l10n = arguments.length <= 1 || arguments[1] === undefined ? this.get('main') : arguments[1];
+        var l10n = arguments.length <= 1 || arguments[1] === undefined ?
+          this.get('main') :
+          arguments[1];
 
         this.localizationsByRoot.set(root, l10n);
         if (!this.rootsByLocalization.has(l10n)) {
@@ -3026,15 +3246,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       LocalizationObserver.prototype.disconnectRoot = function disconnectRoot(root) {
         this.pause();
         this.localizationsByRoot.delete(root);
-        for (var _iterator8 = this.localizations, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
+        for (var _iterator8 = this.localizations, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 =
+            _isArray8 ?
+            _iterator8 :
+            _iterator8[Symbol.iterator]();;) {
           var _ref27;
 
           if (_isArray8) {
-            if (_i8 >= _iterator8.length) break;
+            if (_i8 >= _iterator8.length)
+              break;
             _ref27 = _iterator8[_i8++];
           } else {
             _i8 = _iterator8.next();
-            if (_i8.done) break;
+            if (_i8.done)
+              break;
             _ref27 = _i8.value;
           }
 
@@ -3059,30 +3284,40 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       };
 
       LocalizationObserver.prototype.resume = function resume() {
-        for (var _iterator9 = this.localizations.values(), _isArray9 = Array.isArray(_iterator9), _i9 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
+        for (var _iterator9 = this.localizations.values(), _isArray9 = Array.isArray(_iterator9), _i9 = 0,
+            _iterator9 = _isArray9 ?
+            _iterator9 :
+            _iterator9[Symbol.iterator]();;) {
           var _ref29;
 
           if (_isArray9) {
-            if (_i9 >= _iterator9.length) break;
+            if (_i9 >= _iterator9.length)
+              break;
             _ref29 = _iterator9[_i9++];
           } else {
             _i9 = _iterator9.next();
-            if (_i9.done) break;
+            if (_i9.done)
+              break;
             _ref29 = _i9.value;
           }
 
           var l10n = _ref29;
 
           if (this.rootsByLocalization.has(l10n)) {
-            for (var _iterator10 = this.rootsByLocalization.get(l10n), _isArray10 = Array.isArray(_iterator10), _i10 = 0, _iterator10 = _isArray10 ? _iterator10 : _iterator10[Symbol.iterator]();;) {
+            for (var _iterator10 = this.rootsByLocalization.get(l10n), _isArray10 = Array.isArray(_iterator10),
+                _i10 = 0, _iterator10 = _isArray10 ?
+                _iterator10 :
+                _iterator10[Symbol.iterator]();;) {
               var _ref30;
 
               if (_isArray10) {
-                if (_i10 >= _iterator10.length) break;
+                if (_i10 >= _iterator10.length)
+                  break;
                 _ref30 = _iterator10[_i10++];
               } else {
                 _i10 = _iterator10.next();
-                if (_i10.done) break;
+                if (_i10.done)
+                  break;
                 _ref30 = _i10.value;
               }
 
@@ -3119,7 +3354,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       LocalizationObserver.prototype.translateRoot = function translateRoot(root) {
         var _this12 = this;
 
-        var l10n = arguments.length <= 1 || arguments[1] === undefined ? this.localizationsByRoot.get(root) : arguments[1];
+        var l10n = arguments.length <= 1 || arguments[1] === undefined ?
+          this.localizationsByRoot.get(root) :
+          arguments[1];
 
         return l10n.interactive.then(function (bundles) {
           var langs = bundles.map(function (bundle) {
@@ -3148,15 +3385,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       LocalizationObserver.prototype.translateMutations = function translateMutations(mutations) {
         var targets = new Set();
 
-        for (var _iterator11 = mutations, _isArray11 = Array.isArray(_iterator11), _i11 = 0, _iterator11 = _isArray11 ? _iterator11 : _iterator11[Symbol.iterator]();;) {
+        for (var _iterator11 = mutations, _isArray11 = Array.isArray(_iterator11), _i11 = 0, _iterator11 =
+            _isArray11 ?
+            _iterator11 :
+            _iterator11[Symbol.iterator]();;) {
           var _ref31;
 
           if (_isArray11) {
-            if (_i11 >= _iterator11.length) break;
+            if (_i11 >= _iterator11.length)
+              break;
             _ref31 = _iterator11[_i11++];
           } else {
             _i11 = _iterator11.next();
-            if (_i11.done) break;
+            if (_i11.done)
+              break;
             _ref31 = _i11.value;
           }
 
@@ -3167,15 +3409,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               targets.add(mutation.target);
               break;
             case 'childList':
-              for (var _iterator12 = mutation.addedNodes, _isArray12 = Array.isArray(_iterator12), _i12 = 0, _iterator12 = _isArray12 ? _iterator12 : _iterator12[Symbol.iterator]();;) {
+              for (var _iterator12 = mutation.addedNodes, _isArray12 = Array.isArray(_iterator12), _i12 = 0,
+                  _iterator12 = _isArray12 ?
+                  _iterator12 :
+                  _iterator12[Symbol.iterator]();;) {
                 var _ref32;
 
                 if (_isArray12) {
-                  if (_i12 >= _iterator12.length) break;
+                  if (_i12 >= _iterator12.length)
+                    break;
                   _ref32 = _iterator12[_i12++];
                 } else {
                   _i12 = _iterator12.next();
-                  if (_i12.done) break;
+                  if (_i12.done)
+                    break;
                   _ref32 = _i12.value;
                 }
 
@@ -3217,15 +3464,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       LocalizationObserver.prototype.applyTranslations = function applyTranslations(elemsByL10n, translationsByL10n) {
         this.pause();
-        for (var _iterator13 = elemsByL10n, _isArray13 = Array.isArray(_iterator13), _i13 = 0, _iterator13 = _isArray13 ? _iterator13 : _iterator13[Symbol.iterator]();;) {
+        for (var _iterator13 = elemsByL10n, _isArray13 = Array.isArray(_iterator13), _i13 = 0, _iterator13 =
+            _isArray13 ?
+            _iterator13 :
+            _iterator13[Symbol.iterator]();;) {
           var _ref33;
 
           if (_isArray13) {
-            if (_i13 >= _iterator13.length) break;
+            if (_i13 >= _iterator13.length)
+              break;
             _ref33 = _iterator13[_i13++];
           } else {
             _i13 = _iterator13.next();
-            if (_i13.done) break;
+            if (_i13.done)
+              break;
             _ref33 = _i13.value;
           }
 
@@ -3270,9 +3522,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           var id = elem.getAttribute('data-l10n-id');
           var args = elem.getAttribute('data-l10n-args');
 
-          return args ? [id, JSON.parse(args.replace(reHtml, function (match) {
-            return htmlEntities[match];
-          }))] : id;
+          return args ?
+            [
+              id,
+              JSON.parse(args.replace(reHtml, function (match) {
+                return htmlEntities[match];
+              }))
+            ] :
+            id;
         });
       };
 
@@ -3321,7 +3578,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         });
 
         properties.set(this, {
-          requestBundles: requestBundles, createContext: createContext
+          requestBundles: requestBundles,
+          createContext: createContext
         });
       }
 
@@ -3348,7 +3606,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
         var translations = _keysFromContext[0];
         var errors = _keysFromContext[1];
-
 
         if (errors.length === 0) {
           return translations.map(function (tuple) {
@@ -3401,13 +3658,49 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     var reOverlay = /<|&#?\w+;/;
 
     var allowed = {
-      elements: ['a', 'em', 'strong', 'small', 's', 'cite', 'q', 'dfn', 'abbr', 'data', 'time', 'code', 'var', 'samp', 'kbd', 'sub', 'sup', 'i', 'b', 'u', 'mark', 'ruby', 'rt', 'rp', 'bdi', 'bdo', 'span', 'br', 'wbr'],
+      elements: [
+        'a',
+        'em',
+        'strong',
+        'small',
+        's',
+        'cite',
+        'q',
+        'dfn',
+        'abbr',
+        'data',
+        'time',
+        'code',
+        'var',
+        'samp',
+        'kbd',
+        'sub',
+        'sup',
+        'i',
+        'b',
+        'u',
+        'mark',
+        'ruby',
+        'rt',
+        'rp',
+        'bdi',
+        'bdo',
+        'span',
+        'br',
+        'wbr'
+      ],
       attributes: {
-        global: ['title', 'aria-label', 'aria-valuetext', 'aria-moz-hint'],
+        global: [
+          'title', 'aria-label', 'aria-valuetext', 'aria-moz-hint'
+        ],
         a: ['download'],
-        area: ['download', 'alt'],
+        area: [
+          'download', 'alt'
+        ],
         // value is special-cased in isAttrAllowed
-        input: ['alt', 'placeholder'],
+        input: [
+          'alt', 'placeholder'
+        ],
         menuitem: ['label'],
         menu: ['label'],
         optgroup: ['label'],
@@ -3433,7 +3726,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       };
 
       // XXX the allowed list should be amendable; https://bugzil.la/922573
-
 
       HTMLLocalization.prototype.isElementAllowed = function isElementAllowed(element) {
         return allowed.elements.indexOf(element.tagName.toLowerCase()) !== -1;
@@ -3503,15 +3795,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var defaultLang = _getMeta.defaultLang;
       var availableLangs = _getMeta.availableLangs;
 
-      for (var _iterator16 = getResourceLinks(document.head), _isArray16 = Array.isArray(_iterator16), _i16 = 0, _iterator16 = _isArray16 ? _iterator16 : _iterator16[Symbol.iterator]();;) {
+      for (var _iterator16 = getResourceLinks(document.head), _isArray16 = Array.isArray(_iterator16), _i16 = 0,
+          _iterator16 = _isArray16 ?
+          _iterator16 :
+          _iterator16[Symbol.iterator]();;) {
         var _ref42;
 
         if (_isArray16) {
-          if (_i16 >= _iterator16.length) break;
+          if (_i16 >= _iterator16.length)
+            break;
           _ref42 = _iterator16[_i16++];
         } else {
           _i16 = _iterator16.next();
-          if (_i16.done) break;
+          if (_i16.done)
+            break;
           _ref42 = _i16.value;
         }
 
@@ -3526,3 +3823,5 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     });
   })();
 }
+/* jshint ignore:end */
+/* beautify preserve:end */

@@ -31,7 +31,7 @@ define (require) ->
       chapter = currentPage.chapter ? currentPage._parent?.get('chapter') ? ''
       coach = @mediaBody.regions.coach.$el?.get(0)
       isCoach = @isCoach()
-      downloadable = downloads || pageDownloads;
+      downloadable = downloads || pageDownloads
 
       return {
         jumpToCC: isCoach and coach instanceof Node and document.body.contains(coach)

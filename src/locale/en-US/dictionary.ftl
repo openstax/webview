@@ -880,7 +880,7 @@ textbook-view-license = This work is licensed { LEN($licensors) ->
 
 textbook-view-toc-page-changed = changed
 
-textbook-view-toc-page-match-count = { $count ->
+textbook-view-toc-page-match-count = { NUMBER($count) ->
   [1] { $count } match
  *[other] { $count } matches
 }
