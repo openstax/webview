@@ -890,7 +890,7 @@ textbook-view-license = Zasób udostępniony { LEN($licensors) ->
 
 # TEXTBOOK VIEW - Table of Content Search - src/scripts/modules/media/tabs/contents/toc/page-template.html
 
-textbook-view-toc-page-match-count = { $count ->
+textbook-view-toc-page-match-count = { NUMBER($count) ->
   [1] { $count } wystąpienie
   [few] { $count } wystąpienia
   [many] { $count } wystąpień

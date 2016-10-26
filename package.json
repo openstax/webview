@@ -13,6 +13,7 @@
     "url": "https://github.com/Connexions/webview.git"
   },
   "dependencies": {
+    "babel-polyfill": "^6.16.0",
     "grunt": "~0.4.5",
     "underscore": "^1.8.3"
   },
@@ -34,7 +35,6 @@
     "grunt-nginx": "~0.2.2",
     "grunt-string-replace": "~1.2.0",
     "grunt-targethtml": "~0.2.6",
-    "l20n": "git://github.com/l20n/l20n.js.git#v4.x",
     "less": "~1.7.5",
     "rjs-build-analysis": "~0.0.3"
   },

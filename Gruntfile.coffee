@@ -229,9 +229,6 @@ module.exports = (grunt) ->
           '!dist/scripts/require.js'
           '!dist/scripts/settings.js'
           '!dist/scripts/aloha.js'
-          '!dist/scripts/l20n.js'
-          '!dist/scripts/browser.js'
-          '!dist/scripts/Template.min.js'
         ]
         filter: 'isFile'
       directories:
@@ -335,7 +332,6 @@ module.exports = (grunt) ->
     # write template to tests directory and run tests
     grunt.file.write(options.runner, template)
     grunt.task.run('jshint', 'jsbeautifier', 'coffeelint', 'mocha')
-
   # Aloha
   # -----
   #grunt.registerTask 'aloha', [
