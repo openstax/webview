@@ -10,6 +10,13 @@ h4,
 h5,
 h6 {
   margin: 1.5rem 0 1rem 0;
+  font-weight: bold;
+}
+
+ul, ol {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  color: @gray;
 }
 
 // It is already displayed at the top of the page in blue
@@ -31,6 +38,16 @@ h6 {
   }
 }
 
+.splash {
+  margin-top: 0;
+  &:not([data-orient="vertical"]) {
+    display: block;
+    img {
+      width: 100%;
+    }
+  }
+}
+
 .os-figure {
   display: table;
   margin: 1rem auto 0;
@@ -38,15 +55,19 @@ h6 {
     padding-top: 1rem;
     display: table-caption;
     caption-side: bottom;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    color: @gray;
     .os-title-label {
       font-weight: bold;
     }
     .os-number {
       font-weight: bold;
       padding-right: .5rem;
+    }
+    .os-title {
+      display: none;
+    }
   }
-}
 
 figure {
 
@@ -119,28 +140,8 @@ h1.example-title .text {
 
 
 .exercise-number() {
-  font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
-}
-
-.os-eoc [data-type="exercise"],
-.os-eoc .exercise {
-  span {
-    font-weight: bold;
-    padding-right: 0.5rem
-  }
-  p { display: inline; }
-  [data-type="problem"] > .number {
-    .exercise-number();
-  }
-}
-
-.solutions-container {
-  // TODO: Fix this selector; it should be similar to the problem number one
-  [data-type="solution"] > a /*> .number*/ {
-    .exercise-number();
-  }
 }
 
 > :not(.os-eoc):not(.os-eob) [data-type="exercise"],
@@ -166,4 +167,72 @@ h1.example-title .text {
       display: inline-block;
     }
   }
+}
+
+//
+// End of Chapter/End of Book
+// --------------------------------------------------
+.os-eoc,
+.os-eob {
+  h2[data-type="document-title"],
+  h2.os-title {
+    font-size: 2.1rem;
+    font-weight: bold;
+  }
+  .os-number {
+    padding-right: 0;
+    font-weight: bold;
+    text-decoration: none;
+    &::after {
+      content: ".";
+    }
+  }
+
+  .group-by .os-index-item {
+    &:not(:first-of-type) {
+      margin-top: 0.5rem;
+    }
+    .os-term {
+      font-weight: bold;
+      padding-right: 0.5rem;
+    }
+  }
+
+  .group-label {
+    display: block;
+    font-size: 2.1rem;
+    font-weight: bold;
+    margin: 1.5rem 0 1rem 0;
+  }
+}
+.os-eoc [data-type="exercise"],
+.os-eoc .exercise {
+  span {
+    font-weight: bold;
+    padding-right: 0.5rem
+  }
+  p { display: inline; }
+  [data-type="problem"] > .number {
+    .exercise-number();
+  }
+}
+
+.os-solutions-container {
+  // TODO: Fix this selector; it should be similar to the problem number one
+  [data-type="solution"] {
+    padding: 0.5em 1em;
+    > a /*> .number*/ {
+      .exercise-number();
+    }
+    p {
+      display: inline;
+      &::before {
+        content: " ";
+      }
+    }
+  }
+}
+
+.appendix [data-type="list"] {
+  margin-top: 1rem;
 }
