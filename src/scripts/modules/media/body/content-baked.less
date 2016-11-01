@@ -1,0 +1,232 @@
+// Styles for the contents of a page.
+// This should **only** be imported inside a containing selector like:
+//
+//     #content { @import 'this_file.less'; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1.5rem 0 1rem 0;
+  font-weight: bold;
+}
+
+ul, ol {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  color: @gray;
+}
+
+// It is already displayed at the top of the page in blue
+// the `>` is because collated titles (like Key Concepts) contain descendent
+// document-title elements.
+[data-type="page"],
+[data-type="composite-page"] {
+  > [data-type="document-title"] { display: none; }
+}
+
+> section,
+> figure,
+> [data-type="glossary"],
+> [data-type="footnote-refs"] {
+  margin-top: 6rem;
+
+  > ol > li::before {
+    content: "" !important;
+  }
+}
+
+.splash {
+  margin-top: 0;
+  &:not([data-orient="vertical"]) {
+    display: block;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.os-figure {
+  display: table;
+  margin: 1rem auto 0;
+  .os-caption-container {
+    padding-top: 1rem;
+    display: table-caption;
+    caption-side: bottom;
+    font-size: 1.2rem;
+    color: @gray;
+    .os-title-label {
+      font-weight: bold;
+    }
+    .os-number {
+      font-weight: bold;
+      padding-right: .5rem;
+    }
+  }
+
+figure {
+
+  // Subfigures
+  > figure {
+    &.ui-has-child-figcaption > figcaption::before {
+      //font-weight: bold;
+      //content: counter(figure) counter(subfigure,lower-alpha) ': ';
+    }
+
+    &:not(.ui-has-child-figcaption)::after {
+      //content: '(' counter(subfigure,lower-alpha) ')';
+     }
+    }
+  }
+}
+
+
+// By default, figures are laid out horizontally
+// unless they have the data-orient="vertical" attribute.
+figure:not([data-orient="vertical"]) {
+}
+
+
+// --------------------------------
+// Blockish things (note, example, exercise)
+// --------------------------------
+
+// Slots for various blockish pieces of content (things with a label, title, and body)
+// This **ONLY** contains rules, no selectors.
+#blockish {
+
+  .style(example) {
+    margin-top: 5rem;
+    position: relative;
+   }
+  .title(example) {
+    font-size: 1em;
+    position: absolute;
+    top: -4rem;
+    left: 0em;
+    padding: 0.4em 1em;
+    font-weight: bold;
+    color: @gray-lightest;
+    background-color: @gray;
+    max-width: 100%;
+  }
+}
+
+// TODO refactor this
+h1.example-title .text {
+  padding-left: 1rem;
+}
+// Skeleton for constructing the blockish elements
+// This contains all the selectors for the styling
+
+// Helper mixin for expanding all the selectors
+.make-block(@type) {
+
+  // Add the label to the title element (if one exists) or to the blockish element
+  .place-label(@type; @label-type) {
+    // No title exists so style the blockish::before and put the label there
+    &:not(.ui-has-child-title) .example-title {
+      #blockish>.title(@type);
+      .format-label(@type; @label-type; false);
+    }
+  }
+
+}
+
+
+.exercise-number() {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+> :not(.os-eoc):not(.os-eob) [data-type="exercise"],
+> :not(.os-eoc):not(.os-eob) .exercise {
+
+  .make-block(exercise);
+  .mixin-exercise();
+
+}
+
+//
+// Tables
+// --------------------------------------------------
+.os-table {
+  .os-caption-container {
+    .os-title-label,
+    .os-number {
+      font-weight: bold;
+      display: inline-block;
+      padding-right: 0.25em;
+    }
+    .os-caption {
+      display: inline-block;
+    }
+  }
+}
+
+//
+// End of Chapter/End of Book
+// --------------------------------------------------
+.os-eoc,
+.os-eob {
+  h2[data-type="document-title"],
+  h2.os-title {
+    font-size: 2.1rem;
+    font-weight: bold;
+  }
+  .os-number {
+    padding-right: 0;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .group-by .os-index-item {
+    &:not(:first-of-type) {
+      margin-top: 0.5rem;
+    }
+    .os-term {
+      font-weight: bold;
+      padding-right: 0.5rem;
+    }
+  }
+
+  .group-label {
+    display: block;
+    font-size: 2.1rem;
+    font-weight: bold;
+    margin: 1.5rem 0 1rem 0;
+  }
+}
+.os-eoc [data-type="exercise"],
+.os-eoc .exercise {
+  span {
+    font-weight: bold;
+    padding-right: 0.5rem
+  }
+  p { display: inline; }
+  [data-type="problem"] > .number {
+    .exercise-number();
+  }
+}
+
+.os-solutions-container {
+  // TODO: Fix this selector; it should be similar to the problem number one
+  [data-type="solution"] {
+    padding: 0.5em 1em;
+    > a /*> .number*/ {
+      .exercise-number();
+    }
+    p {
+      display: inline;
+      &::before {
+        content: " ";
+      }
+    }
+  }
+}
+
+.appendix [data-type="list"] {
+  margin-top: 1rem;
+}

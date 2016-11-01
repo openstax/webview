@@ -1,0 +1,94 @@
+// Styles for the contents of a page.
+// This should **only** be imported inside a containing selector like:
+//
+//     #content { @import 'this_file.less'; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 1.5rem;
+}
+
+
+> section,
+> figure,
+> [data-type="glossary"],
+> [data-type="footnote-refs"] {
+  margin-top: 6rem;
+  > ol {
+    list-style-type: none;
+  }
+}
+
+figure {
+
+  &.ui-has-child-figcaption > figcaption::before,
+  &:not(.ui-has-child-figcaption)::after
+  {
+    margin-right: 0.5rem;
+    color: @gray-medium;
+    font-weight: bold;
+    content: "Figure " counter(figure) ".";
+  }
+
+  // Subfigures
+  > figure {
+    &.ui-has-child-figcaption > figcaption::before {
+      font-weight: bold;
+      content: counter(figure) counter(subfigure,lower-alpha) ': ';
+    }
+
+    &:not(.ui-has-child-figcaption)::after {
+      content: '(' counter(subfigure,lower-alpha) ')';
+    }
+
+  }
+}
+
+// By default, figures are laid out horizontally
+// unless they have the data-orient="vertical" attribute.
+figure:not([data-orient="vertical"]) {
+  width: 100%;
+}
+
+
+// --------------------------------
+// Blockish things (note, example, exercise)
+// --------------------------------
+
+// Slots for various blockish pieces of content (things with a label, title, and body)
+// This **ONLY** contains rules, no selectors.
+#blockish {
+
+  .style(example) { margin-top: 3rem; }
+  .title(example) {
+    padding: 0.1em 1em;
+    font-weight: bold;
+    color: @gray-lightest;
+    background-color: @gray;
+  }
+}
+
+// Skeleton for constructing the blockish elements
+// This contains all the selectors for the styling
+
+// Helper mixin for expanding all the selectors
+.make-block(@type) {
+
+  // Add the label to the title element (if one exists) or to the blockish element
+  .place-label(@type; @label-type) {
+    // No title exists so style the blockish::before and put the label there
+    &:not(.ui-has-child-title)::before {
+      #blockish>.title(@type);
+      .format-label(@type; @label-type; false);
+    }
+  }
+
+}
+
+
+[data-type="exercise"],
+.exercise { .make-block(exercise); }

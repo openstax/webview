@@ -119,6 +119,11 @@ define (require) ->
       try
         if @model.get('loaded') and @model.asPage()?.get('loaded') and @model.asPage()?.get('active')
 
+          # Add an attribute marking that this is collated
+          # TODO: Move this into the handlebars template
+          isCollated = @model.asPage().isCollated()
+          $temp.find('#content').attr('data-is-baked', isCollated)
+
           if $temp.find('.os-interactive-link').length
             @model.set('sims', true)
 
@@ -146,7 +151,7 @@ define (require) ->
             $el.toggleClass('ui-has-child-title', $title.length > 0)
 
           # Wrap solutions in a div so "Show/Hide Solutions" work
-          $temp.find('.solution, [data-type="solution"]')
+          $temp.find('.exercise .solution, [data-type="exercise"] [data-type="solution"]')
           .wrapInner('<section class="ui-body">')
           .prepend('''
             <div class="ui-toggle-wrapper">
