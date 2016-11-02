@@ -1,0 +1,23 @@
+#!/bin/bash
+
+>&2 echo "==> Setting up node version"
+
+if [[ ! "${CI}" = "true" ]] # Skip the nvm stuff if running in Travis
+then
+  if [[ -n "$(n --version)" ]]
+  then
+    n $(cat .nvmrc) || exit 1
+  else
+    >&2 echo "ERROR n (node version manager) is not installed globally"
+    >&2 echo "Install it by running 'npm install --global n'"
+    >&2 echo "(see https://www.npmjs.com/package/n )"
+    exit 1
+  fi
+
+  >&2 echo "Using n: $(n --version)"
+  >&2 echo "Using node: $(node --version)"
+  >&2 echo "Using npm: $(npm --version)"
+fi
+
+>&2 echo "==> Installing package dependencies"
+npm install || exit 1
