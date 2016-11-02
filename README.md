@@ -1,14 +1,10 @@
 # Connexions [![Build Status](https://travis-ci.org/Connexions/webview.svg?branch=master)](https://travis-ci.org/Connexions/webview) [![dependency Status](https://david-dm.org/Connexions/webview.svg)](https://david-dm.org/Connexions/webview#info=dependencies) [![devDependency Status](https://david-dm.org/Connexions/webview/dev-status.svg)](https://david-dm.org/Connexions/webview#info=devDependencies)
 
-## Development and Building
-
 Below are instructions for hosting and building the site and a layout of how the code is organized.
 
 CNX webview is designed to be run as a frontend for [cnx-archive](https://github.com/Connexions/cnx-archive).
 
-### Installing & Hosting
-
-#### Installing
+# Installing
 
 1. If necessary, install [Node.js](http://nodejs.org) and npm (included with Node.js).
 1. Run `npm install --global n` to install the [node version manager](npmjs.com/package/n)
@@ -20,28 +16,28 @@ CNX webview is designed to be run as a frontend for [cnx-archive](https://github
 By default, webview will use [cnx-archive](https://github.com/Connexions/cnx-archive) and [cnx-authoring](https://github.com/Connexions/cnx-authoring) hosted on cnx.org.
 
 
-##### Building
+# Building
 
 From the root `webview` directory, run `./script/setup`.
 
 The `dist` directory containing the built site will be added to the root `webview` directory.
 
-##### Testing
+# Testing
 
 From the root `webview` directory, run `./script/test` (which runs `npm test`).
 npm test failures are not as informative as they could be.
 If `coffeelint` fails, you can run it with `grunt coffeelint` to get more information
 
-##### Updating
+# Updating
 
 From the root `webview` directory, run `./script/update`, which executes the following commands:
 1. `npm update`
 2. `bower update`
 3. `grunt aloha --verbose`
 
-#### Hosting
+# Hosting
 
-##### Quick Development Setup
+### Quick Development Setup
 
 1. Install [nginx](http://nginx.org/)
 2. Run `./script/start` (uses `nginx.development.conf`)
@@ -49,7 +45,7 @@ From the root `webview` directory, run `./script/update`, which executes the fol
 4. Point your browser to [http://localhost:8000](http://localhost:8000)
 5. Run `./script/stop` to stop nginx
 
-##### Customization Notes
+### Customization Notes
 
 1. Update settings in `src/scripts/settings.js` if necessary to, for example, include
 the correct Google Analytics ID, and to point to wherever `cnxarchive` is being hosted.
@@ -141,7 +137,7 @@ server {
 </details>
 
 
-### Directory Layout
+# Directory Layout
 
 * `bower_components/`           3rd Party Libraries *(added after install)*
 * `node_modules/`               Node Modules *(added after install)*
