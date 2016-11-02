@@ -75,7 +75,7 @@ define (require) ->
       if Backbone.history.fragment?.match? and linksHelper.getCurrentPathComponents().page?
         historyPage = linksHelper.getCurrentPathComponents().page
       title = document.querySelector('title')
-      if @pageTitle
+      if @pageTitle and currentPage < 1
         title.dataset.l10nId = @pageTitle
         if @pageTitleArgs
           title.dataset.l10nArgs = JSON.stringify(@pageTitleArgs)

@@ -18,8 +18,8 @@
       'hbs/handlebars': '../../bower_components/require-handlebars-plugin/hbs/handlebars',
 
       // ## l20n - localization framework + deps.
-      // l20n: '../../bower_components/l20n/dist/compat/web/l20n',
-      l20n: 'patch/l20n',
+      l20n: '../../bower_components/l20n/dist/compat/web/l20n',
+      // l20n: 'patch/l20n',
       'template': '../../bower_components/l20n/dist/compat/web/Template',
       'browser-polyfill': '../../node_modules/babel-polyfill/dist/polyfill',
 
