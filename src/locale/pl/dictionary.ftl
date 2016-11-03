@@ -1237,7 +1237,7 @@ donate-form-states = { $statecode ->
   [PQ]  Province du Quebec
   [SK]  Saskatchewan
   [YT]  Yukon Territory
-  [ZZ]  Nie dotyczy
+ *[ZZ]  Nie dotyczy
 }
 
 donate-form-countries = { $countrycode ->
@@ -1485,7 +1485,7 @@ donate-form-countries = { $countrycode ->
   [EH]  Sahara Zachodnia
   [YE]  Jemen
   [ZM]  Zambia
-  [ZW]  Zimbabwe
+ *[ZW]  Zimbabwe
 }
 
 donate-form-currency-symbol = $
