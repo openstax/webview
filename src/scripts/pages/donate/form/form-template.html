@@ -144,7 +144,6 @@
         <span class="control-label col-sm-2" data-l10n-id="donate-form-country">Country</span>
         <div class="col-sm-10">
           <input type="hidden" name="Mailing_Country" />
-          <span style="display:none" data-l10n-id="country-code"></span>
           <select id="country-list" name="BILL_COUNTRY" class="form-control">
             {{#each countries}}
               <option value="{{this.code}}" data-l10n-id="donate-form-countries" data-l10n-args='{"countrycode" : "{{this.code}}"}'>{{this.name}}</option>
