@@ -12,8 +12,7 @@
     "type": "git",
     "url": "https://github.com/Connexions/webview.git"
   },
-  "dependencies": {
-    "babel-polyfill": "^6.16.0",
+  "dependencies": {    
     "grunt": "~0.4.5",
     "underscore": "^1.8.3"
   },
