@@ -71,16 +71,19 @@ define (require) ->
 
     # Update page title, canonical link and Open Graph tags
     updatePageInfo: () ->
-      currentPage = @model.getPageNumber().toString() if @model? and @model.isBook?()
+      isBook = @model? and @model.isBook?()
+      currentPage = @model.getPageNumber().toString() if isBook
       if Backbone.history.fragment?.match? and linksHelper.getCurrentPathComponents().page?
         historyPage = linksHelper.getCurrentPathComponents().page
-      title = document.querySelector('title')
-      if @pageTitle and currentPage < 1
-        title.dataset.l10nId = @pageTitle
-        if @pageTitleArgs
-          title.dataset.l10nArgs = JSON.stringify(@pageTitleArgs)
-        else
-          title.dataset.l10nArgs = "{}"
+
+      if @pageTitle
+        document.title = @pageTitle + settings.titleSuffix
+
+        if not isBook
+          title = document.querySelector('title')
+          title.dataset.l10nId = @pageTitle
+          title = title.textContent + settings.titleSuffix
+          title.dataset.l10nArgs = JSON.stringify(@pageTitleArgs) if @pageTitleArgs
 
       canonical = @canonical?() or @canonical
       if canonical isnt undefined
