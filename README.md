@@ -1,53 +1,51 @@
 # Connexions [![Build Status](https://travis-ci.org/Connexions/webview.svg?branch=master)](https://travis-ci.org/Connexions/webview) [![dependency Status](https://david-dm.org/Connexions/webview.svg)](https://david-dm.org/Connexions/webview#info=dependencies) [![devDependency Status](https://david-dm.org/Connexions/webview/dev-status.svg)](https://david-dm.org/Connexions/webview#info=devDependencies)
 
-## Development and Building
-
 Below are instructions for hosting and building the site and a layout of how the code is organized.
 
 CNX webview is designed to be run as a frontend for [cnx-archive](https://github.com/Connexions/cnx-archive).
 
-### Installing & Hosting
-
-#### Installing
+# Installing
 
 1. If necessary, install [Node.js](http://nodejs.org) and npm (included with Node.js).
-2. Run `npm install -g grunt-cli bower` in the command line to install [grunt-cli](https://github.com/gruntjs/grunt-cli) and [bower](http://bower.io/).
-3. From the root `webview` directory, run `npm install` in the command line to install test and build dependencies.
-  * `npm install` runs `bower install` and `grunt install`, both of which can also be run independently
+1. Run `npm install --global n` to install the [node version manager](npmjs.com/package/n)
+2. Run `./script/bootstrap` in the command line to install all the package dependencies.
+  * **Note:** `npm install` runs `bower install` and `grunt install`, both of which can also be run independently
     * `bower install` downloads front-end dependencies
     * `grunt install` compiles the Aloha-Editor (which is downloaded by bower)
 
 By default, webview will use [cnx-archive](https://github.com/Connexions/cnx-archive) and [cnx-authoring](https://github.com/Connexions/cnx-authoring) hosted on cnx.org.
 
-##### Testing
 
-From the root `webview` directory, run `npm test`.
-npm test failures are not as informative as they could be.
-If `coffeelint` fails, you can run it with `grunt coffeelint` to get more information
+# Building
 
-##### Building
-
-From the root `webview` directory, run `grunt dist`.
+From the root `webview` directory, run `./script/setup`.
 
 The `dist` directory containing the built site will be added to the root `webview` directory.
 
-##### Updating
+# Testing
 
-From the root `webview` directory, run `npm run-script upgrade`, which executes the following commands:
+From the root `webview` directory, run `./script/test` (which runs `npm test`).
+npm test failures are not as informative as they could be.
+If `coffeelint` fails, you can run it with `grunt coffeelint` to get more information
+
+# Updating
+
+From the root `webview` directory, run `./script/update`, which executes the following commands:
 1. `npm update`
 2. `bower update`
 3. `grunt aloha --verbose`
 
-#### Hosting
+# Hosting
 
-##### Quick Development Setup
+### Quick Development Setup
 
 1. Install [nginx](http://nginx.org/)
-2. Run `grunt nginx:start` (uses `nginx.development.conf`)
+2. Run `./script/start` (uses `nginx.development.conf`)
 3. (optional) Install https://github.com/prerender/prerender
 4. Point your browser to [http://localhost:8000](http://localhost:8000)
+5. Run `./script/stop` to stop nginx
 
-##### Customization Notes
+### Customization Notes
 
 1. Update settings in `src/scripts/settings.js` if necessary to, for example, include
 the correct Google Analytics ID, and to point to wherever `cnxarchive` is being hosted.
@@ -68,73 +66,78 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
   * Unresolveable URIs should load `dist/index.html` or `src/index.html`
   * If not hosting the site from the domain root, update `root` in `src/scripts/settings.js`
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
-  * Example nginx config:
 
-  ```nginx
-    server {
-        listen 8000; # dev
-        listen [::]:8000; # dev ipv6
-        listen 8001; # production
-        listen [::]:8001; # production ipv6
-        server_name  _;
+<details>
+<summary>Example nginx config</summary>
 
-        # Support both production and dev
-        set $ROOT "src";
-        if ($server_port ~ "8001") {
-            set $ROOT "dist";
+```
+server {
+    listen 8000; # dev
+    listen [::]:8000; # dev ipv6
+    listen 8001; # production
+    listen [::]:8001; # production ipv6
+    server_name  _;
+
+    # Support both production and dev
+    set $ROOT "src";
+    if ($server_port ~ "8001") {
+        set $ROOT "dist";
+    }
+
+    root /path/to/webview/$ROOT/;
+
+    index index.html;
+    try_files $uri @prerender;
+
+    # Proxy resources and exports to cnx.org
+    # since they are not part of the locally hosted package
+    location /resources/ {
+        proxy_pass http://cnx.org;
+    }
+    location /exports/ {
+        proxy_pass http://cnx.org;
+    }
+
+    # For development only
+    location ~ ^.*/bower_components/(.*)$ {
+        alias /path/to/webview/bower_components/$1;
+    }
+
+    location ~ ^.*/(data|scripts|styles|images|fonts)/(.*) {
+        try_files $uri /$1/$2;
+    }
+
+    # Prerender for SEO
+    location @prerender {
+        # Support page prerendering for web crawlers
+        set $prerender 0;
+        if ($http_user_agent ~* "baiduspider|twitterbot|facebookexternalhit|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest") {
+            set $prerender 1;
         }
-
-        root /path/to/webview/$ROOT/;
-
-        index index.html;
-        try_files $uri @prerender;
-
-        # Proxy resources and exports to cnx.org
-        # since they are not part of the locally hosted package
-        location /resources/ {
-            proxy_pass http://cnx.org;
+        if ($args ~ "_escaped_fragment_") {
+            set $prerender 1;
         }
-        location /exports/ {
-            proxy_pass http://cnx.org;
-        }
-
-        # For development only
-        location ~ ^.*/bower_components/(.*)$ {
-            alias /path/to/webview/bower_components/$1;
-        }
-
-        location ~ ^.*/(data|scripts|styles|images|fonts)/(.*) {
-            try_files $uri /$1/$2;
-        }
-
-        # Prerender for SEO
-        location @prerender {
-            # Support page prerendering for web crawlers
+        if ($http_user_agent ~ "Prerender") {
             set $prerender 0;
-            if ($http_user_agent ~* "baiduspider|twitterbot|facebookexternalhit|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest") {
-                set $prerender 1;
-            }
-            if ($args ~ "_escaped_fragment_") {
-                set $prerender 1;
-            }
-            if ($http_user_agent ~ "Prerender") {
-                set $prerender 0;
-            }
-            if ($uri ~ "\.(js|css|xml|less|png|jpg|jpeg|gif|pdf|doc|txt|ico|rss|zip|mp3|rar|exe|wmv|doc|avi|ppt|mpg|mpeg|tif|wav|mov|psd|ai|xls|mp4|m4a|swf|dat|dmg|iso|flv|m4v|torrent)") {
-                set $prerender 0;
-            }
-            if ($prerender = 1) {
-                rewrite .* /$scheme://$http_host$request_uri? break;
-                proxy_pass http://localhost:3000;
-            }
-            if ($prerender = 0) {
-                rewrite .* /index.html break;
-            }
+        }
+        if ($uri ~ "\.(js|css|xml|less|png|jpg|jpeg|gif|pdf|doc|txt|ico|rss|zip|mp3|rar|exe|wmv|doc|avi|ppt|mpg|mpeg|tif|wav|mov|psd|ai|xls|mp4|m4a|swf|dat|dmg|iso|flv|m4v|torrent)") {
+            set $prerender 0;
+        }
+        if ($prerender = 1) {
+            rewrite .* /$scheme://$http_host$request_uri? break;
+            proxy_pass http://localhost:3000;
+        }
+        if ($prerender = 0) {
+            rewrite .* /index.html break;
         }
     }
-  ```
+}
+```
 
-### Directory Layout
+</details>
+
+
+# Directory Layout
 
 * `bower_components/`           3rd Party Libraries *(added after install)*
 * `node_modules/`               Node Modules *(added after install)*
@@ -158,7 +161,7 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
 * `src/index.html`              App's HTML Page
 * `test/`                       Unit tests
 
-License
--------
+
+# License
 
 This software is subject to the provisions of the GNU Affero General Public License Version 3.0 (AGPL). See license.txt for details. Copyright (c) 2013 Rice University.
