@@ -1,6 +1,6 @@
 {
   "name": "connexions-webview",
-  "version": "0.21.15-dev",
+  "version": "0.21.15",
   "ignore": [
     "**/.*",
     "dist",
