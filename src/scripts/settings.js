@@ -36,7 +36,7 @@
       legacy: 'legacy.cnx.org',
 
       // Webmaster E-mail address
-      webmaster: 'cnx@cnx.org',
+      webmaster: 'support@openstax.org',
 
       // Content shortcodes
       shortcodes: {
