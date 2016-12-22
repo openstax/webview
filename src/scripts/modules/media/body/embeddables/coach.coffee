@@ -129,6 +129,7 @@ define (require) ->
     getOptionsForCoach: ->
       {query} = linksHelper.getCurrentPathComponents()
       view = query['cc-view']
+      enrollmentCode = query['enrollment_code']
 
       # nab math rendering from exercise embeddables config
       {onRender} = _.findWhere(embeddablesConfig.embeddableTypes, {embeddableType: 'exercise'})
@@ -160,6 +161,9 @@ define (require) ->
       if view?
         options.view = view
         options.open = true
+
+      if enrollmentCode?
+        options.enrollmentCode = enrollmentCode
 
       _.clone(options)
 
