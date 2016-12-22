@@ -83,25 +83,15 @@
     }
   }
 
-  > .summary {
+  > details {
     margin-top: 1.5rem;
 
-    h5 {
+    summary {
       .user-select(none);
       cursor: pointer;
-
-      &::before {
-        margin-right: .5rem;
-        content: "\25b8"; // ▸
-      }
-
-      &.active::before {
-        content: "\25be"; // ▾
-      }
     }
 
     > .abstract {
-      display: none; // Hide until the summary is toggled open
 
       @media (min-width: @screen-sm-min) {
         max-width: 67%;
