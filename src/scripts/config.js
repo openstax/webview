@@ -50,7 +50,7 @@
 
       // # CoffeeScript
       cs: '../../bower_components/require-cs/cs',
-      'coffee-script': '../../bower_components/coffeescript/extras/coffee-script'
+      'coffee-script': '../../bower_components/coffeescript/docs/v1/browser-compiler/coffee-script'
     },
 
     // # Packages
