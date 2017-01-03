@@ -71,7 +71,6 @@ define (require) ->
       button: '.info .btn'
 
     events:
-      'click .summary .toggle': 'toggleSummary'
       'click .derive .btn': 'derivePage'
       'click .edit .btn' : 'editPage'
       'click .jump-to-cc > .btn': 'jumpToConceptCoach'
@@ -108,12 +107,6 @@ define (require) ->
 
     isCoach: ->
       @getCoach()?
-
-    toggleSummary: (e) ->
-      e.preventDefault()
-      $summary = @$el.find('.summary')
-      $summary.find('h5').toggleClass('active')
-      @$el.find('.abstract').toggle()
 
     editPage: () ->
       data = JSON.stringify({id: @model.asPage().get('id')})

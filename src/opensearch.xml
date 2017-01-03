@@ -5,7 +5,7 @@
   <Tags>educational open content</Tags>
   <Contact>cnx@cnx.org</Contact>
   <Url type="text/html" method="get" template="http://cnx.org/search?q={searchTerms}" />
-  <Image height="64" width="64" type="image/png">/images/cnx-64x64.png</Image>
+  <Image height="96" width="96" type="image/png">/images/favicon-96x96.png</Image>
   <Query role="example" searchTerms="DSP" />
   <Attribution>Creative Commons Attribution License</Attribution>
   <SyndicationRight>open</SyndicationRight>

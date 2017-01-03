@@ -63,10 +63,10 @@
     </div>
 
     {{#if currentPage.abstract}}
-      <div class="summary">
-        <a class="toggle" href="#"><h5 data-l10n-id="textbook-view-summary">Summary</h5></a>
+      <details>
+        <summary data-l10n-id="textbook-view-summary">Summary</summary>
         <div class="abstract">{{include currentPage.abstract}}</div>
-      </div>
+      </details>
     {{/if}}
   </div>
 {{/if}}
