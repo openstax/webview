@@ -26,7 +26,7 @@
       // Use Minified Aloha because loading files in a different requirejs context is a royal pain
       aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
 
-      OpenStaxConceptCoach: '../../bower_components/concept-coach/full-build.min',
+      OpenStaxConceptCoach: '//localhost:3005/dist/full-build.min',
 
       // ## UI Libraries and Helpers
       tooltip: 'helpers/backbone/views/attached/tooltip/tooltip',
@@ -160,7 +160,7 @@
 
       // concept-coach
       OpenStaxConceptCoach: {
-        deps: ['css!../../bower_components/concept-coach/main.min'],
+        deps: ['css!//localhost:3005/dist/main.min'],
         exports: 'OpenStaxConceptCoach'
       }
     },

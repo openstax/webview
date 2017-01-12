@@ -331,7 +331,7 @@ module.exports = (grunt) ->
     'string-replace'
     'targethtml:dist'
     'clean'
-    'uglify:dist'
+    # 'uglify:dist'
     'htmlmin:dist'
     'imagemin'
   ]
