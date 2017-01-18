@@ -167,6 +167,6 @@ define (require) ->
 
       _.clone(options)
 
-    openCoach: =>
+    openCoach: (args...) =>
       options = @getOptionsForCoach()
-      @cc.open(options)
+      @cc.open(options, args...)
