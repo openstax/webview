@@ -1,12 +1,11 @@
 (function () {
   'use strict';
 
-  console.info((process && process.env), 'HALLO?');
-
   // Load the config
-  require(['config', 'compile-config'], function () {
-    // Load the application after the config
-    require(['cs!loader'], function (loader) {
+  require(['config', 'settings'], function(config, settings){
+    require([settings.environment + '-config', 'cs!loader'], function(configureFor, loader){
+      configureFor(settings);
+      // Load the application after the config
       loader.init();
     });
   });

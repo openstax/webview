@@ -1,3 +1,55 @@
+ld = require('lodash')
+
+makeRequireConfig = (includes = []) ->
+  baseIncludes = [
+    'cs!pages/error/error'
+    'cs!pages/home/home'
+    'cs!pages/contents/contents'
+    'cs!pages/search/search'
+    'cs!pages/browse-content/browse-content'
+    'cs!pages/about/about'
+    'cs!pages/tos/tos'
+    'cs!pages/license/license'
+    'cs!pages/donate/donate'
+  ]
+
+  includedModules = ld.concat(baseIncludes, includes)
+
+  options =
+    appDir: 'src'
+    baseUrl: 'scripts'
+    dir: 'dist'
+    mainConfigFile: 'src/scripts/config.js'
+    findNestedDependencies: true
+    removeCombined: false
+    keepBuildDir: false
+    preserveLicenseComments: false
+    skipDirOptimize: true
+    generateSourceMaps: true
+    optimize: 'none'
+    stubModules: ['cs']
+    modules: [{
+      name: 'main'
+      exclude: ['coffee-script', 'less/normalize']
+      excludeShallow: ['settings', 'OpenStaxConceptCoach']
+    }]
+
+    done: (done, output) ->
+      duplicates = require('rjs-build-analysis').duplicates(output)
+
+      if duplicates.length > 0
+        grunt.log.subhead('Duplicates found in requirejs build:')
+        grunt.log.warn(duplicates)
+        done(new Error('r.js built duplicate modules, please check the excludes option.'))
+
+      done()
+
+  compileOptions = ld.cloneDeep(options)
+  compileOptions.modules[0].includes = includedModules
+
+  compileOptions
+
+
 module.exports = (grunt) ->
 
   fs = require('fs')
@@ -128,55 +180,19 @@ module.exports = (grunt) ->
     # Requirejs Optimizer
     requirejs:
       compile:
-        options:
-          appDir: 'src'
-          baseUrl: 'scripts'
-          dir: 'dist'
-          mainConfigFile: 'src/scripts/config.js'
-          findNestedDependencies: true
-          removeCombined: false
-          keepBuildDir: false
-          preserveLicenseComments: false
-          skipDirOptimize: true
-          generateSourceMaps: true
-          optimize: 'none'
-          stubModules: ['cs']
-          modules: [{
-            name: 'main'
-            include: [
-              'cs!pages/error/error'
-              'cs!pages/home/home'
-              'cs!pages/contents/contents'
-              'cs!pages/search/search'
-              'cs!pages/browse-content/browse-content'
-              'cs!pages/workspace/workspace'
-              'cs!pages/about/about'
-              'cs!pages/tos/tos'
-              'cs!pages/license/license'
-              'cs!pages/donate/donate'
-              'cs!pages/role-acceptance/role-acceptance'
-
-              # FIX: edit modules should be loaded in separate modules
-              'select2'
-              'bootstrapPopover'
-              'cs!modules/media/editbar/editbar'
-              'cs!helpers/backbone/views/editable'
-
-              'cs!configs/aloha'
-            ]
-            exclude: ['coffee-script', 'less/normalize']
-            excludeShallow: ['settings']
-          }]
-
-          done: (done, output) ->
-            duplicates = require('rjs-build-analysis').duplicates(output)
-
-            if duplicates.length > 0
-              grunt.log.subhead('Duplicates found in requirejs build:')
-              grunt.log.warn(duplicates)
-              done(new Error('r.js built duplicate modules, please check the excludes option.'))
-
-            done()
+        readonly:
+          options: makeRequireConfig([
+            'compile-config'
+          ])
+        editable:
+          options: makeRequireConfig([
+            'compile-config'
+            'select2'
+            'bootstrapPopover'
+            'cs!modules/media/editbar/editbar'
+            'cs!helpers/backbone/views/editable'
+            'cs!configs/aloha'
+          ])
 
       aloha:
         options: alohaBuildConfig
@@ -266,16 +282,16 @@ module.exports = (grunt) ->
           dest: 'dist/images/'
         }]
 
-    # String Replace (HACK to update aloha path)
-    'string-replace':
-      dist:
-        options:
-          replacements: [{
-            pattern: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha'
-            replacement: 'aloha'
-          }]
-        files:
-          'dist/scripts/main.js': ['dist/scripts/main.js']
+    # # String Replace (HACK to update aloha path)
+    # 'string-replace':
+    #   dist:
+    #     options:
+    #       replacements: [{
+    #         pattern: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha'
+    #         replacement: 'aloha'
+    #       }]
+    #     files:
+    #       'dist/scripts/main.js': ['dist/scripts/main.js']
 
     test:
       options:
@@ -326,9 +342,20 @@ module.exports = (grunt) ->
   # Dist
   # -----
   grunt.registerTask 'dist', [
-    'requirejs:compile'
+    'requirejs:compile:readonly'
     'copy'
-    'string-replace'
+    # 'string-replace'
+    'targethtml:dist'
+    'clean'
+    # 'uglify:dist'
+    'htmlmin:dist'
+    'imagemin'
+  ]
+
+  grunt.registerTask 'dist-edit', [
+    'aloha'
+    'requirejs:compile:editable'
+    'copy'
     'targethtml:dist'
     'clean'
     # 'uglify:dist'
