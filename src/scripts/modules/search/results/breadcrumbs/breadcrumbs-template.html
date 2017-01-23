@@ -3,7 +3,7 @@
     <a href="#" class="remove">
       <span class="fa fa-times"></span>
     </a>
-    <span class="limit">{{name}}</span>
+    <span class="limit" {{localize}} >{{name}}</span>
     <span class="value">
       {{~#is tag "authorID"~}}
         {{author ../../authorList index 'fullname'}} ({{author ../../authorList index 'id'}})

@@ -35,19 +35,13 @@ define (require) ->
 
     initialize: (options) ->
       filters = Object.keys(FILTER_NAMES)
-      Promise.all(filters.map (filterName) ->
-        document.l10n.get('main').formatValue("search-results-filter-#{ filterName }")
-      ).then (ftlFilters) =>
-        @config(options)
-        @set('loaded', false)
-        @set('timedout', false)
-        filters.forEach (filterName, index) ->
-          FILTER_NAMES[filterName] = ftlFilters[index] || FILTER_NAMES[filterName]
+      @config(options)
+      @set('loaded', false)
+      @set('timedout', false)
 
     config: (options = {}) ->
       @query = options.query or ''
       @searchUrl = options.url or SEARCH_URI
-
       return @
 
     load: (options) ->
@@ -90,6 +84,8 @@ define (require) ->
       # Add natural language translation alongside tags
       _.each response.query.limits, (limit) ->
         limit.name = FILTER_NAMES[limit.tag]
+        # Provide search-result model with proprer localization tag.
+        limit.localize = "data-l10n-id=search-results-filter-#{ limit.tag }" or ''
 
       _.each response.results.limits, (limit) ->
         limit.name = FILTER_NAMES[limit.tag] # Add natural language translation alongside tags

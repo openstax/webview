@@ -23,7 +23,7 @@
     "require-handlebars-plugin": "1.0.0",
     "aloha-editor": "oerpub/Aloha-Editor#master",
     "select2": "3.5.4",
-    "babel-polyfill": "^0.0.1"
+    "babel-polyfill": "^0.0.1",
     "l20n": "https://github.com/tomekstach/l20n.js.git",
     "concept-coach": "openstax/tutor-js#coach-20170117.a"
   },
