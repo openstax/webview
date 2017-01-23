@@ -3,14 +3,14 @@
 
   define(function () {
     return function(settings){
-      console.info(settings.environment, settings.coach.base);
+      console.info(settings.environment, settings.conceptCoach.base);
       require.config({
         paths: {
-          OpenStaxConceptCoach: settings.coach.base + 'full-build.min'
+          OpenStaxConceptCoach: settings.conceptCoach.base + 'full-build.min'
         },
         shim: {
           OpenStaxConceptCoach: {
-            deps: ['css!' + settings.coach.base + 'main.min'],
+            deps: ['css!' + settings.conceptCoach.base + 'main.min'],
             exports: 'OpenStaxConceptCoach'
           }
         }

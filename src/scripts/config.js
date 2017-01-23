@@ -54,7 +54,9 @@
 
       // # CoffeeScript
       cs: '../../bower_components/require-cs/cs',
-      'coffee-script': '../../bower_components/coffeescript/docs/v1/browser-compiler/coffee-script'
+      'coffee-script': '../../bower_components/coffeescript/docs/v1/browser-compiler/coffee-script',
+
+      'helpers/backbone/views/content': 'helpers/backbone/views/editable'
     },
 
     // # Packages

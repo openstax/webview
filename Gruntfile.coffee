@@ -1,6 +1,6 @@
 ld = require('lodash')
 
-makeRequireConfig = (includes = []) ->
+makeBaseConfig = (includes = []) ->
   baseIncludes = [
     'cs!pages/error/error'
     'cs!pages/home/home'
@@ -45,7 +45,7 @@ makeRequireConfig = (includes = []) ->
       done()
 
   compileOptions = ld.cloneDeep(options)
-  compileOptions.modules[0].includes = includedModules
+  compileOptions.modules[0].include = includedModules
 
   compileOptions
 
@@ -179,20 +179,19 @@ module.exports = (grunt) ->
 
     # Requirejs Optimizer
     requirejs:
-      compile:
-        readonly:
-          options: makeRequireConfig([
-            'compile-config'
-          ])
-        editable:
-          options: makeRequireConfig([
-            'compile-config'
-            'select2'
-            'bootstrapPopover'
-            'cs!modules/media/editbar/editbar'
-            'cs!helpers/backbone/views/editable'
-            'cs!configs/aloha'
-          ])
+      readonly:
+        options: makeBaseConfig([
+          'config.compiled'
+        ])
+      editable:
+        options: makeBaseConfig([
+          'config.compiled'
+          'select2'
+          'bootstrapPopover'
+          'cs!modules/media/editbar/editbar'
+          'cs!helpers/backbone/views/editable'
+          'cs!configs/aloha'
+        ])
 
       aloha:
         options: alohaBuildConfig
@@ -342,7 +341,7 @@ module.exports = (grunt) ->
   # Dist
   # -----
   grunt.registerTask 'dist', [
-    'requirejs:compile:readonly'
+    'requirejs:readonly'
     'copy'
     # 'string-replace'
     'targethtml:dist'
@@ -354,7 +353,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'dist-edit', [
     'aloha'
-    'requirejs:compile:editable'
+    'requirejs:editable'
     'copy'
     'targethtml:dist'
     'clean'
