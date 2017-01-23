@@ -5,7 +5,8 @@
     var languages = require('cs!configs/languages');
 
     return {
-      environment: 'dev',
+      environment: 'compiled',
+      // features: ['editable'],
       // Directory from which webview is served
       root: '/',
 
@@ -92,7 +93,7 @@
           "NALcUxE9": ["art-exercise", "multiple-choice", "free-response"]
         },
         url: 'http://localhost:3001',
-        source: '//openstax.github.io/cc-dist/'
+        base: '//openstax.github.io/cc-dist/'
       }
 
     };
