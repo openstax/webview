@@ -2,12 +2,12 @@ define (require) ->
   return new class Localizer
 
     currentView = null
+    fallbackLanguage = 'en-US'
     HTMLNode = document.querySelector('html')
-    defaultLocale = HTMLNode.getAttribute('lang') || 'en-US'
 
-    # Detect support for  MutationObserver.
+    # Detect support for MutationObserver.
     MutationObserver = do ->
-      prefixes = ['WebKit', 'Moz', 'O', 'Ms', '', ]
+      prefixes = ['WebKit', 'Moz', 'O', 'Ms', '']
       i = 0
       while i < prefixes.length
         if prefixes[i] + 'MutationObserver' of window
@@ -18,7 +18,7 @@ define (require) ->
     if MutationObserver
       observer = new MutationObserver (mutations) ->
         if currentView
-          currentView.locale = defaultLocale = mutations[0].target.lang
+          currentView.locale = mutations[0].target.lang
           currentView.render()
 
       # listen for language attibute to change.
@@ -29,8 +29,12 @@ define (require) ->
 
     updateOnLanguageChange: (view) ->
       currentView = view
-      # Set default language.
-      currentView.locale = defaultLocale
+      # Set default language & Ensure proper language code
+      # FIXFOR:
+      # In FireFox onLoad default lang. code is set to what is in `lang` html's attibute,
+      # this behaviours causes images to load in Eng. even if site is render in other language after all.
+      currentView.locale = HTMLNode.getAttribute('lang') || fallbackLanguage
 
     getLocale: () ->
-      defaultLocale
+
+      HTMLNode.getAttribute('lang') || fallbackLanguage
