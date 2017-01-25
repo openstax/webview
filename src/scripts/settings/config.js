@@ -2,7 +2,7 @@
   'use strict';
 
   define(function () {
-    return function(settings, _){
+    return function (settings, _) {
       var features = {
         conceptCoach: {
           enable: {
@@ -19,9 +19,8 @@
         }
       };
 
-      var initialConfig = [{}];
-      var featureConfigs = _.map(features, function(featureOptions, feature){
-        if(_.contains(settings.features, feature)){
+      var featureConfigs = _.map(features, function (featureOptions, feature) {
+        if (_.contains(settings.features, feature)) {
           return _.clone(featureOptions.enable) || {};
         } else {
           return _.clone(featureOptions.disable) || {};
@@ -31,7 +30,7 @@
       featureConfigs.unshift({});
       var featureConfig = _.deepExtend.apply(_, featureConfigs);
       require.config(featureConfig);
-    }
+    };
   });
 
 })();
