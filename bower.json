@@ -23,7 +23,7 @@
     "require-handlebars-plugin": "1.0.0",
     "aloha-editor": "oerpub/Aloha-Editor#master",
     "select2": "3.5.4",
-    "concept-coach": "openstax/tutor-js#coach-20170119.a"
+    "underscore-deep-extend": "^0.0.5"
   },
   "devDependencies": {
     "chai": "3.2.0",

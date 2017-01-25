@@ -12,7 +12,6 @@ define (require) ->
       return unless @isCoach()
       $body = $('body')
       @cc = new ConceptCoachAPI(settings.conceptCoach.url)
-      console.info('version cc', @cc.version)
 
       @cc.on('ui.launching', @openCoach)
       @cc.on('ui.close', _.partial(@cc.handleClosed, _, $body[0]))

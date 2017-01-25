@@ -5,7 +5,7 @@ define (require) ->
   Mathjax = require('mathjax')
   router = require('cs!router')
   linksHelper = require('cs!helpers/links')
-  EditableView = require('cs!helpers/backbone/views/editable')
+  ContentView = require('cs!helpers/backbone/views/content')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   SimModal = require('cs!./embeddables/modals/sims/sims')
   Coach = require('cs!./embeddables/coach')
@@ -17,7 +17,7 @@ define (require) ->
     'exercise': require('hbs!./embeddables/exercise-template')
     'iframe': require('hbs!./embeddables/iframe-template')
 
-  return class MediaBodyView extends EditableView
+  return class MediaBodyView extends ContentView
     key = []
     media: 'page'
     template: template
@@ -212,9 +212,6 @@ define (require) ->
             $el = $(el)
             $el.css('counter-reset', 'list-item ' + $el.attr('start'))
 
-          # # uncomment to embed fake exercises and see embeddable exercises in action
-          # @fakeExercises($temp)
-
           # Hide Exercises and set region for Concept Coach, only if canCoach
           @handleCoach($temp)
 
@@ -403,14 +400,6 @@ define (require) ->
     ###
     # End embeddables logic
     ###
-
-    fakeExercises: ($parent) ->
-      sections = $parent.find('section[data-depth="1"]')
-
-      appendFakeExercise = (section, iter) ->
-        $(section).append(fakeExerciseTemplates[iter % fakeExerciseTemplates.length])
-
-      _.each(sections, appendFakeExercise)
 
     onRender: () ->
       @trigger('render')

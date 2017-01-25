@@ -157,6 +157,7 @@ define (require) ->
     _editable: false
 
     initialize: () ->
+      console.info('this is an editable')
       super()
 
       @listenTo(@model, 'change:editable', @_toggleEditable)

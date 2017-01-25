@@ -4,12 +4,12 @@ define (require) ->
   settings = require('settings')
   linksHelper = require('cs!helpers/links')
   router = require('cs!router')
-  EditableView = require('cs!helpers/backbone/views/editable')
+  ContentView = require('cs!helpers/backbone/views/content')
   BookPopoverView = require('cs!./popovers/book/book')
   template = require('hbs!./header-template')
   require('less!./header')
 
-  return class MediaHeaderView extends EditableView
+  return class MediaHeaderView extends ContentView
     media: 'page'
 
     template: template
