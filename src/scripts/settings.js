@@ -4,7 +4,6 @@
   define(function (require) {
     var makeSettings = require('settings/base');
     return makeSettings({
-      environment: 'compiled',
       features: ['conceptCoach'],
 
       // Hostname and port for the cnx-archive server
