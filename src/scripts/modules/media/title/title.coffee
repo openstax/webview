@@ -3,14 +3,14 @@ define (require) ->
   Backbone = require('backbone')
   session = require('cs!session')
   router = require('cs!router')
-  EditableView = require('cs!helpers/backbone/views/editable')
+  ContentView = require('cs!helpers/backbone/views/content')
   template = require('hbs!./title-template')
   settings = require('settings')
   socialMedia = require('cs!helpers/socialmedia.coffee')
   linksHelper = require('cs!helpers/links.coffee')
   require('less!./title')
 
-  return class MediaTitleView extends EditableView
+  return class MediaTitleView extends ContentView
     template: template
     templateHelpers: () ->
       title = @model.get('title')

@@ -1,9 +1,9 @@
 define (require) ->
-  EditableView = require('cs!helpers/backbone/views/editable')
+  ContentView = require('cs!helpers/backbone/views/content')
   template = require('hbs!./sims-template')
   require('less!./sims')
 
-  return class SimsView extends EditableView
+  return class SimsView extends ContentView
     template: template
 
     initialize: () ->

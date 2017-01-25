@@ -18,6 +18,7 @@
       // ## Core Libraries
       jquery: '../../bower_components/jquery/dist/jquery',
       underscore: '../../bower_components/underscore/underscore',
+      underscoreDeepExtend: '../../bower_components/underscore-deep-extend/index',
       backbone: '../../bower_components/backbone/backbone',
       'hbs/handlebars': '../../bower_components/require-handlebars-plugin/hbs/handlebars',
 
@@ -29,8 +30,6 @@
 
       // Use Minified Aloha because loading files in a different requirejs context is a royal pain
       aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
-
-      OpenStaxConceptCoach: '//localhost:3005/dist/full-build.min',
 
       // ## UI Libraries and Helpers
       tooltip: 'helpers/backbone/views/attached/tooltip/tooltip',
@@ -56,7 +55,7 @@
       cs: '../../bower_components/require-cs/cs',
       'coffee-script': '../../bower_components/coffeescript/docs/v1/browser-compiler/coffee-script',
 
-      'helpers/backbone/views/content': 'helpers/backbone/views/editable'
+      OpenStaxConceptCoach: '//localhost:3005/dist/full-build.min'
     },
 
     // # Packages
@@ -162,12 +161,6 @@
       select2: {
         deps: ['jquery', 'css!../../bower_components/select2/select2'],
         exports: 'Select2'
-      },
-
-      // concept-coach
-      OpenStaxConceptCoach: {
-        deps: ['css!//localhost:3005/dist/main.min'],
-        exports: 'OpenStaxConceptCoach'
       }
     },
 
