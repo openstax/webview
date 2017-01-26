@@ -156,7 +156,16 @@ module.exports = (grunt) ->
               'cs!pages/license/license'
               'cs!pages/donate/donate'
               'cs!helpers/backbone/views/editable'
-
+            ]
+            exclude: ['coffee-script', 'less/normalize']
+            excludeShallow: [
+              'settings'
+              'OpenStaxConceptCoach'
+              'authoring'
+            ]
+          }, {
+            name: 'authoring'
+            include: [
               'select2'
               'bootstrapPopover'
               'cs!pages/workspace/workspace'
@@ -164,8 +173,26 @@ module.exports = (grunt) ->
               'cs!modules/media/editbar/editbar'
               'cs!configs/aloha'
             ]
-            exclude: ['coffee-script', 'less/normalize']
-            excludeShallow: ['settings', 'OpenStaxConceptCoach']
+            exclude: [
+              'settings'
+              'OpenStaxConceptCoach'
+              'jquery'
+              'underscore'
+              'underscoreDeepExtend'
+              'backbone'
+              'hbs'
+              'hbs/handlebars'
+              'hbs/underscore'
+              'css/normalize'
+              'css/css'
+              'css'
+              'coffee-script'
+              'less/normalize'
+              'cs!router'
+              'cs!session'
+              'cs!models/search-results'
+              'cs!helpers/backbone/views/base'
+            ]
           }]
 
           done: (done, output) ->
@@ -212,6 +239,8 @@ module.exports = (grunt) ->
           'dist/styles/**/*.less'
           '!dist/scripts/main.js'
           '!dist/scripts/main.js.map'
+          '!dist/scripts/authoring.js'
+          '!dist/scripts/authoring.js.map'
           '!dist/scripts/require.js'
           '!dist/scripts/settings.js'
           '!dist/scripts/aloha.js'
