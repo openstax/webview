@@ -155,11 +155,13 @@ module.exports = (grunt) ->
               'cs!pages/tos/tos'
               'cs!pages/license/license'
               'cs!pages/donate/donate'
+              'cs!helpers/backbone/views/editable'
 
               'select2'
               'bootstrapPopover'
+              'cs!pages/workspace/workspace'
+              'cs!pages/role-acceptance/role-acceptance'
               'cs!modules/media/editbar/editbar'
-              'cs!helpers/backbone/views/editable'
               'cs!configs/aloha'
             ]
             exclude: ['coffee-script', 'less/normalize']

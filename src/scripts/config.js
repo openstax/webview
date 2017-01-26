@@ -24,9 +24,6 @@
       // ## MathJax
       mathjax: '//cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=MML_HTMLorMML',
 
-      // Use Minified Aloha because loading files in a different requirejs context is a royal pain
-      aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
-
       // ## UI Libraries and Helpers
       tooltip: 'helpers/backbone/views/attached/tooltip/tooltip',
       popover: 'helpers/backbone/views/attached/popover/popover',
@@ -38,20 +35,22 @@
       bootstrapCollapse: '../../bower_components/bootstrap/js/collapse',
       bootstrapDropdown: '../../bower_components/bootstrap/js/dropdown',
       bootstrapModal: '../../bower_components/bootstrap/js/modal',
-      bootstrapPopover: '../../bower_components/bootstrap/js/popover',
       bootstrapScrollspy: '../../bower_components/bootstrap/js/scrollspy',
       bootstrapTab: '../../bower_components/bootstrap/js/tab',
       bootstrapTooltip: '../../bower_components/bootstrap/js/tooltip',
       bootstrapTransition: '../../bower_components/bootstrap/js/transition',
 
+      OpenStaxConceptCoach: '//localhost:3005/dist/concept-coach.min',
+
+      // Use Minified Aloha because loading files in a different requirejs context is a royal pain
+      aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
+      bootstrapPopover: '../../bower_components/bootstrap/js/popover',
       // # Select2 multiselect widget
       select2: '../../bower_components/select2/select2',
 
       // # CoffeeScript
       cs: '../../bower_components/require-cs/cs',
-      'coffee-script': '../../bower_components/coffeescript/docs/v1/browser-compiler/coffee-script',
-
-      OpenStaxConceptCoach: '//localhost:3005/dist/concept-coach.min'
+      'coffee-script': '../../bower_components/coffeescript/docs/v1/browser-compiler/coffee-script'
     },
 
     // # Packages
