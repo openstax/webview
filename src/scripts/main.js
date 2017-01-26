@@ -8,7 +8,7 @@
       configureFor(settings, _);
 
       // Load the application after the config
-      if (settings.hasFeature('authoring')){
+      if (settings.hasFeature('authoring')) {
         require(['authoring'], function () {
           loader.init();
         });

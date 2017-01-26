@@ -267,9 +267,12 @@ module.exports = (grunt) ->
         options:
           sourceMap: true
           sourceMapIncludeSources: true
-          sourceMapIn: 'dist/scripts/main.js.map'
+          # http://stackoverflow.com/questions/14207983/how-to-specify-multiple-source-maps-in-uglify-grunt-task
+          sourceMapIn: (path) ->
+            if path.match('require') then 'dist/scripts/main.js.map' else path + '.map'
         files:
           'dist/scripts/main.js': ['dist/scripts/main.js']
+          'dist/scripts/authoring.js': ['dist/scripts/authoring.js']
           'dist/scripts/require.js': ['dist/scripts/require.js']
 
     # HTML min

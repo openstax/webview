@@ -11,8 +11,8 @@
   ];
 
   // Load the config
-  require(authoringModules, function (select2, bootstrapPopover, workspace, roleAcceptance, editbar, aloha) {
-    return [select2, bootstrapPopover, workspace, roleAcceptance, editbar, aloha];
+  require(authoringModules, function () {
+    return;
   });
 
 })();
