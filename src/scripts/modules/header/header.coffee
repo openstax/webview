@@ -6,18 +6,20 @@ define (require) ->
   template = require('hbs!./header-template')
   require('less!./header')
   require('bootstrapCollapse')
+  hasAuthoring = settings.hasFeature('authoring')
 
-  $(window).focus(session.update.bind(session))
+  $(window).focus(session.update.bind(session)) if hasAuthoring
 
   return class HeaderView extends BaseView
     template: template
     templateHelpers: () -> {
+      hasAuthoring: hasAuthoring
       legacy: settings.legacy
       cnxSupport: settings.cnxSupport
       page: @page
       results: !!document.getElementById('results')
       url: @url
-      username: session.get('id')
+      username: if hasAuthoring then session.get('id')
       accountProfile: settings.accountProfile
     }
 
@@ -36,7 +38,7 @@ define (require) ->
       siteStatus: '.site-status'
 
     onRender: () ->
-      session.update()
+      session.update() if hasAuthoring
       @regions.siteStatus.show(new SiteStatusView())
 
     skipTo: (e) ->

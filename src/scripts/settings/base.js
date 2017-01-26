@@ -3,8 +3,8 @@
 
   define(function (require) {
     var _ = require('cs!helpers/underscore.deepExtend');
-
     var languages = require('cs!configs/languages');
+
     var base = {
       // Directory from which webview is served
       root: '/',
@@ -22,6 +22,8 @@
 
       // Webmaster E-mail address
       webmaster: 'cnx@cnx.org',
+      // Support E-mail address
+      support: 'support@openstax.org',
 
       terpUrl: function (itemCode) {
         return 'https://openstaxtutor.org/terp/' + itemCode + '/quiz_start';
@@ -67,7 +69,9 @@
     };
 
     return function makeSettings(additionalSettings) {
-      return _.deepExtend({}, base, additionalSettings);
+      var settings = _.deepExtend({}, base, additionalSettings);
+      settings.hasFeature = _.partial(_.contains, settings.features);
+      return settings;
     };
 
   });
