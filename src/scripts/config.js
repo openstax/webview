@@ -51,7 +51,7 @@
       cs: '../../bower_components/require-cs/cs',
       'coffee-script': '../../bower_components/coffeescript/docs/v1/browser-compiler/coffee-script',
 
-      OpenStaxConceptCoach: '//localhost:3005/dist/full-build.min'
+      OpenStaxConceptCoach: '//localhost:3005/dist/concept-coach.min'
     },
 
     // # Packages

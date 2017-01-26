@@ -7,11 +7,11 @@
         conceptCoach: {
           enable: {
             paths: {
-              OpenStaxConceptCoach: settings.conceptCoach.base + '/full-build.min'
+              OpenStaxConceptCoach: settings.conceptCoach.base + '/concept-coach.min'
             },
             shim: {
               OpenStaxConceptCoach: {
-                deps: ['css!' + settings.conceptCoach.base + '/main.min'],
+                deps: ['css!' + settings.conceptCoach.base + '/concept-coach-styles.min'],
                 exports: 'OpenStaxConceptCoach'
               }
             }
