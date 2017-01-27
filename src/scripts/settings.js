@@ -3,6 +3,12 @@
 
   define(function (require) {
     var makeSettings = require('settings/base');
+
+    // The follow properties have been defined with default values in "settings/base":
+    //  root, features, titleSuffix, analyticsID, languages, webmaster,
+    //  support, terpUrl, defaultLicense, conceptCoach
+    // Any new values here will override those default values.
+
     return makeSettings({
       features: ['conceptCoach'],
 
