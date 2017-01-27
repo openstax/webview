@@ -49,8 +49,9 @@
       },
 
       conceptCoach: {
-        url: 'http://localhost:3001',
-        base: '//localhost:3005/dist'
+        url: '//localhost:3001',
+        assetsUrl: '//localhost:3005/dist',
+        revUrl: 'https://tutor-qa.openstax.org/rev.txt'
       }
     });
   });
