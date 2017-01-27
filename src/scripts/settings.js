@@ -48,15 +48,13 @@
       cnxSupport: 'http://openstax.force.com/support?l=en_US&c=Products%3ACNX',
 
       exerciseUrl: function (itemCode) {
-        // // stub.  Comment out to use local exercises stub.
-        // // Copied from https://exercises-dev1.openstax.org/api/exercises?q=tag:k12phys-ch04-s01-lo01
-        // return 'http://localhost:8000/data/exercises.json';
         return 'https://exercises-dev1.openstax.org/api/exercises?q=tag:' + itemCode;
       },
 
+      // When deployed, these will have the same origin.
       conceptCoach: {
         url: '//localhost:3001',
-        assetsUrl: '//localhost:3005/dist',
+        assetsUrl: '//localhost:3001/assets',
         revUrl: 'https://tutor-qa.openstax.org/rev.txt'
       }
     });

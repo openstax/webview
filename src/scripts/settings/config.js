@@ -1,16 +1,79 @@
 (function () {
   'use strict';
 
+  function hasLocalStorage() {
+    var item = 'localStoragePolyfill';
+    try {
+      localStorage.setItem(item, item);
+      localStorage.removeItem(item);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   // conceptCoach enabled config needs to check for version before setting paths.
   function makeCoachEnabledConfig(settings, _, $) {
+    var REV_ETAG_STORAGE_KEY = 'cnxCoachRevTag';
+    var HAS_LOCAL_STORAGE = hasLocalStorage();
+
     var promise = $.Deferred(function () {
-      return $.get(settings.conceptCoach.revUrl)
+      return $.ajax(settings.conceptCoach.revUrl, getETagMatchingOptions())
         .then(handleCoachVersion)
         .always(handleCoachConfiguration);
     });
 
+    function getETagMatchingOptions() {
+      var options = {};
+
+      if (HAS_LOCAL_STORAGE) {
+        var previousRevETag = localStorage.getItem(REV_ETAG_STORAGE_KEY);
+
+        if (previousRevETag) {
+          options.headers = {
+            'If-None-Match': previousRevETag
+          };
+        }
+      }
+      return options;
+    }
+
+    function makeCoachKey(eTag) {
+      return 'cnxCoachVersion' + eTag;
+    }
+
+    function updateCache(jqXHR, coachVersion) {
+      if (!HAS_LOCAL_STORAGE) {
+        return;
+      }
+
+      var eTag = jqXHR.getResponseHeader('ETag');
+      var previousETag = localStorage.getItem(REV_ETAG_STORAGE_KEY);
+      if (previousETag) {
+        var previousCoachKey = makeCoachKey(previousETag);
+        var previousCoachVersion = localStorage.getItem(previousCoachKey);
+        if (previousCoachVersion && eTag && previousCoachVersion !== coachVersion) {
+          localStorage.removeItem(previousETag);
+        }
+      }
+
+      if (eTag) {
+        localStorage.setItem(REV_ETAG_STORAGE_KEY, eTag);
+        localStorage.setItem(makeCoachKey(eTag), coachVersion);
+      }
+    }
+
+    function getCachedCoachVersion() {
+      if (!HAS_LOCAL_STORAGE) {
+        return;
+      }
+
+      var currentETag = localStorage.getItem(REV_ETAG_STORAGE_KEY);
+      return localStorage.getItem(makeCoachKey(currentETag));
+    }
+
     // pull version string for coach out of revUrl's response
-    function handleCoachVersion(versions) {
+    function handleCoachVersion(versions, status, jqXHR) {
       var apps = versions.split('\n');
       var coachName = 'coach-js';
 
@@ -21,13 +84,14 @@
         }
       });
 
+      updateCache(jqXHR, coachVersionSuffix);
       return coachVersionSuffix;
     }
 
     function handleCoachConfiguration(coachVersionSuffix) {
       // fallback to non-suffixed version if version checking fails.
       if (!_.isString(coachVersionSuffix)) {
-        coachVersionSuffix = '';
+        coachVersionSuffix = getCachedCoachVersion() || '';
       }
       var config = {
         paths: {
