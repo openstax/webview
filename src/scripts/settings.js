@@ -57,6 +57,9 @@
         assetsUrl: '//localhost:3001/assets',
         revUrl: 'https://tutor-qa.openstax.org/rev.txt'
       }
+
     });
+
   });
+
 })();
