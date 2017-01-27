@@ -44,7 +44,7 @@ featured-books-read-more = Więcej
 
 # HEADER - Top Right Message - src/scripts/modules/header/header-template.html
 
-all-cnx-author-legacy-site = Autor CNX | Stara wersja
+all-cnx-author-legacy-site = Twórz zasoby | Stara wersja CNX
   [html/title] Przejdź do starej wersji CNX
 
 # HEADER - Nav Bar - src/scripts/modules/header/header-template.html
