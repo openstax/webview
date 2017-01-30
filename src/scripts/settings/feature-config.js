@@ -33,7 +33,9 @@
         return $.when.apply($, featureConfigs)
           .done(function () {
             var featureConfig = _.deepExtend.apply(_, arguments);
-            require.config(featureConfig);
+            if (featureConfig) {
+              require.config(featureConfig);
+            }
           });
       }
 
