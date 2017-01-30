@@ -78,16 +78,18 @@
         return;
       }
 
+      var DIR_NAME = 'coach-js';
+      var SHA_LENGTH = 40;
+
       var apps = versions.split('\n');
-      var dirName = 'coach-js';
-      var dirNamePatten = new RegExp('(' + dirName + ')+(.)+?(@)');
+      var dirNamePatten = new RegExp('(' + DIR_NAME + ')+(.)+?(@)');
 
       var coachVersionSuffix = '';
       _.forEach(apps, function (app) {
         if (app.match(dirNamePatten)) {
           var shaStartPos = app.indexOf('@') + 1;
-          var version = app.substr(shaStartPos).trim();
-          if (version.length === 40) {
+          var version = app.substr(shaStartPos).trim().substr(0, SHA_LENGTH);
+          if (version.length === SHA_LENGTH) {
             coachVersionSuffix = '-' + version;
           }
         }
