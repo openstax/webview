@@ -74,13 +74,22 @@
 
     // pull version string for coach out of revUrl's response
     function handleCoachVersion(versions, status, jqXHR) {
+      if (!versions) {
+        return;
+      }
+
       var apps = versions.split('\n');
-      var coachName = 'coach-js';
+      var dirName = 'coach-js';
+      var dirNamePatten = new RegExp('(' + dirName + ')+(.)+?(@)');
 
       var coachVersionSuffix = '';
       _.forEach(apps, function (app) {
-        if (app.match(coachName)) {
-          coachVersionSuffix = '-' + app.replace('openstax/tutor-js (' + coachName + ') @ ', '');
+        if (app.match(dirNamePatten)) {
+          var shaStartPos = app.indexOf('@') + 1;
+          var version = app.substr(shaStartPos).trim();
+          if (version.length === 40) {
+            coachVersionSuffix = '-' + version;
+          }
         }
       });
 
