@@ -3,7 +3,7 @@
 
   // Load the config
   require(['config', 'settings'], function (config, settings) {
-    var dependencies = ['settings/config', 'cs!loader', 'cs!helpers/underscore.deepExtend', 'jquery'];
+    var dependencies = ['settings/feature-config', 'cs!loader', 'cs!helpers/underscore.deepExtend', 'jquery'];
 
     // jshint maxparams: 4
     require(dependencies, function (configureFor, loader, _, $) {
