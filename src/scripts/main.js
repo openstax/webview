@@ -7,9 +7,10 @@
     require(['settings/feature-config', 'cs!loader', 'cs!helpers/underscore.deepExtend', 'jquery'],
       function (configureFor, loader, _, $) {
         // some paths and shims need to be configured based on settings.
-        configureFor(settings, _, $);
-        // Load the application after the config
-        loader.init();
+        configureFor(settings, _, $, function () {        
+          // Load the application after the config
+          loader.init();
+        });
       }
     );
   });

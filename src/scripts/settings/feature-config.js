@@ -2,7 +2,7 @@
   'use strict';
 
   define(function () {
-    return function (settings, _, $) {
+    return function (settings, _, $, callback) {
       require(['settings/concept-coach-enabled-config'], function (makeCoachEnabledConfig) {
 
         // config per feature as needed. The key should match the feature string in
@@ -31,10 +31,13 @@
             }
           });
 
-          $.when.apply($, featureConfigs).done(function () {
-            var featureConfig = _.deepExtend.apply(_, arguments);
-            require.config(featureConfig);
-          });
+          $.when.apply($, featureConfigs)
+            .done(function () {
+              var featureConfig = _.deepExtend.apply(_, arguments);
+              require.config(featureConfig);
+            }).then(function () {
+              callback();
+            });
         }
 
         configureForFeatures(features);
