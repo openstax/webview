@@ -145,7 +145,7 @@ module.exports = (grunt) ->
             name: 'main'
             include: [
               'settings/base'
-              'settings/config'
+              'settings/feature-config'
               'cs!pages/error/error'
               'cs!pages/home/home'
               'cs!pages/contents/contents'
