@@ -630,6 +630,16 @@ search-results-filter-book-page = { $displayval ->
  *[other] { $displayval }
 }
 
+search-results-filter-subject-value = { $subject ->
+  [Arts] Muzyka i plastyka
+  [Business] Przedsiębiorczość
+  [Humanities] Nauki humanistyczne
+  [Mathematics and Statistics] Matematyka i statystyka
+  [Science and Technology] Pozostałe nauki ścisłe, przyrodnicze i techniczne
+  [Social Sciences] Nauki społeczne
+ *[__other__] { $subject }
+}
+
 # SEARCH RESULTS - Table - src/scripts/modules/search/results/list/table-partial.html
 
 search-results-table-type = Typ

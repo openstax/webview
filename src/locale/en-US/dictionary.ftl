@@ -628,6 +628,16 @@ search-results-filter-book-page = { $displayval ->
   *[other] { $displayval }
 }
 
+search-results-filter-subject-value = { $subject ->
+  [Arts] Arts
+  [Business] Business
+  [Humanities] Humanities
+  [Mathematics and Statistics] Mathematics and Statistics
+  [Science and Technology] Science and Technology
+  [Social Sciences] Social Sciences
+ *[__other__] { $subject }
+}
+
 # SEARCH RESULTS - Table - src/scripts/modules/search/results/list/table-partial.html
 
 search-results-table-type = Type
