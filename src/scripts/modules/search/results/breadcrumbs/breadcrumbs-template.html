@@ -4,12 +4,16 @@
       <span class="fa fa-times"></span>
     </a>
     <span class="limit" {{localize}} >{{name}}</span>
-    <span class="value">
-      {{~#is tag "authorID"~}}
-        {{author ../../authorList index 'fullname'}} ({{author ../../authorList index 'id'}})
-      {{~else~}}
-        {{detectLanguage ../../languages value}}
-      {{~/is~}}
-    </span>
+    {{~#is tag "subject"~}}
+      <span class="value" data-l10n-id="search-results-filter-subject-value" data-l10n-args='{"subject":"{{ value }}"}'></span>
+    {{~else~}}
+      <span class="value">
+        {{~#is tag "authorID"~}}
+          {{author ../../authorList index 'fullname'}} ({{author ../../authorList index 'id'}})
+        {{~else~}}
+          {{detectLanguage ../../languages value}}
+        {{~/is~}}
+      </span>
+    {{~/is~}}
   </span>
 {{/each}}
