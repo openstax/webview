@@ -5,6 +5,6 @@ define (require) ->
   return (base, featureInitializers) ->
     module = base
     _.each(settings.features, (feature) ->
-      module = featureInitializers[feature](module) if featureInitializers[feature]?
+      module = featureInitializers[feature](module, settings) if featureInitializers[feature]?
     )
     return module

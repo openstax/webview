@@ -9,7 +9,6 @@ define (require) ->
   ContentView = require('cs!helpers/backbone/views/content')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   SimModal = require('cs!./embeddables/modals/sims/sims')
-  Coach = require('cs!./embeddables/coach')
   template = require('hbs!./body-template')
   settings = require('settings')
   require('less!./body')
@@ -42,9 +41,6 @@ define (require) ->
       'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle,
         .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
       'click .os-interactive-link': 'simLink'
-
-    regions:
-      coach: '#coach-wrapper'
 
     initialize: () ->
       super()
@@ -80,32 +76,6 @@ define (require) ->
       @model.setPage(pageNumber)
       router.navigate href, {trigger: false}, => @parent.parent.parent.trackAnalytics()
 
-    getCoach: ->
-      moduleUUID = @model.getUuid()?.split('?')[0]
-      settings.conceptCoach?.uuids?[moduleUUID]
-
-    isCoach: ->
-      @getCoach()?
-
-    hideExercises: ($el) ->
-      hiddenClasses = @getCoach()
-      hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
-      $exercisesToHide = $el.find(hiddenSelectors)
-      $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
-
-      $exercisesToHide
-
-    makeRegionForCoach: ($summary, wrapperId = 'coach-wrapper') ->
-      $("##{wrapperId}").remove()
-      $coachWrapper = $("<div id=\"#{wrapperId}\"></div>")
-      $coachWrapper.insertAfter(_.last($summary))
-
-    handleCoach: ($el) ->
-      return unless @isCoach()
-      @hideExercises($el)
-      $summary = $el.find('section.summary[data-depth], section.section-summary[data-depth]')
-      @makeRegionForCoach($summary) if $summary.length > 0
-
     # Toggle the visibility of teacher's edition elements
     toggleTeacher: () ->
       @model.set('teacher', not @model.get('teacher'))
@@ -117,115 +87,113 @@ define (require) ->
 
       try
         if @model.get('loaded') and @model.asPage()?.get('loaded') and @model.asPage()?.get('active')
-
-          # Add an attribute marking that this is collated
-          # TODO: Move this into the handlebars template
-          isCollated = @model.asPage().isCollated()
-          $temp.find('#content').attr('data-is-baked', isCollated)
-
-          if $temp.find('.os-interactive-link').length
-            @model.set('sims', true)
-
-          $temp.find('table th').attr('scope', 'col')
-
-          # Remove the module title and abstract TODO: check if it is still necessary
-          $temp.children('[data-type="title"]').remove()
-          $temp.children('[data-type="abstract"]').remove()
-
-          # Wrap title and content elements in header and section elements, respectively
-          $temp.find('.example, .exercise, .note,
-                    [data-type="example"], [data-type="exercise"], [data-type="note"]').each (index, el) ->
-            $el = $(el)
-            $contents = $el.contents().filter (i, node) ->
-              return !$(node).is('.title, [data-type="title"]')
-            $contents.wrapAll('<section>')
-            $title = $el.children('.title, [data-type="title"]')
-            $title.wrap('<header>')
-            # Add an attribute for the parents' `data-label`
-            # since CSS does not support `parent(attr(data-label))`.
-            # When the title exists, this attribute is added before it
-            $title.attr('data-label-parent', $el.attr('data-label'))
-            # Add a class for styling since CSS does not support `:has(> .title)`
-            # NOTE: `.toggleClass()` explicitly requires a `false` (not falsy) 2nd argument
-            $el.toggleClass('ui-has-child-title', $title.length > 0)
-
-          # Wrap solutions in a div so "Show/Hide Solutions" work
-          $temp.find('.exercise .solution, [data-type="exercise"] [data-type="solution"]')
-          .wrapInner('<section class="ui-body">')
-          .prepend('''
-            <div class="ui-toggle-wrapper">
-              <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
-            </div>''')
-
-          $temp.find('figure:has(> figcaption)').addClass('ui-has-child-figcaption')
-
-          # Move all figure captions below the figure
-          $temp.find('figcaption').each (i, el) ->
-            $(el).parent().append(el)
-
-          # Convert figure, table, exercise, problem and note links to show the proper name
-          $temp.find('a[href^="#"]:not([data-type=footnote-number]):not([data-type=footnote-ref])').each (i, el) ->
-            $el = $(el)
-            href = $el.attr('href')
-
-            if href.length > 1
-              try
-                $target = $temp.find(href)
-
-                tag = $target?.prop('tagName')?.toLowerCase()
-
-                if $target?.attr('data-type') isnt undefined
-                  tag = $target?.attr('data-type')?.toLowerCase()
-
-                if $el.text() is '[link]' and tag
-                  tag = tag.charAt(0).toUpperCase() + tag.substring(1)
-                  $el.text("#{tag}") if tag isnt 'undefined'
-
-          # Convert links to maintain context in a book, if appropriate
-          if @model.isBook()
-            $temp.find('a:not([data-type=footnote-number]):not([href^="#"])').each (i, el) =>
-              $el = $(el)
-              href = $el.attr('href')
-
-              [href, fragment] = href.split('#')
-              page = @model.getPage(href.substr(10))
-              fragment = fragment and "##{fragment}" or ''
-
-              if page
-                pageNumber = page.getPageNumber()
-                $el.attr('href', "/contents/#{@model.getVersionedId()}:#{page.id}#{fragment}")
-                $el.attr('data-page', pageNumber)
-
-          # Add nofollow to external user-generated links
-          $temp.find('a[href^="http:"], a[href^="https:"], a[href^="//"]').attr('rel', 'nofollow')
-
-          # Copy data-mark-prefix and -suffix from ol to li so they can be used in css
-          $temp.find('ol[data-mark-prefix] > li, ol[data-mark-suffix] > li,
-          [data-type="list"][data-list-type="enumerated"][data-mark-prefix] > [data-type="item"],
-          [data-type="list"][data-list-type="enumerated"][data-mark-suffix] > [data-type="item"]').each (i, el) ->
-            $el = $(el)
-            $parent = $el.parent()
-            $el.attr('data-mark-prefix', $parent.data('mark-prefix'))
-            $el.attr('data-mark-suffix', $parent.data('mark-suffix'))
-          $temp.find('ol[start], [data-type="list"][data-list-type="enumerated"][start]').each (i, el) ->
-            $el = $(el)
-            $el.css('counter-reset', 'list-item ' + $el.attr('start'))
-
-          # Hide Exercises and set region for Concept Coach, only if canCoach
-          @handleCoach($temp)
-
-          @initializeEmbeddableQueues()
-          @findEmbeddables($temp.find('#content'))
-
-          # Show Teacher's Edition content if appropriate
-          @updateTeacher($temp)
-
+          @onAfterSetupDom($temp)
       catch error
         # FIX: Log the error
         console.log error
 
       @$el?.html($temp.html())
 
+    onAfterSetupDom: ($temp) ->
+      @initializeEmbeddableQueues()
+      @findEmbeddables($temp.find('#content'))
+
+      # Show Teacher's Edition content if appropriate
+      @updateTeacher($temp)
+
+    setupDom: ($temp) ->
+      # Add an attribute marking that this is collated
+      # TODO: Move this into the handlebars template
+      isCollated = @model.asPage().isCollated()
+      $temp.find('#content').attr('data-is-baked', isCollated)
+
+      if $temp.find('.os-interactive-link').length
+        @model.set('sims', true)
+
+      $temp.find('table th').attr('scope', 'col')
+
+      # Remove the module title and abstract TODO: check if it is still necessary
+      $temp.children('[data-type="title"]').remove()
+      $temp.children('[data-type="abstract"]').remove()
+
+      # Wrap title and content elements in header and section elements, respectively
+      $temp.find('.example, .exercise, .note,
+                [data-type="example"], [data-type="exercise"], [data-type="note"]').each (index, el) ->
+        $el = $(el)
+        $contents = $el.contents().filter (i, node) ->
+          return !$(node).is('.title, [data-type="title"]')
+        $contents.wrapAll('<section>')
+        $title = $el.children('.title, [data-type="title"]')
+        $title.wrap('<header>')
+        # Add an attribute for the parents' `data-label`
+        # since CSS does not support `parent(attr(data-label))`.
+        # When the title exists, this attribute is added before it
+        $title.attr('data-label-parent', $el.attr('data-label'))
+        # Add a class for styling since CSS does not support `:has(> .title)`
+        # NOTE: `.toggleClass()` explicitly requires a `false` (not falsy) 2nd argument
+        $el.toggleClass('ui-has-child-title', $title.length > 0)
+
+      # Wrap solutions in a div so "Show/Hide Solutions" work
+      $temp.find('.exercise .solution, [data-type="exercise"] [data-type="solution"]')
+      .wrapInner('<section class="ui-body">')
+      .prepend('''
+        <div class="ui-toggle-wrapper">
+          <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
+        </div>''')
+
+      $temp.find('figure:has(> figcaption)').addClass('ui-has-child-figcaption')
+
+      # Move all figure captions below the figure
+      $temp.find('figcaption').each (i, el) ->
+        $(el).parent().append(el)
+
+      # Convert figure, table, exercise, problem and note links to show the proper name
+      $temp.find('a[href^="#"]:not([data-type=footnote-number]):not([data-type=footnote-ref])').each (i, el) ->
+        $el = $(el)
+        href = $el.attr('href')
+
+        if href.length > 1
+          try
+            $target = $temp.find(href)
+
+            tag = $target?.prop('tagName')?.toLowerCase()
+
+            if $target?.attr('data-type') isnt undefined
+              tag = $target?.attr('data-type')?.toLowerCase()
+
+            if $el.text() is '[link]' and tag
+              tag = tag.charAt(0).toUpperCase() + tag.substring(1)
+              $el.text("#{tag}") if tag isnt 'undefined'
+
+      # Convert links to maintain context in a book, if appropriate
+      if @model.isBook()
+        $temp.find('a:not([data-type=footnote-number]):not([href^="#"])').each (i, el) =>
+          $el = $(el)
+          href = $el.attr('href')
+
+          [href, fragment] = href.split('#')
+          page = @model.getPage(href.substr(10))
+          fragment = fragment and "##{fragment}" or ''
+
+          if page
+            pageNumber = page.getPageNumber()
+            $el.attr('href', "/contents/#{@model.getVersionedId()}:#{page.id}#{fragment}")
+            $el.attr('data-page', pageNumber)
+
+      # Add nofollow to external user-generated links
+      $temp.find('a[href^="http:"], a[href^="https:"], a[href^="//"]').attr('rel', 'nofollow')
+
+      # Copy data-mark-prefix and -suffix from ol to li so they can be used in css
+      $temp.find('ol[data-mark-prefix] > li, ol[data-mark-suffix] > li,
+      [data-type="list"][data-list-type="enumerated"][data-mark-prefix] > [data-type="item"],
+      [data-type="list"][data-list-type="enumerated"][data-mark-suffix] > [data-type="item"]').each (i, el) ->
+        $el = $(el)
+        $parent = $el.parent()
+        $el.attr('data-mark-prefix', $parent.data('mark-prefix'))
+        $el.attr('data-mark-suffix', $parent.data('mark-suffix'))
+      $temp.find('ol[start], [data-type="list"][data-list-type="enumerated"][start]').each (i, el) ->
+        $el = $(el)
+        $el.css('counter-reset', 'list-item ' + $el.attr('start'))
 
 
     ###
@@ -412,19 +380,23 @@ define (require) ->
       if @model.get('sims') is true
         @parent?.regions.self.append(new SimModal({model: @model}))
 
-      # mount the Concept Coach if the mounter has been configured/if `canCoach`
-      if @isCoach()
-        @coach = new Coach({model: @model})
-        @regions.coach.append(@coach)
+    onAfterRender: ->
+      currentPage = @model.asPage()
+      return unless currentPage?.get('active')
+      @queueForMathJax()
+      @adjustForHash(currentPage)
 
+    queueForMathJax: ->
       # MathJax rendering must be done after the HTML has been added to the DOM
       MathJax?.Hub.Queue =>
         @jaxing = true
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
       MathJax?.Hub.Queue =>
         @jaxing = false
-        @processCoachMath?()
+      
+      MathJax
 
+    adjustForHash: (currentPage) ->
       # Update the hash fragment after the content has loaded
       # to force the browser window to find the intended content
       jumpToHash = () =>
