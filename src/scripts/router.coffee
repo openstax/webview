@@ -5,7 +5,8 @@ define (require) ->
   session = require('cs!session')
   analytics = require('cs!helpers/handlers/analytics')
   AppView = require('cs!pages/app/app')
-  setupRoutesForAuthoring = require('cs!routes-authoring')
+  routesForAuthoring = require('cs!routes-authoring')
+  feature = require('cs!helpers/feature')
   hasAuthoring = settings.hasFeature('authoring')
 
   return new class Router extends Backbone.Router
@@ -34,7 +35,7 @@ define (require) ->
       @route 'license', 'license', () ->
         @appView.render('license')
 
-      setupRoutesForAuthoring(@) if hasAuthoring
+      feature(@, authoring: routesForAuthoring)
 
       # Match and extract uuid and page numbers separated by a colon
       @route linksHelper.contentsLinkRegEx, 'media', (uuid, version, page, title, qs) ->

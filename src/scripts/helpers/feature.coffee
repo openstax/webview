@@ -1,6 +1,10 @@
 define (require) ->
+  _ = require('underscore')
   settings = require('settings')
 
-  return (featureName, enabledModule, disabledModule) ->
-    module = if settings.hasFeature(featureName) then enabledModule else disabledModule
+  return (base, featureInitializers) ->
+    module = base
+    _.each(settings.features, (feature) ->
+      module = featureInitializers[feature](module) if featureInitializers[feature]?
+    )
     return module

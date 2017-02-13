@@ -1,23 +1,23 @@
 define (require) ->
-  _ = require('underscore')
-  MediaView = require('cs!./media-base')
+  (MediaViewBase) ->
+    _ = require('underscore')
 
-  return class MediaViewWithAuthoring extends MediaView
-    regions: _.extend({}, MediaView.prototype.regions, {
-      editbar: '.editbar'
-    })
+    return class MediaViewWithAuthoring extends MediaViewBase
+      regions: _.extend({}, MediaViewBase.prototype.regions, {
+        editbar: '.editbar'
+      })
 
-    events: _.extend({}, MediaView.prototype.events, {
-      'keydown .media-title > .title input': 'checkKeySequence'
-      'keyup .media-title > .title input': 'resetKeySequence'
-    })
+      events: _.extend({}, MediaViewBase.prototype.events, {
+        'keydown .media-title > .title input': 'checkKeySequence'
+        'keyup .media-title > .title input': 'resetKeySequence'
+      })
 
-    initialize: (options) ->
-      super(options)
-      @listenTo(@model, 'change:editable', @toggleEditor)
+      initialize: (options) ->
+        super(options)
+        @listenTo(@model, 'change:editable', @toggleEditor)
 
-    onBeforeClose: () ->
-      if @model.get('editable')
-        @model.set('editable', false, {silent: true})
-        @closeEditor()
-      super()
+      onBeforeClose: () ->
+        if @model.get('editable')
+          @model.set('editable', false, {silent: true})
+          @closeEditor()
+        super()
