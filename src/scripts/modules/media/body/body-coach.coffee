@@ -1,11 +1,15 @@
 
 define (require) ->
   (MediaBodyViewBase, settings) ->
-    Coach = require('cs!./embeddables/coach')
 
     return class MediaBodyWithCoachView extends MediaBodyViewBase
       regions:
         coach: '#coach-wrapper'
+
+      isCoachInitialized: false
+
+      hasCoach: ->
+        @isCoachInitialized and @regions.coach.$el?
 
       getCoach: ->
         moduleUUID = @model.getUuid()?.split('?')[0]
@@ -40,11 +44,17 @@ define (require) ->
         super($temp)
 
       onAfterRender: ->
-        # mount the Concept Coach if the mounter has been configured/if `canCoach`
-        if @model.asPage()?.get('active') and @isCoach()
-          @coach = new Coach({model: @model})
-          @regions.coach.append(@coach)
+        # mount the Concept Coach if the mounter has been configured/if `isCoach`
+        if @model.asPage()?.get('active') and @isCoach() and not @isCoachInitialized
+          @initalizeCoach()
         super()
+
+      initalizeCoach: ->
+        @isCoachInitialized = true
+        require(['cs!./embeddables/coach'], (Coach) =>
+          unless @hasCoach()
+            @regions.coach.append(new Coach({model: @model}))
+        )
 
       queueForMathJax: ->
         super()?.Hub.Queue =>
