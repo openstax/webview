@@ -1,6 +1,7 @@
 
 define (require) ->
   (MediaBodyViewBase, settings) ->
+    Coach = require('cs!./embeddables/coach')
     coachMixin = require('cs!helpers/backbone/views/coach-mixin')
 
     return class MediaBodyWithCoachView extends MediaBodyViewBase.extend(coachMixin)
@@ -35,10 +36,10 @@ define (require) ->
       onAfterRender: ->
         # mount the Concept Coach if the mounter has been configured/if `canCoach`
         if @model.asPage()?.get('active') and not @hasCoach() and @isCoach()
-          require(['cs!./embeddables/coach'], @mountCoach)
+          @mountCoach()
         super()
 
-      mountCoach: (Coach) =>
+      mountCoach: =>
         @regions.coach.append(new Coach({model: @model})) unless @hasCoach()
         @trigger('change:coachMounted')
 

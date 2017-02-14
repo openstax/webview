@@ -9,7 +9,7 @@
       // `enable`d or 'disable'd features.
       var features = {
         conceptCoach: {
-          enable: makeCoachEnabledConfig(settings, _, $)
+          base: makeCoachEnabledConfig(settings, _, $)
         }
       };
 
@@ -22,11 +22,16 @@
       }
 
       function configureForFeatures(features) {
-        var featureConfigs = _.map(features, function (featureOptions, feature) {
+        var featureConfigs = [];
+        _.each(features, function (featureOptions, feature) {
+          if (!_.isEmpty(featureOptions.base)) {
+            featureConfigs.push(handleOptions(featureOptions.base));
+          }
+
           if (_.contains(settings.features, feature)) {
-            return handleOptions(featureOptions.enable);
+            featureConfigs.push(handleOptions(featureOptions.enable));
           } else {
-            return handleOptions(featureOptions.disable);
+            featureConfigs.push(handleOptions(featureOptions.disable));
           }
         });
 

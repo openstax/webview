@@ -9,7 +9,7 @@
       // Directory from which webview is served
       root: '/',
 
-      features: ['conceptCoach'],
+      features: [],
 
       // Prefix to prepend to page titles
       titleSuffix: ' - OpenStax CNX',
