@@ -1,22 +1,11 @@
 
 define (require) ->
   (MediaBodyViewBase, settings) ->
+    coachMixin = require('cs!helpers/backbone/views/coach-mixin')
 
-    return class MediaBodyWithCoachView extends MediaBodyViewBase
+    return class MediaBodyWithCoachView extends MediaBodyViewBase.extend(coachMixin)
       regions:
         coach: '#coach-wrapper'
-
-      isCoachInitialized: false
-
-      hasCoach: ->
-        @isCoachInitialized and @regions.coach.$el?
-
-      getCoach: ->
-        moduleUUID = @model.getUuid()?.split('?')[0]
-        settings.conceptCoach?.uuids?[moduleUUID]
-
-      isCoach: ->
-        @getCoach()?
 
       hideExercises: ($el) ->
         hiddenClasses = @getCoach()
@@ -44,17 +33,14 @@ define (require) ->
         super($temp)
 
       onAfterRender: ->
-        # mount the Concept Coach if the mounter has been configured/if `isCoach`
-        if @model.asPage()?.get('active') and @isCoach() and not @isCoachInitialized
-          @initalizeCoach()
+        # mount the Concept Coach if the mounter has been configured/if `canCoach`
+        if @model.asPage()?.get('active') and not @hasCoach() and @isCoach()
+          require(['cs!./embeddables/coach'], @mountCoach)
         super()
 
-      initalizeCoach: ->
-        @isCoachInitialized = true
-        require(['cs!./embeddables/coach'], (Coach) =>
-          unless @hasCoach()
-            @regions.coach.append(new Coach({model: @model}))
-        )
+      mountCoach: (Coach) =>
+        @regions.coach.append(new Coach({model: @model})) unless @hasCoach()
+        @trigger('change:coachMounted')
 
       queueForMathJax: ->
         super()?.Hub.Queue =>
