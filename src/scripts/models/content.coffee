@@ -80,10 +80,13 @@ define (require) ->
         @set('childChanged', false)
 
     toJSON: (options = {}) ->
+      # This method is used for editing drafts as well as the JSON being sent to the handlebars template.
+      # Deleting the subcollection id may be problematic when attempting to use it in the
+      # Handlebars template but it does not seem to cause problems now.
       results = super(arguments...)
 
       # Prevent new books with no id from being labelled a subcollection
-      if results.id is 'subcol'
+      if results.id is 'subcol' or results.collated
         delete results.id
 
       if options.includeTree and @isBook()
