@@ -23,9 +23,9 @@ define (require) ->
 
         # TODO investigate if we need specific names for our tracker name
         trackerName = @getTrackerName(account)
-        ga('create', account, 'auto', trackerName)
+        ga?('create', account, 'auto', trackerName)
 
-        ga("#{trackerName}.send", 'pageview', fragment)
+        ga?("#{trackerName}.send", 'pageview', fragment)
 
     getTrackerName: (account) ->
       # Strip non-alphanumeric characters for default trackerName
