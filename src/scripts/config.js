@@ -17,11 +17,6 @@
       backbone: '../../bower_components/backbone/backbone',
       'hbs/handlebars': '../../bower_components/require-handlebars-plugin/hbs/handlebars',
 
-      // ## l20n - localization framework + deps.
-      l20n: '../../bower_components/l20n/dist/compat/web/l20n',
-      'template': '../../bower_components/l20n/dist/compat/web/Template',
-      'browser-polyfill': '../../bower_components/babel-polyfill/browser-polyfill',
-
       // ## Backbone plugins
       'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
 
@@ -167,12 +162,6 @@
       OpenStaxConceptCoach: {
         deps: ['css!../../bower_components/concept-coach/main.min'],
         exports: 'OpenStaxConceptCoach'
-      },
-
-      // l20n compatibility dependencies.
-      l20n: {
-        deps: ['browser-polyfill', 'template'],
-        exports: 'l20n'
       }
     },
 
