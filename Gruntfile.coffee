@@ -196,19 +196,18 @@ module.exports = (grunt) ->
       require:
         src: 'bower_components/requirejs/require.js'
         dest: 'dist/scripts/require.js'
-      l20n:
-        src: 'src/scripts/patch/l20n.js'
-        dest: 'dist/scripts/l20n.js'
-      patch:
-        #patch for webcomponents template.
-        src: 'src/scripts/patch/Template.min.js'
-        dest: 'dist/scripts/Template.min.js'
-      polifills:
-        src : 'node_modules/babel-polyfill/browser.js'
-        dest: 'dist/scripts/browser.js'
       #aloha:
       #  src: 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha.js'
       #  dest: 'dist/scripts/aloha.js'
+      aloha:
+        src: 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha.js'
+        dest: 'dist/scripts/aloha.js'
+      l20n:
+        src: 'bower_components/l20n/dist/compat/web/l20n.js'
+        dest: 'dist/scripts/l20n.js'
+      Template:
+        src: 'bower_components/l20n/dist/compat/web/Template.js'
+        dest: 'dist/scripts/Template.js'
       fonts:
         expand: true
         filter: 'isFile'
@@ -224,6 +223,8 @@ module.exports = (grunt) ->
           'dist/build.txt'
           'dist/scripts/**/*'
           'dist/styles/**/*.less'
+          '!dist/scripts/l20n.js'
+          '!dist/scripts/Template.js'
           '!dist/scripts/main.js'
           '!dist/scripts/main.js.map'
           '!dist/scripts/require.js'
