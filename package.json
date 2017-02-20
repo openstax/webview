@@ -3,6 +3,8 @@
   "version": "0.21.11-dev",
   "description": "Connexions (cnx.org) web site",
   "scripts": {
+    "start": "grunt nginx:start",
+    "stop": "grunt nginx:stop",
     "prepublish": "bower install --config.analytics=false; grunt aloha --verbose",
     "update": "npm update; bower update --config.analytics=false; grunt aloha --verbose",
     "test": "grunt test --verbose",

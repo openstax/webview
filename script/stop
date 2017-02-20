@@ -1,3 +1,3 @@
 #!/bin/bash
 
-$(npm bin)/grunt nginx:stop
+npm run-script stop
