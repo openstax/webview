@@ -69,13 +69,15 @@
 
     > .downloads,
     > .jump-to-cc {
-      @media (max-width: @screen-xs-max) {
-        display: none;
-      }
-
       > .btn {
         margin: 0 0 2rem auto;
       }
+      @media (max-width: @screen-xs-max) {
+        > .btn {
+          margin: 2rem auto;
+        }
+      }
+
     }
 
     > .jump-to-cc > .btn {
