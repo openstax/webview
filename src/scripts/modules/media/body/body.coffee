@@ -1,6 +1,8 @@
 
 define (require) ->
   $ = require('jquery')
+  _ = require('underscore')
+
   embeddablesConfig = require('cs!configs/embeddables')
   Mathjax = require('mathjax')
   router = require('cs!router')
