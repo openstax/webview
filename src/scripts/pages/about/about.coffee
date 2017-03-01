@@ -3,7 +3,6 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   MainPageView = require('cs!modules/main-page/main-page')
   DefaultView = require('cs!./default/default')
-  PeopleView = require('cs!./people/people')
   ContactView = require('cs!./contact/contact')
   template = require('hbs!./about-template')
   require('less!./about')
@@ -27,8 +26,6 @@ define (require) ->
       else
         $items.first().addClass('active')
       switch @page
-        when 'people'
-          @regions.content.show(new PeopleView())
         when 'contact'
           @regions.content.show(new ContactView())
         else
