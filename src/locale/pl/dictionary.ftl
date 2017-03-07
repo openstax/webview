@@ -154,6 +154,11 @@ about-content =
   |
   | <p>A co najlepsze, to wszystko jest dostępne za darmo dzięki wspaniałomyślnej pomocy Rice University i wielu
   | organizacji charytatywnych.</p>
+  |
+  | <p><a href="{ $link-about }">Dowiedz się więcej o zespole tworzącym OpenStax</a></p>
+  |
+  | <p><a href="{ $link-foundation }">Dowiedz się więcej o fundacjach wspierających projekty OpenStax,
+  | takie jak CNX</a></p>
 
 about-how-it-works-header = Jak to działa
 
