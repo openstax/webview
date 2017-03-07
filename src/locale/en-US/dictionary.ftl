@@ -154,6 +154,10 @@ about-content =
   |
   | <p>The best part? Everything is available for free thanks to generous support from Rice University and several
   | philanthropic organizations.</p>
+  |
+  | <p><a href="{ $link-about }">Learn more about the OpenStax team</a></p>
+  |
+  | <p><a href="{ $link-foundation }">Learn more about the foundations supporting OpenStax projects like CNX</a></p>
 
 about-how-it-works-header = How it works
 
@@ -183,98 +187,6 @@ frictionless-content =
   | original author for you, making remixing a cinch.</li>
   | </ul>
 
-# ABOUT - Foundations - src/scripts/pages/about/people/people-template.html & src/scripts/pages/about/people/people.coffee
-
-about-foundations-hewlett =
-  | The William and Flora Hewlett Foundation has been making grants since 1967
-  | to help solve social and environmental problems at home and around the world.
-  | The Foundation concentrates its resources on activities in education, the
-  | environment, global development and population, performing arts, and
-  | philanthropy, and makes grants to support disadvantaged communities in the
-  | San Francisco Bay Area.
-
-about-foundations-gates =
-  | Guided by the belief that every life has equal value, the Bill &amp; Melinda
-  | Gates Foundation works to help all people lead healthy, productive lives.
-  | In developing countries, it focuses on improving people’s health with
-  | vaccines and other life-saving tools and giving them the chance to lift
-  | themselves out of hunger and extreme poverty. In the United States, it seeks
-  | to significantly improve education so that all young people have the
-  | opportunity to reach their full potential. Based in Seattle, Washington,
-  | the foundation is led by CEO Jeff Raikes and Co-chair William H. Gates Sr.,
-  | under the direction of Bill and Melinda Gates and Warren Buffett.
-
-about-foundations-maxfield =
-  | The Maxfield Foundation supports projects with potential for high impact in
-  | science, education, sustainability, and other areas of social importance.
-
-about-foundations-rice =
-  | As a leading research university with a distinctive commitment to
-  | undergraduate education, Rice University aspires to pathbreaking research,
-  | unsurpassed teaching, and contributions to the betterment of our world. It
-  | seeks to fulfill this mission by cultivating a diverse community of
-  | learning and discovery that produces leaders across the spectrum of human
-  | endeavor.
-
-about-foundations-ljaf =
-  | Laura and John Arnold Foundation (LJAF) actively seeks opportunities to
-  | invest in organizations and thought leaders that have a sincere interest in
-  | implementing fundamental changes that not only yield immediate gains, but
-  | also repair broken systems for future generations. LJAF currently focuses
-  | its strategic investments on education, criminal justice, research integrity,
-  | and public accountability.
-
-about-foundations-20mm =
-  | Our mission at the Twenty Million Minds Foundation is to grow access and
-  | success by eliminating unnecessary hurdles to affordability. We support the
-  | creation, sharing, and proliferation of more effective, more affordable
-  | educational content by leveraging disruptive technologies, open educational
-  | resources, and new models for collaboration between for-profit, nonprofit,
-  | and public entities.
-
-about-foundations-kazanjian =
-  | Calvin K. Kazanjian was the founder and president of Peter Paul Inc., the
-  | maker of the Mounds and Almond Joy candy bars, located in Naugatuck,
-  | Connecticut. He firmly believed that if more people understood basic
-  | economics the world would be a better place in which to live. Accordingly,
-  | he established the Foundation in the true spirit of unselfish service. In
-  | his own words, he wished to “help bring a greater happiness and prosperity
-  | to all, through a better understanding of economics.” The Calvin K.
-  | Kazanjian Economics Foundation Inc. is a non-political education
-  | organization that was incorporated as a nonprofit organization under the
-  | Statue Laws of the State of Connecticut on April 4, 1947.
-
-about-foundations-sick =
-  | The Bill and Stephanie Sick Fund supports innovative projects in the areas
-  | of Education, Art, Science and Engineering.
-
-
-
-### PEOPLE ###
-# Link: http://cnx.org/about/people
-# Content on the People page among the about pages.
-
-# PEOPLE - People - src/scripts/pages/about/people/people-template.html
-
-about-people-header = People
-
-about-people-foundation-header = Foundation Support
-
-about-people-foundation-content =
-  | OpenStax College is grateful for the
-  | tremendous support from our foundation sponsors. Without their
-  | strong engagement of our mission,the goal of free access to
-  | high-quality textbooks would remain elusive.
-
-about-people-strategic-advisors = Strategic Advisors
-
-about-people-team-header = The OpenStax College Team
-
-about-people-team-content =
-  | OpenStax College is brought to you by a
-  | team of open education professionals dedicated to increasing global
-  | access to high-quality learning materials for students and teachers.
-
 
 
 ### CONTACT ###
@@ -299,7 +211,7 @@ about-contact-technical-support-header = Technical Support
 
 about-contact-technical-support-content =
   | If you are encountering a technical problem with our site, please send an
-  | email to <a href="mailto:techsupport@cnx.org">techsupport@cnx.org</a>.
+  | email to <a href="mailto:support@openstax.org">support@openstax.org</a>.
   | You can also submit a bug report using our bug submission form.
 
 about-contact-general-questions-header = General Questions
@@ -307,7 +219,7 @@ about-contact-general-questions-header = General Questions
 about-contact-general-questions-content =
   | If you have questions about the site, would like to schedule author
   | training, or have any other general questions regarding OpenStax CNX,
-  | please send an email to <a href="mailto:cnx@cnx.org">cnx@cnx.org</a>.
+  | please send an email to <a href="mailto:support@openstax.org">support@openstax.org</a>.
 
 
 

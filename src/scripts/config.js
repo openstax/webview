@@ -2,6 +2,10 @@
   'use strict';
 
   require.config({
+    // waitSeconds increase to avoid timeout from "loading" OpenStaxConceptCoach
+    // during r.js compiling.
+    // http://stackoverflow.com/questions/14279962/require-js-error-load-timeout-for-modules-backbone-jquerymobile#answer-14283401
+    waitSeconds: 30,
     // # Paths
     paths: {
       // ## Requirejs plugins

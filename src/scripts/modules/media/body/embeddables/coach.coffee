@@ -1,4 +1,6 @@
 define (require) ->
+  _ = require('underscore')
+
   BaseView = require('cs!helpers/backbone/views/base')
   linksHelper = require('cs!helpers/links')
   router = require('cs!router')

@@ -183,71 +183,6 @@ frictionless-content =
   | oryginalnego autora, więc proces adaptacji jest bezbolesny.</li>
   | </ul>
 
-# ABOUT - Foundations - src/scripts/pages/about/people/people-template.html & src/scripts/pages/about/people/people.coffee
-
-about-foundations-hewlett =
-  | William and Flora Hewlett Foundation od 1967 roku sponsoruje inicjatywy
-  | zmierzające do rozwiązania problemów społecznych i przyrodniczych w USA i
-  | na całym świecie. Szczególną uwagę Fundacja poświęca edukacji, środowisku
-  | naturalnemu, rozwojowi świata i jego populacji, sztuce aktorskiej i
-  | działalności charytatywnej, w tym wspierając trudne środowiska w rejonie
-  | Zatoki San Francisco.
-
-about-foundations-gates =
-  | Wiedziona przekonaniem, że każde życie ma taką samą wartość, Bill &amp;
-  | Melinda Gates Foundation stara się pomóc wszystkim ludziom żyć zdrowiej i
-  | owocniej. W krajach rozwijających się Fundacja skupia się na polepszeniu
-  | zdrowia ludzi poprzez programy szczepień i inne ratujące życie, dając im
-  | jednocześnie narzędzia do wyrwania się z głodu i skrajnej biedy. W Stanach
-  | Zjednoczonych stara się polepszyć jakość edukacji, aby wszyscy młodzi
-  | ludzie mogli zrealizować swój pełny potencjał. Fundacja ma siedzibę w
-  | Seattle w stanie Washington. Kierują nią Jeff Raikes (CEO) i William H.
-  | Gates Senior, według wskazań Billa i Melindy Gatesów i Warrena Buffetta.
-
-about-foundations-maxfield =
-  | Maxfield Foundation wspiera inicjatywy z dużym potencjałem dla nauki,
-  | edukacji, zrównoważonego wzrostu i innych obszarów kluczowych dla
-  | społeczeństwa.
-
-about-foundations-rice =
-  | Jako jeden z czołowych ośrodków zarówno naukowych jak i akademickich Rice
-  | University aspiruje do najwyższych standardów w zakresie badań i nauczania,
-  | a także pragnie mieć znaczący wkład w ulepszanie naszego świata. Aby
-  | wypełnić tę misję, tworzy bogatą wspólnotę ludzi z pasją do nauki i
-  | odkrywania, która wydaje z siebie liderów wszelkich inicjatyw, jakie
-  | podejmuje ludzkość.
-
-about-foundations-ljaf =
-  | Laura and John Arnold Foundation (LJAF) aktywnie szuka sposobności do
-  | wspierania organizacji i liderów, którzy mają szczery zamiar wprowadzania
-  | fundamentalnych zmian nie tylko w celu zaspokojenia bieżących potrzeb, ale
-  | też w celu naprawienia źle działających systemów dla przyszłych pokoleń.
-  | LJAF obecnie koncentruje się na edukacji, wymiarze sprawiedliwości,
-  | integracji badań naukowych i kwestii rozliczania instytucji publicznych z
-  | powierzonych im obowiązków.
-
-about-foundations-20mm =
-  | Misją Twenty Million Minds Foundation jest polepszanie dostępności i szans
-  | na sukces poprzez usuwanie przeszkód finansowych. Wspieramy tworzenie,
-  | udostępnianie i rozpowszechnianie skutecznych i niedrogich zasobów
-  | edukacyjnych poprzez inwestowanie w innowacje, otwarte narzędzia edukacyjne
-  | i nowe modele współpracy pomiędzy firmami, organizacjami i instytucjami.
-
-about-foundations-kazanjian =
-  | Calvin K. Kazanjian był założycielem i prezesem firmy Peter Paul Inc.,
-  | produkującej batony Mounds i Almond Joy i mieszczącej się w Naugatuck w
-  | stanie Connecticut. Był głęboko przekonany, że gdyby więcej ludzi znało
-  | podstawy ekonomii, świat byłby lepszy. Dlatego kierując się autentyczną
-  | dobrą wolą powołał do życia Fundację. Jak stwierdził, chciałby "pomóc
-  | osiągnąć szczęście i zamożność wszystkim ludziom poprzez nauczenie ich
-  | ekonomii". Calvin K. Kazanjian Economics Foundation Inc. to apolityczna
-  | fundacja edukacyjna zarejestrowana w 1947 roku na mocy prawa stanu
-  | Connecticut.
-
-about-foundations-sick =
-  | Bill and Stephanie Sick Fund wspiera innowacyjne projekty z dziedziny
-  | edukacji, sztuki, nauki oraz inżynierii.
-
 
 
 ### PEOPLE ###
@@ -299,7 +234,7 @@ about-contact-technical-support-header = Pomoc techniczna
 
 about-contact-technical-support-content =
   | W przypadku problemów technicznych na naszej stronie prosimy o wysłanie wiadomości e-mail na adres
-  | <a href="mailto:techsupport@cnx.org">techsupport@cnx.org</a>.
+  | <a href="mailto:support@openstax.org">support@openstax.org</a>.
   | Możesz również wysłać raport o błędzie przy użyciu formularza do zgłaszania błędów.
 
 about-contact-general-questions-header = Pytania ogólne
@@ -307,7 +242,7 @@ about-contact-general-questions-header = Pytania ogólne
 about-contact-general-questions-content =
   | Jeśli masz pytania dotyczące naszego serwisu, chcesz zapisać się na
   | szkolenie dla autorów lub uzyskać inne informacje na temat Openstax CNX,
-  | wyślij e-mail na adres <a href="mailto:cnx@cnx.org">cnx@cnx.org</a>.
+  | wyślij e-mail na adres <a href="mailto:support@openstax.org">support@openstax.org</a>.
 
 
 
