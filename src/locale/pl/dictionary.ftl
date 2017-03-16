@@ -785,7 +785,7 @@ textbook-view-attribution-p-1 =
   | w następujący sposób:
 
 textbook-view-attribution-p-2-strong =
-  | Nazwa OpenStax College, logo OpenStax College, okładki książek OpenStax College,
+  | Nazwa OpenStax, logo OpenStax, okładki książek OpenStax,
   | nazwa OpenStax CNX i logo OpenStax CNX nie podlegają licencji Creative Commons
   | i wykorzystywanie ich jest dozwolone tylko na mocy uprzedniego, pisemnego upoważnienia ze strony Rice University.
 
