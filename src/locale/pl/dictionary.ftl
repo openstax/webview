@@ -978,12 +978,12 @@ workspace-table-delete = Skasuj
 
 # MY WORKSPACE - Number of Items  - src/scripts/modules/workspace/header/header-template.html
 
-workspace-results-plural = <strong>{ $items }</strong> { PLURAL($items) ->
-  [0] wyników
-  [1] wynik
-  [few] wyniki
-  [many] wyników
- *[other] wyników
+workspace-results-plural = { $items ->
+  [0] Brak wyników
+  [1] Jeden wynik
+  [few] <strong>{ $items }</strong> wyniki
+  [many] <strong>{ $items }</strong> wyników
+ *[other] <strong>{ $items }</strong> wyników
 }
 
 
