@@ -1044,7 +1044,7 @@ donate-slider-100 = Pomaganie nigdy nie było tak przyjemne
 donate-slider-250 = Wypełnijcie waszymi książkami szkolne bibilioteki – ja stawiam!
 donate-slider-500 = Kupcie sobie za to porządne tłumaczenie!
 donate-slider-1000 = Kolejny podrozdział książki OpenStax ja stawiam!
-donate-slider-2500 = Kolejną rozdział książki OpenStax ja stawiam!
+donate-slider-2500 = Kolejny rozdział książki OpenStax ja stawiam!
 donate-slider-5000 = Bill Gates II, do usług
 donate-slider-10000 = Ja cię kręcę!!!!
 
