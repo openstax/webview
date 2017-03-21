@@ -966,8 +966,7 @@ workspace-table-delete = Delete
 
 workspace-results-plural = { $items ->
   [0] <strong>No items</strong>
-  [1] <strong>1</strong> item
- *[other] <strong>{ $counter }</strong> items
+ *[other] <strong>{ $items }</strong> items
 }
 
 
