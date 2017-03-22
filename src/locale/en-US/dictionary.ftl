@@ -596,7 +596,7 @@ search-results-advanced-search = Advanced Search
 
 search-results-tips-and-help = Search Tips &amp; Help
 
-search-results-number-results = { PLURAL($counter) ->
+search-results-number-results = { $counter ->
   [0]   No results found
   [1]   <strong>{ $counter }</strong> result found
  *[other] <strong>{ $counter }</strong> results found

@@ -9,9 +9,9 @@
     {{~else~}}
       <span class="value">
         {{~#is tag "authorID"~}}
-          {{author ../../authorList index 'fullname'}} ({{author ../../authorList index 'id'}})
+          {{author ../../../authorList index 'fullname'}} ({{author ../../../authorList index 'id'}})
         {{~else~}}
-          {{detectLanguage ../../languages value}}
+          {{detectLanguage ../../../languages value}}
         {{~/is~}}
       </span>
     {{~/is~}}
