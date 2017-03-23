@@ -144,28 +144,28 @@ module.exports = (grunt) ->
           modules: [{
             name: 'main'
             include: [
+              'settings/base'
+              'settings/feature-config'
               'cs!pages/error/error'
               'cs!pages/home/home'
               'cs!pages/contents/contents'
               'cs!pages/search/search'
               'cs!pages/browse-content/browse-content'
-              'cs!pages/workspace/workspace'
               'cs!pages/about/about'
               'cs!pages/tos/tos'
               'cs!pages/license/license'
               'cs!pages/donate/donate'
-              'cs!pages/role-acceptance/role-acceptance'
-
-              # FIX: edit modules should be loaded in separate modules
-              'select2'
-              'bootstrapPopover'
-              'cs!modules/media/editbar/editbar'
               'cs!helpers/backbone/views/editable'
 
+              'select2'
+              'bootstrapPopover'
+              'cs!pages/workspace/workspace'
+              'cs!pages/role-acceptance/role-acceptance'
+              'cs!modules/media/editbar/editbar'
               'cs!configs/aloha'
             ]
             exclude: ['coffee-script', 'less/normalize']
-            excludeShallow: ['settings']
+            excludeShallow: ['settings', 'OpenStaxConceptCoach']
           }]
 
           done: (done, output) ->
@@ -326,6 +326,7 @@ module.exports = (grunt) ->
   # Dist
   # -----
   grunt.registerTask 'dist', [
+    'aloha'
     'requirejs:compile'
     'copy'
     'string-replace'

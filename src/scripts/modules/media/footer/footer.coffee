@@ -1,5 +1,5 @@
 define (require) ->
-  EditableView = require('cs!helpers/backbone/views/editable')
+  ContentView = require('cs!helpers/backbone/views/content')
   DownloadsView = require('cs!./downloads/downloads')
   HistoryView = require('cs!./history/history')
   AttributionView = require('cs!./attribution/attribution')
@@ -9,7 +9,7 @@ define (require) ->
   linksHelper = require('cs!helpers/links')
   require('less!./footer')
 
-  return class MediaFooterView extends EditableView
+  return class MediaFooterView extends ContentView
     template: template
 
     templateHelpers:

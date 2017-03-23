@@ -2,11 +2,21 @@
   'use strict';
 
   // Load the config
-  require(['config'], function () {
-    // Load the application after the config
-    require(['cs!loader'], function (loader) {
-      loader.init();
-    });
+  require(['config', 'settings'], function (config, settings) {
+    // jshint maxparams: 5
+    require([
+        'settings/feature-config', 'settings/concept-coach-enabled-config',
+        'cs!loader', 'cs!helpers/underscore.deepExtend', 'jquery'
+      ],
+      function (configureFor, makeCoachEnabledConfig, loader, _, $) {
+        // some paths and shims need to be configured based on settings.
+        configureFor(settings, makeCoachEnabledConfig, _, $)
+          .always(function () {
+            // Load the application after the config
+            loader.init();
+          });
+      }
+    );
   });
 
 })();

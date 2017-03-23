@@ -1,7 +1,7 @@
 define (require) ->
-  EditableView = require('cs!helpers/backbone/views/editable')
+  ContentView = require('cs!helpers/backbone/views/content')
 
-  return class FooterTabView extends EditableView
+  return class FooterTabView extends ContentView
     templateHelpers: () ->
       @media ?= 'book'
       if @media is 'page'

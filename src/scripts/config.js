@@ -18,6 +18,7 @@
       // ## Core Libraries
       jquery: '../../bower_components/jquery/dist/jquery',
       underscore: '../../bower_components/underscore/underscore',
+      underscoreDeepExtend: '../../bower_components/underscore-deep-extend/index',
       backbone: '../../bower_components/backbone/backbone',
       'hbs/handlebars': '../../bower_components/require-handlebars-plugin/hbs/handlebars',
 
@@ -26,11 +27,6 @@
 
       // ## MathJax
       mathjax: '//cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=MML_HTMLorMML',
-
-      // Use Minified Aloha because loading files in a different requirejs context is a royal pain
-      aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
-
-      OpenStaxConceptCoach: '../../bower_components/concept-coach/full-build.min',
 
       // ## UI Libraries and Helpers
       tooltip: 'helpers/backbone/views/attached/tooltip/tooltip',
@@ -43,12 +39,16 @@
       bootstrapCollapse: '../../bower_components/bootstrap/js/collapse',
       bootstrapDropdown: '../../bower_components/bootstrap/js/dropdown',
       bootstrapModal: '../../bower_components/bootstrap/js/modal',
-      bootstrapPopover: '../../bower_components/bootstrap/js/popover',
       bootstrapScrollspy: '../../bower_components/bootstrap/js/scrollspy',
       bootstrapTab: '../../bower_components/bootstrap/js/tab',
       bootstrapTooltip: '../../bower_components/bootstrap/js/tooltip',
       bootstrapTransition: '../../bower_components/bootstrap/js/transition',
 
+      OpenStaxConceptCoach: '//localhost:3005/dist/concept-coach.min',
+
+      // Use Minified Aloha because loading files in a different requirejs context is a royal pain
+      aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
+      bootstrapPopover: '../../bower_components/bootstrap/js/popover',
       // # Select2 multiselect widget
       select2: '../../bower_components/select2/select2',
 
@@ -160,12 +160,6 @@
       select2: {
         deps: ['jquery', 'css!../../bower_components/select2/select2'],
         exports: 'Select2'
-      },
-
-      // concept-coach
-      OpenStaxConceptCoach: {
-        deps: ['css!../../bower_components/concept-coach/main.min'],
-        exports: 'OpenStaxConceptCoach'
       }
     },
 
