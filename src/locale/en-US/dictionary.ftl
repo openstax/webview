@@ -791,7 +791,7 @@ textbook-view-header-derived-from =
 
 textbook-view-dt-name = Name:
 
-textbotok-view-dt-id = ID:
+textbook-view-dt-id = ID:
 
 textbook-view-dt-language = Language:
 
