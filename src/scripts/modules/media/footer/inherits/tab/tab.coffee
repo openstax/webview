@@ -34,6 +34,8 @@ define (require) ->
       contentDisplay.toggle()
       if contentDisplay.is(':visible')
         currentTarget.text('Less Details')
+        currentTarget.attr('data-l10n-id', "textbook-view-loading-less-details-btn")
       else
         currentTarget.text('More Details')
+        currentTarget.attr('data-l10n-id', "textbook-view-loading-more-details-btn")
       return

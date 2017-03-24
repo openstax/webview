@@ -79,3 +79,18 @@
     }
   }
 }
+
+
+// Override bootstrap styles allow dt metedata list to display whole text in dt element.
+.dl-metadata {
+  > dt {
+    margin-top: 5px;
+    white-space: normal;
+    text-overflow: inherit;
+  }
+
+  > dd {
+    margin-top: 5px;
+  }
+
+}

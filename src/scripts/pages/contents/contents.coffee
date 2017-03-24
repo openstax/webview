@@ -9,10 +9,10 @@ define (require) ->
 
   return class ContentsPage extends BaseView
     template: template
-    pageTitle: 'Content Library'
+    pageTitle: 'content-library-pageTitle'
     canonical: () -> null if not @uuid
-    summary: 'OpenStax Content Library'
-    description: 'Search for free, online textbooks.'
+    summary: 'content-library-summary'
+    description: 'content-library-description'
 
     initialize: (options = {}) ->
       super()

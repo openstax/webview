@@ -32,7 +32,7 @@ define (require) ->
 
   return class AdvancedSearchView extends BaseView
     template: template
-    pageTitle: 'Advanced Search'
+    pageTitle: 'advanced-search-pageTitle'
     collection: availableLanguages
     templateHelpers:
       languages: () ->
