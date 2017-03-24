@@ -54,7 +54,11 @@
 
       // # CoffeeScript
       cs: '../../bower_components/require-cs/cs',
-      'coffee-script': '../../bower_components/coffeescript/docs/v1/browser-compiler/coffee-script'
+      'coffee-script': '../../bower_components/coffeescript/docs/v1/browser-compiler/coffee-script',
+
+      // l20n
+      l20n: '../../bower_components/l20n/dist/compat/web/l20n',
+      templatePolyfill: '../../bower_components/l20n/dist/compat/web/Template'
     },
 
     // # Packages
@@ -166,6 +170,18 @@
       OpenStaxConceptCoach: {
         deps: ['css!../../bower_components/concept-coach/main.min'],
         exports: 'OpenStaxConceptCoach'
+      },
+
+      l20n: {
+        exports: 'L20n',
+        deps: ['templatePolyfill'],
+        init: function () {
+          // work-around until https://github.com/katalysteducation/l20n.js/pull/1 is merged.
+          document.l10n.connectRoot(document.documentElement);
+          document.l10n.translateDocument().then(function () {
+            window.addEventListener('languagechange', document.l10n);
+          });
+        }
       }
     },
 
