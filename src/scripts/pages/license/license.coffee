@@ -8,10 +8,10 @@ define (require) ->
     template: template
 
   return class LicensePage extends MainPageView
-    pageTitle: 'License FAQ - OpenStax CNX'
+    pageTitle: 'licensing-pageTitle'
     canonical: null
-    summary: 'OpenStax CNX License'
-    description: 'OpenStax CNX License Frequently Asked Questions'
+    summary: 'licensing-summary'
+    description: 'licensing-description'
 
     onRender: ->
       super()

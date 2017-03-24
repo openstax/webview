@@ -9,16 +9,8 @@ define (require) ->
     templateHelpers: () -> {error: @error}
 
     initialize: (@error) ->
-      if not @error.reason
-        switch @error.code
-          when 403 then @error.reason = 'Forbidden'
-          when 404 then @error.reason = 'Page Not Found'
-          when 408 then @error.reason = 'Request Timed Out'
-          when 500 then @error.reason = 'Internal Server Error'
-          when 503 then @error.reason = 'Service Unavailable'
-          else @error.reason = 'Unknown Error'
-
-      @pageTitle = @error.reason
+      @pageTitle = @error.reason || 'error-page-reason'
+      @pageTitleArgs = {code:@error.code}
       super()
 
   return class ErrorPage extends MainPageView

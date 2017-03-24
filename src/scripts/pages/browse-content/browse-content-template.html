@@ -1,6 +1,6 @@
-<h1>Welcome to the OpenStax CNX Library</h1>
+<h1 data-l10n-id="search-header">Welcome to the OpenStax CNX Library</h1>
 
-<p>The content in OpenStax CNX comes in two formats: <strong>modules</strong>, which are like
+<p data-l10n-id="search-content">The content in OpenStax CNX comes in two formats: <strong>modules</strong>, which are like
   small "knowledge chunks," and <strong>collections</strong>, which are groups of modules
   structured into books or course notes, or for other uses. Our open license allows for free
   use and reuse of all our content.</p>
@@ -15,8 +15,8 @@
         <img src="{{image}}" width="250" height="125" alt="{{name}}" />
       </a>
       <div class="data">
-        <div>Pages: {{count.module}}</div>
-        <div>Books: {{count.collection}}</div>
+        <div data-l10n-id="search-pages" data-l10n-args='{"count":{{count.module}} }'>Pages: {{count.module}}</div>
+        <div data-l10n-id="search-books" data-l10n-args='{"count":{{count.collection}} }'>Books: {{count.collection}}</div>
       </div>
     </li>
   {{/each}}

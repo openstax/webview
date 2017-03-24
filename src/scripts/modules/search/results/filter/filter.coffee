@@ -36,14 +36,15 @@ define (require) ->
 
       if $text.attr('aria-expanded') is 'true'
         $limits.addClass('hidden')
-        $text.text("More #{name}s...")
         $text.removeClass('less')
         $text.attr('aria-expanded', 'false')
+        $text.attr('data-l10n-args', '{"ismore": 0}')
+
       else
         $limits.removeClass('hidden')
-        $text.text("Less #{name}s...")
         $text.addClass('less')
         $text.attr('aria-expanded', 'true')
+        $text.attr('data-l10n-args', '{"ismore": 1}')
 
     toggleLimits: (e) ->
       $target = $(e.currentTarget)

@@ -15,6 +15,10 @@
       <link rel="stylesheet" type="text/css" href="/styles/noscript.css" />
     </noscript>
 
+    <meta name="defaultLanguage" content="en-US">
+    <meta name="availableLanguages" content="en-US, pl">
+    <link rel="localization" href="/locale/{locale}/dictionary.ftl">
+
     <!--(if target dev)><!-->
       <script data-main="/scripts/main" src="../bower_components/requirejs/require.js" async></script>
     <!--<!(endif)-->
@@ -22,6 +26,8 @@
     <!--(if target dist)>
       <script data-main="/scripts/main" src="/scripts/require.js" async></script>
     <!(endif)-->
+    <script defer src="scripts/l20n.js"></script>
+    <script defer src="scripts/Template.js"></script>
   </head>
   <body>
     <script>
