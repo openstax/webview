@@ -1,38 +1,38 @@
-<h2 class="medium-header">Downloads</h2>
+<h2 class="medium-header" data-l10n-id="textbook-view-downloads-header">Downloads</h2>
 
 {{> modules/media/footer/inherits/tab/toggle-partial }}
 
 {{#is downloads 'loading'}}
   <div class="progress progress-striped active">
     <div class="progress-bar secondary" role="progressbar" style="width: 100%">
-      <span class="sr-only">Loading</span>
+      <span class="sr-only" data-l10n-id="textbook-view-loading">Loading</span>
     </div>
   </div>
 {{else}}
   {{#if downloads.length}}
-  <button class="btn content-display-button">More details</button>
+  <button class="btn content-display-button" data-l10n-id="textbook-view-loading-more-details-btn">More details</button>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Format:</th>
-          <th scope="col">Details</th>
-          <th scope="col">File Name:</th>
-          <th scope="col" class="content-display">Generated:</th>
-          <th scope="col" class="content-display">Size:</th>
+          <th scope="col" data-l10n-id="textbook-view-th-format">Format:</th>
+          <th scope="col" data-l10n-id="textbook-view-th-details">Details</th>
+          <th scope="col" data-l10n-id="textbook-view-th-file-name">File Name:</th>
+          <th scope="col" class="content-display" data-l10n-id="textbook-view-th-generated">Generated:</th>
+          <th scope="col" class="content-display" data-l10n-id="textbook-view-th-size">Size:</th>
         </tr>
       </thead>
       <tbody>
         {{#each downloads}}
         <tr>
           <td>{{format}}</td>
-          <td>{{details}}</td>
+          <td data-l10n-id="textbook-view-file-description" data-l10n-args='{"format":"{{format}}"}'>{{details}}</td>
           {{#is this.state 'good'}}
             <td><a href="{{path}}">{{filename}}</a></td>
             <td class="content-display">{{date created}}</td>
             <td class="content-display">{{convertToSize size}}</td>
             </tr>
           {{else}}
-            <td>File not available</td>
+            <td data-l10n-id="textbook-view-file-not-available">File not available</td>
             <td class="content-display">0</td>
             <td class="content-display">0</td>
             </tr>
@@ -41,6 +41,6 @@
       </tbody>
     </table>
   {{else}}
-    <p>No downloads are available at this time.</p>
+    <p data-l10n-id="textbook-view-no-downloads">No downloads are available at this time.</p>
   {{/if}}
 {{/is}}

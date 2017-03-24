@@ -11,7 +11,7 @@ define (require) ->
 
   return class AdvancedSearchView extends BaseView
     template: template
-    pageTitle: 'Advanced Search'
+    pageTitle: 'advanced-search-minimal-pageTitle'
     collection: availableLanguages
     templateHelpers:
       languages: () ->

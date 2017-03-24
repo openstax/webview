@@ -8,10 +8,10 @@ define (require) ->
     template: template
 
   return class TosPage extends MainPageView
-    pageTitle: 'Terms of Service - OpenStax CNX'
+    pageTitle: 'terms-of-service-pageTitle'
     canonical: null
-    summary: 'OpenStax CNX Terms of Service'
-    description: 'OpenStax CNX Terms of Service'
+    summary: 'terms-of-service-summary'
+    description: 'terms-of-service-description'
 
     onRender: ->
       super()

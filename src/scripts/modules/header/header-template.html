@@ -4,23 +4,25 @@
   </div>
   <div class="login">
       <div id="skiptocontent">
-        <a href="#scrollable-content">skip to main content</a>
+        <a href="#scrollable-content" data-l10n-id="all-header-skip-to-content">skip to main content</a>
       </div>
     {{#if results}}
       <div id="skiptoresults">
-        <a href="#results">skip to results</a>
+        <a href="#results" data-l10n-id="all-header-skip-to-results">skip to results</a>
       </div>
     {{/if}}
     <ul>
       {{#if username}}
-        <li><a data-bypass="true" href="{{accountProfile}}">Account Profile</a></li>
-        <li><a data-bypass="true" href="/logout">Log Out {{username}}</a></li>
+        <li><a data-bypass="true" href="{{accountProfile}}" data-l10n-id="all-header-account-profile">Account Profile</a></li>
+        <li><a data-bypass="true" href="/logout" data-l10n-args='{"username":"{{username}}"}' data-l10n-id="all-header-log-out">Log Out {{username}}</a></li>
       {{/if}}
       {{#if cnxSupport}}
-        <li><a href="{{cnxSupport}}" title="Go to CNX Support">Support</a></li>
+        <li><a href="{{cnxSupport}}" title="Go to CNX Support" data-l10n-id="all-header-support">Support</a></li>
       {{/if}}
       {{#if url}}
-        <li><a href="{{url}}" title="Switch to the CNX legacy web site">CNX Author | Legacy Site</a></li>
+
+        <li><a href="{{url}}" data-l10n-id="all-cnx-author-legacy-site">CNX Author | Legacy Site</a></li>
+
       {{/if}}
     </ul>
   </div>
@@ -30,7 +32,7 @@
       {{! Brand and toggle get grouped for better mobile display }}
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#page-nav">
-          <span class="sr-only">Toggle navigation</span>
+          <span class="sr-only" data-l10n-id="all-navbar-toggle-navigation">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -41,10 +43,10 @@
       {{! Collect the nav links, forms, and other content for toggling }}
       <div class="collapse navbar-collapse" id="page-nav">
         <ul class="nav nav-justified">
-          <li {{#is page 'browse'}}class="active"{{/is}}><a href="/browse">Search</a></li>
-          <li {{#is page 'about'}}class="active"{{/is}}><a href="/about">About Us</a></li>
-          <li {{#is page 'donate'}}class="active"{{/is}}><a href="/donate">Give</a></li>
-          <li {{#is page 'workspace'}}class="active"{{/is}}><a href="/workspace">My Workspace</a></li>
+          <li {{#is page 'browse'}}class="active"{{/is}}><a href="/browse" data-l10n-id="all-navbar-search"></a></li>
+          <li {{#is page 'about'}}class="active"{{/is}}><a href="/about" data-l10n-id="all-navbar-about-us"></a></li>
+          <li {{#is page 'donate'}}class="active"{{/is}}><a href="/donate" data-l10n-id="all-navbar-give"></a></li>
+          <li {{#is page 'workspace'}}class="active"{{/is}}><a href="/workspace" data-l10n-id="all-navbar-workspace"></a></li>
           <li>
             <a href="http://www.rice.edu">
               <img src="/images/rice.png" class="rice" alt="Rice University" width="74" height="32" />
