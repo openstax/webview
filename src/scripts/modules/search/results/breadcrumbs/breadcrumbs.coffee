@@ -4,12 +4,14 @@ define (require) ->
   router = require('cs!router')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./breadcrumbs-template')
+  settings = require('settings')
   require('less!./breadcrumbs')
 
   return class SearchResultsBreadcrumbsView extends BaseView
     template: template
     templateHelpers:
       authorList: () -> @model.get('results').auxiliary.authors
+      languages: () -> settings.languages
 
     events:
       'click .remove': 'removeBreadcrumb'

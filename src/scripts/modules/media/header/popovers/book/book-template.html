@@ -1,12 +1,12 @@
 <div class="book-popover">
   <div class="header">
-    <img src="/images/icons/download.png" width="16" height="16" alt="Download" />
-    <h2 class="small-header">Get This Book</h2>
+    <img src="/images/icons/download.png" width="16" height="16" alt="Download" data-l10n-id="textbook-view-book-download-image" />
+    <h2 class="small-header" data-l10n-id="textbook-view-book-get-this-book">Get This Book</h2>
     <p>{{! Copy}}</p>
 
     {{#if downloads}}
       <div class="download-book">
-        <h3 class="extra-small-header">Download Book:</h3>
+        <h3 class="extra-small-header" data-l10n-id="textbook-view-book-download-book">Download Book:</h3>
         <ul>
           {{#each downloads}}
             {{#is state 'good'}}
@@ -25,7 +25,7 @@
 
     {{#if currentPage.downloads}}
       <div class="download-page">
-        <h3 class="extra-small-header">Download Page:</h3>
+        <h3 class="extra-small-header" data-l10n-id="textbook-view-book-download-page">Download Page:</h3>
         <ul>
           {{#each currentPage.downloads}}
             {{#is state 'good'}}
@@ -38,6 +38,6 @@
   </div>
 
   {{#if buyLink}}
-    <a href="{{buyLink}}" class="btn order">Order Printed Book</a>
+    <a href="{{buyLink}}" class="btn order" data-l10n-id="textbook-view-book-order-book">Order Printed Book</a>
   {{/if}}
 </div>

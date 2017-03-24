@@ -210,6 +210,8 @@ module.exports = (grunt) ->
           'dist/build.txt'
           'dist/scripts/**/*'
           'dist/styles/**/*.less'
+          '!dist/scripts/l20n.js'
+          '!dist/scripts/Template.js'
           '!dist/scripts/main.js'
           '!dist/scripts/main.js.map'
           '!dist/scripts/require.js'
@@ -316,7 +318,6 @@ module.exports = (grunt) ->
     # write template to tests directory and run tests
     grunt.file.write(options.runner, template)
     grunt.task.run('jshint', 'jsbeautifier', 'coffeelint', 'mocha')
-
   # Aloha
   # -----
   grunt.registerTask 'aloha', [

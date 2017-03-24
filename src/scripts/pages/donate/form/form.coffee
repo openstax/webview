@@ -6,8 +6,6 @@ define (require) ->
   require('less!./form')
 
   countries = [
-    {code: 'US', name: 'United States'}
-    {code: 'CA', name: 'Canada'}
     {code: 'AF', name: 'Afghanistan'}
     {code: 'AX', name: 'Aland Islands'}
     {code: 'AL', name: 'Albania'}
@@ -46,6 +44,7 @@ define (require) ->
     {code: 'BI', name: 'Burundi'}
     {code: 'KH', name: 'Cambodia'}
     {code: 'CM', name: 'Cameroon'}
+    {code: 'CA', name: 'Canada'}
     {code: 'CV', name: 'Cape Verde'}
     {code: 'KY', name: 'Cayman Islands'}
     {code: 'CF', name: 'Central African Republic'}
@@ -238,6 +237,7 @@ define (require) ->
     {code: 'UA', name: 'Ukraine'}
     {code: 'AE', name: 'United Arab Emirates'}
     {code: 'GB', name: 'United Kingdom'}
+    {code: 'US', name: 'United States'}
     {code: 'UM', name: 'United States Minor Outlying Islands'}
     {code: 'UY', name: 'Uruguay'}
     {code: 'UZ', name: 'Uzbekistan'}
@@ -328,6 +328,7 @@ define (require) ->
     {code: 'PQ', name: 'Province du Quebec'}
     {code: 'SK', name: 'Saskatchewan'}
     {code: 'YT', name: 'Yukon Territory'}
+    {code: 'ZZ', name: 'Not Applicable'}
   ]
 
   return class DonateFormView extends BaseView
@@ -396,9 +397,19 @@ define (require) ->
       @amount = parseFloat(queryString.amount?.replace(',', '')) or 10
       @uuid = queryString.uuid
       @type = queryString.type
+      # Make sure event is detached from previous instantiation.
+      document.removeEventListener 'DOMRetranslated', @sortCountreies
+      # Sort country list alphabetically according to current locale.
+      document.addEventListener 'DOMRetranslated', @sortCountreies
 
     checkForValidity: (e) ->
       validationHelper.checkForValidity(e)
+
+    sortCountreies: () ->
+      sorted = @$el.find('#country-list option').sort (a,b) ->
+        a.text.toLowerCase().localeCompare b.text.toLowerCase()
+      # Apply sorted list.
+      @$el.find("#country-list").empty().append sorted
 
     onSubmit: (e) ->
       if validationHelper.validateRequiredFields()

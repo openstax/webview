@@ -33,10 +33,10 @@ define (require) ->
           @regions.content.show(new DefaultView())
 
   return class DonatePage extends MainPageView
-    pageTitle: 'Support OpenStax CNX'
+    pageTitle: 'donate-pageTitle'
     canonical: null
-    summary: 'Donate to OpenStax CNX'
-    description: 'Donate to OpenStax CNX'
+    summary: 'donate-summary'
+    description: 'donate-description'
 
     initialize: (@options) ->
       super()
