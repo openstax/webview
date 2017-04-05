@@ -190,32 +190,6 @@ frictionless-content =
 
 
 
-### PEOPLE ###
-# Link: http://cnx.org/about/people
-# Content on the People page among the about pages.
-
-# PEOPLE - People - src/scripts/pages/about/people/people-template.html
-
-about-people-header = Ludzie
-
-about-people-foundation-header = Darczyńcy
-
-about-people-foundation-content =
-  | OpenStax College jest wdzięczny za
-  | ogromne wsparcie ze strony sponsorów. Bez ich głębokiego
-  | zaangażowania, realizacja naszej misji upowszechniania
-  | darmowego dostępu do najwyższej jakości podręczników byłaby poza naszym zasięgiem.
-
-about-people-strategic-advisors = Doradcy
-
-about-people-team-header = Zespół OpenStax College
-
-about-people-team-content =
-  | OpenStax College powstał dzięki grupie
-  | specjalistów od otwartych zasobów edukacyjnych, którzy postanowili
-  | polepszyć dostęp studentów i nauczycieli z całego świata do wysokiej jakości podręczników.
-
-
 
 ### CONTACT ###
 # Link: http://cnx.org/about/contact
@@ -702,7 +676,7 @@ textbook-view-contents = Spis treści
 
 # TEXTBOOK VIEW - Endorsement - src/scripts/modules/media/endorsed/endorsed-template.html
 
-textbook-view-endorsed-by = Zatwierdzone przez: OpenStax College
+textbook-view-endorsed-by = Zatwierdzone przez: OpenStax
 
 # TEXTBOOK VIEW - Header - src/scripts/modules/media/header/header-template.html
 
@@ -785,7 +759,7 @@ textbook-view-attribution-p-1 =
   | w następujący sposób:
 
 textbook-view-attribution-p-2-strong =
-  | Nazwa OpenStax College, logo OpenStax College, okładki książek OpenStax College,
+  | Nazwa OpenStax, logo OpenStax, okładki książek OpenStax,
   | nazwa OpenStax CNX i logo OpenStax CNX nie podlegają licencji Creative Commons
   | i wykorzystywanie ich jest dozwolone tylko na mocy uprzedniego, pisemnego upoważnienia ze strony Rice University.
 
