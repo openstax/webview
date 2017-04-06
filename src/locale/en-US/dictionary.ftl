@@ -793,7 +793,7 @@ textbook-view-page-button = Page
 textbook-view-license = This work is licensed { LEN($licensors) ->
     [0]
    *[other] by { $licensors }
-  }{ LEN($name) ->
+  } { LEN($name) ->
     [0]
    *[other] under a <a href="{ $url }">{ $name } ({ $code } { $version })</a>
   }.

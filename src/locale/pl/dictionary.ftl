@@ -807,7 +807,7 @@ textbook-view-page-button = Strona
 textbook-view-license = Zasób udostępniony { LEN($licensors) ->
     [0]
    *[other] przez { $licensors }
-  }{ LEN($name) ->
+  } { LEN($name) ->
     [0]
    *[other] na licencji <a href="{ $url }">{ $name } ({ $code } { $version })</a>
   }.
