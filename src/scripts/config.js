@@ -59,7 +59,8 @@
       // l20n
       l20n: '../../bower_components/l20n/dist/compat/web/l20n',
       templatePolyfill: '../../bower_components/l20n/dist/compat/web/Template',
-      babelPolyfill: '../../bower_components/babel-polyfill/browser-polyfill'
+      babelPolyfill: '../../bower_components/babel-polyfill/browser-polyfill',
+      customEventPolyfill: '../../bower_components/custom-event-polyfill/custom-event-polyfill'
     },
 
     // # Packages
@@ -175,7 +176,7 @@
 
       l20n: {
         exports: 'L20n',
-        deps: ['templatePolyfill', 'babelPolyfill'],
+        deps: ['templatePolyfill', 'babelPolyfill', 'customEventPolyfill'],
         init: function () {
           // work-around until https://github.com/katalysteducation/l20n.js/pull/1 is merged.
           document.l10n.connectRoot(document.documentElement);
