@@ -73,7 +73,7 @@ glob('./src/**/*.html', (err, filenames) => {
         if (languageContent.indexOf(`${key} =`) < 0) {
 
           if (key.indexOf('{') < 0) {
-            console.error(`BUG: Missing key '${key}' in ${languageFile}`)
+            console.error(`BUG: Missing key in ${languageFile}: '${key}'`)
             process.exit(1)
           } else {
             console.warn(`WARN: Skipping key because it is dynamically constructed: '${key}'`)
