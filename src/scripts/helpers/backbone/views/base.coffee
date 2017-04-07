@@ -92,8 +92,6 @@ define (require) ->
               suffix: settings.titleSuffix
             })
 
-          title.textContent = title.textContent + settings.titleSuffix
-
       canonical = @canonical?() or @canonical
       if canonical isnt undefined
         $('link[rel="canonical"]').remove()
