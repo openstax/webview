@@ -3,8 +3,8 @@ const glob = require('glob')
 const jsdom = require('jsdom')
 const jquery = require('jquery')
 
-glob('./src/**/*.html', (err, filenames) => {
-  filenames.forEach((filename) => {
+glob('./src/**/*.html', function(err, filenames) {
+  filenames.forEach(function(filename) {
 
     // Skip certain files
     if (/fake-exercises/.test(filename) || /tos-template/.test(filename)) {
@@ -20,7 +20,7 @@ glob('./src/**/*.html', (err, filenames) => {
     $('[data-l10n-id]').contents().remove()
 
     // Handlebars has `{{ logic-here }}` brackets as text nodes so remove them
-    $('*').each((index, el) => {
+    $('*').each(function(index, el) {
       const text = el.textContent
       // HACK a crude way to remove handlebars
       if (/\{\{/.test(text)) {
