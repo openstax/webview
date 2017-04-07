@@ -82,8 +82,17 @@ define (require) ->
         if not isBook
           title = document.querySelector('title')
           title.dataset.l10nId = @pageTitle
-          title = title.textContent + settings.titleSuffix
-          title.dataset.l10nArgs = JSON.stringify(@pageTitleArgs) if @pageTitleArgs
+
+          if @pageTitleArgs
+            title.dataset.l10nArgs = JSON.stringify(_.extend({
+              suffix: settings.titleSuffix
+            }, @pageTitleArgs))
+          else
+            title.dataset.l10nArgs = JSON.stringify({
+              suffix: settings.titleSuffix
+            })
+
+          title.textContent = title.textContent + settings.titleSuffix
 
       canonical = @canonical?() or @canonical
       if canonical isnt undefined
