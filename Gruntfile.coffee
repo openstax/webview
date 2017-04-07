@@ -195,15 +195,6 @@ module.exports = (grunt) ->
       aloha:
         src: 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha.js'
         dest: 'dist/scripts/aloha.js'
-      l20n:
-        src: 'bower_components/l20n/dist/compat/web/l20n.js'
-        dest: 'dist/scripts/l20n.js'
-      Template:
-        src: 'bower_components/l20n/dist/compat/web/Template.js'
-        dest: 'dist/scripts/Template.js'
-      polyfill:
-        src: 'bower_components/babel-polyfill/browser-polyfill.js'
-        dest: 'dist/scripts/browser.js'
       fonts:
         expand: true
         filter: 'isFile'
