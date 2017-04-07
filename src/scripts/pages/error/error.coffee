@@ -9,7 +9,7 @@ define (require) ->
     templateHelpers: () -> {error: @error}
 
     initialize: (@error) ->
-      @pageTitle = @error.reason || 'error-page-reason'
+      @pageTitle = @error.reason || 'error-page-reason-pageTitle'
       @pageTitleArgs = {code:@error.code}
       super()
 

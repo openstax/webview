@@ -31,7 +31,7 @@ main-learn-more = Learn More
 
 # MAIN PAGE - Title - src/scripts/pages/home/home.coffee
 
-home-pageTitle = Sharing Knowledge and Building Communities - OpenStax CNX
+home-pageTitle = Sharing Knowledge and Building Communities{$suffix}
 
 # MAIN PAGE - Featured Textbooks - src/scripts/modules/featured-books/featured-books-partial.html
 
@@ -120,7 +120,7 @@ all-footer-share = Share
 
 # ABOUT - Page Title and Description - src/scripts/pages/about/about.coffee
 
-about-pageTitle =  About OpenStax CNX
+about-pageTitle =  About OpenStax CNX{$suffix}
 
 about-summary = About OpenStax CNX
 
@@ -229,7 +229,7 @@ about-contact-general-questions-content =
 
 # SEARCH - Page Summary and Description - src/scripts/pages/search/search.coffee
 
-search-pageTitle = Search in OpenStax CNX
+search-pageTitle = Search in OpenStax CNX{$suffix}
 
 search-page-summary = Search for textbooks
 
@@ -269,7 +269,7 @@ search-books = Books: { $count }
 
 # ADVANCED SEARCH - Page Title - src/scripts/modules/search/advanced/advanced.coffee
 
-advanced-search-pageTitle = Advanced Search
+advanced-search-pageTitle = Advanced Search{$suffix}
 
 # ADVANCED SEARCH - Minimal Search Results Table Partial - src/scripts/modules/minimal/search/results/list/table-partial.html
 
@@ -281,11 +281,11 @@ minimal-search-results-table-partial-miscellaneous = Miscellaneous
 
 # ADVANCED SEARCH - Advanced Search Minimal Page Title - src/scripts/modules/minimal/search/advanced/advanced.coffee
 
-advanced-search-minimal-pageTitle = Advanced Search
+advanced-search-minimal-pageTitle = Advanced Search{$suffix}
 
 # ADVANCED SEARCH - Search Minimal Page Title - src/scripts/modules/minimal/search/advanced/advanced.coffee
 
-search-minimal-pageTitle = Advanced Search
+search-minimal-pageTitle = Advanced Search{$suffix}
 
 # ADVANCED SEARCH - Content - src/scripts/modules/search/advanced/advanced-template.html
 
@@ -498,7 +498,7 @@ advanced-search-language-option = { $native } ({ $code ->
 
 # SEARCH RESULTS - Page Title - src/scripts/modules/search/search.coffee
 
-search-results-pageTitle = Search
+search-results-pageTitle = Search{$suffix}
 
 # SEARCH RESULTS - Header - src/scripts/modules/search/header/header-template.html
 
@@ -852,7 +852,7 @@ workspace-popover-create-new-button = Create New
 
 # MY WORKSPACE - Page Title, Summary, Description - src/scripts/pages/workspace/workspace.coffee
 
-workspace-pageTitle = My Workspace
+workspace-pageTitle = My Workspace{$suffix}
 
 workspace-summary = Add new content or find content and derive a copy for editing.
 
@@ -1010,7 +1010,7 @@ textbook-editor-template-tools = Tools
 
 # DONATE - Page Title and Description - src/scripts/pages/donate/donate.coffee
 
-donate-pageTitle = Support OpenStax CNX
+donate-pageTitle = Support OpenStax CNX{$suffix}
 
 donate-summary = Donate to OpenStax CNX
 
@@ -1487,7 +1487,7 @@ donate-thank-you-appreciation-message =
 
 # TERMS OF SERVICE - Page Title - src/scripts/pages/tos/tos.coffee
 
-terms-of-service-pageTitle = Terms of Service - OpenStax CNX
+terms-of-service-pageTitle = Terms of Service{$suffix}
 
 terms-of-service-summary = OpenStax CNX Terms of Service
 
@@ -1503,7 +1503,7 @@ terms-of-service-description = OpenStax CNX Terms of Service
 
 # LICENSING - Page Title - src/scripts/pages/license/license.coffee
 
-licensing-pageTitle = License FAQ - OpenStax CNX
+licensing-pageTitle = License FAQ{$suffix}
 
 licensing-summary = OpenStax CNX License
 
@@ -1722,7 +1722,7 @@ licensing-answer-17 =
 
 # ROLE ACCEPTANCES - Title - src/scripts/modules/role-acceptances/role-acceptances.coffee, src/scripts/pages/role-acceptance/role-acceptance.coffee
 
-role-acceptances-pageTitle = Role Acceptance
+role-acceptances-pageTitle = Role Acceptance{$suffix}
 
 # ROLE ACCEPTANCES - Content - src/scripts/modules/role-acceptances/role-acceptances-template.html
 
@@ -1865,7 +1865,7 @@ contents-alert-out-of-date =
 
 # OTHER CONTENT - Contents Library Page title and description - src/scripts/pages/contents/contents.coffee
 
-content-library-pageTitle = Content Library
+content-library-pageTitle = Content Library{$suffix}
 
 content-library-summary = OpenStax Content Library
 
@@ -1899,6 +1899,7 @@ error-page-reason = { $code ->
  *[unknown] Unknown Error
 }
 
+error-page-reason-pageTitle = { error-page-reason[code] }{$suffix}
 
 
 ### MAINTENANCE ###

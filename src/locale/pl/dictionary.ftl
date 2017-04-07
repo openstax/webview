@@ -30,7 +30,7 @@ main-learn-more = Dowiedz się więcej
 
 # MAIN PAGE - Title - src/scripts/pages/home/home.coffee
 
-home-pageTitle = Propagując wiedzę tworzymy społeczeństwo - OpenStax CNX
+home-pageTitle = Propagując wiedzę tworzymy społeczeństwo{$suffix}
 
 # MAIN PAGE - Featured Textbooks - src/scripts/modules/featured-books/featured-books-partial.html
 
@@ -119,7 +119,7 @@ all-footer-share = Udostępnij
 
 # ABOUT - Page Title and Description - src/scripts/pages/about/about.coffee
 
-about-pageTitle =  O OpenStax CNX
+about-pageTitle =  O OpenStax CNX{$suffix}
 
 about-summary = O OpenStax CNX
 
@@ -231,7 +231,7 @@ about-contact-general-questions-content =
 
 # SEARCH - Page Summary and Description - src/scripts/pages/search/search.coffee
 
-search-pageTitle = Szukaj w bibliotece OpenStax CNX
+search-pageTitle = Szukaj w bibliotece OpenStax CNX{$suffix}
 
 search-page-summary = Szukaj podręczników
 
@@ -271,7 +271,7 @@ search-books = Książki: { $count }
 
 # ADVANCED SEARCH - Page Title - src/scripts/modules/search/advanced/advanced.coffee
 
-advanced-search-pageTitle = Zaawansowane wyszukiwanie
+advanced-search-pageTitle = Zaawansowane wyszukiwanie{$suffix}
 
 # ADVANCED SEARCH - Minimal Search Results Table Partial - src/scripts/modules/minimal/search/results/list/table-partial.html
 
@@ -283,11 +283,11 @@ minimal-search-results-table-partial-miscellaneous = Dodatkowe
 
 # ADVANCED SEARCH - Advanced Search Minimal Page Title - src/scripts/modules/minimal/search/advanced/advanced.coffee
 
-advanced-search-minimal-pageTitle = Zaawansowane wyszukiwanie
+advanced-search-minimal-pageTitle = Zaawansowane wyszukiwanie{$suffix}
 
 # ADVANCED SEARCH - Search Minimal Page Title - src/scripts/modules/minimal/search/advanced/advanced.coffee
 
-search-minimal-pageTitle = Szukaj
+search-minimal-pageTitle = Szukaj{$suffix}
 
 # ADVANCED SEARCH - Content - src/scripts/modules/search/advanced/advanced-template.html
 
@@ -500,7 +500,7 @@ advanced-search-language-option = { $native } ({ $code ->
 
 # SEARCH RESULTS - Page Title - src/scripts/modules/search/search.coffee
 
-search-results-pageTitle = Szukaj
+search-results-pageTitle = Szukaj{$suffix}
 
 # SEARCH RESULTS - Header - src/scripts/modules/search/header/header-template.html
 
@@ -865,7 +865,7 @@ workspace-popover-cancel-button = Anuluj
 
 # MY WORKSPACE - Page Title, Summary, Description - src/scripts/pages/workspace/workspace.coffee
 
-workspace-pageTitle = Moje biurko
+workspace-pageTitle = Moje biurko{$suffix}
 
 workspace-summary = Stwórz nowy zasób albo wyszukaj istniejący i utwórz kopię do modyfikacji.
 
@@ -984,7 +984,7 @@ textbook-editor-template-tools = Narzędzia
 
 # DONATE - Page Title and Description - src/scripts/pages/donate/donate.coffee
 
-donate-pageTitle = Wesprzyj OpenStax CNX
+donate-pageTitle = Wesprzyj OpenStax CNX{$suffix}
 
 donate-summary = Przekaż darowiznę dla OpenStax CNX
 
@@ -1457,7 +1457,7 @@ donate-thank-you-appreciation-message =
 
 # TERMS OF SERVICE - Page Title - src/scripts/pages/tos/tos.coffee
 
-terms-of-service-pageTitle = Warunki korzystania z serwisu OpenStax CNX
+terms-of-service-pageTitle = Warunki korzystania z serwisu OpenStax CNX{$suffix}
 
 terms-of-service-summary = OpenStax CNX - warunki serwisu
 
@@ -1473,7 +1473,7 @@ terms-of-service-description = OpenStax CNX - warunki serwisu
 
 # LICENSING - Page Title - src/scripts/pages/license/license.coffee
 
-licensing-pageTitle = OpenStax CNX: Najczęsciej zadawane pytania odnośnie warunków licencyjnych
+licensing-pageTitle = OpenStax CNX: Najczęsciej zadawane pytania odnośnie warunków licencyjnych{$suffix}
 
 licensing-summary = Licencja OpenStax CNX
 
@@ -1687,7 +1687,7 @@ licensing-answer-17 =
 
 # ROLE ACCEPTANCES - Title - src/scripts/modules/role-acceptances/role-acceptances.coffee, src/scripts/pages/role-acceptance/role-acceptance.coffee
 
-role-acceptances-pageTitle = Nadawanie uprawnień
+role-acceptances-pageTitle = Nadawanie uprawnień{$suffix}
 
 # ROLE ACCEPTANCES - Content - src/scripts/modules/role-acceptances/role-acceptances-template.html
 
@@ -1828,7 +1828,7 @@ contents-alert-out-of-date =
 
 # OTHER CONTENT - Contents Library Page title and description - src/scripts/pages/contents/contents.coffee
 
-content-library-pageTitle = Biblioteka zasobów
+content-library-pageTitle = Biblioteka zasobów{$suffix}
 
 content-library-summary = Biblioteka zasobów OpenStax
 
@@ -1862,6 +1862,7 @@ error-page-reason = { $code ->
  *[unknown] Nieznany błąd
 }
 
+error-page-reason-pageTitle = { error-page-reason[code] }{$suffix}
 
 
 ### MAINTENANCE ###
