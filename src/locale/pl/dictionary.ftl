@@ -856,12 +856,16 @@ workspace-delete-OK = OK
 
 # MY WORKSPACE - Popover - src/scripts/modules/workspace/popovers/new/modals/new-media-template.html
 
+workspace-popover-create-new = Utwórz Nową
+
 workspace-popover-title-label = Tytuł
 
 workspace-popover-title-input =
   [html/placeholder]  Tytuł
 
 workspace-popover-cancel-button = Anuluj
+
+workspace-popover-create-new-button = Utwórz Nową
 
 # MY WORKSPACE - Page Title, Summary, Description - src/scripts/pages/workspace/workspace.coffee
 
@@ -901,6 +905,49 @@ workspace-results-plural = { $items ->
 # Content related to editor that enables the creation and editing of textbooks.
 
 # TEXTBOOK EDITOR - Editbar Styling - src/scripts/modules/media/editbar/editbar-template.html
+
+textbook-editor-toggle-navigation = Przełącz nawigację
+
+textbook-editor-edit = Edytuj
+
+textbook-editor-normal-text-button = Normalny Tekst
+
+textbook-editor-normal-text = Normalny Tekst
+
+textbook-editor-h1 = Nagłówek 1
+textbook-editor-h2 = Nagłówek 2
+textbook-editor-h3 = Nagłówek 3
+
+textbook-editor-code = Kod
+
+textbook-editor-bold =
+  [html/title] Pogrubiony
+textbook-editor-italic =
+  [html/title] Kursywa
+textbook-editor-underline =
+  [html/title] Podkreślać
+textbook-editor-superscript =
+  [html/title] Napisany u góry
+textbook-editor-subscript =
+  [html/title] Indeks
+
+textbook-editor-add-row-before = Dodaj wiersz przed
+textbook-editor-add-row-after = Dodaj wiersz po
+textbook-editor-add-column-before = Dodaj kolumnę przed
+textbook-editor-add-column-after = Dodaj kolumnę po
+textbook-editor-add-header-row = Dodaj wiersz nagłówka
+textbook-editor-delete-row = Usuń wiersz
+textbook-editor-delete-column = Usuń kolumnę
+textbook-editor-delete-table = Usuń tabelę
+
+textbook-editor-paste-button =
+  [html/data-content] Treść została skopiowana do schowka. Kliknij ten przycisk, aby wkleić treść do strony.
+
+textbook-editor-save-draft = Zapisz Projekt
+
+textbook-editor-publish-button = Publikacja...
+
+textbook-editor-drag-to-add = Przeciągnij, aby dodać nową...
 
 # TEXTBOOK EDITOR - Tabs Add Page - src/scripts/modules/media/tabs/contents/popovers/add/modals/add-page-template.html
 
