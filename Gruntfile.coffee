@@ -133,6 +133,7 @@ module.exports = (grunt) ->
           baseUrl: 'scripts'
           dir: 'dist'
           mainConfigFile: 'src/scripts/config.js'
+          waitSeconds: 360 # Jenkins takes a while to build (when running multiple jobs)
           findNestedDependencies: true
           removeCombined: false
           keepBuildDir: false
