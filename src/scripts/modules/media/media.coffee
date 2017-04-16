@@ -64,6 +64,11 @@ define (require) ->
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updateUrl)
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updatePageInfo)
       @listenTo(@model, 'change:abstract', @updateSummary)
+      @listenTo(Backbone, 'title:loaded', @titleHandler)
+
+    titleHandler: (t) ->
+      @this = t
+      @updatePageInfo()
 
     triggerHashChange: (e) ->
       Backbone.trigger('window:hashChange')
@@ -208,7 +213,9 @@ define (require) ->
       analytics.send(analyticsID) if analyticsID
 
     updatePageInfo: () ->
-      @pageTitle = @model.get('title')
+      if not @this?
+        @this = "default"
+      @pageTitle = @model.get('title') + " - " + @this
       super()
 
     updateLegacyLink: () ->

@@ -19,6 +19,8 @@ define (require) ->
       if currentPage
         currentPage = currentPage.toJSON()
         currentPage.encodedTitle = encodeURI(currentPage.title)
+        if currentPage.title
+          Backbone.trigger('title:loaded', currentPage.title) #currentPage ?
       else
         currentPage = {
           title: 'Untitled'
