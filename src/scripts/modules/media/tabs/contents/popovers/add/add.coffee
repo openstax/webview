@@ -21,7 +21,7 @@ define (require) ->
       super()
       @regions.self.appendOnce
         view: @addPageModal
-        as: 'div id="add-page-modal" class="modal fade"'
+        as: 'div id="add-page-modal" class="modal fade" aria-hidden="true"'
 
     addSection: (e) ->
       @hide(e)
