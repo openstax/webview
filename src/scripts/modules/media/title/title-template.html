@@ -17,13 +17,15 @@
     <div class="title">
       <h1 class="large-header">
         {{#is status 'publishing'}}
-          <span class="label label-info" data-l10n-id="textbook-view-publishing" data-l10n-args='{"title":"{{title}}"}'>publishing {{{title}}}</span>
+        <span class="label label-info"><span data-l10n-id="textbook-view-publishing">publishing</span> {{{title}}}</span>
         {{else}}
           {{{title}}}
         {{/is}}
       </h1>
       {{#if parent.id}}
-        <span data-l10n-id="textbook-view-derived-from" data-l10n-args='{"url":"/contents/{{parent.id}}@{{parent.version}}", "title":"{{parent.title}}","authors": {{toJSON (mapField parent.authors "fullname")}} }'>Derived from <a href="/contents/{{parent.id}}@{{parent.version}}">{{parent.title}}</a> by
+      <span data-l10n-id="textbook-view-derived-from">Derived from</span>
+          <a href="/contents/{{parent.id}}@{{parent.version}}">{{parent.title}}</a>
+          <span data-l10n-id="textbook-view-derived-from-by">by</span>
           <span class="collection-authors">
             {{~#each parent.authors}}
               <span class="list-comma">{{fullname}}</span>

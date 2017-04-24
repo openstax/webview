@@ -596,9 +596,11 @@ textbook-view-btn-edit = Edytuj
 
 textbook-view-btn-create = Utwórz kopię do edycji
 
-textbook-view-publishing = publikujesz { $title }
+textbook-view-publishing = publikujesz
 
-textbook-view-derived-from = Utworzone z <a href="{ $url }">{ $title }</a> przez <span class="collection-authors">{ TAKE(50, $authors) }</span>
+textbook-view-derived-from = Utworzone z
+
+textbook-view-derived-from-by = przez
 
 textbook-view-book-by =
   | Utworzone przez: <span class="collection-authors">{ TAKE(50, $authors) }</span>
@@ -692,17 +694,11 @@ textbook-view-btn-get-this-page = Weź tę stronę!
 
 textbook-view-summary = Podsumowanie
 
-textbook-view-header-publishing = <span class="label label-info">publikujesz</span> { $title }
+textbook-view-header-publishing = publikujesz
 
-textbook-view-header-publishing-chapter =
-  | <span class="label label-info">publikujesz</span> <span class="title-chapter">{ $chapter }</span> { $title }
+textbook-view-header-derived-from = Utworzone z
 
-textbook-view-header-no-publishing = { $title }
-
-textbook-view-header-no-publishing-chapter = <span class="title-chapter">{ $chapter }</span> { $title }
-
-textbook-view-header-derived-from =
-  | Utworzone z <a href="{ $url }">{ $title }</a> przez <span class="book-authors">{ TAKE(50, $authors) }</span>
+textbook-view-header-derived-from-by = przez
 
 # TEXTBOOK VIEW - Metadata - src/scripts/modules/media/footer/metadata/metadata-template.html
 
