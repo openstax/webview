@@ -176,14 +176,7 @@
 
       l20n: {
         exports: 'L20n',
-        deps: ['templatePolyfill', 'babelPolyfill', 'customEventPolyfill'],
-        init: function () {
-          // work-around until https://github.com/katalysteducation/l20n.js/pull/1 is merged.
-          document.l10n.connectRoot(document.documentElement);
-          document.l10n.translateDocument().then(function () {
-            window.addEventListener('languagechange', document.l10n);
-          });
-        }
+        deps: ['templatePolyfill', 'babelPolyfill', 'customEventPolyfill']
       }
     },
 
