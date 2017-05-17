@@ -14,16 +14,18 @@
     {{/if}}
 
     <div class="title">
-      <h2 data-l10n-id="textbook-view-header-{{#isnt status 'publishing'}}no-{{/isnt}}publishing{{#if chapter}}-chapter{{/if}}" data-l10n-args='{"chapter":"{{chapter}}","title":"{{safeQuotes pageTitle}}"}'>
+      <h2>
         {{#is status 'publishing'}}
-          <span class="label label-info">publishing</span>
+          <span data-l10n-id="textbook-view-header-publishing" class="label label-info">publishing</span>
         {{/is}}
         {{#if chapter}}<span class="title-chapter">{{chapter}}</span>{{/if}}
         {{{pageTitle}}}
       </h2>
       {{#if currentPage.parent.id}}
-        <span data-l10n-id="textbook-view-header-derived-from" data-l10n-args='{"url":"/contents/{{currentPage.parent.id}}@{{currentPage.parent.version}}","title":"{{safeQuotes currentPage.parent.title}}","authors": {{toJSON (mapField currentPage.parent.authors "fullname")}} }'>
-          Derived from <a href="/contents/{{currentPage.parent.id}}@{{currentPage.parent.version}}">{{currentPage.parent.title}}</a> by
+        <span>
+          <span data-l10n-id="textbook-view-header-derived-from">Derived from</span>
+          <a href="/contents/{{currentPage.parent.id}}@{{currentPage.parent.version}}">{{currentPage.parent.title}}</a>
+          <span data-l10n-id="textbook-view-header-derived-from-by">by</span>
           <span class="book-authors">
             {{#each currentPage.parent.authors}}
               <span class="list-comma">{{fullname}}</span>
