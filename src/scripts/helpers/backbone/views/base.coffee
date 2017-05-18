@@ -77,11 +77,12 @@ define (require) ->
         historyPage = linksHelper.getCurrentPathComponents().page
 
       if @pageTitle
-        document.title = @pageTitle + settings.titleSuffix
+        pageTitle = @pageTitle.replace(/<\/?[^>]+(>|$)/g, '') # Strip tags for baked HTML titles
+        document.title = pageTitle + settings.titleSuffix
 
         if not isBook
           title = document.querySelector('title')
-          title.dataset.l10nId = @pageTitle
+          title.dataset.l10nId = pageTitle
 
           if @pageTitleArgs
             title.dataset.l10nArgs = JSON.stringify(_.extend({

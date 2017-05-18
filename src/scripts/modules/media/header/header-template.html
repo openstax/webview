@@ -14,7 +14,7 @@
     {{/if}}
 
     <div class="title">
-      <h2 data-l10n-id="textbook-view-header-{{#isnt status 'publishing'}}no-{{/isnt}}publishing{{#if chapter}}-chapter{{/if}}" data-l10n-args='{"chapter":"{{chapter}}","title":"{{safeQuotes pageTitle}}"}'>
+      <h2 data-l10n-id="textbook-view-header-{{#isnt status 'publishing'}}no-{{/isnt}}publishing{{#if chapter}}-chapter{{/if}}" data-l10n-args='{"chapter":"{{chapter}}","title":"{{stripTags pageTitle}}"}'>
         {{#is status 'publishing'}}
           <span class="label label-info">publishing</span>
         {{/is}}
