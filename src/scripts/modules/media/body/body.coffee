@@ -157,7 +157,7 @@ define (require) ->
           .wrapInner('<section class="ui-body">')
           .prepend('''
             <div class="ui-toggle-wrapper">
-              <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
+              <button class="btn-link ui-toggle" title="Show/Hide Solution" aria-label="show/hide solution"></button>
             </div>''')
 
           $temp.find('figure:has(> figcaption)').addClass('ui-has-child-figcaption')
