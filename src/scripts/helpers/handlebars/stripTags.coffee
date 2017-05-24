@@ -1,5 +1,6 @@
 define (require) ->
   Handlebars = require('hbs/handlebars')
+  stripTags = require('cs!../strip-tags.coffee')
 
   Handlebars.registerHelper 'stripTags', (str) ->
-    return str.replace(/<\/?[^>]+(>|$)/g, '')
+    return stripTags(str)
