@@ -200,7 +200,7 @@ define (require) ->
       qs = components.rawquery
 
       if title isnt components.title and not @model.isBook()
-        router.navigate("contents/#{components.uuid}#{components.version}/#{title}#{qs}", {replace: true})
+        router.navigate("contents/#{components.uuid}#{components.version}/#{title}#{components.hash_path}#{qs}", {replace: true})
 
     trackAnalytics: () ->
       # Track loading using the media's own analytics ID, if specified
