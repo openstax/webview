@@ -5,6 +5,7 @@ define (require) ->
   settings = require('settings')
   linksHelper = require('cs!helpers/links.coffee')
   locale = require('cs!helpers/locale.coffee')
+  stripTags = require('cs!../../strip-tags.coffee')
 
   dispose = (obj) ->
     delete obj.parent
@@ -77,11 +78,12 @@ define (require) ->
         historyPage = linksHelper.getCurrentPathComponents().page
 
       if @pageTitle
-        document.title = @pageTitle + settings.titleSuffix
+        strippedPageTitle = stripTags(@pageTitle)
+        document.title = strippedPageTitle + settings.titleSuffix
 
         if not isBook
           title = document.querySelector('title')
-          title.dataset.l10nId = @pageTitle
+          title.dataset.l10nId = strippedPageTitle
 
           if @pageTitleArgs
             title.dataset.l10nArgs = JSON.stringify(_.extend({
