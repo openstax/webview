@@ -78,6 +78,8 @@ define (require) ->
     getCurrentPathComponents: () ->
       components = Backbone.history.fragment.match(@contentsLinkRegEx) or []
       path = components[0]
+      hash_path = window.location.hash
+      components[6] = hash_path
       if path?.slice(-1) is '/'
         path = path.slice(0, -1)
 
