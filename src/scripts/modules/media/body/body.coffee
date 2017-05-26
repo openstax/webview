@@ -469,7 +469,12 @@ define (require) ->
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')
       $solution.toggleClass('ui-solution-visible')
-
+      if $solution.hasClass('ui-solution-visible')
+        $solution.attr('aria-expanded',true)
+        $solution.attr('aria-label',"hide solution")
+      else
+        $solution.attr('aria-expanded',false)
+        $solution.attr('aria-label',"show solution")
     onEditable: () -> @$el.find('.media-body').addClass('draft')
 
     onUneditable: () ->
