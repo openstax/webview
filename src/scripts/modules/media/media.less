@@ -4,20 +4,75 @@
 .media {
   height: 100%;
 
-  .pinnable.pinned {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    max-width: @max-viewport-width;
-    z-index: 1;
+  .pinnable {
+    & + .extend-header {
+      opacity: 0;
+      width: 100%;
+      height: 132px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #ededed;
+      z-index: 0;
+      border-bottom: 2px solid #dcdcdc;
+      box-shadow: 0 2px 3px hsla(0,0%,4%,.1);
+    }
+
+    &.pinned {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      max-width: @max-viewport-width;
+      z-index: 1;
+      animation-name: translateHeader;
+      animation-duration: 0.2s;
+      animation-timing-function: ease-out;
+      animation-delay: 0s;
+      animation-iteration-count: 1;
+      animation-fill-mode: none;
+      animation-play-state: running;
+
+      & + .extend-header {
+        animation-name: translateHeader;
+        animation-duration: 0.2s;
+        animation-timing-function: ease-out;
+        animation-delay: 0s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-play-state: running;
+      }
+    }
   }
-  .table-of-contents{
+
+  .table-of-contents {
     overflow-y: auto;
     overflow-x: hidden;
     max-width: 315px;
     width: 100%;
+
     &.pinned {
       position: fixed;
     }
+  }
+}
+
+.main .main-content.pinned {
+  position: relative;
+  top: 150px;
+
+  & + .footer {
+    margin-top: 150px;
+  }
+}
+
+@keyframes translateHeader {
+  from {
+    transform: translate3d(0, -100%, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
   }
 }

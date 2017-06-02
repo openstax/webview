@@ -10,7 +10,7 @@
 
       // Hostname and port for the cnx-archive server
       cnxarchive: {
-        host: 'archive-cte-cnx-dev.cnx.org',
+        host: 'archive-dev.cnx.org',
         port: 80
       },
 
@@ -60,7 +60,7 @@
         // // stub.  Comment out to use local exercises stub.
         // // Copied from https://exercises-dev1.openstax.org/api/exercises?q=tag:k12phys-ch04-s01-lo01
         // return 'http://localhost:8000/data/exercises.json';
-        return 'https://exercises-dev1.openstax.org/api/exercises?q=tag:' + itemCode;
+        return 'https://exercises.openstax.org/api/exercises?q=tag:' + itemCode;
       },
 
       defaultLicense: {
