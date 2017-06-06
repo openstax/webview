@@ -151,7 +151,32 @@ define (require) ->
             # Add a class for styling since CSS does not support `:has(> .title)`
             # NOTE: `.toggleClass()` explicitly requires a `false` (not falsy) 2nd argument
             $el.toggleClass('ui-has-child-title', $title.length > 0)
-
+            
+            # Create subtitles in each chapter with corresponding ids as their href
+            total_subtitle = $temp.find("[data-depth='1']")
+            total_id = total_subtitle.children('[data-type="title"]')
+            id_length = total_id.length
+            i = 0
+            slash_index = window.location.href.lastIndexOf("/")+1
+            real_href = window.location.pathname
+            if real_href.indexOf("#")!= -1
+              hash_index = real_href.indexOf("#")-1
+              real_href = real_href.substring(0,hash_index)
+            location = $('.table-of-contents [href$="'+real_href+'"]').children(".title")
+            location2 = $('.table-of-contents [href$="'+real_href+'"]').children(".chapter-number")
+            # Keep adding subtitles until all subtitles are added
+            if location.children("li").length < id_length
+                while i < id_length
+                  c_index = i + 1
+                  id = total_subtitle[i].id
+                  hash_id = "#" + id
+                  list = $("<li>")
+                  list.text(location2[0].textContent + "."  + c_index + " " + total_id[i].textContent)
+                  list.wrapInner('''<a href = ""></a>''')
+                  list.children("a").attr("href", hash_id)
+                  location.append(list)
+                  i = i + 1
+                  
           # Wrap solutions in a div so "Show/Hide Solutions" work
           $temp.find('.exercise .solution, [data-type="exercise"] [data-type="solution"]')
           .wrapInner('<section class="ui-body">')
