@@ -166,16 +166,16 @@ define (require) ->
             location2 = $('.table-of-contents [href$="'+real_href+'"]').children(".chapter-number")
             # Keep adding subtitles until all subtitles are added
             if location.children("li").length < id_length
-                while i < id_length
-                  c_index = i + 1
-                  id = total_subtitle[i].id
-                  hash_id = "#" + id
-                  list = $("<li>")
-                  list.text(location2[0].textContent + "."  + c_index + " " + total_id[i].textContent)
-                  list.wrapInner('''<a href = ""></a>''')
-                  list.children("a").attr("href", hash_id)
-                  location.append(list)
-                  i = i + 1
+              while i < id_length
+                c_index = i + 1
+                id = total_subtitle[i].id
+                hash_id = "#" + id
+                list = $("<li>")
+                list.text(location2[0].textContent + "."  + c_index + " " + total_id[i].textContent)
+                list.wrapInner('''<a href = ""></a>''')
+                list.children("a").attr("href", hash_id)
+                location.append(list)
+                i = i + 1
                   
           # Wrap solutions in a div so "Show/Hide Solutions" work
           $temp.find('.exercise .solution, [data-type="exercise"] [data-type="solution"]')
