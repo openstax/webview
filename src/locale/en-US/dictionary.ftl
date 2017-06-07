@@ -687,15 +687,6 @@ textbook-view-btn-get-this-page = Get This Page!
 
 textbook-view-summary = Summary
 
-textbook-view-header-publishing = <span class="label label-info">publishing</span> { $title }
-
-textbook-view-header-publishing-chapter =
-  | <span class="label label-info">publishing</span> <span class="title-chapter">{ $chapter }</span> { $title }
-
-textbook-view-header-no-publishing = { $title }
-
-textbook-view-header-no-publishing-chapter = <span class="title-chapter">{ $chapter }</span> { $title }
-
 textbook-view-header-derived-from =
   | Derived from <a href="{ $url }">{ $title }</a> by <span class="book-authors">{ TAKE(50, $authors) }</span>
 

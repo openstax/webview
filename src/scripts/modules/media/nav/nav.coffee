@@ -122,8 +122,13 @@ define (require) ->
 
     enableClearSearch: ->
       @$el.find('.searchbar > .fa').
-      removeClass('fa-search').
+      removeClass('fa-spinner fa-spin load-search').
       addClass('fa-times-circle clear-search')
+
+    enableLoadSearch: ->
+      @$el.find('.searchbar > .fa').
+      removeClass('fa-search').
+      addClass('fa-spinner fa-spin load-search')
 
     handleSearchInput: (event) ->
       if (event.keyCode == 13 and event.target.value?)
@@ -136,6 +141,9 @@ define (require) ->
           bookId: "#{@model.get('id')}@#{@model.get('version')}",
           query: @searchTerm
         }
+        # before the search has loaded
+        @enableLoadSearch()
+        # after the search has completed
         BookSearchResults.fetch(options).done((data) =>
           if not @tocIsOpen
             @toggleContents()
