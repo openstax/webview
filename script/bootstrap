@@ -25,6 +25,3 @@ then
   >&2 echo "Using node: $(node --version)"
   >&2 echo "Using npm: $(npm --version)"
 fi
-
->&2 echo "==> Installing package dependencies"
-npm install || exit 1
