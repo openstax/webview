@@ -8,6 +8,7 @@ define (require) ->
   session = require('cs!session')
   analytics = require('cs!helpers/handlers/analytics')
   router = require('cs!router')
+  l20n = require('l20n')
   require('cs!helpers/backbone/history') # Extend Backbone.history to support query strings
 
   RegExp.escape = (str) -> str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
@@ -98,5 +99,11 @@ define (require) ->
         options.url = root + options.url
 
       return
+
+    # Sometimes l10n loads before the DOM is loaded.
+    # This ensures that l10n processing happens once the DOM is loaded
+    $(document).ready ->
+      l20n.connectRoot(document.documentElement)
+      l20n.translateRoots()
 
   return {init: init}
