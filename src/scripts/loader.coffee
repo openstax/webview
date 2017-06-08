@@ -103,7 +103,7 @@ define (require) ->
     # Sometimes l10n loads before the DOM is loaded.
     # This ensures that l10n processing happens once the DOM is loaded
     $(document).ready ->
-      l20n.connectRoot(document.documentElement)
-      l20n.translateRoots()
+      document.l10n.connectRoot(document.documentElement)
+      document.l10n.translateRoots()
 
   return {init: init}
