@@ -53,6 +53,11 @@ define (require) ->
       e.stopPropagation()
 
       $link = $(e.currentTarget)
+      if $link[0].href.indexOf("#") > -1
+        index = $link[0].href.indexOf("#")
+        new_link =  $link[0].href.substring(index)
+        window.location.hash = new_link.substring(1)
+        return
       router.navigate $link.attr('href'), {trigger: false}, () => @trackNav()
       @model.get('book').setPage($link.data('page'))
 
