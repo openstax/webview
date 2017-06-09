@@ -62,7 +62,6 @@ ul, ol {
     }
     .os-number {
       font-weight: bold;
-      padding-right: .5rem;
     }
   }
 
@@ -214,7 +213,8 @@ h1.example-title .text {
 .os-solutions-container {
   // TODO: Fix this selector; it should be similar to the problem number one
   [data-type="solution"] {
-    padding: 0.5em 1em;
+    padding: 0.5em 0.25em 0.5em 0;
+    display: inline;
     > a /*> .number*/ {
       .exercise-number();
     }
