@@ -95,11 +95,11 @@ module.exports = (grunt) ->
         browser: true
         devel: false
 
-      source: ['src/**/*.js', 'test/**/*.js']
+      source: ['src/**/*.js', 'test/*/**/*.js']
 
     # JS Beautifier
     jsbeautifier:
-      files: ['src/**/*.js', 'test/**/*.js']
+      files: ['src/**/*.js', 'test/*/**/*.js']
       options:
         mode: "VERIFY_ONLY"
         js:

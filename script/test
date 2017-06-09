@@ -1,3 +1,8 @@
 #!/bin/bash
+set -e
 
 npm test
+
+# Check that l20n starts up
+npm run-script dist
+node ./test/verify-l20n.js
