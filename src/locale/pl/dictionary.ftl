@@ -80,7 +80,7 @@ all-header-support = Pomoc
 all-footer-support =
   | Serwis powstał dzięki pomocy William &amp;
   | Flora Hewlett Foundation, Bill &amp; Melinda Gates Foundation,
-  | 20 Million Minds Foundation, Maxfield Foundation, Open Society Foundations oraz Rice University.
+  | Michelson 20MM Foundation, Maxfield Foundation, Open Society Foundations oraz Rice University.
   | Obsługiwany przez OpenStax CNX.
 
 all-footer-ap =
