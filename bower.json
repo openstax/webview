@@ -9,31 +9,31 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "2.1.1",
-    "underscore": "1.8.3",
-    "backbone": "1.2.3",
-    "backbone-associations": "0.6.2",
-    "bootstrap": "3.3.5",
-    "font-awesome": "4.4.0",
-    "requirejs": "2.1.20",
-    "requirejs-text": "2.0.14",
+    "jquery": "^3.2.1",
+    "underscore": "^1.8.3",
+    "backbone": "^1.2.3",
+    "backbone-associations": "^0.6.2",
+    "bootstrap": "^3.3.5",
+    "font-awesome": "fontawesome#^4.7.0",
+    "requirejs": "^2.1.20",
+    "requirejs-text": "^2.0.14",
     "require-cs": "842e8b8568536bcf7efcbea756560c6d7373e5ff",
-    "require-css": "0.1.8",
-    "require-less": "0.1.5",
-    "require-handlebars-plugin": "1.0.0",
+    "require-css": "^0.1.8",
+    "require-less": "^0.1.5",
+    "require-handlebars-plugin": "^1.0.0",
     "aloha-editor": "oerpub/Aloha-Editor#master",
-    "select2": "3.5.4",
+    "select2": "^4.0.3",
     "babel-polyfill": "^0.0.1",
     "l20n": "https://github.com/katalysteducation/l20n.js.git",
     "concept-coach": "openstax/tutor-js#coach-20170308.c",
     "custom-event-polyfill": "^0.3.0"
   },
   "devDependencies": {
-    "chai": "3.2.0",
-    "mocha": "2.3.2",
-    "sinonjs": "1.14.1"
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "sinonjs": "^1.14.1"
   },
   "resolutions": {
-    "font-awesome": "4.4.0"
+    "font-awesome": "^4.7.0"
   }
 }
