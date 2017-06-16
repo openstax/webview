@@ -38,6 +38,9 @@
       // Webmaster E-mail address
       webmaster: 'support@openstax.org',
 
+      // Donate E-mail address
+      donation: 'openstaxgiving@rice.edu',
+
       // Content shortcodes
       shortcodes: {
         'college-physics': '031da8d3-b525-429c-80cf-6c8ed997733a@8.1',

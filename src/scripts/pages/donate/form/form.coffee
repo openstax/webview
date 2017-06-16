@@ -3,6 +3,7 @@ define (require) ->
   validationHelper = require('cs!helpers/validation')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./form-template')
+  settings = require('settings')
   require('less!./form')
 
   countries = [
@@ -345,6 +346,8 @@ define (require) ->
         url = "#{location.protocol}//#{location.host}/donate"
         url += "/download/#{@uuid}/#{@type}" if @uuid and @type
         return url
+      donation: () ->
+        return settings.donation
 
     events:
       'submit form': 'onSubmit'
