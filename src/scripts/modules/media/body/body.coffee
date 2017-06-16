@@ -67,7 +67,7 @@ define (require) ->
       else
         pageId = 0
       currentRoute = Backbone.history.getFragment()
-      canonicalPath = linksHelper.getPath('contents', {model: @model, page: pageId}, [])
+      canonicalPath = linksHelper.getPath('contents', {model: @model, page: pageId}, []) + window.location.hash
       if (canonicalPath isnt "/#{currentRoute}")
         router.navigate(canonicalPath, {replace: true})
 
