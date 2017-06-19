@@ -164,7 +164,7 @@
 
       // Select2
       select2: {
-        deps: ['jquery', 'css!../../bower_components/select2/select2'],
+        deps: ['jquery', 'css!../../bower_components/select2/dist/css/select2'],
         exports: 'Select2'
       },
 
