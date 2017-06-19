@@ -80,7 +80,7 @@ all-header-support = Support
 
 all-footer-support =
   | Supported by William &amp; Flora Hewlett Foundation,
-  | Bill &amp; Melinda Gates Foundation, 20 Million Minds Foundation,
+  | Bill &amp; Melinda Gates Foundation, Michelson 20MM Foundation,
   | Maxfield Foundation, Open Society Foundations, and Rice University.
   | Powered by OpenStax CNX.
 
