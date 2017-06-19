@@ -50,7 +50,7 @@
       bootstrapTransition: '../../bower_components/bootstrap/js/transition',
 
       // # Select2 multiselect widget
-      select2: '../../bower_components/select2/select2',
+      select2: '../../bower_components/select2/dist/js/select2',
 
       // # CoffeeScript
       cs: '../../bower_components/require-cs/cs',
