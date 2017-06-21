@@ -152,6 +152,27 @@ define (require) ->
             # NOTE: `.toggleClass()` explicitly requires a `false` (not falsy) 2nd argument
             $el.toggleClass('ui-has-child-title', $title.length > 0)
 
+          # Create subtitles in each chapter with corresponding ids as their href
+          $totalSubtitle = $temp.find("[data-depth='1']")
+          $totalId = $totalSubtitle.children('[data-type="title"]')
+          idLength = $totalId.length
+          countIndex = 0
+          realHref = window.location.pathname
+          #Determine if this is a outer page view or not
+          $location = $(".table-of-contents [href$='#{realHref}'] > .title")
+          # Keep adding subtitles until all subtitles are added
+          if $location.children("li").length < idLength
+            while countIndex < idLength
+              subIndex = countIndex + 1
+              subId = $totalSubtitle[countIndex].id
+              hashId = "#" + subId
+              $list = $("<li>")
+              $list.html('&nbsp;'+'&nbsp;'+'&nbsp;'+'&nbsp;'+'&nbsp;'+'&nbsp;'+$totalId[countIndex].textContent)
+              $list.wrapInner('''<a href = ""></a>''')
+              $list.children("a").attr("href", hashId)
+              $location.append($list)
+              countIndex += 1
+
           # Wrap solutions in a div so "Show/Hide Solutions" work
           $temp.find('.exercise .solution, [data-type="exercise"] [data-type="solution"]')
           .wrapInner('<section class="ui-body">')
