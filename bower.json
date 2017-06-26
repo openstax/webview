@@ -24,7 +24,7 @@
     "aloha-editor": "oerpub/Aloha-Editor#master",
     "select2": "4.0.3",
     "babel-polyfill": "0.0.1",
-    "l20n": "https://github.com/katalysteducation/l20n.js.git",
+    "l20n": "https://github.com/katalysteducation/l20n.js.git#v4.0.15",
     "concept-coach": "openstax/tutor-js#coach-20170308.c",
     "custom-event-polyfill": "0.3.0"
   },
