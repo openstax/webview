@@ -14,10 +14,17 @@ h6 {
 }
 
 ul, ol {
-  margin-top: 1rem;
-  margin-bottom: 0;
   color: @gray;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
+
+iframe {
+  display: block;
+  margin: 3rem auto;
+  width: 100%;
+}
+
 
 // It is already displayed at the top of the page in blue
 // the `>` is because collated titles (like Key Concepts) contain descendent
@@ -97,24 +104,31 @@ figure:not([data-orient="vertical"]) {
 #blockish {
 .style(note) {
   margin: 3rem 0;
-  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+  padding: 1.5rem;
   background-color: @gray-lightest;
-  border: 0.1rem solid @gray-lighter;
+  border: 0.2rem solid @gray-lighter;
 
   > p {
     margin-top: 0;
+  }
+
+  :last-child {
+    margin-bottom: 0;
   }
 }
 .title(note) {
   color: @gray;
   font-size: 1.5rem;
+  font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   display: block;
   margin-bottom: 1rem;
   margin-top: 0;
   padding: 0rem 1.5rem 1rem 1.5rem;
-  border-bottom: 0.1rem solid @gray-lighter;
+  border-bottom: 0.2rem solid @gray-lighter;
+
+
 }
 .body(note) {
   border-top: none;
@@ -127,6 +141,11 @@ figure:not([data-orient="vertical"]) {
 
   ul {
     color: @gray;
+  }
+
+  > span[data-type="media"] {
+    display: block;
+    margin: 1rem 0;
   }
 }
 .style(example) { .style(note) }
@@ -194,7 +213,10 @@ h1.example-title .text {
 [data-type="example"],
 .example  { .make-block(example); }
 [data-type="abstract"],
-.abstract { .make-block(note); }
+.abstract {
+  .make-block(note);
+  color: @gray;
+}
 [data-type="problem"],
 [data-type="solution"],
 .problem,
@@ -217,10 +239,14 @@ h1.example-title .text {
 // Tables
 // --------------------------------------------------
 .os-table {
+  margin: @line-height-computed 0;
   table {
-     margin: @line-height-computed 0;
+     margin: 0;
   }
   .os-caption-container {
+    padding: 8px;
+    border-top: 0.1rem solid @gray-lighter;
+
     .os-title-label,
     .os-number {
       font-weight: bold;
