@@ -446,6 +446,7 @@ define (require) ->
       jumpToHash = () =>
         if currentPage.get('loaded') and not @fragmentReloaded and window.location.hash
           @fragmentReloaded = true
+
           hash = window.location.hash
           window.location.hash = ''
           window.location.hash = hash
