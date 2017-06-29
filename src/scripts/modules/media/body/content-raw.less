@@ -3,6 +3,8 @@
 //
 //     #content { @import 'this_file.less'; }
 
+@import '_make-block';
+
 h1,
 h2,
 h3,
@@ -89,6 +91,10 @@ figure:not([data-orient="vertical"]) {
 
 }
 
+[data-type="note"],
+.note     { .make-block(note); }
+[data-type="example"],
+.example  { .make-block(example); }
 
 [data-type="exercise"],
 .exercise { .make-block(exercise); }
