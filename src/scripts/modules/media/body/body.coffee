@@ -451,10 +451,6 @@ define (require) ->
           window.location.hash = ''
           window.location.hash = hash
 
-          # scroll up by width of nav bar
-          # FIXME - make this dynamic
-          window.scrollBy(0, -145)
-
       $target = $(window.location.hash)
       if $target.prop('tagName')?.toLowerCase() is 'iframe'
         $target.on('load', jumpToHash)
