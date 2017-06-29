@@ -140,9 +140,9 @@ define (require) ->
                     [data-type="example"], [data-type="exercise"], [data-type="note"]').each (index, el) ->
             $el = $(el)
             $contents = $el.contents().filter (i, node) ->
-              return !$(node).is('.title, [data-type="title"]')
+              return !$(node).is('.title, [data-type="title"], .os-title')
             $contents.wrapAll('<section>')
-            $title = $el.children('.title, [data-type="title"]')
+            $title = $el.children('.title, [data-type="title"], .os-title')
             $title.wrap('<header>')
             # Add an attribute for the parents' `data-label`
             # since CSS does not support `parent(attr(data-label))`.

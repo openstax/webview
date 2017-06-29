@@ -3,6 +3,8 @@
 //
 //     #content { @import 'this_file.less'; }
 
+@import '_make-block';
+
 h1,
 h2,
 h3,
@@ -14,10 +16,17 @@ h6 {
 }
 
 ul, ol {
-  margin-top: 1rem;
-  margin-bottom: 0;
   color: @gray;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
+
+iframe {
+  display: block;
+  margin: 3rem auto;
+  width: 100%;
+}
+
 
 // It is already displayed at the top of the page in blue
 // the `>` is because collated titles (like Key Concepts) contain descendent
@@ -50,7 +59,7 @@ ul, ol {
 
 .os-figure {
   display: table;
-  margin: 1rem auto 0;
+  margin: 3rem auto;
   .os-caption-container {
     padding-top: 1rem;
     display: table-caption;
@@ -95,64 +104,106 @@ figure:not([data-orient="vertical"]) {
 // Slots for various blockish pieces of content (things with a label, title, and body)
 // This **ONLY** contains rules, no selectors.
 #blockish {
+.style(note) {
+  margin: 3rem 0;
+  padding: 1.5rem;
+  background-color: @gray-lightest;
+  border: 0.2rem solid @gray-lighter;
 
-  .style(example) {
-    margin-top: 5rem;
-    position: relative;
-   }
-  .title(example) {
-    font-size: 1em;
-    position: absolute;
-    top: -4rem;
-    left: 0em;
-    padding: 0.4em 1em;
-    font-weight: bold;
-    color: @gray-lightest;
-    background-color: @gray;
-    max-width: 100%;
+  > p {
+    margin-top: 0;
   }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+.title(note) {
+  color: @gray;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  display: block;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  padding: 0rem 1.5rem 1rem 1.5rem;
+  border-bottom: 0.2rem solid @gray-lighter;
+
+
+}
+.body(note) {
+  border-top: none;
+  padding: 0rem 1.5rem;
+  background-color: @gray-lightest;
+
+  p {
+    margin: 0 0 1rem;
+  }
+
+  ul {
+    color: @gray;
+  }
+
+  > span[data-type="media"] {
+    display: block;
+    margin: 1rem 0;
+  }
+}
+.style(example) { .style(note) }
+.title(example) { .title(note) }
+.body(example) { .body(note) }
 }
 
 // TODO refactor this
 h1.example-title .text {
   padding-left: 1rem;
 }
-// Skeleton for constructing the blockish elements
-// This contains all the selectors for the styling
-
-// Helper mixin for expanding all the selectors
-.make-block(@type) {
-
-  // Add the label to the title element (if one exists) or to the blockish element
-  .place-label(@type; @label-type) {
-    // No title exists so style the blockish::before and put the label there
-    &:not(.ui-has-child-title) .example-title {
-      #blockish>.title(@type);
-      .format-label(@type; @label-type; false);
-    }
-  }
-
-}
-
 
 .exercise-number() {
   font-weight: bold;
   text-decoration: none;
 }
 
-> :not(.os-eoc):not(.os-eob) [data-type="exercise"],
-> :not(.os-eoc):not(.os-eob) .exercise {
+[data-type="note"],
+.note     { .make-block(note); }
+[data-type="example"],
+.example  { .make-block(example); }
+[data-type="abstract"],
+.abstract {
+  .make-block(note);
+  color: @gray;
+}
+[data-type="problem"],
+[data-type="solution"],
+.problem,
+.solution {
+  padding: 0;
+}
+[data-type="solution"],
+.solution {
+  border-top: 0.1rem solid @gray-lighter;
 
-  .make-block(exercise);
-  .mixin-exercise();
-
+  section p,
+  section ul,
+  section ol,
+  section .os-table {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 
-//
 // Tables
 // --------------------------------------------------
 .os-table {
+  margin: @line-height-computed 0;
+  table {
+     margin: 0;
+  }
   .os-caption-container {
+    padding: 8px;
+    border-top: 0.1rem solid @gray-lighter;
+
     .os-title-label,
     .os-number {
       font-weight: bold;
