@@ -25,8 +25,8 @@
     "select2": "3.5.4",
     "babel-polyfill": "^0.0.1",
     "l20n": "https://github.com/katalysteducation/l20n.js.git#v4.0.15",
-    "concept-coach": "openstax/tutor-js#coach-20170308.c",
-    "custom-event-polyfill": "^0.3.0"
+    "concept-coach": "openstax/tutor-js#coach-20170630.a",
+    "custom-event-polyfill": "0.3.0"
   },
   "devDependencies": {
     "chai": "3.2.0",
