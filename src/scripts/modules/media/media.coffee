@@ -176,6 +176,7 @@ define (require) ->
       mediaBodyView.on('render', ->
         scrollTo = if wasPinnedAtChange then pinnableTop + 1 else 0
         $(window).scrollTop(scrollTo)
+        tocView.generateAdditionTOC()
       )
 
     updateSummary: () ->

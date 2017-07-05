@@ -85,7 +85,6 @@ define (require) ->
       @$el.addClass('table-of-contents')
       @regions.toc.show new TocSectionView
         model: @model
-
       @regions.self.append new AddPopoverView
         model: @model
         owner: @$el.find('.add.btn')
@@ -188,3 +187,26 @@ define (require) ->
       # Reset styling for all draggable elements
       e.currentTarget.className = ''
       @model.trigger('moveNode')
+
+    generateAdditionTOC: () ->
+      slashIndex = window.location.href.lastIndexOf("/") + 1
+      realHref  = window.location.href.substring(slashIndex)
+      $location = $(".table-of-contents [href$='#{realHref}']")
+      $totalSubtitle = $("body").find("section [data-depth=1]")
+      idLength = $totalSubtitle.children('[data-type="title"]').length
+      if $location.children("li").length < idLength
+        $items = $.map($totalSubtitle, (node) ->
+        # Get the section id so we can link to it
+          id = $(node).attr('id')
+          # Get a copy of the section title to add to the link
+          $title = $(node).find('> [data-type="title"]').clone()
+          # Build the list item and link
+          $listItem = $("<li/>")
+          $titleContent=$title.text()
+          $link = $("<a class=subTitle href='##{id}'/></a>")
+          $link.html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#{$titleContent}")
+          $listItem.append($link)
+          # Return the list item
+          $listItem
+          )
+        $location.append($items)
