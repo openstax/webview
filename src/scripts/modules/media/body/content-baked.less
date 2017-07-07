@@ -141,7 +141,7 @@ figure:not([data-orient="vertical"]) {
     margin: 0 0 1rem;
   }
 
-  ul {
+  ul,ol {
     color: @gray;
   }
 
@@ -170,10 +170,7 @@ h1.example-title .text {
 [data-type="example"],
 .example  { .make-block(example); }
 [data-type="abstract"],
-.abstract {
-  .make-block(note);
-  color: @gray;
-}
+.abstract { .make-block(note); }
 [data-type="problem"],
 [data-type="solution"],
 .problem,
@@ -195,6 +192,21 @@ h1.example-title .text {
       padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
+  }
+}
+
+// Equations
+// --------------------------------------------------
+.equation,
+[data-type="equation"] {
+  position: relative;
+
+  .os-equation-number {
+    font-weight: bold;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
   }
 }
 
