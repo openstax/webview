@@ -19,7 +19,10 @@ define (require) ->
       if page isnt nextPage
         next = linksHelper.getPath('contents', {model: @model, page: nextPage})
         if next isnt undefined
+          urlScheme = window.location.protocol+"//"
           $('head').append("<link rel=\"next\" href=\"#{location.host}#{next}\" />") if next
+          $('link[rel="prerender"]').remove()
+          $('head').append("<link rel=\"prerender\" href=\"#{urlScheme}#{location.host}#{next}\" />") if next
 
       $('link[rel="prev"]').remove()
       if page isnt previousPage
