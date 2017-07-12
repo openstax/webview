@@ -136,8 +136,9 @@ define (require) ->
           $temp.children('[data-type="abstract"]').remove()
 
           # Wrap title and content elements in header and section elements, respectively
-          $temp.find('.example, .exercise, .note,
-                    [data-type="example"], [data-type="exercise"], [data-type="note"]').each (index, el) ->
+          $temp.find('.example, .exercise, .note, .abstract,
+                    [data-type="example"], [data-type="exercise"],
+                    [data-type="note"], [data-type="abstract"]').each (index, el) ->
             $el = $(el)
             $contents = $el.contents().filter (i, node) ->
               return !$(node).is('.title, [data-type="title"], .os-title')
