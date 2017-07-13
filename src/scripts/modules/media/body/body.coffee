@@ -124,7 +124,7 @@ define (require) ->
           # Add an attribute marking that this is collated
           # TODO: Move this into the handlebars template
           isCollated = @model.asPage().isCollated()
-          $temp.find('#content').attr('data-is-baked', isCollated)
+          $('#main-content').attr('data-is-baked', isCollated)
 
           if $temp.find('.os-interactive-link').length
             @model.set('sims', true)
