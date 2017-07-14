@@ -449,8 +449,7 @@ define (require) ->
           @fragmentReloaded = true
 
           hash = window.location.hash
-          window.location.hash = ''
-          window.location.hash = hash
+          window.location.replace(hash)
 
       $target = $(window.location.hash)
       if $target.prop('tagName')?.toLowerCase() is 'iframe'
