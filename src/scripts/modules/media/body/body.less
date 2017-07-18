@@ -37,11 +37,6 @@
 
   .publishing();
 
-  // Import the content styling from a separate file so it can be included in the editing code
-  > #content {
-    @import 'content.less';
-  }
-
   cnx-pi {
     display: none;
   }
@@ -75,6 +70,19 @@ body {
     a {
       text-decoration: none;
     }
+  }
+}
+
+// Import the content styling from a separate file so it can be included in the editing code
+[data-is-baked="true"] {
+  .media-body > #content {
+    @import 'content-baked';
+  }
+}
+
+[data-is-baked="false"] {
+  .media-body > #content {
+    @import 'content-raw';
   }
 }
 
