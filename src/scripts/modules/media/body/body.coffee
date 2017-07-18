@@ -69,7 +69,8 @@ define (require) ->
       currentRoute = Backbone.history.getFragment()
       canonicalPath = linksHelper.getPath('contents', {model: @model, page: pageId}, []) + window.location.hash
       if (canonicalPath isnt "/#{currentRoute}")
-        router.navigate(canonicalPath, {replace: true})
+        # replace previous URL with the canonical path
+        history.replaceState({}, @model.get('title'), canonicalPath)
 
     updateTeacher: ($temp = @$el) ->
       $els = $temp.find('.os-teacher')
@@ -81,7 +82,8 @@ define (require) ->
 
     goToPage: (pageNumber, href) ->
       @model.setPage(pageNumber)
-      router.navigate href, {trigger: false}, => @parent.parent.parent.trackAnalytics()
+
+      router.navigate href, {trigger: true, replace: false}, => @parent.parent.parent.trackAnalytics()
 
     getCoach: ->
       moduleUUID = @model.getUuid()?.split('?')[0]
@@ -440,20 +442,21 @@ define (require) ->
         @jaxing = false
         @processCoachMath?()
 
-      # Update the hash fragment after the content has loaded
-      # to force the browser window to find the intended content
+      # Clear and replace the hash fragment after the content has loaded
+      # to force the browser window to find the intended content (as a side effect)
       jumpToHash = () =>
         if currentPage.get('loaded') and not @fragmentReloaded and window.location.hash
           @fragmentReloaded = true
+
           hash = window.location.hash
-          window.location.hash = ''
-          window.location.hash = hash
+          window.location.replace(hash)
 
       $target = $(window.location.hash)
       if $target.prop('tagName')?.toLowerCase() is 'iframe'
         $target.on('load', jumpToHash)
       else
         jumpToHash()
+
 
     changePage: (e) ->
       # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab
