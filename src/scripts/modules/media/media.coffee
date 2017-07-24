@@ -94,10 +94,23 @@ define (require) ->
       mainPage.regions.main.append(footerNav)
       footerNav.$el.addClass('footer-nav')
       @mainContent = windowWithSidebar.regions.main
-
       $pinnable = @regions.pinnable.$el
       pinnableTop = $pinnable.offset().top
       $toc = tocView.$el
+      
+      tocModel = tocView.model
+      @listenTo(tocModel, 'add:contents change:contents', ->
+        mediaBodyView.on('render', ->
+          $totalSubtitle = $("body").find("section [data-depth=1]")
+          subTable=$.map($totalSubtitle, (node) ->
+            subTitles=$(node).find('> [data-type="title"]').clone().text()
+            subIds="#" + $(node).attr("id")
+            return {text:subTitles,id:subIds}
+          )
+          tocModel.get('contents').models[1].attributes.contents.models[1].set({subTable: subTable})
+        )
+      )
+
       isPinned = false
       setTocHeight = ->
         tocTop = $pinnable.height()
@@ -176,7 +189,6 @@ define (require) ->
       mediaBodyView.on('render', ->
         scrollTo = if wasPinnedAtChange then pinnableTop + 1 else 0
         $(window).scrollTop(scrollTo)
-        tocView.generateAdditionTOC()
       )
 
     updateSummary: () ->

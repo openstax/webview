@@ -5,6 +5,11 @@
         {{#if chapter}}<span class="chapter-number">{{chapter}}</span>{{/if}}
         <span class="title{{#if active}} active{{/if}}" data-depth="{{depth}}">
           {{{title}}}
+          {{#if active}}
+          {{#each subTable}}
+            <li><a href={{this.id}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{this.text}}</a></li>
+          {{/each}}
+          {{/if}}
         </span>
         {{#if searchResult}}
           <div class="snippet">
