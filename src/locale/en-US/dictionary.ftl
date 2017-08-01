@@ -730,7 +730,7 @@ textbook-view-textbook-attribute-header = How to Reuse &amp; Attribute This Cont
 
 textbook-view-textbook-content-produced =
   | Textbook content produced by <span>{ TAKE(50, $authors) }</span>
-  | is licensed under a <a href="{ $url }">{ $title }</a> license.
+  | is licensed under a <a href="{ $url }">{ $title }</a>International License.
 
 textbook-view-attribution-p-1 =
   | Under this license, any user of this textbook or the textbook contents herein must provide proper attribution
@@ -738,18 +738,19 @@ textbook-view-attribution-p-1 =
 
 textbook-view-attribution-p-2-strong =
   | The OpenStax name, OpenStax logo, OpenStax book covers,
-  | OpenStax CNX name, and OpenStax CNX logo are not subject to the creative commons license
+  | OpenStax CNX name, OpenStax CNX logo, OpenStax Tutor name, OpenStax Tutor logo, Rice University name
+  | and Rice University logo are not subject to the creative commons license
   | and may not be reproduced without the prior and express written consent of Rice University.
 
 textbook-view-attribution-p-2-span =
   | For questions regarding this license, please contact <a href="{ $url }">{ $title }</a>.
 
 textbook-view-attribution-li-1 =
-  | If you use this textbook as a bibliographic reference, then you should cite it as follows:
+  | If you use this textbook as a bibliographic reference, then you should include the following link in your citation:
 
 textbook-view-attribution-li-2-title =
-  | If you redistribute this textbook in a print format,
-  | then you must include on every physical page the following attribution:
+  | If you redistribute this textbook in a digital or print format,
+  | then you must include on every page the following attribution:
 
 textbook-view-attribution-li-2-attribution = "Download for free at { $url }."
 
