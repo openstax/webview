@@ -97,17 +97,28 @@ define (require) ->
       $pinnable = @regions.pinnable.$el
       pinnableTop = $pinnable.offset().top
       $toc = tocView.$el
-      
+      #The following codes are used to add addtional table of contents by changing the model
       tocModel = tocView.model
       @listenTo(tocModel, 'add:contents change:contents', ->
         mediaBodyView.on('render', ->
+          #check if the chapter attribute is undefined or not because the view will render several times
+          if mediaBodyView.getModel().toJSON().book.attributes.currentPage.attributes.chapter is undefined
+            return
+          getChapternumber=()->
+            return mediaBodyView.getModel().toJSON().book.attributes.currentPage.attributes.chapter
+          #chapterNumber corresponds to the number of chapter(e.g. Chapter 1.1)
+          chapterNumber=getChapternumber()
+          chapterIndex=Number(chapterNumber.split(".")[0])
+          sectionIndex=Number(chapterNumber.split(".")[1])
           $totalSubtitle = $("body").find("section [data-depth=1]")
           subTable=$.map($totalSubtitle, (node) ->
             subTitles=$(node).find('> [data-type="title"]').clone().text()
             subIds="#" + $(node).attr("id")
             return {text:subTitles,id:subIds}
           )
-          tocModel.get('contents').models[1].attributes.contents.models[1].set({subTable: subTable})
+          #chapterIndex and sectionIndex correspond to indexes for each page/chapter in models
+          tocModel.get('contents').models[chapterIndex].attributes.contents.models[sectionIndex]\
+            .set({subTable: subTable})
         )
       )
 

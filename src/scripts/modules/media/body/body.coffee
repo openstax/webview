@@ -189,7 +189,6 @@ define (require) ->
             $temp.find('a:not([data-type=footnote-number]):not([href^="#"])').each (i, el) =>
               $el = $(el)
               href = $el.attr('href')
-
               [href, fragment] = href.split('#')
               page = @model.getPage(href.substr(10))
               fragment = fragment and "##{fragment}" or ''
