@@ -104,7 +104,7 @@ define (require) ->
           #check if the chapter attribute is undefined or not because the view will render several times
           if mediaBodyView.getModel().toJSON().book.attributes.currentPage.attributes.chapter is undefined
             return
-          getChapternumber=()->
+          getChapternumber= () ->
             return mediaBodyView.getModel().toJSON().book.attributes.currentPage.attributes.chapter
           #chapterNumber corresponds to the number of chapter(e.g. Chapter 1.1)
           chapterNumber=getChapternumber()
