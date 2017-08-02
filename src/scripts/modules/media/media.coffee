@@ -67,9 +67,11 @@ define (require) ->
 
     triggerHashChange: (e) ->
       Backbone.trigger('window:hashChange')
+      href = $(e.currentTarget).attr('href')
+
       e.preventDefault()
-      $elHash = $(e.currentTarget).attr('href').split("#")[1]
-      history.pushState($(e.currentTarget).attr('href'), @model.get('title'), $(e.currentTarget).attr('href'))
+      $elHash = href.split("#")[1]
+      history.pushState(href, @model.get('title'), href)
 
     onRender: () =>
       @regions.media.append(new MediaEndorsedView({model: @model}))
