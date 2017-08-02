@@ -449,7 +449,7 @@ define (require) ->
           hash = window.location.hash
           $pinnable = $('.pinnable')
           obscured = $pinnable.height() + 50
-          window.scroll(0, $(hash).offset().top - obscured);
+          window.scroll(0, $(hash).offset().top - obscured)
 
       $target = $(window.location.hash)
       if $target.prop('tagName')?.toLowerCase() is 'iframe'

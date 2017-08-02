@@ -66,11 +66,9 @@ define (require) ->
       @listenTo(@model, 'change:abstract', @updateSummary)
 
     triggerHashChange: (e) ->
-      e.preventDefault();
+      Backbone.trigger('window:hashChange')
+      e.preventDefault()
       $elHash = $(e.currentTarget).attr('href').split("#")[1]
-      $pinnable = @regions.pinnable.$el
-      obscured = $pinnable.height() + 50
-      window.scroll(0, $("#" + $elHash).offset().top - obscured);
       history.pushState($(e.currentTarget).attr('href'), @model.get('title'), $(e.currentTarget).attr('href'))
 
     onRender: () =>
@@ -116,9 +114,11 @@ define (require) ->
       adjustHashTop = ->
         handleHeaderViewPinning()
         if isPinned
-          obscured = $pinnable.height()
+          obscured = $pinnable.height() + 50
           top = $(window.location.hash)?.position()?.top
           $(window).scrollTop(top - obscured) if top
+
+      Backbone.on('window:hashChange', _.debounce(adjustHashTop, 150))
 
       # closing is triggered in 'onBeforeClose'
       @on('closing', ->
