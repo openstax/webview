@@ -66,7 +66,12 @@ define (require) ->
       @listenTo(@model, 'change:abstract', @updateSummary)
 
     triggerHashChange: (e) ->
-      Backbone.trigger('window:hashChange')
+      e.preventDefault();
+      $elHash = $(e.currentTarget).attr('href').split("#")[1]
+      $pinnable = @regions.pinnable.$el
+      obscured = $pinnable.height() + 50
+      window.scroll(0, $("#" + $elHash).offset().top - obscured);
+      history.pushState($(e.currentTarget).attr('href'), @model.get('title'), $(e.currentTarget).attr('href'))
 
     onRender: () =>
       @regions.media.append(new MediaEndorsedView({model: @model}))
@@ -114,8 +119,6 @@ define (require) ->
           obscured = $pinnable.height()
           top = $(window.location.hash)?.position()?.top
           $(window).scrollTop(top - obscured) if top
-
-      Backbone.on('window:hashChange', _.debounce(adjustHashTop, 150))
 
       # closing is triggered in 'onBeforeClose'
       @on('closing', ->
