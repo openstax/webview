@@ -11,17 +11,19 @@
     max-width: @max-viewport-width;
     z-index: 1;
   }
+
   .table-of-contents{
     overflow-y: auto;
     overflow-x: hidden;
     max-width: 315px;
     width: 100%;
+    a.additionTOC{
+      display: inline-block;
+      text-indent: 20px;
+    }
     &.pinned {
       position: fixed;
-      a.additionTOC{
-        display: inline-block;
-        text-indent: 20px;
-      }
+
     }
   }
 }

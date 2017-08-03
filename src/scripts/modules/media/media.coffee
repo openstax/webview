@@ -118,7 +118,8 @@ define (require) ->
           )
           #chapterIndex and sectionIndex correspond to indexes for each page/chapter in models
           tocModel.get('contents').models[chapterIndex].attributes.contents.models[sectionIndex]\
-            .set({subTable: subTable})
+          .set({subTable: subTable})
+          tocView.render()
         )
       )
 
