@@ -117,8 +117,14 @@ define (require) ->
       # Polyfill for location.origin since IE doesn't support it
       port = if location.port then ":#{location.port}" else ''
       location.origin = location.origin or "#{location.protocol}//#{location.hostname}#{port}"
-      
+
     stripTags: (html) ->
       temp = document.createElement("div")
       temp.innerHTML = html
       return temp.textContent
+
+    offsetHash: () ->
+      $pinnable = $('.pinnable')
+      obscured = $pinnable.height() + 100
+      top = $(window.location.hash)?.position()?.top
+      $(window).scrollTop(top - obscured) if top

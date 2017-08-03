@@ -67,10 +67,9 @@ define (require) ->
 
     triggerHashChange: (e) ->
       Backbone.trigger('window:hashChange')
-      href = $(e.currentTarget).attr('href')
-
       e.preventDefault()
-      $elHash = href.split("#")[1]
+      e.stopPropagation()
+      href = $(e.currentTarget).attr('href')
       history.pushState(href, @model.get('title'), href)
 
     onRender: () =>
@@ -115,10 +114,7 @@ define (require) ->
 
       adjustHashTop = ->
         handleHeaderViewPinning()
-        if isPinned
-          obscured = $pinnable.height() + 50
-          top = $(window.location.hash)?.position()?.top
-          $(window).scrollTop(top - obscured) if top
+        linksHelper.offsetHash()
 
       Backbone.on('window:hashChange', _.debounce(adjustHashTop, 150))
 
