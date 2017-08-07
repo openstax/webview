@@ -743,27 +743,26 @@ textbook-view-textbook-attribute-header = Zasady korzystania z tego zasobu
 
 textbook-view-textbook-content-produced =
   | Treść tej książki została stworzona przez <span>{ TAKE(50, $authors) }</span>
-  | i jest udostępniona na licencji <a href="{ $url }">{ $title }</a>.
+  | i jest udostępniona na licencji <a href="{ $url }">{ $title } (Międzynarodowa)</a>.
 
 textbook-view-attribution-p-1 =
   | Na mocy tej licencji, każdy użytkownik tej książki lub jej fragmentów zobowiązany jest do uznania autorstwa
   | w następujący sposób:
 
 textbook-view-attribution-p-2-strong =
-  | Nazwa OpenStax, logo OpenStax, okładki książek OpenStax,
-  | nazwa OpenStax CNX i logo OpenStax CNX nie podlegają licencji Creative Commons
+  | Nazwa OpenStax CNX, logo OpenStax CNX, nazwa OpenStax Tutor, logo OpenStax Tutor, nazwa Rice University
+  | i logo Rice University nie podlegają licencji Creative Commons
   | i wykorzystywanie ich jest dozwolone tylko na mocy uprzedniego, pisemnego upoważnienia ze strony Rice University.
 
 textbook-view-attribution-p-2-span =
   | Jeśli masz jakiekolwiek pytania odnośnie tej licencji, skontaktuj się z <a href="{ $url }">{ $title }</a>.
 
 textbook-view-attribution-li-1 =
-  | Jeśli chcesz umieścić odnośnik do tej książki w bibliografii,
-  | zrób to zgodnie z poniższym przykładem:
+  | Jeśli chcesz umieścić tę książkę w swojej bibliografii, dodaj do wpisu poniższy odnośnik:
 
 textbook-view-attribution-li-2-title =
-  | Jeśli rozpowszechniasz tę książkę w formie drukowanej,
-  | jesteś zobowiązany do umieszczenia na każdej jej kartce następującej informacji:
+  | Jeśli rozpowszechniasz tę książkę w formie cyfrowej lub drukowanej,
+  | jesteś zobowiązany do umieszczenia na każdej jej stronie następującej informacji:
 
 textbook-view-attribution-li-2-attribution = "Pobierz za darmo z { $url }."
 
