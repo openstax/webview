@@ -730,7 +730,7 @@ textbook-view-textbook-attribute-header = How to Reuse &amp; Attribute This Cont
 
 textbook-view-textbook-content-produced =
   | Textbook content produced by <span>{ TAKE(50, $authors) }</span>
-  | is licensed under a <a href="{ $url }">{ $title }</a>International License.
+  | is licensed under a <a href="{ $url }">{ $title }</a>.
 
 textbook-view-attribution-p-1 =
   | Under this license, any user of this textbook or the textbook contents herein must provide proper attribution
