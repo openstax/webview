@@ -83,7 +83,7 @@ define (require) ->
     goToPage: (pageNumber, href) ->
       @model.setPage(pageNumber)
 
-      router.navigate href, {replace: false}, => @parent.parent.parent.trackAnalytics()
+      router.navigate(href, {trigger: true, replace: false}, => @parent.parent.parent.trackAnalytics())
 
     getCoach: ->
       moduleUUID = @model.getUuid()?.split('?')[0]
