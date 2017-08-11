@@ -70,7 +70,7 @@ define (require) ->
       canonicalPath = linksHelper.getPath('contents', {model: @model, page: pageId}, []) + window.location.hash
       if (canonicalPath isnt "/#{currentRoute}")
         # replace previous URL with the canonical path
-        history.replaceState({}, @model.get('title'), canonicalPath)
+        router.navigate(canonicalPath, {replace: true})
 
     updateTeacher: ($temp = @$el) ->
       $els = $temp.find('.os-teacher')
@@ -83,7 +83,7 @@ define (require) ->
     goToPage: (pageNumber, href) ->
       @model.setPage(pageNumber)
 
-      router.navigate href, {trigger: true, replace: false}, => @parent.parent.parent.trackAnalytics()
+      router.navigate(href, {trigger: true, replace: false}, => @parent.parent.parent.trackAnalytics())
 
     getCoach: ->
       moduleUUID = @model.getUuid()?.split('?')[0]
@@ -445,11 +445,8 @@ define (require) ->
       # Clear and replace the hash fragment after the content has loaded
       # to force the browser window to find the intended content (as a side effect)
       jumpToHash = () =>
-        if currentPage.get('loaded') and not @fragmentReloaded and window.location.hash
-          @fragmentReloaded = true
-
-          hash = window.location.hash
-          window.location.replace(hash)
+        if currentPage.get('loaded') and window.location.hash
+          linksHelper.offsetHash()
 
       $target = $(window.location.hash)
       if $target.prop('tagName')?.toLowerCase() is 'iframe'

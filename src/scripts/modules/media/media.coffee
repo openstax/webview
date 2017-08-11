@@ -67,6 +67,10 @@ define (require) ->
 
     triggerHashChange: (e) ->
       Backbone.trigger('window:hashChange')
+      e.preventDefault()
+      e.stopPropagation()
+      href = $(e.currentTarget).attr('href')
+      history.pushState(href, @model.get('title'), href)
 
     onRender: () =>
       @regions.media.append(new MediaEndorsedView({model: @model}))
@@ -110,10 +114,7 @@ define (require) ->
 
       adjustHashTop = ->
         handleHeaderViewPinning()
-        if isPinned
-          obscured = $pinnable.height()
-          top = $(window.location.hash)?.position()?.top
-          $(window).scrollTop(top - obscured) if top
+        linksHelper.offsetHash()
 
       Backbone.on('window:hashChange', _.debounce(adjustHashTop, 150))
 
