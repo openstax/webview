@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+temp_file="./tmp.html"
+
+for filename in $(find ./src -name "*-template.html"); do
+
+  echo ${filename}
+
+  if [[ ! $(grep "<!-- TEMPLATE_START" ${filename}) ]]; then
+    echo "<!-- TEMPLATE_START: ${filename} -->" > ${temp_file}
+    cat ${filename} >> ${temp_file}
+    echo "<!-- TEMPLATE_END: ${filename} -->" >> ${temp_file}
+
+    mv ${temp_file} ${filename}
+  else
+    echo "Skipping ${filename} because it already has the special comments"
+  fi
+
+done
