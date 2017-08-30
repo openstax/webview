@@ -4,6 +4,39 @@
 @import "./mixins-app.less";
 @import "./aloha-hacks.less"; // Aloha Hacks
 
+
+template-wrapper:not(:empty) {
+  display: block;
+
+  border-left: 1px solid red;
+  border-radius: 10px;
+  margin-left: 1em;
+
+  &::before {
+    content: attr(filename);
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: bold;
+  }
+}
+
+template-following {
+  + * {
+    border-left: 1px solid red;
+    border-radius: 10px;
+    margin-left: 1em;
+  }
+
+  &::before {
+    display: block;
+
+    content: attr(filename);
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: bold;
+  }
+}
+
 // Debugging: mark elements that have not been converted yet
 // FIXME: remove this once all content is converted
 .not-converted-yet {

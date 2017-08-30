@@ -1,21 +1,24 @@
 #!/bin/bash
 
-set -e
+# set -e
 
 temp_file="./tmp.html"
 
-for filename in $(find ./src -name "*-template.html"); do
+for filename in $(cd ./src/scripts && find . -name "*.html"); do
 
   echo ${filename}
 
-  if [[ ! $(grep "<!-- TEMPLATE_START" ${filename}) ]]; then
-    echo "<!-- TEMPLATE_START: ${filename} -->" > ${temp_file}
-    cat ${filename} >> ${temp_file}
-    echo "<!-- TEMPLATE_END: ${filename} -->" >> ${temp_file}
+  xmllint ${filename} > /dev/null
+  if [[ $? == 0 ]]; then
 
-    mv ${temp_file} ${filename}
+    echo "<template-following filename=\"${filename}\"/>" > ${temp_file}
+    cat ./src/scripts/${filename} >> ${temp_file}
   else
-    echo "Skipping ${filename} because it already has the special comments"
+    echo "<template-wrapper filename=\"${filename}\">" > ${temp_file}
+    cat ./src/scripts/${filename} >> ${temp_file}
+    echo "</template-wrapper>" >> ${temp_file}
   fi
+
+  mv ${temp_file} ./src/scripts/${filename}
 
 done
