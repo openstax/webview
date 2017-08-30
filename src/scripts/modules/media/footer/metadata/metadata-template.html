@@ -150,3 +150,38 @@
     {{~/if}}
     </dd>
 </dl>
+
+
+<pre>
+id: {{id}}
+version: {{version}}
+legacy_id: {{legacy_id}}
+legacy_version: {{legacy_version}}
+created: {{created}}
+shortId: {{shortId}}
+stateid: {{stateid}}
+</pre>
+
+<p>Links</p>
+
+<ul>
+  <li>Source: <a href="http://archive.cnx.org/contents/{{id}}.html">XHTML</a>,
+    <a href="http://archive.cnx.org/contents/{{id}}.json">JSON</a>,
+    <a href="http://legacy.cnx.org/content/{{legacy_id}}/latest/source">CNXML</a>
+  </li>
+  <li><a href="http://archive.cnx.org/extras/{{id}}">Extra Details (JSON)</a></li>
+  <li><a href="http://legacy.cnx.org/content/{{legacy_id}}/latest/content_info#cnx_downloads_header">Legacy Downloads</a></li>
+  <li><a href="http://legacy.cnx.org/content/{{legacy_id}}/latest/enqueue">Enqueue PDF</a></li>
+  <li><a href="http://legacy.cnx.org/content/{{legacy_id}}/latest/">Legacy Page</a></li>
+  <li><a href="http://legacy.cnx.org/content/{{legacy_id}}/latest/content_info">Legacy Metadata</a></li>
+  <li><a href="http://legacy.cnx.org/content/{{legacy_id}}/latest/query_ptool">PDF Status</a></li>
+</ul>
+
+<p>Book-only Links</p>
+<ul>
+  <li><a href="http://archive.cnx.org/exports/{{id}}@{{version}}.pdf">Download PDF</a></li>
+  <li><a href="http://legacy.cnx.org/content/{{legacy_id}}/latest/module_export?format=zip">Complete zip</a></li>
+  <li><a href="http://legacy.cnx.org/content/{{legacy_id}}/latest/pdf">Legacy PDF</a></li>
+  <li><a href="http://legacy.cnx.org/content/{{legacy_id}}/latest/printinfo">PDF Info</a></li>
+  <li><a href="http://legacy.cnx.org/content/{{legacy_id}}/latest/collection_parameters">PDF Parameters</a></li>
+</ul>

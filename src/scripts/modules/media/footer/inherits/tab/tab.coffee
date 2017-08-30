@@ -11,6 +11,9 @@ define (require) ->
       model = model?.toJSON() or {}
       model.type = @model.get('mediaType')
 
+      # TODO: Inject the archive and legacy hostnames
+      # Maybe inject the book and the page into the model (as __page and __book) so the Spy Mode links will work
+
       return model or {}
 
     events:
