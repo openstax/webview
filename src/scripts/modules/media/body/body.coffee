@@ -229,7 +229,8 @@ define (require) ->
 
           # Add link tags if in dev mode (Skip the root content element)
           if devMode.isEnabled()
-            $temp.find('#content *[id]:not(a):not([data-type="problem"]):not([data-type="solution"]):not(dd):not(:has(> math))').each (i, el) ->
+            idSelector = '*[id]:not(a):not([data-type="problem"]):not([data-type="solution"]):not(dd):not(:has(>math))'
+            $temp.find('#content ' + idSelector).each (i, el) ->
               $el = $(el)
               elDesc = $el.attr('data-type') or el.tagName
               # skip math because MathJax will not render properly when it has a 'float:left;' sibling
@@ -237,7 +238,11 @@ define (require) ->
                 classNameInfo = " class:[#{$el.attr('class')}]"
               else
                 classNameInfo = ''
-              $el.prepend("<a data-dev='anchor' href='##{$el.attr('id')}' title='#{elDesc}'><span data-dev='desc'>#{elDesc}</span> <i class='fa fa-link'></i><span data-dev='class-info'>#{classNameInfo}</span></a>")
+              $el.prepend("""<a data-dev='anchor' href='##{$el.attr('id')}'>
+                  <span data-dev='desc'>#{elDesc}</span>
+                  <i class='fa fa-link'></i>
+                  <span data-dev='class-info'>#{classNameInfo}</span>
+                </a>""")
 
           # Show Teacher's Edition content if appropriate
           @updateTeacher($temp)
@@ -457,7 +462,7 @@ define (require) ->
 
       # Clear and replace the hash fragment after the content has loaded
       # to force the browser window to find the intended content (as a side effect)
-      jumpToHash = () =>
+      jumpToHash = () ->
         if currentPage.get('loaded') and window.location.hash
           linksHelper.offsetHash()
 
