@@ -1,6 +1,7 @@
 define (require) ->
   session  = require('cs!session')
   settings = require('settings')
+  devMode = require('cs!../../configs/dev-mode')
   SiteStatusView = require('cs!./site-status/site-status')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./header-template')
@@ -12,6 +13,7 @@ define (require) ->
   return class HeaderView extends BaseView
     template: template
     templateHelpers: () -> {
+      devModeFlag: devMode.isEnabled()
       legacy: settings.legacy
       cnxSupport: settings.cnxSupport
       page: @page

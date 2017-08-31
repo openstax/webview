@@ -711,3 +711,28 @@ table {
     margin: 1rem 3rem;
   }
 }
+
+
+// Dev-mode styling
+* > [data-dev='anchor'] {
+  text-decoration: none !important;
+
+  // This method worked when it was just an icon, not when it contains the data-type
+  // float: left;
+  // padding-right: 4px;
+  // margin-left: -20px;
+  // line-height: 1;
+
+  position: relative;
+  display: inline-block;
+  left: -50px;
+  width: 0;
+  white-space: nowrap;
+}
+
+*:not(:hover) > [data-dev='anchor'] {
+  > [data-dev='desc'],
+  > i.fa-link {
+    opacity: .1;
+  }
+}
