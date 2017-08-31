@@ -12,8 +12,18 @@ define (require) ->
 
   if /dev-mode=true/.test(window.location.search)
     setEnabled(true)
+    # Clear it from the URL
+    if window.location.search is '?dev-mode=true'
+      window.location.search = ''
+    else
+      window.location.search = window.location.search.replace('dev-mode=true', '')
   else if /dev-mode=false/.test(window.location.search)
     setEnabled(false)
+    # Clear it from the URL
+    if window.location.search is '?dev-mode=false'
+      window.location.search = ''
+    else
+      window.location.search = window.location.search.replace('dev-mode=false', '')
 
   return {
     isEnabled
