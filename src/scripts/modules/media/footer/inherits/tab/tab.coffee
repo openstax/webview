@@ -1,4 +1,7 @@
 define (require) ->
+  _ = require('underscore')
+  settings = require('settings')
+  devMode = require('cs!configs/dev-mode')
   EditableView = require('cs!helpers/backbone/views/editable')
 
   return class FooterTabView extends EditableView
@@ -14,7 +17,7 @@ define (require) ->
       # TODO: Inject the archive and legacy hostnames
       # Maybe inject the book and the page into the model (as __page and __book) so the Spy Mode links will work
 
-      return model or {}
+      return _.extend({cnxarchive: settings.cnxarchive, legacy: settings.legacy, devModeFlag: devMode.isEnabled()}, model)
 
     events:
       'click > .book-page-toggle > .btn:not(.active)': 'toggleMedia'
