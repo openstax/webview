@@ -17,7 +17,10 @@ define (require) ->
       # TODO: Inject the archive and legacy hostnames
       # Maybe inject the book and the page into the model (as __page and __book) so the Spy Mode links will work
 
-      return _.extend({cnxarchive: settings.cnxarchive, legacy: settings.legacy, devModeFlag: devMode.isEnabled()}, model)
+      return _.extend({
+        cnxarchive: settings.cnxarchive
+        legacy: settings.legacy
+        devModeFlag: devMode.isEnabled()}, model)
 
     events:
       'click > .book-page-toggle > .btn:not(.active)': 'toggleMedia'
