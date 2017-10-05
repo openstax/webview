@@ -17,8 +17,8 @@ glob('./src/**/*.html', (err, filenames) => {
     }
 
     const contents = fs.readFileSync(filename)
-    const document = jsdom.jsdom(`<html><body>${contents}</body></html>`)
-    const $ = jquery(document.defaultView)
+    const dom = new jsdom.JSDOM(`<html><body>${contents}</body></html>`)
+    const $ = jquery(dom.window)
 
     // Find all the data-l10n-id attributes and look up to see if entries exist in all the languages
     $('[data-l10n-id]').each((index, el) => {
