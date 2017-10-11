@@ -1,5 +1,7 @@
 # Connexions [![Build Status](https://travis-ci.org/Connexions/webview.svg?branch=master)](https://travis-ci.org/Connexions/webview) [![dependency Status](https://david-dm.org/Connexions/webview.svg)](https://david-dm.org/Connexions/webview#info=dependencies) [![devDependency Status](https://david-dm.org/Connexions/webview/dev-status.svg)](https://david-dm.org/Connexions/webview#info=devDependencies)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Connexions/webview.svg)](https://greenkeeper.io/)
+
 Below are instructions for hosting and building the site and a layout of how the code is organized.
 
 CNX webview is designed to be run as a frontend for [cnx-archive](https://github.com/Connexions/cnx-archive).
