@@ -23,7 +23,7 @@ describe('handlebars in array helper tests', function () {
   });
 
   it('should perform the true function', function () {
-    Handlebars.helpers.inArray([1, 2, 3], 2, myOptions).should.equal('12/11/2012');
+    Handlebars.helpers.inArray([1, 2, 3], 2, myOptions).should.equal('December 11, 2012');
   });
   it('should perform the false function', function () {
     Handlebars.helpers.inArray([1, 2, 3], 10, myOptions).should.equal('Caroline');
@@ -36,6 +36,6 @@ describe('handlebars in array helper tests', function () {
     var myValue = function () {
       return 3;
     };
-    Handlebars.helpers.inArray(myArray, myValue, myOptions).should.equal('12/11/2012');
+    Handlebars.helpers.inArray(myArray, myValue, myOptions).should.equal('December 11, 2012');
   });
 });

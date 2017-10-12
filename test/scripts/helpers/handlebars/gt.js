@@ -23,7 +23,7 @@ describe('handlebar greater than helper tests', function () {
   });
 
   it('should perform the true function', function () {
-    Handlebars.helpers.gt(10, 2, myOptions).should.equal('12/11/2012');
+    Handlebars.helpers.gt(10, 2, myOptions).should.equal('December 11, 2012');
   });
   it('should perform the false function', function () {
     Handlebars.helpers.gt(2, 10, myOptions).should.equal('Caroline');

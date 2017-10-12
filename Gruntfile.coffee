@@ -293,7 +293,7 @@ module.exports = (grunt) ->
       options:
         reporter: 'Spec'
         run: false
-        log: false
+        log: true
         timeout: 15000
 
   # Dependencies
@@ -319,7 +319,7 @@ module.exports = (grunt) ->
 
     # write template to tests directory and run tests
     grunt.file.write(options.runner, template)
-    grunt.task.run('jshint', 'jsbeautifier', 'coffeelint', 'mocha')
+    grunt.task.run('jsbeautifier', 'mocha', 'jshint', 'coffeelint')
   # Aloha
   # -----
   grunt.registerTask 'aloha', [

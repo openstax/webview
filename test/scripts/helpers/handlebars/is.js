@@ -23,10 +23,10 @@ describe('handlebars is helper tests', function () {
   });
 
   it('should perform the true function', function () {
-    Handlebars.helpers.is(2, 2, myOptions).should.equal('12/11/2012');
-    Handlebars.helpers.is('test string', 'test string', myOptions).should.equal('12/11/2012');
+    Handlebars.helpers.is(2, 2, myOptions).should.equal('December 11, 2012');
+    Handlebars.helpers.is('test string', 'test string', myOptions).should.equal('December 11, 2012');
     var myDate = new Date();
-    Handlebars.helpers.is(myDate, myDate, myOptions).should.equal('12/11/2012');
+    Handlebars.helpers.is(myDate, myDate, myOptions).should.equal('December 11, 2012');
 
   });
   it('should perform the false function', function () {
