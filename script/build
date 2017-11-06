@@ -1,4 +1,7 @@
 #!/bin/bash
+cd "$(dirname "$0")/.." || exit 111
+source ./script/bootstrap || exit 111
 
->&2 echo "==> Building dist/"
-npm run-script dist || exit 1
+
+do_progress_quiet "Building dist files" \
+  npm run-script dist || exit 1

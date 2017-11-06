@@ -1,0 +1,16 @@
+#!/bin/bash
+cd "$(dirname "$0")/.." || exit 111
+
+dirs_to_remove=(
+  dist
+  node_modules
+  bower_components
+)
+
+for dir_name in "${dirs_to_remove[@]}"; do
+  if [[ -d "./${dir_name}/" ]]; then
+    rm -rf "./${dir_name}/" || exit 111
+  fi
+done
+
+echo "Done cleaning"
