@@ -30,7 +30,7 @@ yell() { >&2 _say "$0: ${c_red}$*${c_none}"; }
 die() {
   yell "$1"
   # shellcheck disable=SC2086
-  exit ${2:112} # Use the 2nd arg or 112 as the default
+  exit ${2:-112} # Use the 2nd arg or 112 as the default
 }
 try() { __NESTED_PROGRESS__="true" "$@" || die "${c_red}ERROR: could not run [$*]${c_none}" 112; }
 
