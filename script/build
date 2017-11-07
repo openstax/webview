@@ -4,4 +4,4 @@ source ./script/bootstrap || exit 111
 
 
 do_progress_quiet "Building dist files" \
-  npm run-script dist || exit 1
+  npm run-script dist

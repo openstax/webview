@@ -60,7 +60,7 @@ _quiet_ok() {
 }
 do_progress_quiet() {
   # Keep it loud when running in Travis or Jenkins
-  if [[ "${CI}" == "true" || "${JENKINS_URL}" != "" || "${TRACE}" || "${DEBUG}" || "${VERBOSE}" || "${__NESTED_PROGRESS__}" == "true" ]]; then
+  if [[ "${TRACE}" || "${DEBUG}" || "${VERBOSE}" || "${__NESTED_PROGRESS__}" == "true" ]]; then
     do_progress "$@"
   else
     _quiet_progress "$1"
