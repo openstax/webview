@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./script/bootstrap || exit 1
+source ./script/bootstrap || exit 1
 
 >&2 echo "==> Installing package dependencies"
 npm install || exit 1

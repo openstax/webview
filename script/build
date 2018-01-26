@@ -1,4 +1,6 @@
 #!/bin/bash
 
+source ./script/bootstrap || exit 1
+
 >&2 echo "==> Building dist/"
 npm run-script dist || exit 1
