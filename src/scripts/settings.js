@@ -16,8 +16,8 @@
 
       // Hostname and port for the cnx-authoring server
       cnxauthoring: {
-        host: 'cnx.org',
-        port: 80
+        host: location.hostname,
+        port: 8080
       },
 
       // Prefix to prepend to page titles

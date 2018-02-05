@@ -34,14 +34,11 @@ define (require) ->
     regions:
       media: '.media'
       pinnable: '.pinnable'
-      #editbar: '.editbar'
 
     summary:() -> @updateSummary()
     description: () -> @updateDescription()
 
     events:
-      #'keydown .media-title > .title input': 'checkKeySequence'
-      #'keyup .media-title > .title input': 'resetKeySequence'
       'click a[href*="#"]': 'triggerHashChange'
 
     initialize: (options) ->
@@ -60,7 +57,6 @@ define (require) ->
         @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage
           change:currentPage.loaded', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
-      #@listenTo(@model, 'change:editable', @toggleEditor)
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updateUrl)
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updatePageInfo)
       @listenTo(@model, 'change:abstract', @updateSummary)
@@ -239,36 +235,16 @@ define (require) ->
     # FIX: How much of loadEditor and closeEditor can be merged into the editbar?
     loadEditor: () ->
       return
-      #@editing = true
-
-      #require ['cs!./editbar/editbar'], (EditbarView) =>
-      #  @regions.editbar.show(new EditbarView({model: @model}))
-      #  height = @regions.editbar.$el.find('.navbar').outerHeight()
-      #  $('body').css('padding-top', height) # Don't cover the page header
-      #  window.scrollBy(0, height) # Prevent viewport from jumping
 
     closeEditor: () ->
       return
-      #@editing = false
-      #height = @regions.editbar.$el.find('.navbar').outerHeight()
-      #@regions.editbar.empty()
-      #$('body').css('padding-top', '0') # Remove added padding
-      #window.scrollBy(0, -height) # Prevent viewport from jumping
 
     onBeforeClose: () ->
-      #if @model.get('editable')
-      #  @model.set('editable', false, {silent: true})
-      #  @closeEditor()
       @trigger('closing')
 
     checkKeySequence: (e) ->
       return
-      #key[e.keyCode] = true
-      #ctrl+alt+shift+l+i
-      #if key[16] and key[17] and key[18] and key[73] and key[76]
-      #  if @model.get('canChangeLicense') or @model.get('derivedFrom') is null
-      #    $('#license-modal').modal('show')
 
     resetKeySequence: (e) ->
       return
-      #key[e.keyCode] = false
+

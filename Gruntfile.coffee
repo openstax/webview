@@ -3,23 +3,6 @@ module.exports = (grunt) ->
   fs = require('fs')
   pkg = require('./package.json')
 
-  ###
-  alohaBuildConfig = grunt.file.read('bower_components/aloha-editor/build/aloha/build-profile-with-oer.js')
-  alohaBuildConfig = eval(alohaBuildConfig)
-  alohaBuildConfig.appDir = 'bower_components/aloha-editor/src/'
-  alohaBuildConfig.baseUrl = 'lib/'
-  alohaBuildConfig.dir = 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output'
-  alohaBuildConfig.mainConfigFile = 'bower_components/aloha-editor/build/aloha/build-profile-with-oer.js'
-  alohaBuildConfig.wrap =
-    startFile: 'bower_components/aloha-editor/build/aloha/closure-start.frag'
-    endFile: 'bower_components/aloha-editor/build/aloha/closure-end.frag'
-  alohaBuildConfig.skipDirOptimize = true
-  alohaBuildConfig.optimize = "uglify2"
-  alohaBuildConfig.optimizeCss = "standard"
-  alohaBuildConfig.separateCSS = false
-  alohaBuildConfig.preserveLicenseComments = false
-  ###
-
   # Project configuration.
   grunt.initConfig
     pkg: pkg
@@ -27,14 +10,12 @@ module.exports = (grunt) ->
     # Development nginx server
     # ----
     # Start with `grunt nginx:start`
-    ###
     nginx:
       tasks: ['nginx']
       options:
         config: 'nginx.development.conf'
         prefix: './'
-    ###
-
+   
     # Lint
     # ----
 
@@ -154,20 +135,13 @@ module.exports = (grunt) ->
               'cs!pages/contents/contents'
               'cs!pages/search/search'
               'cs!pages/browse-content/browse-content'
-              #'cs!pages/workspace/workspace'
               'cs!pages/about/about'
               'cs!pages/tos/tos'
               'cs!pages/license/license'
               'cs!pages/donate/donate'
-              #'cs!pages/role-acceptance/role-acceptance'
 
               # FIX: edit modules should be loaded in separate modules
-              #'select2'
-              #'bootstrapPopover'
-              #'cs!modules/media/editbar/editbar'
               'cs!helpers/backbone/views/editable'
-
-              #'cs!configs/aloha'
             ]
             exclude: ['coffee-script', 'less/normalize']
             excludeShallow: ['settings']
@@ -183,9 +157,6 @@ module.exports = (grunt) ->
 
             done()
 
-      #aloha:
-      #  options: alohaBuildConfig
-
     # Target HTML
     targethtml:
       dist:
@@ -197,9 +168,6 @@ module.exports = (grunt) ->
       require:
         src: 'bower_components/requirejs/require.js'
         dest: 'dist/scripts/require.js'
-      #aloha:
-      #  src: 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha.js'
-      #  dest: 'dist/scripts/aloha.js'
       fonts:
         expand: true
         filter: 'isFile'
@@ -274,19 +242,6 @@ module.exports = (grunt) ->
           dest: 'dist/images/'
         }]
 
-    # String Replace (HACK to update aloha path)
-    ###
-    'string-replace':
-      dist:
-        options:
-          replacements: [{
-            pattern: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha'
-            replacement: 'aloha'
-          }]
-        files:
-          'dist/scripts/main.js': ['dist/scripts/main.js']
-    ###
-
     test:
       options:
         template: 'test/index.template.html'
@@ -328,16 +283,12 @@ module.exports = (grunt) ->
     grunt.task.run('jshint', 'jsbeautifier', 'coffeelint', 'mocha')
   # Aloha
   # -----
-  #grunt.registerTask 'aloha', [
-  #  'requirejs:aloha'
-  #]
 
   # Dist
   # -----
   grunt.registerTask 'dist', [
     'requirejs:compile'
     'copy'
-    #'string-replace'
     'targethtml:dist'
     'clean'
     'uglify:dist'
