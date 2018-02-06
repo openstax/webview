@@ -16,7 +16,7 @@
     <div class="title">
       <h2>
         {{#if chapter}}<span class="title-chapter">{{chapter}}</span>{{/if}}
-        {{{pageTitle}}}
+        {{#if chapter}}{{{pageTitle}}}{{/if}}
       </h2>
       {{#if currentPage.parent.id}}
         <span data-l10n-id="textbook-view-header-derived-from" data-l10n-args='{"url":"/contents/{{currentPage.parent.id}}@{{currentPage.parent.version}}","title":"{{stripTags currentPage.parent.title}}","authors": {{toJSON (mapField currentPage.parent.authors "fullname")}} }'>

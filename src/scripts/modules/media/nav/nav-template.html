@@ -7,11 +7,14 @@
            <span class="text" data-l10n-id="textbook-view-contents">Contents</span>
            <span class="fa fa-plus open-indicator"></span>
          </button>
+        {{#if book}}
         <div class="searchbar">
           <span class="fa fa-search"></span>
           <input class="find form-control" type="search" placeholder="Search this book" value="{{searchTerm}}" data-l10n-id="textbook-view-search-this-book"/>
         </div>
+        {{/if}}
       {{/unless}}
+      {{#if book}}
       <div class="media-navbar">
         <div class="book-nav" aria-busy="true">
           {{#if back}}
@@ -37,6 +40,24 @@
           {{/if}}
         </div>
       </div>
+      {{/if}}
     </div>
   </div>
+{{else}}
+
+
+   <div class="media-nav{{#is status 'publishing'}} publishing{{/is}}">
+     <div class="media-toolbar">
+       {{#unless _hideProgress}}
+         <button class="toggle btn" role="button">
+           <span class="fa fa-book"></span>
+            <span class="text" >Books This Page Is In</span>
+            <span class="fa fa-plus open-indicator"></span>
+          </button>
+       {{/unless}}
+     </div>
+   </div>
+
+
+
 {{/if}}

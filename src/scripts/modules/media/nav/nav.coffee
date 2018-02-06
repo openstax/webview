@@ -53,6 +53,7 @@ define (require) ->
       'click .next': 'nextPage'
       'click .back': 'previousPage'
       'click .toggle.btn': 'toggleContents'
+      # 'click .toggle.btn.books': 'toggleBooksList'
       'click .back-to-top > a': 'backToTop'
       'keydown .searchbar input': 'handleSearchInput'
       'click .searchbar > .clear-search': 'clearSearch'
@@ -71,6 +72,16 @@ define (require) ->
         for container in @model.get('currentPage')?.containers() ? []
           container.set('expanded', true)
       @updateToc()
+
+    toggleBooksList: (e) ->
+      @tocIsOpen = not @tocIsOpen
+      @.trigger('tocIsOpen', @tocIsOpen)
+      if @tocIsOpen
+        @closeAllContainers() unless @model.get('searchResults')
+        for container in @model.get('currentPage')?.containers() ? []
+          container.set('expanded', true)
+      @updateToc()
+
 
     updateToc: ->
       button = @$el.find('.toggle.btn')
