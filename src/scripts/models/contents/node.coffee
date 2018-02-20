@@ -99,6 +99,7 @@ define (require) ->
               @set('downloads', response.downloads)
               @set('isLatest', response.isLatest)
               @set('canPublish', response.canPublish)
+              @set('booksContainingPage', response.books)
             .fail () =>
               @set('downloads', [])
 

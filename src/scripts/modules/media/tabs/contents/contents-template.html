@@ -10,6 +10,48 @@
     </div>
     <div class="result-count" data-l10n-id="textbook-editor-contents-results-matches" data-l10n-args='{"hits":{{resultCount}} }'>{{resultCountText}}</div>
   {{/if}}
-  <div class="toc">
-    {{! TocView}}
-  </div>
+
+  {{#if isBook}}
+    <div class="toc">
+      {{! TocView}}
+    </div>
+
+  {{else}}
+    <div class="booksContaining">
+      <ul>
+        {{#each booksIn}}
+        <li >
+            <div>
+              <span class="section-wrapper name-wrapper" tabindex="0" aria-expanded="true">
+                <span class="title section">
+                  <b>{{title}}</b>
+                </span>
+              </span></div>
+          <ul data-expanded="true">
+            <li>  <div>
+            <span class="name-wrapper">
+              <a href="https://cnx.org/contents/{{this.ident_hash}}" data-page="2" data-trigger="false">
+                <span class="title active" data-depth="">
+                  Go to Book!
+                </span>
+              </a></span></div>
+        </li>
+
+            <li>  <div>
+            <span class="name-wrapper">
+                <span class="title" data-depth="">
+                  <b>Author(s): </b>
+                    {{authors}}
+                </span>
+            </span></div>
+        </li>
+
+        </ul>
+        </li>
+        {{/each}}
+
+      </ul>
+    </div>
+
+
+  {{/if}}

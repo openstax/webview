@@ -64,6 +64,14 @@ define (require) ->
           "#{hits} page#{s} matched"
       resultCount: () ->
         @model?.get('searchResults')?.total
+      isBook: () ->
+        if @model["attributes"]["page"]
+          "book"
+        else
+          null
+      booksIn: () ->
+        @model?.get('booksContainingPage')
+
     regions:
       toc: '.toc'
 
@@ -79,6 +87,7 @@ define (require) ->
       @listenTo(@model, 'change:contents add:contents remove:contents', _.debounce(@processPages, 250))
       @listenTo(@model, 'change:searchResults', @handleSearchResults)
       @listenTo(@model, 'change:currentPage', @loadHighlightedPage)
+      @listenTo(@model, 'change:booksContainingPage', @handleBooksContainingPage)
       @scrollPosition = 0
 
     onRender: () ->
@@ -188,3 +197,8 @@ define (require) ->
       # Reset styling for all draggable elements
       e.currentTarget.className = ''
       @model.trigger('moveNode')
+
+    handleBooksContainingPage: ->
+      console.log "got here"
+      console.log @model.get('booksContainingPage')
+      @render()
