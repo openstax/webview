@@ -76,7 +76,7 @@ cnxarchive: {
   * If not hosting the site from the domain root, update `root` in `src/scripts/settings.js`
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
 
-####Example nginx config
+#### Example nginx config
 
 You can, for example, point at the server hosting the `cnxarchive` you want to work with. This will point all the resources to the proper server.
 
