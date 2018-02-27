@@ -143,6 +143,8 @@ server {
     }
 }
 ```
+**Note: make sure to disable your browser's cache to view changes made to `nginx.development.conf`. For example, in Chrome's console, under the network tab, check "Disable Cache".
+
 
 
 
