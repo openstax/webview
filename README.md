@@ -50,6 +50,15 @@ From the root `webview` directory, run `./script/update`, which executes the fol
 1. Update settings in `src/scripts/settings.js` if necessary to, for example, include
 the correct Google Analytics ID, and to point to wherever `cnxarchive` is being hosted.
 
+For example, if the data you are working with is located on `devb.cnx.org`, you can change `src/scripts/settings.js` as follows:
+
+```
+cnxarchive: {
+  host: 'archive-devb.cnx.org',
+  port: 80
+},
+```
+
 2. Ensure resources are being served with the correct MIME type, including fonts.
   * Example nginx MIME types that may need to be added:
 
@@ -67,8 +76,9 @@ the correct Google Analytics ID, and to point to wherever `cnxarchive` is being 
   * If not hosting the site from the domain root, update `root` in `src/scripts/settings.js`
   * `scripts`, `styles`, and `images` routes should be rewritten to the correct paths
 
-<details>
-<summary>Example nginx config</summary>
+#### Example nginx config
+
+You can, for example, point at the server hosting the `cnxarchive` you want to work with. This will point all the resources to the proper server.
 
 ```
 server {
@@ -133,8 +143,9 @@ server {
     }
 }
 ```
+**Note:** make sure to disable your browser's cache to view changes made to `nginx.development.conf`. For example, in Chrome's console, under the network tab, check "Disable Cache".
 
-</details>
+
 
 
 # Directory Layout
