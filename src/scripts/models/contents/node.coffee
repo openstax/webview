@@ -100,6 +100,7 @@ define (require) ->
               @set('isLatest', response.isLatest)
               @set('canPublish', response.canPublish)
               @set('booksContainingPage', response.books)
+              console.log(response)
             .fail () =>
               @set('downloads', [])
 

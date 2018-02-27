@@ -24,24 +24,29 @@
             <div>
               <span class="section-wrapper name-wrapper" tabindex="0" aria-expanded="true">
                 <span class="title section">
+                  <a href="https://cnx.org/contents/{{this.ident_hash}}" data-page="2" data-trigger="false">
                   <b>{{title}}</b>
+                  </a>
                 </span>
               </span></div>
           <ul data-expanded="true">
-            <li>  <div>
-            <span class="name-wrapper">
-              <a href="https://cnx.org/contents/{{this.ident_hash}}" data-page="2" data-trigger="false">
-                <span class="title active" data-depth="">
-                  Go to Book!
-                </span>
-              </a></span></div>
-        </li>
 
-            <li>  <div>
+        <li>  <div>
             <span class="name-wrapper">
                 <span class="title" data-depth="">
                   <b>Author(s): </b>
-                    {{authors}}
+                    {{#authors}}
+                      {{formattedName}}
+                    {{/authors}}
+
+                </span>
+            </span></div>
+        </li>
+        <li>  <div>
+            <span class="name-wrapper">
+                <span class="title" data-depth="">
+                  <b>Revised: </b>
+                    {{revised}}
                 </span>
             </span></div>
         </li>
