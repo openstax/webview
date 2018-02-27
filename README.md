@@ -50,7 +50,7 @@ From the root `webview` directory, run `./script/update`, which executes the fol
 1. Update settings in `src/scripts/settings.js` if necessary to, for example, include
 the correct Google Analytics ID, and to point to wherever `cnxarchive` is being hosted.
 
-For example, if the data you are working with is located on `devb.cnx.org`, you can change `src/scripts/settings.js` as follow:
+For example, if the data you are working with is located on `devb.cnx.org`, you can change `src/scripts/settings.js` as follows:
 
 ```
 cnxarchive: {
@@ -143,7 +143,7 @@ server {
     }
 }
 ```
-**Note: make sure to disable your browser's cache to view changes made to `nginx.development.conf`. For example, in Chrome's console, under the network tab, check "Disable Cache".
+**Note:** make sure to disable your browser's cache to view changes made to `nginx.development.conf`. For example, in Chrome's console, under the network tab, check "Disable Cache".
 
 
 
