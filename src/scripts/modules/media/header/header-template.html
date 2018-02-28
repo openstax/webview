@@ -41,9 +41,9 @@
         <div class="downloads">
           {{#or hasDownloads buyLink}}
             {{#is mediaType 'application/vnd.org.cnx.collection'}}
-              <button class="btn" tabindex="0" type="submit" data-l10n-id="textbook-view-btn-get-this-book">Get This Book!</button>
+              <button class="btn" tabindex="0" type="submit" data-l10n-id="textbook-view-btn-get-this-book" aria-role="dialog">Get This Book!</button>
             {{else}}
-              <button class="btn" tabindex="0" type="submit" data-l10n-id="textbook-view-btn-get-this-page">Get This Page!</button>
+              <button class="btn" tabindex="0" type="submit" data-l10n-id="textbook-view-btn-get-this-page" aria-role="dialog">Get This Page!</button>
             {{/is}}
           {{/or}}
         </div>

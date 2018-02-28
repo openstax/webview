@@ -98,6 +98,8 @@ all-footer-licensing = Licensing
 
 all-footer-terms-of-use = Terms of Use
 
+all-footer-accessibility = Accessibility Statement
+
 all-footer-contact = Contact
 
 all-footer-connect = Connect
