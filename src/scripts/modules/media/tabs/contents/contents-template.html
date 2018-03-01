@@ -18,13 +18,17 @@
 
   {{else}}
     <div class="booksContaining">
+      <div>
+        <span class="title">This page is in {{numBooks}} {{pageId}} books</span>
+      </div>
+      <br>
       <ul>
         {{#each booksIn}}
         <li >
             <div>
               <span class="section-wrapper name-wrapper" tabindex="0" aria-expanded="true">
                 <span class="title section">
-                  <a href="https://cnx.org/contents/{{this.ident_hash}}" data-page="2" data-trigger="false">
+                  <a href="https://cnx.org/contents/{{this.shortId}}:{{../pageId}}" data-page="2" data-trigger="false">
                   <b>{{title}}</b>
                   </a>
                 </span>
@@ -53,6 +57,7 @@
 
         </ul>
         </li>
+        <br>
         {{/each}}
 
       </ul>

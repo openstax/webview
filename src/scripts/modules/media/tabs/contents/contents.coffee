@@ -71,6 +71,10 @@ define (require) ->
           null
       booksIn: () ->
         @model?.get('booksContainingPage')
+      numBooks:() ->
+        @model?.get('booksContainingPage')?.length
+      pageId:() ->
+        (window.location.href.split '/')[4]
 
     regions:
       toc: '.toc'
@@ -199,6 +203,4 @@ define (require) ->
       @model.trigger('moveNode')
 
     handleBooksContainingPage: ->
-      console.log "got here"
-      console.log @model.get('booksContainingPage')
       @render()
