@@ -19,7 +19,7 @@
   {{else}}
     <div class="booksContaining">
       <div>
-        <span class="title">This page is in {{numBooks}} {{pageId}} books</span>
+        <span class="title">This page is in {{numBooks}} books</span>
       </div>
       <br>
       <ul>
@@ -51,6 +51,15 @@
                 <span class="title" data-depth="">
                   <b>Revised: </b>
                     {{revised}}
+                </span>
+            </span></div>
+        </li>
+        <li>  <div>
+            <span class="name-wrapper">
+                <span class="title" data-depth="">
+                  <a href="https://cnx.org/contents/{{this.shortId}}" data-page="2" data-trigger="false">
+                    Go to Book
+                  </a>
                 </span>
             </span></div>
         </li>
