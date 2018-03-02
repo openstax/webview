@@ -28,7 +28,7 @@
             <div>
               <span class="section-wrapper name-wrapper" tabindex="0" aria-expanded="true">
                 <span class="title section">
-                  <a href="https://cnx.org/contents/{{this.shortId}}:{{../pageId}}" data-page="2" data-trigger="false">
+                  <a href="/contents/{{shortId}}:{{../pageId}}" data-page="2" data-trigger="false">
                   <b>{{title}}</b>
                   </a>
                 </span>
@@ -39,9 +39,7 @@
             <span class="name-wrapper">
                 <span class="title" data-depth="">
                   <b>Author(s): </b>
-                    {{#authors}}
-                      {{formattedName}}
-                    {{/authors}}
+                  {{#each authors}}{{fullname}}, {{/each}}
 
                 </span>
             </span></div>
@@ -57,7 +55,7 @@
         <li>  <div>
             <span class="name-wrapper">
                 <span class="title" data-depth="">
-                  <a href="https://cnx.org/contents/{{this.shortId}}" data-page="2" data-trigger="false">
+                  <a href="/contents/{{shortId}}" data-page="2" data-trigger="false">
                     Go to Book
                   </a>
                 </span>
