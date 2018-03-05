@@ -59,7 +59,7 @@ define (require) ->
 
       if model.isBook?()
         title = trim(model.get('currentPage')?.get('title'))
-        page = ":#{model.getPageNumber()}"
+        page = ":#{model.get('currentPage')?.getShortUuid()}"
 
       return "#{settings.root}contents/#{id}#{page}/#{title}"
 
