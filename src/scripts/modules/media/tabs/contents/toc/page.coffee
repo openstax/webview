@@ -58,7 +58,7 @@ define (require) ->
 
     trackNav: () ->
       tree = @collection.get('book') or @collection
-      analyticsID = tree.get('googleAnalytics')
-      analytics.send(analyticsID) if analyticsID
+      analyticsIDs = tree.get('googleAnalytics')
+      analytics.sendAnalytics(analyticsIDs) if analyticsIDs
 
     removeNode: () -> @content.removeNode(@model)
