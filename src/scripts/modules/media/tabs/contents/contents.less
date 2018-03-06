@@ -22,6 +22,18 @@
     border-bottom: solid 1px @gray-lightest;
   }
 
+  .max-wrap-two-lines {
+    // white-space: nowrap !important;
+    // overflow: hidden !important;
+    // text-overflow: ellipsis !important;
+    // max-width: 200px !important;
+    // max-height: 10px !important;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
   > .add {
     margin: 0.5rem 0 0.5rem @left-menu-indent;
   }

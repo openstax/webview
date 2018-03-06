@@ -26,43 +26,39 @@
         {{#each booksIn}}
         <li >
             <div>
-              <span class="section-wrapper name-wrapper" tabindex="0" aria-expanded="true">
-                <span class="title section">
+              <span class="section-wrapper name-wrapper" tabindex="0">
+                <span class="title section max-wrap-two-lines">
                   <a href="/contents/{{shortId}}:{{../pageId}}" data-page="2" data-trigger="false">
                   <b>{{title}}</b>
                   </a>
                 </span>
               </span></div>
           <ul data-expanded="true">
-
-        <li>  <div>
-            <span class="name-wrapper">
-                <span class="title" data-depth="">
-                  <b>Author(s): </b>
-                  {{#each authors}}{{fullname}}, {{/each}}
-
-                </span>
-            </span></div>
-        </li>
-        <li>  <div>
-            <span class="name-wrapper">
-                <span class="title" data-depth="">
-                  <b>Revised: </b>
-                    {{revised}}
-                </span>
-            </span></div>
-        </li>
-        <li>  <div>
-            <span class="name-wrapper">
-                <span class="title" data-depth="">
-                  <a href="/contents/{{shortId}}" data-page="2" data-trigger="false">
-                    Go to Book
-                  </a>
-                </span>
-            </span></div>
-        </li>
-
-        </ul>
+            <li>  <div>
+                <span class="name-wrapper">
+                    <span class="title">
+                      <b>Author(s): </b>
+                      {{#each authors}}{{fullname}}, {{/each}}
+                    </span>
+                </span></div>
+            </li>
+            <li>
+              <div><span class="name-wrapper">
+                  <span class="title">
+                    <b>Revised: </b>{{revised}}
+                  </span>
+              </span></div>
+            </li>
+            <li>
+              <div><span class="name-wrapper">
+                    <span class="title">
+                      <a href="/contents/{{shortId}}" data-page="2" data-trigger="false">
+                        Go to Book
+                      </a>
+                    </span>
+                </span></div>
+            </li>
+          </ul>
         </li>
         <br>
         {{/each}}
