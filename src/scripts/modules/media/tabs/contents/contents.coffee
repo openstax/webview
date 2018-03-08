@@ -203,4 +203,6 @@ define (require) ->
       @model.trigger('moveNode')
 
     handleBooksContainingPage: ->
+      for i in @model["attributes"]["booksContainingPage"]
+        i["revised"] = ((i["revised"] + "").split "T")[0]
       @render()
