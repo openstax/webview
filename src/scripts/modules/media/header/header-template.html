@@ -31,23 +31,15 @@
     </div>
 
     <div class="info">
-      {{#if conceptCoach}}
-        {{#if jumpToCC}}
-          <div class="jump-to-cc">
-            <a class="btn" href="#coach-wrapper" data-l10n-id="textbook-view-btn-jump-to-concept-coach">Jump to Concept Coach</a>
-          </div>
-        {{/if}}
-      {{else}}
-        <div class="downloads">
-          {{#or hasDownloads buyLink}}
-            {{#is mediaType 'application/vnd.org.cnx.collection'}}
-              <button class="btn" tabindex="0" type="submit" data-l10n-id="textbook-view-btn-get-this-book">Get This Book!</button>
-            {{else}}
-              <button class="btn" tabindex="0" type="submit" data-l10n-id="textbook-view-btn-get-this-page">Get This Page!</button>
-            {{/is}}
-          {{/or}}
-        </div>
-      {{/if}}
+      <div class="downloads">
+        {{#or hasDownloads buyLink}}
+          {{#is mediaType 'application/vnd.org.cnx.collection'}}
+            <button class="btn" tabindex="0" type="submit" data-l10n-id="textbook-view-btn-get-this-book">Get This Book!</button>
+          {{else}}
+            <button class="btn" tabindex="0" type="submit" data-l10n-id="textbook-view-btn-get-this-page">Get This Page!</button>
+          {{/is}}
+        {{/or}}
+      </div>
       {{#if currentPage.authors.length}}
         <span data-l10n-id="textbook-view-page-by" data-l10n-args='{"authors": {{toJSON (mapField currentPage.authors "fullname")}} }'>Page by:
           <span class="page-authors">

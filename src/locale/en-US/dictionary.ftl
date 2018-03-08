@@ -679,8 +679,6 @@ textbook-view-btn-create-copy = Create an Editable Copy
 
 textbook-view-btn-edit-page = Edit Page
 
-textbook-view-btn-jump-to-concept-coach = Jump to Concept Coach
-
 textbook-view-btn-get-this-book = Get This Book!
 
 textbook-view-btn-get-this-page = Get This Page!

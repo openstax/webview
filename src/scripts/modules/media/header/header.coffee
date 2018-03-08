@@ -29,13 +29,9 @@ define (require) ->
       downloads = @model.get('downloads')
       pageDownloads = currentPage?.get?('downloads')
       chapter = currentPage.chapter ? currentPage._parent?.get('chapter') ? ''
-      coach = @mediaBody.regions.coach.$el?.get(0)
-      isCoach = @isCoach()
       downloadable = downloads || pageDownloads
 
       return {
-        jumpToCC: isCoach and coach instanceof Node and document.body.contains(coach)
-        conceptCoach: isCoach
         currentPage: currentPage
         chapter: chapter
         pageTitle: currentPage.searchTitle ? currentPage.title
@@ -73,7 +69,6 @@ define (require) ->
     events:
       'click .derive .btn': 'derivePage'
       'click .edit .btn' : 'editPage'
-      'click .jump-to-cc > .btn': 'jumpToConceptCoach'
 
     initialize: (options) ->
       super()
@@ -94,19 +89,11 @@ define (require) ->
       if not @model.asPage()?.get('active') then return
 
       # IE doesn't like it being inside the button. Move it out.
-      if not @isCoach()
-        popoverView = new BookPopoverView
-          model: @model
-          owner: @$el.find('.info .btn')
-        @regions.button.append popoverView
-        popoverView.$el.insertAfter(popoverView.$el.parent())
-
-    getCoach: ->
-      moduleUUID = @model.getUuid()?.split('?')[0]
-      settings.conceptCoach?.uuids?[moduleUUID]
-
-    isCoach: ->
-      @getCoach()?
+      popoverView = new BookPopoverView
+        model: @model
+        owner: @$el.find('.info .btn')
+      @regions.button.append popoverView
+      popoverView.$el.insertAfter(popoverView.$el.parent())
 
     editPage: () ->
       data = JSON.stringify({id: @model.asPage().get('id')})

@@ -55,24 +55,6 @@ body {
   .transition(background 0.5s ease-in-out);
 }
 
-.concept-coach-wrapper {
-  margin-top: 4rem;
-}
-
-// styles for coach scene, not opened.
-.media-body > #content {
-  .concept-coach-wrapper {
-    p, h1, h2, h3, h4, h5, h6 {
-      color: inherit;
-      margin: inherit;
-    }
-
-    a {
-      text-decoration: none;
-    }
-  }
-}
-
 // Import the content styling from a separate file so it can be included in the editing code
 [data-is-baked="true"] {
   .media-body > #content {
@@ -83,38 +65,5 @@ body {
 [data-is-baked="false"] {
   .media-body > #content {
     @import 'content-raw';
-  }
-}
-
-// styles for coach opened.
-body.cc-opened {
-  .concept-coach-wrapper {
-    text-align: left;
-  }
-
-  [data-math]:not(.math-rendered) {
-    // hide math while it is unformatted
-    visibility: hidden;
-  }
-
-  .media-body > #content .concept-coach-wrapper {
-    p, h1, h2, h3, h4, h5, h6 {
-      color: inherit;
-    }
-
-    .concept-coach-view {
-      p, h1, h2, h3, h4, h5, h6 {
-        margin-bottom: inherit;
-      }
-    }
-
-    .dropdown-menu > li > a {
-      text-decoration: none;
-    }
-
-    .concept-coach-title h3.chapter-section-prefix {
-      margin-bottom: 0;
-    }
-
   }
 }

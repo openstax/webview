@@ -2,10 +2,6 @@
   'use strict';
 
   require.config({
-    // waitSeconds increase to avoid timeout from "loading" OpenStaxConceptCoach
-    // during r.js compiling.
-    // http://stackoverflow.com/questions/14279962/require-js-error-load-timeout-for-modules-backbone-jquerymobile#answer-14283401
-    waitSeconds: 30,
     // # Paths
     paths: {
       // ## Requirejs plugins
@@ -29,8 +25,6 @@
 
       // Use Minified Aloha because loading files in a different requirejs context is a royal pain
       aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
-
-      OpenStaxConceptCoach: '../../bower_components/concept-coach/full-build.min',
 
       // ## UI Libraries and Helpers
       tooltip: 'helpers/backbone/views/attached/tooltip/tooltip',
@@ -166,12 +160,6 @@
       select2: {
         deps: ['jquery', 'css!../../bower_components/select2/dist/css/select2'],
         exports: 'Select2'
-      },
-
-      // concept-coach
-      OpenStaxConceptCoach: {
-        deps: ['css!../../bower_components/concept-coach/main.min'],
-        exports: 'OpenStaxConceptCoach'
       },
 
       l20n: {
