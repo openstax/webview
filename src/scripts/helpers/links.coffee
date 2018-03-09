@@ -51,7 +51,7 @@ define (require) ->
       return url
 
     # Get the URL to view a given content model
-    getModelPath: (model, withTitle = true) ->
+    getModelPath: (model, withTitle) ->
       page = ''
       id = model.getUuid?() or model.id
       version = model.get?('version') or model.version
