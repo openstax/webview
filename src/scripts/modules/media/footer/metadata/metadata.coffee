@@ -23,7 +23,7 @@ define (require) ->
       model.languages = settings.languages
       model.languageName = settings.languages[model.language]
       model.subjectsList = subjects.list
-      model.url = linksHelper.getModelPath(model)
+      model.url = linksHelper.getModelPath(model, true)
       model.printStyles =
         {
           'default' : 'Default',

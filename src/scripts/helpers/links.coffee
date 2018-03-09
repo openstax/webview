@@ -51,7 +51,7 @@ define (require) ->
       return url
 
     # Get the URL to view a given content model
-    getModelPath: (model) ->
+    getModelPath: (model, withTitle) ->
       page = ''
       id = model.getUuid?() or model.id
       version = model.get?('version') or model.version
@@ -59,9 +59,12 @@ define (require) ->
 
       if model.isBook?()
         title = trim(model.get('currentPage')?.get('title'))
-        page = ":#{model.get('currentPage')?.getShortUuid()}"
+        page = ":#{model.get('currentPage')?.getUuid()}"
 
-      return "#{settings.root}contents/#{id}#{page}/#{title}"
+      url = "#{settings.root}contents/#{id}#{page}"
+      url += "/#{title}" if withTitle
+
+      return url
 
     getCleanSearchQuery: (queryString, paramsToIgnore) ->
       queryString ?= window.location.search

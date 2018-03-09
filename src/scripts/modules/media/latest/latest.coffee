@@ -9,7 +9,7 @@ define (require) ->
     template: template
     templateHelpers:
       url: () ->
-        path = linksHelper.getModelPath(@model)
+        path = linksHelper.getModelPath(@model, true)
         queryString = linksHelper.serializeQuery(location.search)
         if queryString.minimal then return path + '?minimal=true' else return path
 
