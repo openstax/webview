@@ -1,5 +1,6 @@
 define (require) ->
   $ = require('jquery')
+  Backbone = require('backbone')
   linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics')
@@ -198,8 +199,8 @@ define (require) ->
 
     trackAnalytics: () ->
       # Track loading using the media's own analytics ID, if specified
-      analyticsID = @model.get('googleAnalytics')
-      analytics.send(analyticsID) if analyticsID
+      analyticsIDs = @model.get('googleAnalytics')
+      analytics.sendAnalytics(analyticsIDs) if analyticsIDs
 
     updatePageInfo: () ->
       @pageTitle = @model.get('title')
@@ -243,4 +244,3 @@ define (require) ->
 
     resetKeySequence: (e) ->
       return
-

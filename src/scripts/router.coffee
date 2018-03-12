@@ -54,6 +54,6 @@ define (require) ->
 
     navigate: (fragment, options = {}, cb) ->
       super(arguments...)
-      analytics.send() if options.analytics isnt false
+      analytics.sendAnalytics() if options.analytics isnt false
       cb?()
       @trigger('navigate')
