@@ -16,6 +16,10 @@ define (require) ->
     # Send the current page to every analytics service
     sendAnalytics: (accounts, fragment = Backbone.history.fragment) ->
 
+      # Use the default analytics ID in settings if no account is specified
+      unless accounts
+        accounts = [settings.analyticsID]
+
       # temporarily support a single field for analytics (sometimes it is `null`)
       unless Array.isArray(accounts)
         console.log 'Consider calling analytics.sendAnalytics with an Array'
@@ -25,8 +29,6 @@ define (require) ->
 
         accounts.forEach (account) =>
           if not /^\//.test(fragment) then fragment = '/' + fragment
-          # Use the default analytics ID in settings if no account is specified
-          account ?= settings.analyticsID
 
           # TODO investigate if we need specific names for our tracker name
           trackerName = @getTrackerName(account)
