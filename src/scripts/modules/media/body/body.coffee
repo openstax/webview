@@ -10,7 +10,6 @@ define (require) ->
   EditableView = require('cs!helpers/backbone/views/editable')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
   SimModal = require('cs!./embeddables/modals/sims/sims')
-  Coach = require('cs!./embeddables/coach')
   template = require('hbs!./body-template')
   settings = require('settings')
   require('less!./body')
@@ -44,9 +43,6 @@ define (require) ->
         .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
 
       'click .os-interactive-link': 'simLink'
-
-    regions:
-      coach: '#coach-wrapper'
 
     initialize: () ->
       super()
@@ -83,32 +79,6 @@ define (require) ->
       @model.setPage(pageNumber)
 
       router.navigate(href, {trigger: true, replace: false}, => @parent.parent.parent.trackAnalytics())
-
-    getCoach: ->
-      moduleUUID = @model.getUuid()?.split('?')[0]
-      settings.conceptCoach?.uuids?[moduleUUID]
-
-    isCoach: ->
-      @getCoach()?
-
-    hideExercises: ($el) ->
-      hiddenClasses = @getCoach()
-      hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
-      $exercisesToHide = $el.find(hiddenSelectors)
-      $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
-
-      $exercisesToHide
-
-    makeRegionForCoach: ($summary, wrapperId = 'coach-wrapper') ->
-      $("##{wrapperId}").remove()
-      $coachWrapper = $("<div id=\"#{wrapperId}\"></div>")
-      $coachWrapper.insertAfter(_.last($summary))
-
-    handleCoach: ($el) ->
-      return unless @isCoach()
-      @hideExercises($el)
-      $summary = $el.find('section.summary[data-depth], section.section-summary[data-depth]')
-      @makeRegionForCoach($summary) if $summary.length > 0
 
     # Toggle the visibility of teacher's edition elements
     toggleTeacher: () ->
@@ -218,9 +188,6 @@ define (require) ->
 
           # # uncomment to embed fake exercises and see embeddable exercises in action
           # @fakeExercises($temp)
-
-          # Hide Exercises and set region for Concept Coach, only if canCoach
-          @handleCoach($temp)
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
@@ -422,18 +389,12 @@ define (require) ->
       if @model.get('sims') is true
         @parent?.regions.self.append(new SimModal({model: @model}))
 
-      # mount the Concept Coach if the mounter has been configured/if `canCoach`
-      if @isCoach()
-        @coach = new Coach({model: @model})
-        @regions.coach.append(@coach)
-
       # MathJax rendering must be done after the HTML has been added to the DOM
       MathJax?.Hub.Queue =>
         @jaxing = true
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
       MathJax?.Hub.Queue =>
         @jaxing = false
-        @processCoachMath?()
 
       # Clear and replace the hash fragment after the content has loaded
       # to force the browser window to find the intended content (as a side effect)

@@ -684,8 +684,6 @@ textbook-view-btn-create-copy = Utwórz kopię do edycji
 
 textbook-view-btn-edit-page = Edytuj stronę
 
-textbook-view-btn-jump-to-concept-coach = Idź do Concept Coach
-
 textbook-view-btn-get-this-book = Weź tę książkę!
 
 textbook-view-btn-get-this-page = Weź tę stronę!

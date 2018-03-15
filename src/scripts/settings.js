@@ -68,14 +68,6 @@
 
       defaultLicense: {
         code: 'by'
-      },
-
-      conceptCoach: {
-        uuids: {
-          'f10533ca-f803-490d-b935-88899941197f': ['art-exercise', 'free-response', 'multiple-choice'],
-          '8QUzyvgD': ['art-exercise', 'free-response', 'multiple-choice'] // only long-codes are currently supported
-        },
-        url: 'https://tutor-qa.openstax.org'
       }
 
     };
