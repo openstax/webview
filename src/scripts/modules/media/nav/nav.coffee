@@ -53,16 +53,16 @@ define (require) ->
       'click .next': 'nextPage'
       'click .back': 'previousPage'
       'click .toggle.btn': 'toggleContents'
-      # 'click .toggle.btn.books': 'toggleBooksList'
       'click .back-to-top > a': 'backToTop'
       'keydown .searchbar input': 'handleSearchInput'
       'click .searchbar > .clear-search': 'clearSearch'
 
-    closeAllContainers: (nodes = @model.get('contents').models) =>
-      for node in nodes
-        if node.isSection()
-          node.set('expanded', false)
-          @closeAllContainers(node.get('contents').models)
+    closeAllContainers: (nodes = @model.get('contents')?.models) =>
+      if nodes
+        for node in nodes
+          if node.isSection()
+            node.set('expanded', false)
+            @closeAllContainers(node.get('contents').models)
 
     toggleContents: (e) ->
       @tocIsOpen = not @tocIsOpen
