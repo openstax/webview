@@ -26,37 +26,27 @@
         {{#each booksIn}}
         <li >
             <div>
-              <span class="section-wrapper name-wrapper" tabindex="0" aria-expanded="true">
-                <span class="title section max-wrap-two-lines">
-                  <a href="/contents/{{shortid}}:{{../pageId}}" data-page="2" data-trigger="false">
+                <a href="/contents/{{shortid}}:{{../pageId}}">
                   <b>{{title}}</b>
-                  </a>
-                </span>
-              </span></div>
+                </a>
+            </div>
           <ul data-expanded="true">
-            <li>  <div>
-                <span class="name-wrapper">
-                    <span class="title">
-                      <b>Author(s): </b>
-                      {{#each authors}}{{fullname}}, {{/each}}
-                    </span>
-                </span></div>
+            <li>
+              <div>
+                  <b>Author(s): </b> {{authors}}
+              </div>
             </li>
             <li>
-              <div><span class="name-wrapper">
-                  <span class="title">
-                    <b>Revised: </b>{{revised}}
-                  </span>
-              </span></div>
+              <div>
+                  <b>Revised: </b>{{revised}}
+              </div>
             </li>
             <li>
-              <div><span class="name-wrapper">
-                    <span class="title">
-                      <a href="/contents/{{shortid}}" data-page="2" data-trigger="false">
-                        Go to Book
-                      </a>
-                    </span>
-                </span></div>
+              <div>
+                  <a href="/contents/{{shortid}}" data-page="2" data-trigger="false">
+                    Go to Book
+                  </a>
+              </div>
             </li>
           </ul>
         </li>

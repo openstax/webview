@@ -203,6 +203,10 @@ define (require) ->
       @model.trigger('moveNode')
 
     handleBooksContainingPage: ->
-      for i in @model["attributes"]["booksContainingPage"]
-        i["revised"] = ((i["revised"] + "").split "T")[0]
+      for book in @model["attributes"]["booksContainingPage"]
+        book["revised"] = ((book["revised"] + "").split "T")[0]
+        s = []
+        for author in book["authors"]
+          s.push(author["fullname"])
+        book["authors"] = s.toString()
       @render()
