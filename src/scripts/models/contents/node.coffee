@@ -254,6 +254,8 @@ define (require) ->
 
     isBook: () -> @get('mediaType') is 'application/vnd.org.cnx.collection'
 
+    isPage: () -> @get('mediaType') is 'application/vnd.org.cnx.module'
+
     isDraft: () -> @get('version') is 'draft' or /@draft$/.test(@id)
 
     isSaveable: () -> !!@get('mediaType')

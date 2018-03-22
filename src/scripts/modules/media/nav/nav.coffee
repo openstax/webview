@@ -33,6 +33,7 @@ define (require) ->
       return {
         _hideProgress: @hideProgress
         book: @model.isBook()
+        isPage: @model.isPage()
         next: next
         back: back
         pages: if @model.get('loaded') then @model.getTotalPages() else 0
