@@ -204,7 +204,7 @@ define (require) ->
 
     handleBooksContainingPage: ->
       for book in @model["attributes"]["booksContainingPage"]
-        book["revised"] = ((book["revised"] + "").split "T")[0]
+        book["revised"] = new Date(book["revised"])
         s = []
         for author in book["authors"]
           s.push(author["fullname"])
