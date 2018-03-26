@@ -19,7 +19,7 @@
   {{else}}
     <div class="booksContaining">
       <div>
-        <span class="title">This page is in {{numBooks}} books</span>
+        <span class="title" data-l10n-id="textbook-view-page-in-books" data-l10n-args='{"numbooks":{{numBooks}} }'>This page is in {{numBooks}} books</span>
       </div>
       <br>
       <ul>
@@ -33,17 +33,17 @@
           <ul data-expanded="true">
             <li>
               <div>
-                  <b>Authors: </b> {{authors}}
+                  <b data-l10n-id="textbook-view-dt-authors">Authors: </b> {{authors}}
               </div>
             </li>
             <li>
               <div>
-                  <b>Revised: </b>{{date revised}}
+                  <b data-l10n-id="textbook-view-book-list-revised">Revised: </b>{{date revised}}
               </div>
             </li>
             <li>
               <div>
-                  <a href="/contents/{{shortid}}" data-page="2" data-trigger="false">
+                  <a data-l10n-id="textbook-view-book-list-go-to-book" href="/contents/{{shortid}}" data-page="2" data-trigger="false">
                     Go to Book
                   </a>
               </div>
