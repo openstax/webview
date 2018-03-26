@@ -175,5 +175,5 @@ define (require) ->
       @enableClearSearch() if @model.get('searchResults')?
       @updateToc()
       if @model.isPage()
-          @toggleBooksList()
-          @closeContentsOnSmallScreen()
+        @toggleBooksList()
+        @closeContentsOnSmallScreen()
