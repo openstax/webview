@@ -33,6 +33,7 @@ define (require) ->
       return {
         _hideProgress: @hideProgress
         book: @model.isBook()
+        isPage: @model.isPage()
         next: next
         back: back
         pages: if @model.get('loaded') then @model.getTotalPages() else 0
@@ -57,11 +58,12 @@ define (require) ->
       'keydown .searchbar input': 'handleSearchInput'
       'click .searchbar > .clear-search': 'clearSearch'
 
-    closeAllContainers: (nodes = @model.get('contents').models) =>
-      for node in nodes
-        if node.isSection()
-          node.set('expanded', false)
-          @closeAllContainers(node.get('contents').models)
+    closeAllContainers: (nodes = @model.get('contents')?.models) =>
+      if nodes
+        for node in nodes
+          if node.isSection()
+            node.set('expanded', false)
+            @closeAllContainers(node.get('contents').models)
 
     toggleContents: (e) ->
       @tocIsOpen = not @tocIsOpen
@@ -71,6 +73,16 @@ define (require) ->
         for container in @model.get('currentPage')?.containers() ? []
           container.set('expanded', true)
       @updateToc()
+
+    toggleBooksList: (e) ->
+      @tocIsOpen = not @tocIsOpen
+      @.trigger('tocIsOpen', @tocIsOpen)
+      if @tocIsOpen
+        @closeAllContainers() unless @model.get('searchResults')
+        for container in @model.get('currentPage')?.containers() ? []
+          container.set('expanded', true)
+      @updateToc()
+
 
     updateToc: ->
       button = @$el.find('.toggle.btn')
@@ -162,3 +174,6 @@ define (require) ->
       @regions.tocPanel?.show(new ContentsView({model: @model}))
       @enableClearSearch() if @model.get('searchResults')?
       @updateToc()
+      if @model.isPage()
+        @toggleBooksList()
+        @closeContentsOnSmallScreen()

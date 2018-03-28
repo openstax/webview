@@ -34,6 +34,7 @@ define (require) ->
       return {
         currentPage: currentPage
         chapter: chapter
+        isBook: @model.isBook()
         pageTitle: currentPage.searchTitle ? currentPage.title
         hasDownloads: if _.isArray downloadable then _.some downloadable, (link) -> link.state != 'missing' else false
         derivable: @isDerivable()

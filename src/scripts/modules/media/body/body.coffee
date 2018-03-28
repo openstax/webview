@@ -398,7 +398,7 @@ define (require) ->
 
       # Clear and replace the hash fragment after the content has loaded
       # to force the browser window to find the intended content (as a side effect)
-      jumpToHash = () =>
+      jumpToHash = () ->
         if currentPage.get('loaded') and window.location.hash
           linksHelper.offsetHash()
 

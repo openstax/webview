@@ -99,6 +99,7 @@ define (require) ->
               @set('downloads', response.downloads)
               @set('isLatest', response.isLatest)
               @set('canPublish', response.canPublish)
+              @set('booksContainingPage', response.books)
             .fail () =>
               @set('downloads', [])
 
@@ -252,6 +253,8 @@ define (require) ->
     isSection: () -> not @isBook() and @get('contents') instanceof Backbone.Collection
 
     isBook: () -> @get('mediaType') is 'application/vnd.org.cnx.collection'
+
+    isPage: () -> @get('mediaType') is 'application/vnd.org.cnx.module'
 
     isDraft: () -> @get('version') is 'draft' or /@draft$/.test(@id)
 

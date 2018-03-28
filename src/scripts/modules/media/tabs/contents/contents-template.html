@@ -10,6 +10,51 @@
     </div>
     <div class="result-count" data-l10n-id="textbook-editor-contents-results-matches" data-l10n-args='{"hits":{{resultCount}} }'>{{resultCountText}}</div>
   {{/if}}
-  <div class="toc">
-    {{! TocView}}
-  </div>
+
+  {{#if isBook}}
+    <div class="toc">
+      {{! TocView}}
+    </div>
+
+  {{else}}
+    <div class="booksContaining">
+      <div>
+        <span class="title" data-l10n-id="textbook-view-page-in-books" data-l10n-args='{"numbooks":{{numBooks}} }'>This page is in {{numBooks}} books</span>
+      </div>
+      <br>
+      <ul>
+        {{#each booksIn}}
+        <li >
+            <div>
+                <a href="/contents/{{shortid}}:{{../pageId}}">
+                  <b>{{title}}</b>
+                </a>
+            </div>
+          <ul data-expanded="true">
+            <li>
+              <div>
+                  <b data-l10n-id="textbook-view-dt-authors">Authors: </b> {{authors}}
+              </div>
+            </li>
+            <li>
+              <div>
+                  <b data-l10n-id="textbook-view-book-list-revised">Revised: </b>{{date revised}}
+              </div>
+            </li>
+            <li>
+              <div>
+                  <a data-l10n-id="textbook-view-book-list-go-to-book" href="/contents/{{shortid}}" data-page="2" data-trigger="false">
+                    Go to Book
+                  </a>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <br>
+        {{/each}}
+
+      </ul>
+    </div>
+
+
+  {{/if}}

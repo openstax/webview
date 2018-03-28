@@ -13,6 +13,7 @@
       {{/if}}
     {{/if}}
 
+    {{#if isBook}}
     <div class="title">
       <h2>
         {{#if chapter}}<span class="title-chapter">{{chapter}}</span>{{/if}}
@@ -50,6 +51,7 @@
         </span>
       {{/if}}
     </div>
+    {{/if}}
 
     {{#if currentPage.abstract}}
       <details>

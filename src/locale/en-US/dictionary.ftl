@@ -669,6 +669,8 @@ textbook-view-search-this-book =
 
 textbook-view-contents = Contents
 
+textbook-view-books = Books
+
 # TEXTBOOK VIEW - Endorsement - src/scripts/modules/media/endorsed/endorsed-template.html
 
 textbook-view-endorsed-by = Endorsed by: OpenStax
@@ -965,6 +967,16 @@ textbook-editor-contents-results-matches = { $hits ->
   [1] { $hits } page matched
  *[other] { $hits } pages matched
 }
+
+textbook-view-page-in-books = { $numbooks ->
+  [0] This page is not in any books
+  [1] This page is in this book
+ *[other] This page is in { $numbooks } books
+ }
+
+textbook-view-book-list-revised = Revised: 
+
+textbook-view-book-list-go-to-book = Go to book
 
 # TEXTBOOK EDITOR - Add Page List - src/scripts/modules/media/tabs/contents/popovers/add/modals/results/list/add-page-list-template.html
 
