@@ -64,11 +64,7 @@ define (require) ->
           "#{hits} page#{s} matched"
       resultCount: () ->
         @model?.get('searchResults')?.total
-      isBook: () ->
-        if @model["attributes"]["page"]
-          "book"
-        else
-          null
+      isBook: () -> @model.isBook()
       booksIn: () ->
         @model?.get('booksContainingPage')
       numBooks:() ->
