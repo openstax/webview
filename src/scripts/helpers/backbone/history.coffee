@@ -13,7 +13,7 @@ define (require) ->
         root = @root.replace(trailingSlash, '')
         if not fragment.indexOf(root) then fragment = fragment.slice(root.length)
 
-      return fragment.replace(routeStripper, '')
+      return decodeURIComponent(fragment.replace(routeStripper, ''))
 
     navigate: (fragment, options) ->
       if not Backbone.History.started then return false
