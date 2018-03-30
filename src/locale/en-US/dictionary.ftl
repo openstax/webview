@@ -969,9 +969,9 @@ textbook-editor-contents-results-matches = { $hits ->
 }
 
 textbook-view-page-in-books = { $numbooks ->
-  [0] This page is not in any books
-  [1] This page is in this book
- *[other] This page is in { $numbooks } books
+  [0] This page is not in any books.
+  [1] This page is in this book:
+ *[other] This page is in { $numbooks } books:
  }
 
 textbook-view-book-list-revised = Revised: 

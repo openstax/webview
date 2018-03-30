@@ -991,11 +991,11 @@ textbook-editor-contents-results-matches = { $hits ->
 }
 
 textbook-view-page-in-books = { $numbooks ->
-  [0] Żadna książka nie zawiera tej strony
-  [1] Jedna książka zawiera tę stronę
-  [few] { $numbooks } książki zawierają tę stronę
-  [many] { $numbooks } książek zawiera tę stronę
- *[other] { $numbooks } książki zawiera tę stronę
+  [0] Żadna książka nie zawiera tej strony.
+  [1] Jedna książka zawiera tę stronę:
+  [few] { $numbooks } książki zawierają tę stronę:
+  [many] { $numbooks } książek zawiera tę stronę:
+ *[other] { $numbooks } książki zawiera tę stronę:
 }
 
 textbook-view-book-list-revised = Zmodyfikowano:
