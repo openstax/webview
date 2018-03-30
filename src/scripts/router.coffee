@@ -8,9 +8,6 @@ define (require) ->
 
   return new class Router extends Backbone.Router
     initialize: (args...) ->
-      # decodedPathname = decodeURIComponent(window.location.pathname)
-      # if (decodedPathname != window.location.pathname)
-      #   window.location.replace(decodeURIComponent(window.location))
       @appView = new AppView()
 
       # Default Route
