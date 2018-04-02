@@ -25,28 +25,23 @@
       <ul>
         {{#each booksIn}}
         <li >
-            <div class="max-wrap-two-lines">
-                <a href="/contents/{{shortid}}:{{../pageId}}">
-                  <b>{{title}}</b>
-                </a>
+            <div>
+              <a class="max-wrap-two-lines" 
+                 href="/contents/{{shortid}}:{{../pageId}}">
+                <b>{{title}}</b>
+              </a>
             </div>
           <ul data-expanded="true">
             <li>
-              <div>
                   <b data-l10n-id="textbook-view-dt-authors">Authors: </b> {{authors}}
-              </div>
             </li>
             <li>
-              <div>
                   <b data-l10n-id="textbook-view-book-list-revised">Revised: </b>{{date revised}}
-              </div>
             </li>
             <li>
-              <div>
                   <a data-l10n-id="textbook-view-book-list-go-to-book" href="/contents/{{shortid}}">
                     Go to Book
                   </a>
-              </div>
             </li>
           </ul>
         </li>
