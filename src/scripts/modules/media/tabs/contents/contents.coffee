@@ -71,10 +71,11 @@ define (require) ->
         hits = @model?.get('booksContainingPage')?.length
         return unless hits?
         if hits is 0
-          "This page was not found in any books."
+          "This page is not in any books."
+        else if hits is 1
+          "This page is in this book:"
         else
-          s = if hits is 1 then '' else 's'
-          "This page is in #{hits} book#{s}"
+          "This page is in #{hits} books:"
       pageId:() ->
         (window.location.href.split '/')[4]
 
