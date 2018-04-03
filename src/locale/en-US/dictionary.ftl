@@ -98,6 +98,8 @@ all-footer-licensing = Licensing
 
 all-footer-terms-of-use = Terms of Use
 
+all-footer-accessibility = Accessibility Statement
+
 all-footer-contact = Contact
 
 all-footer-connect = Connect
@@ -974,7 +976,7 @@ textbook-view-page-in-books = { $numbooks ->
  *[other] This page is in { $numbooks } books:
  }
 
-textbook-view-book-list-revised = Revised: 
+textbook-view-book-list-revised = Revised:
 
 textbook-view-book-list-go-to-book = Go to book
 
