@@ -174,6 +174,3 @@ define (require) ->
       @regions.tocPanel?.show(new ContentsView({model: @model}))
       @enableClearSearch() if @model.get('searchResults')?
       @updateToc()
-      if @model.isPage()
-        @toggleBooksList()
-        @closeContentsOnSmallScreen()
