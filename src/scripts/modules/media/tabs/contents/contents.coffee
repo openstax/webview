@@ -67,8 +67,14 @@ define (require) ->
       isBook: () -> @model.isBook()
       booksIn: () ->
         @model?.get('booksContainingPage')
-      numBooks:() ->
-        @model?.get('booksContainingPage')?.length
+      numBooksText:() ->
+        hits = @model?.get('booksContainingPage')?.length
+        return unless hits?
+        if hits is 0
+          "This page was not found in any books."
+        else
+          s = if hits is 1 then '' else 's'
+          "This page is in #{hits} book#{s}"
       pageId:() ->
         (window.location.href.split '/')[4]
 
