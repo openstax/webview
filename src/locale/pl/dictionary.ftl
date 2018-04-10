@@ -97,6 +97,8 @@ all-footer-licensing = Licencje
 
 all-footer-terms-of-use = Warunki użytkowania
 
+all-footer-accessibility = Ułatwienia dostępności
+
 all-footer-contact = Kontakt
 
 all-footer-connect = Łącza
