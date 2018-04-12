@@ -23,7 +23,6 @@ define (require) ->
   require('less!./media')
 
   return class MediaView extends BaseView
-    scrollPosition: 0
     key = []
     canonical: () ->
       return linksHelper.getModelPath(@model, false)
@@ -48,6 +47,7 @@ define (require) ->
       @uuid = options.uuid
       @model = new Content({id: @uuid, version: options.version, page: options.page})
       @minimal = options.minimal
+      @scrollPosition = 0
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title change:parent.id', @updatePageInfo)
@@ -123,12 +123,11 @@ define (require) ->
 
       $titleArea = mediaTitleView.$el.find('.media-title')
       pinNavBar = ->
-        if window.innerWidth > 640
-          $pinnable.addClass('pinned')
-          $titleArea.addClass('compact')
-          $toc.addClass('pinned')
-          isPinned = true
-          adjustMainMargin($pinnable.height())
+        $pinnable.addClass('pinned')
+        $titleArea.addClass('compact')
+        $toc.addClass('pinned')
+        isPinned = true
+        adjustMainMargin($pinnable.height())
       unpinNavBar = ->
         $pinnable.removeClass('pinned')
         $titleArea.removeClass('compact')
@@ -146,15 +145,18 @@ define (require) ->
 
         if top < @scrollPosition && window.innerWidth < 640
           # scrolling up want to make the header reappear
-          $pinnable.addClass('pinned')
-          $titleArea.addClass('compact')
-          $toc.addClass('pinned')
-          isPinned = true
-          adjustMainMargin($pinnable.height())
+          pinNavBar()
+        else if (top > @scrollPosition && window.innerWidth < 640) && !navView.tocIsOpen
+          # scrolling down want to make the header dissapear
+          unpinNavBar()
 
         if top > pinnableTop
           if not isPinned
-            pinNavBar()
+            if navView.tocIsOpen && window.innerWidth < 640
+              pinNavBar()
+            else
+              if window.innerWidth >= 640
+                pinNavBar()
         else if isPinned
           unpinNavBar()
         setTocHeight()
@@ -174,6 +176,7 @@ define (require) ->
           top = $(window).scrollTop()
           if top < pinnableTop
             $(window).scrollTop(pinnableTop + 10)
+
         setTocHeight()
         )
       wasPinnedAtChange = false
