@@ -23,6 +23,7 @@ define (require) ->
   require('less!./media')
 
   return class MediaView extends BaseView
+    scrollPosition: 0
     key = []
     canonical: () ->
       return linksHelper.getModelPath(@model, false)
@@ -122,11 +123,12 @@ define (require) ->
 
       $titleArea = mediaTitleView.$el.find('.media-title')
       pinNavBar = ->
-        $pinnable.addClass('pinned')
-        $titleArea.addClass('compact')
-        $toc.addClass('pinned')
-        isPinned = true
-        adjustMainMargin($pinnable.height())
+        if window.innerWidth > 640
+          $pinnable.addClass('pinned')
+          $titleArea.addClass('compact')
+          $toc.addClass('pinned')
+          isPinned = true
+          adjustMainMargin($pinnable.height())
       unpinNavBar = ->
         $pinnable.removeClass('pinned')
         $titleArea.removeClass('compact')
@@ -141,12 +143,23 @@ define (require) ->
 
       handleHeaderViewPinning = ->
         top = $(window).scrollTop()
+
+        if top < @scrollPosition && window.innerWidth < 640
+          # scrolling up want to make the header reappear
+          $pinnable.addClass('pinned')
+          $titleArea.addClass('compact')
+          $toc.addClass('pinned')
+          isPinned = true
+          adjustMainMargin($pinnable.height())
+
         if top > pinnableTop
           if not isPinned
             pinNavBar()
         else if isPinned
           unpinNavBar()
         setTocHeight()
+
+        @scrollPosition = top
       Backbone.on('window:optimizedScroll', handleHeaderViewPinning)
       # closing is triggered in 'onBeforeClose'
       @on('closing', ->
