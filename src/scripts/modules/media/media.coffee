@@ -129,6 +129,7 @@ define (require) ->
         isPinned = true
         adjustMainMargin($pinnable.height())
       unpinNavBar = ->
+        $pinnable.removeClass('opened')
         $pinnable.removeClass('pinned')
         $titleArea.removeClass('compact')
         $toc.removeClass('pinned')
@@ -139,26 +140,38 @@ define (require) ->
         $titleArea = mediaTitleView.$el.find('.media-title')
         $titleArea.addClass('compact') if isPinned
       )
+      pinNavBarSlow = ->
+        $pinnable.removeClass('closed')
+        $pinnable.addClass('opened')
+      unpinNavBarSlow = ->
+        $pinnable.addClass('pinned')
+        $toc.addClass('pinned')
+        $pinnable.removeClass('opened')
+        $pinnable.addClass('closed')
+        adjustMainMargin(0)
+        isPinned = false
+        pinnableTop = $pinnable.offset().top
+
 
       handleHeaderViewPinning = ->
         top = $(window).scrollTop()
 
-        if top < @scrollPosition && window.innerWidth < 640
-          # scrolling up want to make the header reappear
-          pinNavBar()
-        else if (top > @scrollPosition && window.innerWidth < 640) && !navView.tocIsOpen
-          # scrolling down want to make the header dissapear
+        if top <= pinnableTop
           unpinNavBar()
-
-        if top > pinnableTop
-          if not isPinned
-            if navView.tocIsOpen && window.innerWidth < 640
-              pinNavBar()
-            else
-              if window.innerWidth >= 640
+        else
+          if window.innerWidth < 640
+            if top + 20 < @scrollPosition && window.innerWidth < 640
+              # scrolling up want to make the header reappear
+              if not isPinned
                 pinNavBar()
-        else if isPinned
-          unpinNavBar()
+                pinNavBarSlow()
+            else if (top > @scrollPosition && window.innerWidth < 640) && !navView.tocIsOpen
+              # scrolling down want to make the header dissapear
+              if isPinned
+                unpinNavBarSlow()
+          else if not isPinned
+            pinNavBar()
+
         setTocHeight()
 
         @scrollPosition = top

@@ -5,12 +5,23 @@
   height: 100%;
 
   .pinnable.pinned {
+    opacity: 1;
     position: fixed;
     top: 0;
     width: 100%;
     max-width: @max-viewport-width;
     z-index: 1;
+    transition: top 1s ease-in-out;
   }
+
+  .pinnable.closed{
+    top: -200px;
+  }
+
+  .pinnable.opened{
+    top: 0;
+  }
+
   .table-of-contents{
     overflow-y: auto;
     overflow-x: hidden;
