@@ -47,7 +47,7 @@ define (require) ->
       if response.abstract?
         response.abstract = $(response.abstract).unwrap().html()
 
-      if response.mediaType is 'application/vnd.org.cnx.collection'
+      if response.mediaType is 'application/vnd.org.cnx.collection' or response.mediaType is 'application/vnd.org.cnx.subcollection' 
         # Only load the contents once
         response.contents = @get('contents') or response.tree.contents or []
 
@@ -252,7 +252,7 @@ define (require) ->
 
     isSection: () -> not @isBook() and @get('contents') instanceof Backbone.Collection
 
-    isBook: () -> @get('mediaType') is 'application/vnd.org.cnx.collection'
+    isBook: () -> @get('mediaType') is 'application/vnd.org.cnx.collection' or @get('mediaType') is 'application/vnd.org.cnx.subcollection'
 
     isPage: () -> @get('mediaType') is 'application/vnd.org.cnx.module'
 
