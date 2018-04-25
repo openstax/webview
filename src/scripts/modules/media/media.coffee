@@ -47,6 +47,7 @@ define (require) ->
       @uuid = options.uuid
       @model = new Content({id: @uuid, version: options.version, page: options.page})
       @minimal = options.minimal
+      @scrollPosition = 0
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title change:parent.id', @updatePageInfo)
@@ -128,6 +129,7 @@ define (require) ->
         isPinned = true
         adjustMainMargin($pinnable.height())
       unpinNavBar = ->
+        $pinnable.removeClass('opened')
         $pinnable.removeClass('pinned')
         $titleArea.removeClass('compact')
         $toc.removeClass('pinned')
@@ -138,15 +140,41 @@ define (require) ->
         $titleArea = mediaTitleView.$el.find('.media-title')
         $titleArea.addClass('compact') if isPinned
       )
+      pinNavBarSlow = ->
+        $pinnable.removeClass('closed')
+        $pinnable.addClass('opened')
+      unpinNavBarSlow = ->
+        $pinnable.addClass('pinned')
+        $toc.addClass('pinned')
+        $pinnable.removeClass('opened')
+        $pinnable.addClass('closed')
+        adjustMainMargin(0)
+        isPinned = false
+        pinnableTop = $pinnable.offset().top
+
 
       handleHeaderViewPinning = ->
         top = $(window).scrollTop()
-        if top > pinnableTop
-          if not isPinned
-            pinNavBar()
-        else if isPinned
+
+        if top <= pinnableTop
           unpinNavBar()
+        else
+          if window.innerWidth < 640
+            if top + 30 < @scrollPosition && window.innerWidth < 640
+              # scrolling up want to make the header reappear
+              if not isPinned
+                pinNavBar()
+                pinNavBarSlow()
+            else if (top > @scrollPosition && window.innerWidth < 640) && !navView.tocIsOpen
+              # scrolling down want to make the header dissapear
+              if isPinned
+                unpinNavBarSlow()
+          else if not isPinned
+            pinNavBar()
+
         setTocHeight()
+
+        @scrollPosition = top
       Backbone.on('window:optimizedScroll', handleHeaderViewPinning)
       # closing is triggered in 'onBeforeClose'
       @on('closing', ->
@@ -161,6 +189,7 @@ define (require) ->
           top = $(window).scrollTop()
           if top < pinnableTop
             $(window).scrollTop(pinnableTop + 10)
+
         setTocHeight()
         )
       wasPinnedAtChange = false
