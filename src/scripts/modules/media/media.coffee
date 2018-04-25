@@ -160,7 +160,7 @@ define (require) ->
           unpinNavBar()
         else
           if window.innerWidth < 640
-            if top + 20 < @scrollPosition && window.innerWidth < 640
+            if top + 30 < @scrollPosition && window.innerWidth < 640
               # scrolling up want to make the header reappear
               if not isPinned
                 pinNavBar()
