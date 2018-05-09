@@ -27,6 +27,10 @@ define (require) ->
 
       require ['analytics'], (ga) =>
 
+        # Uncomment me to log what would have been sent to `ga(...)` (for debugging)
+        # ga = (a,b,c) ->
+        #   console.log('Local Analytics function', a,b,c)
+
         accounts.forEach (account) =>
           if not /^\//.test(fragment) then fragment = '/' + fragment
 

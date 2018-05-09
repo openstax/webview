@@ -65,7 +65,10 @@ define (require) ->
       canonicalPath = linksHelper.getPath('contents', {model: @model, page: pageId}, []) + window.location.hash
       if (canonicalPath isnt "/#{currentRoute}")
         # replace previous URL with the canonical path
-        router.navigate(canonicalPath, {replace: true, analytics: false}) # Set analytics:false to prevent double-tracking pageViews. It's not ideal, because it does not track the canonical version that a person saw
+        # Set analytics:false to prevent double-tracking pageViews.
+        # It's not ideal, because it does not track the canonical version that a person saw
+        # See #1601
+        router.navigate(canonicalPath, {replace: true, analytics: false})
 
     updateTeacher: ($temp = @$el) ->
       $els = $temp.find('.os-teacher')

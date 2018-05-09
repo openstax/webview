@@ -115,7 +115,9 @@ define (require) ->
       e.preventDefault()
       e.stopPropagation()
       href = $(e.currentTarget).attr('href')
-      router.navigate href, {trigger: false}, () => @mediaParent.trackAnalytics() # this sends the page without a version number (which causes analytics to fire). It fires twice because @mediaParent.trackAnalytics() also sends an event.
+      # this sends the page without a version number (which causes analytics to fire).
+      # It fires twice because @mediaParent.trackAnalytics() also sends an event.
+      router.navigate href, {trigger: false}, () => @mediaParent.trackAnalytics()
 
     closeContentsOnSmallScreen: ->
       if window.innerWidth < 640
