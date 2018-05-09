@@ -65,7 +65,7 @@ define (require) ->
       canonicalPath = linksHelper.getPath('contents', {model: @model, page: pageId}, []) + window.location.hash
       if (canonicalPath isnt "/#{currentRoute}")
         # replace previous URL with the canonical path
-        router.navigate(canonicalPath, {replace: true})
+        router.navigate(canonicalPath, {replace: true, analytics: false}) # Set analytics:false to prevent double-tracking pageViews. It's not ideal, because it does not track the canonical version that a person saw
 
     updateTeacher: ($temp = @$el) ->
       $els = $temp.find('.os-teacher')
@@ -384,7 +384,7 @@ define (require) ->
       currentPage = @model.asPage()
       return unless currentPage?
       page = currentPage ? @model.get('contents')?.models[0]?.get('book')
-    
+
       return unless currentPage.get('active')
       if @model.get('sims') is true
         @parent?.regions.self.append(new SimModal({model: @model}))
