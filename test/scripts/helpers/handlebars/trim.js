@@ -11,11 +11,6 @@ describe('handlebars trim helper tests', function () {
     });
   });
 
-  it('should cut the string down to 30 characters', function () {
-    var returnVal = Handlebars.helpers.trim('thisisastringwiththirtysixcharacters');
-    returnVal.length.should.equal(30);
-    returnVal.should.equal('thisisastringwiththirtysixchar');
-  });
   it('should replace white space with dashes', function () {
     // space
     Handlebars.helpers.trim('  lots of    spaces ').should.equal('--lots-of----spaces-');
