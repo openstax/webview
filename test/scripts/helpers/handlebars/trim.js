@@ -12,7 +12,7 @@ describe('handlebars trim helper tests', function () {
   });
 
   it('should leave special characters alone and replace spaces', function () {
-    Handlebars.helpers.trim('Najważniejsze stałe fizyczne').should.equal('najważniejsze-stałe-fizyczne');
+    Handlebars.helpers.trim('Najważniejsze stałe fizyczne').should.equal('Najważniejsze-stałe-fizyczne');
   });
 
   it('should replace white space with dashes', function () {
