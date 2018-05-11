@@ -5,7 +5,7 @@ define (require) ->
     temp = document.createElement("div")
     temp.innerHTML = str
     str = temp.textContent
-    str.replace(/[^\w\s)]/g, '').replace(/\s/g, '-')
+    str.replace(/[^\w\s]/g, '').replace(/\s/g, '-')
 
   Handlebars.registerHelper 'trim', (str) -> trim(str)
 

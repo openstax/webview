@@ -11,6 +11,10 @@ describe('handlebars trim helper tests', function () {
     });
   });
 
+  it('should leave special characters alone and replace spaces', function() {
+    Handlebars.helpers.trim('Najważniejsze stałe fizyczne').should.equal('najważniejsze-stałe-fizyczne');
+  });
+
   it('should replace white space with dashes', function () {
     // space
     Handlebars.helpers.trim('  lots of    spaces ').should.equal('--lots-of----spaces-');
