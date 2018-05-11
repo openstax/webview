@@ -11,7 +11,7 @@ describe('handlebars trim helper tests', function () {
     });
   });
 
-  it('should leave special characters alone and replace spaces', function() {
+  it('should leave special characters alone and replace spaces', function () {
     Handlebars.helpers.trim('Najważniejsze stałe fizyczne').should.equal('najważniejsze-stałe-fizyczne');
   });
 
