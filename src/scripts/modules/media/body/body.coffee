@@ -12,6 +12,7 @@ define (require) ->
   SimModal = require('cs!./embeddables/modals/sims/sims')
   template = require('hbs!./body-template')
   settings = require('settings')
+  analytics = require('cs!helpers/handlers/analytics')
   require('less!./body')
 
   embeddableTemplates =
@@ -69,6 +70,9 @@ define (require) ->
         # It's not ideal, because it does not track the canonical version that a person saw
         # See #1601
         router.navigate(canonicalPath, {replace: true, analytics: false})
+      # Only send analytics once the canonical URL is in the browser URL
+      analytics.sendAnalytics()
+
 
     updateTeacher: ($temp = @$el) ->
       $els = $temp.find('.os-teacher')
