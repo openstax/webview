@@ -49,8 +49,7 @@ define (require) ->
         uuid = settings.shortcodes[uuid] if settings.shortcodes[uuid]
         pageId = if isNaN(page) then page else Number(page)
         @appView.render('contents', {uuid: uuid, version: version, page: pageId, qs: qs})
-        # Trust that canonicalizePath is called later
-        # analytics.sendAnalytics()
+        # Sending analytics will be done once the path is canonicalized
 
       @route /^donate\/?([^/\?;]*)?\/?([^/\?;]*)?\/?([^/\?;]*)?(?:\?)?.*/, 'donate', (page, uuid, type) ->
         @appView.render('donate', {page: page, uuid: uuid, type: type})
