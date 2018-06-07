@@ -5,6 +5,7 @@ define (require) ->
   settings = require('settings')
   Collection = require('cs!models/contents/collection')
   Page = require('cs!models/contents/page')
+  analytics = require('cs!helpers/handlers/analytics')
 
   return class Content extends Collection
     relations: [{
@@ -46,6 +47,15 @@ define (require) ->
 
         .fail (model, response, options) =>
           @set('error', response?.status or model?.status or 9000)
+
+      @on('change:canonicalPath', @sendPageViewAnalytics)
+
+    sendPageViewAnalytics: ->
+      # Track loading using the media's own analytics ID, if specified
+      analyticsIDs = @get('googleAnalytics')
+      analytics.sendAnalytics(analyticsIDs) if analyticsIDs
+      analytics.sendAnalytics() # Send site-wide analytics
+
 
     defaultPage: ->
       result = 1
