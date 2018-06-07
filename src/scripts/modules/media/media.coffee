@@ -49,6 +49,7 @@ define (require) ->
       @minimal = options.minimal
       @scrollPosition = 0
 
+      @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title change:parent.id', @updatePageInfo)
       if not @minimal
         @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage
@@ -224,6 +225,11 @@ define (require) ->
       if title isnt components.title and not @model.isBook()
         router.navigate("contents/#{components.uuid}#{components.version}/\
         #{title}#{components.hash_path}#{qs}", {replace: true})
+
+    trackAnalytics: () ->
+      # Track loading using the media's own analytics ID, if specified
+      analyticsIDs = @model.get('googleAnalytics')
+      analytics.sendAnalytics(analyticsIDs) if analyticsIDs
 
     updatePageInfo: () ->
       @pageTitle = @model.get('title')
