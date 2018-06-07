@@ -114,7 +114,10 @@ define (require) ->
 
       e.preventDefault()
       e.stopPropagation()
-      # Rely on the Content.sendPageViewAnalytics to fire
+      href = $(e.currentTarget).attr('href')
+      # this sends the page without a version number (which causes analytics to fire).
+      # It fires twice because @mediaParent.trackAnalytics() also sends an event.
+      router.navigate href, {trigger: false}, () => @mediaParent.trackAnalytics()
 
     closeContentsOnSmallScreen: ->
       if window.innerWidth < 640
