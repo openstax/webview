@@ -12,6 +12,7 @@ define (require) ->
   SimModal = require('cs!./embeddables/modals/sims/sims')
   template = require('hbs!./body-template')
   settings = require('settings')
+  analytics = require('cs!helpers/handlers/analytics')
   require('less!./body')
 
   embeddableTemplates =
@@ -70,7 +71,7 @@ define (require) ->
         # See #1601
         router.navigate(canonicalPath, {replace: true, analytics: false})
       # Only send analytics once the canonical URL is in the browser URL
-      @model.set('canonicalPath', canonicalPath)
+      analytics.sendAnalytics()
 
 
     updateTeacher: ($temp = @$el) ->
