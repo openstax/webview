@@ -55,11 +55,17 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.searchHtml', @render)
 
     canonicalizePath: =>
+      allTrackers = [settings.analyticsID]
+      if @model.get('googleAnalytics')
+        allTrackers = allTrackers.concat(@model.get('googleAnalytics'))
+
       if @model.isBook()
         currentPage = @model.get('currentPage')
         pageIsLoaded = currentPage?.get('loaded')
         return unless pageIsLoaded and currentPage.get('active')
         pageId = currentPage.getShortUuid()
+        if currentPage.get('googleAnalytics')
+          allTrackers = allTrackers.concat(currentPage.get('googleAnalytics'))
       else
         pageId = 0
       currentRoute = Backbone.history.getFragment()
@@ -71,8 +77,7 @@ define (require) ->
         # See #1601
         router.navigate(canonicalPath, {replace: true, analytics: false})
       # Only send analytics once the canonical URL is in the browser URL
-      allTrackers = [settings.analyticsID].concat(@model.get('googleAnalytics') or [])
-      analytics.sendAnalytics(allTrackers)
+      analytics.sendAnalytics(_.uniq(allTrackers))
 
 
     updateTeacher: ($temp = @$el) ->
