@@ -71,7 +71,8 @@ define (require) ->
         # See #1601
         router.navigate(canonicalPath, {replace: true, analytics: false})
       # Only send analytics once the canonical URL is in the browser URL
-      analytics.sendAnalytics()
+      allTrackers = [settings.analyticsID].concat(@model.get('googleAnalytics') or [])
+      analytics.sendAnalytics(allTrackers)
 
 
     updateTeacher: ($temp = @$el) ->
