@@ -33,6 +33,13 @@ iframe {
   text-align: center;
   font-weight: normal;
 }
+
+.os-chapter-outline {
+  ul {
+    margin-top: 0;
+  }
+}
+
 // It is already displayed at the top of the page in blue
 // the `>` is because collated titles (like Key Concepts) contain descendent
 // document-title elements.
@@ -178,8 +185,6 @@ h1.example-title .text {
 .note     { .make-block(note); }
 [data-type="example"],
 .example  { .make-block(example); }
-[data-type="abstract"],
-.abstract { .make-block(note); }
 [data-type="problem"],
 [data-type="solution"],
 .problem,
@@ -335,4 +340,3 @@ h1.example-title .text {
 .appendix [data-type="list"] {
   margin-top: 1rem;
 }
-
