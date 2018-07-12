@@ -68,7 +68,11 @@ define (require) ->
       booksIn: () ->
         @model?.get('booksContainingPage')
       numBooks:() ->
-        @model?.get('booksContainingPage')?.length
+        hits = @model?.get('booksContainingPage')?.length
+        if hits
+          hits
+        else 
+          0
       pageId:() ->
         (window.location.href.split '/')[4]
 
