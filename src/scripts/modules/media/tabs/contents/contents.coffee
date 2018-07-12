@@ -71,7 +71,7 @@ define (require) ->
         hits = @model?.get('booksContainingPage')?.length
         if hits
           hits
-        else 
+        else
           0
       pageId:() ->
         (window.location.href.split '/')[4]
