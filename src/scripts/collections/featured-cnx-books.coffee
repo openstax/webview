@@ -19,9 +19,8 @@ define (require) ->
         book.title = book.title
         book.description = () ->
           abstract = book.abstract
-          abstractText = $(abstract).text().substring(0,100) + '…'
           if abstract isnt null
-            return "#{abstractText}"
+            return $(abstract).text()
           else
             return ''
         book.cover = "#{archive}#{book.resourcePath}"

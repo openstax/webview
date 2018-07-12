@@ -13,6 +13,7 @@
 
       // ## Core Libraries
       jquery: '../../bower_components/jquery/dist/jquery',
+      jqueryui: '../../bower_components/jquery-ui/jquery-ui',
       underscore: '../../bower_components/underscore/underscore',
       backbone: '../../bower_components/backbone/backbone',
       'hbs/handlebars': '../../bower_components/require-handlebars-plugin/hbs/handlebars',
@@ -54,7 +55,10 @@
       l20n: '../../bower_components/l20n/dist/compat/web/l20n',
       templatePolyfill: '../../bower_components/l20n/dist/compat/web/Template',
       babelPolyfill: '../../bower_components/babel-polyfill/browser-polyfill',
-      customEventPolyfill: '../../bower_components/custom-event-polyfill/custom-event-polyfill'
+      customEventPolyfill: '../../bower_components/custom-event-polyfill/custom-event-polyfill',
+
+      // ## Ellipses
+      shave: '../../bower_components/shave/dist/shave'
     },
 
     // # Packages

@@ -35,6 +35,7 @@ home-pageTitle = Propagując wiedzę tworzymy społeczeństwo{$suffix}
 # MAIN PAGE - Featured Textbooks - src/scripts/modules/featured-books/featured-books-partial.html
 
 featured-books-read-more = Więcej
+featured-books-read-less = Mniej
 
 
 
