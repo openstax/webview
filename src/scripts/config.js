@@ -57,6 +57,9 @@
       babelPolyfill: '../../bower_components/babel-polyfill/browser-polyfill',
       customEventPolyfill: '../../bower_components/custom-event-polyfill/custom-event-polyfill',
 
+      // ## Ability to wait for images to load
+      imagesloaded: '../../bower_components/imagesloaded/imagesloaded.pkgd',
+
       // ## Ellipses
       shave: '../../bower_components/shave/dist/shave'
     },
