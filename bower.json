@@ -26,9 +26,9 @@
     "babel-polyfill": "0.0.1",
     "l20n": "https://github.com/katalysteducation/l20n.js.git#v4.0.15",
     "custom-event-polyfill": "0.3.0",
-    "shave": "^2.2.1",
-    "jquery-ui": "^1.12.1",
-    "imagesloaded": "^4.1.4"
+    "shave": "2.2.1",
+    "jquery-ui": "1.12.1",
+    "imagesloaded": "4.1.4"
   },
   "devDependencies": {
     "chai": "4.0.2",
