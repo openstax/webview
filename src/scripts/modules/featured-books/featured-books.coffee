@@ -26,7 +26,7 @@ define (require) ->
     shaveBookDescriptions: () ->
       console.log('sss')
       shave('.book .description', 60)
-      $('.book:not(:has(.description .js-shave)) .read-more').hide()
+      $('.book:has(.description .js-shave) .read-more').show()
       toggled_descriptions = $(
         '.book:has(.description .js-shave):has(.read-more .less:visible) .description'
       )
