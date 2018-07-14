@@ -15,7 +15,7 @@ module.exports = (grunt) ->
       options:
         config: 'nginx.development.conf'
         prefix: './'
-   
+
     # Lint
     # ----
 
@@ -32,6 +32,7 @@ module.exports = (grunt) ->
           it: true
           chai: true
           sinon: true
+          extras: true
 
         # Enforcing options
         camelcase: true
@@ -274,9 +275,11 @@ module.exports = (grunt) ->
     options = @options()
 
     tests = grunt.file.expand(options.files).map((file) -> "../#{file}")
+    extras = grunt.file.read('src/data/extras.json')
 
     # build the template
     template = grunt.file.read(options.template).replace('{{ tests }}', JSON.stringify(tests))
+                                                .replace('{{ extras }}', extras)
 
     # write template to tests directory and run tests
     grunt.file.write(options.runner, template)

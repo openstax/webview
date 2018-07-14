@@ -1,0 +1,45 @@
+{
+  "featuredLinks": [
+    {
+      "title": "Introductory Statistics",
+      "cover": "/images/books/introductory_statistics.png",
+      "link": "/contents/introductory_statistics",
+      "description": "A one-semester introduction to statistics course for students who are not mathematics or engineering majors. It focuses on the interpretation of statistical results, especially in real world settings.",
+      "type": "OpenStax Featured"
+    },
+    {
+        "title": "College Physics",
+        "cover": "/images/books/college_physics.png",
+        "link": "/contents/college_physics",
+        "abstract": "A two-semester introductory physics book that's algebra-based, grounded with real-world examples, illustrations and explanations to help students grasp key, fundamental physics concepts.",
+        "type": "OpenStax Featured"
+    },
+    {
+        "title": "College Introduction to Sociology",
+        "cover": "/images/books/college_introduction_to_sociology.png",
+        "link": "/contents/college_introduction_to_sociology",
+        "abstract": "A one-semester, introductory sociology course including sociology theory and research, real-world applications, simplify and debate features, and learning objectives.",
+        "type": "CNX Featured"
+    },
+    {
+        "title": "Biology",
+        "cover": "/images/books/biology.png",
+        "link": "/contents/biology",
+        "abstract": "Biology is grounded in an evolutionary basis and includes exciting features that highlight careers in the biological sciences and everyday applications of the concepts at hand.",
+        "type": "OpenStax Featured"
+    }, {
+        "title": "Concepts of Biology",
+        "cover": "/images/books/concepts_of_biology.png",
+        "link": "/contents/concepts_of_biology",
+        "abstract": "Concepts of Biology is designed for the introductory biology course for nonmajors taught at most two- and four-year colleges. The scope, sequence, and level of the program are designed to match typical course syllabi in the market.",
+        "type": "OpenStax Featured"
+    },
+    {
+        "title": "Anatomy and Physiology",
+        "cover": "/images/books/anatomy_and_physiology.png",
+        "link": "/contents/anatomy_and_physiology",
+        "abstract": "Anatomy and Physiology is a dynamic textbook for the yearlong Human Anatomy and Physiology course taught at most two- and four-year colleges and universities to students majoring in nursing and allied health.",
+        "type": "OpenStax Featured"
+    }
+  ]
+}
