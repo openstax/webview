@@ -7,7 +7,7 @@ define (require) ->
   archive = "#{location.protocol}//#{settings.cnxarchive.host}#{archiveport}"
 
   return new class SiteStatus extends Backbone.Collection
-    url: "#{archive}/extras"
+    url: "#{archive}/extras/site-messages"
     model: SiteStatusModel
 
     parse: (response) ->

@@ -4,10 +4,10 @@ define (require) ->
   settings = require('settings')
 
   archiveport = if settings.cnxarchive.port then ":#{settings.cnxarchive.port}" else ''
-  SERVER = "#{location.protocol}//#{settings.cnxarchive.host}#{archiveport}"
+  archive = "#{location.protocol}//#{settings.cnxarchive.host}#{archiveport}"
 
   return new class Subjects extends Backbone.Collection
-    url: () -> "#{SERVER}/extras"
+    url: "#{archive}/extras/subjects"
 
     list:
       'Arts'                      : '/images/subjects/art.jpg'
