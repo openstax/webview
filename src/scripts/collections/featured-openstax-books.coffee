@@ -20,6 +20,7 @@ define (require) ->
         book.description = $(book.description).text()
         book.link = book.webview_link
         book.type = 'OpenStax Featured'
+        book.id = book.id.toString()
 
       return books
 

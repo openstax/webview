@@ -33,6 +33,7 @@ module.exports = (grunt) ->
           chai: true
           sinon: true
           extras: true
+          cmsBooks: true
 
         # Enforcing options
         camelcase: true
@@ -276,10 +277,12 @@ module.exports = (grunt) ->
 
     tests = grunt.file.expand(options.files).map((file) -> "../#{file}")
     extras = grunt.file.read('src/data/extras.json')
+    cmsBooks = grunt.file.read('src/data/cms-books.json')
 
     # build the template
     template = grunt.file.read(options.template).replace('{{ tests }}', JSON.stringify(tests))
                                                 .replace('{{ extras }}', extras)
+                                                .replace('{{ cmsBooks }}', cmsBooks)
 
     # write template to tests directory and run tests
     grunt.file.write(options.runner, template)
