@@ -293,7 +293,17 @@ h1.example-title .text {
     font-weight: bold;
     margin: 1.5rem 0 1rem 0;
   }
+
+  [data-type="list"],
+  .list {
+
+    > [data-type="title"],
+    > .title {
+      margin-top: 15px;
+    }
+  }
 }
+
 .os-eoc [data-type="exercise"],
 .os-eoc .exercise {
   p { display: inline; }
@@ -335,4 +345,3 @@ h1.example-title .text {
 .appendix [data-type="list"] {
   margin-top: 1rem;
 }
-
