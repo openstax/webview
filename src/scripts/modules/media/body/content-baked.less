@@ -209,15 +209,18 @@ h1.example-title .text {
 // --------------------------------------------------
 .equation,
 [data-type="equation"] {
-  position: relative;
-
-  .os-number {
-    border: black solid 1px;
-    display: block;
-    padding: 1px 5px;
-    float: right;
-    text-align: center;
+  display: table;
+  width: 100%;
+  .os-equation-number {
+    display: table-cell;
     vertical-align: middle;
+    width: 5%;
+    .os-number {
+      border: black solid 1px;
+      padding: 5px;
+      text-align: center;
+      vertical-align: middle;
+    }
   }
 }
 
@@ -225,7 +228,7 @@ h1.example-title .text {
 //
 // MathJax_Display override
 // --------------------------------------------------
-.MathJax_Display {
+.os-table table thead tr th .MathJax_Display {
   width: auto !important;
   float: left !important;
   margin: 0px;
@@ -335,4 +338,3 @@ h1.example-title .text {
 .appendix [data-type="list"] {
   margin-top: 1rem;
 }
-
