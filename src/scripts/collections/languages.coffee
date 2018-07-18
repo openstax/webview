@@ -13,7 +13,7 @@ define (require) ->
     comparator: 'english'
 
     parse: (response) ->
-      languages = response.languages_and_count
+      languages = response.languages
       allLanguages = settings.languages
       availableLanguages = []
       _.each languages, (language) ->

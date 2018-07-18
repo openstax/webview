@@ -8,11 +8,11 @@ define (require) ->
   archive = "#{location.protocol}//#{settings.cnxarchive.host}#{archiveport}"
 
   return new class FeaturedBooks extends Backbone.Collection
-    url: "#{archive}/extras/featured-links"
+    url: "#{archive}/extras/featured"
     model: FeaturedBook
 
     parse: (response) ->
-      books = response.featuredLinks
+      books = response.featured
 
       _.each books, (book) ->
         book.title = book.title
