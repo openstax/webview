@@ -8,12 +8,12 @@ define (require) ->
   archive = "#{location.protocol}//#{settings.cnxarchive.host}#{archiveport}"
 
   return new class AvailableLanguages extends Backbone.Collection
-    url: "#{archive}/extras"
+    url: "#{archive}/extras/languages"
     model: AvailableLanguage
     comparator: 'english'
 
     parse: (response) ->
-      languages = response.languages_and_count
+      languages = response.languages
       allLanguages = settings.languages
       availableLanguages = []
       _.each languages, (language) ->
