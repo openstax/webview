@@ -67,7 +67,7 @@ define (require) ->
       isBook: () -> @model.isBook()
       booksIn: () ->
         @model?.get('booksContainingPage')
-      isBookLoaded: () -> 
+      isBookLoaded: () ->
         @isContentLoaded
       numBooks:() ->
         hits = @model?.get('booksContainingPage')?.length
