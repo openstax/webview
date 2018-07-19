@@ -2,7 +2,6 @@
 // This should **only** be imported inside a containing selector like:
 //
 //     #content { @import 'this_file.less'; }
-
 @import 'content-common';
 @import '_make-block';
 
@@ -12,11 +11,12 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 1.5rem 0 1rem 0;
+  margin: 1.5rem 0 1rem;
   font-weight: bold;
 }
 
-ul, ol {
+ol,
+ul {
   color: @gray;
   margin-bottom: 1rem;
   margin-top: 1rem;
@@ -36,20 +36,23 @@ iframe {
 
 .no-emphasis {
   font-weight: normal;
-} //to ensure that all terms with this tag will display unbolded
-
+}
+//to ensure that all terms with this tag will display unbolded
 // It is already displayed at the top of the page in blue
 // the `>` is because collated titles (like Key Concepts) contain descendent
 // document-title elements.
+
 [data-type="page"],
 [data-type="composite-page"] {
-  > [data-type="document-title"] { display: none; }
+  > [data-type="document-title"] {
+    display: none;
+  }
 }
 
-> section,
-> figure,
 > [data-type="glossary"],
-> [data-type="footnote-refs"] {
+ > [data-type="footnote-refs"],
+ > figure,
+ > section {
   margin-top: 6rem;
 
   > ol > li::before {
@@ -59,8 +62,10 @@ iframe {
 
 .splash {
   margin-top: 0;
+
   &:not([data-orient="vertical"]) {
     display: block;
+
     img {
       width: 100%;
     }
@@ -70,106 +75,115 @@ iframe {
 .os-figure {
   display: table;
   margin: 3rem auto;
+
   .os-caption-container {
     padding-top: 1rem;
     display: table-caption;
     caption-side: bottom;
     font-size: 1.2rem;
     color: @gray;
+
     .os-title-label {
       font-weight: bold;
     }
+
     .os-number {
       font-weight: bold;
     }
+
     .os-title {
       font-weight: bold;
     }
   }
 
-figure {
+  figure {
+    // Subfigures
+    > figure {
+      &.ui-has-child-figcaption > figcaption::before {
+        //font-weight: bold;
+        //content: counter(figure) counter(subfigure,lower-alpha) ': ';
+      }
 
-  // Subfigures
-  > figure {
-    &.ui-has-child-figcaption > figcaption::before {
-      //font-weight: bold;
-      //content: counter(figure) counter(subfigure,lower-alpha) ': ';
-    }
-
-    &:not(.ui-has-child-figcaption)::after {
-      //content: '(' counter(subfigure,lower-alpha) ')';
-     }
+      &:not(.ui-has-child-figcaption)::after {
+        //content: '(' counter(subfigure,lower-alpha) ')';
+      }
     }
   }
 }
-
-
 // By default, figures are laid out horizontally
 // unless they have the data-orient="vertical" attribute.
-figure:not([data-orient="vertical"]) {
-}
 
-
+figure:not([data-orient="vertical"]) {}
 // --------------------------------
 // Blockish things (note, example, exercise)
 // --------------------------------
-
 // Slots for various blockish pieces of content (things with a label, title, and body)
 // This **ONLY** contains rules, no selectors.
+
 #blockish {
-.style(note) {
-  margin: 3rem 0;
-  padding: 1.5rem;
-  background-color: @gray-lightest;
-  border: 0.2rem solid @gray-lighter;
+  .style(note) {
+    margin: 3rem 0;
+    padding: 1.5rem;
+    background-color: @gray-lightest;
+    border: 0.2rem solid @gray-lighter;
 
-  > p {
-    margin-top: 0;
+    > p {
+      margin-top: 0;
+    }
+
+    :last-child {
+      //  margin-bottom: 0;
+    }
   }
 
-  :last-child {
-  //  margin-bottom: 0;
-  }
-}
-.title(note) {
-  color: @gray;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  display: block;
-  margin-bottom: 1rem;
-  margin-top: 0;
-  padding: 0rem 1.5rem 1rem 1.5rem;
-  border-bottom: 0.2rem solid @gray-lighter;
-
-
-}
-.body(note) {
-  border-top: none;
-  padding: 0rem 1.5rem;
-  background-color: @gray-lightest;
-  color: @gray;
-
-  p {
-    margin: 0 0 1rem;
-  }
-
-  ul,ol {
+  .title(note) {
     color: @gray;
-  }
-
-  > span[data-type="media"] {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
     display: block;
-    margin: 1rem 0;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    padding: 0 1.5rem 1rem;
+    border-bottom: 0.2rem solid @gray-lighter;
+  }
+
+  .body(note) {
+    border-top: none;
+    padding: 0 1.5rem;
+    background-color: @gray-lightest;
+    color: @gray;
+
+    p {
+      margin: 0 0 1rem;
+    }
+
+    ol,
+    ul {
+      color: @gray;
+    }
+
+    > span[data-type="media"] {
+      display: block;
+      margin: 1rem 0;
+    }
+  }
+
+  .style(example) {
+    .style(note)
+  }
+
+  .title(example) {
+    .title(note)
+  }
+
+  .body(example) {
+    .body(note)
   }
 }
-.style(example) { .style(note) }
-.title(example) { .title(note) }
-.body(example) { .body(note) }
-}
-
 // TODO refactor this
+
 h1.example-title .text {
   padding-left: 1rem;
 }
@@ -180,11 +194,20 @@ h1.example-title .text {
 }
 
 [data-type="note"],
-.note     { .make-block(note); }
+.note {
+  .make-block(note);
+}
+
 [data-type="example"],
-.example  { .make-block(example); }
+.example {
+  .make-block(example);
+}
+
 [data-type="abstract"],
-.abstract { .make-block(note); }
+.abstract {
+  .make-block(note);
+}
+
 [data-type="problem"],
 [data-type="solution"],
 .problem,
@@ -192,6 +215,7 @@ h1.example-title .text {
   padding: 0;
 }
 // solutions of notes, exercises, and examples have a top-border to separate the solution
+
 [data-type="note"],
 [data-type="exercise"],
 [data-type="example"] {
@@ -199,27 +223,28 @@ h1.example-title .text {
   .solution {
     border-top: 0.1rem solid @gray-lighter;
 
-    section p,
-    section ul,
+    section .os-table,
     section ol,
-    section .os-table {
+    section p,
+    section ul {
       padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
-
   }
 }
-
 // Equations
 // --------------------------------------------------
+
 .equation,
 [data-type="equation"] {
   display: table;
   width: 100%;
+
   .os-equation-number {
     display: table-cell;
     vertical-align: middle;
     width: 5%;
+
     .os-number {
       border: black solid 1px;
       padding: 5px;
@@ -228,62 +253,67 @@ h1.example-title .text {
     }
   }
 }
-
-
 //
 // MathJax_Display override
 // --------------------------------------------------
+
 .os-table table thead tr th .MathJax_Display {
   width: auto !important;
   float: left !important;
-  margin: 0px;
+  margin: 0;
 }
-
 // Tables
 // --------------------------------------------------
+
 .os-table {
   margin: @line-height-computed 0;
+
   .os-table-title {
     text-align: center;
     font-weight: bold;
     padding-bottom: 1em;
   }
+
   table {
     margin: 0;
+
     tr {
       td {
         vertical-align: middle;
-        padding: 1em 0em;
+        padding: 1em 0;
       }
     }
   }
+
   .os-caption-container {
     font-size: 0.9em;
     padding: 8px;
     border-top: 0.1rem solid @gray-lighter;
 
-    .os-title-label,
-    .os-number {
+    .os-number,
+    .os-title-label {
       font-weight: bold;
       display: inline-block;
       padding-right: 0.25em;
     }
+
     .os-caption {
       display: inline-block;
     }
   }
 }
-
 //
 // End of Chapter/End of Book
 // --------------------------------------------------
-.os-eoc,
-.os-eob {
+
+.os-eob,
+.os-eoc {
   h2[data-type="document-title"],
   h2.os-title {
     font-size: 2.1rem;
     font-weight: bold;
   }
+
   .os-number {
     padding-right: 0;
     font-weight: bold;
@@ -294,6 +324,7 @@ h1.example-title .text {
     &:not(:first-of-type) {
       margin-top: 0.5rem;
     }
+
     .os-term {
       font-weight: bold;
       padding-right: 0.5rem;
@@ -304,7 +335,7 @@ h1.example-title .text {
     display: block;
     font-size: 2.1rem;
     font-weight: bold;
-    margin: 1.5rem 0 1rem 0;
+    margin: 1.5rem 0 1rem;
   }
 
   &.os-reference-container > .os-chapter-area > .reference {
@@ -316,49 +347,55 @@ h1.example-title .text {
   [data-type="list"],
   .list {
     > [data-type="title"],
-    > .title {
+     > .title {
       margin-top: 15px;
     }
   }
 
-.os-eoc [data-type="exercise"],
-.os-eoc .exercise {
-  p { display: inline; }
-  [data-type="problem"] > .number {
-    .exercise-number();
-  }
-
-  img {
-    float: left;
-    margin-right: 10px;
-  }
-
-  ol {
-    overflow: hidden;
-  }
-  clear: left;
-}
-
-.os-solutions-container {
-  // TODO: Fix this selector; it should be similar to the problem number one
-  [data-type="solution"] {
-    padding: 0.5em 0.25em 0.5em 0;
-    //display: inline;
-    > a /*> .number*/ {
-      .exercise-number();
-    }
+  .os-eoc [data-type="exercise"],
+  .os-eoc .exercise {
     p {
       display: inline;
-      &::before {
-        content: " ";
+    }
+
+    [data-type="problem"] > .number {
+      .exercise-number();
+    }
+
+    img {
+      float: left;
+      margin-right: 10px;
+    }
+
+    ol {
+      overflow: hidden;
+    }
+    clear: left;
+  }
+
+  .os-solutions-container {
+    // TODO: Fix this selector; it should be similar to the problem number one
+    [data-type="solution"] {
+      padding: 0.5em 0.25em 0.5em 0;
+      //display: inline;
+      /*> .number*/
+      > a {
+        .exercise-number();
+      }
+
+      p {
+        display: inline;
+
+        &::before {
+          content: " ";
+        }
       }
     }
   }
+  .os-chapter-area [data-type="solution"] p {
+    display: inline;
+  }
 }
-.os-chapter-area [data-type="solution"] p {
-  display: inline;
-}
-
 .appendix [data-type="list"] {
   margin-top: 1rem;
 }
