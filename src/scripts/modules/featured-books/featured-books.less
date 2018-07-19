@@ -19,6 +19,7 @@
     > .book {
       .make-sm-column(6);
       display: block;
+      min-height: 182px;
       margin-bottom: 3rem; // Add spacing between books when they're aligned vertically
       padding-bottom: 2rem;
 
@@ -32,6 +33,7 @@
       }
 
       &:nth-child(2n+1) {
+        clear: left;
         padding-right: 1.5rem;
         padding-left: 0;
       }
@@ -59,16 +61,28 @@
         }
       }
 
-     .read-more {
-       position:absolute;
-       bottom:1rem;
-       right:2rem;
+      p.description {
+        overflow: hidden;
+      }
 
-       > :after {
-         content: '▸';
-         margin-left:0.5rem;
-       }
-     }
+      .show {
+        display: none;
+        float: right;
+
+        > .more::after {
+          content: '▸';
+          margin-left: 0.5rem;
+        }
+
+        > .less {
+          display: none;
+
+          &::after {
+            content: '▴';
+            margin-left: 0.5rem;
+          }
+        }
+      }
 
       p {
         font-weight: 300;
