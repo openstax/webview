@@ -34,9 +34,16 @@ iframe {
   font-weight: normal;
 }
 
+.os-chapter-outline {
+  ul {
+    margin-top: 0;
+  }
+}
+
 .no-emphasis {
   font-weight: normal;
 } //to ensure that all terms with this tag will display unbolded
+
 
 // It is already displayed at the top of the page in blue
 // the `>` is because collated titles (like Key Concepts) contain descendent
@@ -158,7 +165,7 @@ figure:not([data-orient="vertical"]) {
     color: @gray;
   }
 
-  > span[data-type="media"] {
+  span[data-type="media"] {
     display: block;
     margin: 1rem 0;
   }
@@ -182,8 +189,6 @@ h1.example-title .text {
 .note     { .make-block(note); }
 [data-type="example"],
 .example  { .make-block(example); }
-[data-type="abstract"],
-.abstract { .make-block(note); }
 [data-type="problem"],
 [data-type="solution"],
 .problem,
@@ -252,7 +257,7 @@ h1.example-title .text {
     tr {
       td {
         vertical-align: middle;
-        padding: 1em 0em;
+        padding: @table-cell-padding;
       }
     }
   }
@@ -329,14 +334,9 @@ h1.example-title .text {
   }
 
   img {
-    float: left;
-    margin-right: 10px;
+    display: block;
+    margin-bottom: 1em;
   }
-
-  ol {
-    overflow: hidden;
-  }
-  clear: left;
 }
 
 .os-solutions-container {
