@@ -38,6 +38,14 @@ define (require) ->
 
       return url
 
+    extrasUrl: () ->
+      id = @getVersionedId()
+
+      if @isInBook()
+        return "#{ARCHIVE}/contents/#{@get('book').getVersionedId()}:#{id}.json"
+      else
+        return "#{ARCHIVE}/contents/#{id}.json"
+
     parse: (response, options = {}) ->
       # Don't overwrite the title from the book's table of contents
       #if @get('title') then delete response.title
@@ -92,12 +100,8 @@ define (require) ->
             @set('downloads', [])
             @set('isLatest', true)
           else
-            if @isInBook()
-              url = "#{ARCHIVE}/extras/#{@get('book').getVersionedId()}:#{@getVersionedId()}"
-            else
-              url = "#{ARCHIVE}/extras/#{@getVersionedId()}"
             $.ajax
-              url: url
+              url: @extrasUrl()
               dataType: 'json'
             .done (response) =>
               @set('downloads', response.downloads)
