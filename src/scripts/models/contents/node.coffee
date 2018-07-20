@@ -92,8 +92,12 @@ define (require) ->
             @set('downloads', [])
             @set('isLatest', true)
           else
+            if @isInBook()
+              url = "#{ARCHIVE}/extras/#{@get('book').getVersionedId()}:#{@getVersionedId()}"
+            else
+              url = "#{ARCHIVE}/extras/#{@getVersionedId()}"
             $.ajax
-              url: "#{ARCHIVE}/extras/#{@getVersionedId()}"
+              url: url
               dataType: 'json'
             .done (response) =>
               @set('downloads', response.downloads)
