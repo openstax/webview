@@ -20,6 +20,12 @@
         port: 8080
       },
 
+      // Hostname and port for the OpenStax CMS server
+      openstaxcms: {
+        host: 'openstax.org',
+        port: 443
+      },
+
       // Prefix to prepend to page titles
       titleSuffix: ' - OpenStax CNX',
 

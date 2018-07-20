@@ -18,9 +18,11 @@
 
   {{else}}
     <div class="booksContaining">
+      {{#if isBookLoaded}}
       <div>
-        <span class="title" data-l10n-id="textbook-view-page-in-books" data-l10n-args='{"numbooks":{{numBooks}} }'>{{numBooksText}}</span>
+        <span class="title" data-l10n-id="textbook-view-page-in-books" data-l10n-args='{"numbooks":{{numBooks}} }'>This page is in {{numBooks}} books</span>
       </div>
+      {{/if}}
       <br>
       <ul>
         {{#each booksIn}}

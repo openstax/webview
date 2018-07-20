@@ -67,15 +67,14 @@ define (require) ->
       isBook: () -> @model.isBook()
       booksIn: () ->
         @model?.get('booksContainingPage')
-      numBooksText:() ->
+      isBookLoaded: () ->
+        @isContentLoaded
+      numBooks:() ->
         hits = @model?.get('booksContainingPage')?.length
-        return unless hits?
-        if hits is 0
-          "This page is not in any books."
-        else if hits is 1
-          "This page is in this book:"
+        if hits
+          hits
         else
-          "This page is in #{hits} books:"
+          0
       pageId:() ->
         (window.location.href.split '/')[4]
 
@@ -96,6 +95,7 @@ define (require) ->
       @listenTo(@model, 'change:currentPage', @loadHighlightedPage)
       @listenTo(@model, 'change:booksContainingPage', @handleBooksContainingPage)
       @scrollPosition = 0
+      @isContentLoaded = false
 
     onRender: () ->
       @$el.addClass('table-of-contents')
@@ -212,4 +212,5 @@ define (require) ->
         for author in book["authors"]
           s.push(author["fullname"])
         book["authors"] = s.toString()
+      @isContentLoaded = true
       @render()

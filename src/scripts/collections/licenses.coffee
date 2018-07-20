@@ -6,7 +6,7 @@ define (require) ->
   archive = "#{location.protocol}//#{settings.cnxarchive.host}#{archiveport}"
 
   return new class License extends Backbone.Collection
-    url: "#{archive}/extras"
+    url: "#{archive}/extras/licenses"
 
     parse: (response) ->
       licenses = response.licenses

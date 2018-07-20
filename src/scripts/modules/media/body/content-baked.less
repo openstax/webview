@@ -40,6 +40,11 @@ iframe {
   }
 }
 
+.no-emphasis {
+  font-weight: normal;
+} //to ensure that all terms with this tag will display unbolded
+
+
 // It is already displayed at the top of the page in blue
 // the `>` is because collated titles (like Key Concepts) contain descendent
 // document-title elements.
@@ -89,8 +94,7 @@ iframe {
     }
   }
 
-figure {
-
+  figure {
   // Subfigures
   > figure {
     &.ui-has-child-figcaption > figcaption::before {
@@ -214,15 +218,18 @@ h1.example-title .text {
 // --------------------------------------------------
 .equation,
 [data-type="equation"] {
-  position: relative;
-
-  .os-number {
-    border: black solid 1px;
-    display: block;
-    padding: 1px 5px;
-    float: right;
-    text-align: center;
+  display: table;
+  width: 100%;
+  .os-equation-number {
+    display: table-cell;
     vertical-align: middle;
+    width: 5%;
+    .os-number {
+      border: black solid 1px;
+      padding: 5px;
+      text-align: center;
+      vertical-align: middle;
+    }
   }
 }
 
@@ -240,6 +247,11 @@ h1.example-title .text {
 // --------------------------------------------------
 .os-table {
   margin: @line-height-computed 0;
+  .os-table-title {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 1em;
+  }
   table {
     margin: 0;
     tr {
@@ -298,7 +310,22 @@ h1.example-title .text {
     font-weight: bold;
     margin: 1.5rem 0 1rem 0;
   }
+
+  &.os-reference-container > .os-chapter-area > .reference {
+    span.os-reference-number {
+      margin-right: 10px;
+    }
+  }
+
+  [data-type="list"],
+  .list {
+    > [data-type="title"],
+    > .title {
+      margin-top: 15px;
+    }
+  }
 }
+
 .os-eoc [data-type="exercise"],
 .os-eoc .exercise {
   p { display: inline; }
@@ -328,6 +355,7 @@ h1.example-title .text {
     }
   }
 }
+
 .os-chapter-area [data-type="solution"] p {
   display: inline;
 }

@@ -1,0 +1,511 @@
+{
+    "meta": {
+        "total_count": 36
+    },
+    "items": [
+        {
+            "id": 46,
+            "meta": {
+                "slug": "prealgebra",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/46/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/prealgebra/",
+                "first_published_at": "2016-03-09T10:00:11.787802-06:00"
+            },
+            "title": "Prealgebra",
+            "description": "<p></p><p><i>Prealgebra</i> is designed to meet scope and sequence requirements for a one-semester prealgebra course. The book’s organization makes it easy to adapt to a variety of course syllabi. The text introduces the fundamental concepts of algebra while addressing the needs of students with diverse backgrounds and learning styles. Each topic builds upon previously developed material to demonstrate the cohesiveness and structure of mathematics.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/prealgebra_1.svg",
+            "webview_link": "https://cnx.org/contents/caa57dab-41c7-455e-bd6f-f443cda5519c"
+        },
+        {
+            "id": 130,
+            "meta": {
+                "slug": "elementary-algebra",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/130/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/elementary-algebra/",
+                "first_published_at": "2017-02-13T15:16:38.440710-06:00"
+            },
+            "title": "Elementary Algebra",
+            "description": "<p><i>Elementary Algebra</i> is designed to meet the scope and sequence requirements of a one-semester elementary algebra course. The book’s organization makes it easy to adapt to a variety of course syllabi. The text expands on the fundamental concepts of algebra while addressing the needs of students with diverse backgrounds and learning styles. Each topic builds upon previously developed material to demonstrate the cohesiveness and structure of mathematics.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/elementary-algebra.svg",
+            "webview_link": "https://cnx.org/contents/0889907c-f0ef-496a-bcb8-2a5bb121717f"
+        },
+        {
+            "id": 131,
+            "meta": {
+                "slug": "intermediate-algebra",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/131/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/intermediate-algebra/",
+                "first_published_at": "2017-02-17T15:15:54.212862-06:00"
+            },
+            "title": "Intermediate Algebra",
+            "description": "<p><i>Intermediate Algebra</i> is designed to meet the scope and sequence requirements of a one-semester intermediate algebra course. The book’s organization makes it easy to adapt to a variety of course syllabi. The text expands on the fundamental concepts of algebra while addressing the needs of students with diverse backgrounds and learning styles. The material is presented as a sequence of clear steps, building on concepts presented in prealgebra and elementary algebra courses.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/intermediate-algebra.svg",
+            "webview_link": "https://cnx.org/contents/02776133-d49d-49cb-bfaa-67c7f61b25a1"
+        },
+        {
+            "id": 39,
+            "meta": {
+                "slug": "college-algebra",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/39/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/college-algebra/",
+                "first_published_at": "2016-03-09T09:54:06.207750-06:00"
+            },
+            "title": "College Algebra",
+            "description": "<p></p><p><i>College Algebra</i> provides a comprehensive exploration of algebraic principles and meets scope and sequence requirements for a typical introductory algebra course. The modular approach and richness of content ensure that the book meets the needs of a variety of courses. <i>College Algebra</i> offers a wealth of examples with detailed, conceptual explanations, building a strong foundation in the material before asking students to apply what they’ve learned.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/college_algebra.svg",
+            "webview_link": "https://cnx.org/contents/9b08c294-057f-4201-9f48-5d6ad992740d"
+        },
+        {
+            "id": 38,
+            "meta": {
+                "slug": "algebra-and-trigonometry",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/38/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/algebra-and-trigonometry/",
+                "first_published_at": "2016-03-09T09:53:01.890636-06:00"
+            },
+            "title": "Algebra and Trigonometry",
+            "description": "<p><i>Algebra and Trigonometry</i> provides a comprehensive exploration of algebraic principles and meets scope and sequence requirements for a typical introductory algebra and trigonometry course. The modular approach and the richness of content ensure that the book meets the needs of a variety of courses. <i>Algebra and Trigonometry</i> offers a wealth of examples with detailed, conceptual explanations, building a strong foundation in the material before asking students to apply what they’ve learned.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/algebra_trigonometry.svg",
+            "webview_link": "https://cnx.org/contents/13ac107a-f15f-49d2-97e8-60ab2e3b519c"
+        },
+        {
+            "id": 37,
+            "meta": {
+                "slug": "precalculus",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/37/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/precalculus/",
+                "first_published_at": "2016-03-09T09:50:20.975884-06:00"
+            },
+            "title": "Precalculus",
+            "description": "<p><i>Precalculus</i> is adaptable and designed to fit the needs of a variety of precalculus courses. It is a comprehensive text that covers more ground than a typical one- or two-semester college-level precalculus course. The content is organized by clearly-defined learning objectives and includes worked examples that demonstrate problem-solving approaches in an accessible way.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/precalculus.svg",
+            "webview_link": "https://cnx.org/contents/fd53eae1-fa23-47c7-bb1b-972349835c3c"
+        },
+        {
+            "id": 74,
+            "meta": {
+                "slug": "calculus-volume-1",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/74/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/calculus-volume-1/",
+                "first_published_at": "2016-03-10T14:37:26.063299-06:00"
+            },
+            "title": "Calculus Volume 1",
+            "description": "<p><i>Calculus</i> is designed for the typical two- or three-semester general calculus course, incorporating innovative features to enhance student learning. The book guides students through the core concepts of calculus and helps them understand how those concepts apply to their lives and the world around them. Due to the comprehensive nature of the material, we are offering the book in three volumes for flexibility and efficiency. <i>Volume 1</i> covers functions, limits, derivatives, and integration.<br/></p><p>Please note that this title is published under a CC BY-NC-SA 4.0 license, which means that you are free to use and adapt, but not for commercial purposes. Changes you make need to be shared using this license.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/calculus-v1.svg",
+            "webview_link": "https://cnx.org/contents/8b89d172-2927-466f-8661-01abc7ccdba4"
+        },
+        {
+            "id": 75,
+            "meta": {
+                "slug": "calculus-volume-2",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/75/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/calculus-volume-2/",
+                "first_published_at": "2016-03-10T14:37:26.063299-06:00"
+            },
+            "title": "Calculus Volume 2",
+            "description": "<p><i>Calculus</i> is designed for the typical two- or three-semester general calculus course, incorporating innovative features to enhance student learning. The book guides students through the core concepts of calculus and helps them understand how those concepts apply to their lives and the world around them. Due to the comprehensive nature of the material, we are offering the book in three volumes for flexibility and efficiency. <i>Volume 2</i> covers integration, differential equations, sequences and series, and parametric equations and polar coordinates..</p><p>Please note that this title is published under a CC BY-NC-SA 4.0 license, which means that you are free to use and adapt, but not for commercial purposes. Changes you make need to be shared using this license.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/calculus-v2.svg",
+            "webview_link": "https://cnx.org/contents/1d39a348-071f-4537-85b6-c98912458c3c"
+        },
+        {
+            "id": 76,
+            "meta": {
+                "slug": "calculus-volume-3",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/76/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/calculus-volume-3/",
+                "first_published_at": "2016-03-10T14:37:26.063299-06:00"
+            },
+            "title": "Calculus Volume 3",
+            "description": "<p><i>Calculus</i> is designed for the typical two- or three-semester general calculus course, incorporating innovative features to enhance student learning. The book guides students through the core concepts of calculus and helps them understand how those concepts apply to their lives and the world around them. Due to the comprehensive nature of the material, we are offering the book in three volumes for flexibility and efficiency. <i>Volume 3</i> covers parametric equations and polar coordinates, vectors, functions of several variables, multiple integration, and second-order differential equations.</p><p>Please note that this title is published under a CC BY-NC-SA 4.0 license, which means that you are free to use and adapt, but not for commercial purposes. Changes you make need to be shared using this license.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/calculus-v3.svg",
+            "webview_link": "https://cnx.org/contents/a31cd793-2162-4e9e-acb5-6e6bbd76a5fa"
+        },
+        {
+            "id": 36,
+            "meta": {
+                "slug": "introductory-statistics",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/36/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/introductory-statistics/",
+                "first_published_at": "2016-03-09T09:49:10.790493-06:00"
+            },
+            "title": "Introductory Statistics",
+            "description": "<p><i>Introductory Statistics</i> follows scope and sequence requirements of a one-semester introduction to statistics course and is geared toward students majoring in fields other than math or engineering. The text assumes some knowledge of intermediate algebra and focuses on statistics application over theory.<i> Introductory Statistics</i> includes innovative practical applications that make the text relevant and accessible, as well as collaborative exercises, technology integration problems, and statistics labs.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/statistics.svg",
+            "webview_link": "https://cnx.org/contents/30189442-6998-4686-ac05-ed152b91b9de"
+        },
+        {
+            "id": 35,
+            "meta": {
+                "slug": "anatomy-and-physiology",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/35/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/anatomy-and-physiology/",
+                "first_published_at": "2016-03-09T09:48:12.654796-06:00"
+            },
+            "title": "Anatomy and Physiology",
+            "description": "<p><i>Anatomy and Physiology</i> is a dynamic textbook for the two-semester human anatomy and physiology course for life science and allied health majors. The book is organized by body system and covers standard scope and sequence requirements. Its lucid text, strategically constructed art, career features, and links to external learning tools address the critical teaching and learning challenges in the course. The web-based version of <i>Anatomy and Physiology</i> also features links to surgical videos, histology, and interactive diagrams.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/anatomy_physiology.svg",
+            "webview_link": "https://cnx.org/contents/14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22"
+        },
+        {
+            "id": 81,
+            "meta": {
+                "slug": "astronomy",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/81/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/astronomy/",
+                "first_published_at": "2016-04-22T12:11:50.319882-05:00"
+            },
+            "title": "Astronomy",
+            "description": "<p><i>Astronomy</i> is designed to meet the scope and sequence requirements of one- or two-semester introductory astronomy courses. The book begins with relevant scientific fundamentals and progresses through an exploration of the solar system, stars, galaxies, and cosmology. The <i>Astronomy</i> textbook builds student understanding through the use of relevant analogies, clear and non-technical explanations, and rich illustrations. Mathematics is included in a flexible manner to meet the needs of individual instructors.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/astronomy.svg",
+            "webview_link": "https://cnx.org/contents/2e737be8-ea65-48c3-aa0a-9f35b4c6a966"
+        },
+        {
+            "id": 121,
+            "meta": {
+                "slug": "biology",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/121/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/biology/",
+                "first_published_at": "2016-12-16T09:52:20.369252-06:00"
+            },
+            "title": "Biology",
+            "description": "<p><i>Biology</i> is designed to cover the scope and sequence requirements of a typical two-semester biology course for science majors. The text provides comprehensive coverage of foundational research and core biology concepts through an evolutionary lens. <i>Biology</i> includes rich features that engage students in scientific inquiry, highlight careers in the biological sciences, and offer everyday applications. The book also includes clicker questions to help students understand—and apply—key concepts. <br/><br/>This book has been superseded by <a href=\"/details/books/biology-2e\">Biology 2e</a> and is no longer being updated. Print copies of our first edition will be available until we run out of stock, and this page will be taken down in June 2019. We recommend that you use Biology 2e, available <a href=\"/details/books/biology-2e\">here</a>.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/biology.svg",
+            "webview_link": "https://cnx.org/contents/185cbf87-c72e-48f5-b51e-f14f21b5eabd"
+        },
+        {
+            "id": 207,
+            "meta": {
+                "slug": "biology-2e",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/207/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/biology-2e/",
+                "first_published_at": "2018-03-09T15:44:46.846024-06:00"
+            },
+            "title": "Biology 2e",
+            "description": "<p><i>Biology 2e</i> is designed to cover the scope and sequence requirements of a typical two-semester biology course for science majors. The text provides comprehensive coverage of foundational research and core biology concepts through an evolutionary lens. <i>Biology</i> includes rich features that engage students in scientific inquiry, highlight careers in the biological sciences, and offer everyday applications. The book also includes various types of practice and homework questions that help students understand—and apply—key concepts.</p><p><br/>The 2nd edition has been revised to incorporate clearer, more current, and more dynamic explanations, while maintaining the same organization as the first edition. Art and illustrations have been substantially improved, and the textbook features additional assessments and related resources.</p><p><br/></p><p></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/biology_book_card_2e.svg",
+            "webview_link": "https://cnx.org/contents/8d50a0af-948b-4204-a71d-4826cba765b8"
+        },
+        {
+            "id": 34,
+            "meta": {
+                "slug": "concepts-biology",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/34/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/concepts-biology/",
+                "first_published_at": "2016-03-09T09:47:29.653246-06:00"
+            },
+            "title": "Concepts of Biology",
+            "description": "<p><i>Concepts of Biology</i> is designed for the typical introductory biology course for nonmajors, covering standard scope and sequence requirements. The text includes interesting applications and conveys the major themes of biology, with content that is meaningful and easy to understand. The book is designed to demonstrate biology concepts and to promote scientific literacy.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/concpets_biology_eZrc8yQ.svg",
+            "webview_link": "https://cnx.org/contents/b3c1e1d2-839c-42b0-a314-e119a8aafbdd"
+        },
+        {
+            "id": 83,
+            "meta": {
+                "slug": "microbiology",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/83/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/microbiology/",
+                "first_published_at": "2016-04-26T10:41:48.505644-05:00"
+            },
+            "title": "Microbiology",
+            "description": "<p><i>Microbiology</i> covers the scope and sequence requirements for a single-semester microbiology course for non-majors. The book presents the core concepts of microbiology with a focus on applications for careers in allied health. The pedagogical features of the text make the material interesting and accessible while maintaining the career-application focus and scientific rigor inherent in the subject matter. <i>Microbiology</i>’s art program enhances students’ understanding of concepts through clear and effective illustrations, diagrams, and photographs.<br/></p><p><i>Microbiology</i> is produced through a collaborative publishing agreement between OpenStax and the American Society for Microbiology Press. The book aligns with the curriculum guidelines of the American Society for Microbiology.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/microbiology.svg",
+            "webview_link": "https://cnx.org/contents/e42bd376-624b-4c0f-972f-e0c57998e765"
+        },
+        {
+            "id": 43,
+            "meta": {
+                "slug": "chemistry",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/43/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/chemistry/",
+                "first_published_at": "2016-03-09T09:57:39.246931-06:00"
+            },
+            "title": "Chemistry",
+            "description": "<p><i>Chemistry</i> is designed to meet the scope and sequence requirements of the two-semester general chemistry course. The textbook provides an important opportunity for students to learn the core concepts of chemistry and understand how those concepts apply to their lives and the world around them. The book also includes a number of innovative features, including interactive exercises and real-world applications, designed to enhance student learning.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/chemistry.svg",
+            "webview_link": "https://cnx.org/contents/85abf193-2bd2-4908-8563-90b8a7ac8df6"
+        },
+        {
+            "id": 93,
+            "meta": {
+                "slug": "chemistry-atoms-first",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/93/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/chemistry-atoms-first/",
+                "first_published_at": "2016-07-19T11:18:52.182148-05:00"
+            },
+            "title": "Chemistry: Atoms First",
+            "description": "<p><i>Chemistry: Atoms First</i> is a peer-reviewed, openly licensed introductory textbook produced through a collaborative publishing partnership between OpenStax and the University of Connecticut and UConn Undergraduate Student Government Association.<br/></p><p>This title is an adaptation of the OpenStax <i>Chemistry</i> text and covers scope and sequence requirements of the two-semester general chemistry course. Reordered to fit an atoms first approach, this title introduces atomic and molecular structure much earlier than the traditional approach, delaying the introduction of more abstract material so students have time to acclimate to the study of chemistry. <i>Chemistry: Atoms First</i> also provides a basis for understanding the application of quantitative principles to the chemistry that underlies the entire course.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Chmistry-Atoms-First.svg",
+            "webview_link": "https://cnx.org/contents/4539ae23-1ccc-421e-9b25-843acbb6c4b0"
+        },
+        {
+            "id": 31,
+            "meta": {
+                "slug": "college-physics",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/31/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/college-physics/",
+                "first_published_at": "2016-03-09T09:05:28.982257-06:00"
+            },
+            "title": "College Physics",
+            "description": "<p><i>College Physics</i> meets standard scope and sequence requirements for a two-semester introductory algebra-based physics course. The text is grounded in real-world examples to help students grasp fundamental physics concepts. It requires knowledge of algebra and some trigonometry, but not calculus. <i>College Physics</i> includes learning objectives, concept questions, links to labs and simulations, and ample practice opportunities for traditional physics application problems.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/physics.svg",
+            "webview_link": "https://cnx.org/contents/031da8d3-b525-429c-80cf-6c8ed997733a"
+        },
+        {
+            "id": 82,
+            "meta": {
+                "slug": "university-physics-volume-1",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/82/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/university-physics-volume-1/",
+                "first_published_at": "2016-04-22T12:13:54.743756-05:00"
+            },
+            "title": "University Physics Volume 1",
+            "description": "<p><i>University Physics</i> is a three-volume collection that meets the scope and sequence requirements for two- and three-semester calculus-based physics courses. <i>Volume 1</i> covers mechanics, sound, oscillations, and waves. <a href=\"https://openstax.org/details/books/university-physics-volume-2\"><i>Volume 2</i></a> covers thermodynamics, electricity and magnetism, and <a href=\"https://openstax.org/details/books/university-physics-volume-3\"><i>Volume 3</i></a> covers optics and modern physics. This textbook emphasizes connections between theory and application, making physics concepts interesting and accessible to students while maintaining the mathematical rigor inherent in the subject. Frequent, strong examples focus on how to approach a problem, how to work with the equations, and how to check and generalize the result.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/university_physics-v1.png",
+            "webview_link": "https://cnx.org/contents/d50f6e32-0fda-46ef-a362-9bd36ca7c97d"
+        },
+        {
+            "id": 94,
+            "meta": {
+                "slug": "university-physics-volume-2",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/94/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/university-physics-volume-2/",
+                "first_published_at": "2016-04-22T12:13:54.743756-05:00"
+            },
+            "title": "University Physics Volume 2",
+            "description": "<p><i>University Physics</i> is a three-volume collection that meets the scope and sequence requirements for two- and three-semester calculus-based physics courses. <a href=\"https://openstax.org/details/books/university-physics-volume-1\"><i>Volume 1</i></a> covers mechanics, sound, oscillations, and waves. <i>Volume 2</i> covers thermodynamics, electricity and magnetism, and <a href=\"https://openstax.org/details/books/university-physics-volume-3\"><i>Volume 3</i></a> covers optics and modern physics. This textbook emphasizes connections between theory and application, making physics concepts interesting and accessible to students while maintaining the mathematical rigor inherent in the subject. Frequent, strong examples focus on how to approach a problem, how to work with the equations, and how to check and generalize the result.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/university_physics-v2.png",
+            "webview_link": "https://cnx.org/contents/7a0f9770-1c44-4acd-9920-1cd9a99f2a1e"
+        },
+        {
+            "id": 95,
+            "meta": {
+                "slug": "university-physics-volume-3",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/95/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/university-physics-volume-3/",
+                "first_published_at": "2016-04-22T12:13:54.743756-05:00"
+            },
+            "title": "University Physics Volume 3",
+            "description": "<p><i>University Physics</i> is a three-volume collection that meets the scope and sequence requirements for two- and three-semester calculus-based physics courses. <a href=\"https://openstax.org/details/books/university-physics-volume-1\"><i>Volume 1</i></a> covers mechanics, sound, oscillations, and waves. <a href=\"https://openstax.org/details/books/university-physics-volume-2\"><i>Volume 2</i></a> covers thermodynamics, electricity, and magnetism, and <i>Volume 3</i> covers optics and modern physics. This textbook emphasizes connections between theory and application, making physics concepts interesting and accessible to students while maintaining the mathematical rigor inherent in the subject. Frequent, strong examples focus on how to approach a problem, how to work with the equations, and how to check and generalize the result.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/university_physics-v3.png",
+            "webview_link": "https://cnx.org/contents/af275420-6050-4707-995c-57b9cc13c358"
+        },
+        {
+            "id": 84,
+            "meta": {
+                "slug": "american-government",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/84/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/american-government/",
+                "first_published_at": "2016-05-13T16:29:19.973695-05:00"
+            },
+            "title": "American Government",
+            "description": "<p><i>American Government</i> is designed to meet the scope and sequence requirements of the single-semester American government course. This title includes innovative features designed to enhance student learning, including Insider Perspective features and a Get Connected Module that shows students how they can get engaged in the political process. The book provides an important opportunity for students to learn the core concepts of American government and understand how those concepts apply to their lives and the world around them. <i>American Government</i> includes updated information on the 2016 presidential election.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/american_government.svg",
+            "webview_link": "https://cnx.org/contents/5bcc0e59-7345-421d-8507-a1e4608685e8"
+        },
+        {
+            "id": 177,
+            "meta": {
+                "slug": "principles-economics-2e",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/177/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/principles-economics-2e/",
+                "first_published_at": "2017-11-01T11:54:44.174463-05:00"
+            },
+            "title": "Principles of Economics 2e",
+            "description": "<p><i>Principles of Economics 2e</i> covers the scope and sequence of most introductory economics courses. The text includes many current examples, which are handled in a politically equitable way. The outcome is a balanced approach to the theory and application of economics concepts. The second edition has been thoroughly revised to increase clarity, update data and current event impacts, and incorporate the feedback from many reviewers and adopters.</p><p></p><p>Changes made in <i>Principles of Economics 2e</i> are described in the preface and the transition guide to help instructors transition to the second edition. The first edition of <i>Principles of Economics</i> by OpenStax is available in web view <a href=\"http://cnx.org/contents/69619d2b-68f0-44b0-b074-a9b2bf90b2c6\">here</a>.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Economics2e-BookCard.png",
+            "webview_link": "https://cnx.org/contents/bc498e1f-efe9-43a0-8dea-d3569ad09a82"
+        },
+        {
+            "id": 178,
+            "meta": {
+                "slug": "principles-macroeconomics-2e",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/178/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/principles-macroeconomics-2e/",
+                "first_published_at": "2017-11-08T12:14:11.093682-06:00"
+            },
+            "title": "Principles of Macroeconomics 2e",
+            "description": "<p><i>Principles of Macroeconomics 2e</i> covers the scope and sequence of most introductory economics courses. The text includes many current examples, which are handled in a politically equitable way. The outcome is a balanced approach to the theory and application of economics concepts. The second edition has been thoroughly revised to increase clarity, update data and current event impacts, and incorporate the feedback from many reviewers and adopters.<br/></p><p>Changes made in <i>Principles of Macroeconomics 2e</i> are described in the preface and the transition guide to help instructors transition to the second edition. The first edition of <i>Principles of Macroeconomics</i> by OpenStax is available in web view <a href=\"http://cnx.org/contents/4061c832-098e-4b3c-a1d9-7eb593a2cb31\">here</a>.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Macroeconomics2e-BookCard.png",
+            "webview_link": "https://cnx.org/contents/27f59064-990e-48f1-b604-5188b9086c29"
+        },
+        {
+            "id": 155,
+            "meta": {
+                "slug": "principles-microeconomics-2e",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/155/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/principles-microeconomics-2e/",
+                "first_published_at": "2017-06-28T11:30:43.785365-05:00"
+            },
+            "title": "Principles of Microeconomics 2e",
+            "description": "<p><i>Principles of Microeconomics 2e</i> covers the scope and sequence of most introductory microeconomics courses. The text includes many current examples, which are handled in a politically equitable way. The outcome is a balanced approach to the theory and application of economics concepts. The second edition has been thoroughly revised to increase clarity, update data and current event impacts, and incorporate the feedback from many reviewers and adopters.<br/></p><p>Changes made in <i>Principles of Microeconomics 2e</i> are described in the preface and the transition guide to help instructors transition to the second edition. The first edition of <i>Principles of Microeconomics</i> by OpenStax is available in web view <a href=\"http://cnx.org/contents/ea2f225e-6063-41ca-bcd8-36482e15ef65\">here</a>.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/micro_economics_2e.svg",
+            "webview_link": "https://cnx.org/contents/5c09762c-b540-47d3-9541-dda1f44f16e5"
+        },
+        {
+            "id": 45,
+            "meta": {
+                "slug": "psychology",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/45/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/psychology/",
+                "first_published_at": "2016-03-09T09:58:52.534763-06:00"
+            },
+            "title": "Psychology",
+            "description": "<p><i>Psychology</i> is designed to meet scope and sequence requirements for the single-semester introduction to psychology course. The book offers a comprehensive treatment of core concepts, grounded in both classic studies and current and emerging research. The text also includes coverage of the DSM-5 in examinations of psychological disorders. <i>Psychology</i> incorporates discussions that reflect the diversity within the discipline, as well as the diversity of cultures and communities across the globe.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/psychology.svg",
+            "webview_link": "https://cnx.org/contents/4abf04bf-93a0-45c3-9cbc-2cefd46e68cc"
+        },
+        {
+            "id": 32,
+            "meta": {
+                "slug": "introduction-sociology-2e",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/32/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/introduction-sociology-2e/",
+                "first_published_at": "2016-03-09T09:45:10.681907-06:00"
+            },
+            "title": "Introduction to Sociology 2e",
+            "description": "<p><i>Introduction to Sociology 2e</i> adheres to the scope and sequence of a typical, one-semester introductory sociology course. It offers comprehensive coverage of core concepts, foundational scholars, and emerging theories. The textbook presents section reviews with rich questions, discussions that help students apply their knowledge, and features that draw learners into the discipline in meaningful ways. The second edition has been updated significantly to reflect the latest research and current, relevant examples.<br/></p><p>Changes made in<i> Introduction to Sociology 2e</i> are described in the preface to help instructors transition to the second edition. The first edition of <i>Introduction to Sociology</i> by OpenStax is available in web view <a href=\"http://cnx.org/contents/afe4332a-c97f-4fc4-be27-4e4d384a32d8/Introduction-to-Sociology\">here</a>.</p><p><br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/sociology_2e.svg",
+            "webview_link": "https://cnx.org/contents/02040312-72c8-441e-a685-20e9333f3e1d"
+        },
+        {
+            "id": 44,
+            "meta": {
+                "slug": "us-history",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/44/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/us-history/",
+                "first_published_at": "2016-03-09T09:58:20.010727-06:00"
+            },
+            "title": "U.S. History",
+            "description": "<p><i>U.S. History</i> is designed to meet the scope and sequence requirements of most introductory courses. The text provides a balanced approach to U.S. history, considering the people, events, and ideas that have shaped the United States from both the top down (politics, economics, diplomacy) and bottom up (eyewitness accounts, lived experience). <i>U.S. History</i> covers key forces that form the American experience, with particular attention to issues of race, class, and gender.<br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/US_history.svg",
+            "webview_link": "https://cnx.org/contents/a7ba2fb8-8925-4987-b182-5f4429d48daa"
+        },
+        {
+            "id": 162,
+            "meta": {
+                "slug": "biology-ap-courses",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/162/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/biology-ap-courses/",
+                "first_published_at": "2017-07-27T09:56:13.901502-05:00"
+            },
+            "title": "Biology For AP® Courses",
+            "description": "<p><i>Biology for AP</i><i><sup>®</sup></i><i> Courses</i> covers the scope and sequence requirements of a typical two-semester Advanced Placement<sup>®</sup> biology course. The text provides comprehensive coverage of foundational research and core biology concepts through an evolutionary lens. <i>Biology for AP</i><i><sup>®</sup></i><i> Courses</i> was designed to meet and exceed the requirements of the College Board’s AP<sup>®</sup> Biology framework while allowing significant flexibility for instructors. Each section of the book includes an introduction based on the AP<sup>®</sup> curriculum and includes rich features that engage students in scientific practice and AP<sup>®</sup> test preparation; it also highlights careers and research opportunities in biological sciences.</p><p><br/>Advanced Placement<sup>®</sup> and AP<sup>®</sup> are trademarks registered and/or owned by the College Board, which was not involved in the production of, and does not endorse, this textbook.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/biology-AP.png",
+            "webview_link": "https://cnx.org/contents/6c322e32-9fb0-4c4d-a1d7-20c95c5c7af2"
+        },
+        {
+            "id": 186,
+            "meta": {
+                "slug": "principles-macroeconomics-ap-courses-2e",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/186/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/principles-macroeconomics-ap-courses-2e/",
+                "first_published_at": "2017-11-29T11:53:53.654175-06:00"
+            },
+            "title": "Principles of Macroeconomics for AP® Courses 2e",
+            "description": "<p><i>Principles of Macroeconomics for AP</i><i><sup>®</sup></i><i> Courses 2e</i> covers the scope and sequence requirements for an Advanced Placement<sup>®</sup> macroeconomics course and is listed on the <a href=\"https://cb.collegeboard.org/ap-course-audit/courses/macroeconomics_textbook_list.html\">College Board’s AP® example textbook list</a>. The second edition includes many current examples and recent data from FRED (Federal Reserve Economic Data), which are presented in a politically equitable way. The outcome is a balanced approach to the theory and application of economics concepts.</p><p><br/>The second edition was developed with significant feedback from current users. In nearly all chapters, it follows the same basic structure of the first edition. General descriptions of the edits are provided in the preface, and a chapter-by-chapter transition guide is available for instructors. The first edition of <i>Principles of Macroeconomics for AP</i><i><sup>®</sup></i><i> Courses</i> by OpenStax is available in web view <a href=\"http://cnx.org/contents/33076054-ec1d-4417-8824-ce354efe42d0\">here</a>.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/APMacroeconomics2e-bookcard.svg",
+            "webview_link": "https://cnx.org/contents/9117cf8c-a8a3-4875-8361-9cb0f1fc9362"
+        },
+        {
+            "id": 188,
+            "meta": {
+                "slug": "principles-microeconomics-ap-courses-2e",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/188/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/principles-microeconomics-ap-courses-2e/",
+                "first_published_at": "2017-11-29T11:55:46.299107-06:00"
+            },
+            "title": "Principles of Microeconomics for AP® Courses 2e",
+            "description": "<p><i>Principles of Microeconomics for AP</i><i><sup>®</sup></i><i> Courses 2e</i> covers the scope and sequence requirements for an Advanced Placement<sup>®</sup> microeconomics course and is listed on the <a href=\"https://cb.collegeboard.org/ap-course-audit/courses/microeconomics_textbook_list.html\">College Board’s AP® example textbook list</a>. The second edition includes many current examples and recent data from FRED (Federal Reserve Economic Data), which are presented in a politically equitable way. The outcome is a balanced approach to the theory and application of economics concepts.</p><p><br/>The second edition was developed with significant feedback from current users. In nearly all chapters, it follows the same basic structure of the first edition. General descriptions of the edits are provided in the preface, and a chapter-by-chapter transition guide is available for instructors. The first edition of <i>Principles of Microeconomics for AP® Courses</i> by OpenStax is available in web view <a href=\"https://cnx.org/contents/ca344e2d-6731-43cd-b851-a7b3aa0b37aa\">here</a>.</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/APMicroeconomics2e-bookcard.svg",
+            "webview_link": "https://cnx.org/contents/636cbfd9-4e37-4575-83ab-9dec9029ca4e"
+        },
+        {
+            "id": 47,
+            "meta": {
+                "slug": "college-physics-ap-courses",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/47/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/college-physics-ap-courses/",
+                "first_published_at": "2016-03-09T10:01:26.391128-06:00"
+            },
+            "title": "The AP Physics Collection",
+            "description": "<p>The <i>AP Physics Collection</i> is a free, turnkey solution for your AP<sup>®</sup> Physics course, brought to you through a collaboration between OpenStax and Rice Online Learning. The integrated collection features the OpenStax <i>College Physics for AP</i><i><sup>®</sup></i><i> Courses</i> text, Concept Trailer videos, instructional videos, problem solution videos, and a correlation guide to help you align all of your free content.<br/><br/>The <i>College Physics for AP</i><i><sup>®</sup></i><i> Courses</i> text is designed to engage students in their exploration of physics and help them apply these concepts to the Advanced Placement<sup>®</sup> test. This book is Learning List-approved for AP<sup>®</sup> Physics courses.</p><p><b>Creators of Rice Online Learning instructional videos and problem solution videos</b><br/>Jason Hafner<br/>Gigi Nevils-Noe<br/>Matt Wilson</p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/college_physics_for_ap_course_book_card.svg",
+            "webview_link": "https://cnx.org/contents/8d04a686-d5e8-4798-a27d-c608e4d0e187"
+        },
+        {
+            "id": 189,
+            "meta": {
+                "slug": "introductory-business-statistics",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/189/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/introductory-business-statistics/",
+                "first_published_at": "2017-11-30T11:15:17.997949-06:00"
+            },
+            "title": "Introductory Business Statistics",
+            "description": "<p></p><p></p><p></p><p><i>Introductory Business Statistics</i> is designed to meet the scope and sequence requirements of the one-semester statistics course for business, economics, and related majors. Core statistical concepts and skills have been augmented with practical business examples, scenarios, and exercises. The result is a meaningful understanding of the discipline, which will serve students in their business careers and real-world experiences.</p><p></p><p></p><p></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/IntroductoryBusinessStatistics-bookcard.svg",
+            "webview_link": "https://cnx.org/contents/b56bb9e9-5eb8-48ef-9939-88b1b12ce22f"
+        },
+        {
+            "id": 190,
+            "meta": {
+                "slug": "fizyka-dla-szkół-wyższych-polska",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/190/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/fizyka-dla-szk%C3%B3%C5%82-wy%C5%BCszych-polska/",
+                "first_published_at": "2017-12-05T14:46:42.214564-06:00"
+            },
+            "title": "Fizyka dla szkół wyższych Tom 1",
+            "description": "<p><i>Fizyka dla szkół wyższych</i> dopasowana jest pod względem zakresu i układu treści do typowych kursów wprowadzających z fizyki ogólnej opartych na analizie matematycznej. Podręcznik kładzie nacisk na powiązania między teorią a praktycznymi zastosowaniami, wyjaśniając zagadnienia fizyczne w ciekawy i zrozumiały sposób, lecz z zachowaniem niezbędnego rygoru matematycznego. Liczne, dobrze dobrane przykłady pokazują, jak podejść do zadania, jak wykorzystać wzory i wreszcie jak sprawdzić i uogólnić wynik.<br/></p><p>Pytania prosimy wysyłać na adres <a href=\"mailto:kontakt@openstax.pl\">kontakt@openstax.pl</a>.</p><p></p><p></p><p><a href=\"https://openstax.org/blog/openstax-partners-katalyst-deliver-free-textbooks-poland\">OpenStax has partnered with Katalyst Education</a> to bring free, peer-reviewed, openly licensed textbooks to Poland as part of a new effort to internationalize OpenStax’s free open textbook model. <i>Fizyka dla szkół wyższych</i> is the first Polish title to be published under this agreement. Click <a href=\"https://openstax.org/details/books/university-physics-volume-1\">here</a> for the English version of University Physics Volume 1.</p><p></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/university_physics_book_card_outlined.svg",
+            "webview_link": "https://cnx.org/contents/4eaa8f03-88a8-485a-a777-dd3602f6c13e"
+        },
+        {
+            "id": 219,
+            "meta": {
+                "slug": "fizyka-dla-szkół-wyższych-tom-2-polska",
+                "type": "books.Book",
+                "detail_url": "https://openstax.org/api/v2/pages/219/",
+                "html_url": "http://oscms-dev.openstax.org/subjects/fizyka-dla-szk%C3%B3%C5%82-wy%C5%BCszych-tom-2-polska/",
+                "first_published_at": "2018-06-18T12:34:42.916050-05:00"
+            },
+            "title": "Fizyka dla szkół wyższych Tom 2",
+            "description": "<p><i>Fizyka dla szkół wyższych</i> dopasowana jest pod względem zakresu i układu treści do typowych kursów wprowadzających z fizyki ogólnej opartych na analizie matematycznej. Podręcznik kładzie nacisk na powiązania między teorią a praktycznymi zastosowaniami, wyjaśniając zagadnienia fizyczne w ciekawy i zrozumiały sposób, lecz z zachowaniem niezbędnego rygoru matematycznego. Liczne, dobrze dobrane przykłady pokazują, jak podejść do zadania, jak wykorzystać wzory i wreszcie jak sprawdzić i uogólnić wynik.<br/> Pytania prosimy wysyłać na adres <a href=\"mailto:kontakt@openstax.pl\">kontakt@openstax.pl</a>.<br/><br/><br/><a href=\"/blog/openstax-partners-katalyst-deliver-free-textbooks-poland\">OpenStax has partnered with Katalyst Education</a> to bring free, peer-reviewed, openly licensed textbooks to Poland as part of a new effort to internationalize OpenStax’s free open textbook model. <i>Fizyka dla szkół wyższych</i> is the first Polish title to be published under this agreement. Click <a href=\"/details/university-physics-volume-2\">here</a> for the English version of University Physics Volume 2.<br/><br/></p>",
+            "cover_url": "https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/university_physics_book_card_volume_2_1.svg",
+            "webview_link": "https://cnx.org/contents/16ab5b96-4598-45f9-993c-b8d78d82b0c6"
+        }
+    ]
+}
