@@ -18,7 +18,7 @@ define (require) ->
       _.each books, (book) ->
         book.cover = book.cover_url
         book.description = $(book.description).text()
-        book.link = "#{location.protocol}//#{location.host}/contents/#{book.cnx_id}"
+        book.link = "contents/#{book.cnx_id}"
         book.type = 'OpenStax Featured'
         book.id = book.id.toString()
 
