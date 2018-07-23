@@ -25,9 +25,9 @@ define (require) ->
 
     shaveBookDescriptions: () ->
       shave('.book .description', 60)
-      $('.book:has(.description .js-shave) .show').show()
+      $('.book:has(.description .js-shave) .show-more-less').show()
       toggled_descriptions = $(
-        '.book:has(.description .js-shave):has(.show .less:visible) .description'
+        '.book:has(.description .js-shave):has(.show-more-less .less:visible) .description'
       )
       toggled_descriptions.find('.js-shave-char').hide()
       toggled_descriptions.find('.js-shave').show()
@@ -58,8 +58,8 @@ define (require) ->
       @collection.add(featuredCNXBooks.models)
 
     onAfterRender: () ->
-      $('.show .more').on('click', @readMore)
-      $('.show .less').on('click', @readLess)
+      $('.show-more-less .more').on('click', @readMore)
+      $('.show-more-less .less').on('click', @readLess)
       @shaveBookDescriptionsAfterImagesLoaded()
       $(window).resize(@debouncedShaveBookDescriptionsAfterImagesLoaded)
 
