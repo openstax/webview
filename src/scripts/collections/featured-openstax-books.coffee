@@ -9,7 +9,7 @@ define (require) ->
 
   return new class FeaturedOpenStaxBooks extends Backbone.Collection
     url: "#{openstaxcms}/api/v2/pages/?type=books.Book&limit=250" +
-         "&fields=cover_url,description,title,webview_link"
+         "&fields=cover_url,description,title,cnx_id"
     model: FeaturedBook
 
     parse: (response) ->
@@ -18,7 +18,7 @@ define (require) ->
       _.each books, (book) ->
         book.cover = book.cover_url
         book.description = $(book.description).text()
-        book.link = book.webview_link
+        book.link = "#{location.protocol}//#{location.host}/contents/#{book.cnx_id}"
         book.type = 'OpenStax Featured'
         book.id = book.id.toString()
 
