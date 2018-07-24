@@ -199,6 +199,8 @@ define (require) ->
             $el = $(el)
             $el.css('counter-reset', 'list-item ' + $el.attr('start'))
 
+          require(['helpers/swipe-tables'])
+
           # # uncomment to embed fake exercises and see embeddable exercises in action
           # @fakeExercises($temp)
 

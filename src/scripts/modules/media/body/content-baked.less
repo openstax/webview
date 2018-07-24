@@ -240,7 +240,17 @@ h1.example-title .text {
 
 // Tables
 // --------------------------------------------------
+.swipe-table {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Chrome / Opera */
+  cursor: -webkit-grab;
+}
 .os-table {
+  overflow-x: auto;
   margin: @line-height-computed 0;
   .os-table-title {
     text-align: center;
