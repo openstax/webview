@@ -102,7 +102,7 @@ describe('links helper tests', function () {
         },
         page: 'page'
       };
-      links.getPath(page, data).should.equal('/contents/book name@book name:page title!@page title!/page-title');
+      links.getPath(page, data).should.equal('/contents/book name@book name:page title!@page title!/page-title-');
     });
   });
   describe('serialize query tests', function () {

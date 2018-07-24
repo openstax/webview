@@ -5,7 +5,7 @@ define (require) ->
     temp = document.createElement("div")
     temp.innerHTML = str
     str = temp.textContent
-    str.replace(/[\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]/g, '').replace(/\s/g, '-')
+    str.replace(/[\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~\s+]/g, '-')
 
   Handlebars.registerHelper 'trim', (str) -> trim(str)
 
