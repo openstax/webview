@@ -281,13 +281,13 @@ module.exports = (grunt) ->
 
     templateVars = {
       tests: JSON.stringify(grunt.file.expand(options.files).map((file) -> "../#{file}"))
-      extras: grunt.file.read('src/data/extras.json')
-      cmsBooks: grunt.file.read('src/data/cms-books.json')
+      extras: grunt.file.read('test/data/extras.json')
+      cmsBooks: grunt.file.read('test/data/cms-books.json')
       exercises: JSON.stringify([
-        grunt.file.read('src/data/exercises/ex001.html'),
-        grunt.file.read('src/data/exercises/ex002.html'),
-        grunt.file.read('src/data/exercises/ex003.html'),
-        grunt.file.read('src/data/exercises/ex004.html')
+        grunt.file.read('test/data/exercises/ex001.html'),
+        grunt.file.read('test/data/exercises/ex002.html'),
+        grunt.file.read('test/data/exercises/ex003.html'),
+        grunt.file.read('test/data/exercises/ex004.html')
       ])
     }
 
