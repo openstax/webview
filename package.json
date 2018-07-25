@@ -39,7 +39,7 @@
     "jsdom": "^11.3.0",
     "less": "~1.7.5",
     "rjs-build-analysis": "~0.0.3",
-    "mocha": "3.4.2"
+    "mocha": "3.5.3"
   },
   "license": [
     {

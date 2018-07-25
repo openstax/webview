@@ -26,6 +26,12 @@
         port: 443
       },
 
+      // Hostname and port for the exercises server
+      exercises: {
+        host: 'exercises.openstax.org',
+        port: 443
+      },
+
       // Prefix to prepend to page titles
       titleSuffix: ' - OpenStax CNX',
 
@@ -60,17 +66,6 @@
       accountProfile: 'https://accounts.cnx.org/profile',
 
       cnxSupport: 'http://openstax.force.com/support?l=en_US&c=Products%3ACNX',
-
-      terpUrl: function (itemCode) {
-        return 'https://openstaxtutor.org/terp/' + itemCode + '/quiz_start';
-      },
-
-      exerciseUrl: function (itemCode) {
-        // // stub.  Comment out to use local exercises stub.
-        // // Copied from https://exercises-dev1.openstax.org/api/exercises?q=tag:k12phys-ch04-s01-lo01
-        // return 'http://localhost:8000/data/exercises.json';
-        return 'https://exercises-dev1.openstax.org/api/exercises?q=tag:' + itemCode;
-      },
 
       defaultLicense: {
         code: 'by'
