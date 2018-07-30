@@ -44,6 +44,10 @@ define (require) ->
         .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
 
       'click .os-interactive-link': 'simLink'
+      'mousedown .os-table' : 'startSwiping'
+      'mouseup .os-table' : 'stopSwiping'
+      'mouseleave .os-table' : 'stopSwiping'
+      'mousemove .os-table' : 'handleSwipe'
 
     initialize: () ->
       super()
@@ -198,8 +202,6 @@ define (require) ->
           $temp.find('ol[start], [data-type="list"][data-list-type="enumerated"][start]').each (i, el) ->
             $el = $(el)
             $el.css('counter-reset', 'list-item ' + $el.attr('start'))
-
-          swip = require(['helpers/backbone/views/swipe-tables'])
 
           # # uncomment to embed fake exercises and see embeddable exercises in action
           # @fakeExercises($temp)
@@ -464,3 +466,43 @@ define (require) ->
       @model.set('simUrl', link.attr('href'))
       @model.set('simTitle', link.parents('figure').find('[data-type="title"]').text())
       $('#sims-modal').modal('show')
+
+    # Handle Big Tables - add swiping | Proper events are added at the top of the file
+
+    isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    isSwiping = false
+    tableLeftPos = 0
+    startSwipingPos = 0
+    swipeRange = 0
+
+    isSwipable: (target) ->
+      if !@isMobile and target.offsetWidth < target.getElementsByTagName('table')[0].offsetWidth
+        return true
+      false
+
+    handleSwipe: (e) ->
+      target = e.currentTarget
+      if @isSwipable(target)
+        if !target.classList.contains('swipe-table') then target.classList.add('swipe-table')
+      if @isSwiping
+        mouseX = e.clientX
+        swipeDistance = @startSwipingPos - mouseX
+        if swipeDistance <= @swipeRange and swipeDistance >= -1 * @swipeRange
+          target.scrollLeft += swipeDistance
+      return
+
+    startSwiping: (e) ->
+      target = e.currentTarget
+      if @isSwipable(target)
+        @isSwiping = true
+        offsets = target.getBoundingClientRect()
+        @tableLeftPos = offsets.left
+        @startSwipingPos = window.event.clientX
+        @swipeRange = target.getElementsByTagName('table')[0].offsetWidth - (target.offsetWidth)
+      return
+
+    stopSwiping: () ->
+      @isSwiping = false
+      return
+
+    # End big tables
