@@ -22,6 +22,7 @@ module.exports = (grunt) ->
     # JSHint
     jshint:
       options:
+        esversion: 6,
         globals:
           require: true
           define: true
