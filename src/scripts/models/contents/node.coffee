@@ -42,9 +42,9 @@ define (require) ->
       id = @getVersionedId()
 
       if @isInBook()
-        return "#{ARCHIVE}/contents/#{@get('book').getVersionedId()}:#{id}.json"
+        return "#{ARCHIVE}/extras/#{@get('book').getVersionedId()}:#{id}"
       else
-        return "#{ARCHIVE}/contents/#{id}.json"
+        return "#{ARCHIVE}/extras/#{id}"
 
     parse: (response, options = {}) ->
       # Don't overwrite the title from the book's table of contents
