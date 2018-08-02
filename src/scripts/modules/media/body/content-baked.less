@@ -16,10 +16,18 @@ h6 {
   font-weight: bold;
 }
 
+h3 + section {
+  margin-top: 0;
+}
+
 ul, ol {
   color: @gray;
   margin-bottom: 1rem;
   margin-top: 1rem;
+}
+
+[data-bullet-style="none"] {
+  list-style-type: none;
 }
 
 iframe {
@@ -388,4 +396,8 @@ h1.example-title .text {
 
 .appendix [data-type="list"] {
   margin-top: 1rem;
+}
+
+.scaled-down > img{
+  width: 60%;
 }
