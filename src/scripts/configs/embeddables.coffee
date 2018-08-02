@@ -18,7 +18,7 @@ define (require) ->
   return {
     embeddableTypes: [
       {
-        match: '#ost\/api\/ex\/'
+        match: '#ost/api/ex/'
         matchType: 'a'
         embeddableType: 'exercise'
         apiUrl: () ->
@@ -37,7 +37,7 @@ define (require) ->
         async: true
       },
       {
-        match: '#exercises?\/'
+        match: '#exercises?/'
         matchType: 'a'
         embeddableType: 'exercise'
         apiUrl: () ->
