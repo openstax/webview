@@ -13,7 +13,7 @@ module.exports = (grunt) ->
     nginx:
       tasks: ['nginx']
       options:
-        config: 'nginx.development.conf'
+        config: 'conf/nginx.dev.conf'
         prefix: './'
 
     # Lint

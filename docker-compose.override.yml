@@ -1,0 +1,7 @@
+version: '3'
+services:
+  webview:
+    volumes:
+    - ./src:/code/src
+    ports:
+      - "8000:8000"
