@@ -16,10 +16,18 @@ h6 {
   font-weight: bold;
 }
 
+h3 + section {
+  margin-top: 0;
+}
+
 ul, ol {
   color: @gray;
   margin-bottom: 1rem;
   margin-top: 1rem;
+}
+
+[data-bullet-style="none"] {
+  list-style-type: none;
 }
 
 iframe {
@@ -34,9 +42,16 @@ iframe {
   font-weight: normal;
 }
 
+.os-chapter-outline {
+  ul {
+    margin-top: 0;
+  }
+}
+
 .no-emphasis {
   font-weight: normal;
 } //to ensure that all terms with this tag will display unbolded
+
 
 // It is already displayed at the top of the page in blue
 // the `>` is because collated titles (like Key Concepts) contain descendent
@@ -158,7 +173,7 @@ figure:not([data-orient="vertical"]) {
     color: @gray;
   }
 
-  > span[data-type="media"] {
+  span[data-type="media"] {
     display: block;
     margin: 1rem 0;
   }
@@ -182,8 +197,6 @@ h1.example-title .text {
 .note     { .make-block(note); }
 [data-type="example"],
 .example  { .make-block(example); }
-[data-type="abstract"],
-.abstract { .make-block(note); }
 [data-type="problem"],
 [data-type="solution"],
 .problem,
@@ -228,6 +241,13 @@ h1.example-title .text {
   }
 }
 
+// Notes
+// --------------------------------------------------
+.os-note-body {
+  img {
+    display: block;
+  }
+}
 
 //
 // MathJax_Display override
@@ -240,7 +260,17 @@ h1.example-title .text {
 
 // Tables
 // --------------------------------------------------
+.swipe-table {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Chrome / Opera */
+  cursor: -webkit-grab;
+}
 .os-table {
+  overflow-x: auto;
   margin: @line-height-computed 0;
   .os-table-title {
     text-align: center;
@@ -252,7 +282,16 @@ h1.example-title .text {
     tr {
       td {
         vertical-align: middle;
-        padding: 1em 0em;
+        padding: @table-cell-padding;
+      }
+    }
+    ul {
+      &[data-bullet-style="none"] {
+        padding: 0;
+        margin: 0;
+        li {
+          list-style: none;
+        }
       }
     }
   }
@@ -284,7 +323,7 @@ h1.example-title .text {
     font-weight: bold;
   }
   .os-number {
-    padding-right: 0;
+    padding-right: 4px;
     font-weight: bold;
     text-decoration: none;
   }
@@ -329,14 +368,9 @@ h1.example-title .text {
   }
 
   img {
-    float: left;
-    margin-right: 10px;
+    display: block;
+    margin-bottom: 1em;
   }
-
-  ol {
-    overflow: hidden;
-  }
-  clear: left;
 }
 
 .os-solutions-container {
@@ -362,4 +396,8 @@ h1.example-title .text {
 
 .appendix [data-type="list"] {
   margin-top: 1rem;
+}
+
+.scaled-down > img{
+  width: 60%;
 }
