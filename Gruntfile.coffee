@@ -26,6 +26,8 @@ module.exports = (grunt) ->
         globals:
           require: true
           define: true
+          # NOTE: Use console.debug() to get output from tests
+          console: true
 
           # test globals
           beforeEach: true
@@ -35,6 +37,7 @@ module.exports = (grunt) ->
           sinon: true
           extras: true
           cmsBooks: true
+          exercises: true
 
         # Enforcing options
         camelcase: true
@@ -257,7 +260,8 @@ module.exports = (grunt) ->
       options:
         reporter: 'Spec'
         run: false
-        log: false
+        log: true
+        logErrors: true
         timeout: 15000
 
   # Dependencies
@@ -276,14 +280,22 @@ module.exports = (grunt) ->
   grunt.registerTask 'test', 'Run JS Unit tests', () ->
     options = @options()
 
-    tests = grunt.file.expand(options.files).map((file) -> "../#{file}")
-    extras = grunt.file.read('src/data/extras.json')
-    cmsBooks = grunt.file.read('src/data/cms-books.json')
+    templateVars = {
+      tests: JSON.stringify(grunt.file.expand(options.files).map((file) -> "../#{file}"))
+      extras: grunt.file.read('test/data/extras.json')
+      cmsBooks: grunt.file.read('test/data/cms-books.json')
+      exercises: JSON.stringify([
+        grunt.file.read('test/data/exercises/ex001.html'),
+        grunt.file.read('test/data/exercises/ex002.html'),
+        grunt.file.read('test/data/exercises/ex003.html'),
+        grunt.file.read('test/data/exercises/ex004.html')
+      ])
+    }
 
     # build the template
-    template = grunt.file.read(options.template).replace('{{ tests }}', JSON.stringify(tests))
-                                                .replace('{{ extras }}', extras)
-                                                .replace('{{ cmsBooks }}', cmsBooks)
+    template = grunt.file.read(options.template)
+    for key, value of templateVars
+      template = template.replace("{{ #{key} }}", value)
 
     # write template to tests directory and run tests
     grunt.file.write(options.runner, template)
