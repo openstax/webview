@@ -17,10 +17,10 @@ describe('handlebars trim helper tests', function () {
 
   it('should replace white space with dashes', function () {
     // space
-    Handlebars.helpers.trim('  lots of    spaces ').should.equal('--lots-of----spaces-');
+    Handlebars.helpers.trim('  lots of    spaces ').should.equal('lots-of-spaces');
     // tabs
-    Handlebars.helpers.trim('\tsome\ttabs\t').should.equal('-some-tabs-');
+    Handlebars.helpers.trim('\tsome\ttabs\t').should.equal('some-tabs');
     // new lines
-    Handlebars.helpers.trim('anewline\n').should.equal('anewline-');
+    Handlebars.helpers.trim('anewline\n').should.equal('anewline');
   });
 });
