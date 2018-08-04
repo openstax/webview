@@ -6,9 +6,9 @@ CNX webview is designed to be run as a frontend for [cnx-archive](https://github
 
 # Installing
 
-1. If necessary, install [Node.js](http://nodejs.org) and npm (included with Node.js).
-1. Run `npm install --global n` to install the [node version manager](npmjs.com/package/n)
-2. Run `./script/bootstrap` in the command line to install all the package dependencies.
+1. If necessary, install [Node.js](http://nodejs.org) and npm (which is included with Node.js).
+2. From the root `webview` directory, run `./script/bootstrap` in the command line.
+3. Now run `./script/setup` to install all the package dependencies.
   * **Note:** `npm install` runs `bower install` and `grunt install`, both of which can also be run independently
     * `bower install` downloads front-end dependencies
     * `grunt install` compiles the Aloha-Editor (which is downloaded by bower)
