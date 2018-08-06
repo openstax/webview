@@ -41,7 +41,7 @@
     "rjs-build-analysis": "~0.0.3",
     "stylelint": "^9.4.0",
     "stylelint-config-rational-order": "0.0.2",
-    "stylelint-order": "^0.8.1"
+    "stylelint-order": "^0.8.1",
     "mocha": "3.5.3"
   },
   "license": [
