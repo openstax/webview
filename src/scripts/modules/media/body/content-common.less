@@ -1,3 +1,4 @@
+@table-cell-padding: 1em;
 // Styles for the contents of a page.
 // This should **only** be imported inside a containing selector like:
 //
@@ -344,6 +345,16 @@ table {
   margin-bottom: @line-height-computed;
   background-color: @table-bg;
   counter-increment: table;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    &[data-bullet-style="none"] {
+      li {
+        list-style: none;
+      }
+    }
+  }
 
   caption {
     margin-top: 0.5rem;
