@@ -11,6 +11,6 @@ describe('Collection model', function () {
   it('should use the non-contextual extras url', function () {
     collection.id = 'abcd@1234';
     collection.isInBook().should.equal(false);
-    collection.extrasUrl().should.contain('/contents/' + collection.id);
+    collection.extrasUrl().should.contain('/extras/' + collection.id);
   });
 });

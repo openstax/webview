@@ -1,7 +1,7 @@
 describe('handlebar date helper tests', function () {
   'use strict';
   var date, Handlebars, myDate = new Date();
-  var dateRegex = /(\w+)(?:\/|\s)(\d\d)(?:\/|,\s)(\d\d\d\d)/;
+  var dateRegex = /(\w+)(?:\/|\s)(\d{1,2})(?:\/|,\s)(\d\d\d\d)/;
   var months = {
     'January': 0,
     'February': 1,
