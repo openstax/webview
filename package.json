@@ -38,11 +38,11 @@
     "jquery": "^3.2.1",
     "jsdom": "^11.3.0",
     "less": "~1.7.5",
-    "mocha": "3.4.2",
     "rjs-build-analysis": "~0.0.3",
     "stylelint": "^9.4.0",
     "stylelint-config-rational-order": "0.0.2",
-    "stylelint-order": "^0.8.1"
+    "stylelint-order": "^0.8.1",
+    "mocha": "3.5.3"
   },
   "license": [
     {
