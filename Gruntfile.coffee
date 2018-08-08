@@ -248,6 +248,18 @@ module.exports = (grunt) ->
           dest: 'dist/images/'
         }]
 
+    # Generate gzip files that will be served by nginx
+    compress:
+      dist:
+        options:
+          mode: 'gzip'
+          level: 9
+        expand: true
+        cwd: 'dist/'
+        src: ['**/*.{html,xml,css,js,map,svg,otf,ttf,ftl}']
+        dest: 'dist/'
+        rename: (dest, src) -> dest + "#{src}.gz"
+
     test:
       options:
         template: 'test/index.template.html'
@@ -313,16 +325,11 @@ module.exports = (grunt) ->
     'uglify:dist'
     'htmlmin:dist'
     'imagemin'
+    'compress:dist'
   ]
 
   # Default
   # -----
   grunt.registerTask 'default', [
-    'requirejs:compile'
-    'copy'
-    'targethtml:dist'
-    'clean'
-    'uglify:dist'
-    'htmlmin:dist'
-    'imagemin'
+    'dist'
   ]
