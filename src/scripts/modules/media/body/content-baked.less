@@ -210,9 +210,6 @@ h1.example-title .text {
   > :first-child {
     display: inline;
   }
-  > :not(:first-child) {
-    display: block!important;
-  }
 }
 
 // solutions of notes, exercises, and examples have a top-border to separate the solution
@@ -374,7 +371,6 @@ h1.example-title .text {
 
 .os-eoc [data-type="exercise"],
 .os-eoc .exercise {
-  p { display: inline; }
   [data-type="problem"] > .number {
     .exercise-number();
   }
