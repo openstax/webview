@@ -210,6 +210,9 @@ h1.example-title .text {
   > :first-child {
     display: inline;
   }
+  > :not(:first-child) {
+    display: block!important;
+  }
 }
 
 // solutions of notes, exercises, and examples have a top-border to separate the solution
