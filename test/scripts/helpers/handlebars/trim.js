@@ -11,17 +11,16 @@ describe('handlebars trim helper tests', function () {
     });
   });
 
-  it('should cut the string down to 30 characters', function () {
-    var returnVal = Handlebars.helpers.trim('thisisastringwiththirtysixcharacters');
-    returnVal.length.should.equal(30);
-    returnVal.should.equal('thisisastringwiththirtysixchar');
+  it('should leave special characters alone and replace spaces', function () {
+    Handlebars.helpers.trim('Najważniejsze stałe fizyczne').should.equal('Najważniejsze-stałe-fizyczne');
   });
+
   it('should replace white space with dashes', function () {
     // space
-    Handlebars.helpers.trim('  lots of    spaces ').should.equal('--lots-of----spaces-');
+    Handlebars.helpers.trim('  lots of    spaces ').should.equal('lots-of-spaces');
     // tabs
-    Handlebars.helpers.trim('\tsome\ttabs\t').should.equal('-some-tabs-');
+    Handlebars.helpers.trim('\tsome\ttabs\t').should.equal('some-tabs');
     // new lines
-    Handlebars.helpers.trim('anewline\n').should.equal('anewline-');
+    Handlebars.helpers.trim('anewline\n').should.equal('anewline');
   });
 });
