@@ -31,6 +31,7 @@ define (require) ->
         @regions.search.show(new SearchResultsView({model: @model}))
       else
         @regions.search.show(new AdvancedSearchView())
+      @regions.search.$el[0].setAttribute('aria-busy', 'true')
 
     displayError: () ->
       error = arguments[1] # @model.get('error')
