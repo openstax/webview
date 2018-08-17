@@ -256,9 +256,9 @@ module.exports = (grunt) ->
           level: 9
         expand: true
         cwd: 'dist/'
-        src: ['**/*.{html,xml,css,js,map,svg,otf,ttf,ftl}']
+        src: ['**/{*.{html,xml,css,svg,otf,ttf,ftl},!(settings).js,!(require.js).map}']
         dest: 'dist/'
-        rename: (dest, src) -> dest + "#{src}.gz"
+        rename: (dest, src) -> "#{dest}#{src}.gz"
 
     test:
       options:
