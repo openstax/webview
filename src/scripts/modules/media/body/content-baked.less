@@ -203,6 +203,15 @@ h1.example-title .text {
 .solution {
   padding: 0;
 }
+
+.os-problem-container,
+.os-solution-container {
+  display: inline;
+  > :first-child {
+    display: inline;
+  }
+}
+
 // solutions of notes, exercises, and examples have a top-border to separate the solution
 [data-type="note"],
 [data-type="exercise"],
@@ -294,6 +303,15 @@ h1.example-title .text {
         }
       }
     }
+    .os-figure {
+      margin: 0;
+      img {
+        margin: 0;
+      }
+      .os-caption-container {
+        padding: 1rem 0 0 0;
+      }
+    }
   }
   .os-caption-container {
     font-size: 0.9em;
@@ -327,6 +345,9 @@ h1.example-title .text {
     font-weight: bold;
     text-decoration: none;
   }
+  .os-number:not(:only-child) {
+    padding: 0;
+  }
 
   .group-by .os-index-item {
     &:not(:first-of-type) {
@@ -345,10 +366,9 @@ h1.example-title .text {
     margin: 1.5rem 0 1rem 0;
   }
 
-  &.os-reference-container > .os-chapter-area > .reference {
-    span.os-reference-number {
-      margin-right: 10px;
-    }
+  &.os-reference-container > .os-chapter-area > .reference span.os-reference-number,
+  &.os-references-container .references .os-note-body > a {
+    margin-right: 10px;
   }
 
   [data-type="list"],
@@ -362,7 +382,6 @@ h1.example-title .text {
 
 .os-eoc [data-type="exercise"],
 .os-eoc .exercise {
-  p { display: inline; }
   [data-type="problem"] > .number {
     .exercise-number();
   }
@@ -413,6 +432,6 @@ figure.scaled-down {
   display: block;
 
   img {
-    width: 60%    
+    width: 60%
   }
 }
