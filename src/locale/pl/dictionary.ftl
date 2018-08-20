@@ -200,33 +200,11 @@ frictionless-content =
 
 # CONTACT - Content - src/scripts/pages/about/contact/contact-template.html
 
-about-contact-google-maps = Mapa Google™
-
 about-contact-header = Kontakt
-
-about-contact-phone = Telefon: { $phone }
-
-about-contact-email = E-mail: <a href="mailto:{ $email }">{ $email }</a>
 
 about-contact-questions-header = Masz pytanie?
 
-about-contact-questions-content = Napisz do nas, jeśli potrzebujesz dodatkowych informacji.
-
-about-contact-technical-support-header = Pomoc techniczna
-
-about-contact-technical-support-content =
-  | W przypadku problemów technicznych na naszej stronie prosimy o wysłanie wiadomości e-mail na adres
-  | <a href="mailto:support@openstax.org">support@openstax.org</a>.
-  | Możesz również wysłać raport o błędzie przy użyciu formularza do zgłaszania błędów.
-
-about-contact-general-questions-header = Pytania ogólne
-
-about-contact-general-questions-content =
-  | Jeśli masz pytania dotyczące naszego serwisu, chcesz zapisać się na
-  | szkolenie dla autorów lub uzyskać inne informacje na temat Openstax CNX,
-  | wyślij e-mail na adres <a href="mailto:support@openstax.org">support@openstax.org</a>.
-
-
+about-contact-questions-content = Możesz skontaktować się z nami wysyłając e-mail na adres <a href="mailto:kontakt@openstax.pl">kontakt@openstax.pl</a>.
 
 ### SEARCH ###
 # Link: http://cnx.org/browse
