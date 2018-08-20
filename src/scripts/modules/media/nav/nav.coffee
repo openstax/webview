@@ -57,6 +57,7 @@ define (require) ->
       'click .back-to-top > a': 'backToTop'
       'keydown .searchbar input': 'handleSearchInput'
       'click .searchbar > .clear-search': 'clearSearch'
+      'click .searchbar > .fa-search': 'handleSearch'
 
     closeAllContainers: (nodes = @model.get('contents')?.models) =>
       if nodes
@@ -147,28 +148,31 @@ define (require) ->
       removeClass('fa-search').
       addClass('fa-spinner fa-spin load-search')
 
+    handleSearch: ->
+      @searchTerm = @$el.find('.searchbar input').val()
+      if @searchTerm == ''
+        @clearSearch()
+        return
+      options = {
+        bookId: "#{@model.get('id')}@#{@model.get('version')}",
+        query: @searchTerm
+      }
+      # before the search has loaded
+      @enableLoadSearch()
+      # after the search has completed
+      BookSearchResults.fetch(options).done((data) =>
+        if not @tocIsOpen
+          @toggleContents()
+        @model.set('searchResults', data.results)
+        @enableClearSearch()
+      ).fail((err) ->
+        console.error("Search failed:", err)
+      )
+      
     handleSearchInput: (event) ->
-      if (event.keyCode == 13 and event.target.value?)
-        @searchTerm = event.target.value
+      if event.keyCode == 13
         event.preventDefault()
-        if @searchTerm == ''
-          @clearSearch()
-          return
-        options = {
-          bookId: "#{@model.get('id')}@#{@model.get('version')}",
-          query: @searchTerm
-        }
-        # before the search has loaded
-        @enableLoadSearch()
-        # after the search has completed
-        BookSearchResults.fetch(options).done((data) =>
-          if not @tocIsOpen
-            @toggleContents()
-          @model.set('searchResults', data.results)
-          @enableClearSearch()
-        ).fail((err) ->
-          console.error("Search failed:", err)
-        )
+        @handleSearch()
 
     onRender: ->
       if not @mediaParent?
