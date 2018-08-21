@@ -207,8 +207,11 @@ h1.example-title .text {
 .os-problem-container,
 .os-solution-container {
   display: inline;
-  > :first-child {
+  > :first-child:not(ul):not(ol) {
     display: inline;
+  }
+  > ul, > ol {
+    margin-top: 0rem;
   }
 }
 
