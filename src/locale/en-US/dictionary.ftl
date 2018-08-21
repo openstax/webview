@@ -70,7 +70,7 @@ all-header-log-out = Log Out { $username }
 all-navbar-toggle-navigation = Toggle navigation
 
 all-header-support = Support
-  [html/title] Got to CNX Support
+  [html/title] Go to CNX Support
 
 
 
