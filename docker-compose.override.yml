@@ -4,5 +4,6 @@ services:
     volumes:
     - ./src:/code/src
     - ./conf:/code/conf
+    - ./dist:/code/dist
     ports:
       - "8000:8000"
