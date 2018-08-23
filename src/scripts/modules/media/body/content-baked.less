@@ -204,11 +204,13 @@ h1.example-title .text {
   padding: 0;
 }
 
-.os-problem-container,
-.os-solution-container {
-  display: inline;
-  > :first-child {
+.os-eoc, .os-eob {
+  .os-problem-container,
+  .os-solution-container {
     display: inline;
+    > :first-child {
+      display: inline;
+    }
   }
 }
 
