@@ -65,7 +65,7 @@
 
       accountProfile: 'https://accounts.cnx.org/profile',
 
-      cnxSupport: 'http://openstax.force.com/support?l=en_US&c=Products%3ACNX',
+      cnxSupport: 'https://openstax.secure.force.com/help',
 
       defaultLicense: {
         code: 'by'
