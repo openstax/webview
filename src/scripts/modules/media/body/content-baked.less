@@ -204,14 +204,15 @@ h1.example-title .text {
   padding: 0;
 }
 
-:not(.ui-body) > .os-problem-container,
-:not(.ui-body) > .os-solution-container {
-  display: inline;
-  > :first-child:not(ul):not(ol) {
-    display: inline;
-  }
-  > ul, > ol {
-    margin-top: 0rem;
+.os-eoc, .os-eob {
+  :not(.ui-body) > .os-problem-container,
+  :not(.ui-body) > .os-solution-container {
+    > :first-child:not(ul):not(ol) {
+      display: inline;
+    }
+    > ul, > ol {
+      margin-top: 0rem;
+    }
   }
 }
 
