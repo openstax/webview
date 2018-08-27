@@ -70,6 +70,7 @@ define (require) ->
           window.open(href, '_blank')
       else if download.test(href)
         if document.cookie.indexOf('donation') is -1
+          e.preventDefault()
           content = href.match(exports)
           router.navigate("/donate/download/#{content[1]}/#{content[2]}", {trigger: true})
         else
