@@ -205,9 +205,8 @@ h1.example-title .text {
 }
 
 .os-eoc, .os-eob {
-  .os-problem-container,
-  .os-solution-container {
-    display: inline;
+  :not(.ui-body) > .os-problem-container,
+  :not(.ui-body) > .os-solution-container {
     > :first-child:not(ul):not(ol) {
       display: inline;
     }
