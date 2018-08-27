@@ -74,7 +74,7 @@ define (require) ->
           content = href.match(exports)
           router.navigate("/donate/download/#{content[1]}/#{content[2]}", {trigger: true})
         else
-          downloadUrl(href)
+          return # Let the browser download the file # downloadUrl(href)
 
       else if resources.test(href)
         window.open(href, '_blank')
