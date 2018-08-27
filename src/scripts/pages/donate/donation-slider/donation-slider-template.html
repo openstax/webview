@@ -12,7 +12,7 @@
 
   {{#if uuid}}
     <div class="centered">
-      <a class="btn btn-primary {{#unless path}}disabled{{/unless}}"
+      <a class="btn btn-primary {{#unless path}}disabled{{/unless}}" data-bypass
         {{#if ../../isIpad}}
           {{#is ../../format 'PDF'}}
             data-ipad="true"
