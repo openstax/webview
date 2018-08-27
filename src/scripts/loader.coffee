@@ -62,9 +62,8 @@ define (require) ->
       # Only handle links intended to be processed by Backbone
       if e.isDefaultPrevented() or href.charAt(0) is '#' or mailto.test(href) then return
 
-      e.preventDefault()
-
       if external.test(href)
+        e.preventDefault()
         if legacy.test(href)
           location.href = href
         else
@@ -77,8 +76,10 @@ define (require) ->
           return # Let the browser download the file # downloadUrl(href)
 
       else if resources.test(href)
+        e.preventDefault()
         window.open(href, '_blank')
       else
+        e.preventDefault()
         if $this.data('trigger') is false then trigger = false else trigger = true
         router.navigate(href, {trigger: trigger})
 
