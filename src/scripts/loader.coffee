@@ -62,23 +62,25 @@ define (require) ->
       # Only handle links intended to be processed by Backbone
       if e.isDefaultPrevented() or href.charAt(0) is '#' or mailto.test(href) then return
 
-      e.preventDefault()
-
       if external.test(href)
+        e.preventDefault()
         if legacy.test(href)
           location.href = href
         else
           window.open(href, '_blank')
       else if download.test(href)
         if document.cookie.indexOf('donation') is -1
+          e.preventDefault()
           content = href.match(exports)
           router.navigate("/donate/download/#{content[1]}/#{content[2]}", {trigger: true})
         else
-          downloadUrl(href)
+          return # Let the browser download the file # downloadUrl(href)
 
       else if resources.test(href)
+        e.preventDefault()
         window.open(href, '_blank')
       else
+        e.preventDefault()
         if $this.data('trigger') is false then trigger = false else trigger = true
         router.navigate(href, {trigger: trigger})
 
