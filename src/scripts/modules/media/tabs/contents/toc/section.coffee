@@ -11,19 +11,21 @@ define (require) ->
   return class TocSectionView extends TocDraggableView
     template: template
     templateHelpers:
+      static: -> @static
       editable: -> @editable
       visible: ->
         @model.get('visible')
     itemViewContainer: '> ul'
 
     events:
-      'click > div > .section-wrapper': 'toggleSection'
-      'keydown > div > .section-wrapper': 'toggleSectionWithKeyboard'
+      'click > div > .section-wrapper.name-wrapper': 'toggleSection'
+      'keydown > div > .section-wrapper.name-wrapper': 'toggleSectionWithKeyboard'
       'click > div > .remove': 'removeNode'
       'click > div > .edit': 'editNode'
 
-    initialize: () ->
+    initialize: (options) ->
       return unless @model
+      @static = !!options.static
       @content = @model.get('book') or @model
       @editable = @content.get('editable')
       @regions =
@@ -55,6 +57,7 @@ define (require) ->
           if node.isSection()
             @regions.container.appendAs 'li', new TocSectionView
               model: node
+              static: @static
           else
             @regions.container.appendAs 'li', new TocPageView
               model: node

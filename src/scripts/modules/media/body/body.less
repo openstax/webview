@@ -51,6 +51,30 @@
   }
 }
 
+.media-body-about {
+  max-width: @max-media-width;
+  margin: 0 auto;
+  display: block;
+  padding: 4rem 6rem 0 6rem;
+  width: auto; // override bootstrap
+
+  .media-body-about-description-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin: 2rem 0 2rem 0;
+
+    .media-body-about-cover {
+      width: ~"calc(125px + 2rem)";
+      height: intrinsic;
+      margin-right: 2rem;
+    }
+
+    .media-body-about-description {
+      flex: 1;
+    }
+  }
+}
+
 body {
   .transition(background 0.5s ease-in-out);
 }

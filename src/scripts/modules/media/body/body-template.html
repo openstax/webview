@@ -8,6 +8,20 @@
         {{include content}}
       </div>
     </div>
+    {{#if hasAbout}}
+      <div class="media-body-about">
+        <hr />
+        {{#if about.id}}
+          <h1>About This Book</h1>
+          <div class="media-body-about-description-wrapper">
+            <img class="media-body-about-cover" src="{{about.cover}}" />
+            <div class="media-body-about-description">
+              {{{about.description}}}
+            </div>
+          </div>
+        {{/if}}
+      </div>
+    {{/if}}
   {{/if}}
 {{else}}
   <div class="media-body" aria-busy="true">
