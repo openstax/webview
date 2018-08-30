@@ -204,11 +204,16 @@ h1.example-title .text {
   padding: 0;
 }
 
-.os-problem-container,
-.os-solution-container {
-  display: inline;
-  > :first-child {
+.os-eoc, .os-eob {
+  .os-problem-container,
+  .os-solution-container {
     display: inline;
+    > :first-child:not(ul):not(ol):not([data-type="note"]) {
+      display: inline;
+    }
+    > ul, > ol, [data-type="note"] {
+      margin-top: 0;
+    }
   }
 }
 
@@ -247,6 +252,11 @@ h1.example-title .text {
       text-align: center;
       vertical-align: middle;
     }
+  }
+  [data-type="title"] {
+    display: block;
+    text-align: center;
+    font-weight: bold;
   }
 }
 
@@ -294,7 +304,8 @@ h1.example-title .text {
         padding: @table-cell-padding;
       }
     }
-    ul {
+    ul, ol{
+      padding-left: 1.5em;
       &[data-bullet-style="none"] {
         padding: 0;
         margin: 0;
