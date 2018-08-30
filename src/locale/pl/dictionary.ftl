@@ -37,8 +37,10 @@ home-pageTitle = Propagując wiedzę tworzymy społeczeństwo{$suffix}
 featured-books-show-more = Więcej
 featured-books-show-less = Mniej
 
-
+featured-books-openstax-heading = Podręczniki OpenStax
 featured-books-openstax-description = OpenStax publikuje wysokiej jakości recenzowane podręczniki na otwartej licencji, dzięki czemu są udostępniane całkowicie za darmo w internecie, a egzemplarze drukowane można uzyskać niskim kosztem. Aby dowiedzieć się, jakie formaty są dostępne, odwiedź <a href="https://openstax.org">openstax.org</a> i wybierz interesującą cię dziedzinę.
+
+featured-books-cnx-heading = Zasoby stworzone przez użytkowników
 featured-books-cnx-description = Poniższe książki i strony zostały przygotowane i udostępnione przez społeczność ludzi przekonanych o tym, że zasoby edukacyjne powinny być otwarte dla wszystkich.
 
 

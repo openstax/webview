@@ -38,8 +38,10 @@ home-pageTitle = Sharing Knowledge and Building Communities{$suffix}
 featured-books-show-more = Show More
 featured-books-show-less = Show Less
 
+featured-books-openstax-heading = OpenStax Textbooks
 featured-books-openstax-description = OpenStax publishes high-quality, peer-reviewed, openly licensed textbooks that are absolutely free online and low cost in print. For all our available formats, visit <a href="https://openstax.org">openstax.org</a> and select the subject that interests you.
 
+featured-books-cnx-heading = Community-Created Content
 featured-books-cnx-description = The books and pages below were contributed by a community of individuals dedicated to openly licensed educational content for all.
 
 
