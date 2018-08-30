@@ -208,11 +208,11 @@ h1.example-title .text {
   .os-problem-container,
   .os-solution-container {
     display: inline;
-    > :first-child:not(ul):not(ol) {
+    > :first-child:not(ul):not(ol):not([data-type="note"]) {
       display: inline;
     }
-    > ul, > ol {
-      margin-top: 0rem;
+    > ul, > ol, [data-type="note"] {
+      margin-top: 0;
     }
   }
 }
