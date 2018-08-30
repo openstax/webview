@@ -86,8 +86,9 @@ define (require) ->
       'dragend .toc [draggable]': 'onDragEnd'
       'click .clear-results': 'clearSearchResults'
 
-    initialize: () ->
+    initialize: (options) ->
       super()
+      @static = !!options.static
       @listenTo(@model, 'removeNode addNode moveNode', @processPages)
       @listenTo(@model, 'change:editable change:currentPage addNode removeNode moveNode', _.debounce(@render, 250))
       @listenTo(@model, 'change:contents add:contents remove:contents', _.debounce(@processPages, 250))
@@ -99,8 +100,11 @@ define (require) ->
 
     onRender: () ->
       @$el.addClass('table-of-contents')
+      if @static
+        @$el.addClass('static')
       @regions.toc.show new TocSectionView
         model: @model
+        static: @static
 
       @regions.self.append new AddPopoverView
         model: @model

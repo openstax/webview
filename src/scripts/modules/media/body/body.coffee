@@ -9,7 +9,9 @@ define (require) ->
   linksHelper = require('cs!helpers/links')
   EditableView = require('cs!helpers/backbone/views/editable')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
+  ContentsView = require('cs!modules/media/tabs/contents/contents')
   SimModal = require('cs!./embeddables/modals/sims/sims')
+  FeaturedBook = require('cs!models/featured-openstax-book')
   template = require('hbs!./body-template')
   settings = require('settings')
   analytics = require('cs!helpers/handlers/analytics')
@@ -24,6 +26,8 @@ define (require) ->
     media: 'page'
     template: template
     templateHelpers:
+      about: () -> @featuredBookModel.toJSON()
+      hasAbout: () -> @shouldDisplayAbout()
       editable: () -> @model.get('currentPage')?.isEditable()
       content: () -> @model.asPage()?.get('searchHtml') ? @model.asPage()?.get('content')
       hasContent: () -> typeof @model.asPage()?.get('content') is 'string'
@@ -38,6 +42,10 @@ define (require) ->
         value: () -> 'content'
         type: 'aloha'
 
+    regions:
+      media: '.media-body'
+      about: '.media-body-about'
+
     events:
       'click a': 'changePage'
       'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle,
@@ -49,10 +57,20 @@ define (require) ->
       'mouseleave .os-table' : 'stopSwiping'
       'mousemove .os-table' : 'handleSwipe'
 
+    shouldDisplayAbout: () ->
+      @model.get('currentPage')?.getPageNumber() == @model.defaultPage()
+
     initialize: () ->
       super()
       @jaxing = false
+
+      @featuredBookModel = new FeaturedBook()
+      @listenTo(@featuredBookModel, 'change', @render)
+
       @listenTo(@model, 'change:loaded', @render)
+      @listenTo(@model, 'change:loaded', () ->
+        @featuredBookModel.set({cnx_id: @model.id}).fetch()
+      )
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
@@ -425,6 +443,7 @@ define (require) ->
       else
         jumpToHash()
 
+      @regions.about.append(new ContentsView({model: @model, static: true}))
 
     changePage: (e) ->
       # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab

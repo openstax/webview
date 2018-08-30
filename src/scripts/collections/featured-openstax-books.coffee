@@ -2,7 +2,7 @@ define (require) ->
   $ = require('jquery')
   Backbone = require('backbone')
   settings = require('settings')
-  FeaturedBook = require('cs!models/featured-book')
+  FeaturedBook = require('cs!models/featured-openstax-book')
 
   openstaxcmsport = if settings.openstaxcms.port then ":#{settings.openstaxcms.port}" else ''
   openstaxcms = "#{location.protocol}//#{settings.openstaxcms.host}#{openstaxcmsport}"
@@ -12,18 +12,7 @@ define (require) ->
          "&fields=cover_url,description,title,cnx_id"
     model: FeaturedBook
 
-    parse: (response) ->
-      books = response.items
-
-      _.each books, (book) ->
-        book.cover = book.cover_url
-        book.description = $(book.description).text()
-        book.link = "contents/#{book.cnx_id}"
-        book.type = 'OpenStax Featured'
-        book.id = book.id.toString()
-
-      return books
-
+    parse: (response) -> response.items
 
     initialize: () ->
       @fetch({reset: true})
