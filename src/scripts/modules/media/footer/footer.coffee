@@ -60,6 +60,8 @@ define (require) ->
     switchTab: ($tab) ->
       if $tab.hasClass('disabled') then return
 
+      beforeY = window.scrollY
+
       $allTabs = @$el.find('.tab')
       $allTabs.addClass('inactive')
       $allTabs.removeClass('active')
@@ -73,3 +75,6 @@ define (require) ->
       else
         @currentTab = null
         $allTabs.removeClass('inactive')
+
+      if window.scrollY != beforeY
+        window.scrollTo(window.scrollX, beforeY)
