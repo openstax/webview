@@ -40,7 +40,7 @@ From the root `webview` directory, run `./script/update`, which executes the fol
 ### Quick Development Setup
 
 1. Install [nginx](http://nginx.org/)
-2. Run `./script/start` (uses `nginx.development.conf`)
+2. Run `./script/start` (uses `nginx.dev.conf`)
 3. (optional) Install https://github.com/prerender/prerender
 4. Point your browser to [http://localhost:8000](http://localhost:8000)
 5. Run `./script/stop` to stop nginx
@@ -143,7 +143,7 @@ server {
     }
 }
 ```
-**Note:** make sure to disable your browser's cache to view changes made to `nginx.development.conf`. For example, in Chrome's console, under the network tab, check "Disable Cache".
+**Note:** make sure to disable your browser's cache to view changes made to `./conf/nginx.dev.conf`. For example, in Chrome's console, under the network tab, check "Disable Cache".
 
 
 
@@ -172,6 +172,17 @@ server {
 * `src/index.html`              App's HTML Page
 * `test/`                       Unit tests
 
+# Using Docker
+
+## Install Docker and Docker Compose
+
+Follow the instructions to install [Docker](https://docs.docker.com/install/).
+
+Follow the instructions to install [Docker Compose](https://docs.docker.com/compose/install/).
+
+## Run Docker Compose
+
+    $ docker-compose up -d
 
 # License
 

@@ -1,0 +1,9 @@
+version: '3'
+services:
+  app:
+    volumes:
+    - ./src:/code/src
+    - ./conf:/code/conf
+    - ./dist:/code/dist
+    ports:
+      - "8000:8000"
