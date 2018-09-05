@@ -144,7 +144,6 @@ module.exports = (grunt) ->
               'cs!pages/about/about'
               'cs!pages/tos/tos'
               'cs!pages/license/license'
-              'cs!pages/donate/donate'
 
               # FIX: edit modules should be loaded in separate modules
               'cs!helpers/backbone/views/editable'
