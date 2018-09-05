@@ -1,9 +1,15 @@
-version: '3'
+version: '3.5'
 services:
   app:
+    command: bash -c "if [ -z \"`ls -A node_modules`\" ]; then script/setup; fi && supervisord -c conf/supervisord.dev.conf"
+    build:
+      context: .
+      target: builder
+    networks:
+      - webview
     volumes:
-    - ./src:/code/src
-    - ./conf:/code/conf
-    - ./dist:/code/dist
+      - .:/code
     ports:
       - "8000:8000"
+networks:
+  webview:

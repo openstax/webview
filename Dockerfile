@@ -1,4 +1,4 @@
-FROM openstax/nodejs:6.9.1
+FROM openstax/nodejs:6.9.1 as builder
 
 # Install higher level packages
 RUN apt-get update -qqy \
@@ -11,22 +11,22 @@ RUN npm install -g grunt-cli
 
 # Create the webview user, group, home directory, and package directory.
 RUN addgroup --system webview && adduser --system --group webview --home /code
+RUN chown -R webview:webview /var/log/nginx /var/lib/nginx
+
+USER webview
 
 # Set working directory
 WORKDIR /code
 
-# Copy application code into the image
-COPY . .
-
-# Execute the following commands as specified user / bower doesn't like being executed as root
-USER webview
-
-# Setup the webview application
-RUN script/setup
-
 # Expose default port
 EXPOSE 8000
 
-USER root
+FROM builder as build
+
+# Copy application code into the image
+COPY . .
+
+# Setup the webview application
+RUN script/setup
 
 CMD ["supervisord", "-c", "conf/supervisord.dev.conf"]
