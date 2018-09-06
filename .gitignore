@@ -7,6 +7,8 @@ dist/
 .npm
 supervisord.pid
 
+test/selenium/__pycache__/
+
 test/index.html
 
 nginx.error.log

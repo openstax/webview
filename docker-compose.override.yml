@@ -6,7 +6,9 @@ services:
       context: .
       target: builder
     networks:
-      - webview
+      webview:
+        aliases:
+          - webview
     volumes:
       - .:/code
     ports:

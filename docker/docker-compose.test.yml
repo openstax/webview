@@ -1,0 +1,26 @@
+version: '3.5'
+services:
+  selenium:
+    command: tox -- --webview_base_url=http://webview:8000/ -m webview --headless
+    image: cnx-automation:latest
+    environment:
+      - DISPLAY=:0
+      - GITHUB_TOKEN
+      - HEADLESS
+      - PRINT_PAGE_SOURCE_ON_FAILURE
+      - RUNSLOW
+      - ARCHIVE_BASE_URL
+      - LEGACY_BASE_URL
+      - LEGACY_USERNAME
+      - LEGACY_PASSWORD
+      - NEB_ENV
+      - WEBVIEW_BASE_URL
+    shm_size: 2g
+    ports:
+      - "5900:5900"
+    networks:
+      webview:
+    volumes:
+      - ./test/selenium:/code/tests/webview/
+networks:
+  webview:

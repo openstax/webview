@@ -3,6 +3,6 @@ services:
   app:
     build: .
     networks:
-      - webview
+      webview:
 networks:
   webview:
