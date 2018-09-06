@@ -53,7 +53,7 @@ Available prefixes (and corresponding location for user):
 - all - content that is visible on all pages
 - [about-contact](http://cnx.org/about/contact)
 - [main](http://cnx.org/)
-- [donate](http://cnx.org/donate)
+- [donate](https://openstax.org/give)
 - [search](http://cnx.org/browse)
 - [advanced-search](http://cnx.org/search)
 - [licensing](http://cnx.org/license)

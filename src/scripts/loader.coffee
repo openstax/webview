@@ -31,28 +31,15 @@ define (require) ->
 
     return promise
 
-  # Trick to download a file with JavaScript
-  downloadUrl = (url) ->
-    hiddenIFrameId = 'hiddenDownloader'
-    iframe = document.getElementById(hiddenIFrameId)
-    if iframe is null
-      iframe = document.createElement('iframe')
-      iframe.id = hiddenIFrameId
-      iframe.style.display = 'none'
-      document.body.appendChild(iframe)
-
-    iframe.src = url
-
   init = (options = {}) ->
     legacy = new RegExp("^((f|ht)tps?:)?\/\/#{RegExp.escape(settings.legacy)}")
-    download = /^\/(exports)\//
     external = /^((f|ht)tps?:)?\/\//
     resources = /\/(resources|exports)\//
     mailto = /^mailto:(.+)/
     exports = /exports\/([^\/:]+).(pdf|epub|zip)/
 
     # Catch internal application links and let Backbone handle the routing
-    $(document).on 'click', 'a[href]:not([data-bypass]):not([href^="#"])', (e) ->
+    $(document).on 'click', 'a[href]:not([download]):not([data-bypass]):not([href^="#"])', (e) ->
       # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab
       return if e.metaKey or e.which isnt 1
 
@@ -68,14 +55,6 @@ define (require) ->
           location.href = href
         else
           window.open(href, '_blank')
-      else if download.test(href)
-        if document.cookie.indexOf('donation') is -1
-          e.preventDefault()
-          content = href.match(exports)
-          router.navigate("/donate/download/#{content[1]}/#{content[2]}", {trigger: true})
-        else
-          return # Let the browser download the file # downloadUrl(href)
-
       else if resources.test(href)
         e.preventDefault()
         window.open(href, '_blank')

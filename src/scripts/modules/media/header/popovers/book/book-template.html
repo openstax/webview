@@ -10,13 +10,13 @@
         <ul>
           {{#each downloads}}
             {{#is state 'good'}}
-              <li><a href="{{path}}"
+              <li><a href="{{path}}" download="{{filename}}"
                 {{#if ../../isIpad}}
                   {{#is ../../format 'PDF'}}
                     data-ipad="true"
                   {{/is}}
                 {{/if}}
-                data-prop="true">{{format}}</a></li>
+                >{{format}}</a></li>
             {{/is}}
           {{/each}}
         </ul>
@@ -29,7 +29,7 @@
         <ul>
           {{#each currentPage.downloads}}
             {{#is state 'good'}}
-              <li><a href="{{path}}" data-prop="true">{{format}}</a></li>
+              <li><a href="{{path}}" download="{{filename}}">{{format}}</a></li>
             {{/is}}
           {{/each}}
         </ul>

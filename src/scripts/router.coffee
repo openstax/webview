@@ -52,8 +52,7 @@ define (require) ->
         # Sending analytics will be done once the path is canonicalized
 
       @route /^donate\/?([^/\?;]*)?\/?([^/\?;]*)?\/?([^/\?;]*)?(?:\?)?.*/, 'donate', (page, uuid, type) ->
-        @appView.render('donate', {page: page, uuid: uuid, type: type})
-        analytics.sendAnalytics()
+        window.location = 'https://openstax.org/give'
 
       @route /^(search)(?:\?q=)?(.*)/, 'search', () ->
         @appView.render('search')
