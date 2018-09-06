@@ -27,7 +27,7 @@
           <td>{{format}}</td>
           <td data-l10n-id="textbook-view-file-description" data-l10n-args='{"format":"{{format}}"}'>{{details}}</td>
           {{#is this.state 'good'}}
-            <td><a href="{{path}}">{{filename}}</a></td>
+            <td><a href="{{path}}" download="{{filename}}">{{filename}}</a></td>
             <td class="content-display">{{date created}}</td>
             <td class="content-display">{{convertToSize size}}</td>
             </tr>
