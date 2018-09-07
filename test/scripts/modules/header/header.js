@@ -14,7 +14,8 @@ describe('header tests', function () {
 
   describe('donate link', function () {
     it('should go to openstax', function () {
-      'asdf'.should.equal('qwer');
+      headerView.render();
+      headerView.$el.find('#nav-donate a').attr('href').should.equal('https://openstax.org/give');
     });
   });
 });
