@@ -302,6 +302,9 @@ h1.example-title .text {
       td {
         vertical-align: middle;
         padding: @table-cell-padding;
+        &[data-align="center"] {
+          text-align: center;
+        }
       }
     }
     ul, ol{
