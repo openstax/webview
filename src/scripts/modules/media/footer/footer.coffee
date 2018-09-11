@@ -4,7 +4,7 @@ define (require) ->
   HistoryView = require('cs!./history/history')
   AttributionView = require('cs!./attribution/attribution')
   MetadataView = require('cs!./metadata/metadata')
-  LicenseView = require('cs!./license/license')
+  #LicenseView = require('cs!./license/license')
   template = require('hbs!./footer-template')
   linksHelper = require('cs!helpers/links')
   require('less!./footer')
@@ -45,7 +45,7 @@ define (require) ->
       @regions.downloads.show(new DownloadsView({model: @model}))
       @regions.history.show(new HistoryView({model: @model}))
       @regions.attribution.show(new AttributionView({model: @model}))
-      @regions.license.show(new LicenseView({model: @model}))
+      #@regions.license.show(new LicenseView({model: @model}))
       @regions.metadata.show(new MetadataView({model: @model}))
 
     keySelectTab: (e) ->
