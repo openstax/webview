@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh "docker build -t openstax/cnx-webview:dev ."
+        sh "docker build --build-arg environment=prod -t openstax/cnx-webview:dev ."
       }
     }
     stage('Publish Dev Container') {
