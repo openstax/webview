@@ -5,5 +5,7 @@ services:
     - ./src:/code/src
     - ./conf:/code/conf
     - ./dist:/code/dist
+    environment:
+    - ENVIRONMENT=dev
     ports:
       - "8000:8000"

@@ -208,12 +208,13 @@ h1.example-title .text {
   .os-problem-container,
   .os-solution-container {
     display: inline;
-    > :first-child:not(ul):not(ol):not([data-type="note"]) {
+    > :first-child:not(ul):not(ol):not([data-type="note"]):not(.os-figure) {
       display: inline;
     }
     > ul, > ol, [data-type="note"] {
       margin-top: 0;
     }
+    .os-figure {  margin: 3rem 0; }
   }
 }
 
@@ -302,6 +303,12 @@ h1.example-title .text {
       td {
         vertical-align: middle;
         padding: @table-cell-padding;
+        &[data-align="center"] {
+          text-align: center;
+        }
+      }
+      [data-valign="top"] {
+        vertical-align: top;
       }
     }
     ul, ol{
@@ -349,12 +356,8 @@ h1.example-title .text {
     font-weight: bold;
   }
   .os-number {
-    padding-right: 4px;
     font-weight: bold;
     text-decoration: none;
-  }
-  .os-number:not(:only-child) {
-    padding: 0;
   }
 
   .group-by .os-index-item {
@@ -441,5 +444,29 @@ figure.scaled-down {
 
   img {
     width: 60%
+  }
+}
+
+.learning-objectives {
+  margin: 3rem 0;
+  padding: 1.5rem;
+  background-color: #ededed;
+  border: .2rem solid #dcdcdc;
+  [data-type="title"] {
+    display: inline-block;
+    color: #555;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    display: block;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    padding: 0 1.5rem 1rem;
+    border-bottom: .2rem solid #dcdcdc;
+  }
+  p {
+    color: #555;
+    margin: 0 0 1rem 1.5rem;
   }
 }
