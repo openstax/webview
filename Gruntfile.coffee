@@ -247,6 +247,17 @@ module.exports = (grunt) ->
           dest: 'dist/images/'
         }]
 
+    # Append content hash to filenames for cache busting and update html
+    # Regex in the webview nginx config in cnx-deploy must match these filenames
+    cacheBust:
+      dist:
+        options:
+          # Does not work for locale due to the templated link to dictionary.ftl
+          assets: [ '{fonts,images,scripts,styles}/**/*' ]
+          baseDir: './dist/'
+          separator: '.cache.'
+        src: [ 'dist/*.html' ]
+
     # Generate gzip files that will be served by nginx
     compress:
       dist:
@@ -324,6 +335,7 @@ module.exports = (grunt) ->
     'uglify:dist'
     'htmlmin:dist'
     'imagemin'
+    'cacheBust:dist'
     'compress:dist'
   ]
 
