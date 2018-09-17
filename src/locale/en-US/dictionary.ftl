@@ -656,6 +656,9 @@ textbook-view-search-this-book =
 
 textbook-view-contents = Contents
 
+textbook-view-contents-aria-label =
+  [html/aria-label] Click to Show the Table of Contents
+
 textbook-view-books = Books
 
 # TEXTBOOK VIEW - Endorsement - src/scripts/modules/media/endorsed/endorsed-template.html

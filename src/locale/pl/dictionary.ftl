@@ -660,6 +660,9 @@ textbook-view-search-this-book =
 
 textbook-view-contents = Spis treści
 
+textbook-view-contents-aria-label =
+  [html/aria-label] Kliknij, aby odkryć spis treści
+
 textbook-view-books = Książki
 
 # TEXTBOOK VIEW - Endorsement - src/scripts/modules/media/endorsed/endorsed-template.html
