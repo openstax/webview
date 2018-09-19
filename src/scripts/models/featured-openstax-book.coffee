@@ -11,7 +11,7 @@ define (require) ->
       "&cnx_id=#{@get('cnx_id')}"
 
     parseDescription: (desc) ->
-      if !desc 
+      if !desc
         'This book has no description.'
       else
         desc.replace(/<(?:[^a.]|\s)*?>/g, "")
