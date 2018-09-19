@@ -49,7 +49,7 @@ define (require) ->
 
     defaultPage: ->
       result = 1
-      if @isBook() and @isCcap()
+      if @isBook()
         result += 1 while @getPage(result).get('title').match(/Preface/)
       return result
 
