@@ -166,6 +166,7 @@ define (require) ->
             <div class="ui-toggle-wrapper">
               <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
             </div>''')
+          .append('<div class="ui-body-live" aria-live="polite"></div>')
 
           $temp.find('figure:has(> figcaption)').addClass('ui-has-child-figcaption')
 
@@ -460,10 +461,14 @@ define (require) ->
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')
       $solution.toggleClass('ui-solution-visible')
+      $uiBody = $solution[0].getElementsByClassName('ui-body')[0]
+      $uiBodyLive = $solution[0].getElementsByClassName('ui-body-live')[0]
       if $solution.hasClass('ui-solution-visible')
         $solution.attr('aria-expanded',true)
         $solution.attr('aria-label',"hide solution")
+        $uiBodyLive.innerHTML = $uiBody.innerHTML
       else
+        $uiBodyLive.innerHTML = ''
         $solution.attr('aria-expanded',false)
         $solution.attr('aria-label',"show solution")
     onEditable: () -> @$el.find('.media-body').addClass('draft')
