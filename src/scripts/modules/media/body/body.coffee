@@ -161,12 +161,11 @@ define (require) ->
 
           # Wrap solutions in a div so "Show/Hide Solutions" work
           $temp.find('.exercise .solution, [data-type="exercise"] [data-type="solution"]')
-          .wrapInner('<section class="ui-body">')
+          .wrapInner('<section class="ui-body" role="alert">')
           .prepend('''
             <div class="ui-toggle-wrapper">
               <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
             </div>''')
-          .append('<div class="ui-body-live" aria-live="polite"></div>')
 
           $temp.find('figure:has(> figcaption)').addClass('ui-has-child-figcaption')
 
@@ -466,9 +465,7 @@ define (require) ->
       if $solution.hasClass('ui-solution-visible')
         $solution.attr('aria-expanded',true)
         $solution.attr('aria-label',"hide solution")
-        $uiBodyLive.innerHTML = $uiBody.innerHTML
       else
-        $uiBodyLive.innerHTML = ''
         $solution.attr('aria-expanded',false)
         $solution.attr('aria-label',"show solution")
     onEditable: () -> @$el.find('.media-body').addClass('draft')
