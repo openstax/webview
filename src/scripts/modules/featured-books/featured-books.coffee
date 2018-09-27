@@ -7,7 +7,6 @@ define (require) ->
   featuredOpenStaxBooks = require('cs!collections/featured-openstax-books')
   featuredCNXBooks = require('cs!collections/featured-cnx-books')
   imagesLoaded = require('imagesloaded')
-  shave = require('shave')
   template = require('hbs!./featured-books-template')
   require('less!./featured-books')
 
@@ -23,23 +22,10 @@ define (require) ->
       @debouncedShaveBookDescriptionsAfterImagesLoaded = \
         _.debounce(@shaveBookDescriptionsAfterImagesLoaded, 300)
 
-    shaveBookDescriptions: () ->
-      shave('.book .description', 60)
-      $('.book:has(.description .js-shave) .show-more-less').show()
-      toggled_descriptions = $(
-        '.book:has(.description .js-shave):has(.show-more-less .less:visible) .description'
-      )
-      toggled_descriptions.find('.js-shave-char').hide()
-      toggled_descriptions.find('.js-shave').show()
-
-    shaveBookDescriptionsAfterImagesLoaded: () =>
-      imagesLoaded('.books', @shaveBookDescriptions)
-
     readMore: (event) ->
       read_more = $(this).parent()
       book = read_more.parent()
-      book.find('.description .js-shave-char').hide()
-      book.find('.description .js-shave').show('highlight')
+      book.find('.description').css('height', 'auto')
       $(this).hide()
       read_more.find('.less').show()
       event.preventDefault()
@@ -47,8 +33,7 @@ define (require) ->
     readLess: (event) ->
       read_more = $(this).parent()
       book = read_more.parent()
-      book.find('.description .js-shave-char').show('highlight')
-      book.find('.description .js-shave').hide('highlight')
+      book.find('.description').css('height', '60px')
       $(this).hide()
       read_more.find('.more').show()
       event.preventDefault()
@@ -60,7 +45,6 @@ define (require) ->
     onAfterRender: () ->
       $('.show-more-less .more').on('click', @readMore)
       $('.show-more-less .less').on('click', @readLess)
-      @shaveBookDescriptionsAfterImagesLoaded()
       $(window).resize(@debouncedShaveBookDescriptionsAfterImagesLoaded)
 
     onBeforeClose: () ->
