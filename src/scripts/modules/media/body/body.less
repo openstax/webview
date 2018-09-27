@@ -79,6 +79,17 @@ body {
   .transition(background 0.5s ease-in-out);
 }
 
+@media (max-width: @screen-xs-max) {
+  .media-body-about {
+    .media-body-about-description-wrapper {
+      display:block;
+      .media-body-about-cover {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
+
 // Import the content styling from a separate file so it can be included in the editing code
 [data-is-baked="true"] {
   .media-body > #content {
