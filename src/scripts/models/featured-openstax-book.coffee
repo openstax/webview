@@ -14,7 +14,7 @@ define (require) ->
       if !desc
         'This book has no description.'
       else
-        desc.replace(/<(?:[^a.]|\s)*?>/g, "")
+        desc.replace(/<\/p>|<br?.>/g, " ").replace(/<(?:[^a.]|\s)*?>/g, "").trim()
 
     parse: (response, options) ->
       data = if response.items then response.items[0] else response
