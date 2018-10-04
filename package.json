@@ -3,7 +3,6 @@
   "version": "0.23.3",
   "description": "Connexions (cnx.org) web site",
   "scripts": {
-    "precommit": "lint-staged",
     "prepublish": "bower install --config.analytics=false",
     "upgrade": "npm update; bower update --config.analytics=false",
     "test": "grunt test --verbose",
@@ -62,5 +61,10 @@
   ],
   "engines": {
     "node": ">=0.10"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
