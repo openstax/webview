@@ -7,12 +7,12 @@
     "prepublish": "bower install --config.analytics=false",
     "upgrade": "npm update; bower update --config.analytics=false",
     "test": "grunt test --verbose",
-    "posttest": "node ./script/check-templates-for-non-i18n-text.js",
+    "posttest": "lint-staged && node ./script/check-templates-for-non-i18n-text.js",
     "dist": "grunt dist --verbose"
   },
   "lint-staged": {
     "*.less": [
-      "stylelint --syntax=less --custom-formatter=node_modules/stylelint-formatter-pretty",
+      "stylelint --fix --syntax=less --custom-formatter=node_modules/stylelint-formatter-pretty",
       "git add"
     ]
   },
@@ -52,7 +52,6 @@
     "mocha": "3.5.3",
     "rjs-build-analysis": "~0.0.3",
     "stylelint": "^9.5.0",
-    "stylelint-config-property-sort-order-smacss": "^4.0.0",
     "stylelint-formatter-pretty": "^1.0.3"
   },
   "license": [
