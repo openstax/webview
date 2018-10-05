@@ -31,7 +31,7 @@ if [ "${1:0:1}" = '-' ]; then
 fi
 
 case "${ENVIRONMENT}" in
-	dev) PROJECT_ROOT='/code/src' ;;
+	'dev') PROJECT_ROOT='/code/src' ;;
 	*) PROJECT_ROOT='/code/dist' ;;
 esac
 
@@ -46,10 +46,14 @@ if [ "$1" = 'nginx' ]; then
 	file_env 'EXERCISES_HOST' "${EXERCISES_HOST:-exercises.openstax.org}"
 	file_env 'EXERCISES_PORT' "${EXERCISES_PORT:-443}"
 	file_env 'LEGACY_HOST'    "${LEGACY_HOST:-legacy.cnx.org}"
-	
-	/code/script/gen-settings-from-env > $PROJECT_ROOT/scripts/settings.js
 
-	configure-nginx-from-env.sh $PROJECT_ROOT > /etc/nginx/conf.d/default.conf
+	echo
+	echo "Setting up for use as a '${ENVIRONMENT}' environment."
+	echo "Nginx will be configured to serve from: ${PROJECT_ROOT}"
+
+	/code/script/gen-settings-from-env > "${PROJECT_ROOT}/scripts/settings.js"
+
+	configure-nginx-from-env.sh "${PROJECT_ROOT}" > '/etc/nginx/conf.d/default.conf'
 
 	echo
 	echo 'CNX webview init process complete; ready for start up.'
