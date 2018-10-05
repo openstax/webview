@@ -3,6 +3,8 @@ FROM openstax/nodejs:6.9.1 as base-system
 # Install grunt-cli globally
 RUN npm install -g grunt-cli
 
+COPY .dockerfiles/build-webview.sh /usr/local/bin/
+
 # Create the webview user, group, home directory, and package directory.
 # Note, the packaging tools don't like to run as root.
 RUN addgroup --system webview && adduser --system --group webview --home /code
@@ -12,15 +14,19 @@ WORKDIR /code
 
 # Copy application code into the image
 COPY . .
-# Remove the local copy of the build distribution directory if it exists
-RUN rm -rf dist
 
 
 FROM base-system as built
 
+# Specify the type of container to build: 'dev' OR 'prod'
+#  - 'dev' will specify that the container should run the source
+#  - 'prod' will run as close to production as possible
+ARG environment=prod
+ENV ENVIRONMENT=${environment}
+
 # Setup the webview application
-RUN script/setup
-RUN script/build
+COPY .dockerfiles/build-webview.sh /usr/local/bin/
+RUN build-webview.sh
 
 
 FROM nginx:latest as serve
