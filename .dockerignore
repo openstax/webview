@@ -1,4 +1,8 @@
+.cache
+.config
 .git
-node_modules/
-bower_components/
+.npm
+bower_components
+dist
+node_modules
 package.json.lock
