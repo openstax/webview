@@ -37,7 +37,9 @@ esac
 
 if [ "$1" = 'nginx' ]; then
 	chown -R "nginx" "$PROJECT_ROOT" 2>/dev/null || :
-	chmod 700 "$PROJECT_ROOT" 2>/dev/null || :
+	if [ "$ENVIRONMENT" = 'dev']; then
+		chmod 700 "$PROJECT_ROOT" 2>/dev/null || :
+	fi
 
 	file_env 'ARCHIVE_HOST'   "${ARCHIVE_HOST:-archive.cnx.org}"
 	file_env 'ARCHIVE_PORT'   "${ARCHIVE_PORT:-80}"
