@@ -1,39 +1,45 @@
-FROM openstax/nodejs:6.9.1 as builder
-
-# Specify the type of container runtime: 'dev' OR 'prod'
-#  - 'dev' will specify that the container should run the source
-#  - 'prod' will run as close to production as possible
-ARG environment=dev
-ENV ENVIRONMENT=${environment}
-
-# Install higher level packages
-RUN apt-get update -qqy \
-  && apt-get -qqy install nginx supervisor
+FROM openstax/nodejs:6.9.1 as base-system
 
 # Install grunt-cli globally
 RUN npm install -g grunt-cli
 
+COPY .dockerfiles/build-webview.sh /usr/local/bin/
+
 # Create the webview user, group, home directory, and package directory.
+# Note, the packaging tools don't like to run as root.
 RUN addgroup --system webview && adduser --system --group webview --home /code
-RUN chown -R webview:webview /var/log/nginx /var/lib/nginx
 
 USER webview
-
-# Set working directory
 WORKDIR /code
-
-# Expose default port
-EXPOSE 8000
-
-FROM builder as build
 
 # Copy application code into the image
 COPY . .
-# Remove the local copy of the build distribution directory if it exists
-RUN rm -rf dist
+
+
+FROM base-system as built
+
+# Specify the type of container to build: 'dev' OR 'prod'
+#  - 'dev' will specify that the container should run the source
+#  - 'prod' will run as close to production as possible
+ARG environment=prod
+ENV ENVIRONMENT=${environment}
 
 # Setup the webview application
-RUN script/setup
-RUN script/build
+COPY .dockerfiles/build-webview.sh /usr/local/bin/
+RUN build-webview.sh
 
-CMD supervisord -c conf/supervisord.$ENVIRONMENT.conf
+
+FROM nginx:latest as serve
+
+# Specify the type of container runtime: 'dev' OR 'prod'
+#  - 'dev' will specify that the container should run the source
+#  - 'prod' will run as close to production as possible
+ARG environment=prod
+ENV ENVIRONMENT=${environment}
+
+COPY --from=built /code /code
+COPY .dockerfiles/configure-nginx-from-env.sh /usr/local/bin/
+COPY .dockerfiles/docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+CMD ["nginx", "-g", "daemon off;"]
