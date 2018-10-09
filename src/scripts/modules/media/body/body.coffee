@@ -161,7 +161,7 @@ define (require) ->
 
           # Wrap solutions in a div so "Show/Hide Solutions" work
           $temp.find('.exercise .solution, [data-type="exercise"] [data-type="solution"]')
-          .wrapInner('<section class="ui-body">')
+          .wrapInner('<section class="ui-body" role="alert">')
           .prepend('''
             <div class="ui-toggle-wrapper">
               <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
@@ -460,6 +460,8 @@ define (require) ->
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')
       $solution.toggleClass('ui-solution-visible')
+      $uiBody = $solution[0].getElementsByClassName('ui-body')[0]
+      $uiBodyLive = $solution[0].getElementsByClassName('ui-body-live')[0]
       if $solution.hasClass('ui-solution-visible')
         $solution.attr('aria-expanded',true)
         $solution.attr('aria-label',"hide solution")
