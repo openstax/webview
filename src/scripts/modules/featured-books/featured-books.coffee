@@ -1,5 +1,4 @@
 define (require) ->
-  _ = require('underscore')
   $ = require('jquery')
   require('jqueryui')
   Backbone = require('backbone')
@@ -19,13 +18,11 @@ define (require) ->
       super()
       @listenTo(featuredOpenStaxBooks, 'reset', @render)
       @listenTo(featuredCNXBooks, 'reset', @render)
-      @debouncedShaveBookDescriptionsAfterImagesLoaded = \
-        _.debounce(@shaveBookDescriptionsAfterImagesLoaded, 300)
 
     readMore: (event) ->
       read_more = $(this).parent()
       book = read_more.parent()
-      book.find('.description').css('height', 'auto')
+      book.find('.description').addClass('extended')
       $(this).hide()
       read_more.find('.less').show()
       event.preventDefault()
@@ -33,7 +30,7 @@ define (require) ->
     readLess: (event) ->
       read_more = $(this).parent()
       book = read_more.parent()
-      book.find('.description').css('height', '60px')
+      book.find('.description').removeClass('extended')
       $(this).hide()
       read_more.find('.more').show()
       event.preventDefault()
@@ -45,7 +42,10 @@ define (require) ->
     onAfterRender: () ->
       $('.show-more-less .more').on('click', @readMore)
       $('.show-more-less .less').on('click', @readLess)
-      $(window).resize(@debouncedShaveBookDescriptionsAfterImagesLoaded)
-
-    onBeforeClose: () ->
-      $(window).off('resize', @debouncedShaveBookDescriptionsAfterImagesLoaded)
+      $('.description').each (i, desc) ->
+        $(desc).css('max-height', '100%')
+        if $(desc).height() <= 60
+          $(desc).parent().find('.show-more-less')[0].style.display = 'none'
+          $(desc).removeClass('show-ellipsis')
+        else
+          $(desc).css('max-height', '')
