@@ -67,6 +67,11 @@ define (require) ->
             @closeAllContainers(node.get('contents').models)
 
     toggleContents: (e) ->
+      tocInsideSidebar = $('.toc')[0]
+      if tocInsideSidebar.getAttribute('role')
+        tocInsideSidebar.removeAttribute('role')
+      else
+        tocInsideSidebar.setAttribute('role', 'alert')
       @tocIsOpen = not @tocIsOpen
       @.trigger('tocIsOpen', @tocIsOpen)
       if @tocIsOpen
