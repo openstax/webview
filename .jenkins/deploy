@@ -35,7 +35,7 @@ pipeline {
         // Requires DOCKER_HOST be set in the Jenkins Configuration.
         // Using the environment variable enables this file to be
         // endpoint agnostic.
-        sh "docker service update --label-add 'git.commit-hash=${GIT_COMMIT}' --image openstax/cnx-webview:dev staging_ui"
+        sh "docker -H ${CNX_STAGING_DOCKER_HOST} service update --label-add 'git.commit-hash=${GIT_COMMIT}' --image openstax/cnx-webview:dev staging_ui"
       }
     }
     stage('Run Integration Tests'){
