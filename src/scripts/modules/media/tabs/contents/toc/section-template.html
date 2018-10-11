@@ -1,13 +1,13 @@
 {{#if visible}}
   {{#if book}} {{! Only display if the model has a reference to the book, and therefore is not the book }}
     <div {{#if editable}}draggable="true"{{/if}} data-expandable="true" {{#if expanded}}data-expanded="true"{{/if}}>
-      <span class="section-wrapper{{#unless static}} name-wrapper{{/unless}}" tabindex="0"
+      <button class="section-wrapper{{#unless static}} name-wrapper{{/unless}}" tabindex="0"
        {{#if expanded}}aria-expanded="true"{{else}}aria-expanded="false"{{/if}}>
        {{#if chapter}}<span class="chapter-number">{{chapter}}</span>{{/if}}
         <span class="title section">
           {{{title}}}
         </span>
-      </span>
+      </button>
 
       {{~#if editable~}}
         <span class="edit fa fa-pencil"></span>
@@ -15,5 +15,5 @@
       {{~/if~}}
     </div>
   {{/if}}
-  <ul {{#if expanded}}data-expanded="true"{{else}}{{#if static}}data-expanded="true"{{/if}}{{/if}}></ul>
+  <ul aria-live="polite" {{#if expanded}}data-expanded="true"{{else}}{{#if static}}data-expanded="true"{{/if}}{{/if}}></ul>
 {{/if}}
