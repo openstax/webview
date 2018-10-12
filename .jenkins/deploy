@@ -41,7 +41,7 @@ pipeline {
     stage('Run Integration Tests'){
       steps {
         sh "mkdir -p ${WORKSPACE}/xml-report"
-        sh "${WORKSPACE}/.jenkins/gen_env_list.py > ${WORKSPACE}/env.list"
+        sh "${WORKSPACE}/.jenkins/gen_env_list.py ${CNX_STAGING_DOCKER_HOST} > ${WORKSPACE}/env.list"
         sh "docker run --rm -v ${WORKSPACE}/xml-report:/xml-report:z  --env-file ${WORKSPACE}/env.list openstax/cnx-automation:latest tox -- -m 'webview' --junitxml=/xml-report/report.xml"
       }
       post {
