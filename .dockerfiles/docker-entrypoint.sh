@@ -37,7 +37,7 @@ esac
 
 if [ "$1" = 'nginx' ]; then
 	chown -R "nginx" "$PROJECT_ROOT" 2>/dev/null || :
-	if [ "$ENVIRONMENT" = 'dev']; then
+	if [ "$ENVIRONMENT" = 'dev' ]; then
 		chmod 700 "$PROJECT_ROOT" 2>/dev/null || :
 	fi
 
