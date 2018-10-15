@@ -1,5 +1,8 @@
 pipeline {
   agent { label 'docker' }
+  environment {
+    TESTING_CONTAINER_NAME = "webview-testing-${env.BUILD_ID}"
+  }
   stages {
     stage('Build') {
       steps {
@@ -42,11 +45,19 @@ pipeline {
       steps {
         sh "mkdir -p ${WORKSPACE}/xml-report"
         sh "${WORKSPACE}/.jenkins/gen_env_list.py ${CNX_STAGING_DOCKER_HOST} > ${WORKSPACE}/env.list"
-        sh "docker run --rm -v ${WORKSPACE}/xml-report:/xml-report:z  --env-file ${WORKSPACE}/env.list openstax/cnx-automation:latest tox -- -m 'webview' --junitxml=/xml-report/report.xml"
+        // Start the testing container
+        sh "docker run -d -v ${WORKSPACE}/xml-report:/xml-report:z --env-file ${WORKSPACE}/env.list --name ${TESTING_CONTAINER_NAME} openstax/cnx-automation:latest"
+        // Run the tests
+        sh "docker exec ${TESTING_CONTAINER_NAME} tox -- -m 'webview' --junitxml=/code/report.xml"
       }
       post {
         always {
-          junit "${WORKSPACE}/xml-report/report.xml"
+          // Move the report to a place that is both accessible and writable
+          sh "docker exec -u root ${TESTING_CONTAINER_NAME} cp /code/report.xml /xml-report"
+          // Destroy the testing container
+          sh "docker stop ${TESTING_CONTAINER_NAME} && docker rm -f ${TESTING_CONTAINER_NAME}"
+          // Report test results
+          junit "xml-report/report.xml"
         }
       }
     }
