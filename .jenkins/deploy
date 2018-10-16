@@ -17,22 +17,6 @@ pipeline {
         }
       }
     }
-    stage('Publish Release') {
-      when {
-        expression {
-          release = sh(returnStdout: true, script: 'git tag -l --points-at HEAD | head -n 1').trim()
-          return release
-        }
-      }
-      steps {
-        withDockerRegistry([credentialsId: 'docker-registry', url: '']) {
-          sh "docker tag openstax/cnx-webview:dev openstax/cnx-webview:${release}"
-          sh "docker tag openstax/cnx-webview:dev openstax/cnx-webview:latest"
-          sh "docker push openstax/cnx-webview:${release}"
-          sh "docker push openstax/cnx-webview:latest"
-        }
-      }
-    }
     stage('Deploy to the Staging stack') {
       steps {
         // Requires DOCKER_HOST be set in the Jenkins Configuration.
@@ -41,7 +25,7 @@ pipeline {
         sh "docker -H ${CNX_STAGING_DOCKER_HOST} service update --label-add 'git.commit-hash=${GIT_COMMIT}' --image openstax/cnx-webview:dev staging_ui"
       }
     }
-    stage('Run Integration Tests'){
+    stage('Run Functional Tests'){
       steps {
         sh "mkdir -p ${WORKSPACE}/xml-report"
         sh "${WORKSPACE}/.jenkins/gen_env_list.py ${CNX_STAGING_DOCKER_HOST} > ${WORKSPACE}/env.list"
@@ -58,6 +42,24 @@ pipeline {
           sh "docker stop ${TESTING_CONTAINER_NAME} && docker rm -f ${TESTING_CONTAINER_NAME}"
           // Report test results
           junit "xml-report/report.xml"
+        }
+      }
+    }
+    stage('Publish Release') {
+      when { buildingTag() }
+      environment {
+        release = """${sh(
+          returnStdout: true,
+          // Strip the `v` prefix
+          script: 'bash -c \'echo ${TAG_NAME#v*}\''
+        ).trim()}"""
+      }
+      steps {
+        withDockerRegistry([credentialsId: 'docker-registry', url: '']) {
+          sh "docker tag openstax/cnx-webview:dev openstax/cnx-webview:${release}"
+          sh "docker tag openstax/cnx-webview:dev openstax/cnx-webview:latest"
+          sh "docker push openstax/cnx-webview:${release}"
+          sh "docker push openstax/cnx-webview:latest"
         }
       }
     }
