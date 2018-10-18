@@ -34,6 +34,13 @@
       height: 100%;
       visibility: visible;
 
+      @media (max-width: 640px) {
+        width: 100%;
+        .table-of-contents.pinned {
+          max-width: 100%;
+        }
+      }
+
       > div {
         overflow-y: auto;
         margin-left: 0;
