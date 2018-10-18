@@ -460,8 +460,6 @@ define (require) ->
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')
       $solution.toggleClass('ui-solution-visible')
-      $uiBody = $solution[0].getElementsByClassName('ui-body')[0]
-      $uiBodyLive = $solution[0].getElementsByClassName('ui-body-live')[0]
       if $solution.hasClass('ui-solution-visible')
         $solution.attr('aria-expanded',true)
         $solution.attr('aria-label',"hide solution")
