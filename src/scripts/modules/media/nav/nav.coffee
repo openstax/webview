@@ -67,6 +67,9 @@ define (require) ->
             @closeAllContainers(node.get('contents').models)
 
     toggleContents: (e) ->
+      // This component is used in the ToC as well as the intro page. 
+      // Having the aria attributes causes confusion because there are 2 `<nav>` elements on the page
+      // See #1975
       tocInsideSidebar = $('.toc')[0]
       if tocInsideSidebar.getAttribute('role')
         tocInsideSidebar.removeAttribute('role')
