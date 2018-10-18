@@ -2,6 +2,11 @@ bower_components/
 node_modules/
 dist/
 
+.cache
+.config
+.npm
+supervisord.pid
+
 test/index.html
 
 nginx.error.log

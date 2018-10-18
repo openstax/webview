@@ -1,5 +1,8 @@
 pipeline {
   agent { label 'docker' }
+  environment {
+    TESTING_CONTAINER_NAME = "webview-testing-${env.BUILD_ID}"
+  }
   stages {
     stage('Build') {
       steps {
@@ -14,12 +17,42 @@ pipeline {
         }
       }
     }
-    stage('Publish Release') {
-      when {
-        expression {
-          release = sh(returnStdout: true, script: 'git tag -l --points-at HEAD | head -n 1').trim()
-          return release
+    stage('Deploy to the Staging stack') {
+      steps {
+        // Requires DOCKER_HOST be set in the Jenkins Configuration.
+        // Using the environment variable enables this file to be
+        // endpoint agnostic.
+        sh "docker -H ${CNX_STAGING_DOCKER_HOST} service update --label-add 'git.commit-hash=${GIT_COMMIT}' --image openstax/cnx-webview:dev staging_ui"
+      }
+    }
+    stage('Run Functional Tests'){
+      steps {
+        sh "mkdir -p ${WORKSPACE}/xml-report"
+        sh "${WORKSPACE}/.jenkins/gen_env_list.py ${CNX_STAGING_DOCKER_HOST} > ${WORKSPACE}/env.list"
+        // Start the testing container
+        sh "docker run -d -v ${WORKSPACE}/xml-report:/xml-report:z --env-file ${WORKSPACE}/env.list --name ${TESTING_CONTAINER_NAME} openstax/cnx-automation:latest"
+        // Run the tests
+        sh "docker exec ${TESTING_CONTAINER_NAME} tox -- -m 'webview' --junitxml=/code/report.xml"
+      }
+      post {
+        always {
+          // Move the report to a place that is both accessible and writable
+          sh "docker exec -u root ${TESTING_CONTAINER_NAME} cp /code/report.xml /xml-report"
+          // Destroy the testing container
+          sh "docker stop ${TESTING_CONTAINER_NAME} && docker rm -f ${TESTING_CONTAINER_NAME}"
+          // Report test results
+          junit "xml-report/report.xml"
         }
+      }
+    }
+    stage('Publish Release') {
+      when { buildingTag() }
+      environment {
+        release = """${sh(
+          returnStdout: true,
+          // Strip the `v` prefix
+          script: 'bash -c \'echo ${TAG_NAME#v*}\''
+        ).trim()}"""
       }
       steps {
         withDockerRegistry([credentialsId: 'docker-registry', url: '']) {

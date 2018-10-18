@@ -1,4 +1,8 @@
-version: '3'
+version: '3.5'
 services:
   app:
-    build: ./
+    build:
+      context: .
+      target: serve
+    ports:
+      - "8000:80"
