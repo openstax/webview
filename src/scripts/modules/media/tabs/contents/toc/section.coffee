@@ -83,6 +83,7 @@ define (require) ->
         e.preventDefault()
         @toggleSection()
         @$el.find('> div > .section-wrapper').focus()
+        @$el.find('> ul').attr('role', 'alert')
 
     removeNode: () ->
       @content.removeNode(@model)
