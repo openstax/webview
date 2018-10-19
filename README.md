@@ -45,6 +45,8 @@ From the root `webview` directory, run `./script/update`, which executes the fol
 4. Point your browser to [http://localhost:8000](http://localhost:8000)
 5. Run `./script/stop` to stop nginx
 
+To see which templates are being used for which parts, see [docs/README.md](./docs/README.md)
+
 ### Customization Notes
 
 1. Update settings in `src/scripts/settings.js` if necessary to, for example, include
