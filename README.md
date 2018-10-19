@@ -28,6 +28,8 @@ From the root `webview` directory, run `./script/test` (which runs `npm test`).
 npm test failures are not as informative as they could be.
 If `coffeelint` fails, you can run it with `grunt coffeelint` to get more information
 
+To enable development mode, add `?dev-mode=true` to the URL.
+
 # Updating
 
 From the root `webview` directory, run `./script/update`, which executes the following commands:

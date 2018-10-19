@@ -149,14 +149,12 @@
       <div>{{submitter.fullname}}<div>
     {{~/if}}
     </dd>
+{{#if devModeFlag}}
   <dt>Developer Mode</dt>
   <dd>
-    {{#if devModeFlag}}
-      <a data-bypass="true" href="?dev-mode=false">Enabled</a>
-    {{else}}
-      <a data-bypass="true" href="?dev-mode=true">Disabled</a>
-    {{/if}}
+      <a data-bypass="true" href="?dev-mode=false">Enabled</a> (click to Disable)
   </dd>
+{{/if}}
 </dl>
 
 
