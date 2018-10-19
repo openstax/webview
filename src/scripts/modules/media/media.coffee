@@ -1,5 +1,6 @@
 define (require) ->
   $ = require('jquery')
+  Backbone = require('backbone')
   linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   analytics = require('cs!helpers/handlers/analytics')
@@ -24,24 +25,17 @@ define (require) ->
   return class MediaView extends BaseView
     key = []
     canonical: () ->
-      uuid = @model.getUuid()
-      if uuid
-        return "//#{location.host}/contents/#{uuid}/"
-      else
-        return null
+      return linksHelper.getModelPath(@model, false)
 
     template: template
     regions:
       media: '.media'
       pinnable: '.pinnable'
-      editbar: '.editbar'
 
     summary:() -> @updateSummary()
     description: () -> @updateDescription()
 
     events:
-      'keydown .media-title > .title input': 'checkKeySequence'
-      'keyup .media-title > .title input': 'resetKeySequence'
       'click a[href*="#"]': 'triggerHashChange'
 
     initialize: (options) ->
@@ -53,6 +47,7 @@ define (require) ->
       @uuid = options.uuid
       @model = new Content({id: @uuid, version: options.version, page: options.page})
       @minimal = options.minimal
+      @scrollPosition = 0
 
       @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title change:parent.id', @updatePageInfo)
@@ -60,13 +55,16 @@ define (require) ->
         @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage
           change:currentPage.loaded', @updateLegacyLink)
       @listenTo(@model, 'change:error', @displayError)
-      @listenTo(@model, 'change:editable', @toggleEditor)
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updateUrl)
       @listenTo(@model, 'change:title change:currentPage change:currentPage.loaded', @updatePageInfo)
       @listenTo(@model, 'change:abstract', @updateSummary)
 
     triggerHashChange: (e) ->
       Backbone.trigger('window:hashChange')
+      e.preventDefault()
+      e.stopPropagation()
+      href = $(e.currentTarget).attr('href')
+      history.pushState(href, @model.get('title'), href)
 
     onRender: () =>
       @regions.media.append(new MediaEndorsedView({model: @model}))
@@ -110,10 +108,7 @@ define (require) ->
 
       adjustHashTop = ->
         handleHeaderViewPinning()
-        if isPinned
-          obscured = $pinnable.height()
-          top = $(window.location.hash)?.position()?.top
-          $(window).scrollTop(top - obscured) if top
+        linksHelper.offsetHash()
 
       Backbone.on('window:hashChange', _.debounce(adjustHashTop, 150))
 
@@ -134,6 +129,7 @@ define (require) ->
         isPinned = true
         adjustMainMargin($pinnable.height())
       unpinNavBar = ->
+        $pinnable.removeClass('opened')
         $pinnable.removeClass('pinned')
         $titleArea.removeClass('compact')
         $toc.removeClass('pinned')
@@ -144,15 +140,41 @@ define (require) ->
         $titleArea = mediaTitleView.$el.find('.media-title')
         $titleArea.addClass('compact') if isPinned
       )
+      pinNavBarSlow = ->
+        $pinnable.removeClass('closed')
+        $pinnable.addClass('opened')
+      unpinNavBarSlow = ->
+        $pinnable.addClass('pinned')
+        $toc.addClass('pinned')
+        $pinnable.removeClass('opened')
+        $pinnable.addClass('closed')
+        adjustMainMargin(0)
+        isPinned = false
+        pinnableTop = $pinnable.offset().top
+
 
       handleHeaderViewPinning = ->
         top = $(window).scrollTop()
-        if top > pinnableTop
-          if not isPinned
-            pinNavBar()
-        else if isPinned
+
+        if top <= pinnableTop
           unpinNavBar()
+        else
+          if window.innerWidth < 640
+            if top + 30 < @scrollPosition && window.innerWidth < 640
+              # scrolling up want to make the header reappear
+              if not isPinned
+                pinNavBar()
+                pinNavBarSlow()
+            else if (top > @scrollPosition && window.innerWidth < 640) && !navView.tocIsOpen
+              # scrolling down want to make the header dissapear
+              if isPinned
+                unpinNavBarSlow()
+          else if not isPinned
+            pinNavBar()
+
         setTocHeight()
+
+        @scrollPosition = top
       Backbone.on('window:optimizedScroll', handleHeaderViewPinning)
       # closing is triggered in 'onBeforeClose'
       @on('closing', ->
@@ -167,6 +189,7 @@ define (require) ->
           top = $(window).scrollTop()
           if top < pinnableTop
             $(window).scrollTop(pinnableTop + 10)
+
         setTocHeight()
         )
       wasPinnedAtChange = false
@@ -200,12 +223,13 @@ define (require) ->
       qs = components.rawquery
 
       if title isnt components.title and not @model.isBook()
-        router.navigate("contents/#{components.uuid}#{components.version}/#{title}#{qs}", {replace: true})
+        router.navigate("contents/#{components.uuid}#{components.version}/\
+        #{title}#{components.hash_path}#{qs}", {replace: true})
 
     trackAnalytics: () ->
       # Track loading using the media's own analytics ID, if specified
-      analyticsID = @model.get('googleAnalytics')
-      analytics.send(analyticsID) if analyticsID
+      analyticsIDs = @model.get('googleAnalytics')
+      analytics.sendAnalytics(analyticsIDs) if analyticsIDs
 
     updatePageInfo: () ->
       @pageTitle = @model.get('title')
@@ -236,33 +260,16 @@ define (require) ->
 
     # FIX: How much of loadEditor and closeEditor can be merged into the editbar?
     loadEditor: () ->
-      @editing = true
-
-      require ['cs!./editbar/editbar'], (EditbarView) =>
-        @regions.editbar.show(new EditbarView({model: @model}))
-        height = @regions.editbar.$el.find('.navbar').outerHeight()
-        $('body').css('padding-top', height) # Don't cover the page header
-        window.scrollBy(0, height) # Prevent viewport from jumping
+      return
 
     closeEditor: () ->
-      @editing = false
-      height = @regions.editbar.$el.find('.navbar').outerHeight()
-      @regions.editbar.empty()
-      $('body').css('padding-top', '0') # Remove added padding
-      window.scrollBy(0, -height) # Prevent viewport from jumping
+      return
 
     onBeforeClose: () ->
-      if @model.get('editable')
-        @model.set('editable', false, {silent: true})
-        @closeEditor()
       @trigger('closing')
 
     checkKeySequence: (e) ->
-      key[e.keyCode] = true
-      #ctrl+alt+shift+l+i
-      if key[16] and key[17] and key[18] and key[73] and key[76]
-        if @model.get('canChangeLicense') or @model.get('derivedFrom') is null
-          $('#license-modal').modal('show')
+      return
 
     resetKeySequence: (e) ->
-      key[e.keyCode] = false
+      return

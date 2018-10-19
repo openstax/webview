@@ -9,10 +9,12 @@ define (require) ->
   linksHelper = require('cs!helpers/links')
   EditableView = require('cs!helpers/backbone/views/editable')
   ProcessingInstructionsModal = require('cs!./processing-instructions/modals/processing-instructions')
+  ContentsView = require('cs!modules/media/tabs/contents/contents')
   SimModal = require('cs!./embeddables/modals/sims/sims')
-  Coach = require('cs!./embeddables/coach')
+  FeaturedBook = require('cs!models/featured-openstax-book')
   template = require('hbs!./body-template')
   settings = require('settings')
+  analytics = require('cs!helpers/handlers/analytics')
   require('less!./body')
 
   embeddableTemplates =
@@ -24,6 +26,8 @@ define (require) ->
     media: 'page'
     template: template
     templateHelpers:
+      about: () -> @featuredBookModel.toJSON()
+      hasAbout: () -> @shouldDisplayAbout()
       editable: () -> @model.get('currentPage')?.isEditable()
       content: () -> @model.asPage()?.get('searchHtml') ? @model.asPage()?.get('content')
       hasContent: () -> typeof @model.asPage()?.get('content') is 'string'
@@ -38,38 +42,65 @@ define (require) ->
         value: () -> 'content'
         type: 'aloha'
 
+    regions:
+      media: '.media-body'
+      about: '.media-body-about'
+
     events:
       'click a': 'changePage'
       'click [data-type="solution"] > .ui-toggle-wrapper > .ui-toggle,
         .solution > .ui-toggle-wrapper > .ui-toggle': 'toggleSolution'
-      'keydown .media-body': 'checkKeySequence'
-      'keyup .media-body': 'resetKeySequence'
-      'click .os-interactive-link': 'simLink'
 
-    regions:
-      coach: '#coach-wrapper'
+      'click .os-interactive-link': 'simLink'
+      'mousedown .os-table' : 'startSwiping'
+      'mouseup .os-table' : 'stopSwiping'
+      'mouseleave .os-table' : 'stopSwiping'
+      'mousemove .os-table' : 'handleSwipe'
+
+    shouldDisplayAbout: () ->
+      @model.get('currentPage')?.getPageNumber() == @model.defaultPage()
 
     initialize: () ->
       super()
       @jaxing = false
+
+      @featuredBookModel = new FeaturedBook()
+      @listenTo(@featuredBookModel, 'change', @render)
+
       @listenTo(@model, 'change:loaded', @render)
+      @listenTo(@model, 'change:loaded', () ->
+        @featuredBookModel.set({cnx_id: @model.id}).fetch()
+      )
       @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
       @listenTo(@model, 'change:currentPage.editable', @render)
       @listenTo(@model, 'change:currentPage.loaded change:currentPage.active change:shortId', @canonicalizePath)
       @listenTo(@model, 'change:currentPage.searchHtml', @render)
 
     canonicalizePath: =>
+      allTrackers = [settings.analyticsID]
+      if @model.get('googleAnalytics')
+        allTrackers = allTrackers.concat(@model.get('googleAnalytics'))
+
       if @model.isBook()
         currentPage = @model.get('currentPage')
         pageIsLoaded = currentPage?.get('loaded')
         return unless pageIsLoaded and currentPage.get('active')
         pageId = currentPage.getShortUuid()
+        if currentPage.get('googleAnalytics')
+          allTrackers = allTrackers.concat(currentPage.get('googleAnalytics'))
       else
         pageId = 0
       currentRoute = Backbone.history.getFragment()
-      canonicalPath = linksHelper.getPath('contents', {model: @model, page: pageId}, [])
+      canonicalPath = linksHelper.getPath('contents', {model: @model, page: pageId}, []) + window.location.hash
       if (canonicalPath isnt "/#{currentRoute}")
-        router.navigate(canonicalPath, {replace: true})
+        # replace previous URL with the canonical path
+        # Set analytics:false to prevent double-tracking pageViews.
+        # It's not ideal, because it does not track the canonical version that a person saw
+        # See #1601
+        router.navigate(canonicalPath, {replace: true, analytics: false})
+      # Only send analytics once the canonical URL is in the browser URL
+      analytics.sendAnalytics(_.uniq(allTrackers))
+
 
     updateTeacher: ($temp = @$el) ->
       $els = $temp.find('.os-teacher')
@@ -81,33 +112,8 @@ define (require) ->
 
     goToPage: (pageNumber, href) ->
       @model.setPage(pageNumber)
-      router.navigate href, {trigger: false}, => @parent.parent.parent.trackAnalytics()
 
-    getCoach: ->
-      moduleUUID = @model.getUuid()?.split('?')[0]
-      settings.conceptCoach?.uuids?[moduleUUID]
-
-    isCoach: ->
-      @getCoach()?
-
-    hideExercises: ($el) ->
-      hiddenClasses = @getCoach()
-      hiddenSelectors = hiddenClasses.map((name) -> ".#{name}").join(', ')
-      $exercisesToHide = $el.find(hiddenSelectors)
-      $exercisesToHide.add($exercisesToHide.siblings('[data-type=title]')).hide()
-
-      $exercisesToHide
-
-    makeRegionForCoach: ($summary, wrapperId = 'coach-wrapper') ->
-      $("##{wrapperId}").remove()
-      $coachWrapper = $("<div id=\"#{wrapperId}\"></div>")
-      $coachWrapper.insertAfter(_.last($summary))
-
-    handleCoach: ($el) ->
-      return unless @isCoach()
-      @hideExercises($el)
-      $summary = $el.find('section.summary[data-depth], section.section-summary[data-depth]')
-      @makeRegionForCoach($summary) if $summary.length > 0
+      router.navigate(href, {trigger: true, replace: false}, => @parent.parent.parent.trackAnalytics())
 
     # Toggle the visibility of teacher's edition elements
     toggleTeacher: () ->
@@ -124,7 +130,7 @@ define (require) ->
           # Add an attribute marking that this is collated
           # TODO: Move this into the handlebars template
           isCollated = @model.asPage().isCollated()
-          $temp.find('#content').attr('data-is-baked', isCollated)
+          $('#main-content').attr('data-is-baked', isCollated)
 
           if $temp.find('.os-interactive-link').length
             @model.set('sims', true)
@@ -136,13 +142,14 @@ define (require) ->
           $temp.children('[data-type="abstract"]').remove()
 
           # Wrap title and content elements in header and section elements, respectively
-          $temp.find('.example, .exercise, .note,
-                    [data-type="example"], [data-type="exercise"], [data-type="note"]').each (index, el) ->
+          $temp.find('.example, .exercise, .note, .abstract,
+                    [data-type="example"], [data-type="exercise"],
+                    [data-type="note"], [data-type="abstract"]').each (index, el) ->
             $el = $(el)
             $contents = $el.contents().filter (i, node) ->
-              return !$(node).is('.title, [data-type="title"]')
+              return !$(node).is('.title, [data-type="title"], .os-title')
             $contents.wrapAll('<section>')
-            $title = $el.children('.title, [data-type="title"]')
+            $title = $el.children('.title, [data-type="title"], .os-title')
             $title.wrap('<header>')
             # Add an attribute for the parents' `data-label`
             # since CSS does not support `parent(attr(data-label))`.
@@ -154,7 +161,7 @@ define (require) ->
 
           # Wrap solutions in a div so "Show/Hide Solutions" work
           $temp.find('.exercise .solution, [data-type="exercise"] [data-type="solution"]')
-          .wrapInner('<section class="ui-body">')
+          .wrapInner('<section class="ui-body" role="alert">')
           .prepend('''
             <div class="ui-toggle-wrapper">
               <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
@@ -216,9 +223,6 @@ define (require) ->
 
           # # uncomment to embed fake exercises and see embeddable exercises in action
           # @fakeExercises($temp)
-
-          # Hide Exercises and set region for Concept Coach, only if canCoach
-          @handleCoach($temp)
 
           @initializeEmbeddableQueues()
           @findEmbeddables($temp.find('#content'))
@@ -407,29 +411,18 @@ define (require) ->
     ###
 
     fakeExercises: ($parent) ->
-      sections = $parent.find('section[data-depth="1"]')
+      return
 
-      appendFakeExercise = (section, iter) ->
-        $(section).append(fakeExerciseTemplates[iter % fakeExerciseTemplates.length])
-
-      _.each(sections, appendFakeExercise)
 
     onRender: () ->
       @trigger('render')
       currentPage = @model.asPage()
       return unless currentPage?
       page = currentPage ? @model.get('contents')?.models[0]?.get('book')
-      if currentPage.get('loaded') and @model.isDraft()
-        @parent?.regions.self.append(new ProcessingInstructionsModal({model: @model}))
 
       return unless currentPage.get('active')
       if @model.get('sims') is true
         @parent?.regions.self.append(new SimModal({model: @model}))
-
-      # mount the Concept Coach if the mounter has been configured/if `canCoach`
-      if @isCoach()
-        @coach = new Coach({model: @model})
-        @regions.coach.append(@coach)
 
       # MathJax rendering must be done after the HTML has been added to the DOM
       MathJax?.Hub.Queue =>
@@ -437,22 +430,20 @@ define (require) ->
       MathJax?.Hub.Queue(['Typeset', MathJax.Hub], @$el.get(0))
       MathJax?.Hub.Queue =>
         @jaxing = false
-        @processCoachMath?()
 
-      # Update the hash fragment after the content has loaded
-      # to force the browser window to find the intended content
-      jumpToHash = () =>
-        if currentPage.get('loaded') and not @fragmentReloaded and window.location.hash
-          @fragmentReloaded = true
-          hash = window.location.hash
-          window.location.hash = ''
-          window.location.hash = hash
+      # Clear and replace the hash fragment after the content has loaded
+      # to force the browser window to find the intended content (as a side effect)
+      jumpToHash = () ->
+        if currentPage.get('loaded') and window.location.hash
+          linksHelper.offsetHash()
 
       $target = $(window.location.hash)
       if $target.prop('tagName')?.toLowerCase() is 'iframe'
         $target.on('load', jumpToHash)
       else
         jumpToHash()
+
+      @regions.about.append(new ContentsView({model: @model, static: true}))
 
     changePage: (e) ->
       # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab
@@ -469,6 +460,8 @@ define (require) ->
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')
       $solution.toggleClass('ui-solution-visible')
+      $uiBody = $solution[0].getElementsByClassName('ui-body')[0]
+      $uiBodyLive = $solution[0].getElementsByClassName('ui-body-live')[0]
       if $solution.hasClass('ui-solution-visible')
         $solution.attr('aria-expanded',true)
         $solution.attr('aria-label',"hide solution")
@@ -482,21 +475,11 @@ define (require) ->
       @render() # Re-render body view to cleanup aloha issues
 
     checkKeySequence: (e) ->
-      key[e.keyCode] = true
-      if @model.isDraft()
-        #ctrl+alt+shift+p+i
-        if key[16] and key[17] and key[18] and key[73] and key[80]
-          instructionTags = []
-          processingInstructions = @$el.find('.media-body').find('cnx-pi')
-
-          _.each processingInstructions, (instruction) ->
-            instructionTags.push(instruction.outerHTML)
-
-          $('#pi').val(instructionTags.join('\n'))
-          $('#processing-instructions-modal').modal('show')
+      return
 
     resetKeySequence: (e) ->
-      key[e.keyCode] = false
+      return
+
 
     simLink: (evt) ->
       evt.preventDefault()
@@ -504,3 +487,43 @@ define (require) ->
       @model.set('simUrl', link.attr('href'))
       @model.set('simTitle', link.parents('figure').find('[data-type="title"]').text())
       $('#sims-modal').modal('show')
+
+    # Handle Big Tables - add swiping | Proper events are added at the top of the file
+
+    isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    isSwiping = false
+    tableLeftPos = 0
+    startSwipingPos = 0
+    swipeRange = 0
+
+    isSwipable: (target) ->
+      if !@isMobile and target.offsetWidth < target.getElementsByTagName('table')[0].offsetWidth
+        return true
+      false
+
+    handleSwipe: (e) ->
+      target = e.currentTarget
+      if @isSwipable(target)
+        if !target.classList.contains('swipe-table') then target.classList.add('swipe-table')
+      if @isSwiping
+        mouseX = e.clientX
+        swipeDistance = @startSwipingPos - mouseX
+        if swipeDistance <= @swipeRange and swipeDistance >= -1 * @swipeRange
+          target.scrollLeft += swipeDistance
+      return
+
+    startSwiping: (e) ->
+      target = e.currentTarget
+      if @isSwipable(target)
+        @isSwiping = true
+        offsets = target.getBoundingClientRect()
+        @tableLeftPos = offsets.left
+        @startSwipingPos = window.event.clientX
+        @swipeRange = target.getElementsByTagName('table')[0].offsetWidth - (target.offsetWidth)
+      return
+
+    stopSwiping: () ->
+      @isSwiping = false
+      return
+
+    # End big tables

@@ -8,35 +8,38 @@ define (require) ->
 
   return new class Router extends Backbone.Router
     initialize: (args...) ->
-      decodedPathname = decodeURIComponent(window.location.pathname)
-      if (decodedPathname != window.location.pathname)
-        window.location.replace(decodeURIComponent(window.location))
       @appView = new AppView()
 
       # Default Route
       @route '*actions', 'default', () ->
         @appView.render('error', {code: 404})
+        # Explicitly send analytics for each page so we can delay sending it for
+        # content until the canonical URL is in the browser URL
+        analytics.sendAnalytics()
 
       @route '', 'index', () ->
         @appView.render('home')
+        # Explicitly send analytics for each page so we can delay sending it for
+        # content until the canonical URL is in the browser URL
+        analytics.sendAnalytics()
 
-      @route 'workspace', 'workspace', () ->
-        @appView.render('workspace')
 
       @route 'contents', 'contents', () ->
         @appView.render('contents')
+        analytics.sendAnalytics()
 
       @route 'browse', 'browse', ->
         @appView.render('browse-content')
+        analytics.sendAnalytics()
 
       @route 'tos', 'tos', () ->
         @appView.render('tos')
+        analytics.sendAnalytics()
 
       @route 'license', 'license', () ->
         @appView.render('license')
+        analytics.sendAnalytics()
 
-      @route /^users\/role-acceptance\/(.+)/, 'role-acceptance', () ->
-        @appView.render('role-acceptance')
 
       # Match and extract uuid and page numbers separated by a colon
       @route linksHelper.contentsLinkRegEx, 'media', (uuid, version, page, title, qs) ->
@@ -46,19 +49,20 @@ define (require) ->
         uuid = settings.shortcodes[uuid] if settings.shortcodes[uuid]
         pageId = if isNaN(page) then page else Number(page)
         @appView.render('contents', {uuid: uuid, version: version, page: pageId, qs: qs})
+        # Sending analytics will be done once the path is canonicalized
 
       @route /^donate\/?([^/\?;]*)?\/?([^/\?;]*)?\/?([^/\?;]*)?(?:\?)?.*/, 'donate', (page, uuid, type) ->
-        @appView.render('donate', {page: page, uuid: uuid, type: type})
+        window.location = 'https://openstax.org/give'
 
       @route /^(search)(?:\?q=)?(.*)/, 'search', () ->
         @appView.render('search')
+        analytics.sendAnalytics()
 
       @route /^about\/?(.*)/, 'about', (page) ->
         @appView.render('about', {page: page})
+        analytics.sendAnalytics()
 
     navigate: (fragment, options = {}, cb) ->
       super(arguments...)
-      session.update() # Check for changes to the session status
-      analytics.send() if options.analytics isnt false
       cb?()
       @trigger('navigate')

@@ -51,7 +51,7 @@ define (require) ->
       return url
 
     # Get the URL to view a given content model
-    getModelPath: (model) ->
+    getModelPath: (model, withTitle) ->
       page = ''
       id = model.getUuid?() or model.id
       version = model.get?('version') or model.version
@@ -59,9 +59,12 @@ define (require) ->
 
       if model.isBook?()
         title = trim(model.get('currentPage')?.get('title'))
-        page = ":#{model.getPageNumber()}"
+        page = ":#{model.get('currentPage')?.getUuid()}"
 
-      return "#{settings.root}contents/#{id}#{page}/#{title}"
+      url = "#{settings.root}contents/#{id}#{page}"
+      url += "/#{title}" if withTitle
+
+      return url
 
     getCleanSearchQuery: (queryString, paramsToIgnore) ->
       queryString ?= window.location.search
@@ -78,6 +81,8 @@ define (require) ->
     getCurrentPathComponents: () ->
       components = Backbone.history.fragment.match(@contentsLinkRegEx) or []
       path = components[0]
+      hash_path = window.location.hash
+      components[6] = hash_path
       if path?.slice(-1) is '/'
         path = path.slice(0, -1)
 
@@ -89,6 +94,7 @@ define (require) ->
         title: components[4]
         rawquery: components[5] or ''
         query: @serializeQuery(components[5] or '')
+        hash_path: components[6]
       }
 
     serializeQuery: (query) ->
@@ -114,8 +120,14 @@ define (require) ->
       # Polyfill for location.origin since IE doesn't support it
       port = if location.port then ":#{location.port}" else ''
       location.origin = location.origin or "#{location.protocol}//#{location.hostname}#{port}"
-      
+
     stripTags: (html) ->
       temp = document.createElement("div")
       temp.innerHTML = html
       return temp.textContent
+
+    offsetHash: () ->
+      $pinnable = $('.pinnable')
+      obscured = $pinnable.height() + 100
+      top = $(window.location.hash)?.offset()?.top
+      $(window).scrollTop(top - obscured) if top

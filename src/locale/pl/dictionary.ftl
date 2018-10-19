@@ -34,8 +34,14 @@ home-pageTitle = Propagując wiedzę tworzymy społeczeństwo{$suffix}
 
 # MAIN PAGE - Featured Textbooks - src/scripts/modules/featured-books/featured-books-partial.html
 
-featured-books-read-more = Więcej
+featured-books-show-more = Więcej
+featured-books-show-less = Mniej
 
+featured-books-openstax-heading = Podręczniki OpenStax
+featured-books-openstax-description = OpenStax publikuje wysokiej jakości recenzowane podręczniki na otwartej licencji, dzięki czemu są udostępniane całkowicie za darmo w internecie, a egzemplarze drukowane można uzyskać niskim kosztem. Aby dowiedzieć się, jakie formaty są dostępne, odwiedź <a href="https://openstax.org">openstax.org</a> i wybierz interesującą cię dziedzinę.
+
+featured-books-cnx-heading = Zasoby stworzone przez użytkowników
+featured-books-cnx-description = Poniższe książki i strony zostały przygotowane i udostępnione przez społeczność ludzi przekonanych o tym, że zasoby edukacyjne powinny być otwarte dla wszystkich.
 
 
 ### HEADER ###
@@ -80,7 +86,7 @@ all-header-support = Pomoc
 all-footer-support =
   | Serwis powstał dzięki pomocy William &amp;
   | Flora Hewlett Foundation, Bill &amp; Melinda Gates Foundation,
-  | 20 Million Minds Foundation, Maxfield Foundation, Open Society Foundations oraz Rice University.
+  | Michelson 20MM Foundation, Maxfield Foundation, Open Society Foundations oraz Rice University.
   | Obsługiwany przez OpenStax CNX.
 
 all-footer-ap =
@@ -96,6 +102,8 @@ all-footer-creative-commons =
 all-footer-licensing = Licencje
 
 all-footer-terms-of-use = Warunki użytkowania
+
+all-footer-accessibility = Ułatwienia dostępności
 
 all-footer-contact = Kontakt
 
@@ -197,33 +205,11 @@ frictionless-content =
 
 # CONTACT - Content - src/scripts/pages/about/contact/contact-template.html
 
-about-contact-google-maps = Mapa Google™
-
 about-contact-header = Kontakt
-
-about-contact-phone = Telefon: { $phone }
-
-about-contact-email = E-mail: <a href="mailto:{ $email }">{ $email }</a>
 
 about-contact-questions-header = Masz pytanie?
 
-about-contact-questions-content = Napisz do nas, jeśli potrzebujesz dodatkowych informacji.
-
-about-contact-technical-support-header = Pomoc techniczna
-
-about-contact-technical-support-content =
-  | W przypadku problemów technicznych na naszej stronie prosimy o wysłanie wiadomości e-mail na adres
-  | <a href="mailto:support@openstax.org">support@openstax.org</a>.
-  | Możesz również wysłać raport o błędzie przy użyciu formularza do zgłaszania błędów.
-
-about-contact-general-questions-header = Pytania ogólne
-
-about-contact-general-questions-content =
-  | Jeśli masz pytania dotyczące naszego serwisu, chcesz zapisać się na
-  | szkolenie dla autorów lub uzyskać inne informacje na temat Openstax CNX,
-  | wyślij e-mail na adres <a href="mailto:support@openstax.org">support@openstax.org</a>.
-
-
+about-contact-questions-content = Możesz skontaktować się z nami wysyłając e-mail na adres <a href="mailto:kontakt@openstax.pl">kontakt@openstax.pl</a>.
 
 ### SEARCH ###
 # Link: http://cnx.org/browse
@@ -598,7 +584,7 @@ textbook-view-btn-create = Utwórz kopię do edycji
 
 textbook-view-publishing = publikujesz { $title }
 
-textbook-view-derived-from = Utworzone z <a href="{ $url }">{ $title }</a> przez <span class="collection-authors">{ TAKE(50, $authors) }</span>
+textbook-view-derived-from = Utworzone z <a href="{ $url }">{ $title }</a> autorstwa <span class="collection-authors">{ TAKE(50, $authors) }</span>
 
 textbook-view-book-by =
   | Utworzone przez: <span class="collection-authors">{ TAKE(50, $authors) }</span>
@@ -674,6 +660,11 @@ textbook-view-search-this-book =
 
 textbook-view-contents = Spis treści
 
+textbook-view-contents-aria-label =
+  [html/aria-label] Kliknij, aby odkryć spis treści
+
+textbook-view-books = Książki
+
 # TEXTBOOK VIEW - Endorsement - src/scripts/modules/media/endorsed/endorsed-template.html
 
 textbook-view-endorsed-by = Zatwierdzone przez: OpenStax
@@ -684,8 +675,6 @@ textbook-view-btn-create-copy = Utwórz kopię do edycji
 
 textbook-view-btn-edit-page = Edytuj stronę
 
-textbook-view-btn-jump-to-concept-coach = Idź do Concept Coach
-
 textbook-view-btn-get-this-book = Weź tę książkę!
 
 textbook-view-btn-get-this-page = Weź tę stronę!
@@ -693,7 +682,7 @@ textbook-view-btn-get-this-page = Weź tę stronę!
 textbook-view-summary = Podsumowanie
 
 textbook-view-header-derived-from =
-  | Utworzone z <a href="{ $url }">{ $title }</a> przez <span class="book-authors">{ TAKE(50, $authors) }</span>
+  | Utworzone z <a href="{ $url }">{ $title }</a> autorstwa <span class="book-authors">{ TAKE(50, $authors) }</span>
 
 # TEXTBOOK VIEW - Metadata - src/scripts/modules/media/footer/metadata/metadata-template.html
 
@@ -990,6 +979,18 @@ textbook-editor-contents-results-matches = { $hits ->
  *[other] Znaleziono { $hits } strony
 }
 
+textbook-view-page-in-books = { $numbooks ->
+  [0] Żadna książka nie zawiera tej strony.
+  [1] Jedna książka zawiera tę stronę:
+  [few] { $numbooks } książki zawierają tę stronę:
+  [many] { $numbooks } książek zawiera tę stronę:
+ *[other] { $numbooks } książki zawiera tę stronę:
+}
+
+textbook-view-book-list-revised = Zmodyfikowano:
+
+textbook-view-book-list-go-to-book = Przejdź do książki
+
 # TEXTBOOK EDITOR - Add Page List - src/scripts/modules/media/tabs/contents/popovers/add/modals/results/list/add-page-list-template.html
 
 textbook-editor-add-page-list-no-results = Brak wyników. Spróbuj rozszerzyć wyszukiwanie.
@@ -1013,481 +1014,6 @@ textbook-editor-tools-standard-edition = Wydanie standardowe
 textbook-editor-template-contents = Spis treści
 
 textbook-editor-template-tools = Narzędzia
-
-
-
-### DONATE ###
-# Links: http://cnx.org/donate, http://cnx.org/donate/form
-# Content related to people donating money
-
-# DONATE - Page Title and Description - src/scripts/pages/donate/donate.coffee
-
-donate-pageTitle = Wesprzyj OpenStax CNX{$suffix}
-
-donate-summary = Przekaż darowiznę dla OpenStax CNX
-
-donate-description = Przekaż darowiznę dla OpenStax CNX
-
-# DONATE - Header and Content - src/scripts/pages/donate/default/default-template.html
-
-donate-header = Wesprzyj OpenStax CNX
-
-donate-subheader = Twoja darowizna zmienia świat
-
-donate-content =
-  | Dzięki twojej darowiźnie, wciąż rosnące zasoby OpenStax CNX będą mogły
-  | pozostać darmowe dla nauczycieli i studentów z całego świata.
-
-donate-donation-handle-message =
-  | O bezpieczne przekazanie darowizny dba Rice University we współpracy z
-  | <a href="http://www.touchnet.com/">Touchnet</a>.
-
-# DONATE - Slider - src/scripts/pages/donate/donation-slider/donation-slider.coffee, src/scripts/pages/donate/donation-slider/donation-slider-template.html
-
-donate-slider-0 = Wolność (każda) mnie uszczęśliwia
-donate-slider-5 = Marszałek byłby z Ciebie dumny
-donate-slider-10 = OpenStax CNX to świetny pomysł, warto wspomóc
-donate-slider-15 = Pomogliście mi zaoszczędzić setki dolarów!
-donate-slider-20 = Mój bankomat chce, żebym wam to dał
-donate-slider-25 = Marszałek byłby dumny (i zszokowany bankomatem)
-donate-slider-50 = Hej, OpenStax, dajcie drukowany egzemplarz potrzebującej szkole
-donate-slider-75 = Dołożę się, niech te książki będą darmowe!
-donate-slider-100 = Pomaganie nigdy nie było tak przyjemne
-donate-slider-250 = Wypełnijcie waszymi książkami szkolne bibilioteki – ja stawiam!
-donate-slider-500 = Kupcie sobie za to porządne tłumaczenie!
-donate-slider-1000 = Kolejny podrozdział książki OpenStax ja stawiam!
-donate-slider-2500 = Kolejny rozdział książki OpenStax ja stawiam!
-donate-slider-5000 = Bill Gates II, do usług
-donate-slider-10000 = Ja cię kręcę!!!!
-
-donate-slider-amount = { $amount ->
-  [0] 0 $
-  [5] 5 $
-  *[10] 10 $
-  [15] 15 $
-  [20] 20 $
-  [25] 25 $
-  [50] 50 $
-  [75] 75 $
-  [100] 100 $
-  [250] 250 $
-  [500] 500 $
-  [1000] 1000 $
-  [2500] 2500 $
-  [5000] 5000 $
-  [10000] 10000 $
-}
-
-donate-donate-now-button = Wspomóż nas
-
-donation-download-for-free = Pobierz za darmo
-
-# DONATE - Form - src/scripts/pages/donate/form/form-template.html
-
-donate-form-support-cnx = Wesprzyj OpenStax CNX
-
-donate-form-header-message = Twoja darowizna zmienia świat
-
-donate-form-content =
-  | Dzięki twojej darowiźnie, wciąż rosnące zasoby OpenStax CNX będą mogły
-  | pozostać darmowe dla nauczycieli i studentów z całego świata.
-
-donate-form-prompt =
-  | Wpisz swoje dane jako darczyńcy i kliknij "Dalej", aby przejść do
-  | bezpiecznej płatności.
-
-donate-form-title = Tytuł
-
-donate-form-first-name = Imię
-
-donate-form-last-name = Nazwisko
-
-donate-form-suffix = Sufiks
-
-donate-form-email = E-Mail
-
-donate-form-address = Adres
-
-donate-form-city = Miasto
-
-donate-form-state = Stan
-
-donate-form-zip-code = Kod pocztowy
-
-donate-form-country = Państwo
-
-donate-form-donation = Darowizna
-
-donate-form-continue = Kontynuuj
-
-donate-form-titles =
-  | <option value="">Dr</option>
-  | <option value="pubDate">Pan</option>
-  | <option value="popularity">Pani</option>
-
-donate-form-states = { $statecode ->
-  [TX]  Texas
-  [AL]  Alabama
-  [AK]  Alaska
-  [AZ]  Arizona
-  [AR]  Arkansas
-  [CA]  California
-  [CO]  Colorado
-  [CT]  Connecticut
-  [DE]  Delaware
-  [FL]  Florida
-  [GA]  Georgia
-  [HI]  Hawaii
-  [ID]  Idaho
-  [IL]  Illinois
-  [IN]  Indiana
-  [IA]  Iowa
-  [KS]  Kansas
-  [KY]  Kentucky
-  [LA]  Louisiana
-  [ME]  Maine
-  [MD]  Maryland
-  [MA]  Massachusetts
-  [MI]  Michigan
-  [MN]  Minnesota
-  [MO]  Missouri
-  [MS]  Mississippi
-  [MT]  Montana
-  [NE]  Nebraska
-  [NV]  Nevada
-  [NH]  New Hampshire
-  [NJ]  New Jersey
-  [NM]  New Mexico
-  [NY]  New York
-  [NC]  North Carolina
-  [ND]  North Dakota
-  [OH]  Ohio
-  [OK]  Oklahoma
-  [OR]  Oregon
-  [PA]  Pennsylvania
-  [RI]  Rhode Island
-  [SC]  South Carolina
-  [SD]  South Dakota
-  [TN]  Tennessee
-  [UT]  Utah
-  [VT]  Vermont
-  [VA]  Virginia
-  [WA]  Washington
-  [WV]  West Virginia
-  [WI]  Wisconsin
-  [WY]  Wyoming
-  [AS]  American Samoa
-  [DC]  District of Columbia
-  [FM]  Federated States of Micronesia
-  [GU]  Guam
-  [MP]  Northern Mariana Islands
-  [PW]  Palau
-  [PR]  Puerto Rico
-  [VI]  Virgin Islands
-  [AA]  Armed Forces Americas
-  [AE]  Armed Forces Europe
-  [AP]  Armed Forces Pacific
-  [AB]  Alberta
-  [BC]  British Columbia
-  [MB]  Manitoba
-  [NB]  New Brunswick
-  [NF]  Newfoundland
-  [NT]  Northwest Territories
-  [NS]  Nova Scotia
-  [ON]  Ontario
-  [PE]  Prince Edward Island
-  [PQ]  Province du Quebec
-  [SK]  Saskatchewan
-  [YT]  Yukon Territory
- *[ZZ]  Nie dotyczy
-}
-
-donate-form-countries = { $countrycode ->
-  [US]  Stany Zjednoczone
-  [CA]  Kanada
-  [AF]  Afganistan
-  [AX]  Wyspy Alandzkie
-  [AL]  Albania
-  [DZ]  Algieria
-  [AS]  Samoa Amerykańskie
-  [AD]  Andora
-  [AO]  Angola
-  [AI]  Anguilla
-  [AQ]  Antarktyka
-  [AG]  Antigua i Barbuda
-  [AR]  Argentyna
-  [AM]  Armenia
-  [AW]  Aruba
-  [AU]  Australia
-  [AT]  Austria
-  [AZ]  Azerbejdżan
-  [BS]  Bahamy
-  [BH]  Bahrajn
-  [BD]  Bangladesz
-  [BB]  Barbados
-  [BY]  Białoruś
-  [BE]  Belgia
-  [BZ]  Belize
-  [BJ]  Benin
-  [BM]  Bermuda
-  [BT]  Bhutan
-  [BO]  Boliwia
-  [BA]  Bośnia i Hercegowina
-  [BW]  Botswana
-  [BV]  Wyspa Bouveta
-  [BR]  Brazylia
-  [IO]  Brytyjskie Terytorium Oceanu Indyjskiego
-  [BN]  Brunei
-  [BG]  Bułgaria
-  [BF]  Burkina Faso
-  [BI]  Burundi
-  [KH]  Kambodża
-  [CM]  Kamerun
-  [CV]  Republika Zielonego Przylądka
-  [KY]  Kajmany
-  [CF]  Republika Środkowoafrykańska
-  [TD]  Czad
-  [CL]  Chile
-  [CN]  Chiny
-  [CX]  Wyspa Bożego Narodzenia
-  [CC]  Wyspy Kokosowe
-  [CO]  Kolumbia
-  [KM]  Komory
-  [CG]  Kongo
-  [CD]  Demokratyczna Republika Konga
-  [CK]  Wyspy Cooka
-  [CR]  Kostaryka
-  [HR]  Chorwacja
-  [CU]  Kuba
-  [CY]  Cypr
-  [CZ]  Czechy
-  [DK]  Dania
-  [DJ]  Dżibuti
-  [DM]  Dominika
-  [DO]  Dominikana
-  [EC]  Ekwador
-  [EG]  Egipt
-  [SV]  Salwador
-  [GQ]  Gwinea Równikowa
-  [ER]  Erytrea
-  [EE]  Estonia
-  [ET]  Etiopia
-  [FK]  Falklandy
-  [FO]  Wyspy Owcze
-  [FJ]  Fidżi
-  [FI]  Finlandia
-  [FR]  Francja
-  [GF]  Gujana Francuska
-  [PF]  Polinezja Francuska
-  [TF]  Francuskie Terytoria Południowe i Antarktyczne
-  [GA]  Gabon
-  [GM]  Gambia
-  [GE]  Gruzja
-  [DE]  Niemcy
-  [GH]  Ghana
-  [GI]  Gibraltar
-  [GR]  Grecja
-  [GL]  Grenlandia
-  [GD]  Grenada
-  [GP]  Gwadelupa
-  [GU]  Guam
-  [GT]  Gwatemala
-  [GG]  Wyspa Guernsey
-  [GN]  Gwinea
-  [GW]  Gwinea Bissau
-  [GY]  Gujana
-  [HT]  Haiti
-  [HM]  Wyspy Heard i McDonalda
-  [VA]  Watykan
-  [HN]  Honduras
-  [HK]  Hong Kong
-  [HU]  Węgry
-  [IS]  Islandia
-  [IN]  Indie
-  [ID]  Indonezja
-  [IR]  Iran
-  [IQ]  Irak
-  [IE]  Irlandia
-  [IM]  Wyspa Man
-  [IL]  Izrael
-  [IT]  Włochy
-  [JM]  Jamajka
-  [JP]  Japonia
-  [JE]  Wyspa Jersey
-  [JO]  Jordania
-  [KZ]  Kazachstan
-  [KE]  Kenia
-  [KI]  Kiribati
-  [KP]  Korea Północna
-  [KR]  Korea Południowa
-  [KW]  Kuwejt
-  [KG]  Kirgistan
-  [LA]  Laos
-  [LV]  Łotwa
-  [LB]  Liban
-  [LS]  Lesotho
-  [LR]  Liberia
-  [LY]  Libia
-  [LI]  Liechtenstein
-  [LT]  Litwa
-  [LU]  Luksemburg
-  [MO]  Makau
-  [MK]  Macedonia
-  [MG]  Madagaskar
-  [MW]  Malawi
-  [MY]  Malezja
-  [MV]  Malediwy
-  [ML]  Mali
-  [MT]  Malta
-  [MH]  Wyspy Marshalla
-  [MQ]  Martynika
-  [MR]  Mauretania
-  [MU]  Mauritius
-  [YT]  Majotta
-  [MX]  Meksyk
-  [FM]  Mikronesia
-  [MD]  Mołdawia
-  [MC]  Monako
-  [MN]  Mongolia
-  [ME]  Czarnogóra
-  [MS]  Montserrat
-  [MA]  Maroko
-  [MZ]  Mozambik
-  [MM]  Mjanma
-  [NA]  Namibia
-  [NR]  Nauru
-  [NP]  Nepal
-  [NL]  Holandia
-  [AN]  Antyle Holenderskie
-  [NC]  Nowa Kaledonia
-  [NZ]  Nowa Zelandia
-  [NI]  Nikaragua
-  [NE]  Niger
-  [NG]  Nigeria
-  [NU]  Niue
-  [NF]  Wyspa Norfolk
-  [MP]  Mariany Północne
-  [NO]  Norwegia
-  [OM]  Oman
-  [PK]  Pakistan
-  [PW]  Palau
-  [PS]  Palestyna
-  [PA]  Panama
-  [PG]  Papua-Nowa Gwinea
-  [PY]  Paragwaj
-  [PE]  Peru
-  [PH]  Filipiny
-  [PN]  Pitcairn
-  [PL]  Polska
-  [PT]  Portugalia
-  [PR]  Portoryko
-  [QA]  Katar
-  [RE]  Reunion
-  [RO]  Rumunia
-  [RU]  Rosja
-  [RW]  Rwanda
-  [BL]  Saint-Barthelemy
-  [SH]  Wyspa Świętej Heleny
-  [KN]  Saint Kitts i Nevis
-  [LC]  Saint Lucia
-  [MF]  Saint-Martin
-  [PM]  Saint-Pierre i Miquelon
-  [VC]  Saint Vincent i Grenadyny
-  [WS]  Samoa
-  [SM]  San Marino
-  [ST]  Wyspy Świętego Tomasza i Książęca
-  [SA]  Arabia Saudyjska
-  [SN]  Senegal
-  [RS]  Serbia
-  [SC]  Seszele
-  [SL]  Sierra Leone
-  [SG]  Singapur
-  [SK]  Słowacja
-  [SI]  Słowenia
-  [SB]  Wyspy Salomona
-  [SO]  Somalia
-  [ZA]  Republika Południowej Afryki
-  [GS]  Georgia Południowa i Sandwich Południowy
-  [ES]  Hiszpania
-  [LK]  Sri Lanka
-  [SD]  Sudan
-  [SR]  Surinam
-  [SJ]  Wyspy Svalbard i Jan Mayen
-  [SZ]  Suazi
-  [SE]  Szwecja
-  [CH]  Szwajcaria
-  [SY]  Syria
-  [TW]  Tajwan
-  [TJ]  Tadżykistan
-  [TZ]  Tanzania
-  [TH]  Tajlandia
-  [TL]  Timor Wschodni
-  [TG]  Togo
-  [TK]  Tokelau
-  [TO]  Tonga
-  [TT]  Trynidad i Tobago
-  [TN]  Tunezja
-  [TR]  Turcja
-  [TM]  Turkmenistan
-  [TC]  Wyspy Turks i Caicos
-  [TV]  Tuvalu
-  [UG]  Uganda
-  [UA]  Ukraina
-  [AE]  Zjednoczone Emiraty Arabskie
-  [GB]  Wielka Brytania
-  [UM]  Dalekie Wyspy Mniejsze Stanów Zjednoczonych
-  [UY]  Urugwaj
-  [UZ]  Uzbekistan
-  [VU]  Vanuatu
-  [VE]  Wenezuela
-  [VN]  Wietnam
-  [VG]  Brytyjskie Wyspy Dziewicze
-  [VI]  Wyspy Dziewicze Stanów Zjednoczonych
-  [WF]  Wallis i Futuna
-  [EH]  Sahara Zachodnia
-  [YE]  Jemen
-  [ZM]  Zambia
- *[ZW]  Zimbabwe
-}
-
-donate-form-currency-symbol = $
-
-donate-form-donation-decimal = ,00
-
-# DONATE - Download Page - src/scripts/pages/donate/download/download-template.html
-
-donate-download-header = Pobierz
-
-donate-download-support-header = Wesprzyj OpenStax CNX
-
-donate-download-support-content =
-  | Czy chcesz, żebyśmy nadal za darmo udostępniali zasoby warte miliony
-  | dolarów? Pomóż nam utrzymać ten projekt przy życiu przekazując nam darowiznę!
-
-donate-download-donation-handled =
-  | O bezpieczne przekazanie darowizny dba Rice University we współpracy z
-  | <a href="http://www.touchnet.com/">Touchnet</a>.
-
-# DONATE - Thank You - src/scripts/pages/donate/thankyou/thankyou-template.html
-
-donate-thank-you-thank-you-header = Dziękujemy!
-
-donate-thank-you-download-title = Pobierz { $title }
-
-donate-thank-you-download-message =
-  | Pobieranie powinno rozpocząć się automatycznie. Jeśli to nie nastąpi,
-  | kliknij poniższy przycisk.
-
-donate-thank-you-download-button = Pobierz
-
-donate-thank-you-thank-you-for-generosity = Dziękujemy za twoją szczodrość
-
-donate-thank-you-appreciation-message =
-  | Dzięki twojej darowiźnie, wciąż rosnące zasoby OpenStax CNX będą mogły
-  | pozostać darmowe dla nauczycieli i studentów z całego świata. Oto dane,
-  | które wpisałeś.
-
-
 
 ### TERMS OF SERVICE ###
 # Link: http://cnx.org/tos

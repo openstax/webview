@@ -2,10 +2,6 @@
   'use strict';
 
   require.config({
-    // waitSeconds increase to avoid timeout from "loading" OpenStaxConceptCoach
-    // during r.js compiling.
-    // http://stackoverflow.com/questions/14279962/require-js-error-load-timeout-for-modules-backbone-jquerymobile#answer-14283401
-    waitSeconds: 30,
     // # Paths
     paths: {
       // ## Requirejs plugins
@@ -13,10 +9,11 @@
       hbs: '../../bower_components/require-handlebars-plugin/hbs',
 
       // ## Google Analytics
-      analytics: '//www.google-analytics.com/analytics',
+      analytics: 'https://www.google-analytics.com/analytics',
 
       // ## Core Libraries
       jquery: '../../bower_components/jquery/dist/jquery',
+      jqueryui: '../../bower_components/jquery-ui/jquery-ui',
       underscore: '../../bower_components/underscore/underscore',
       backbone: '../../bower_components/backbone/backbone',
       'hbs/handlebars': '../../bower_components/require-handlebars-plugin/hbs/handlebars',
@@ -25,12 +22,10 @@
       'backbone-associations': '../../bower_components/backbone-associations/backbone-associations',
 
       // ## MathJax
-      mathjax: '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=MML_HTMLorMML',
+      mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=MML_HTMLorMML',
 
       // Use Minified Aloha because loading files in a different requirejs context is a royal pain
       aloha: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha',
-
-      OpenStaxConceptCoach: '../../bower_components/concept-coach/full-build.min',
 
       // ## UI Libraries and Helpers
       tooltip: 'helpers/backbone/views/attached/tooltip/tooltip',
@@ -50,7 +45,7 @@
       bootstrapTransition: '../../bower_components/bootstrap/js/transition',
 
       // # Select2 multiselect widget
-      select2: '../../bower_components/select2/select2',
+      select2: '../../bower_components/select2/dist/js/select2',
 
       // # CoffeeScript
       cs: '../../bower_components/require-cs/cs',
@@ -60,7 +55,13 @@
       l20n: '../../bower_components/l20n/dist/compat/web/l20n',
       templatePolyfill: '../../bower_components/l20n/dist/compat/web/Template',
       babelPolyfill: '../../bower_components/babel-polyfill/browser-polyfill',
-      customEventPolyfill: '../../bower_components/custom-event-polyfill/custom-event-polyfill'
+      customEventPolyfill: '../../bower_components/custom-event-polyfill/custom-event-polyfill',
+
+      // ## Ability to wait for images to load
+      imagesloaded: '../../bower_components/imagesloaded/imagesloaded.pkgd',
+
+      // ## Ellipses
+      shave: '../../bower_components/shave/dist/shave'
     },
 
     // # Packages
@@ -116,7 +117,8 @@
               'tex2jax.js',
               'mml2jax.js',
               'MathMenu.js',
-              'MathZoom.js'
+              'MathZoom.js',
+              '[a11y]/mathjax-sre.js',
             ],
             tex2jax: {
               inlineMath: [
@@ -164,14 +166,8 @@
 
       // Select2
       select2: {
-        deps: ['jquery', 'css!../../bower_components/select2/select2'],
+        deps: ['jquery', 'css!../../bower_components/select2/dist/css/select2'],
         exports: 'Select2'
-      },
-
-      // concept-coach
-      OpenStaxConceptCoach: {
-        deps: ['css!../../bower_components/concept-coach/main.min'],
-        exports: 'OpenStaxConceptCoach'
       },
 
       l20n: {

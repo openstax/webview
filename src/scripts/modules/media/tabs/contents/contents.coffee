@@ -64,6 +64,20 @@ define (require) ->
           "#{hits} page#{s} matched"
       resultCount: () ->
         @model?.get('searchResults')?.total
+      isBook: () -> @model.isBook()
+      booksIn: () ->
+        @model?.get('booksContainingPage')
+      isBookLoaded: () ->
+        @isContentLoaded
+      numBooks:() ->
+        hits = @model?.get('booksContainingPage')?.length
+        if hits
+          hits
+        else
+          0
+      pageId:() ->
+        (window.location.href.split '/')[4]
+
     regions:
       toc: '.toc'
 
@@ -72,19 +86,25 @@ define (require) ->
       'dragend .toc [draggable]': 'onDragEnd'
       'click .clear-results': 'clearSearchResults'
 
-    initialize: () ->
+    initialize: (options) ->
       super()
+      @static = !!options.static
       @listenTo(@model, 'removeNode addNode moveNode', @processPages)
       @listenTo(@model, 'change:editable change:currentPage addNode removeNode moveNode', _.debounce(@render, 250))
       @listenTo(@model, 'change:contents add:contents remove:contents', _.debounce(@processPages, 250))
       @listenTo(@model, 'change:searchResults', @handleSearchResults)
       @listenTo(@model, 'change:currentPage', @loadHighlightedPage)
+      @listenTo(@model, 'change:booksContainingPage', @handleBooksContainingPage)
       @scrollPosition = 0
+      @isContentLoaded = false
 
     onRender: () ->
       @$el.addClass('table-of-contents')
+      if @static
+        @$el.addClass('static')
       @regions.toc.show new TocSectionView
         model: @model
+        static: @static
 
       @regions.self.append new AddPopoverView
         model: @model
@@ -188,3 +208,13 @@ define (require) ->
       # Reset styling for all draggable elements
       e.currentTarget.className = ''
       @model.trigger('moveNode')
+
+    handleBooksContainingPage: ->
+      for book in @model["attributes"]["booksContainingPage"]
+        book["revised"] = new Date(book["revised"])
+        s = []
+        for author in book["authors"]
+          s.push(author["fullname"])
+        book["authors"] = s.toString()
+      @isContentLoaded = true
+      @render()

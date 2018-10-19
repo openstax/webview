@@ -3,21 +3,6 @@ module.exports = (grunt) ->
   fs = require('fs')
   pkg = require('./package.json')
 
-  alohaBuildConfig = grunt.file.read('bower_components/aloha-editor/build/aloha/build-profile-with-oer.js')
-  alohaBuildConfig = eval(alohaBuildConfig)
-  alohaBuildConfig.appDir = 'bower_components/aloha-editor/src/'
-  alohaBuildConfig.baseUrl = 'lib/'
-  alohaBuildConfig.dir = 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output'
-  alohaBuildConfig.mainConfigFile = 'bower_components/aloha-editor/build/aloha/build-profile-with-oer.js'
-  alohaBuildConfig.wrap =
-    startFile: 'bower_components/aloha-editor/build/aloha/closure-start.frag'
-    endFile: 'bower_components/aloha-editor/build/aloha/closure-end.frag'
-  alohaBuildConfig.skipDirOptimize = true
-  alohaBuildConfig.optimize = "uglify2"
-  alohaBuildConfig.optimizeCss = "standard"
-  alohaBuildConfig.separateCSS = false
-  alohaBuildConfig.preserveLicenseComments = false
-
   # Project configuration.
   grunt.initConfig
     pkg: pkg
@@ -28,7 +13,7 @@ module.exports = (grunt) ->
     nginx:
       tasks: ['nginx']
       options:
-        config: 'nginx.development.conf'
+        config: 'conf/nginx.dev.conf'
         prefix: './'
 
     # Lint
@@ -37,9 +22,12 @@ module.exports = (grunt) ->
     # JSHint
     jshint:
       options:
+        esversion: 6,
         globals:
           require: true
           define: true
+          # NOTE: Use console.debug() to get output from tests
+          console: true
 
           # test globals
           beforeEach: true
@@ -47,6 +35,9 @@ module.exports = (grunt) ->
           it: true
           chai: true
           sinon: true
+          extras: true
+          cmsBooks: true
+          exercises: true
 
         # Enforcing options
         camelcase: true
@@ -150,20 +141,12 @@ module.exports = (grunt) ->
               'cs!pages/contents/contents'
               'cs!pages/search/search'
               'cs!pages/browse-content/browse-content'
-              'cs!pages/workspace/workspace'
               'cs!pages/about/about'
               'cs!pages/tos/tos'
               'cs!pages/license/license'
-              'cs!pages/donate/donate'
-              'cs!pages/role-acceptance/role-acceptance'
 
               # FIX: edit modules should be loaded in separate modules
-              'select2'
-              'bootstrapPopover'
-              'cs!modules/media/editbar/editbar'
               'cs!helpers/backbone/views/editable'
-
-              'cs!configs/aloha'
             ]
             exclude: ['coffee-script', 'less/normalize']
             excludeShallow: ['settings']
@@ -179,9 +162,6 @@ module.exports = (grunt) ->
 
             done()
 
-      aloha:
-        options: alohaBuildConfig
-
     # Target HTML
     targethtml:
       dist:
@@ -193,9 +173,6 @@ module.exports = (grunt) ->
       require:
         src: 'bower_components/requirejs/require.js'
         dest: 'dist/scripts/require.js'
-      aloha:
-        src: 'bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha.js'
-        dest: 'dist/scripts/aloha.js'
       fonts:
         expand: true
         filter: 'isFile'
@@ -270,16 +247,29 @@ module.exports = (grunt) ->
           dest: 'dist/images/'
         }]
 
-    # String Replace (HACK to update aloha path)
-    'string-replace':
+    # Append content hash to filenames for cache busting and update html
+    # Regex in the webview nginx config in cnx-deploy must match these filenames
+    cacheBust:
       dist:
         options:
-          replacements: [{
-            pattern: '../../bower_components/aloha-editor/target/build-profile-with-oer/rjs-output/lib/aloha'
-            replacement: 'aloha'
-          }]
-        files:
-          'dist/scripts/main.js': ['dist/scripts/main.js']
+          # Does not work for locale due to the templated link to dictionary.ftl
+          # Does not work for settings.js because the real settings.js is added later
+          assets: [ '{fonts,images,scripts,styles}/**/!(settings.js)' ]
+          baseDir: './dist/'
+          separator: '.cache.'
+        src: [ 'dist/*.html' ]
+
+    # Generate gzip files that will be served by nginx
+    compress:
+      dist:
+        options:
+          mode: 'gzip'
+          level: 9
+        expand: true
+        cwd: 'dist/'
+        src: ['**/{*.{html,xml,css,svg,otf,ttf,ftl},!(settings).js,!(require.js).map}']
+        dest: 'dist/'
+        rename: (dest, src) -> "#{dest}#{src}.gz"
 
     test:
       options:
@@ -293,7 +283,8 @@ module.exports = (grunt) ->
       options:
         reporter: 'Spec'
         run: false
-        log: false
+        log: true
+        logErrors: true
         timeout: 15000
 
   # Dependencies
@@ -312,41 +303,45 @@ module.exports = (grunt) ->
   grunt.registerTask 'test', 'Run JS Unit tests', () ->
     options = @options()
 
-    tests = grunt.file.expand(options.files).map((file) -> "../#{file}")
+    templateVars = {
+      tests: JSON.stringify(grunt.file.expand(options.files).map((file) -> "../#{file}"))
+      extras: grunt.file.read('test/data/extras.json')
+      cmsBooks: grunt.file.read('test/data/cms-books.json')
+      exercises: JSON.stringify([
+        grunt.file.read('test/data/exercises/ex001.html'),
+        grunt.file.read('test/data/exercises/ex002.html'),
+        grunt.file.read('test/data/exercises/ex003.html'),
+        grunt.file.read('test/data/exercises/ex004.html')
+      ])
+    }
 
     # build the template
-    template = grunt.file.read(options.template).replace('{{ tests }}', JSON.stringify(tests))
+    template = grunt.file.read(options.template)
+    for key, value of templateVars
+      template = template.replace("{{ #{key} }}", value)
 
     # write template to tests directory and run tests
     grunt.file.write(options.runner, template)
     grunt.task.run('jshint', 'jsbeautifier', 'coffeelint', 'mocha')
   # Aloha
   # -----
-  grunt.registerTask 'aloha', [
-    'requirejs:aloha'
-  ]
 
   # Dist
   # -----
   grunt.registerTask 'dist', [
     'requirejs:compile'
     'copy'
-    'string-replace'
     'targethtml:dist'
     'clean'
     'uglify:dist'
     'htmlmin:dist'
     'imagemin'
+    'cacheBust:dist'
+    'compress:dist'
   ]
 
   # Default
   # -----
   grunt.registerTask 'default', [
-    'requirejs:compile'
-    'copy'
-    'targethtml:dist'
-    'clean'
-    'uglify:dist'
-    'htmlmin:dist'
-    'imagemin'
+    'dist'
   ]

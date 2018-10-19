@@ -1,6 +1,13 @@
 @import "../../../../styles/variables.less";
 @import "../../../../styles/mixins.less";
 
+
+[data-is-baked="true"] {
+  details {
+    display: none;
+  }
+}
+
 .media-header {
   padding: 0 6rem;
   padding-bottom: 2rem;
@@ -28,6 +35,10 @@
       font-weight: 400;
       color: @brand-primary;
       padding-right: 0.4em;
+    }
+
+    .os-number {
+      font-weight: 500;
     }
 
     // When editing is turned on the Title becomes an input box; make sure it stretches
@@ -72,6 +83,13 @@
       > .btn {
         margin: 0 0 2rem auto;
       }
+
+      > .invert-on-focus:focus {
+        background-color: white;
+        border-color: @brand-secondary;
+        color: @brand-secondary;
+      }
+
       @media (max-width: @screen-xs-max) {
         > .btn {
           margin: 2rem auto;

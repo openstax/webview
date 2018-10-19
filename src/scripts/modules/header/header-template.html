@@ -12,10 +12,6 @@
       </div>
     {{/if}}
     <ul>
-      {{#if username}}
-        <li><a data-bypass="true" href="{{accountProfile}}" data-l10n-id="all-header-account-profile">Account Profile</a></li>
-        <li><a data-bypass="true" href="/logout" data-l10n-args='{"username":"{{username}}"}' data-l10n-id="all-header-log-out">Log Out {{username}}</a></li>
-      {{/if}}
       {{#if cnxSupport}}
         <li><a href="{{cnxSupport}}" title="Go to CNX Support" data-l10n-id="all-header-support">Support</a></li>
       {{/if}}
@@ -37,16 +33,17 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">OpenStax CNX</a>
+        <a href="/">
+          <img src="/images/logo.png" class="navbar-brand" alt="OpenStax CNX" />
+        </a>
       </div>
 
       {{! Collect the nav links, forms, and other content for toggling }}
       <div class="collapse navbar-collapse" id="page-nav">
         <ul class="nav nav-justified">
-          <li {{#is page 'browse'}}class="active"{{/is}}><a href="/browse" data-l10n-id="all-navbar-search"></a></li>
-          <li {{#is page 'about'}}class="active"{{/is}}><a href="/about" data-l10n-id="all-navbar-about-us"></a></li>
-          <li {{#is page 'donate'}}class="active"{{/is}}><a href="/donate" data-l10n-id="all-navbar-give"></a></li>
-          <li {{#is page 'workspace'}}class="active"{{/is}}><a href="/workspace" data-l10n-id="all-navbar-workspace"></a></li>
+          <li id="nav-browse" {{#is page 'browse'}}class="active"{{/is}}><a href="/browse" data-l10n-id="all-navbar-search"></a></li>
+          <li id="nav-about" {{#is page 'about'}}class="active"{{/is}}><a href="/about" data-l10n-id="all-navbar-about-us"></a></li>
+          <li id="nav-donate" {{#is page 'donate'}}class="active"{{/is}}><a href="https://openstax.org/give" data-bypass data-l10n-id="all-navbar-give"></a></li>
           <li>
             <a href="http://www.rice.edu">
               <img src="/images/rice.png" class="rice" alt="Rice University" width="74" height="32" />

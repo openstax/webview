@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+  app:
+    build:
+      args:
+        environment: dev
+    environment:
+      - ENVIRONMENT=dev
+    volumes:
+      - .:/code
+  setup-n-test:
+    command: bash -c "script/setup && script/test"
+    build:
+      context: .
+      target: base-system
+    volumes:
+      - .:/code

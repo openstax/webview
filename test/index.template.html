@@ -12,6 +12,10 @@
 	  <script type="text/javascript">
       mocha.setup('bdd');
 
+      var extras = {{ extras }};
+      var cmsBooks = {{ cmsBooks }};
+      var exercises = {{ exercises }};
+
       require.config({
         baseUrl: '../src/scripts',
         callback: function () {

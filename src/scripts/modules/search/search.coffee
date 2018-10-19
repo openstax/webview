@@ -21,6 +21,7 @@ define (require) ->
         @model = searchResults.config().load({query: location.search})
 
       @listenTo(@model, 'change:error', @displayError) if @model
+      @listenTo(@model, 'sync', @loaded) if @model
 
     regions:
       search: '.search'
@@ -30,7 +31,12 @@ define (require) ->
         @regions.search.show(new SearchResultsView({model: @model}))
       else
         @regions.search.show(new AdvancedSearchView())
+      @regions.search.$el[0].setAttribute('aria-busy', 'true')
 
     displayError: () ->
       error = arguments[1] # @model.get('error')
       router.appView.render('error', {code: error}) if error
+      @loaded()
+
+    loaded: () ->
+      @regions.search.$el[0].setAttribute('aria-busy', 'false')

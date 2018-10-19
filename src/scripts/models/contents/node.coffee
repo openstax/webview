@@ -38,6 +38,14 @@ define (require) ->
 
       return url
 
+    extrasUrl: () ->
+      id = @getVersionedId()
+
+      if @isInBook()
+        return "#{ARCHIVE}/extras/#{@get('book').getVersionedId()}:#{id}"
+      else
+        return "#{ARCHIVE}/extras/#{id}"
+
     parse: (response, options = {}) ->
       # Don't overwrite the title from the book's table of contents
       #if @get('title') then delete response.title
@@ -93,12 +101,13 @@ define (require) ->
             @set('isLatest', true)
           else
             $.ajax
-              url: "#{ARCHIVE}/extras/#{@getVersionedId()}"
+              url: @extrasUrl()
               dataType: 'json'
             .done (response) =>
               @set('downloads', response.downloads)
               @set('isLatest', response.isLatest)
               @set('canPublish', response.canPublish)
+              @set('booksContainingPage', response.books)
             .fail () =>
               @set('downloads', [])
 
@@ -252,6 +261,8 @@ define (require) ->
     isSection: () -> not @isBook() and @get('contents') instanceof Backbone.Collection
 
     isBook: () -> @get('mediaType') is 'application/vnd.org.cnx.collection'
+
+    isPage: () -> @get('mediaType') is 'application/vnd.org.cnx.module'
 
     isDraft: () -> @get('version') is 'draft' or /@draft$/.test(@id)
 

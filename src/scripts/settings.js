@@ -20,6 +20,18 @@
         port: 8080
       },
 
+      // Hostname and port for the OpenStax CMS server
+      openstaxcms: {
+        host: 'openstax.org',
+        port: 443
+      },
+
+      // Hostname and port for the exercises server
+      exercises: {
+        host: 'exercises.openstax.org',
+        port: 443
+      },
+
       // Prefix to prepend to page titles
       titleSuffix: ' - OpenStax CNX',
 
@@ -38,6 +50,9 @@
       // Webmaster E-mail address
       webmaster: 'support@openstax.org',
 
+      // Donate E-mail address
+      donation: 'openstaxgiving@rice.edu',
+
       // Content shortcodes
       shortcodes: {
         'college-physics': '031da8d3-b525-429c-80cf-6c8ed997733a@8.1',
@@ -50,29 +65,10 @@
 
       accountProfile: 'https://accounts.cnx.org/profile',
 
-      cnxSupport: 'http://openstax.force.com/support?l=en_US&c=Products%3ACNX',
-
-      terpUrl: function (itemCode) {
-        return 'https://openstaxtutor.org/terp/' + itemCode + '/quiz_start';
-      },
-
-      exerciseUrl: function (itemCode) {
-        // // stub.  Comment out to use local exercises stub.
-        // // Copied from https://exercises-dev1.openstax.org/api/exercises?q=tag:k12phys-ch04-s01-lo01
-        // return 'http://localhost:8000/data/exercises.json';
-        return 'https://exercises-dev1.openstax.org/api/exercises?q=tag:' + itemCode;
-      },
+      cnxSupport: 'https://openstax.secure.force.com/help',
 
       defaultLicense: {
         code: 'by'
-      },
-
-      conceptCoach: {
-        uuids: {
-          'f10533ca-f803-490d-b935-88899941197f': ['art-exercise', 'free-response', 'multiple-choice'],
-          '8QUzyvgD': ['art-exercise', 'free-response', 'multiple-choice'] // only long-codes are currently supported
-        },
-        url: 'https://tutor-qa.openstax.org'
       }
 
     };

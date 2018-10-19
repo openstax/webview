@@ -2,4 +2,18 @@
 
 .search {
   margin: 4rem 3rem;
+  .results {
+    > header {
+      margin-top: 1rem;
+    }
+  }
+  &[aria-busy="true"] {
+    .filter {
+      display: none;
+    }
+    .info {
+      float: none !important;
+      margin: auto auto 6rem auto;
+    }
+  }
 }

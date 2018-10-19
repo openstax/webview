@@ -3,6 +3,9 @@
 //
 //     #content { @import 'this_file.less'; }
 
+@import 'content-common';
+@import '_make-block';
+
 h1,
 h2,
 h3,
@@ -13,11 +16,42 @@ h6 {
   font-weight: bold;
 }
 
-ul, ol {
-  margin-top: 1rem;
-  margin-bottom: 0;
-  color: @gray;
+h3 + section {
+  margin-top: 0;
 }
+
+ul, ol {
+  color: @gray;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+[data-bullet-style="none"] {
+  list-style-type: none;
+}
+
+iframe {
+  display: block;
+  margin: 3rem auto;
+  width: 100%;
+}
+
+.centered-text {
+  display: block;
+  text-align: center;
+  font-weight: normal;
+}
+
+.os-chapter-outline {
+  ul {
+    margin-top: 0;
+  }
+}
+
+.no-emphasis {
+  font-weight: normal;
+} //to ensure that all terms with this tag will display unbolded
+
 
 // It is already displayed at the top of the page in blue
 // the `>` is because collated titles (like Key Concepts) contain descendent
@@ -50,7 +84,7 @@ ul, ol {
 
 .os-figure {
   display: table;
-  margin: 1rem auto 0;
+  margin: 3rem auto;
   .os-caption-container {
     padding-top: 1rem;
     display: table-caption;
@@ -63,10 +97,12 @@ ul, ol {
     .os-number {
       font-weight: bold;
     }
+    .os-title {
+      font-weight: bold;
+    }
   }
 
-figure {
-
+  figure {
   // Subfigures
   > figure {
     &.ui-has-child-figcaption > figcaption::before {
@@ -95,72 +131,216 @@ figure:not([data-orient="vertical"]) {
 // Slots for various blockish pieces of content (things with a label, title, and body)
 // This **ONLY** contains rules, no selectors.
 #blockish {
+.style(note) {
+  margin: 3rem 0;
+  padding: 1.5rem;
+  background-color: @gray-lightest;
+  border: 0.2rem solid @gray-lighter;
 
-  .style(example) {
-    margin-top: 5rem;
-    position: relative;
-   }
-  .title(example) {
-    font-size: 1em;
-    position: absolute;
-    top: -4rem;
-    left: 0em;
-    padding: 0.4em 1em;
-    font-weight: bold;
-    color: @gray-lightest;
-    background-color: @gray;
-    max-width: 100%;
+  > p {
+    margin-top: 0;
   }
+
+  :last-child {
+  //  margin-bottom: 0;
+  }
+}
+.title(note) {
+  color: @gray;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  display: block;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  padding: 0rem 1.5rem 1rem 1.5rem;
+  border-bottom: 0.2rem solid @gray-lighter;
+
+
+}
+.body(note) {
+  border-top: none;
+  padding: 0rem 1.5rem;
+  background-color: @gray-lightest;
+  color: @gray;
+
+  p {
+    margin: 0 0 1rem;
+  }
+
+  ul,ol {
+    color: @gray;
+  }
+
+  span[data-type="media"] {
+    display: block;
+    margin: 1rem 0;
+  }
+}
+.style(example) { .style(note) }
+.title(example) { .title(note) }
+.body(example) { .body(note) }
 }
 
 // TODO refactor this
 h1.example-title .text {
   padding-left: 1rem;
 }
-// Skeleton for constructing the blockish elements
-// This contains all the selectors for the styling
-
-// Helper mixin for expanding all the selectors
-.make-block(@type) {
-
-  // Add the label to the title element (if one exists) or to the blockish element
-  .place-label(@type; @label-type) {
-    // No title exists so style the blockish::before and put the label there
-    &:not(.ui-has-child-title) .example-title {
-      #blockish>.title(@type);
-      .format-label(@type; @label-type; false);
-    }
-  }
-
-}
-
 
 .exercise-number() {
   font-weight: bold;
   text-decoration: none;
 }
 
-> :not(.os-eoc):not(.os-eob) [data-type="exercise"],
-> :not(.os-eoc):not(.os-eob) .exercise {
+[data-type="note"],
+.note     { .make-block(note); }
+[data-type="example"],
+.example  { .make-block(example); }
+[data-type="problem"],
+[data-type="solution"],
+.problem,
+.solution {
+  padding: 0;
+}
 
-  .make-block(exercise);
-  .mixin-exercise();
+.os-eoc, .os-eob {
+  .os-problem-container,
+  .os-solution-container {
+    display: inline;
+    > :first-child:not(ul):not(ol):not([data-type="note"]):not(.os-figure) {
+      display: inline;
+    }
+    > ul, > ol, [data-type="note"] {
+      margin-top: 0;
+    }
+    .os-figure {  margin: 3rem 0; }
+  }
+}
 
+// solutions of notes, exercises, and examples have a top-border to separate the solution
+[data-type="note"],
+[data-type="exercise"],
+[data-type="example"] {
+  [data-type="solution"],
+  .solution {
+    border-top: 0.1rem solid @gray-lighter;
+
+    section p,
+    section ul,
+    section ol,
+    section .os-table {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+  }
+}
+
+// Equations
+// --------------------------------------------------
+.equation,
+[data-type="equation"] {
+  display: table;
+  width: 100%;
+  .os-equation-number {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    .os-number {
+      border: black solid 1px;
+      padding: 5px;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+  [data-type="title"] {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+// Notes
+// --------------------------------------------------
+.os-note-body {
+  img {
+    display: block;
+  }
 }
 
 //
+// MathJax_Display override
+// --------------------------------------------------
+.os-table table thead tr th .MathJax_Display {
+  width: auto !important;
+  float: left !important;
+  margin: 0px;
+}
+
 // Tables
 // --------------------------------------------------
+.swipe-table {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Chrome / Opera */
+  cursor: -webkit-grab;
+}
 .os-table {
+  overflow-x: auto;
+  margin: @line-height-computed 0;
+  .os-table-title {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 1em;
+  }
+  table {
+    margin: 0;
+    tr {
+      td {
+        vertical-align: middle;
+        padding: @table-cell-padding;
+        &[data-align="center"] {
+          text-align: center;
+        }
+      }
+      [data-valign="top"] {
+        vertical-align: top;
+      }
+    }
+    ul, ol{
+      padding-left: 1.5em;
+      &[data-bullet-style="none"] {
+        padding: 0;
+        margin: 0;
+        li {
+          list-style: none;
+        }
+      }
+    }
+    .os-figure {
+      margin: 0;
+      img {
+        margin: 0;
+      }
+      .os-caption-container {
+        padding: 1rem 0 0 0;
+      }
+    }
+  }
   .os-caption-container {
+    font-size: 0.9em;
+    padding: 8px;
+    border-top: 0.1rem solid @gray-lighter;
+
     .os-title-label,
     .os-number {
       font-weight: bold;
       display: inline-block;
       padding-right: 0.25em;
-    }
-    .os-caption {
-      display: inline-block;
     }
   }
 }
@@ -176,7 +356,6 @@ h1.example-title .text {
     font-weight: bold;
   }
   .os-number {
-    padding-right: 0;
     font-weight: bold;
     text-decoration: none;
   }
@@ -197,16 +376,30 @@ h1.example-title .text {
     font-weight: bold;
     margin: 1.5rem 0 1rem 0;
   }
+
+  &.os-reference-container > .os-chapter-area > .reference span.os-reference-number,
+  &.os-references-container .references .os-note-body > a {
+    margin-right: 10px;
+  }
+
+  [data-type="list"],
+  .list {
+    > [data-type="title"],
+    > .title {
+      margin-top: 15px;
+    }
+  }
 }
+
 .os-eoc [data-type="exercise"],
 .os-eoc .exercise {
-  span {
-    font-weight: bold;
-    padding-right: 0.5rem
-  }
-  p { display: inline; }
   [data-type="problem"] > .number {
     .exercise-number();
+  }
+
+  img {
+    display: block;
+    margin-bottom: 1em;
   }
 }
 
@@ -214,7 +407,7 @@ h1.example-title .text {
   // TODO: Fix this selector; it should be similar to the problem number one
   [data-type="solution"] {
     padding: 0.5em 0.25em 0.5em 0;
-    display: inline;
+    //display: inline;
     > a /*> .number*/ {
       .exercise-number();
     }
@@ -227,6 +420,53 @@ h1.example-title .text {
   }
 }
 
+.os-chapter-area [data-type="solution"] p {
+  display: inline;
+}
+
 .appendix [data-type="list"] {
   margin-top: 1rem;
+}
+
+figure.scaled-down {
+  width: 60%;
+  margin: auto;
+
+  ~ .os-caption-container {
+    width: 60%;
+    margin: auto;
+  }
+}
+
+:not(figure) > [data-type="media"].scaled-down {
+  text-align: center;
+  display: block;
+
+  img {
+    width: 60%
+  }
+}
+
+.learning-objectives {
+  margin: 3rem 0;
+  padding: 1.5rem;
+  background-color: #ededed;
+  border: .2rem solid #dcdcdc;
+  [data-type="title"] {
+    display: inline-block;
+    color: #555;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    display: block;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    padding: 0 1.5rem 1rem;
+    border-bottom: .2rem solid #dcdcdc;
+  }
+  p {
+    color: #555;
+    margin: 0 0 1rem 1.5rem;
+  }
 }

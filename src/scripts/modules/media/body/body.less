@@ -37,11 +37,6 @@
 
   .publishing();
 
-  // Import the content styling from a separate file so it can be included in the editing code
-  > #content {
-    @import 'content.less';
-  }
-
   cnx-pi {
     display: none;
   }
@@ -56,57 +51,54 @@
   }
 }
 
+.media-body-about {
+  max-width: @max-media-width;
+  margin: 0 auto;
+  display: block;
+  padding: 4rem 6rem 0 6rem;
+  width: auto; // override bootstrap
+
+  .media-body-about-description-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin: 2rem 0 2rem 0;
+
+    .media-body-about-cover {
+      width: ~"calc(125px + 2rem)";
+      height: ~"calc(125px + 2rem)";
+      margin-right: 2rem;
+    }
+
+    .media-body-about-description {
+      flex: 1;
+    }
+  }
+}
+
 body {
   .transition(background 0.5s ease-in-out);
 }
 
-.concept-coach-wrapper {
-  margin-top: 4rem;
-}
-
-// styles for coach scene, not opened.
-.media-body > #content {
-  .concept-coach-wrapper {
-    p, h1, h2, h3, h4, h5, h6 {
-      color: inherit;
-      margin: inherit;
-    }
-
-    a {
-      text-decoration: none;
-    }
-  }
-}
-
-// styles for coach opened.
-body.cc-opened {
-  .concept-coach-wrapper {
-    text-align: left;
-  }
-
-  [data-math]:not(.math-rendered) {
-    // hide math while it is unformatted
-    visibility: hidden;
-  }
-
-  .media-body > #content .concept-coach-wrapper {
-    p, h1, h2, h3, h4, h5, h6 {
-      color: inherit;
-    }
-
-    .concept-coach-view {
-      p, h1, h2, h3, h4, h5, h6 {
-        margin-bottom: inherit;
+@media (max-width: @screen-xs-max) {
+  .media-body-about {
+    .media-body-about-description-wrapper {
+      display:block;
+      .media-body-about-cover {
+        margin-bottom: 2rem;
       }
     }
+  }
+}
 
-    .dropdown-menu > li > a {
-      text-decoration: none;
-    }
+// Import the content styling from a separate file so it can be included in the editing code
+[data-is-baked="true"] {
+  .media-body > #content {
+    @import 'content-baked';
+  }
+}
 
-    .concept-coach-title h3.chapter-section-prefix {
-      margin-bottom: 0;
-    }
-
+[data-is-baked="false"] {
+  .media-body > #content {
+    @import 'content-raw';
   }
 }

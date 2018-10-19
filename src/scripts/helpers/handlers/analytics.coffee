@@ -14,18 +14,31 @@ define (require) ->
         l: Date.now()
 
     # Send the current page to every analytics service
-    send: (account, fragment = Backbone.history.fragment) ->
-      if not /^\//.test(fragment) then fragment = '/' + fragment
+    sendAnalytics: (accounts, fragment = Backbone.history.fragment) ->
+
+      # Use the default analytics ID in settings if no account is specified
+      unless accounts
+        accounts = [settings.analyticsID]
+
+      # temporarily support a single field for analytics (sometimes it is `null`)
+      unless Array.isArray(accounts)
+        console.log 'Consider calling analytics.sendAnalytics with an Array'
+        @sendAnalytics([accounts], fragment)
 
       require ['analytics'], (ga) =>
-        # Use the default analytics ID in settings if no account is specified
-        account ?= settings.analyticsID
 
-        # TODO investigate if we need specific names for our tracker name
-        trackerName = @getTrackerName(account)
-        ga('create', account, 'auto', trackerName)
+        # Uncomment me to log what would have been sent to `ga(...)` (for debugging)
+        # ga = (a,b,c) ->
+        #   console.log('Local Analytics function', a,b,c)
 
-        ga("#{trackerName}.send", 'pageview', fragment)
+        accounts.forEach (account) =>
+          if not /^\//.test(fragment) then fragment = '/' + fragment
+
+          # TODO investigate if we need specific names for our tracker name
+          trackerName = @getTrackerName(account)
+          ga('create', account, 'auto', trackerName)
+
+          ga("#{trackerName}.send", 'pageview', fragment)
 
     getTrackerName: (account) ->
       # Strip non-alphanumeric characters for default trackerName

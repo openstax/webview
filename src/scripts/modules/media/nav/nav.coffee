@@ -19,7 +19,10 @@ define (require) ->
       if page isnt nextPage
         next = linksHelper.getPath('contents', {model: @model, page: nextPage})
         if next isnt undefined
+          urlScheme = window.location.protocol+"//"
           $('head').append("<link rel=\"next\" href=\"#{location.host}#{next}\" />") if next
+          $('link[rel="prerender"]').remove()
+          $('head').append("<link rel=\"prerender\" href=\"#{urlScheme}#{location.host}#{next}\" />") if next
 
       $('link[rel="prev"]').remove()
       if page isnt previousPage
@@ -30,6 +33,7 @@ define (require) ->
       return {
         _hideProgress: @hideProgress
         book: @model.isBook()
+        isPage: @model.isPage()
         next: next
         back: back
         pages: if @model.get('loaded') then @model.getTotalPages() else 0
@@ -53,12 +57,14 @@ define (require) ->
       'click .back-to-top > a': 'backToTop'
       'keydown .searchbar input': 'handleSearchInput'
       'click .searchbar > .clear-search': 'clearSearch'
+      'click .searchbar > .fa-search': 'handleSearch'
 
-    closeAllContainers: (nodes = @model.get('contents').models) =>
-      for node in nodes
-        if node.isSection()
-          node.set('expanded', false)
-          @closeAllContainers(node.get('contents').models)
+    closeAllContainers: (nodes = @model.get('contents')?.models) =>
+      if nodes
+        for node in nodes
+          if node.isSection()
+            node.set('expanded', false)
+            @closeAllContainers(node.get('contents').models)
 
     toggleContents: (e) ->
       @tocIsOpen = not @tocIsOpen
@@ -68,6 +74,16 @@ define (require) ->
         for container in @model.get('currentPage')?.containers() ? []
           container.set('expanded', true)
       @updateToc()
+
+    toggleBooksList: (e) ->
+      @tocIsOpen = not @tocIsOpen
+      @.trigger('tocIsOpen', @tocIsOpen)
+      if @tocIsOpen
+        @closeAllContainers() unless @model.get('searchResults')
+        for container in @model.get('currentPage')?.containers() ? []
+          container.set('expanded', true)
+      @updateToc()
+
 
     updateToc: ->
       button = @$el.find('.toggle.btn')
@@ -100,6 +116,8 @@ define (require) ->
       e.preventDefault()
       e.stopPropagation()
       href = $(e.currentTarget).attr('href')
+      # this sends the page without a version number (which causes analytics to fire).
+      # It fires twice because @mediaParent.trackAnalytics() also sends an event.
       router.navigate href, {trigger: false}, () => @mediaParent.trackAnalytics()
 
     closeContentsOnSmallScreen: ->
@@ -130,28 +148,31 @@ define (require) ->
       removeClass('fa-search').
       addClass('fa-spinner fa-spin load-search')
 
+    handleSearch: ->
+      @searchTerm = @$el.find('.searchbar input').val()
+      if @searchTerm == ''
+        @clearSearch()
+        return
+      options = {
+        bookId: "#{@model.get('id')}@#{@model.get('version')}",
+        query: @searchTerm
+      }
+      # before the search has loaded
+      @enableLoadSearch()
+      # after the search has completed
+      BookSearchResults.fetch(options).done((data) =>
+        if not @tocIsOpen
+          @toggleContents()
+        @model.set('searchResults', data.results)
+        @enableClearSearch()
+      ).fail((err) ->
+        console.error("Search failed:", err)
+      )
+      
     handleSearchInput: (event) ->
-      if (event.keyCode == 13 and event.target.value?)
-        @searchTerm = event.target.value
+      if event.keyCode == 13
         event.preventDefault()
-        if @searchTerm == ''
-          @clearSearch()
-          return
-        options = {
-          bookId: "#{@model.get('id')}@#{@model.get('version')}",
-          query: @searchTerm
-        }
-        # before the search has loaded
-        @enableLoadSearch()
-        # after the search has completed
-        BookSearchResults.fetch(options).done((data) =>
-          if not @tocIsOpen
-            @toggleContents()
-          @model.set('searchResults', data.results)
-          @enableClearSearch()
-        ).fail((err) ->
-          console.error("Search failed:", err)
-        )
+        @handleSearch()
 
     onRender: ->
       if not @mediaParent?
@@ -159,3 +180,6 @@ define (require) ->
       @regions.tocPanel?.show(new ContentsView({model: @model}))
       @enableClearSearch() if @model.get('searchResults')?
       @updateToc()
+      if @model.isPage()
+        @toggleBooksList()
+        @closeContentsOnSmallScreen()

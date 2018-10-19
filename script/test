@@ -5,4 +5,4 @@ npm test
 
 # Check that l20n starts up
 npm run-script dist
-node ./test/verify-l20n.js
+PATH="${PATH}:$(npm bin)" node ./test/verify-l20n.js

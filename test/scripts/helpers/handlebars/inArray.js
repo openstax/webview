@@ -2,8 +2,8 @@ describe('handlebars in array helper tests', function () {
   'use strict';
   var inArray, Handlebars,
     myOptions = {
-      fn: function (obj) {
-        return obj.date('12/11/2012').toString();
+      fn: function () {
+        return '12/11/2012';
       },
       inverse: function (obj) {
         return obj.author([{
