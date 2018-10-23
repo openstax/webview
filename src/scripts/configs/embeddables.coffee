@@ -22,7 +22,7 @@ define (require) ->
         matchType: 'a'
         embeddableType: 'exercise'
         apiUrl: () ->
-          "#{exercises}/api/exercises?q=tag:\"#{@itemCode}\""
+          "#{exercises}/api/exercises?q=tag:\"#{encodeURIComponent(@itemCode)}\""
 
         # # Adds flexibility for if data needs transformation post API call
         # # For now, not needed for when using actual API.  Comment in if using local stub.
@@ -41,7 +41,7 @@ define (require) ->
         matchType: 'a'
         embeddableType: 'exercise'
         apiUrl: () ->
-          "#{exercises}/api/exercises?q=nickname:\"#{@itemCode}\""
+          "#{exercises}/api/exercises?q=nickname:\"#{encodeURIComponent(@itemCode)}\""
 
         # # Adds flexibility for if data needs transformation post API call
         # # For now, not needed for when using actual API.  Comment in if using local stub.
