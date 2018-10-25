@@ -32,7 +32,7 @@ pipeline {
         // Start the testing container
         sh "docker run -d -v ${WORKSPACE}/xml-report:/xml-report:z --env-file ${WORKSPACE}/env.list --name ${TESTING_CONTAINER_NAME} openstax/cnx-automation:latest"
         // Run the tests
-        sh "docker exec ${TESTING_CONTAINER_NAME} tox -- -m 'webview' --junitxml=/code/report.xml"
+        sh "docker exec ${TESTING_CONTAINER_NAME} tox -- -m 'webview and not (requires_deployment or requires_varnish_routing or legacy)' --junitxml=/code/report.xml"
       }
       post {
         always {
