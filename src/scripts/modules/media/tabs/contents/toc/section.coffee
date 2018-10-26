@@ -83,10 +83,12 @@ define (require) ->
         e.preventDefault()
         @toggleSection()
         isExpanded = @$el.find('button')[0].getAttribute('aria-expanded')
-        if isExpanded == 'true'
-          @$el.find('ul')[0].querySelector('.name-wrapper a, .section-wrapper').focus()
-        else if isExpanded == 'false'
-          @$el.find('> div > .section-wrapper')[0].focus()
+        if isExpanded is 'true'
+          focusEl = @$el.find('ul')[0].querySelector('.name-wrapper a, .section-wrapper')
+        else
+          focusEl = @$el.find('> div > .section-wrapper')[0]
+        
+        focusEl.focus()
 
     removeNode: () ->
       @content.removeNode(@model)
