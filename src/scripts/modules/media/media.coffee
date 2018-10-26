@@ -27,11 +27,15 @@ define (require) ->
     key = []
     canonical: () ->
       uuid = @model.attributes.currentPage?.attributes?.canonical
-      if not uuid
+      if uuid
+        pageId = @model.attributes.currentPage?.id
+      else
         uuid = @model.attributes?.canonical
-        if not uuid
-          uuid = @model.id
-      url = "#{settings.root}contents/#{uuid}"
+        pageId = @model.id
+      if not uuid
+        url = "#{settings.root}contents/#{pageId}"
+      else
+        url = "#{settings.root}contents/#{uuid}:#{pageId}"
       return url
 
     template: template
