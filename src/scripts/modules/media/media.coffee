@@ -27,6 +27,10 @@ define (require) ->
     key = []
     canonical: () ->
       uuid = @model.attributes.currentPage?.attributes?.canonical
+      if not uuid
+        uuid = @model.attributes?.canonical
+        if not uuid
+          uuid = @model.id
       url = "#{settings.root}contents/#{uuid}"
       return url
 
