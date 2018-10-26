@@ -26,6 +26,7 @@ define (require) ->
   return class MediaView extends BaseView
     key = []
     canonical: () ->
+      console.debug "model: ", @model
       urlScheme = window.location.protocol+"//"
       uuid = @model.attributes.currentPage?.attributes?.canonical
       mediatype = @model.attributes.mediaType
@@ -36,6 +37,7 @@ define (require) ->
         pageId = @model.id
         if not uuid and mediatype is 'application/vnd.org.cnx.collection'
           uuid =  @model.attributes.id
+          pageId = @model.attributes.currentPage?.id
       if not uuid
         url = "#{urlScheme}#{location.host}#{settings.root}contents/#{pageId}"
       else
