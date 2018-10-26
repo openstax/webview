@@ -1,4 +1,6 @@
-These screenshots describe which templates are used in order to generate the various parts of a page. It is useful for making changes and gets you a little closer to the JS code that is used to generate that particular part of the page. To regenerate them, run `./script/add-template-comments` and take screenshots.
+These screenshots describe which templates are used in order to generate the various parts of a page. It is useful for making changes and gets you a little closer to the JS code that is used to generate that particular part of the page. 
+
+To regenerate them, run `./script/add-template-comments` and take screenshots.
 
 # Home page:
 
