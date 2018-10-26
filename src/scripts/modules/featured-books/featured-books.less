@@ -74,14 +74,9 @@
       
         &.extended {
           max-height: 100%;
-          &.show-ellipsis {
-            &:after {
-              display: none;
-            }
-          }
         }
 
-        &.show-ellipsis {
+        &:not(.extended).show-ellipsis {
           position: relative;
           &:after {
             content: '…';
