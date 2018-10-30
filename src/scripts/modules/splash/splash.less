@@ -1,9 +1,10 @@
 @import "../../../styles/variables.less";
 
 @banner-height: 48rem;
+@splash-margin-top: -11.1rem;
 
 .splash {
-  margin-top: -11.1rem;
+  margin-top: @splash-margin-top;
 
   > .banner {
     position: relative;
@@ -56,6 +57,24 @@
 
       > a {
         font-size: 1.6rem;
+      }
+
+      @media (max-width: @grid-float-breakpoint-max) {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: calc(@banner-height + @splash-margin-top);
+        background-color: rgba(255, 255, 255, .2);
+        > h1 {
+          max-width: 80%;
+          margin: 0;
+          padding: 0 6rem 3rem 3rem;
+          text-shadow: 0 0 .2em rgba(255,255,255,0.8);
+        }
       }
     }
   }
