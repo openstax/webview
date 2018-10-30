@@ -184,6 +184,41 @@ Follow the instructions to install [Docker Compose](https://docs.docker.com/comp
 
     $ docker-compose up -d
 
+# Installing on Ubuntu 16.04
+
+* Install node 6.9.1.
+   * It must be downloaded from the Node JS web site - `https://nodejs.org/dist/v6.9.1/`
+   * Unzip the tar ball into a directory
+   * Create symlinks to node in the expected locations
+      * `ln -sf <YOUR_FOLDER>/bin/node /usr/bin/node`
+      * `ln -sf <YOUR_FOLDER>/bin/node /usr/bin/nodejs`
+   * Test installation
+      - `node -v`
+* Install yarn
+   * Follow instructions at `https://yarnpkg.com/lang/en/docs/install/#debian-stable`
+* Follow Webview installation instructions in README
+* Install nginx
+   * `sudo apt-get update`
+   * `sudo apt-get install nginx`
+* Create self signed cert
+```
+   openssl req -x509 -out localhost.crt -keyout localhost.key \
+  -newkey rsa:2048 -nodes -sha256 \
+  -subj '/CN=localhost' -extensions EXT -config <( \
+   printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+```
+* Add Key and Cert files to nginx config location - `webview/conf`
+* Update nginx config to use HTTPS - `nginx-dev.conf`
+```
+      server {
+        listen 8000;
+        listen 443 ssl;
+        ssl_certificate localhost.crt;
+        ssl_certificate_key localhost.key;
+        root src;
+```
+* Start server - `sudo ./script/start`
+
 # License
 
 This software is subject to the provisions of the GNU Affero General Public License Version 3.0 (AGPL). See license.txt for details. Copyright (c) 2013 Rice University.
