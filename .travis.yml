@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "6.9.1"
+  - "10.13.0"
 before_install: ./script/bootstrap
 script: ./script/test
 sudo: false
