@@ -5,9 +5,9 @@
   structured into books or course notes, or for other uses. Our open license allows for free
   use and reuse of all our content.</p>
 
-<ul>
+<div class="search-categories">
   {{#each this}}
-    <li>
+    <section class="search-category">
       <h2 class="medium-header">
         <a href="/search?q=subject:&quot;{{name}}&quot;">{{name}}</a>
       </h2>
@@ -18,6 +18,6 @@
         <div data-l10n-id="search-pages" data-l10n-args='{"count":{{count.module}} }'>Pages: {{count.module}}</div>
         <div data-l10n-id="search-books" data-l10n-args='{"count":{{count.collection}} }'>Books: {{count.collection}}</div>
       </div>
-    </li>
+    </section>
   {{/each}}
-</ul>
+</div>
