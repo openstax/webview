@@ -95,7 +95,7 @@
 
 }
 
-@media (max-width: @screen-xs-max) {
+.responsive-settings() {
   .media-footer .tab-content {
     overflow: auto;
     .book-page-toggle {
@@ -110,4 +110,14 @@
     margin-left: 0;
     clear: both;
   }
+}
+
+@media (max-width: @screen-md-max) {
+  .sidebar-open {
+    .responsive-settings()
+  }
+}
+
+@media (max-width: @screen-xs-max) {
+  .responsive-settings()
 }
