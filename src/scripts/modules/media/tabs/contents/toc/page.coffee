@@ -44,6 +44,7 @@ define (require) ->
     selectPageWithKeyboard: (e) ->
       if e.keyCode is 13 or e.keyCode is 32
         e.target.click()
+        window.pageWasChangedWithKeyboard = true
 
     changePage: (e) ->
       # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab
