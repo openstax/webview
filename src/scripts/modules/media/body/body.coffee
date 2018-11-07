@@ -445,6 +445,12 @@ define (require) ->
 
       @regions.about.append(new ContentsView({model: @model, static: true}))
 
+      # Wrap tables inside unbaked books with additional div so we can
+      # apply overflow-x: auto to them. Tables inside baked books are wrapped with .os-table
+      if !@model.asPage().isCollated()
+        $('.main-page table').each (index, table) ->
+          $(table).wrap('<div class="table-wrapper"></div>')
+
     changePage: (e) ->
       # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab
       return if e.metaKey or e.which isnt 1

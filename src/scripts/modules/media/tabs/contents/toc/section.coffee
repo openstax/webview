@@ -82,8 +82,13 @@ define (require) ->
       if e.keyCode is 13 or e.keyCode is 32
         e.preventDefault()
         @toggleSection()
-        @$el.find('> div > .section-wrapper').focus()
-        @$el.find('> ul').attr('role', 'alert')
+        isExpanded = @$el.find('button')[0].getAttribute('aria-expanded')
+        if isExpanded is 'true'
+          focusEl = @$el.find('ul')[0].querySelector('.name-wrapper a, .section-wrapper')
+        else
+          focusEl = @$el.find('> div > .section-wrapper')[0]
+
+        focusEl.focus()
 
     removeNode: () ->
       @content.removeNode(@model)
