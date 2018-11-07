@@ -392,7 +392,11 @@ table {
 
   // Cells
   thead,
-  tbody,
+  tbody {
+    tr > td[data-align="right"]{
+      text-align: right;
+    }
+  }
   tfoot {
     > tr {
       > th,
