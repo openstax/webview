@@ -159,6 +159,11 @@ figure[data-orient="vertical"] {
   font-size: 1rem;
 }
 
+[data-type="footnote-ref"] {
+  text-indent: -27px;
+  padding-left: 27px;
+}
+
 .abstract {
   position: relative;
   background-color: @gray-lightest;
@@ -182,6 +187,12 @@ figure[data-orient="vertical"] {
   }
 }
 
+ol > li {
+  margin-bottom: 1em;
+  > p {
+    margin: 0;
+  }
+}
 
 // --------------------------------
 // Blockish things (note, example, exercise)
@@ -342,6 +353,10 @@ blockquote {
 // Tables
 // --------------------------------------------------
 
+.table-wrapper {
+  overflow-x: auto;
+}
+
 table {
   margin-top: 6rem;
   width: 100%;
@@ -443,4 +458,11 @@ table {
   [data-type="definition"] {
     margin: 1rem 3rem;
   }
+}
+
+//
+// Equations
+// --------------------------------------------------
+[data-type="equation"] {
+  overflow: auto;
 }
