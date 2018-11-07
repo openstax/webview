@@ -129,8 +129,7 @@ define (require) ->
 
     focusTitle: () ->
       toFocus = $(@$el[0]).find('.media-header .title h2')[0]
-      if toFocus
+      if @model.asPage()?.get('loaded') and toFocus
         toFocus.setAttribute('tabindex', '-1')
         toFocus.focus()
         toFocus.removeAttribute('tabindex')
-        window.pageWasChangedWithKeyboard = false

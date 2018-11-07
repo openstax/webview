@@ -53,6 +53,7 @@ define (require) ->
     events:
       'click .next': 'nextPage'
       'click .back': 'previousPage'
+      'keydown .book-nav a.nav': 'changePageWithKeyboard'
       'click .toggle.btn': 'toggleContents'
       'click .back-to-top > a': 'backToTop'
       'keydown .searchbar input': 'handleSearchInput'
@@ -113,6 +114,11 @@ define (require) ->
       # Show the previous page if there is one
       @changePage(e)
       @model.setPage(previousPage)
+    
+    changePageWithKeyboard: (e) ->
+      if e.keyCode is 13 or e.keyCode is 32
+        window.pageWasChangedWithKeyboard = true
+        e.target.click()
 
     changePage: (e) ->
       # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab
