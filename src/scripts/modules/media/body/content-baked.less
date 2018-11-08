@@ -31,6 +31,16 @@ ul, ol {
   padding-left: 1rem;
 }
 
+.stepwise {
+  list-style-type: none;
+  counter-reset: stepwiseCounter;
+  padding-left: 0;
+  > li:before {
+      content: "Step " counter(stepwiseCounter) ". ";
+      counter-increment: stepwiseCounter;
+  }
+}
+
 [data-bullet-style="none"] {
   list-style-type: none;
 }
