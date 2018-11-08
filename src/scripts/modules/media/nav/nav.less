@@ -47,7 +47,7 @@
     .searchbar {
       width: ~"calc(35% - " @button-width * .5 ~")";
 
-      @media (max-width: 768px) {
+      @media (max-width: @landscape-breakpoint) {
         width: ~"calc(100% - " @button-width ~"- 3rem)"
       }
       position: relative;
@@ -70,7 +70,7 @@
 
     .media-navbar {
       width: ~"calc(65% - " @button-width * .7 ~")";
-      @media (max-width: 768px) {
+      @media (max-width: @landscape-breakpoint) {
         width: 100%;
         display: block;
       }
