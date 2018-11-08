@@ -1,3 +1,5 @@
+@Library('pipeline-library') _
+
 pipeline {
   agent { label 'docker' }
   environment {
@@ -27,22 +29,7 @@ pipeline {
     }
     stage('Run Functional Tests'){
       steps {
-        sh "mkdir -p ${WORKSPACE}/xml-report"
-        sh "${WORKSPACE}/.jenkins/gen_env_list.py ${CNX_STAGING_DOCKER_HOST} > ${WORKSPACE}/env.list"
-        // Start the testing container
-        sh "docker run -d -v ${WORKSPACE}/xml-report:/xml-report:z --env-file ${WORKSPACE}/env.list --name ${TESTING_CONTAINER_NAME} openstax/cnx-automation:latest"
-        // Run the tests
-        sh "docker exec ${TESTING_CONTAINER_NAME} tox -- -m 'webview and not (requires_deployment or requires_varnish_routing or legacy)' --junitxml=/code/report.xml"
-      }
-      post {
-        always {
-          // Move the report to a place that is both accessible and writable
-          sh "docker exec -u root ${TESTING_CONTAINER_NAME} cp /code/report.xml /xml-report"
-          // Destroy the testing container
-          sh "docker stop ${TESTING_CONTAINER_NAME} && docker rm -f ${TESTING_CONTAINER_NAME}"
-          // Report test results
-          junit "xml-report/report.xml"
-        }
+          runCnxFunctionalTests(testingDomain: "${env.CNX_STAGING_DOCKER_HOST}")
       }
     }
     stage('Publish Release') {
