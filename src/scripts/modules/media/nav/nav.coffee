@@ -71,14 +71,17 @@ define (require) ->
       # This component is used in the ToC as well as the intro page.
       # Having the aria attributes causes confusion because there are 2 `<nav>` elements on the page
       # See #1975
-      firstElementInSidebarToc = $('.toc')[0].querySelector('.name-wrapper a, .section-wrapper')
+      firstElementInSidebarToc = null
+      if $('.toc')[0]
+        firstElementInSidebarToc = $('.toc')[0].querySelector('.name-wrapper a, .section-wrapper')
       @tocIsOpen = not @tocIsOpen
       @.trigger('tocIsOpen', @tocIsOpen)
       if @tocIsOpen
         @closeAllContainers() unless @model.get('searchResults')
         for container in @model.get('currentPage')?.containers() ? []
           container.set('expanded', true)
-        firstElementInSidebarToc.focus()
+        if firstElementInSidebarToc
+          firstElementInSidebarToc.focus()
       @updateToc()
 
     toggleBooksList: (e) ->

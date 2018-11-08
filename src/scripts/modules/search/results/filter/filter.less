@@ -29,11 +29,20 @@
       padding-left: 1.5rem;
       margin: 0.5rem 0;
       width: 100%;
+      display: flex;
+      justify-content: space-between;
 
       > dt {
         text-align: left;
         font-weight: normal;
         white-space: normal;
+        flex: 1 1 50%;
+      }
+
+      > dd {
+        text-align: right;
+        margin: 0;
+        flex: 1 1 50%;
       }
 
       .toggle {
