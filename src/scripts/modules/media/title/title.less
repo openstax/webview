@@ -16,6 +16,13 @@
 
   &:not(.publishing) { background-color: @gray-lightest; }
 
+  @media (max-width: @landscape-breakpoint) {
+    padding: 1rem 1.5rem 0.5rem 1.5rem;
+    &.compact {
+      padding-bottom: 0.5rem;
+    }
+  }
+
   a:focus {
     background-color: #78b04a;
   }
