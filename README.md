@@ -200,14 +200,14 @@ Follow the instructions to install [Docker Compose](https://docs.docker.com/comp
 * Install nginx
    * `sudo apt-get update`
    * `sudo apt-get install nginx`
-* Create self signed cert
+* Create self signed cert. This will result in 2 files(.key and .cert) created in the directory the command below is run in.
 ```
    openssl req -x509 -out localhost.crt -keyout localhost.key \
   -newkey rsa:2048 -nodes -sha256 \
   -subj '/CN=localhost' -extensions EXT -config <( \
    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 ```
-* Add Key and Cert files to nginx config location - `webview/conf`
+* Copy the Key and Cert files to nginx config location if they were not created there - `webview/conf`
 * Update nginx config to use HTTPS - `nginx-dev.conf`
 ```
       server {
