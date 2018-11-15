@@ -34,6 +34,8 @@ pipeline {
         // Using the environment variable enables this file to be
         // endpoint agnostic.
         sh "docker -H ${CNX_STAGING_DOCKER_HOST} service update --label-add 'git.commit-hash=${GIT_COMMIT}' --image openstax/cnx-webview:dev staging_ui"
+        // Also cycle the http-cache (varnish), so we don't have stale pages being served
+        sh "docker -H ${CNX_STAGING_DOCKER_HOST} service update --restart-condition=any staging_http-cache"
       }
     }
     stage('Run Functional Tests'){
