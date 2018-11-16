@@ -53,6 +53,7 @@ define (require) ->
     events:
       'click .next': 'nextPage'
       'click .back': 'previousPage'
+      'keydown .book-nav a.nav': 'changePageWithKeyboard'
       'click .toggle.btn': 'toggleContents'
       'click .back-to-top > a': 'backToTop'
       'keydown .searchbar input': 'handleSearchInput'
@@ -70,17 +71,17 @@ define (require) ->
       # This component is used in the ToC as well as the intro page.
       # Having the aria attributes causes confusion because there are 2 `<nav>` elements on the page
       # See #1975
-      tocInsideSidebar = $('.toc')[0]
-      if tocInsideSidebar.getAttribute('role')
-        tocInsideSidebar.removeAttribute('role')
-      else
-        tocInsideSidebar.setAttribute('role', 'alert')
+      firstElementInSidebarToc = null
+      if $('.toc')[0]
+        firstElementInSidebarToc = $('.toc')[0].querySelector('.name-wrapper a, .section-wrapper')
       @tocIsOpen = not @tocIsOpen
       @.trigger('tocIsOpen', @tocIsOpen)
       if @tocIsOpen
         @closeAllContainers() unless @model.get('searchResults')
         for container in @model.get('currentPage')?.containers() ? []
           container.set('expanded', true)
+        if firstElementInSidebarToc
+          firstElementInSidebarToc.focus()
       @updateToc()
 
     toggleBooksList: (e) ->
@@ -116,6 +117,11 @@ define (require) ->
       # Show the previous page if there is one
       @changePage(e)
       @model.setPage(previousPage)
+    
+    changePageWithKeyboard: (e) ->
+      if e.keyCode is 13 or e.keyCode is 32
+        window.pageWasChangedWithKeyboard = true
+        e.target.click()
 
     changePage: (e) ->
       # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab

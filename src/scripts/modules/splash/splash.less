@@ -60,19 +60,19 @@
       }
 
       @media (max-width: @grid-float-breakpoint-max) {
-        position: relative;
+        position: absolute;
         top: 0;
-        left: 0;
-        right: 0;
+        right: auto;
         display: flex;
         align-items: center;
         width: 100%;
-        height: calc(@banner-height + @splash-margin-top);
+        height: 100%;
         background-color: rgba(255, 255, 255, .2);
         > h1 {
           max-width: 80%;
           margin: 0;
-          padding: 0 6rem 3rem 3rem;
+          padding-left: 3rem;
+          padding-right: 6rem;
           text-shadow: 0 0 .2em rgba(255,255,255,0.8);
         }
       }

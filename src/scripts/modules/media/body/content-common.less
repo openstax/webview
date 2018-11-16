@@ -159,6 +159,11 @@ figure[data-orient="vertical"] {
   font-size: 1rem;
 }
 
+[data-type="footnote-ref"] {
+  text-indent: -27px;
+  padding-left: 27px;
+}
+
 .abstract {
   position: relative;
   background-color: @gray-lightest;
@@ -341,6 +346,10 @@ blockquote {
 // Tables
 // --------------------------------------------------
 
+.table-wrapper {
+  overflow-x: auto;
+}
+
 table {
   margin-top: 6rem;
   width: 100%;
@@ -376,7 +385,11 @@ table {
 
   // Cells
   thead,
-  tbody,
+  tbody {
+    tr > td[data-align="right"]{
+      text-align: right;
+    }
+  }
   tfoot {
     > tr {
       > th,
@@ -438,4 +451,11 @@ table {
   [data-type="definition"] {
     margin: 1rem 3rem;
   }
+}
+
+//
+// Equations
+// --------------------------------------------------
+[data-type="equation"] {
+  overflow: auto;
 }
