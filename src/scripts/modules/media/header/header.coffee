@@ -78,7 +78,7 @@ define (require) ->
       @mediaBody = options.mediaBody
 
       @listenTo(@model, 'change:downloads change:buyLink change:title change:active', @render)
-      @listenTo(@model, 'change:currentPage change:currentPage.active change:currentPage.loaded', @render)
+      @listenTo(@model, 'change:currentPage change:currentPage.active', @render)
       @listenTo(@model, 'change:abstract change:currentPage.abstract change:currentPage.chapter', @render)
       @listenTo(session, 'change', @render)
       @listenTo(@model, 'change:currentPage.editable change:currentPage.canPublish', @render)
@@ -133,3 +133,4 @@ define (require) ->
         toFocus.setAttribute('tabindex', '-1')
         toFocus.focus()
         toFocus.removeAttribute('tabindex')
+        window.pageWasChangedWithKeyboard = false
