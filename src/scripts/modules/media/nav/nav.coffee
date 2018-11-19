@@ -162,6 +162,11 @@ define (require) ->
       removeClass('fa-search').
       addClass('fa-spinner fa-spin load-search')
 
+    enableSearch: ->
+      @$el.find('.searchbar > .fa').
+      removeClass('fa-spinner fa-spin load-search').
+      addClass('fa-search')
+
     handleSearch: ->
       @searchTerm = @$el.find('.searchbar input').val()
       if @searchTerm == ''
@@ -178,7 +183,7 @@ define (require) ->
         if not @tocIsOpen
           @toggleContents()
         @model.set('searchResults', data.results)
-        @enableClearSearch()
+        @enableSearch()
       ).fail((err) ->
         console.error("Search failed:", err)
       )
