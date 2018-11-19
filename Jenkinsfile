@@ -1,8 +1,7 @@
+@Library('pipeline-library') _
+
 pipeline {
   agent { label 'docker' }
-  environment {
-    TESTING_CONTAINER_NAME = "webview-testing-${env.BUILD_ID}"
-  }
   stages {
     stage('Build') {
       steps {
@@ -10,6 +9,12 @@ pipeline {
       }
     }
     stage('Publish Dev Container') {
+      when {
+        anyOf {
+          branch 'master'
+          buildingTag()
+        }
+      }
       steps {
         // 'docker-registry' is defined in Jenkins under credentials
         withDockerRegistry([credentialsId: 'docker-registry', url: '']) {
@@ -18,41 +23,36 @@ pipeline {
       }
     }
     stage('Deploy to the Staging stack') {
+      when {
+        anyOf {
+          branch 'master'
+          buildingTag()
+        }
+      }
       steps {
         // Requires DOCKER_HOST be set in the Jenkins Configuration.
         // Using the environment variable enables this file to be
         // endpoint agnostic.
         sh "docker -H ${CNX_STAGING_DOCKER_HOST} service update --label-add 'git.commit-hash=${GIT_COMMIT}' --image openstax/cnx-webview:dev staging_ui"
+        // Also cycle the http-cache (varnish), so we don't have stale pages being served
+        sh "docker -H ${CNX_STAGING_DOCKER_HOST} service update --restart-condition=any staging_http-cache"
       }
     }
     stage('Run Functional Tests'){
-      steps {
-        sh "mkdir -p ${WORKSPACE}/xml-report"
-        sh "${WORKSPACE}/.jenkins/gen_env_list.py ${CNX_STAGING_DOCKER_HOST} > ${WORKSPACE}/env.list"
-        // Start the testing container
-        sh "docker run -d -v ${WORKSPACE}/xml-report:/xml-report:z --env-file ${WORKSPACE}/env.list --name ${TESTING_CONTAINER_NAME} openstax/cnx-automation:latest"
-        // Run the tests
-        sh "docker exec ${TESTING_CONTAINER_NAME} tox -- -m 'webview and not (requires_deployment or requires_varnish_routing or legacy)' --junitxml=/code/report.xml"
-      }
-      post {
-        always {
-          // Move the report to a place that is both accessible and writable
-          sh "docker exec -u root ${TESTING_CONTAINER_NAME} cp /code/report.xml /xml-report"
-          // Destroy the testing container
-          sh "docker stop ${TESTING_CONTAINER_NAME} && docker rm -f ${TESTING_CONTAINER_NAME}"
-          // Report test results
-          junit "xml-report/report.xml"
+      when {
+        anyOf {
+          branch 'master'
+          buildingTag()
         }
+      }
+      steps {
+          runCnxFunctionalTests(testingDomain: "${env.CNX_STAGING_DOCKER_HOST}")
       }
     }
     stage('Publish Release') {
       when { buildingTag() }
       environment {
-        release = """${sh(
-          returnStdout: true,
-          // Strip the `v` prefix
-          script: 'bash -c \'echo ${TAG_NAME#v*}\''
-        ).trim()}"""
+        release = meta.version()
       }
       steps {
         withDockerRegistry([credentialsId: 'docker-registry', url: '']) {

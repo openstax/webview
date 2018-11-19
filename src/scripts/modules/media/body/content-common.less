@@ -164,6 +164,11 @@ figure[data-orient="vertical"] {
   font-size: 1rem;
 }
 
+[data-type="footnote-ref"] {
+  text-indent: -27px;
+  padding-left: 27px;
+}
+
 .abstract {
   position: relative;
   background-color: @gray-lightest;
@@ -187,6 +192,12 @@ figure[data-orient="vertical"] {
   }
 }
 
+ol > li {
+  margin-bottom: 1em;
+  > p {
+    margin: 0;
+  }
+}
 
 // --------------------------------
 // Blockish things (note, example, exercise)
@@ -386,7 +397,11 @@ table {
 
   // Cells
   thead,
-  tbody,
+  tbody {
+    tr > td[data-align="right"]{
+      text-align: right;
+    }
+  }
   tfoot {
     > tr {
       > th,
