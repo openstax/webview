@@ -56,7 +56,7 @@ define (require) ->
       'keydown .book-nav a.nav': 'changePageWithKeyboard'
       'click .toggle.btn': 'toggleContents'
       'click .back-to-top > a': 'backToTop'
-      'keydown .searchbar input': 'handleSearchInput'
+      'keyup .searchbar input': 'handleSearchInput'
       'click .searchbar > .clear-search': 'clearSearch'
       'click .searchbar > .fa-search': 'handleSearch'
 
@@ -164,7 +164,7 @@ define (require) ->
 
     enableSearch: ->
       @$el.find('.searchbar > .fa').
-      removeClass('fa-spinner fa-spin load-search').
+      removeClass('fa-times-circle clear-search').
       addClass('fa-search')
 
     handleSearch: ->
@@ -183,12 +183,14 @@ define (require) ->
         if not @tocIsOpen
           @toggleContents()
         @model.set('searchResults', data.results)
-        @enableSearch()
+        @enableClearSearch()
       ).fail((err) ->
         console.error("Search failed:", err)
       )
       
     handleSearchInput: (event) ->
+      if event.target.value == '' && @$el.find('.searchbar > .clear-search').length > 0
+        @enableSearch()
       if event.keyCode == 13
         event.preventDefault()
         @handleSearch()
