@@ -50,7 +50,11 @@
     > .main {
       width: ~"calc(100% -" @sidebar-width + @fudge ~")";
       @media (max-width: 640px) {
-        visibility:hidden;
+        position: absolute; 
+        overflow: hidden; 
+        height: 1px; 
+        width: 1px; 
+        margin: -1px;
       }
     }
   }
