@@ -42,7 +42,7 @@ define (require) ->
 
     sendDownloadAnalytics: (accounts, bookTitle, fileType, url, fragment = Backbone.history.fragment) ->
 
-      eventPacket = 
+      eventPacket =
         eventCategory: fileType + ' ' + bookTitle,
         eventAction: fileType + ' Download'
         eventLabel: url,

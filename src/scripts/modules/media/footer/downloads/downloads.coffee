@@ -9,11 +9,14 @@ define (require) ->
 
     events:
       'click [data-format="PDF"]': (e) ->
-        analytics.sendDownloadAnalytics(@model.get('googleAnalytics'),@model.attributes.title, 'PDF', @model.attributes.downloads[0].path)
+        analytics.sendDownloadAnalytics(@model.get('googleAnalytics'),@model.attributes.title, 'PDF', \
+        @model.attributes.downloads[0].path)
       'click [data-format="EPUB"]': (e) ->
-        analytics.sendDownloadAnalytics(@model.get('googleAnalytics'),@model.attributes.title, 'EPUB', @model.attributes.downloads[1].path)
+        analytics.sendDownloadAnalytics(@model.get('googleAnalytics'),@model.attributes.title, 'EPUB', \
+        @model.attributes.downloads[1].path)
       'click [data-format="Offline ZIP"]': (e) ->
-        analytics.sendDownloadAnalytics(@model.get('googleAnalytics'),@model.attributes.title, 'Offline Zip', @model.attributes.downloads[2].path)
+        analytics.sendDownloadAnalytics(@model.get('googleAnalytics'),@model.attributes.title, 'Offline Zip', \
+        @model.attributes.downloads[2].path)
 
     initialize: () ->
       super()
