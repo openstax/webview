@@ -56,7 +56,7 @@ define (require) ->
       'keydown .book-nav a.nav': 'changePageWithKeyboard'
       'click .toggle.btn': 'toggleContents'
       'click .back-to-top > a': 'backToTop'
-      'keydown .searchbar input': 'handleSearchInput'
+      'keyup .searchbar input': 'handleSearchInput'
       'click .searchbar > .clear-search': 'clearSearch'
       'click .searchbar > .fa-search': 'handleSearch'
 
@@ -162,6 +162,11 @@ define (require) ->
       removeClass('fa-search').
       addClass('fa-spinner fa-spin load-search')
 
+    enableSearch: ->
+      @$el.find('.searchbar > .fa').
+      removeClass('fa-times-circle clear-search').
+      addClass('fa-search')
+
     handleSearch: ->
       @searchTerm = @$el.find('.searchbar input').val()
       if @searchTerm == ''
@@ -184,6 +189,8 @@ define (require) ->
       )
       
     handleSearchInput: (event) ->
+      if event.target.value == '' && @$el.find('.searchbar > .clear-search').length > 0
+        @enableSearch()
       if event.keyCode == 13
         event.preventDefault()
         @handleSearch()

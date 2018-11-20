@@ -26,6 +26,11 @@ ul, ol {
   margin-top: 1rem;
 }
 
+.stepwise {
+  list-style-type: none;
+  padding-left: 0;
+}
+
 .circled {
   list-style-type: none;
   padding-left: 1rem;
@@ -308,6 +313,9 @@ h1.example-title .text {
   }
   table {
     margin: 0;
+    &.has-images {
+      table-layout: fixed;
+    }
     tr {
       td {
         vertical-align: middle;
