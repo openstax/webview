@@ -27,6 +27,9 @@
     .transition(~"width" @transition-style);
     width: ~"calc(100% -" @fudge ~")";
     display: inline-block;
+    @media (max-width: 640px) {
+      display: block;
+    }
   }
   &.sidebar-open {
     > .sidebar {
@@ -51,7 +54,7 @@
     > .main {
       width: ~"calc(100% -" @sidebar-width + @fudge ~")";
       @media (max-width: 640px) {
-        visibility:hidden;
+        display: none;
       }
     }
   }
