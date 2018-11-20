@@ -2,9 +2,6 @@
 
 pipeline {
   agent { label 'docker' }
-  environment {
-    TESTING_CONTAINER_NAME = "webview-testing-${env.BUILD_ID}"
-  }
   stages {
     stage('Build') {
       steps {
@@ -12,6 +9,12 @@ pipeline {
       }
     }
     stage('Publish Dev Container') {
+      when {
+        anyOf {
+          branch 'master'
+          buildingTag()
+        }
+      }
       steps {
         // 'docker-registry' is defined in Jenkins under credentials
         withDockerRegistry([credentialsId: 'docker-registry', url: '']) {
@@ -20,14 +23,28 @@ pipeline {
       }
     }
     stage('Deploy to the Staging stack') {
+      when {
+        anyOf {
+          branch 'master'
+          buildingTag()
+        }
+      }
       steps {
         // Requires DOCKER_HOST be set in the Jenkins Configuration.
         // Using the environment variable enables this file to be
         // endpoint agnostic.
         sh "docker -H ${CNX_STAGING_DOCKER_HOST} service update --label-add 'git.commit-hash=${GIT_COMMIT}' --image openstax/cnx-webview:dev staging_ui"
+        // Also cycle the http-cache (varnish), so we don't have stale pages being served
+        sh "docker -H ${CNX_STAGING_DOCKER_HOST} service update --restart-condition=any staging_http-cache"
       }
     }
     stage('Run Functional Tests'){
+      when {
+        anyOf {
+          branch 'master'
+          buildingTag()
+        }
+      }
       steps {
           runCnxFunctionalTests(testingDomain: "${env.CNX_STAGING_DOCKER_HOST}")
       }
@@ -35,11 +52,7 @@ pipeline {
     stage('Publish Release') {
       when { buildingTag() }
       environment {
-        release = """${sh(
-          returnStdout: true,
-          // Strip the `v` prefix
-          script: 'bash -c \'echo ${TAG_NAME#v*}\''
-        ).trim()}"""
+        release = meta.version()
       }
       steps {
         withDockerRegistry([credentialsId: 'docker-registry', url: '']) {

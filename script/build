@@ -4,3 +4,6 @@ source ./script/bootstrap || exit 1
 
 >&2 echo "==> Building dist/"
 npm run-script dist || exit 1
+
+>&2 echo "==> Copying bower_components into dist/ (for fonts)"
+cp -R ./bower_components/ ./dist/
