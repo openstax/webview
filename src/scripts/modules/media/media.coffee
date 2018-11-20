@@ -26,7 +26,6 @@ define (require) ->
   return class MediaView extends BaseView
     key = []
     canonical: () ->
-      console.debug "model: ", @model
       urlScheme = window.location.protocol+"//"
       uuid = @model.attributes.currentPage?.attributes?.canonical
       mediatype = @model.attributes.mediaType
