@@ -35,7 +35,9 @@ pipeline {
         // endpoint agnostic.
         sh "docker -H ${CNX_STAGING_DOCKER_HOST} service update --label-add 'git.commit-hash=${GIT_COMMIT}' --image openstax/cnx-webview:dev staging_ui"
         // Also cycle the http-cache (varnish), so we don't have stale pages being served
-        sh "docker -H ${CNX_STAGING_DOCKER_HOST} service update --restart-condition=any staging_http-cache"
+        // FIXME: This is a hack to restart a service, because docker service doesn't support single service restart
+        sh "docker -H ${CNX_STAGING_DOCKER_HOST} service scale staging_http-cache=0"
+        sh "docker -H ${CNX_STAGING_DOCKER_HOST} service scale staging_http-cache=1"
       }
     }
     stage('Run Functional Tests'){
