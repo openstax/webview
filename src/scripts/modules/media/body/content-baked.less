@@ -317,9 +317,11 @@ h1.example-title .text {
       table-layout: fixed;
     }
     tr {
+      td, th {
+        padding: @table-cell-padding;
+      }
       td {
         vertical-align: middle;
-        padding: @table-cell-padding;
       }
       [data-valign="top"] {
         vertical-align: top;
