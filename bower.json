@@ -28,7 +28,8 @@
     "custom-event-polyfill": "0.3.0",
     "shave": "2.2.1",
     "jquery-ui": "1.12.1",
-    "imagesloaded": "4.1.4"
+    "imagesloaded": "4.1.4",
+    "requirejs-json": "^0.0.3"
   },
   "devDependencies": {
     "chai": "4.0.2",

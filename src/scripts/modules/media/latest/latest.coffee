@@ -1,6 +1,6 @@
 define (require) ->
   linksHelper = require('cs!helpers/links')
-  settings = require('settings')
+  settings = require('json!settings.json')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./latest-template')
   require('less!./latest')

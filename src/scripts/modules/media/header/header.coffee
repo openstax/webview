@@ -1,7 +1,7 @@
 define (require) ->
   _ = require('underscore')
   session = require('cs!session')
-  settings = require('settings')
+  settings = require('json!settings.json')
   linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')

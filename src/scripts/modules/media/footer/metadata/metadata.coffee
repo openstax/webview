@@ -2,7 +2,7 @@ define (require) ->
   _ = require('underscore')
   linksHelper = require('cs!helpers/links')
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
   subjects = require('cs!collections/subjects')
   FooterTabView = require('cs!modules/media/footer/inherits/tab/tab')
   template = require('hbs!./metadata-template')

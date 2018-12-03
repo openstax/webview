@@ -1,6 +1,6 @@
 define (require) ->
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
 
   # Class to handle loading analytics scripts and wrapping
   # handlers around them so that modules don't have to

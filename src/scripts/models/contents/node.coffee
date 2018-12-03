@@ -5,7 +5,7 @@
 define (require) ->
   $ = require('jquery')
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
   linksHelper = require('cs!helpers/links')
   require('backbone-associations')
   session = require('cs!session')

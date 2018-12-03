@@ -1,7 +1,7 @@
 define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
   trim = require('cs!helpers/handlebars/trim')
 
   shortcodes = settings.shortcodes

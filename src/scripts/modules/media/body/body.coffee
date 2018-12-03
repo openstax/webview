@@ -13,7 +13,7 @@ define (require) ->
   SimModal = require('cs!./embeddables/modals/sims/sims')
   FeaturedBook = require('cs!models/featured-openstax-book')
   template = require('hbs!./body-template')
-  settings = require('settings')
+  settings = require('json!settings.json')
   analytics = require('cs!helpers/handlers/analytics')
   require('less!./body')
 

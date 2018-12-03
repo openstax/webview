@@ -1,6 +1,6 @@
 define (require) ->
   session  = require('cs!session')
-  settings = require('settings')
+  settings = require('json!settings.json')
   SiteStatusView = require('cs!../../header/site-status/site-status')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./header-template')

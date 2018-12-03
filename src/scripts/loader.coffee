@@ -4,7 +4,7 @@ define (require) ->
   require('less!../styles/main')
   $ = require('jquery')
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
   session = require('cs!session')
   analytics = require('cs!helpers/handlers/analytics')
   router = require('cs!router')

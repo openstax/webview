@@ -1,6 +1,6 @@
 define (require) ->
 
-  settings = require('settings')
+  settings = require('json!settings.json')
   exercisesport = if settings.exercises.port then ":#{settings.exercises.port}" else ''
   exercises = "#{location.protocol}//#{settings.exercises.host}#{exercisesport}"
   renderMath = ($parent) ->

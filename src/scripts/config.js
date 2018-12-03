@@ -7,6 +7,7 @@
       // ## Requirejs plugins
       text: '../../bower_components/requirejs-text/text',
       hbs: '../../bower_components/require-handlebars-plugin/hbs',
+      json: '../../bower_components/requirejs-json/json',
 
       // ## Google Analytics
       analytics: 'https://www.google-analytics.com/analytics',

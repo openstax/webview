@@ -149,7 +149,7 @@ module.exports = (grunt) ->
               'cs!helpers/backbone/views/editable'
             ]
             exclude: ['coffee-script', 'less/normalize']
-            excludeShallow: ['settings']
+            excludeShallow: ['json!settings.json']
           }]
 
           done: (done, output) ->
@@ -194,7 +194,7 @@ module.exports = (grunt) ->
           '!dist/scripts/main.js'
           '!dist/scripts/main.js.map'
           '!dist/scripts/require.js'
-          '!dist/scripts/settings.js'
+          '!dist/scripts/settings.json'
           '!dist/scripts/aloha.js'
         ]
         filter: 'isFile'
@@ -253,8 +253,7 @@ module.exports = (grunt) ->
       dist:
         options:
           # Does not work for locale due to the templated link to dictionary.ftl
-          # Does not work for settings.js because the real settings.js is added later
-          assets: [ '{fonts,images,scripts,styles}/**/!(settings.js)' ]
+          assets: [ '{fonts,images,scripts,styles}/**/*.js' ]
           baseDir: './dist/'
           separator: '.cache.'
         src: [ 'dist/*.html' ]
@@ -267,7 +266,7 @@ module.exports = (grunt) ->
           level: 9
         expand: true
         cwd: 'dist/'
-        src: ['**/{*.{html,xml,css,svg,otf,ttf,ftl},!(settings).js,!(require.js).map}']
+        src: ['**/{*.{html,xml,css,svg,otf,ttf,ftl},*.js,!(require.js).map}']
         dest: 'dist/'
         rename: (dest, src) -> "#{dest}#{src}.gz"
 

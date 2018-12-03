@@ -1,5 +1,5 @@
 define (require) ->
-  settings = require('settings')
+  settings = require('json!settings.json')
   BaseView = require('cs!helpers/backbone/views/base')
   Licenses = require('cs!collections/licenses')
   template = require('hbs!./license-template')

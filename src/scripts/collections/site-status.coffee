@@ -1,6 +1,6 @@
 define (require) ->
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
   SiteStatusModel = require('cs!models/site-status')
 
   archiveport = if settings.cnxarchive.port then ":#{settings.cnxarchive.port}" else ''

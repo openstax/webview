@@ -1,7 +1,7 @@
 define (require) ->
   _ = require('underscore')
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
 
   archiveport = if settings.cnxarchive.port then ":#{settings.cnxarchive.port}" else ''
   archive = "#{location.protocol}//#{settings.cnxarchive.host}#{archiveport}"

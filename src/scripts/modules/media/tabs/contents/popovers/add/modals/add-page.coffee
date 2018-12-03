@@ -1,7 +1,7 @@
 define (require) ->
   $ = require('jquery')
   _ = require('underscore')
-  settings = require('settings')
+  settings = require('json!settings.json')
   linksHelper = require('cs!helpers/links')
   router = require('cs!router')
   searchResults = require('cs!models/search-results')

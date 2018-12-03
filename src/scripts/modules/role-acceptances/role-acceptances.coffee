@@ -1,7 +1,7 @@
 define (require) ->
   $ = require('jquery')
   _ = require('underscore')
-  settings = require('settings')
+  settings = require('json!settings.json')
   BaseView = require('cs!helpers/backbone/views/base')
   RoleAcceptances = require('cs!models/role-acceptances')
   template = require('hbs!./role-acceptances-template')

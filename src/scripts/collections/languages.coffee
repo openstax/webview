@@ -1,7 +1,7 @@
 define (require) ->
   $ = require('jquery')
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
   AvailableLanguage = require('cs!models/available-language')
 
   archiveport = if settings.cnxarchive.port then ":#{settings.cnxarchive.port}" else ''

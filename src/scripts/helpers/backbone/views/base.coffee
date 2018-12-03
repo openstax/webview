@@ -2,7 +2,7 @@ define (require) ->
   $ = require('jquery')
   _ = require('underscore')
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
   linksHelper = require('cs!helpers/links.coffee')
   locale = require('cs!helpers/locale.coffee')
   stripTags = require('cs!../../strip-tags.coffee')

@@ -7,9 +7,9 @@ if [[ $0 != "-bash" ]]; then
 fi
 
 # Write the settings.js file
-gen-settings-from-env > src/scripts/settings.js
+gen-settings-from-env > src/scripts/settings.json
 
 # If dist exists, copy the file there as well
-if [ -f dist/scripts/settings.js ]; then
-  cp src/scripts/settings.js dist/scripts/settings.js
+if [ -f dist/scripts/settings.json ]; then
+  cp src/scripts/settings.json dist/scripts/settings.json
 fi

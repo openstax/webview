@@ -1,6 +1,6 @@
 define (require) ->
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
 
   openstaxcmsport = if settings.openstaxcms.port then ":#{settings.openstaxcms.port}" else ''
   openstaxcms = "#{location.protocol}//#{settings.openstaxcms.host}#{openstaxcmsport}"

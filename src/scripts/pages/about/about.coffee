@@ -1,5 +1,5 @@
 define (require) ->
-  settings = require('settings')
+  settings = require('json!settings.json')
   BaseView = require('cs!helpers/backbone/views/base')
   MainPageView = require('cs!modules/main-page/main-page')
   DefaultView = require('cs!./default/default')

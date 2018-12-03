@@ -4,7 +4,7 @@ define (require) ->
   router = require('cs!router')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./breadcrumbs-template')
-  settings = require('settings')
+  settings = require('json!settings.json')
   require('less!./breadcrumbs')
 
   return class SearchResultsBreadcrumbsView extends BaseView

@@ -2,7 +2,7 @@ define (require) ->
   $ = require('jquery')
   _ = require('underscore')
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
   Collection = require('cs!models/contents/collection')
   Page = require('cs!models/contents/page')
 

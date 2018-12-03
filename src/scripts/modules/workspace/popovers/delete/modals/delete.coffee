@@ -2,7 +2,7 @@ define (require) ->
   $ = require('jquery')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./delete-template')
-  settings = require('settings')
+  settings = require('json!settings.json')
   require('less!./delete')
 
   authoringport = if settings.cnxauthoring.port then ":#{settings.cnxauthoring.port}" else ''

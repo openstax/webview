@@ -7,7 +7,7 @@ define (require) ->
   Content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
   MainPageView = require('cs!modules/main-page/main-page')
-  settings = require('settings')
+  settings = require('json!settings.json')
 
   ContentsView = require('cs!modules/media/tabs/contents/contents')
 

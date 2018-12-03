@@ -5,7 +5,7 @@ define (require) ->
   router = require('cs!router')
   EditableView = require('cs!helpers/backbone/views/editable')
   template = require('hbs!./title-template')
-  settings = require('settings')
+  settings = require('json!settings.json')
   socialMedia = require('cs!helpers/socialmedia.coffee')
   linksHelper = require('cs!helpers/links.coffee')
   require('less!./title')

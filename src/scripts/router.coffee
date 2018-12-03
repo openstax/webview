@@ -1,6 +1,6 @@
 define (require) ->
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
   linksHelper = require('cs!helpers/links')
   session = require('cs!session')
   analytics = require('cs!helpers/handlers/analytics')

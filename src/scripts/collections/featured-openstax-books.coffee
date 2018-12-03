@@ -1,7 +1,7 @@
 define (require) ->
   $ = require('jquery')
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
   FeaturedBook = require('cs!models/featured-openstax-book')
 
   openstaxcmsport = if settings.openstaxcms.port then ":#{settings.openstaxcms.port}" else ''

@@ -1,6 +1,6 @@
 define (require) ->
   Backbone = require('backbone')
-  settings = require('settings')
+  settings = require('json!settings.json')
 
   authoringport = if settings.cnxauthoring.port then ":#{settings.cnxauthoring.port}" else ''
   AUTHORING = "#{location.protocol}//#{settings.cnxauthoring.host}#{authoringport}"
