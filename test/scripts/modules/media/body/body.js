@@ -6,7 +6,7 @@ describe('MediaBodyView tests', function () {
   beforeEach(function (done) {
     this.timeout(10000);
 
-    require(['jquery', 'settings', 'cs!modules/media/body/body', 'cs!configs/embeddables'],
+    require(['jquery', 'json!settings.json', 'cs!modules/media/body/body', 'cs!configs/embeddables'],
       // jshint -W072
       // Because it complains about this callback having too many arguments
       function (jQuery, settings, MediaBodyView, embeddablesConfig) {
