@@ -3,6 +3,7 @@ define (require) ->
   linksHelper = require('cs!helpers/links')
   Backbone = require('backbone')
   settings = require('json!settings.json')
+  allLanguages = require('cs!configs/languages')
   subjects = require('cs!collections/subjects')
   FooterTabView = require('cs!modules/media/footer/inherits/tab/tab')
   template = require('hbs!./metadata-template')
@@ -20,8 +21,8 @@ define (require) ->
     template: template
     templateHelpers: () ->
       model = super()
-      model.languages = settings.languages
-      model.languageName = settings.languages[model.language]
+      model.languages = allLanguages
+      model.languageName = allLanguages[model.language]
       model.subjectsList = subjects.list
       model.url = linksHelper.getModelPath(model, true)
       model.printStyles =

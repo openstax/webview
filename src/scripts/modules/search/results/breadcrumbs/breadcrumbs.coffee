@@ -5,13 +5,14 @@ define (require) ->
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./breadcrumbs-template')
   settings = require('json!settings.json')
+  allLanguages = require('cs!configs/languages')
   require('less!./breadcrumbs')
 
   return class SearchResultsBreadcrumbsView extends BaseView
     template: template
     templateHelpers:
       authorList: () -> @model.get('results').auxiliary.authors
-      languages: () -> settings.languages
+      languages: () -> allLanguages
 
     events:
       'click .remove': 'removeBreadcrumb'

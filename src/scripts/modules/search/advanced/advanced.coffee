@@ -4,6 +4,7 @@ define (require) ->
   settings = require('json!settings.json')
   router = require('cs!router')
   SearchHeaderView = require('cs!../header/header')
+  allLanguages = require('cs!configs/languages')
   BaseView = require('cs!helpers/backbone/views/base')
   template = require('hbs!./advanced-template')
   availableLanguages = require('cs!collections/languages')
@@ -38,7 +39,7 @@ define (require) ->
       languages: () ->
         if availableLanguages.models?
           return availableLanguages.models
-        return settings.languages
+        return allLanguages
       filtered: () ->
         if availableLanguages.models? then return true else false
       years: [(new Date).getFullYear()..1999]

@@ -2,6 +2,7 @@ define (require) ->
   $ = require('jquery')
   Backbone = require('backbone')
   settings = require('json!settings.json')
+  allLanguages = require('cs!configs/languages')
   AvailableLanguage = require('cs!models/available-language')
 
   archiveport = if settings.cnxarchive.port then ":#{settings.cnxarchive.port}" else ''
@@ -14,7 +15,6 @@ define (require) ->
 
     parse: (response) ->
       languages = response.languages
-      allLanguages = settings.languages
       availableLanguages = []
       _.each languages, (language) ->
         if language[0]?
