@@ -24,8 +24,8 @@
 main-splash-head = Discover learning materials in an Open Space.
 
 main-splash-content =
-  | View and share free educational material in small modules that can
-  | be organized as courses, books, reports or other academic assignments.
+  | View and share free educational material that can
+  | be organized as books or other academic assignments.
 
 main-learn-more = Learn More
 
