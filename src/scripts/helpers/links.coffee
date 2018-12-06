@@ -128,6 +128,6 @@ define (require) ->
 
     offsetHash: () ->
       $pinnable = $('.pinnable')
-      obscured = $pinnable.height() + 100
+      obscured = $pinnable.height() + 150
       top = $(window.location.hash)?.offset()?.top
       $(window).scrollTop(top - obscured) if top
