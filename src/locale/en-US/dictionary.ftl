@@ -239,10 +239,10 @@ search-header = Welcome to the OpenStax CNX Library
 
 search-content =
   | The content in OpenStax CNX comes in two formats:
-  | <strong>Pages</strong>, which are like
-    small "knowledge chunks,"
-  | and <strong>Books</strong>, which are groups of Pages.
-  | Our open license allows for free use and reuse of all our content.
+  | <strong>modules</strong>, which are like small "knowledge chunks,"
+  | and <strong>collections</strong>, which are groups of modules
+  | structured into books or course notes, or for other uses. Our open
+  | license allows for free use and reuse of all our content.
 
 search-pages = Pages: { $count }
 
