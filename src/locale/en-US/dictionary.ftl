@@ -240,7 +240,7 @@ search-header = Welcome to the OpenStax CNX Library
 search-content =
   | The content in OpenStax CNX comes in two formats:
   | <strong>Pages</strong>, which are like
-    small "knowledge chunks,"
+  |  small "knowledge chunks,"
   | and <strong>Books</strong>, which are groups of Pages.
   | Our open license allows for free use and reuse of all our content.
 
