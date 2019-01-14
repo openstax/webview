@@ -50,9 +50,7 @@ define (require) ->
     defaultPage: ->
       result = 1
       if @isBook()
-        resultPage = @getPage(result)
-        if (resultPage != '')
-          result += 1 while resultPage.get('title').match(/Preface/)
+        result += 1 while @getPage(result).get('title').match(/Preface/)
       return result
 
     parse: (response, options = {}) ->
