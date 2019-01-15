@@ -54,7 +54,6 @@ define (require) ->
       @listenTo(@collection, 'reset', @render)
 
     onRender: () ->
-      $("#alert-danger").hide()
       @regions.header.show(new SearchHeaderView())
       $.each(@criteria, (name, value) =>
         $item = @$el.find("[name^=\"#{name}\"]")
@@ -69,11 +68,14 @@ define (require) ->
       query = @formatQuery(values)
 
       @search(query)
-      if !query
-        $("#alert-danger").show()
 
     search: (query) ->
-      router.navigate("search?q=#{query}", {trigger: true})
+      if !query
+        $("#alert-danger").show()
+      else if query == 'sort:popularity' || query == 'sort:pubDate'
+          $("#alert-danger").show()
+      else if query
+        router.navigate("search?q=#{query}", {trigger: true})
 
     formatQuery: (obj) ->
       format = (obj) ->
