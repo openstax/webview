@@ -54,7 +54,6 @@ ul, ol {
 iframe {
   display: block;
   margin: 3rem auto;
-  width: 100%;
 }
 
 .centered-text {
@@ -243,8 +242,8 @@ h1.example-title .text {
   }
 }
 
-.os-eob {
-  .os-solution-container {
+.os-eob, .os-eos {
+  .os-solution-container, .os-problem-container {
     img {
       display: block;
     }
@@ -258,6 +257,15 @@ h1.example-title .text {
   [data-type="solution"],
   .solution {
     border-top: 0.1rem solid @gray-lighter;
+  }
+}
+
+[data-type="example"] {
+  .os-solution-container {
+    margin-top: 1rem;
+    p {
+      margin-top: 1rem;
+    }
   }
 }
 
@@ -418,6 +426,10 @@ h1.example-title .text {
       margin-top: 15px;
     }
   }
+}
+
+.os-reference-number {
+  font-weight: bold;
 }
 
 .os-eoc [data-type="exercise"],
