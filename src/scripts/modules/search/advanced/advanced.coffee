@@ -54,7 +54,6 @@ define (require) ->
       @listenTo(@collection, 'reset', @render)
 
     onRender: () ->
-      $("#alert-danger").hide()
       @regions.header.show(new SearchHeaderView())
       $.each(@criteria, (name, value) =>
         $item = @$el.find("[name^=\"#{name}\"]")
@@ -66,11 +65,16 @@ define (require) ->
 
       $form = $(e.currentTarget)
       values = $form.serializeArray()
-      query = @formatQuery(values)
-
-      @search(query)
-      if !query
+      if @validateSearchable(values)
+        query = @formatQuery(values)
+        @search(query)
+      else
         $("#alert-danger").show()
+
+    validateSearchable: (values) ->
+      values
+        .filter (field) -> !!field.value?.length
+        .some (field) -> field.name != "sort"
 
     search: (query) ->
       router.navigate("search?q=#{query}", {trigger: true})
