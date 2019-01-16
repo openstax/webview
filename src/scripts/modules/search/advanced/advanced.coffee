@@ -69,12 +69,10 @@ define (require) ->
 
       @search(query)
 
-    search: (query) ->
-      if !query
+    search: (query,values) ->
+      if !values || values == 'sort:popularity' || values == 'sort:pubDate'
         $("#alert-danger").show()
-      else if query == 'sort:popularity' || query == 'sort:pubDate'
-          $("#alert-danger").show()
-      else if query
+      else
         router.navigate("search?q=#{query}", {trigger: true})
 
     formatQuery: (obj) ->
