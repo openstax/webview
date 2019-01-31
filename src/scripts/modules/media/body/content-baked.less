@@ -482,22 +482,43 @@ h1.example-title .text {
   margin-top: 1rem;
 }
 
-figure.scaled-down {
-  width: 60%;
-  margin: auto;
-
-  ~ .os-caption-container {
+figure {
+  &.scaled-down {
     width: 60%;
     margin: auto;
+
+    ~ .os-caption-container {
+      width: 60%;
+      margin: auto;
+    }
+  }
+  &.scaled-down-30 {
+    width: 30%;
+    margin: auto;
+
+    ~ .os-caption-container {
+      width: 30%;
+      margin: auto;
+    }
   }
 }
 
-:not(figure) > [data-type="media"].scaled-down {
-  text-align: center;
-  display: block;
+:not(figure) > [data-type="media"] {
+  &.scaled-down {
+    text-align: center;
+    display: block;
 
-  img {
-    width: 60%
+    img {
+      width: 60%;
+    }
+  }
+  &.scaled-down-30 {
+    text-align: center;
+    display: block;
+
+    img {
+      width: 30%;
+    }
   }
 }
 
