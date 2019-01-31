@@ -180,8 +180,6 @@ figure:not([data-orient="vertical"]) {
   margin-top: 0;
   padding: 0rem 1.5rem 1rem 1.5rem;
   border-bottom: 0.2rem solid @gray-lighter;
-
-
 }
 .body(note) {
   border-top: none;
@@ -246,6 +244,17 @@ h1.example-title .text {
   .os-solution-container, .os-problem-container {
     img {
       display: block;
+    }
+  }
+}
+
+[data-type="exercise"] {
+  [data-type="problem"] {
+    p:first-of-type {
+      display: inline;
+      a {
+        font-weight: bold;
+      }
     }
   }
 }
