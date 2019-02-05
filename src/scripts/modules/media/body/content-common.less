@@ -1,5 +1,6 @@
 @table-cell-padding: 1em;
 @base-font: 14px;
+
 // Styles for the contents of a page.
 // This should **only** be imported inside a containing selector like:
 //
@@ -25,12 +26,14 @@ p {
   }
 }
 
-a:not([role=button]) {
+a:not([role="button"]) {
   text-decoration: underline;
 }
 
 img {
   max-width: 100%;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 pre {
@@ -69,7 +72,10 @@ figure {
   }
 
   // do not wrap this in a .media so it applies to editing in Aloha
-  img { max-width: 100%; }
+  img {
+    max-width: 100%;
+    padding: 0; //overrides top&bott padding on img, all img EXCEPT those in figure tags should have 1em top&bott padding
+  }
 
   > [data-type="media"],
   > .media {
@@ -83,10 +89,10 @@ figure {
     counter-increment: subfigure;
 
     &:not(.ui-has-child-figcaption)::after {
-      position: relative;
       display: block;
-      text-align: center;
+      position: relative;
       font-weight: bold;
+      text-align: center;
       // content: '(' counter(subfigure,lower-alpha) ')';
     }
 
@@ -96,8 +102,8 @@ figure {
 // By default, figures are laid out horizontally
 // unless they have the data-orient="vertical" attribute.
 figure:not([data-orient="vertical"]) {
-  position: relative;
   display: table;
+  position: relative;
   // width: 100%;
   top: 0;
   table-layout: fixed;
@@ -109,18 +115,19 @@ figure:not([data-orient="vertical"]) {
 
   > figcaption {
     display: table-caption;
-    caption-side: bottom;
     margin-bottom: 1.5rem;
+    caption-side: bottom;
   }
 
   // Subfigures
   > figure {
     display: table-cell;
 
-    > figcaption { display: block; }
+    > figcaption {
+      display: block;
+    }
   }
 }
-
 
 figure[data-orient="vertical"] {
   // The display defaults are correct for figures and subfigures
@@ -132,16 +139,14 @@ figure[data-orient="vertical"] {
   font-weight: bold;
 }
 
-// Teacher's Edition
+// Teachers Edition
 .os-teacher {
   display: none;
 }
 
-
 // ----------------------
 // Lists
 // ----------------------
-
 
 // A list with a title
 [data-type="list"],
@@ -154,16 +159,20 @@ figure[data-orient="vertical"] {
   }
 }
 
-
 .footnote {
   font-size: 1rem;
 }
 
+[data-type="footnote-ref"] {
+  padding-left: 27px;
+  text-indent: -27px;
+}
+
 .abstract {
   position: relative;
-  background-color: @gray-lightest;
-  padding: 4.5rem 1.5rem 1.5rem 1.5rem;
   margin: 3rem 6rem 0 6rem;
+  padding: 4.5rem 1.5rem 1.5rem 1.5rem;
+  background-color: @gray-lightest;
 
   ul {
     margin: 1.5rem 0 0 0;
@@ -172,16 +181,15 @@ figure[data-orient="vertical"] {
       position: absolute;
       top: 1.5rem;
       left: 1.5rem;
+      color: @gray;
       font-size: 1.5rem;
       font-weight: bold;
-      color: @gray;
-      text-transform: uppercase;
       letter-spacing: 0.1rem;
+      text-transform: uppercase;
       content: "Abstract";
     }
   }
 }
-
 
 // --------------------------------
 // Blockish things (note, example, exercise)
@@ -199,30 +207,36 @@ figure[data-orient="vertical"] {
   // - `.label()` : styling for the label part; @has-title is true if there is a title child
   // - `.title()` : styling for the title (if there is one since they are optional)
   // - `.body()` : styling for the rest
-  .style(@type) { }
-  .default-label(@type; @has-title) { }
-  .title(@type) { display: inline-block; }
-  .body(@type) { }
 
+  // .style(@type) { }
+  // .default-label(@type; @has-title) { }
+  .title(@type) {
+    display: inline-block;
+  }
+  // .body(@type) { }
 
   // Style the note
-  .default-label(note; false) { content: 'Note'; }
-  .default-label(note; true)  { content: 'Note: '; }
+  .default-label(note; false) {
+    content: "Note";
+  }
+  .default-label(note; true) {
+    content: "Note: ";
+  }
   .style(note) {
     margin: 3rem 6rem 0 6rem;
     padding: 1.5rem;
     background-color: @gray-lightest;
 
     @media (max-width: @screen-xs-max) {
-      margin-left: 0;
       margin-right: 0;
+      margin-left: 0;
     }
   }
   .title(note) {
     color: @gray;
     font-size: 1.5rem;
-    text-transform: uppercase;
     letter-spacing: 0.1rem;
+    text-transform: uppercase;
   }
   .body(note) {
     padding: 0.5rem 1.5rem;
@@ -231,8 +245,13 @@ figure[data-orient="vertical"] {
   }
 
   // Style the example
-  .default-label(example; false) { content: 'Example'; }
-  .default-label(example; true)  { content: 'Example: '; }
+  .default-label(example; false) {
+    content: "Example";
+  }
+  .default-label(example; true)  {
+    content: "Example: ";
+  }
+
   // .style(example) { margin-top: 3rem; }
   // .title(example) {
   //   padding: 0.1em 1em;
@@ -241,15 +260,27 @@ figure[data-orient="vertical"] {
   //   background-color: @gray;
   // }
   // Style the body of an example the same as a note
-  .body(example) { .body(note); }
+
+  .body(example) {
+    .body(note);
+  }
 
   //Style the exercise the same as an example
-  .default-label(exercise; false) { content: 'Exercise'; }
-  .default-label(exercise; true)  { content: 'Exercise: '; }
-  .style(exercise) { .style(example); }
-  .title(exercise) { .title(example); }
-  .body(exercise)  { .body(example); }
-
+  .default-label(exercise; false) {
+    content: "Exercise";
+  }
+  .default-label(exercise; true)  {
+    content: "Exercise: ";
+  }
+  .style(exercise) {
+    .style(example);
+  }
+  .title(exercise) {
+    .title(example);
+  }
+  .body(exercise)  {
+    .body(example);
+  }
 }
 
 blockquote {
@@ -275,29 +306,35 @@ blockquote {
 
       > .ui-toggle {
         outline: 0;
-        text-align: center;
         font-weight: bold;
+        text-align: center;
       }
     }
 
     &:not(.ui-solution-visible) {
-      > .ui-toggle-wrapper > button.ui-toggle::before { content: '[Show Solution]'; }
-      > section { display: none; }
+      > .ui-toggle-wrapper > button.ui-toggle::before {
+        content: "[Show Solution]";
+      }
+      > section {
+        display: none;
+      }
     }
 
     &.ui-solution-visible {
-      > .ui-toggle-wrapper > button.ui-toggle::before { content: '[Hide Solution]'; }
+      > .ui-toggle-wrapper > button.ui-toggle::before {
+        content: "[Hide Solution]";
+      }
     }
   }
 
   &.check-understanding [data-type="title"]::before,
-  &[data-type=check-understanding] .title::before {
+  &[data-type="check-understanding"] .title::before {
     margin-right: 0;
     content: "";
   }
 
   &.conceptual-questions [data-type="problem"],
-  &[data-type=conceptual-questions] .problem {
+  &[data-type="conceptual-questions"] .problem {
     border-top: none;
 
     p {
@@ -306,15 +343,15 @@ blockquote {
   }
 
   &.problems-exercises,
-  &[data-type=problems-exercises] {
+  &[data-type="problems-exercises"] {
 
     [data-type="problem"]::before,
     [data-type="solution"]::before,
     .problem::before, .solution::before {
-      font-weight: bold;
       color: @gray;
-      text-transform: uppercase;
+      font-weight: bold;
       letter-spacing: 0.1rem;
+      text-transform: uppercase;
     }
 
     [data-type="problem"]::before,
@@ -322,7 +359,7 @@ blockquote {
       content: "Problem";
     }
 
-    [data-type="solution"]::before
+    [data-type="solution"]::before,
     .solution::before {
       content: "Solution";
     }
@@ -342,10 +379,14 @@ blockquote {
 // Tables
 // --------------------------------------------------
 
+.table-wrapper {
+  overflow-x: auto;
+}
+
 table {
-  margin-top: 6rem;
   width: 100%;
   max-width: 100%;
+  margin-top: 6rem;
   margin-bottom: @line-height-computed;
   background-color: @table-bg;
   counter-increment: table;
@@ -377,15 +418,19 @@ table {
 
   // Cells
   thead,
-  tbody,
+  tbody {
+    tr > td[data-align="right"]{
+      text-align: right;
+    }
+  }
   tfoot {
     > tr {
       > th,
       > td {
         padding: @table-cell-padding;
+        border-top: 0.1rem solid @table-border-color;
         line-height: @line-height-base;
         vertical-align: top;
-        border-top: 0.1rem solid @table-border-color;
       }
     }
   }
@@ -393,10 +438,10 @@ table {
   // Bottom align for column headings
   thead > tr > th,
   thead > tr > td {
-    vertical-align: bottom;
     border-bottom: 0.2rem solid @table-border-color;
     font-weight: bold;
     text-align: left;
+    vertical-align: bottom;
   }
 
   // Remove top border from thead by default
@@ -439,4 +484,11 @@ table {
   [data-type="definition"] {
     margin: 1rem 3rem;
   }
+}
+
+//
+// Equations
+// --------------------------------------------------
+[data-type="equation"] {
+  overflow: auto;
 }
