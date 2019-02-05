@@ -24,8 +24,8 @@
 main-splash-head = Discover learning materials in an Open Space.
 
 main-splash-content =
-  | View and share free educational material in small modules that can
-  | be organized as courses, books, reports or other academic assignments.
+  | View and share free educational material that can
+  | be organized as books or other academic assignments.
 
 main-learn-more = Learn More
 
@@ -239,10 +239,10 @@ search-header = Welcome to the OpenStax CNX Library
 
 search-content =
   | The content in OpenStax CNX comes in two formats:
-  | <strong>modules</strong>, which are like small "knowledge chunks,"
-  | and <strong>collections</strong>, which are groups of modules
-  | structured into books or course notes, or for other uses. Our open
-  | license allows for free use and reuse of all our content.
+  | <strong>Pages</strong>, which are like
+  |  small "knowledge chunks,"
+  | and <strong>Books</strong>, which are groups of Pages.
+  | Our open license allows for free use and reuse of all our content.
 
 search-pages = Pages: { $count }
 
@@ -655,6 +655,9 @@ textbook-view-search-this-book =
   [html/placeholder] Search this book
 
 textbook-view-contents = Contents
+
+textbook-view-contents-aria-label =
+  [html/aria-label] Click to Show the Table of Contents
 
 textbook-view-books = Books
 

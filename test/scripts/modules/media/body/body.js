@@ -37,7 +37,7 @@ describe('MediaBodyView tests', function () {
       for (var exIndex = exStart; exIndex < exStart + 2; exIndex++) {
         var expectedItemCode = expectedItemCodes[exIndex];
         var expectedUrl = exercisesServer + '/api/exercises?q=' +
-          expectedAttribute + ':"' + expectedItemCode + '"';
+          expectedAttribute + ':"' + encodeURIComponent(expectedItemCode) + '"';
         var exerciseLink = $(exercises[exIndex]).find('a');
         var embeddableItem = mediaBodyView.getEmbeddableItem(embedType, exerciseLink);
         embeddableItem.itemCode.should.equal(expectedItemCode);

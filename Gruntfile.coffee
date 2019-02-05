@@ -86,11 +86,11 @@ module.exports = (grunt) ->
         browser: true
         devel: false
 
-      source: ['src/**/*.js', 'test/**/*.js']
+      source: ['src/**/*.js', 'test/*/**/*.js']
 
     # JS Beautifier
     jsbeautifier:
-      files: ['src/**/*.js', 'test/**/*.js']
+      files: ['src/**/*.js', 'test/*/**/*.js']
       options:
         mode: "VERIFY_ONLY"
         js:
@@ -253,7 +253,8 @@ module.exports = (grunt) ->
       dist:
         options:
           # Does not work for locale due to the templated link to dictionary.ftl
-          assets: [ '{fonts,images,scripts,styles}/**/*' ]
+          # Does not work for settings.js because the real settings.js is added later
+          assets: [ '{fonts,images,scripts,styles}/**/!(settings.js)' ]
           baseDir: './dist/'
           separator: '.cache.'
         src: [ 'dist/*.html' ]

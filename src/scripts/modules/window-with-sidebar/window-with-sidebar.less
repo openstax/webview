@@ -26,7 +26,6 @@
   > .main {
     .transition(~"width" @transition-style);
     display: inline-block;
-    width: ~"calc(100% -" @fudge ~")";
     @media (max-width: 640px) {
       display: block;
     }
@@ -37,6 +36,13 @@
       width: @sidebar-width;
       height: 100%;
       visibility: visible;
+
+      @media (max-width: 640px) {
+        width: 100%;
+        .table-of-contents.pinned {
+          max-width: 100%;
+        }
+      }
 
       > div {
         overflow-y: auto;

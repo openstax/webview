@@ -12,17 +12,18 @@
   > ul {
     margin: 0 0 3rem 0;
     padding: 0 0 0 3rem;
+    border-bottom: 0.1rem solid @gray-light;
+    color: @link-color;
     font-size: 0;
     list-style-type: none;
-    color: @link-color;
-    border-bottom: 0.1rem solid @gray-light;
 
     > li {
       display: inline-block;
-      padding: 0.7rem 1rem;
+      margin-top: 0.3rem;
       margin-right: 0.3rem;
-      font-size: 1.4rem;
+      padding: 0.7rem 1rem;
       background-color: @gray-lightest;
+      font-size: 1.4rem;
       cursor: pointer;
       .user-select(none);
 
@@ -31,24 +32,22 @@
         vertical-align: middle;
 
         &::after {
-          font-weight: bold;
           margin-left: 0.5rem;
-          vertical-align: top;
+          font-weight: bold;
           content: "+";
+          vertical-align: top;
         }
       }
 
       &:focus {
-        border-top: 0.1rem solid @brand-primary;
-        border-left: 0.1rem solid @brand-primary;
-        border-right: 0.1rem solid @brand-primary;
-        outline: 0;
+        outline: 1px;
+        outline-style: solid;
       }
 
       &.active,
       &.active > button {
-        color: @gray-lightest;
         background-color: @link-color;
+        color: @gray-lightest;
 
         > .tab-title::after {
           content: "\2212"; // &minus; (−)
@@ -65,30 +64,30 @@
 
   > .tab-content {
     display: none;
-    padding-bottom: 4rem;
     margin-bottom: 4rem;
-    background-color: white;
+    padding-bottom: 4rem;
     border-bottom: 0.1rem solid @gray-light;
+    background-color: white;
   }
 
   .book-page-toggle {
     position: absolute;
-    right: 0;
     top: 0;
+    right: 0;
 
     .btn {
-      color: black;
       border: 0.1rem solid @gray-lightest;
       background-color: white;
+      color: black;
       &:focus {
         border-color: lightblue;
       }
     }
 
     .active {
-      color: black;
       border: 0.1rem solid transparent;
       background-color: @gray-lightest;
+      color: black;
     }
   }
 }

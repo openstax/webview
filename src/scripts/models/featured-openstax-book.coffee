@@ -10,11 +10,17 @@ define (require) ->
       "&fields=cover_url,description,title,cnx_id" +
       "&cnx_id=#{@get('cnx_id')}"
 
+    parseDescription: (desc) ->
+      if !desc
+        'This book has no description.'
+      else
+        desc.replace(/<\/p>|<br?.>/g, " ").replace(/<(?:[^a.]|\s)*?>/g, "").trim()
+
     parse: (response, options) ->
       data = if response.items then response.items[0] else response
       parsed =
         title: data?.title
-        description: $(data?.description).text()
+        description: @parseDescription(data?.description)
         cover: data?.cover_url
         type: 'OpenStax Featured'
         id: data?.id.toString()

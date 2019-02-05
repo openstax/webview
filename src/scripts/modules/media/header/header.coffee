@@ -89,6 +89,8 @@ define (require) ->
     onRender: () ->
       if not @model.asPage()?.get('active') then return
 
+      if window.pageWasChangedWithKeyboard is true then @focusTitle()
+
       # IE doesn't like it being inside the button. Move it out.
       popoverView = new BookPopoverView
         model: @model
@@ -124,3 +126,11 @@ define (require) ->
       @pageTitle = @model.get('title')
       if @model.asPage()?
         @pageTitle = "#{@model.get('currentPage').get('title')} - #{@model.get('title')}"
+
+    focusTitle: () ->
+      toFocus = $(@$el[0]).find('.media-header .title h2')[0]
+      if @model.asPage()?.get('loaded') and toFocus
+        toFocus.setAttribute('tabindex', '-1')
+        toFocus.focus()
+        toFocus.removeAttribute('tabindex')
+        window.pageWasChangedWithKeyboard = false

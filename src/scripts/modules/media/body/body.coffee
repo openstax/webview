@@ -161,7 +161,7 @@ define (require) ->
 
           # Wrap solutions in a div so "Show/Hide Solutions" work
           $temp.find('.exercise .solution, [data-type="exercise"] [data-type="solution"]')
-          .wrapInner('<section class="ui-body">')
+          .wrapInner('<section class="ui-body" role="alert">')
           .prepend('''
             <div class="ui-toggle-wrapper">
               <button class="btn-link ui-toggle" title="Show/Hide Solution"></button>
@@ -445,6 +445,12 @@ define (require) ->
 
       @regions.about.append(new ContentsView({model: @model, static: true}))
 
+      # Wrap tables inside unbaked books with additional div so we can
+      # apply overflow-x: auto to them. Tables inside baked books are wrapped with .os-table
+      if !@model.asPage().isCollated()
+        $('.main-page table').each (index, table) ->
+          $(table).wrap('<div class="table-wrapper"></div>')
+
     changePage: (e) ->
       # Don't intercept cmd/ctrl-clicks intended to open a link in a new tab
       return if e.metaKey or e.which isnt 1
@@ -460,6 +466,8 @@ define (require) ->
     toggleSolution: (e) ->
       $solution = $(e.currentTarget).closest('.solution, [data-type="solution"]')
       $solution.toggleClass('ui-solution-visible')
+      $uiBody = $solution[0].getElementsByClassName('ui-body')[0]
+      $uiBodyLive = $solution[0].getElementsByClassName('ui-body-live')[0]
       if $solution.hasClass('ui-solution-visible')
         $solution.attr('aria-expanded',true)
         $solution.attr('aria-label',"hide solution")

@@ -7,6 +7,7 @@ define (require) ->
   Content = require('cs!models/content')
   BaseView = require('cs!helpers/backbone/views/base')
   MainPageView = require('cs!modules/main-page/main-page')
+  settings = require('settings')
 
   ContentsView = require('cs!modules/media/tabs/contents/contents')
 
@@ -25,7 +26,22 @@ define (require) ->
   return class MediaView extends BaseView
     key = []
     canonical: () ->
-      return linksHelper.getModelPath(@model, false)
+      urlScheme = window.location.protocol+"//"
+      uuid = @model.attributes.currentPage?.attributes?.canonical
+      mediatype = @model.attributes.mediaType
+      if uuid
+        pageId = @model.attributes.currentPage?.id
+      else
+        uuid = @model.attributes?.canonical
+        pageId = @model.id
+        if not uuid and mediatype is 'application/vnd.org.cnx.collection'
+          uuid =  @model.attributes.id
+          pageId = @model.attributes.currentPage?.id
+      if not uuid
+        url = "#{urlScheme}#{location.host}#{settings.root}contents/#{pageId}"
+      else
+        url = "#{urlScheme}#{location.host}#{settings.root}contents/#{uuid}:#{pageId}"
+      return url
 
     template: template
     regions:

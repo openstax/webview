@@ -1,11 +1,17 @@
-version: '3'
+version: '3.5'
 services:
   app:
-    volumes:
-    - ./src:/code/src
-    - ./conf:/code/conf
-    - ./dist:/code/dist
+    build:
+      args:
+        environment: dev
     environment:
-    - ENVIRONMENT=dev
-    ports:
-      - "8000:8000"
+      - ENVIRONMENT=dev
+    volumes:
+      - .:/code
+  setup-n-test:
+    command: bash -c "script/setup && script/test"
+    build:
+      context: .
+      target: base-system
+    volumes:
+      - .:/code

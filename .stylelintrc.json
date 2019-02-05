@@ -8,9 +8,6 @@
     ],
     "at-rule-name-case": "lower",
     "at-rule-name-space-after": "always",
-    "at-rule-semicolon-newline-after": [ "always", {
-      "severity": "warning"
-    } ],
     "at-rule-no-unknown": true,
     "block-opening-brace-newline-after": "always",
     "block-closing-brace-newline-before": [ "always", {
@@ -22,7 +19,9 @@
     } ],
     "color-no-invalid-hex": true,
     "comment-no-empty": true,
-    "declaration-block-no-duplicate-properties": true,
+    "declaration-block-no-duplicate-properties": [ true, {
+      "severity": "warning"
+    } ],
     "declaration-block-no-shorthand-property-overrides": true,
     "declaration-colon-space-before": "never",
     "declaration-colon-space-after": "always",

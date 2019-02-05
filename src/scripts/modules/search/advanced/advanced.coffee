@@ -65,9 +65,16 @@ define (require) ->
 
       $form = $(e.currentTarget)
       values = $form.serializeArray()
-      query = @formatQuery(values)
+      if @validateSearchable(values)
+        query = @formatQuery(values)
+        @search(query)
+      else
+        $("#alert-danger").show()
 
-      @search(query)
+    validateSearchable: (values) ->
+      values
+        .filter (field) -> !!field.value?.length
+        .some (field) -> field.name != "sort"
 
     search: (query) ->
       router.navigate("search?q=#{query}", {trigger: true})

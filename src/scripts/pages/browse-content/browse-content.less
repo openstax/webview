@@ -13,35 +13,31 @@
     margin-bottom: 2rem;
   }
 
-  > ul {
-    .make-row();
-    padding: 0;
+  > .search-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     margin-bottom: 3rem;
-    list-style-type: none;
-    text-align: center;
 
-    > li {
-      .make-lg-column(8);
-      display: inline-block;
-      padding: 2rem 0;
-      width: 33%;
+    > .search-category {
+      width: 250px;
+      margin: 2rem 3rem;
 
       > .medium-header {
-        margin-bottom: 1.5rem;
         width: 25rem;
-        font-weight: 300;
         margin: 0 auto 1.5rem auto;
+        font-weight: 300;
         text-align: left;
       }
 
       > .data {
         display: inline-block;
-        padding: 1rem 1.5rem;
         width: @block-width;
+        padding: 1rem 1.5rem;
+        background-color: @gray-medium;
+        color: @gray-lightest;
         font-weight: 300;
         text-align: left;
-        color: @gray-lightest;
-        background-color: @gray-medium;
       }
     }
   }

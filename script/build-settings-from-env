@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# See https://github.com/openstax/setup-scripts for details on this file
+
+if [[ $0 != "-bash" ]]; then
+  cd "$(dirname "$0")/.." || exit 111
+fi
+
+# Write the settings.js file
+gen-settings-from-env > src/scripts/settings.js
+
+# If dist exists, copy the file there as well
+if [ -f dist/scripts/settings.js ]; then
+  cp src/scripts/settings.js dist/scripts/settings.js
+fi

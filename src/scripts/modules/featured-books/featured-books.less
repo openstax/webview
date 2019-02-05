@@ -3,45 +3,45 @@
 
 .featured-books {
   .make-row();
-  padding: 3rem;
   margin: 0 !important; // Override bootstrap css
+  padding: 3rem;
   overflow: hidden;
 
   p {
-    font-weight: 300;
     color: @gray-dark;
+    font-weight: 300;
   }
 
   > h2 {
-    padding-bottom:2rem;
+    padding-bottom: 2rem;
   }
 
   > .books {
     position: relative;
-    margin-top: 20px;
     width: 100%;
+    margin-top: 20px;
     overflow: hidden;
 
     > .book {
       .make-sm-column(6);
       display: block;
       min-height: 182px;
-      margin-bottom: 3rem; // Add spacing between books when they're aligned vertically
+      margin-bottom: 3rem; // Add spacing between books when they are aligned vertically
       padding-bottom: 2rem;
 
       &::after {
-      	display: block;
+        display: block;
         height: 0;
         clear: both;
-      	font-size: 0;
-      	content: " ";
+        font-size: 0;
+        content: " ";
         visibility: hidden;
       }
 
       &:nth-child(2n+1) {
-        clear: left;
         padding-right: 1.5rem;
         padding-left: 0;
+        clear: left;
       }
 
       &:nth-child(2n) {
@@ -53,8 +53,8 @@
       }
 
       img {
-        float: left;
         margin-right: 2rem;
+        float: left;
         border: 0;
       }
 
@@ -62,30 +62,51 @@
         margin-bottom: 1rem;
 
         a {
-          font-weight: 300;
           color: @link-color;
+          font-weight: 300;
         }
       }
 
       p.description {
+        max-height: 60px;
+        text-align: justify;
         overflow: hidden;
+
+        &.extended {
+          max-height: 100%;
+        }
+
+        &:not(.extended).show-ellipsis {
+          position: relative;
+          &:after {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            padding-left: 5%;
+            background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), to(white), color-stop(50%, white));
+            background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+            background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+            background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+            content: "…";
+          }
+        }
       }
 
       .show-more-less {
-        display: none;
         float: right;
 
         > .more::after {
-          content: '▸';
           margin-left: 0.5rem;
+          content: "▸";
         }
 
         > .less {
           display: none;
 
           &::after {
-            content: '▴';
             margin-left: 0.5rem;
+            content: "▴";
           }
         }
       }
