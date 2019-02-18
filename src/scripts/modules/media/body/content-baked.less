@@ -248,6 +248,13 @@ h1.example-title .text {
   }
 }
 
+.review-questions,
+.os-review-questions-container {
+  [type="a"] {
+    list-style-type: upper-alpha;
+  }
+}
+
 [data-type="exercise"] {
   [data-type="problem"] {
     p:first-of-type {
@@ -258,10 +265,6 @@ h1.example-title .text {
       }
     }
   }
-}
-
-.review-questions [type="a"] {
-  list-style-type: upper-alpha;
 }
 
 // solutions of notes, exercises, and examples have a top-border to separate the solution
