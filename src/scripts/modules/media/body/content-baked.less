@@ -220,6 +220,10 @@ h1.example-title .text {
   text-decoration: none;
 }
 
+[data-type="composite-page"] [data-type="solution"] p {
+  display: inline;
+}
+
 [data-type="note"],
 .note     { .make-block(note); }
 [data-type="example"],
@@ -263,7 +267,7 @@ h1.example-title .text {
 [data-type="exercise"] {
   [data-type="problem"] {
     p:first-of-type {
-      display: inline;
+      display: inline-block;
       a {
         font-weight: bold;
         margin-right: 0.5em;
