@@ -87,6 +87,9 @@ define (require) ->
       @listenTo(@model, 'change:currentPage.searchTitle', @render)
 
     onRender: () ->
+      #allows user to access 'skiptocontent' and header navigation when navigating from pg to pg in a book
+      $(':root').attr("tabindex",0).focus();
+
       if not @model.asPage()?.get('active') then return
 
       if window.pageWasChangedWithKeyboard is true then @focusTitle()
