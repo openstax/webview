@@ -88,7 +88,7 @@ define (require) ->
 
     onRender: () ->
       #allows user to access 'skiptocontent' and header navigation when navigating from pg to pg in a book
-      $(':root').attr("tabindex",0).focus();
+      $(':root').attr("tabindex",0).focus()
 
       if not @model.asPage()?.get('active') then return
 
