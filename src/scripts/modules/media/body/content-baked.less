@@ -259,14 +259,23 @@ h1.example-title .text {
   }
 }
 
+[data-type="composite-page"] {
+  [data-type="exercise"] {
+    [data-type="problem"] {
+      p:first-of-type {
+        a {
+          font-weight: bold;
+          margin-right: 0.5em;
+        }
+      }
+    }
+  }
+}
+
 [data-type="exercise"] {
   [data-type="problem"] {
     p:first-of-type {
       display: inline-block;
-      a {
-        font-weight: bold;
-        margin-right: 0.5em;
-      }
     }
   }
 }
