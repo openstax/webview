@@ -115,6 +115,10 @@ figure.splash.unnumbered {
   }
 }
 
+span[data-type="media"] img {
+  display: block;
+}
+
 .os-figure {
   display: table;
   margin: 3rem auto;
@@ -463,6 +467,18 @@ h1.example-title .text {
     > [data-type="title"],
     > .title {
       margin-top: 15px;
+    }
+  }
+
+  [data-type="solution"] {
+    ol {
+      display: inline-grid;
+    }
+    span[data-type="media"] {
+      display: block;
+    }
+    table {
+      margin-top: 0;
     }
   }
 }
