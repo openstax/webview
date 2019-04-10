@@ -263,14 +263,23 @@ h1.example-title .text {
   }
 }
 
+[data-type="composite-page"] {
+  [data-type="exercise"] {
+    [data-type="problem"] {
+      p:first-of-type {
+        a {
+          font-weight: bold;
+          margin-right: 0.5em;
+        }
+      }
+    }
+  }
+}
+
 [data-type="exercise"] {
   [data-type="problem"] {
     p:first-of-type {
       display: inline-block;
-      a {
-        font-weight: bold;
-        margin-right: 0.5em;
-      }
     }
   }
 }
@@ -449,6 +458,18 @@ h1.example-title .text {
     > [data-type="title"],
     > .title {
       margin-top: 15px;
+    }
+  }
+
+  [data-type="solution"] {
+    ol {
+      display: inline-grid;
+    }
+    span[data-type="media"] {
+      display: block;
+    }
+    table {
+      margin-top: 0;
     }
   }
 }
