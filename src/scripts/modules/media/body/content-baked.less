@@ -106,10 +106,12 @@ iframe {
   }
 }
 
-figure:not([data-orient="vertical"]).splash {
-  > figcaption {
-    display: block;
+figure.splash.unnumbered {
+  display: table;
+  margin: 3rem auto;
+  figcaption {
     text-align: left;
+    padding-left: 0rem;
   }
 }
 
