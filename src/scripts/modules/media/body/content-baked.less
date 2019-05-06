@@ -58,6 +58,11 @@ ul, ol {
   }
 }
 
+.os-abstract {
+  list-style-type: none;
+  padding-left: 2rem;
+}
+
 .circled {
   list-style-type: none;
   padding-left: 1rem;
@@ -121,6 +126,19 @@ iframe {
       width: 100%;
     }
   }
+}
+
+figure.splash.unnumbered {
+  display: table;
+  margin: 3rem auto;
+  figcaption {
+    text-align: left;
+    padding-left: 0rem;
+  }
+}
+
+span[data-type="media"] img {
+  display: block;
 }
 
 .os-figure {
@@ -228,6 +246,10 @@ h1.example-title .text {
   text-decoration: none;
 }
 
+[data-type="composite-page"] [data-type="solution"] p {
+  display: inline;
+}
+
 [data-type="note"],
 .note {
   .make-block(note);
@@ -267,20 +289,32 @@ h1.example-title .text {
   }
 }
 
-[data-type="exercise"] {
-  [data-type="problem"] {
-    p:first-of-type {
-      display: inline;
-      a {
-        margin-right: 0.5em;
-        font-weight: bold;
+.review-questions,
+.os-review-questions-container {
+  [type="a"] {
+    list-style-type: upper-alpha;
+  }
+}
+
+[data-type="composite-page"] {
+  [data-type="exercise"] {
+    [data-type="problem"] {
+      p:first-of-type {
+        a {
+          font-weight: bold;
+          margin-right: 0.5em;
+        }
       }
     }
   }
 }
 
-.review-questions [type="a"] {
-  list-style-type: upper-alpha;
+[data-type="exercise"] {
+  [data-type="problem"] {
+    p:first-of-type {
+      display: inline-block;
+    }
+  }
 }
 
 // solutions of notes, exercises, and examples have a top-border to separate the solution
@@ -473,6 +507,18 @@ h1.example-title .text {
       margin-top: 15px;
     }
   }
+
+  [data-type="solution"] {
+    ol {
+      display: inline-grid;
+    }
+    span[data-type="media"] {
+      display: block;
+    }
+    table {
+      margin-top: 0;
+    }
+  }
 }
 
 .os-reference-number {
@@ -518,6 +564,10 @@ h1.example-title .text {
 
 .os-chapter-area [data-type="solution"] p {
   display: inline;
+}
+
+.preface ul {
+  list-style-type: none;
 }
 
 .appendix [data-type="list"] {
@@ -585,4 +635,9 @@ figure {
     margin: 0 0 1rem 1.5rem;
     color: #555;
   }
+}
+
+// FIXME: hiding in baked books until a fix is made on CNX
+.not-converted-yet {
+  visibility: hidden;
 }
