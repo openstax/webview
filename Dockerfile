@@ -1,4 +1,4 @@
-FROM openstax/node:10.13.0 as base-system
+FROM openstax/nodejs:10.13.0 as base-system
 
 # Install grunt-cli globally
 RUN npm install -g grunt-cli
