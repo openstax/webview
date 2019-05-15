@@ -1,4 +1,4 @@
-FROM openstax/nodejs:6.9.1 as base-system
+FROM node:10.15-stretch as base-system
 
 # Install grunt-cli globally
 RUN npm install -g grunt-cli
@@ -9,12 +9,12 @@ COPY .dockerfiles/build-webview.sh /usr/local/bin/
 # Note, the packaging tools don't like to run as root.
 RUN addgroup --system webview && adduser --system --group webview --home /code
 
+# Copy application code into the image
+COPY . /code
+RUN chown -R webview:webview /code
+
 USER webview
 WORKDIR /code
-
-# Copy application code into the image
-COPY . .
-
 
 FROM base-system as built
 

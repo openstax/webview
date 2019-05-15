@@ -1,6 +1,7 @@
 .cache
 .config
 .git
+.node-version
 .npm
 bower_components
 dist
