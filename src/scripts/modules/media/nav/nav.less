@@ -6,12 +6,6 @@
 @button-width: 13rem;
 @searchbar-margin: 3px;
 
-.footer-nav {
-  .media-nav > .media-toolbar > .media-navbar {
-    width: 100%;
-  }
-}
-
 .media-nav {
   padding: 1rem;
 
@@ -31,11 +25,11 @@
     }
 
     .toggle.btn {
-      background-color: @brand-primary;
-      color: white;
-      border: solid 2px @brand-primary;
       width: @button-width;
       margin: @searchbar-margin;
+      border: solid 2px @brand-primary;
+      background-color: @brand-primary;
+      color: white;
       .text {
         margin: 0 6px;
       }
@@ -49,17 +43,16 @@
     }
 
     .searchbar {
-      width: ~"calc(35% - " @button-width * .5 ~")";
-
       @media (max-width: @landscape-breakpoint) {
-        width: ~"calc(100% - " @button-width ~"- 3rem)"
+        width: ~"calc(100% - " @button-width ~"- 3rem)";
       }
       position: relative;
+      width: ~"calc(35% - " @button-width * .5 ~")";
       margin: @searchbar-margin;
       .fa {
         position: absolute;
-        left: ~"calc(100% - 27px)";
         top: 0.3em;
+        left: ~"calc(100% - 27px)";
         color: @gray-light;
         font-size: 150%;
         &.clear-search {
@@ -75,8 +68,8 @@
     .media-navbar {
       width: ~"calc(65% - " @button-width * .7 ~")";
       @media (max-width: @landscape-breakpoint) {
-        width: 100%;
         display: block;
+        width: 100%;
       }
 
       > .book-nav {
@@ -90,9 +83,9 @@
         }
 
         > .progress {
+          height: @progress-height;
           margin-top: 1.4rem;
           margin-bottom: 0;
-          height: @progress-height;
           border-radius: 0.8rem;
           background-color: darken(@gray-lighter, 5%);
           box-shadow: none;
@@ -105,8 +98,8 @@
         }
 
         > .back-to-top {
-          text-align: center;
           line-height: @nav-height;
+          text-align: center;
 
           > a {
             display: inline-block;
@@ -114,17 +107,17 @@
           }
 
           &::before, &::after {
-            font-size: 1.4em;
             color: @link-color;
+            font-size: 1.4em;
             content: "\25b4"; // ▴
           }
         }
 
         > .nav {
+          display: flex;
+          color: @brand-primary;
           font-size: 1.6rem;
           line-height: 3.8rem;
-          color: @brand-primary;
-          display: flex;
 
           &.disabled {
             opacity: 0.5;
@@ -150,24 +143,30 @@
 
         > .back::before, > .next::after {
           display: inline-block;
-          margin: 1rem 1rem 0;
-          height: 1.6rem;
           width: 1.6rem;
-          vertical-align: text-bottom;
+          height: 1.6rem;
+          margin: 1rem 1rem 0;
           border-radius: 50%;
-          color: white;
-          background: @brand-primary url(/images/icons/arrow-white.png) no-repeat 0.6rem center;
+          background: @brand-primary url("/images/icons/arrow-white.png") no-repeat 0.6rem center;
           background-size: 40%;
-          content: ""
+          color: white;
+          content: "";
+          vertical-align: text-bottom;
         }
       }
     }
   }
 
   .toc-panel {
-    width: 100%;
-    background-color: white;
-    border: solid 2px @gray-lightest;
     display: none;
+    width: 100%;
+    border: solid 2px @gray-lightest;
+    background-color: white;
+  }
+}
+
+.footer-nav {
+  .media-nav > .media-toolbar > .media-navbar {
+    width: 100%;
   }
 }

@@ -7,9 +7,9 @@
 
 .fullsize-container {
   > .sidebar {
+    display: inline-block;
     width: 0;
     height: 0;
-    display: inline-block;
     vertical-align: top;
     visibility: hidden;
     .transition(~"width" @transition-style);
@@ -25,7 +25,6 @@
   }
   > .main {
     .transition(~"width" @transition-style);
-    width: ~"calc(100% -" @fudge ~")";
     display: inline-block;
     @media (max-width: 640px) {
       display: block;
@@ -33,10 +32,10 @@
   }
   &.sidebar-open {
     > .sidebar {
+      position: sticky;
       width: @sidebar-width;
       height: 100%;
       visibility: visible;
-      position: sticky;
 
       @media (max-width: 640px) {
         width: 100%;

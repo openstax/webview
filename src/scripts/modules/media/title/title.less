@@ -3,70 +3,14 @@
 
 .media-title {
   padding: 1rem 3rem;
-  &.compact {
-    padding: 1rem 1rem 0 1.3rem;
-    font-size: 85%;
-    .large-header {
-      font-size: 1.8rem;
-    }
-    .info > .share {
-      display: none;
-    }
-  }
-
-  &:not(.publishing) { background-color: @gray-lightest; }
-
-  @media (max-width: @landscape-breakpoint) {
-    padding: 1rem 1.5rem 0.5rem 1.5rem;
-    &.compact {
-      padding-bottom: 0.5rem;
-    }
-  }
-
-  a:focus {
-    background-color: #78b04a;
-  }
-  .publishing();
-
-  > .derive, .edit {
-    margin-bottom: 1.5rem;
-  }
-
-  > .title {
-    overflow-wrap: break-word;
-
-    @media (min-width: @landscape-breakpoint) {
-      display: inline-block;
-      margin-right: 7%;
-      width: ~"calc(100% - 29rem)";
-
-      > h1 {
-        font-weight: 400;
-      }
-
-    }
-
-    > span {
-      display: block;
-      margin-top: 0.5rem;
-    }
-
-    // When editing is turned on the Title becomes an input box; make sure it stretches
-    input[type="text"] {
-      width: 60rem;
-      height: 4.5rem;
-      text-overflow: ellipsis;
-    }
-  }
-
   > .info {
     overflow-wrap: break-word;
     .user-select(none);
 
     @media (min-width: @landscape-breakpoint) {
       display: inline-block;
-      margin-bottom: -3.9rem;
       width: 20rem;
+      margin-bottom: -3.9rem;
       text-align: right;
       vertical-align: top;
     }
@@ -91,10 +35,75 @@
         > li {
           display: inline-block;
           height: 2.8rem; // Same height as the circles
-          vertical-align: middle;
           cursor: pointer;
+          vertical-align: middle;
         }
       }
+    }
+  }
+
+  &.compact {
+    padding: 1rem 1rem 0 1.3rem;
+    font-size: 85%;
+    .large-header {
+      font-size: 1.8rem;
+    }
+    .info > .share {
+      display: none;
+    }
+  }
+
+  &:not(.publishing) {
+    background-color: @gray-lightest;
+  }
+
+  @media (max-width: @landscape-breakpoint) {
+    padding: 1rem 1.5rem 0.5rem 1.5rem;
+    &.compact {
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  @media (max-width: @landscape-breakpoint) {
+    padding: 1rem 1.5rem 0.5rem 1.5rem;
+    &.compact {
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  a:focus {
+    background-color: #78b04a;
+  }
+  .publishing();
+
+  > .derive, .edit {
+    margin-bottom: 1.5rem;
+  }
+
+  > .title {
+    overflow-wrap: break-word;
+
+    @media (min-width: @landscape-breakpoint) {
+      display: inline-block;
+      width: ~"calc(100% - 29rem)";
+      margin-right: 7%;
+
+      > h1 {
+        font-weight: 400;
+      }
+
+    }
+
+    > span {
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    // When editing is turned on the Title becomes an input box; make sure it stretches
+    input[type="text"] {
+      width: 60rem;
+      height: 4.5rem;
+      text-overflow: ellipsis;
     }
   }
 }

@@ -10,7 +10,7 @@
     position: relative;
     width: 100%;
     height: @banner-height;
-    background: transparent url(/images/banners/splash.jpg) no-repeat center right;
+    background: transparent url("/images/banners/splash.jpg") no-repeat center right;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -41,8 +41,8 @@
 
       > h1 {
         margin-bottom: 3rem;
-        font-weight: 300;
         color: @brand-primary;
+        font-weight: 300;
       }
 
       > p {
@@ -60,10 +60,10 @@
       }
 
       @media (max-width: @grid-float-breakpoint-max) {
+        display: flex;
         position: absolute;
         top: 0;
         right: auto;
-        display: flex;
         align-items: center;
         width: 100%;
         height: 100%;
@@ -71,9 +71,9 @@
         > h1 {
           max-width: 80%;
           margin: 0;
-          padding-left: 3rem;
           padding-right: 6rem;
-          text-shadow: 0 0 .2em rgba(255,255,255,0.8);
+          padding-left: 3rem;
+          text-shadow: 0 0 .2em rgba(255, 255, 255, 0.8);
         }
       }
     }

@@ -8,7 +8,7 @@ before_install:
 
 language: node_js
 node_js:
-  - "6.9.1"
+  - "10.15.3"
 before_install: ./script/bootstrap
 script: ./script/test
 sudo: false
