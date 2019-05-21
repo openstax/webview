@@ -20,19 +20,19 @@
 }
 
 .media-body {
-  max-width: @max-media-width;
-  margin: 0 auto;
   display: block;
-  padding: 4rem 6rem 0 6rem;
   width: auto; // override bootstrap
+  max-width: @max-media-width;
   min-height: 6rem;
+  margin: 0 auto;
+  padding: 4rem 6rem 0 6rem;
   counter-reset: figure;
   outline: none;
 
   &.draft:not(.publishing) {
+    min-height: 4in;
     padding: 4rem 6rem;
     background-color: #ffc;
-    min-height: 4in;
   }
 
   .publishing();
@@ -52,11 +52,11 @@
 }
 
 .media-body-about {
+  display: block;
+  width: auto; // override bootstrap
   max-width: @max-media-width;
   margin: 0 auto;
-  display: block;
   padding: 4rem 6rem 0 6rem;
-  width: auto; // override bootstrap
 
   .media-body-about-description-wrapper {
     display: flex;
@@ -82,7 +82,7 @@ body {
 @media (max-width: @screen-xs-max) {
   .media-body-about {
     .media-body-about-description-wrapper {
-      display:block;
+      display: block;
       .media-body-about-cover {
         margin-bottom: 2rem;
       }

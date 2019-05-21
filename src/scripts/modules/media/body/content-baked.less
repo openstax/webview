@@ -3,8 +3,8 @@
 //
 //     #content { @import 'this_file.less'; }
 
-@import 'content-common';
-@import '_make-block';
+@import "content-common";
+@import "_make-block";
 
 h1,
 h2,
@@ -21,9 +21,25 @@ h3 + section {
 }
 
 ul, ol {
-  color: @gray;
-  margin-bottom: 1rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: @gray;
+}
+
+.stepwise {
+  list-style-type: none;
+  padding-left: 0;
+  > li {
+    display: flex;
+    .os-stepwise-token {
+      white-space: pre;
+    }
+    .os-stepwise-content {
+      > ul, ol {
+        padding-left: 1rem;
+      }
+    }
+  }
 }
 
 .os-stepwise {
@@ -63,8 +79,8 @@ iframe {
 
 .centered-text {
   display: block;
-  text-align: center;
   font-weight: normal;
+  text-align: center;
 }
 
 .os-chapter-outline {
@@ -78,16 +94,17 @@ iframe {
 }
 
 .no-emphasis {
-  font-weight: normal;
-} //to ensure that all terms with this tag will display unbolded
-
+  font-weight: normal; //to ensure that all terms with this tag will display unbolded
+}
 
 // It is already displayed at the top of the page in blue
 // the `>` is because collated titles (like Key Concepts) contain descendent
 // document-title elements.
 [data-type="page"],
 [data-type="composite-page"] {
-  > [data-type="document-title"] { display: none; }
+  > [data-type="document-title"] {
+    display: none;
+  }
 }
 
 > section,
@@ -128,11 +145,11 @@ span[data-type="media"] img {
   display: table;
   margin: 3rem auto;
   .os-caption-container {
-    padding-top: 1rem;
     display: table-caption;
-    caption-side: bottom;
-    font-size: 1.2rem;
+    padding-top: 1rem;
     color: @gray;
+    font-size: 1.2rem;
+    caption-side: bottom;
     .os-title-label {
       font-weight: bold;
     }
@@ -145,26 +162,24 @@ span[data-type="media"] img {
   }
 
   figure {
-  // Subfigures
-  > figure {
-    &.ui-has-child-figcaption > figcaption::before {
-      //font-weight: bold;
-      //content: counter(figure) counter(subfigure,lower-alpha) ': ';
-    }
+    // Subfigures
+    > figure {
+      &.ui-has-child-figcaption > figcaption::before {
+        //font-weight: bold;
+        //content: counter(figure) counter(subfigure,lower-alpha) ': ';
+      }
 
-    &:not(.ui-has-child-figcaption)::after {
-      //content: '(' counter(subfigure,lower-alpha) ')';
-     }
+      &:not(.ui-has-child-figcaption)::after {
+        //content: '(' counter(subfigure,lower-alpha) ')';
+      }
     }
   }
 }
 
-
 // By default, figures are laid out horizontally
 // unless they have the data-orient="vertical" attribute.
-figure:not([data-orient="vertical"]) {
-}
-
+// figure:not([data-orient="vertical"]) {
+// }
 
 // --------------------------------
 // Blockish things (note, example, exercise)
@@ -173,54 +188,52 @@ figure:not([data-orient="vertical"]) {
 // Slots for various blockish pieces of content (things with a label, title, and body)
 // This **ONLY** contains rules, no selectors.
 #blockish {
-.style(note) {
-  margin: 3rem 0;
-  padding: 1.5rem;
-  background-color: @gray-lightest;
-  border: 0.2rem solid @gray-lighter;
+  .style(note) {
+    margin: 3rem 0;
+    padding: 1.5rem;
+    border: 0.2rem solid @gray-lighter;
+    background-color: @gray-lightest;
 
-  > p {
-    margin-top: 0;
+    > p {
+      margin-top: 0;
+    }
+
+    :last-child {
+      //  margin-bottom: 0;
+    }
   }
-
-  :last-child {
-  //  margin-bottom: 0;
-  }
-}
-.title(note) {
-  color: @gray;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  display: block;
-  margin-bottom: 1rem;
-  margin-top: 0;
-  padding: 0rem 1.5rem 1rem 1.5rem;
-  border-bottom: 0.2rem solid @gray-lighter;
-}
-.body(note) {
-  border-top: none;
-  padding: 0rem 1.5rem;
-  background-color: @gray-lightest;
-  color: @gray;
-
-  p {
-    margin: 0 0 1rem;
-  }
-
-  ul,ol {
-    color: @gray;
-  }
-
-  span[data-type="media"] {
+  .title(note) {
     display: block;
-    margin: 1rem 0;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding: 0rem 1.5rem 1rem 1.5rem;
+    border-bottom: 0.2rem solid @gray-lighter;
+    color: @gray;
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
   }
-}
-.style(example) { .style(note) }
-.title(example) { .title(note) }
-.body(example) { .body(note) }
+  .body(note) {
+    padding: 0rem 1.5rem;
+    border-top: none;
+    background-color: @gray-lightest;
+    color: @gray;
+
+    span[data-type="media"] {
+      display: block;
+      margin: 1rem 0;
+    }
+  }
+  .style(example) {
+    .style(note);
+  }
+  .title(example) {
+    .title(note);
+  }
+  .body(example) {
+    .body(note);
+  }
 }
 
 // TODO refactor this
@@ -238,9 +251,13 @@ h1.example-title .text {
 }
 
 [data-type="note"],
-.note     { .make-block(note); }
+.note {
+  .make-block(note);
+}
 [data-type="example"],
-.example  { .make-block(example); }
+.example {
+  .make-block(example);
+}
 [data-type="problem"],
 [data-type="solution"],
 .problem,
@@ -258,7 +275,9 @@ h1.example-title .text {
     > ul, > ol, [data-type="note"] {
       margin-top: 0;
     }
-    .os-figure {  margin: 3rem 0; }
+    .os-figure {
+      margin: 3rem 0;
+    }
   }
 }
 
@@ -325,19 +344,19 @@ h1.example-title .text {
   width: 100%;
   .os-equation-number {
     display: table-cell;
-    vertical-align: middle;
     width: 5%;
+    vertical-align: middle;
     .os-number {
-      border: black solid 1px;
       padding: 5px;
+      border: black solid 1px;
       text-align: center;
       vertical-align: middle;
     }
   }
   [data-type="title"] {
     display: block;
-    text-align: center;
     font-weight: bold;
+    text-align: center;
   }
 }
 
@@ -354,28 +373,28 @@ h1.example-title .text {
 // --------------------------------------------------
 .os-table table thead tr th .MathJax_Display {
   width: auto !important;
-  float: left !important;
   margin: 0px;
+  float: left !important;
 }
 
 // Tables
 // --------------------------------------------------
 .swipe-table {
   -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Chrome / Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Chrome / Opera */
   cursor: -webkit-grab;
 }
 .os-table {
   overflow-x: auto;
   margin: @line-height-computed 0;
   .os-table-title {
-    text-align: center;
-    font-weight: bold;
     padding-bottom: 1em;
+    font-weight: bold;
+    text-align: center;
   }
   table {
     margin: 0;
@@ -399,8 +418,8 @@ h1.example-title .text {
     ul, ol{
       padding-left: 1.5em;
       &[data-bullet-style="none"] {
-        padding: 0;
         margin: 0;
+        padding: 0;
         li {
           list-style: none;
         }
@@ -417,15 +436,15 @@ h1.example-title .text {
     }
   }
   .os-caption-container {
-    font-size: 0.9em;
     padding: 8px;
     border-top: 0.1rem solid @gray-lighter;
+    font-size: 0.9em;
 
     .os-title-label,
     .os-number {
-      font-weight: bold;
       display: inline-block;
       padding-right: 0.25em;
+      font-weight: bold;
     }
   }
 }
@@ -433,8 +452,22 @@ h1.example-title .text {
 //
 // End of Chapter/End of Book
 // --------------------------------------------------
+
 .os-eoc,
 .os-eob {
+  .os-problem-container,
+  .os-solution-container {
+    display: inline;
+    > :first-child:not(ul):not(ol):not([data-type="note"]):not(.os-figure) {
+      display: inline;
+    }
+    > ul, > ol, [data-type="note"] {
+      margin-top: 0;
+    }
+    .os-figure {
+      margin: 3rem 0;
+    }
+  }
   h2[data-type="document-title"],
   h2.os-title {
     font-size: 2.1rem;
@@ -450,16 +483,16 @@ h1.example-title .text {
       margin-top: 0.5rem;
     }
     .os-term {
-      font-weight: bold;
       padding-right: 0.5rem;
+      font-weight: bold;
     }
   }
 
   .group-label {
     display: block;
+    margin: 1.5rem 0 1rem 0;
     font-size: 2.1rem;
     font-weight: bold;
-    margin: 1.5rem 0 1rem 0;
   }
 
   &.os-reference-container > .os-chapter-area > .reference span.os-reference-number,
@@ -501,6 +534,14 @@ h1.example-title .text {
   img {
     display: block;
     margin-bottom: 1em;
+  }
+}
+
+.os-eob {
+  .os-solution-container {
+    img {
+      display: block;
+    }
   }
 }
 
@@ -556,16 +597,16 @@ figure {
 
 :not(figure) > [data-type="media"] {
   &.scaled-down {
-    text-align: center;
     display: block;
+    text-align: center;
 
     img {
       width: 60%;
     }
   }
   &.scaled-down-30 {
-    text-align: center;
     display: block;
+    text-align: center;
 
     img {
       width: 30%;
@@ -576,24 +617,23 @@ figure {
 .learning-objectives {
   margin: 3rem 0;
   padding: 1.5rem;
-  background-color: #ededed;
   border: .2rem solid #dcdcdc;
+  background-color: #ededed;
   [data-type="title"] {
-    display: inline-block;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding: 0 1.5rem 1rem;
+    border-bottom: .2rem solid #dcdcdc;
     color: #555;
     font-size: 1.5rem;
     font-weight: 700;
-    text-transform: uppercase;
     letter-spacing: .1rem;
-    display: block;
-    margin-bottom: 1rem;
-    margin-top: 0;
-    padding: 0 1.5rem 1rem;
-    border-bottom: .2rem solid #dcdcdc;
+    text-transform: uppercase;
   }
   p {
-    color: #555;
     margin: 0 0 1rem 1.5rem;
+    color: #555;
   }
 }
 

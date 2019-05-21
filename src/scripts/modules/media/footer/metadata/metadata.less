@@ -12,22 +12,22 @@
 
   .book-page-toggle {
     position: absolute;
-    right: 4rem;
     top: 2rem;
+    right: 4rem;
 
     .btn {
-      color: black;
       border: 0.1rem solid @gray-lightest;
       background-color: white;
+      color: black;
       &:focus {
-          border-color: lightblue;
+        border-color: lightblue;
       }
     }
 
     .active {
-      color: black;
       border: 0.1rem solid transparent;
       background-color: @gray-lightest;
+      color: black;
     }
   }
 
@@ -35,10 +35,10 @@
     margin-bottom: 0;
 
     > dt {
-      padding: 1rem 0;
       width: 22.5rem;
-      text-align: left;
+      padding: 1rem 0;
       color: @gray-dark;
+      text-align: left;
     }
 
     > dd {
@@ -80,19 +80,16 @@
   }
 }
 
-
 // Override bootstrap styles allow dt metedata list to display whole text in dt element.
 .dl-metadata {
   > dt {
     margin-top: 5px;
-    white-space: normal;
     text-overflow: inherit;
+    white-space: normal;
   }
-
   > dd {
     margin-top: 5px;
   }
-
 }
 
 .responsive-settings() {
@@ -114,10 +111,10 @@
 
 @media (max-width: @screen-md-max) {
   .sidebar-open {
-    .responsive-settings()
+    .responsive-settings();
   }
 }
 
 @media (max-width: @screen-xs-max) {
-  .responsive-settings()
+  .responsive-settings();
 }
