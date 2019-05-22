@@ -422,13 +422,17 @@ table {
     tr > td[data-align="right"]{
       text-align: right;
     }
+    tr > td {
+      padding: 1em;
+      border: 0.1rem solid @table-border-color;
+    }
   }
   tfoot {
     > tr {
       > th,
       > td {
         padding: @table-cell-padding;
-        border-top: 0.1rem solid @table-border-color;
+        border: 0.1rem solid @table-border-color;
         line-height: @line-height-base;
         vertical-align: top;
       }
@@ -438,41 +442,20 @@ table {
   // Bottom align for column headings
   thead > tr > th,
   thead > tr > td {
-    border-bottom: 0.2rem solid @table-border-color;
+    border: 0.2rem solid @table-border-color;
     font-weight: bold;
     text-align: left;
     vertical-align: bottom;
   }
 
-  // Remove top border from thead by default
-  caption + thead,
-  colgroup + thead,
-  thead:first-child {
-    tr:first-child {
-      th, td {
-        border-top: 0;
-      }
-    }
-  }
-
   // Account for multiple tbody instances
   tbody + tbody {
-    border-top: 0.2rem solid @table-border-color;
+    border: 0.2rem solid @table-border-color;
   }
 
   // Nesting
   table {
     background-color: @body-bg;
-  }
-
-  // Zebra striping
-  > tbody {
-    > tr:nth-child(odd) {
-      > td,
-      > th {
-        background-color: @table-bg-accent;
-      }
-    }
   }
 }
 
