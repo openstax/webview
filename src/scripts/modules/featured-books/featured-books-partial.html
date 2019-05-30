@@ -1,6 +1,10 @@
 <div class="book">
-  <a href="{{link}}" tabindex="-1"><img src="{{cover}}" width="125" alt="{{title}}" /></a>
-  <h3 id="fb-{{prefix}}-{{id}}-title" class="small-header"><a href="{{link}}">{{title}}</a></h3>
+  <a href="{{link}}" tabindex="-1" data-bypass="true">
+    <img src="{{cover}}" width="125" alt="{{title}}" />
+  </a>
+  <h3 id="fb-{{prefix}}-{{id}}-title" class="small-header">
+    <a href="{{link}}" data-bypass="true">{{title}}</a>
+  </h3>
   <p class="description show-ellipsis">{{{description}}}</p>
   <div class="show-more-less"><a href="" aria-labelledby="fb-{{prefix}}-{{id}}-title" data-l10n-id="featured-books-show-more" class="more">Show More</a><a href="" aria-labelledby="fb-{{prefix}}-{{id}}-title" data-l10n-id="featured-books-show-less" class="less">Show Less</a></div>
 </div>
