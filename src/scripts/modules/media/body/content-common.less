@@ -417,7 +417,13 @@ table {
   }
 
   // Cells
-  thead,
+  thead {
+    tr {
+      th {
+        padding: @table-cell-padding;
+      }
+    }
+  }
   tbody {
     tr > td[data-align="right"]{
       text-align: right;
