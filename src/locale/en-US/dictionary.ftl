@@ -108,8 +108,6 @@ all-footer-accessibility = Accessibility Statement
 
 all-footer-contact = Contact
 
-all-footer-connect = Connect
-
 all-footer-android-app = Android App
 
 all-footer-dev-blog = Dev Blog
