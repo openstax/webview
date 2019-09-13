@@ -3,12 +3,12 @@
 
 .page-footer {
   .make-row();
-  padding: 2rem;
   margin: 0 !important; // override bootstrap css
-  font-size: 0.85em;
-  color: @gray-lighter;
-  text-align: center;
+  padding: 2rem;
   background-color: @gray-dark;
+  color: @gray-lighter;
+  font-size: 0.85em;
+  text-align: center;
 
   a {
     color: @gray-lighter;
@@ -20,13 +20,13 @@
     text-align: left;
 
     > div {
-      padding: 0.8rem 0;
       margin: 0;
+      padding: 0.8rem 0;
     }
 
     .cc-logo-link {
-      float: left;
       margin-right: 1.5rem;
+      float: left;
     }
 
     .horizontal {
@@ -52,14 +52,12 @@
 
     /* Make the OER logo look like a button */
     .oer {
-      background-color: white;
       border-radius: 0.4rem;
+      background-color: white;
     }
   }
 
-  > .connect, > .share {
-    .make-sm-column(2);
-
+  > .share {
     @media (max-width: @screen-xs-max) {
       display: none;
     }
@@ -67,39 +65,24 @@
     .small-header {
       margin-top: 1.5rem;
       margin-bottom: 0.7rem;
+      color: @gray-lighter;
       font-size: 1.7rem;
       font-weight: 400;
-      color: @gray-lighter;
     }
 
-    > ul {
-      padding: 0;
-      list-style-type: none;
-
-      > li {
-        margin-bottom: 0.2rem;
-      }
-    }
-  }
-
-  > .connect {
-    @media (min-width: @screen-xs-min) {
-      border-left: 0.1rem solid @link-active-color;
-      border-right: 0.1rem solid @link-active-color;
-    }
-  }
-
-  > .share {
     > ul {
       .flexbox();
       .flex-flow(row; wrap);
       .justify-content(center);
-      max-width: 7.5rem;
+      max-width: 12rem;
       margin: 0 auto;
+      padding: 0;
+      list-style-type: none;
 
       > li {
         .flex(1; 0; auto);
         margin: 0.5rem 0;
+        margin-bottom: 0.2rem;
       }
     }
   }

@@ -107,8 +107,6 @@ all-footer-accessibility = Ułatwienia dostępności
 
 all-footer-contact = Kontakt
 
-all-footer-connect = Łącza
-
 all-footer-android-app = Aplikacja na Androida
 
 all-footer-dev-blog = Blog
