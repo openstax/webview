@@ -1,5 +1,5 @@
 {{#if data.items.0.stimulus_html }}
-    <div class="exercise-stimulus">{{ data['items'].0.stimulus_html }}</div>
+    <div class="exercise-stimulus">{{{ data.items.0.stimulus_html }}}</div>
 {{/if}}
 {{#if data.items.[0].questions}}
     {{#each data.items.0.questions}}
