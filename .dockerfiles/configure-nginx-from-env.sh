@@ -49,7 +49,7 @@ server {
 ${DEV_CONFIG}
 
   location ~ ^.*/(scripts|styles|images)/(.*) {
-      try_files \$uri \$uri/ /\$1/\$2;
+      try_files \$uri \$uri/ =404;
   }
 
   types {
