@@ -184,6 +184,15 @@ Follow the instructions to install [Docker Compose](https://docs.docker.com/comp
 
     $ docker-compose up -d
 
+## Some notes on using webview with Docker
+
+The nginx and application configurations are automatically generated from environnment variables when using Docker. One can take a glance at the used environment variables in [this file](https://github.com/openstax/webview/blob/master/.dockerfiles/docker-entrypoint.sh). Take special care when assigning these variables that `FE_ARCHIVE_HOST`, `OPENSTAX_HOST`, `LEGACY_HOST`, and `EXERCISE_HOST` must all be able to be resolved by the frontend client. `ARCHIVE` on the other hand, must be able to be resolved by the webview Docker container. For example, if one has archive running in Docker Compose with webview then they could assign `ARCHIVE` like so:
+```
+ARCHIVE=archive  # the archive service is called 'archive'
+ARCHIVE_PORT=6543  # the open port in the archive container - NOT the docker host
+```
+But could not assign `FE_ARCHIVE_HOST` to the same values. `FE_ARCHIVE_HOST` would need to be assigned to the host name and port exposed on the docker host, instead.
+
 # Installing on Ubuntu 16.04
 
 * Install node 6.9.1.

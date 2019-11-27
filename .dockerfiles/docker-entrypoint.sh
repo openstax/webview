@@ -16,9 +16,9 @@ file_env() {
 		exit 1
 	fi
 	local val="$def"
-	if [ "${!var:-}" ]; then
+	if [[ "${!var:-}" ]]; then
 		val="${!var}"
-	elif [ "${!fileVar:-}" ]; then
+	elif [[ "${!fileVar:-}" ]]; then
 		val="$(< "${!fileVar}")"
 	fi
 	export "$var"="$val"
@@ -35,19 +35,21 @@ case "${ENVIRONMENT}" in
 	*) PROJECT_ROOT='/code/dist' ;;
 esac
 
-if [ "$1" = 'nginx' ]; then
+if [[ "$1" = 'nginx' ]]; then
 	chown -R "nginx" "$PROJECT_ROOT" 2>/dev/null || :
-	if [ "$ENVIRONMENT" = 'dev']; then
+	if [[ "$ENVIRONMENT" = 'dev' ]]; then
 		chmod 700 "$PROJECT_ROOT" 2>/dev/null || :
 	fi
 
-	file_env 'ARCHIVE_HOST'   "${ARCHIVE_HOST:-archive.cnx.org}"
-	file_env 'ARCHIVE_PORT'   "${ARCHIVE_PORT:-80}"
-	file_env 'OPENSTAX_HOST'  "${OPENSTAX_HOST:-openstax.org}"
-	file_env 'OPENSTAX_PORT'  "${OPENSTAX_PORT:-443}"
-	file_env 'EXERCISES_HOST' "${EXERCISES_HOST:-exercises.openstax.org}"
-	file_env 'EXERCISES_PORT' "${EXERCISES_PORT:-443}"
-	file_env 'LEGACY_HOST'    "${LEGACY_HOST:-legacy.cnx.org}"
+	file_env 'ARCHIVE_HOST'     "${ARCHIVE_HOST:-archive.cnx.org}"
+	file_env 'ARCHIVE_PORT'     "${ARCHIVE_PORT:-80}"
+	file_env 'FE_ARCHIVE_HOST'  "${FE_ARCHIVE_HOST:-archive.cnx.org}"
+	file_env 'FE_ARCHIVE_PORT'  "${FE_ARCHIVE_PORT:-80}"
+	file_env 'OPENSTAX_HOST'    "${OPENSTAX_HOST:-openstax.org}"
+	file_env 'OPENSTAX_PORT'    "${OPENSTAX_PORT:-443}"
+	file_env 'EXERCISES_HOST'   "${EXERCISES_HOST:-exercises.openstax.org}"
+	file_env 'EXERCISES_PORT'   "${EXERCISES_PORT:-443}"
+	file_env 'LEGACY_HOST'      "${LEGACY_HOST:-legacy.cnx.org}"
 
 	echo
 	echo "Setting up for use as a '${ENVIRONMENT}' environment."
