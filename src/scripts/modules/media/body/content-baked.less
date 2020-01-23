@@ -281,6 +281,28 @@ h1.example-title .text {
   }
 }
 
+[data-type="page"] section:not(.section-exercises) [data-type="exercise"]:not(.unnumbered) {
+  [data-type="problem"] {
+    .os-number {
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .os-problem-container,
+    .os-solution-container {
+      display: inline;
+      > :first-child:not(ul):not(ol):not([data-type="note"]):not(.os-figure) {
+        display: inline;
+      }
+      > ul, > ol, [data-type="note"] {
+        margin-top: 0;
+      }
+      .os-figure {
+        margin: 3rem 0;
+      }
+    }
+  }
+}
+
 .os-eob, .os-eos {
   .os-solution-container, .os-problem-container {
     img {
