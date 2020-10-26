@@ -588,6 +588,8 @@ textbook-view-book-by =
 textbook-view-page-by =
   | Page by: <span class="collection-authors">{ TAKE(50, $authors) }</span>
 
+textbook-view-footnotes = Footnotes
+
 # TEXTBOOK VIEW - Downloads - src/scripts/modules/media/footer/downloads/downloads-template.html
 
 textbook-view-downloads-header = Downloads

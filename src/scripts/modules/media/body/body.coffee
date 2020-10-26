@@ -110,6 +110,75 @@ define (require) ->
       else
         $els.hide()
 
+    supportPreviousVersionOfFootnoteS: ($temp) ->
+      $footnotes = $temp.find('[role=doc-footnote]');
+
+      if $footnotes.length
+        $header = document.createElement('h3');
+        $header.setAttribute('data-type', 'footnote-refs-title');
+        $header.setAttribute('data-l10n-id', 'textbook-view-footnotes')
+
+        $container = document.createElement('div');
+        $container.setAttribute('data-type', 'footnote-refs');
+        $container.appendChild($header);
+
+        $list = document.createElement('ul');
+        $list.setAttribute('data-list-type', 'bulleted');
+        $list.setAttribute('data-bullet-style', 'none');
+
+        $index = 0
+        while $index < $footnotes.length
+          $footnote = $footnotes[$index]
+
+          $counter = $index + 1;
+
+          $item = document.createElement('li');
+          $item.setAttribute('id', $footnote.getAttribute('id'));
+          $item.setAttribute('data-type', 'footnote-ref');
+
+          $anchor = document.createElement('a');
+          $anchor.setAttribute('data-type', 'footnote-ref-link');
+          $anchor.setAttribute('href', '#footnote-ref' + $counter);
+          $anchor.innerHTML = $counter;
+
+          $content = document.createElement('span');
+          $content.setAttribute('data-type', 'footnote-ref-content');
+          $content.innerHTML = " " + $footnote.innerHTML;
+
+          $number = $content.querySelector('[data-type="footnote-number"]');
+          if $number
+            $number.remove()
+
+          $item.appendChild($anchor);
+          $item.appendChild($content);
+
+          $list.appendChild($item);
+          $footnote.remove();
+
+          $index++
+
+        $container.appendChild($list);
+        $rootEl = $temp.find('#content');
+        $rootEl.append($container);
+        $footnoteLinks = $temp.find('[role="doc-noteref"]');
+
+        index = 0
+        while index < $footnoteLinks.length
+          $link = $footnoteLinks[index]
+
+          $counter = index + 1;
+
+          $sup = document.createElement('sup');
+          $sup.setAttribute('id', 'footnote-ref' + $counter);
+          $sup.setAttribute('data-type', 'footnote-number');
+
+          $link.setAttribute('data-type', 'footnote-link');
+
+          $link.replaceWith($sup);
+          $sup.appendChild($link);
+
+          index++
+
     goToPage: (pageNumber, href) ->
       @model.setPage(pageNumber)
 
@@ -229,6 +298,8 @@ define (require) ->
 
           # Show Teacher's Edition content if appropriate
           @updateTeacher($temp)
+
+          @supportPreviousVersionOfFootnoteS($temp)
 
       catch error
         # FIX: Log the error

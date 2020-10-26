@@ -590,6 +590,8 @@ textbook-view-book-by =
 textbook-view-page-by =
   | Utworzone przez: <span class="collection-authors">{ TAKE(50, $authors) }</span>
 
+textbook-view-footnotes = Przypisy dolne
+
 # TEXTBOOK VIEW - Downloads - src/scripts/modules/media/footer/downloads/downloads-template.html
 
 textbook-view-downloads-header = Do pobrania
